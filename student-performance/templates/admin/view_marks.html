@@ -1,0 +1,138 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="h3 mb-1">Marks Management</h2>
+        <p class="text-muted small mb-0">Record and monitor student performance metrics.</p>
+    </div>
+    <a href="{{ url_for('admin.add_marks') }}" class="btn btn-primary d-inline-flex align-items-center">
+        <i class="fas fa-plus me-2"></i> Add Marks Record
+    </a>
+</div>
+
+<!-- Search & Filter Box -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body p-4">
+        <form method="GET" action="{{ url_for('admin.view_marks') }}" class="row g-3">
+            <div class="col-md-3">
+                <label class="form-label">Enrollment No</label>
+                <input type="text" name="roll_no" class="form-control" placeholder="Search Enrollment No..."
+                    value="{{ filters.get('roll_no', '') }}">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Subject</label>
+                <select name="subject" class="form-select text-muted">
+                    <option value="">All Subjects</option>
+                    {% for subject in subjects %}
+                    <option value="{{ subject }}" {{ 'selected' if filters.get('subject')==subject }}>{{ subject }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Marks Range</label>
+                <div class="input-group">
+                    <input type="number" name="min_marks" class="form-control" placeholder="Min"
+                        value="{{ filters.get('min_marks', '') }}">
+                    <input type="number" name="max_marks" class="form-control" placeholder="Max"
+                        value="{{ filters.get('max_marks', '') }}">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Exam Type</label>
+                <select name="exam_type" class="form-select text-muted">
+                    <option value="">All Types</option>
+                    <option value="Internal" {{ 'selected' if filters.get('exam_type')=='Internal' }}>Internal</option>
+                    <option value="External" {{ 'selected' if filters.get('exam_type')=='External' }}>External</option>
+                    <option value="Practical" {{ 'selected' if filters.get('exam_type')=='Practical' }}>Practical
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-search me-2"></i>Search
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Marks Table -->
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th class="ps-4">Enrollment No</th>
+                        <th>Student Name</th>
+                        <th>Subject</th>
+                        <th class="text-center">Marks</th>
+                        <th>Exam Type</th>
+                        <th>Date</th>
+                        <th class="text-end pe-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in marks_list %}
+                    <tr>
+                        <td class="ps-4 fw-bold text-primary">{{ record.roll_no }}</td>
+                        <td>{{ record.name }}</td>
+                        <td>
+                            <span class="badge bg-light text-secondary border">{{ record.subject }}</span>
+                        </td>
+                        <td class="text-center">
+                            {% set mark_val = record.marks|int if record.marks else 0 %}
+                            {% set mark_class = 'success' if mark_val >= 35 else 'danger' %}
+                            <div class="d-inline-flex flex-column align-items-center">
+                                <span class="fw-bold h6 mb-0 text-{{ mark_class }}">{{ mark_val }}</span>
+                                <div class="progress mt-1" style="height: 4px; width: 40px;">
+                                    <div class="progress-bar bg-{{ mark_class }}" data-progress-width="{{ mark_val }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span
+                                class="badge bg-{{ 'info' if record.exam_type == 'Internal' else 'primary' if record.exam_type == 'External' else 'warning' }} bg-opacity-10 text-{{ 'info' if record.exam_type == 'Internal' else 'primary' if record.exam_type == 'External' else 'warning' }} border">
+                                {{ record.exam_type }}
+                            </span>
+                        </td>
+                        <td class="text-muted small">{{ record.exam_date }}</td>
+                        <td class="text-end pe-4">
+                            <div class="d-flex justify-content-end gap-2">
+                                <a href="{{ url_for('admin.edit_marks', id=record.marks_id) }}"
+                                    class="btn btn-sm btn-light text-primary" title="Edit">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+                                <a href="{{ url_for('admin.delete_marks', id=record.marks_id) }}"
+                                    class="btn btn-sm btn-light text-danger"
+                                    onclick="return confirm('Delete this record?')" title="Delete">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center py-5 text-muted">
+                            <i class="fas fa-filter fa-3x mb-3 opacity-25"></i>
+                            <p class="mb-0">No marks records found.</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('[data-progress-width]').forEach(function (el) {
+            el.style.width = el.getAttribute('data-progress-width') + '%';
+        });
+    });
+</script>
+{% endblock %}

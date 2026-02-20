@@ -1,0 +1,64 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h3 class="fw-bold">Attendance Analytics</h3>
+        <p class="text-muted">Student-wise collective attendance data and risk assessment.</p>
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light">
+                    <tr>
+                        <th>Enrollment No</th>
+                        <th>Name</th>
+                        <th>Dept & Sem</th>
+                        <th class="text-center">Present</th>
+                        <th class="text-center">Absent</th>
+                        <th class="text-center">Attendance %</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in summary %}
+                    <tr>
+                        <td class="fw-bold">{{ s.roll_no }}</td>
+                        <td>{{ s.name }}</td>
+                        <td>{{ s.department }} (S{{ s.semester }})</td>
+                        <td class="text-center text-success fw-bold">{{ s.present_days }}</td>
+                        <td class="text-center text-danger fw-bold">{{ s.absent_days }}</td>
+                        <td class="text-center">
+                            <div class="progress" style="height: 10px; min-width: 100px;">
+                                {% set bc = 'bg-success' if s.percentage >= 75 else 'bg-warning' if s.percentage >= 60
+                                else 'bg-danger' %}
+                                {% set b_style = 'style="width: ' ~ s.percentage ~ '%;"' %}
+                                <div class="progress-bar {{ bc }}" role="progressbar" {{ b_style | safe }}
+                                    aria-valuenow="{{ s.percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small class="fw-bold mt-1 d-block">{{ s.percentage }}%</small>
+                        </td>
+                        <td>
+                            {% if s.percentage >= 75 %}
+                            <span class="badge bg-success">Safe</span>
+                            {% elif s.percentage >= 60 %}
+                            <span class="badge bg-warning">Low</span>
+                            {% else %}
+                            <span class="badge bg-danger">Critical</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center py-5">No students found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

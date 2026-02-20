@@ -1,0 +1,1681 @@
+roll_no,name,email,department,semester,subject,marks,exam_type,exam_date
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,Python Programming,60,Internal,2026-02-05
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,Python Programming,87,External,2026-03-10
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,Python Programming,38,Practical,2026-02-12
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,Java Programming,84,Internal,2026-02-05
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,Java Programming,49,External,2026-03-10
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,Java Programming,62,Practical,2026-02-12
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,DBMS,61,Internal,2026-02-05
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,DBMS,45,External,2026-03-10
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,DBMS,16,Practical,2026-02-12
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,Data Structures,69,Internal,2026-02-05
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,Data Structures,30,External,2026-03-10
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,Data Structures,82,Practical,2026-02-12
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,Operating Systems,49,Internal,2026-02-05
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,Operating Systems,17,External,2026-03-10
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,Operating Systems,37,Practical,2026-02-12
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,Web Technology,75,Internal,2026-02-05
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,Web Technology,93,External,2026-03-10
+B1001,Aditya Verma,aditya.verma.b1001@example.com,BCA,1,Web Technology,36,Practical,2026-02-12
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,Python Programming,62,Internal,2026-02-05
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,Python Programming,98,External,2026-03-10
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,Python Programming,74,Practical,2026-02-12
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,Java Programming,64,Internal,2026-02-05
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,Java Programming,100,External,2026-03-10
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,Java Programming,55,Practical,2026-02-12
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,DBMS,77,Internal,2026-02-05
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,DBMS,58,External,2026-03-10
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,DBMS,93,Practical,2026-02-12
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,Data Structures,57,Internal,2026-02-05
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,Data Structures,91,External,2026-03-10
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,Data Structures,80,Practical,2026-02-12
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,Operating Systems,89,Internal,2026-02-05
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,Operating Systems,91,External,2026-03-10
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,Operating Systems,96,Practical,2026-02-12
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,Web Technology,69,Internal,2026-02-05
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,Web Technology,99,External,2026-03-10
+B1002,Riya Trivedi,riya.trivedi.b1002@example.com,BCA,1,Web Technology,73,Practical,2026-02-12
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,Python Programming,74,Internal,2026-02-05
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,Python Programming,52,External,2026-03-10
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,Python Programming,71,Practical,2026-02-12
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,Java Programming,62,Internal,2026-02-05
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,Java Programming,44,External,2026-03-10
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,Java Programming,65,Practical,2026-02-12
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,DBMS,51,Internal,2026-02-05
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,DBMS,56,External,2026-03-10
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,DBMS,82,Practical,2026-02-12
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,Data Structures,81,Internal,2026-02-05
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,Data Structures,55,External,2026-03-10
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,Data Structures,84,Practical,2026-02-12
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,Operating Systems,89,Internal,2026-02-05
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,Operating Systems,77,External,2026-03-10
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,Operating Systems,49,Practical,2026-02-12
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,Web Technology,54,Internal,2026-02-05
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,Web Technology,23,External,2026-03-10
+B1003,Rahul Agarwal,rahul.agarwal.b1003@example.com,BCA,1,Web Technology,69,Practical,2026-02-12
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,Python Programming,90,Internal,2026-02-05
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,Python Programming,62,External,2026-03-10
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,Python Programming,52,Practical,2026-02-12
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,Java Programming,31,Internal,2026-02-05
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,Java Programming,80,External,2026-03-10
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,Java Programming,79,Practical,2026-02-12
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,DBMS,58,Internal,2026-02-05
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,DBMS,52,External,2026-03-10
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,DBMS,97,Practical,2026-02-12
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,Data Structures,59,Internal,2026-02-05
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,Data Structures,91,External,2026-03-10
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,Data Structures,93,Practical,2026-02-12
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,Operating Systems,80,Internal,2026-02-05
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,Operating Systems,76,External,2026-03-10
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,Operating Systems,83,Practical,2026-02-12
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,Web Technology,77,Internal,2026-02-05
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,Web Technology,97,External,2026-03-10
+B1004,Arjun Nair,arjun.nair.b1004@example.com,BCA,1,Web Technology,86,Practical,2026-02-12
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,Python Programming,51,Internal,2026-02-05
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,Python Programming,75,External,2026-03-10
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,Python Programming,73,Practical,2026-02-12
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,Java Programming,50,Internal,2026-02-05
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,Java Programming,77,External,2026-03-10
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,Java Programming,76,Practical,2026-02-12
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,DBMS,51,Internal,2026-02-05
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,DBMS,79,External,2026-03-10
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,DBMS,58,Practical,2026-02-12
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,Data Structures,50,Internal,2026-02-05
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,Data Structures,82,External,2026-03-10
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,Data Structures,77,Practical,2026-02-12
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,Operating Systems,66,Internal,2026-02-05
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,Operating Systems,78,External,2026-03-10
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,Operating Systems,70,Practical,2026-02-12
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,Web Technology,77,Internal,2026-02-05
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,Web Technology,83,External,2026-03-10
+B1005,Amrita Singhania,amrita.singhania.b1005@example.com,BCA,1,Web Technology,42,Practical,2026-02-12
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,Python Programming,66,Internal,2026-02-05
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,Python Programming,52,External,2026-03-10
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,Python Programming,52,Practical,2026-02-12
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,Java Programming,52,Internal,2026-02-05
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,Java Programming,72,External,2026-03-10
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,Java Programming,52,Practical,2026-02-12
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,DBMS,84,Internal,2026-02-05
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,DBMS,40,External,2026-03-10
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,DBMS,50,Practical,2026-02-12
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,Data Structures,38,Internal,2026-02-05
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,Data Structures,66,External,2026-03-10
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,Data Structures,53,Practical,2026-02-12
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,Operating Systems,82,Internal,2026-02-05
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,Operating Systems,45,External,2026-03-10
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,Operating Systems,45,Practical,2026-02-12
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,Web Technology,94,Internal,2026-02-05
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,Web Technology,84,External,2026-03-10
+B1006,Arjun Malhotra,arjun.malhotra.b1006@example.com,BCA,1,Web Technology,80,Practical,2026-02-12
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,Python Programming,41,Internal,2026-02-05
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,Python Programming,58,External,2026-03-10
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,Python Programming,57,Practical,2026-02-12
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,Java Programming,100,Internal,2026-02-05
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,Java Programming,58,External,2026-03-10
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,Java Programming,70,Practical,2026-02-12
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,DBMS,67,Internal,2026-02-05
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,DBMS,69,External,2026-03-10
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,DBMS,50,Practical,2026-02-12
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,Data Structures,78,Internal,2026-02-05
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,Data Structures,85,External,2026-03-10
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,Data Structures,42,Practical,2026-02-12
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,Operating Systems,76,Internal,2026-02-05
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,Operating Systems,77,External,2026-03-10
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,Operating Systems,88,Practical,2026-02-12
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,Web Technology,80,Internal,2026-02-05
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,Web Technology,93,External,2026-03-10
+B1007,Pooja Agarwal,pooja.agarwal.b1007@example.com,BCA,1,Web Technology,69,Practical,2026-02-12
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,Python Programming,58,Internal,2026-02-05
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,Python Programming,82,External,2026-03-10
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,Python Programming,64,Practical,2026-02-12
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,Java Programming,58,Internal,2026-02-05
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,Java Programming,41,External,2026-03-10
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,Java Programming,57,Practical,2026-02-12
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,DBMS,76,Internal,2026-02-05
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,DBMS,81,External,2026-03-10
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,DBMS,70,Practical,2026-02-12
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,Data Structures,51,Internal,2026-02-05
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,Data Structures,46,External,2026-03-10
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,Data Structures,46,Practical,2026-02-12
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,Operating Systems,67,Internal,2026-02-05
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,Operating Systems,41,External,2026-03-10
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,Operating Systems,79,Practical,2026-02-12
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,Web Technology,67,Internal,2026-02-05
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,Web Technology,73,External,2026-03-10
+B1008,Arjun Patel,arjun.patel.b1008@example.com,BCA,1,Web Technology,41,Practical,2026-02-12
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,Python Programming,55,Internal,2026-02-05
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,Python Programming,89,External,2026-03-10
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,Python Programming,57,Practical,2026-02-12
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,Java Programming,87,Internal,2026-02-05
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,Java Programming,62,External,2026-03-10
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,Java Programming,67,Practical,2026-02-12
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,DBMS,77,Internal,2026-02-05
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,DBMS,86,External,2026-03-10
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,DBMS,89,Practical,2026-02-12
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,Data Structures,60,Internal,2026-02-05
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,Data Structures,89,External,2026-03-10
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,Data Structures,85,Practical,2026-02-12
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,Operating Systems,35,Internal,2026-02-05
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,Operating Systems,51,External,2026-03-10
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,Operating Systems,20,Practical,2026-02-12
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,Web Technology,73,Internal,2026-02-05
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,Web Technology,65,External,2026-03-10
+B1009,Manish Nair,manish.nair.b1009@example.com,BCA,1,Web Technology,47,Practical,2026-02-12
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,Python Programming,100,Internal,2026-02-05
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,Python Programming,27,External,2026-03-10
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,Python Programming,89,Practical,2026-02-12
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,Java Programming,79,Internal,2026-02-05
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,Java Programming,83,External,2026-03-10
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,Java Programming,100,Practical,2026-02-12
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,DBMS,67,Internal,2026-02-05
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,DBMS,99,External,2026-03-10
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,DBMS,65,Practical,2026-02-12
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,Data Structures,72,Internal,2026-02-05
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,Data Structures,91,External,2026-03-10
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,Data Structures,78,Practical,2026-02-12
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,Operating Systems,96,Internal,2026-02-05
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,Operating Systems,100,External,2026-03-10
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,Operating Systems,48,Practical,2026-02-12
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,Web Technology,85,Internal,2026-02-05
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,Web Technology,55,External,2026-03-10
+B1010,Anjali Nair,anjali.nair.b1010@example.com,BCA,1,Web Technology,98,Practical,2026-02-12
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,Python Programming,75,Internal,2026-02-05
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,Python Programming,90,External,2026-03-10
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,Python Programming,86,Practical,2026-02-12
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,Java Programming,64,Internal,2026-02-05
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,Java Programming,58,External,2026-03-10
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,Java Programming,50,Practical,2026-02-12
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,DBMS,83,Internal,2026-02-05
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,DBMS,58,External,2026-03-10
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,DBMS,18,Practical,2026-02-12
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,Data Structures,85,Internal,2026-02-05
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,Data Structures,51,External,2026-03-10
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,Data Structures,85,Practical,2026-02-12
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,Operating Systems,88,Internal,2026-02-05
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,Operating Systems,41,External,2026-03-10
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,Operating Systems,80,Practical,2026-02-12
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,Web Technology,76,Internal,2026-02-05
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,Web Technology,52,External,2026-03-10
+B1011,Riya Malhotra,riya.malhotra.b1011@example.com,BCA,1,Web Technology,93,Practical,2026-02-12
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,Python Programming,75,Internal,2026-02-05
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,Python Programming,69,External,2026-03-10
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,Python Programming,65,Practical,2026-02-12
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,Java Programming,75,Internal,2026-02-05
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,Java Programming,27,External,2026-03-10
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,Java Programming,70,Practical,2026-02-12
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,DBMS,40,Internal,2026-02-05
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,DBMS,53,External,2026-03-10
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,DBMS,27,Practical,2026-02-12
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,Data Structures,51,Internal,2026-02-05
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,Data Structures,57,External,2026-03-10
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,Data Structures,56,Practical,2026-02-12
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,Operating Systems,75,Internal,2026-02-05
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,Operating Systems,71,External,2026-03-10
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,Operating Systems,57,Practical,2026-02-12
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,Web Technology,69,Internal,2026-02-05
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,Web Technology,76,External,2026-03-10
+B1012,Sneha Nair,sneha.nair.b1012@example.com,BCA,1,Web Technology,39,Practical,2026-02-12
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,Python Programming,60,Internal,2026-02-05
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,Python Programming,80,External,2026-03-10
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,Python Programming,58,Practical,2026-02-12
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,Java Programming,82,Internal,2026-02-05
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,Java Programming,91,External,2026-03-10
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,Java Programming,73,Practical,2026-02-12
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,DBMS,67,Internal,2026-02-05
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,DBMS,68,External,2026-03-10
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,DBMS,33,Practical,2026-02-12
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,Data Structures,41,Internal,2026-02-05
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,Data Structures,43,External,2026-03-10
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,Data Structures,31,Practical,2026-02-12
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,Operating Systems,44,Internal,2026-02-05
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,Operating Systems,7,External,2026-03-10
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,Operating Systems,61,Practical,2026-02-12
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,Web Technology,56,Internal,2026-02-05
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,Web Technology,82,External,2026-03-10
+B1013,Vivek Agarwal,vivek.agarwal.b1013@example.com,BCA,1,Web Technology,58,Practical,2026-02-12
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,Python Programming,36,Internal,2026-02-05
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,Python Programming,80,External,2026-03-10
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,Python Programming,75,Practical,2026-02-12
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,Java Programming,28,Internal,2026-02-05
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,Java Programming,72,External,2026-03-10
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,Java Programming,64,Practical,2026-02-12
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,DBMS,52,Internal,2026-02-05
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,DBMS,13,External,2026-03-10
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,DBMS,77,Practical,2026-02-12
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,Data Structures,57,Internal,2026-02-05
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,Data Structures,51,External,2026-03-10
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,Data Structures,72,Practical,2026-02-12
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,Operating Systems,34,Internal,2026-02-05
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,Operating Systems,61,External,2026-03-10
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,Operating Systems,30,Practical,2026-02-12
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,Web Technology,87,Internal,2026-02-05
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,Web Technology,49,External,2026-03-10
+B1014,Arjun Kapoor,arjun.kapoor.b1014@example.com,BCA,1,Web Technology,15,Practical,2026-02-12
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,Python Programming,96,Internal,2026-02-05
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,Python Programming,100,External,2026-03-10
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,Python Programming,96,Practical,2026-02-12
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,Java Programming,84,Internal,2026-02-05
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,Java Programming,90,External,2026-03-10
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,Java Programming,67,Practical,2026-02-12
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,DBMS,49,Internal,2026-02-05
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,DBMS,73,External,2026-03-10
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,DBMS,82,Practical,2026-02-12
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,Data Structures,91,Internal,2026-02-05
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,Data Structures,97,External,2026-03-10
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,Data Structures,66,Practical,2026-02-12
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,Operating Systems,94,Internal,2026-02-05
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,Operating Systems,70,External,2026-03-10
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,Operating Systems,89,Practical,2026-02-12
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,Web Technology,64,Internal,2026-02-05
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,Web Technology,80,External,2026-03-10
+B1015,Karan Gupta,karan.gupta.b1015@example.com,BCA,1,Web Technology,65,Practical,2026-02-12
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,Python Programming,80,Internal,2026-02-05
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,Python Programming,100,External,2026-03-10
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,Python Programming,34,Practical,2026-02-12
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,Java Programming,53,Internal,2026-02-05
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,Java Programming,66,External,2026-03-10
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,Java Programming,67,Practical,2026-02-12
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,DBMS,92,Internal,2026-02-05
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,DBMS,98,External,2026-03-10
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,DBMS,71,Practical,2026-02-12
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,Data Structures,68,Internal,2026-02-05
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,Data Structures,60,External,2026-03-10
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,Data Structures,79,Practical,2026-02-12
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,Operating Systems,81,Internal,2026-02-05
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,Operating Systems,99,External,2026-03-10
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,Operating Systems,92,Practical,2026-02-12
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,Web Technology,88,Internal,2026-02-05
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,Web Technology,69,External,2026-03-10
+B1016,Manish Kapoor,manish.kapoor.b1016@example.com,BCA,1,Web Technology,67,Practical,2026-02-12
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,Python Programming,56,Internal,2026-02-05
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,Python Programming,64,External,2026-03-10
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,Python Programming,47,Practical,2026-02-12
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,Java Programming,74,Internal,2026-02-05
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,Java Programming,75,External,2026-03-10
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,Java Programming,85,Practical,2026-02-12
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,DBMS,85,Internal,2026-02-05
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,DBMS,48,External,2026-03-10
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,DBMS,83,Practical,2026-02-12
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,Data Structures,48,Internal,2026-02-05
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,Data Structures,78,External,2026-03-10
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,Data Structures,38,Practical,2026-02-12
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,Operating Systems,49,Internal,2026-02-05
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,Operating Systems,66,External,2026-03-10
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,Operating Systems,78,Practical,2026-02-12
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,Web Technology,38,Internal,2026-02-05
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,Web Technology,44,External,2026-03-10
+B1017,Vivek Sharma,vivek.sharma.b1017@example.com,BCA,1,Web Technology,61,Practical,2026-02-12
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,Python Programming,56,Internal,2026-02-05
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,Python Programming,67,External,2026-03-10
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,Python Programming,80,Practical,2026-02-12
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,Java Programming,74,Internal,2026-02-05
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,Java Programming,63,External,2026-03-10
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,Java Programming,19,Practical,2026-02-12
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,DBMS,40,Internal,2026-02-05
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,DBMS,46,External,2026-03-10
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,DBMS,37,Practical,2026-02-12
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,Data Structures,67,Internal,2026-02-05
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,Data Structures,57,External,2026-03-10
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,Data Structures,55,Practical,2026-02-12
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,Operating Systems,41,Internal,2026-02-05
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,Operating Systems,78,External,2026-03-10
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,Operating Systems,47,Practical,2026-02-12
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,Web Technology,67,Internal,2026-02-05
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,Web Technology,36,External,2026-03-10
+B1018,Rahul Gupta,rahul.gupta.b1018@example.com,BCA,1,Web Technology,61,Practical,2026-02-12
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,Python Programming,52,Internal,2026-02-05
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,Python Programming,88,External,2026-03-10
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,Python Programming,65,Practical,2026-02-12
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,Java Programming,56,Internal,2026-02-05
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,Java Programming,60,External,2026-03-10
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,Java Programming,75,Practical,2026-02-12
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,DBMS,63,Internal,2026-02-05
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,DBMS,37,External,2026-03-10
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,DBMS,91,Practical,2026-02-12
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,Data Structures,73,Internal,2026-02-05
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,Data Structures,62,External,2026-03-10
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,Data Structures,68,Practical,2026-02-12
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,Operating Systems,62,Internal,2026-02-05
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,Operating Systems,75,External,2026-03-10
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,Operating Systems,58,Practical,2026-02-12
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,Web Technology,73,Internal,2026-02-05
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,Web Technology,67,External,2026-03-10
+B1019,Manish Pandey,manish.pandey.b1019@example.com,BCA,1,Web Technology,60,Practical,2026-02-12
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,Python Programming,48,Internal,2026-02-05
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,Python Programming,37,External,2026-03-10
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,Python Programming,54,Practical,2026-02-12
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,Java Programming,53,Internal,2026-02-05
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,Java Programming,69,External,2026-03-10
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,Java Programming,63,Practical,2026-02-12
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,DBMS,40,Internal,2026-02-05
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,DBMS,83,External,2026-03-10
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,DBMS,91,Practical,2026-02-12
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,Data Structures,54,Internal,2026-02-05
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,Data Structures,37,External,2026-03-10
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,Data Structures,30,Practical,2026-02-12
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,Operating Systems,68,Internal,2026-02-05
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,Operating Systems,37,External,2026-03-10
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,Operating Systems,84,Practical,2026-02-12
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,Web Technology,72,Internal,2026-02-05
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,Web Technology,40,External,2026-03-10
+B1020,Tanya Iyer,tanya.iyer.b1020@example.com,BCA,1,Web Technology,75,Practical,2026-02-12
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,Advanced Python,96,Internal,2026-02-05
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,Advanced Python,91,External,2026-03-10
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,Advanced Python,56,Practical,2026-02-12
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,Java,72,Internal,2026-02-05
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,Java,80,External,2026-03-10
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,Java,77,Practical,2026-02-12
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,DBMS,71,Internal,2026-02-05
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,DBMS,87,External,2026-03-10
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,DBMS,85,Practical,2026-02-12
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,DSA,96,Internal,2026-02-05
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,DSA,80,External,2026-03-10
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,DSA,77,Practical,2026-02-12
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,Computer Networks,42,Internal,2026-02-05
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,Computer Networks,54,External,2026-03-10
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,Computer Networks,60,Practical,2026-02-12
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,Software Engineering,83,Internal,2026-02-05
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,Software Engineering,87,External,2026-03-10
+M1021,Vikram Yadav,vikram.yadav.m1021@example.com,MCA,1,Software Engineering,86,Practical,2026-02-12
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,Advanced Python,65,Internal,2026-02-05
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,Advanced Python,84,External,2026-03-10
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,Advanced Python,100,Practical,2026-02-12
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,Java,100,Internal,2026-02-05
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,Java,88,External,2026-03-10
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,Java,83,Practical,2026-02-12
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,DBMS,88,Internal,2026-02-05
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,DBMS,70,External,2026-03-10
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,DBMS,61,Practical,2026-02-12
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,DSA,94,Internal,2026-02-05
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,DSA,78,External,2026-03-10
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,DSA,76,Practical,2026-02-12
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,Computer Networks,98,Internal,2026-02-05
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,Computer Networks,96,External,2026-03-10
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,Computer Networks,75,Practical,2026-02-12
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,Software Engineering,58,Internal,2026-02-05
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,Software Engineering,91,External,2026-03-10
+M1022,Amit Trivedi,amit.trivedi.m1022@example.com,MCA,1,Software Engineering,74,Practical,2026-02-12
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,Advanced Python,72,Internal,2026-02-05
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,Advanced Python,32,External,2026-03-10
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,Advanced Python,25,Practical,2026-02-12
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,Java,42,Internal,2026-02-05
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,Java,39,External,2026-03-10
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,Java,51,Practical,2026-02-12
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,DBMS,48,Internal,2026-02-05
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,DBMS,59,External,2026-03-10
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,DBMS,42,Practical,2026-02-12
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,DSA,71,Internal,2026-02-05
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,DSA,41,External,2026-03-10
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,DSA,70,Practical,2026-02-12
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,Computer Networks,76,Internal,2026-02-05
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,Computer Networks,54,External,2026-03-10
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,Computer Networks,66,Practical,2026-02-12
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,Software Engineering,48,Internal,2026-02-05
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,Software Engineering,46,External,2026-03-10
+M1023,Manish Bose,manish.bose.m1023@example.com,MCA,1,Software Engineering,55,Practical,2026-02-12
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,Advanced Python,50,Internal,2026-02-05
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,Advanced Python,73,External,2026-03-10
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,Advanced Python,69,Practical,2026-02-12
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,Java,97,Internal,2026-02-05
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,Java,68,External,2026-03-10
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,Java,60,Practical,2026-02-12
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,DBMS,97,Internal,2026-02-05
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,DBMS,80,External,2026-03-10
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,DBMS,55,Practical,2026-02-12
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,DSA,68,Internal,2026-02-05
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,DSA,29,External,2026-03-10
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,DSA,77,Practical,2026-02-12
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,Computer Networks,96,Internal,2026-02-05
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,Computer Networks,47,External,2026-03-10
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,Computer Networks,100,Practical,2026-02-12
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,Software Engineering,88,Internal,2026-02-05
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,Software Engineering,47,External,2026-03-10
+M1024,Aditya Reddy,aditya.reddy.m1024@example.com,MCA,1,Software Engineering,100,Practical,2026-02-12
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,Advanced Python,54,Internal,2026-02-05
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,Advanced Python,52,External,2026-03-10
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,Advanced Python,80,Practical,2026-02-12
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,Java,34,Internal,2026-02-05
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,Java,89,External,2026-03-10
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,Java,19,Practical,2026-02-12
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,DBMS,77,Internal,2026-02-05
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,DBMS,74,External,2026-03-10
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,DBMS,58,Practical,2026-02-12
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,DSA,48,Internal,2026-02-05
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,DSA,68,External,2026-03-10
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,DSA,53,Practical,2026-02-12
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,Computer Networks,43,Internal,2026-02-05
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,Computer Networks,73,External,2026-03-10
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,Computer Networks,33,Practical,2026-02-12
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,Software Engineering,51,Internal,2026-02-05
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,Software Engineering,63,External,2026-03-10
+M1025,Vivek Pandey,vivek.pandey.m1025@example.com,MCA,1,Software Engineering,57,Practical,2026-02-12
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,Advanced Python,58,Internal,2026-02-05
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,Advanced Python,59,External,2026-03-10
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,Advanced Python,81,Practical,2026-02-12
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,Java,52,Internal,2026-02-05
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,Java,88,External,2026-03-10
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,Java,93,Practical,2026-02-12
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,DBMS,55,Internal,2026-02-05
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,DBMS,51,External,2026-03-10
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,DBMS,59,Practical,2026-02-12
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,DSA,100,Internal,2026-02-05
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,DSA,83,External,2026-03-10
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,DSA,64,Practical,2026-02-12
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,Computer Networks,60,Internal,2026-02-05
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,Computer Networks,47,External,2026-03-10
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,Computer Networks,88,Practical,2026-02-12
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,Software Engineering,60,Internal,2026-02-05
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,Software Engineering,98,External,2026-03-10
+M1026,Siddharth Patel,siddharth.patel.m1026@example.com,MCA,1,Software Engineering,83,Practical,2026-02-12
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,Advanced Python,100,Internal,2026-02-05
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,Advanced Python,85,External,2026-03-10
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,Advanced Python,79,Practical,2026-02-12
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,Java,46,Internal,2026-02-05
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,Java,73,External,2026-03-10
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,Java,84,Practical,2026-02-12
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,DBMS,48,Internal,2026-02-05
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,DBMS,79,External,2026-03-10
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,DBMS,86,Practical,2026-02-12
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,DSA,95,Internal,2026-02-05
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,DSA,100,External,2026-03-10
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,DSA,80,Practical,2026-02-12
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,Computer Networks,73,Internal,2026-02-05
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,Computer Networks,45,External,2026-03-10
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,Computer Networks,94,Practical,2026-02-12
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,Software Engineering,85,Internal,2026-02-05
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,Software Engineering,56,External,2026-03-10
+M1027,Karan Agarwal,karan.agarwal.m1027@example.com,MCA,1,Software Engineering,50,Practical,2026-02-12
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,Advanced Python,46,Internal,2026-02-05
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,Advanced Python,79,External,2026-03-10
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,Advanced Python,52,Practical,2026-02-12
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,Java,43,Internal,2026-02-05
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,Java,94,External,2026-03-10
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,Java,33,Practical,2026-02-12
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,DBMS,68,Internal,2026-02-05
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,DBMS,85,External,2026-03-10
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,DBMS,12,Practical,2026-02-12
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,DSA,77,Internal,2026-02-05
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,DSA,54,External,2026-03-10
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,DSA,84,Practical,2026-02-12
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,Computer Networks,95,Internal,2026-02-05
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,Computer Networks,54,External,2026-03-10
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,Computer Networks,45,Practical,2026-02-12
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,Software Engineering,73,Internal,2026-02-05
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,Software Engineering,84,External,2026-03-10
+M1028,Arjun Pandey,arjun.pandey.m1028@example.com,MCA,1,Software Engineering,66,Practical,2026-02-12
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,Advanced Python,60,Internal,2026-02-05
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,Advanced Python,34,External,2026-03-10
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,Advanced Python,65,Practical,2026-02-12
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,Java,81,Internal,2026-02-05
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,Java,40,External,2026-03-10
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,Java,42,Practical,2026-02-12
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,DBMS,69,Internal,2026-02-05
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,DBMS,28,External,2026-03-10
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,DBMS,39,Practical,2026-02-12
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,DSA,76,Internal,2026-02-05
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,DSA,45,External,2026-03-10
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,DSA,71,Practical,2026-02-12
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,Computer Networks,61,Internal,2026-02-05
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,Computer Networks,44,External,2026-03-10
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,Computer Networks,56,Practical,2026-02-12
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,Software Engineering,71,Internal,2026-02-05
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,Software Engineering,35,External,2026-03-10
+M1029,Siddharth Verma,siddharth.verma.m1029@example.com,MCA,1,Software Engineering,18,Practical,2026-02-12
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,Advanced Python,78,Internal,2026-02-05
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,Advanced Python,87,External,2026-03-10
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,Advanced Python,63,Practical,2026-02-12
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,Java,55,Internal,2026-02-05
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,Java,56,External,2026-03-10
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,Java,38,Practical,2026-02-12
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,DBMS,85,Internal,2026-02-05
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,DBMS,65,External,2026-03-10
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,DBMS,88,Practical,2026-02-12
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,DSA,65,Internal,2026-02-05
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,DSA,35,External,2026-03-10
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,DSA,59,Practical,2026-02-12
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,Computer Networks,85,Internal,2026-02-05
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,Computer Networks,69,External,2026-03-10
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,Computer Networks,50,Practical,2026-02-12
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,Software Engineering,56,Internal,2026-02-05
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,Software Engineering,58,External,2026-03-10
+M1030,Anjali Chopra,anjali.chopra.m1030@example.com,MCA,1,Software Engineering,79,Practical,2026-02-12
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,Advanced Python,99,Internal,2026-02-05
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,Advanced Python,56,External,2026-03-10
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,Advanced Python,84,Practical,2026-02-12
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,Java,94,Internal,2026-02-05
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,Java,60,External,2026-03-10
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,Java,89,Practical,2026-02-12
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,DBMS,100,Internal,2026-02-05
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,DBMS,97,External,2026-03-10
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,DBMS,100,Practical,2026-02-12
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,DSA,100,Internal,2026-02-05
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,DSA,94,External,2026-03-10
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,DSA,93,Practical,2026-02-12
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,Computer Networks,59,Internal,2026-02-05
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,Computer Networks,95,External,2026-03-10
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,Computer Networks,51,Practical,2026-02-12
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,Software Engineering,90,Internal,2026-02-05
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,Software Engineering,77,External,2026-03-10
+M1031,Anjali Kapoor,anjali.kapoor.m1031@example.com,MCA,1,Software Engineering,79,Practical,2026-02-12
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,Advanced Python,21,Internal,2026-02-05
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,Advanced Python,55,External,2026-03-10
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,Advanced Python,11,Practical,2026-02-12
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,Java,5,Internal,2026-02-05
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,Java,44,External,2026-03-10
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,Java,58,Practical,2026-02-12
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,DBMS,65,Internal,2026-02-05
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,DBMS,70,External,2026-03-10
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,DBMS,40,Practical,2026-02-12
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,DSA,65,Internal,2026-02-05
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,DSA,27,External,2026-03-10
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,DSA,57,Practical,2026-02-12
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,Computer Networks,31,Internal,2026-02-05
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,Computer Networks,51,External,2026-03-10
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,Computer Networks,25,Practical,2026-02-12
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,Software Engineering,46,Internal,2026-02-05
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,Software Engineering,69,External,2026-03-10
+M1032,Neha Saxena,neha.saxena.m1032@example.com,MCA,1,Software Engineering,35,Practical,2026-02-12
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,Advanced Python,100,Internal,2026-02-05
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,Advanced Python,78,External,2026-03-10
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,Advanced Python,93,Practical,2026-02-12
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,Java,82,Internal,2026-02-05
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,Java,84,External,2026-03-10
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,Java,95,Practical,2026-02-12
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,DBMS,100,Internal,2026-02-05
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,DBMS,97,External,2026-03-10
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,DBMS,52,Practical,2026-02-12
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,DSA,97,Internal,2026-02-05
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,DSA,29,External,2026-03-10
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,DSA,96,Practical,2026-02-12
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,Computer Networks,88,Internal,2026-02-05
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,Computer Networks,63,External,2026-03-10
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,Computer Networks,66,Practical,2026-02-12
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,Software Engineering,82,Internal,2026-02-05
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,Software Engineering,78,External,2026-03-10
+M1033,Priya Saxena,priya.saxena.m1033@example.com,MCA,1,Software Engineering,63,Practical,2026-02-12
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,Advanced Python,85,Internal,2026-02-05
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,Advanced Python,73,External,2026-03-10
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,Advanced Python,69,Practical,2026-02-12
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,Java,73,Internal,2026-02-05
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,Java,83,External,2026-03-10
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,Java,79,Practical,2026-02-12
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,DBMS,62,Internal,2026-02-05
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,DBMS,81,External,2026-03-10
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,DBMS,54,Practical,2026-02-12
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,DSA,39,Internal,2026-02-05
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,DSA,90,External,2026-03-10
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,DSA,48,Practical,2026-02-12
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,Computer Networks,97,Internal,2026-02-05
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,Computer Networks,60,External,2026-03-10
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,Computer Networks,75,Practical,2026-02-12
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,Software Engineering,49,Internal,2026-02-05
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,Software Engineering,71,External,2026-03-10
+M1034,Vikram Verma,vikram.verma.m1034@example.com,MCA,1,Software Engineering,19,Practical,2026-02-12
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,Advanced Python,40,Internal,2026-02-05
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,Advanced Python,65,External,2026-03-10
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,Advanced Python,62,Practical,2026-02-12
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,Java,62,Internal,2026-02-05
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,Java,71,External,2026-03-10
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,Java,66,Practical,2026-02-12
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,DBMS,62,Internal,2026-02-05
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,DBMS,69,External,2026-03-10
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,DBMS,92,Practical,2026-02-12
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,DSA,53,Internal,2026-02-05
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,DSA,70,External,2026-03-10
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,DSA,75,Practical,2026-02-12
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,Computer Networks,41,Internal,2026-02-05
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,Computer Networks,95,External,2026-03-10
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,Computer Networks,20,Practical,2026-02-12
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,Software Engineering,50,Internal,2026-02-05
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,Software Engineering,88,External,2026-03-10
+M1035,Arjun Verma,arjun.verma.m1035@example.com,MCA,1,Software Engineering,87,Practical,2026-02-12
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,Advanced Python,57,Internal,2026-02-05
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,Advanced Python,100,External,2026-03-10
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,Advanced Python,77,Practical,2026-02-12
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,Java,93,Internal,2026-02-05
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,Java,91,External,2026-03-10
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,Java,93,Practical,2026-02-12
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,DBMS,70,Internal,2026-02-05
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,DBMS,89,External,2026-03-10
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,DBMS,64,Practical,2026-02-12
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,DSA,83,Internal,2026-02-05
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,DSA,63,External,2026-03-10
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,DSA,100,Practical,2026-02-12
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,Computer Networks,76,Internal,2026-02-05
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,Computer Networks,74,External,2026-03-10
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,Computer Networks,55,Practical,2026-02-12
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,Software Engineering,91,Internal,2026-02-05
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,Software Engineering,33,External,2026-03-10
+M1036,Ishaan Kapoor,ishaan.kapoor.m1036@example.com,MCA,1,Software Engineering,77,Practical,2026-02-12
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,Advanced Python,77,Internal,2026-02-05
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,Advanced Python,84,External,2026-03-10
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,Advanced Python,73,Practical,2026-02-12
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,Java,59,Internal,2026-02-05
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,Java,84,External,2026-03-10
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,Java,59,Practical,2026-02-12
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,DBMS,61,Internal,2026-02-05
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,DBMS,67,External,2026-03-10
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,DBMS,69,Practical,2026-02-12
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,DSA,72,Internal,2026-02-05
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,DSA,90,External,2026-03-10
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,DSA,85,Practical,2026-02-12
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,Computer Networks,76,Internal,2026-02-05
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,Computer Networks,50,External,2026-03-10
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,Computer Networks,95,Practical,2026-02-12
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,Software Engineering,80,Internal,2026-02-05
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,Software Engineering,71,External,2026-03-10
+M1037,Ishaan Verma,ishaan.verma.m1037@example.com,MCA,1,Software Engineering,65,Practical,2026-02-12
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,Advanced Python,33,Internal,2026-02-05
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,Advanced Python,29,External,2026-03-10
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,Advanced Python,41,Practical,2026-02-12
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,Java,73,Internal,2026-02-05
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,Java,73,External,2026-03-10
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,Java,73,Practical,2026-02-12
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,DBMS,42,Internal,2026-02-05
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,DBMS,4,External,2026-03-10
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,DBMS,56,Practical,2026-02-12
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,DSA,36,Internal,2026-02-05
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,DSA,64,External,2026-03-10
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,DSA,18,Practical,2026-02-12
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,Computer Networks,77,Internal,2026-02-05
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,Computer Networks,75,External,2026-03-10
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,Computer Networks,40,Practical,2026-02-12
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,Software Engineering,29,Internal,2026-02-05
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,Software Engineering,76,External,2026-03-10
+M1038,Anjali Iyer,anjali.iyer.m1038@example.com,MCA,1,Software Engineering,34,Practical,2026-02-12
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,Advanced Python,45,Internal,2026-02-05
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,Advanced Python,42,External,2026-03-10
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,Advanced Python,65,Practical,2026-02-12
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,Java,69,Internal,2026-02-05
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,Java,70,External,2026-03-10
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,Java,47,Practical,2026-02-12
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,DBMS,15,Internal,2026-02-05
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,DBMS,64,External,2026-03-10
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,DBMS,71,Practical,2026-02-12
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,DSA,53,Internal,2026-02-05
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,DSA,53,External,2026-03-10
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,DSA,63,Practical,2026-02-12
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,Computer Networks,70,Internal,2026-02-05
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,Computer Networks,77,External,2026-03-10
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,Computer Networks,36,Practical,2026-02-12
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,Software Engineering,50,Internal,2026-02-05
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,Software Engineering,39,External,2026-03-10
+M1039,Riya Joshi,riya.joshi.m1039@example.com,MCA,1,Software Engineering,79,Practical,2026-02-12
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,Advanced Python,99,Internal,2026-02-05
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,Advanced Python,77,External,2026-03-10
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,Advanced Python,53,Practical,2026-02-12
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,Java,75,Internal,2026-02-05
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,Java,72,External,2026-03-10
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,Java,85,Practical,2026-02-12
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,DBMS,79,Internal,2026-02-05
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,DBMS,54,External,2026-03-10
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,DBMS,100,Practical,2026-02-12
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,DSA,66,Internal,2026-02-05
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,DSA,30,External,2026-03-10
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,DSA,100,Practical,2026-02-12
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,Computer Networks,85,Internal,2026-02-05
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,Computer Networks,100,External,2026-03-10
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,Computer Networks,84,Practical,2026-02-12
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,Software Engineering,80,Internal,2026-02-05
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,Software Engineering,89,External,2026-03-10
+M1040,Vikram Khanna,vikram.khanna.m1040@example.com,MCA,1,Software Engineering,49,Practical,2026-02-12
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,Engineering Mathematics,26,Internal,2026-02-05
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,Engineering Mathematics,65,External,2026-03-10
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,Engineering Mathematics,36,Practical,2026-02-12
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,Data Structures,48,Internal,2026-02-05
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,Data Structures,73,External,2026-03-10
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,Data Structures,77,Practical,2026-02-12
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,DBMS,69,Internal,2026-02-05
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,DBMS,50,External,2026-03-10
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,DBMS,41,Practical,2026-02-12
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,Operating Systems,64,Internal,2026-02-05
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,Operating Systems,69,External,2026-03-10
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,Operating Systems,28,Practical,2026-02-12
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,Computer Networks,49,Internal,2026-02-05
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,Computer Networks,69,External,2026-03-10
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,Computer Networks,59,Practical,2026-02-12
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,Software Engineering,71,Internal,2026-02-05
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,Software Engineering,78,External,2026-03-10
+BT1041,Anjali Saxena,anjali.saxena.bt1041@example.com,B.TECH,1,Software Engineering,63,Practical,2026-02-12
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,Engineering Mathematics,59,Internal,2026-02-05
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,Engineering Mathematics,59,External,2026-03-10
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,Engineering Mathematics,26,Practical,2026-02-12
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,Data Structures,77,Internal,2026-02-05
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,Data Structures,70,External,2026-03-10
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,Data Structures,67,Practical,2026-02-12
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,DBMS,92,Internal,2026-02-05
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,DBMS,83,External,2026-03-10
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,DBMS,40,Practical,2026-02-12
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,Operating Systems,100,Internal,2026-02-05
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,Operating Systems,41,External,2026-03-10
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,Operating Systems,85,Practical,2026-02-12
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,Computer Networks,49,Internal,2026-02-05
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,Computer Networks,55,External,2026-03-10
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,Computer Networks,59,Practical,2026-02-12
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,Software Engineering,36,Internal,2026-02-05
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,Software Engineering,88,External,2026-03-10
+BT1042,Siddharth Sharma,siddharth.sharma.bt1042@example.com,B.TECH,1,Software Engineering,55,Practical,2026-02-12
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,Engineering Mathematics,51,Internal,2026-02-05
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,Engineering Mathematics,66,External,2026-03-10
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,Engineering Mathematics,49,Practical,2026-02-12
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,Data Structures,80,Internal,2026-02-05
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,Data Structures,45,External,2026-03-10
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,Data Structures,36,Practical,2026-02-12
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,DBMS,18,Internal,2026-02-05
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,DBMS,21,External,2026-03-10
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,DBMS,70,Practical,2026-02-12
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,Operating Systems,82,Internal,2026-02-05
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,Operating Systems,49,External,2026-03-10
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,Operating Systems,81,Practical,2026-02-12
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,Computer Networks,57,Internal,2026-02-05
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,Computer Networks,48,External,2026-03-10
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,Computer Networks,52,Practical,2026-02-12
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,Software Engineering,58,Internal,2026-02-05
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,Software Engineering,32,External,2026-03-10
+BT1043,Simran Yadav,simran.yadav.bt1043@example.com,B.TECH,1,Software Engineering,68,Practical,2026-02-12
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,Engineering Mathematics,79,Internal,2026-02-05
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,Engineering Mathematics,73,External,2026-03-10
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,Engineering Mathematics,46,Practical,2026-02-12
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,Data Structures,53,Internal,2026-02-05
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,Data Structures,71,External,2026-03-10
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,Data Structures,73,Practical,2026-02-12
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,DBMS,80,Internal,2026-02-05
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,DBMS,51,External,2026-03-10
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,DBMS,77,Practical,2026-02-12
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,Operating Systems,58,Internal,2026-02-05
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,Operating Systems,31,External,2026-03-10
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,Operating Systems,89,Practical,2026-02-12
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,Computer Networks,87,Internal,2026-02-05
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,Computer Networks,73,External,2026-03-10
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,Computer Networks,51,Practical,2026-02-12
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,Software Engineering,96,Internal,2026-02-05
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,Software Engineering,28,External,2026-03-10
+BT1044,Karan Agarwal,karan.agarwal.bt1044@example.com,B.TECH,1,Software Engineering,80,Practical,2026-02-12
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,Engineering Mathematics,56,Internal,2026-02-05
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,Engineering Mathematics,58,External,2026-03-10
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,Engineering Mathematics,36,Practical,2026-02-12
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,Data Structures,80,Internal,2026-02-05
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,Data Structures,69,External,2026-03-10
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,Data Structures,75,Practical,2026-02-12
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,DBMS,75,Internal,2026-02-05
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,DBMS,50,External,2026-03-10
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,DBMS,71,Practical,2026-02-12
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,Operating Systems,55,Internal,2026-02-05
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,Operating Systems,70,External,2026-03-10
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,Operating Systems,62,Practical,2026-02-12
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,Computer Networks,83,Internal,2026-02-05
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,Computer Networks,49,External,2026-03-10
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,Computer Networks,52,Practical,2026-02-12
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,Software Engineering,48,Internal,2026-02-05
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,Software Engineering,46,External,2026-03-10
+BT1045,Manish Patel,manish.patel.bt1045@example.com,B.TECH,1,Software Engineering,65,Practical,2026-02-12
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,Engineering Mathematics,72,Internal,2026-02-05
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,Engineering Mathematics,79,External,2026-03-10
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,Engineering Mathematics,80,Practical,2026-02-12
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,Data Structures,86,Internal,2026-02-05
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,Data Structures,75,External,2026-03-10
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,Data Structures,49,Practical,2026-02-12
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,DBMS,74,Internal,2026-02-05
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,DBMS,60,External,2026-03-10
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,DBMS,46,Practical,2026-02-12
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,Operating Systems,61,Internal,2026-02-05
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,Operating Systems,48,External,2026-03-10
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,Operating Systems,66,Practical,2026-02-12
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,Computer Networks,89,Internal,2026-02-05
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,Computer Networks,50,External,2026-03-10
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,Computer Networks,75,Practical,2026-02-12
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,Software Engineering,69,Internal,2026-02-05
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,Software Engineering,78,External,2026-03-10
+BT1046,Siddharth Joshi,siddharth.joshi.bt1046@example.com,B.TECH,1,Software Engineering,94,Practical,2026-02-12
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,Engineering Mathematics,49,Internal,2026-02-05
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,Engineering Mathematics,82,External,2026-03-10
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,Engineering Mathematics,57,Practical,2026-02-12
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,Data Structures,46,Internal,2026-02-05
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,Data Structures,100,External,2026-03-10
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,Data Structures,74,Practical,2026-02-12
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,DBMS,23,Internal,2026-02-05
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,DBMS,88,External,2026-03-10
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,DBMS,94,Practical,2026-02-12
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,Operating Systems,63,Internal,2026-02-05
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,Operating Systems,66,External,2026-03-10
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,Operating Systems,94,Practical,2026-02-12
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,Computer Networks,58,Internal,2026-02-05
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,Computer Networks,95,External,2026-03-10
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,Computer Networks,48,Practical,2026-02-12
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,Software Engineering,78,Internal,2026-02-05
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,Software Engineering,64,External,2026-03-10
+BT1047,Vivek Nair,vivek.nair.bt1047@example.com,B.TECH,1,Software Engineering,63,Practical,2026-02-12
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,Engineering Mathematics,89,Internal,2026-02-05
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,Engineering Mathematics,50,External,2026-03-10
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,Engineering Mathematics,75,Practical,2026-02-12
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,Data Structures,66,Internal,2026-02-05
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,Data Structures,50,External,2026-03-10
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,Data Structures,60,Practical,2026-02-12
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,DBMS,46,Internal,2026-02-05
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,DBMS,56,External,2026-03-10
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,DBMS,41,Practical,2026-02-12
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,Operating Systems,62,Internal,2026-02-05
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,Operating Systems,94,External,2026-03-10
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,Operating Systems,90,Practical,2026-02-12
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,Computer Networks,44,Internal,2026-02-05
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,Computer Networks,52,External,2026-03-10
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,Computer Networks,100,Practical,2026-02-12
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,Software Engineering,63,Internal,2026-02-05
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,Software Engineering,79,External,2026-03-10
+BT1048,Anjali Nair,anjali.nair.bt1048@example.com,B.TECH,1,Software Engineering,83,Practical,2026-02-12
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,Engineering Mathematics,88,Internal,2026-02-05
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,Engineering Mathematics,88,External,2026-03-10
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,Engineering Mathematics,100,Practical,2026-02-12
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,Data Structures,44,Internal,2026-02-05
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,Data Structures,93,External,2026-03-10
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,Data Structures,68,Practical,2026-02-12
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,DBMS,74,Internal,2026-02-05
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,DBMS,78,External,2026-03-10
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,DBMS,62,Practical,2026-02-12
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,Operating Systems,83,Internal,2026-02-05
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,Operating Systems,92,External,2026-03-10
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,Operating Systems,73,Practical,2026-02-12
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,Computer Networks,69,Internal,2026-02-05
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,Computer Networks,62,External,2026-03-10
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,Computer Networks,100,Practical,2026-02-12
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,Software Engineering,97,Internal,2026-02-05
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,Software Engineering,63,External,2026-03-10
+BT1049,Simran Pandey,simran.pandey.bt1049@example.com,B.TECH,1,Software Engineering,99,Practical,2026-02-12
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,Engineering Mathematics,73,Internal,2026-02-05
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,Engineering Mathematics,85,External,2026-03-10
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,Engineering Mathematics,57,Practical,2026-02-12
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,Data Structures,70,Internal,2026-02-05
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,Data Structures,30,External,2026-03-10
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,Data Structures,28,Practical,2026-02-12
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,DBMS,21,Internal,2026-02-05
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,DBMS,69,External,2026-03-10
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,DBMS,27,Practical,2026-02-12
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,Operating Systems,63,Internal,2026-02-05
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,Operating Systems,32,External,2026-03-10
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,Operating Systems,42,Practical,2026-02-12
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,Computer Networks,59,Internal,2026-02-05
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,Computer Networks,40,External,2026-03-10
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,Computer Networks,28,Practical,2026-02-12
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,Software Engineering,7,Internal,2026-02-05
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,Software Engineering,39,External,2026-03-10
+BT1050,Siddharth Verma,siddharth.verma.bt1050@example.com,B.TECH,1,Software Engineering,45,Practical,2026-02-12
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,Engineering Mathematics,82,Internal,2026-02-05
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,Engineering Mathematics,80,External,2026-03-10
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,Engineering Mathematics,71,Practical,2026-02-12
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,Data Structures,88,Internal,2026-02-05
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,Data Structures,86,External,2026-03-10
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,Data Structures,76,Practical,2026-02-12
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,DBMS,22,Internal,2026-02-05
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,DBMS,86,External,2026-03-10
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,DBMS,82,Practical,2026-02-12
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,Operating Systems,67,Internal,2026-02-05
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,Operating Systems,34,External,2026-03-10
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,Operating Systems,72,Practical,2026-02-12
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,Computer Networks,87,Internal,2026-02-05
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,Computer Networks,74,External,2026-03-10
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,Computer Networks,69,Practical,2026-02-12
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,Software Engineering,56,Internal,2026-02-05
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,Software Engineering,70,External,2026-03-10
+BT1051,Priya Trivedi,priya.trivedi.bt1051@example.com,B.TECH,1,Software Engineering,64,Practical,2026-02-12
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,Engineering Mathematics,53,Internal,2026-02-05
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,Engineering Mathematics,53,External,2026-03-10
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,Engineering Mathematics,74,Practical,2026-02-12
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,Data Structures,14,Internal,2026-02-05
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,Data Structures,49,External,2026-03-10
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,Data Structures,43,Practical,2026-02-12
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,DBMS,44,Internal,2026-02-05
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,DBMS,40,External,2026-03-10
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,DBMS,28,Practical,2026-02-12
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,Operating Systems,78,Internal,2026-02-05
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,Operating Systems,68,External,2026-03-10
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,Operating Systems,72,Practical,2026-02-12
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,Computer Networks,61,Internal,2026-02-05
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,Computer Networks,35,External,2026-03-10
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,Computer Networks,71,Practical,2026-02-12
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,Software Engineering,71,Internal,2026-02-05
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,Software Engineering,42,External,2026-03-10
+BT1052,Karan Saxena,karan.saxena.bt1052@example.com,B.TECH,1,Software Engineering,80,Practical,2026-02-12
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,Engineering Mathematics,89,Internal,2026-02-05
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,Engineering Mathematics,71,External,2026-03-10
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,Engineering Mathematics,49,Practical,2026-02-12
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,Data Structures,91,Internal,2026-02-05
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,Data Structures,80,External,2026-03-10
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,Data Structures,49,Practical,2026-02-12
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,DBMS,71,Internal,2026-02-05
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,DBMS,47,External,2026-03-10
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,DBMS,87,Practical,2026-02-12
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,Operating Systems,88,Internal,2026-02-05
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,Operating Systems,22,External,2026-03-10
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,Operating Systems,74,Practical,2026-02-12
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,Computer Networks,37,Internal,2026-02-05
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,Computer Networks,34,External,2026-03-10
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,Computer Networks,85,Practical,2026-02-12
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,Software Engineering,97,Internal,2026-02-05
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,Software Engineering,64,External,2026-03-10
+BT1053,Pooja Gupta,pooja.gupta.bt1053@example.com,B.TECH,1,Software Engineering,64,Practical,2026-02-12
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,Engineering Mathematics,60,Internal,2026-02-05
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,Engineering Mathematics,55,External,2026-03-10
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,Engineering Mathematics,35,Practical,2026-02-12
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,Data Structures,85,Internal,2026-02-05
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,Data Structures,85,External,2026-03-10
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,Data Structures,92,Practical,2026-02-12
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,DBMS,27,Internal,2026-02-05
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,DBMS,50,External,2026-03-10
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,DBMS,53,Practical,2026-02-12
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,Operating Systems,60,Internal,2026-02-05
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,Operating Systems,66,External,2026-03-10
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,Operating Systems,58,Practical,2026-02-12
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,Computer Networks,49,Internal,2026-02-05
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,Computer Networks,71,External,2026-03-10
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,Computer Networks,83,Practical,2026-02-12
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,Software Engineering,80,Internal,2026-02-05
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,Software Engineering,75,External,2026-03-10
+BT1054,Priya Mehta,priya.mehta.bt1054@example.com,B.TECH,1,Software Engineering,55,Practical,2026-02-12
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,Engineering Mathematics,44,Internal,2026-02-05
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,Engineering Mathematics,70,External,2026-03-10
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,Engineering Mathematics,48,Practical,2026-02-12
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,Data Structures,87,Internal,2026-02-05
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,Data Structures,74,External,2026-03-10
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,Data Structures,57,Practical,2026-02-12
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,DBMS,79,Internal,2026-02-05
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,DBMS,75,External,2026-03-10
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,DBMS,73,Practical,2026-02-12
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,Operating Systems,82,Internal,2026-02-05
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,Operating Systems,85,External,2026-03-10
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,Operating Systems,84,Practical,2026-02-12
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,Computer Networks,44,Internal,2026-02-05
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,Computer Networks,58,External,2026-03-10
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,Computer Networks,63,Practical,2026-02-12
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,Software Engineering,69,Internal,2026-02-05
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,Software Engineering,94,External,2026-03-10
+BT1055,Simran Agarwal,simran.agarwal.bt1055@example.com,B.TECH,1,Software Engineering,69,Practical,2026-02-12
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,Engineering Mathematics,82,Internal,2026-02-05
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,Engineering Mathematics,78,External,2026-03-10
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,Engineering Mathematics,80,Practical,2026-02-12
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,Data Structures,46,Internal,2026-02-05
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,Data Structures,65,External,2026-03-10
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,Data Structures,69,Practical,2026-02-12
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,DBMS,90,Internal,2026-02-05
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,DBMS,59,External,2026-03-10
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,DBMS,96,Practical,2026-02-12
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,Operating Systems,67,Internal,2026-02-05
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,Operating Systems,49,External,2026-03-10
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,Operating Systems,49,Practical,2026-02-12
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,Computer Networks,100,Internal,2026-02-05
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,Computer Networks,77,External,2026-03-10
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,Computer Networks,89,Practical,2026-02-12
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,Software Engineering,58,Internal,2026-02-05
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,Software Engineering,63,External,2026-03-10
+BT1056,Simran Singhania,simran.singhania.bt1056@example.com,B.TECH,1,Software Engineering,65,Practical,2026-02-12
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,Engineering Mathematics,33,Internal,2026-02-05
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,Engineering Mathematics,92,External,2026-03-10
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,Engineering Mathematics,76,Practical,2026-02-12
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,Data Structures,76,Internal,2026-02-05
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,Data Structures,64,External,2026-03-10
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,Data Structures,54,Practical,2026-02-12
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,DBMS,87,Internal,2026-02-05
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,DBMS,44,External,2026-03-10
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,DBMS,63,Practical,2026-02-12
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,Operating Systems,70,Internal,2026-02-05
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,Operating Systems,50,External,2026-03-10
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,Operating Systems,53,Practical,2026-02-12
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,Computer Networks,61,Internal,2026-02-05
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,Computer Networks,51,External,2026-03-10
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,Computer Networks,50,Practical,2026-02-12
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,Software Engineering,27,Internal,2026-02-05
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,Software Engineering,99,External,2026-03-10
+BT1057,Riya Verma,riya.verma.bt1057@example.com,B.TECH,1,Software Engineering,58,Practical,2026-02-12
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,Engineering Mathematics,88,Internal,2026-02-05
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,Engineering Mathematics,86,External,2026-03-10
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,Engineering Mathematics,69,Practical,2026-02-12
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,Data Structures,100,Internal,2026-02-05
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,Data Structures,65,External,2026-03-10
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,Data Structures,62,Practical,2026-02-12
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,DBMS,65,Internal,2026-02-05
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,DBMS,100,External,2026-03-10
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,DBMS,56,Practical,2026-02-12
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,Operating Systems,100,Internal,2026-02-05
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,Operating Systems,89,External,2026-03-10
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,Operating Systems,70,Practical,2026-02-12
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,Computer Networks,98,Internal,2026-02-05
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,Computer Networks,67,External,2026-03-10
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,Computer Networks,52,Practical,2026-02-12
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,Software Engineering,86,Internal,2026-02-05
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,Software Engineering,77,External,2026-03-10
+BT1058,Riya Chopra,riya.chopra.bt1058@example.com,B.TECH,1,Software Engineering,79,Practical,2026-02-12
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,Engineering Mathematics,100,Internal,2026-02-05
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,Engineering Mathematics,80,External,2026-03-10
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,Engineering Mathematics,83,Practical,2026-02-12
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,Data Structures,94,Internal,2026-02-05
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,Data Structures,96,External,2026-03-10
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,Data Structures,90,Practical,2026-02-12
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,DBMS,31,Internal,2026-02-05
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,DBMS,94,External,2026-03-10
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,DBMS,67,Practical,2026-02-12
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,Operating Systems,55,Internal,2026-02-05
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,Operating Systems,91,External,2026-03-10
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,Operating Systems,77,Practical,2026-02-12
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,Computer Networks,38,Internal,2026-02-05
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,Computer Networks,68,External,2026-03-10
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,Computer Networks,22,Practical,2026-02-12
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,Software Engineering,49,Internal,2026-02-05
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,Software Engineering,95,External,2026-03-10
+BT1059,Pooja Gupta,pooja.gupta.bt1059@example.com,B.TECH,1,Software Engineering,100,Practical,2026-02-12
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,Engineering Mathematics,71,Internal,2026-02-05
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,Engineering Mathematics,35,External,2026-03-10
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,Engineering Mathematics,93,Practical,2026-02-12
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,Data Structures,61,Internal,2026-02-05
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,Data Structures,85,External,2026-03-10
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,Data Structures,53,Practical,2026-02-12
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,DBMS,65,Internal,2026-02-05
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,DBMS,84,External,2026-03-10
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,DBMS,52,Practical,2026-02-12
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,Operating Systems,49,Internal,2026-02-05
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,Operating Systems,65,External,2026-03-10
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,Operating Systems,66,Practical,2026-02-12
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,Computer Networks,62,Internal,2026-02-05
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,Computer Networks,79,External,2026-03-10
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,Computer Networks,42,Practical,2026-02-12
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,Software Engineering,15,Internal,2026-02-05
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,Software Engineering,77,External,2026-03-10
+BT1060,Vikram Pandey,vikram.pandey.bt1060@example.com,B.TECH,1,Software Engineering,63,Practical,2026-02-12
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Advanced Algorithms,67,Internal,2026-02-05
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Advanced Algorithms,91,External,2026-03-10
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Advanced Algorithms,75,Practical,2026-02-12
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Machine Learning,79,Internal,2026-02-05
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Machine Learning,73,External,2026-03-10
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Machine Learning,98,Practical,2026-02-12
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Cloud Computing,76,Internal,2026-02-05
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Cloud Computing,53,External,2026-03-10
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Cloud Computing,97,Practical,2026-02-12
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Distributed Systems,85,Internal,2026-02-05
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Distributed Systems,69,External,2026-03-10
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Distributed Systems,73,Practical,2026-02-12
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Data Mining,56,Internal,2026-02-05
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Data Mining,86,External,2026-03-10
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Data Mining,51,Practical,2026-02-12
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Research Methodology,91,Internal,2026-02-05
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Research Methodology,90,External,2026-03-10
+MT1061,Vikram Pandey,vikram.pandey.mt1061@example.com,M.TECH,1,Research Methodology,83,Practical,2026-02-12
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Advanced Algorithms,77,Internal,2026-02-05
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Advanced Algorithms,43,External,2026-03-10
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Advanced Algorithms,61,Practical,2026-02-12
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Machine Learning,42,Internal,2026-02-05
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Machine Learning,52,External,2026-03-10
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Machine Learning,86,Practical,2026-02-12
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Cloud Computing,75,Internal,2026-02-05
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Cloud Computing,67,External,2026-03-10
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Cloud Computing,72,Practical,2026-02-12
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Distributed Systems,59,Internal,2026-02-05
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Distributed Systems,35,External,2026-03-10
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Distributed Systems,55,Practical,2026-02-12
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Data Mining,47,Internal,2026-02-05
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Data Mining,83,External,2026-03-10
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Data Mining,49,Practical,2026-02-12
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Research Methodology,54,Internal,2026-02-05
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Research Methodology,74,External,2026-03-10
+MT1062,Sneha Malhotra,sneha.malhotra.mt1062@example.com,M.TECH,1,Research Methodology,45,Practical,2026-02-12
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Advanced Algorithms,69,Internal,2026-02-05
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Advanced Algorithms,22,External,2026-03-10
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Advanced Algorithms,52,Practical,2026-02-12
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Machine Learning,38,Internal,2026-02-05
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Machine Learning,59,External,2026-03-10
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Machine Learning,62,Practical,2026-02-12
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Cloud Computing,81,Internal,2026-02-05
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Cloud Computing,57,External,2026-03-10
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Cloud Computing,75,Practical,2026-02-12
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Distributed Systems,79,Internal,2026-02-05
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Distributed Systems,79,External,2026-03-10
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Distributed Systems,75,Practical,2026-02-12
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Data Mining,46,Internal,2026-02-05
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Data Mining,63,External,2026-03-10
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Data Mining,70,Practical,2026-02-12
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Research Methodology,48,Internal,2026-02-05
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Research Methodology,7,External,2026-03-10
+MT1063,Karan Sharma,karan.sharma.mt1063@example.com,M.TECH,1,Research Methodology,51,Practical,2026-02-12
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Advanced Algorithms,76,Internal,2026-02-05
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Advanced Algorithms,77,External,2026-03-10
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Advanced Algorithms,58,Practical,2026-02-12
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Machine Learning,76,Internal,2026-02-05
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Machine Learning,24,External,2026-03-10
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Machine Learning,58,Practical,2026-02-12
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Cloud Computing,67,Internal,2026-02-05
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Cloud Computing,43,External,2026-03-10
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Cloud Computing,38,Practical,2026-02-12
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Distributed Systems,48,Internal,2026-02-05
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Distributed Systems,74,External,2026-03-10
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Distributed Systems,75,Practical,2026-02-12
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Data Mining,77,Internal,2026-02-05
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Data Mining,48,External,2026-03-10
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Data Mining,61,Practical,2026-02-12
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Research Methodology,54,Internal,2026-02-05
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Research Methodology,81,External,2026-03-10
+MT1064,Arjun Gupta,arjun.gupta.mt1064@example.com,M.TECH,1,Research Methodology,62,Practical,2026-02-12
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Advanced Algorithms,74,Internal,2026-02-05
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Advanced Algorithms,53,External,2026-03-10
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Advanced Algorithms,85,Practical,2026-02-12
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Machine Learning,62,Internal,2026-02-05
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Machine Learning,30,External,2026-03-10
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Machine Learning,54,Practical,2026-02-12
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Cloud Computing,87,Internal,2026-02-05
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Cloud Computing,4,External,2026-03-10
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Cloud Computing,49,Practical,2026-02-12
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Distributed Systems,71,Internal,2026-02-05
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Distributed Systems,62,External,2026-03-10
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Distributed Systems,70,Practical,2026-02-12
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Data Mining,65,Internal,2026-02-05
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Data Mining,63,External,2026-03-10
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Data Mining,7,Practical,2026-02-12
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Research Methodology,69,Internal,2026-02-05
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Research Methodology,78,External,2026-03-10
+MT1065,Manish Saxena,manish.saxena.mt1065@example.com,M.TECH,1,Research Methodology,7,Practical,2026-02-12
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Advanced Algorithms,72,Internal,2026-02-05
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Advanced Algorithms,78,External,2026-03-10
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Advanced Algorithms,87,Practical,2026-02-12
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Machine Learning,62,Internal,2026-02-05
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Machine Learning,47,External,2026-03-10
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Machine Learning,95,Practical,2026-02-12
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Cloud Computing,65,Internal,2026-02-05
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Cloud Computing,95,External,2026-03-10
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Cloud Computing,71,Practical,2026-02-12
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Distributed Systems,95,Internal,2026-02-05
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Distributed Systems,46,External,2026-03-10
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Distributed Systems,92,Practical,2026-02-12
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Data Mining,66,Internal,2026-02-05
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Data Mining,76,External,2026-03-10
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Data Mining,40,Practical,2026-02-12
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Research Methodology,77,Internal,2026-02-05
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Research Methodology,100,External,2026-03-10
+MT1066,Karan Gupta,karan.gupta.mt1066@example.com,M.TECH,1,Research Methodology,65,Practical,2026-02-12
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Advanced Algorithms,48,Internal,2026-02-05
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Advanced Algorithms,92,External,2026-03-10
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Advanced Algorithms,52,Practical,2026-02-12
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Machine Learning,68,Internal,2026-02-05
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Machine Learning,47,External,2026-03-10
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Machine Learning,73,Practical,2026-02-12
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Cloud Computing,28,Internal,2026-02-05
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Cloud Computing,39,External,2026-03-10
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Cloud Computing,74,Practical,2026-02-12
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Distributed Systems,33,Internal,2026-02-05
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Distributed Systems,80,External,2026-03-10
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Distributed Systems,28,Practical,2026-02-12
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Data Mining,9,Internal,2026-02-05
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Data Mining,30,External,2026-03-10
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Data Mining,48,Practical,2026-02-12
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Research Methodology,60,Internal,2026-02-05
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Research Methodology,52,External,2026-03-10
+MT1067,Aditya Saxena,aditya.saxena.mt1067@example.com,M.TECH,1,Research Methodology,44,Practical,2026-02-12
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Advanced Algorithms,86,Internal,2026-02-05
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Advanced Algorithms,87,External,2026-03-10
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Advanced Algorithms,64,Practical,2026-02-12
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Machine Learning,71,Internal,2026-02-05
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Machine Learning,52,External,2026-03-10
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Machine Learning,75,Practical,2026-02-12
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Cloud Computing,67,Internal,2026-02-05
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Cloud Computing,90,External,2026-03-10
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Cloud Computing,49,Practical,2026-02-12
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Distributed Systems,79,Internal,2026-02-05
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Distributed Systems,51,External,2026-03-10
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Distributed Systems,90,Practical,2026-02-12
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Data Mining,84,Internal,2026-02-05
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Data Mining,48,External,2026-03-10
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Data Mining,54,Practical,2026-02-12
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Research Methodology,48,Internal,2026-02-05
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Research Methodology,91,External,2026-03-10
+MT1068,Vikram Verma,vikram.verma.mt1068@example.com,M.TECH,1,Research Methodology,88,Practical,2026-02-12
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Advanced Algorithms,93,Internal,2026-02-05
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Advanced Algorithms,56,External,2026-03-10
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Advanced Algorithms,84,Practical,2026-02-12
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Machine Learning,100,Internal,2026-02-05
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Machine Learning,80,External,2026-03-10
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Machine Learning,80,Practical,2026-02-12
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Cloud Computing,68,Internal,2026-02-05
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Cloud Computing,93,External,2026-03-10
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Cloud Computing,43,Practical,2026-02-12
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Distributed Systems,90,Internal,2026-02-05
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Distributed Systems,100,External,2026-03-10
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Distributed Systems,69,Practical,2026-02-12
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Data Mining,52,Internal,2026-02-05
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Data Mining,67,External,2026-03-10
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Data Mining,62,Practical,2026-02-12
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Research Methodology,56,Internal,2026-02-05
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Research Methodology,48,External,2026-03-10
+MT1069,Priya Reddy,priya.reddy.mt1069@example.com,M.TECH,1,Research Methodology,52,Practical,2026-02-12
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Advanced Algorithms,61,Internal,2026-02-05
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Advanced Algorithms,42,External,2026-03-10
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Advanced Algorithms,32,Practical,2026-02-12
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Machine Learning,33,Internal,2026-02-05
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Machine Learning,26,External,2026-03-10
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Machine Learning,24,Practical,2026-02-12
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Cloud Computing,68,Internal,2026-02-05
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Cloud Computing,27,External,2026-03-10
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Cloud Computing,68,Practical,2026-02-12
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Distributed Systems,73,Internal,2026-02-05
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Distributed Systems,41,External,2026-03-10
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Distributed Systems,75,Practical,2026-02-12
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Data Mining,43,Internal,2026-02-05
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Data Mining,64,External,2026-03-10
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Data Mining,84,Practical,2026-02-12
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Research Methodology,42,Internal,2026-02-05
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Research Methodology,50,External,2026-03-10
+MT1070,Tanya Chopra,tanya.chopra.mt1070@example.com,M.TECH,1,Research Methodology,70,Practical,2026-02-12
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Advanced Algorithms,68,Internal,2026-02-05
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Advanced Algorithms,43,External,2026-03-10
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Advanced Algorithms,79,Practical,2026-02-12
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Machine Learning,76,Internal,2026-02-05
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Machine Learning,56,External,2026-03-10
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Machine Learning,49,Practical,2026-02-12
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Cloud Computing,74,Internal,2026-02-05
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Cloud Computing,80,External,2026-03-10
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Cloud Computing,59,Practical,2026-02-12
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Distributed Systems,89,Internal,2026-02-05
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Distributed Systems,94,External,2026-03-10
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Distributed Systems,64,Practical,2026-02-12
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Data Mining,45,Internal,2026-02-05
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Data Mining,93,External,2026-03-10
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Data Mining,51,Practical,2026-02-12
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Research Methodology,65,Internal,2026-02-05
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Research Methodology,43,External,2026-03-10
+MT1071,Anjali Reddy,anjali.reddy.mt1071@example.com,M.TECH,1,Research Methodology,94,Practical,2026-02-12
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Advanced Algorithms,58,Internal,2026-02-05
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Advanced Algorithms,76,External,2026-03-10
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Advanced Algorithms,54,Practical,2026-02-12
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Machine Learning,41,Internal,2026-02-05
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Machine Learning,75,External,2026-03-10
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Machine Learning,62,Practical,2026-02-12
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Cloud Computing,76,Internal,2026-02-05
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Cloud Computing,44,External,2026-03-10
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Cloud Computing,69,Practical,2026-02-12
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Distributed Systems,43,Internal,2026-02-05
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Distributed Systems,73,External,2026-03-10
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Distributed Systems,82,Practical,2026-02-12
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Data Mining,44,Internal,2026-02-05
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Data Mining,41,External,2026-03-10
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Data Mining,71,Practical,2026-02-12
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Research Methodology,75,Internal,2026-02-05
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Research Methodology,55,External,2026-03-10
+MT1072,Anjali Chopra,anjali.chopra.mt1072@example.com,M.TECH,1,Research Methodology,71,Practical,2026-02-12
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Advanced Algorithms,89,Internal,2026-02-05
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Advanced Algorithms,50,External,2026-03-10
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Advanced Algorithms,65,Practical,2026-02-12
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Machine Learning,84,Internal,2026-02-05
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Machine Learning,67,External,2026-03-10
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Machine Learning,43,Practical,2026-02-12
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Cloud Computing,71,Internal,2026-02-05
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Cloud Computing,25,External,2026-03-10
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Cloud Computing,43,Practical,2026-02-12
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Distributed Systems,45,Internal,2026-02-05
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Distributed Systems,56,External,2026-03-10
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Distributed Systems,79,Practical,2026-02-12
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Data Mining,48,Internal,2026-02-05
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Data Mining,95,External,2026-03-10
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Data Mining,80,Practical,2026-02-12
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Research Methodology,91,Internal,2026-02-05
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Research Methodology,68,External,2026-03-10
+MT1073,Tanya Khanna,tanya.khanna.mt1073@example.com,M.TECH,1,Research Methodology,51,Practical,2026-02-12
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Advanced Algorithms,78,Internal,2026-02-05
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Advanced Algorithms,77,External,2026-03-10
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Advanced Algorithms,96,Practical,2026-02-12
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Machine Learning,66,Internal,2026-02-05
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Machine Learning,73,External,2026-03-10
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Machine Learning,74,Practical,2026-02-12
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Cloud Computing,100,Internal,2026-02-05
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Cloud Computing,81,External,2026-03-10
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Cloud Computing,100,Practical,2026-02-12
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Distributed Systems,100,Internal,2026-02-05
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Distributed Systems,100,External,2026-03-10
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Distributed Systems,80,Practical,2026-02-12
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Data Mining,94,Internal,2026-02-05
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Data Mining,60,External,2026-03-10
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Data Mining,48,Practical,2026-02-12
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Research Methodology,99,Internal,2026-02-05
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Research Methodology,99,External,2026-03-10
+MT1074,Sanya Bose,sanya.bose.mt1074@example.com,M.TECH,1,Research Methodology,100,Practical,2026-02-12
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Advanced Algorithms,67,Internal,2026-02-05
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Advanced Algorithms,36,External,2026-03-10
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Advanced Algorithms,76,Practical,2026-02-12
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Machine Learning,69,Internal,2026-02-05
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Machine Learning,84,External,2026-03-10
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Machine Learning,100,Practical,2026-02-12
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Cloud Computing,77,Internal,2026-02-05
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Cloud Computing,46,External,2026-03-10
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Cloud Computing,57,Practical,2026-02-12
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Distributed Systems,64,Internal,2026-02-05
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Distributed Systems,62,External,2026-03-10
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Distributed Systems,80,Practical,2026-02-12
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Data Mining,45,Internal,2026-02-05
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Data Mining,84,External,2026-03-10
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Data Mining,91,Practical,2026-02-12
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Research Methodology,94,Internal,2026-02-05
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Research Methodology,65,External,2026-03-10
+MT1075,Amit Nair,amit.nair.mt1075@example.com,M.TECH,1,Research Methodology,74,Practical,2026-02-12
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Advanced Algorithms,95,Internal,2026-02-05
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Advanced Algorithms,55,External,2026-03-10
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Advanced Algorithms,62,Practical,2026-02-12
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Machine Learning,30,Internal,2026-02-05
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Machine Learning,89,External,2026-03-10
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Machine Learning,78,Practical,2026-02-12
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Cloud Computing,93,Internal,2026-02-05
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Cloud Computing,86,External,2026-03-10
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Cloud Computing,63,Practical,2026-02-12
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Distributed Systems,99,Internal,2026-02-05
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Distributed Systems,44,External,2026-03-10
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Distributed Systems,86,Practical,2026-02-12
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Data Mining,64,Internal,2026-02-05
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Data Mining,84,External,2026-03-10
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Data Mining,76,Practical,2026-02-12
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Research Methodology,86,Internal,2026-02-05
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Research Methodology,80,External,2026-03-10
+MT1076,Aditya Joshi,aditya.joshi.mt1076@example.com,M.TECH,1,Research Methodology,92,Practical,2026-02-12
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Advanced Algorithms,56,Internal,2026-02-05
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Advanced Algorithms,35,External,2026-03-10
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Advanced Algorithms,40,Practical,2026-02-12
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Machine Learning,61,Internal,2026-02-05
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Machine Learning,51,External,2026-03-10
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Machine Learning,71,Practical,2026-02-12
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Cloud Computing,51,Internal,2026-02-05
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Cloud Computing,49,External,2026-03-10
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Cloud Computing,51,Practical,2026-02-12
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Distributed Systems,37,Internal,2026-02-05
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Distributed Systems,52,External,2026-03-10
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Distributed Systems,36,Practical,2026-02-12
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Data Mining,49,Internal,2026-02-05
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Data Mining,46,External,2026-03-10
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Data Mining,57,Practical,2026-02-12
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Research Methodology,59,Internal,2026-02-05
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Research Methodology,18,External,2026-03-10
+MT1077,Neha Singhania,neha.singhania.mt1077@example.com,M.TECH,1,Research Methodology,66,Practical,2026-02-12
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Advanced Algorithms,33,Internal,2026-02-05
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Advanced Algorithms,53,External,2026-03-10
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Advanced Algorithms,44,Practical,2026-02-12
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Machine Learning,48,Internal,2026-02-05
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Machine Learning,75,External,2026-03-10
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Machine Learning,57,Practical,2026-02-12
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Cloud Computing,46,Internal,2026-02-05
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Cloud Computing,63,External,2026-03-10
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Cloud Computing,71,Practical,2026-02-12
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Distributed Systems,83,Internal,2026-02-05
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Distributed Systems,54,External,2026-03-10
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Distributed Systems,48,Practical,2026-02-12
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Data Mining,53,Internal,2026-02-05
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Data Mining,33,External,2026-03-10
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Data Mining,80,Practical,2026-02-12
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Research Methodology,47,Internal,2026-02-05
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Research Methodology,78,External,2026-03-10
+MT1078,Pooja Kapoor,pooja.kapoor.mt1078@example.com,M.TECH,1,Research Methodology,66,Practical,2026-02-12
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Advanced Algorithms,56,Internal,2026-02-05
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Advanced Algorithms,49,External,2026-03-10
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Advanced Algorithms,31,Practical,2026-02-12
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Machine Learning,46,Internal,2026-02-05
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Machine Learning,32,External,2026-03-10
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Machine Learning,21,Practical,2026-02-12
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Cloud Computing,36,Internal,2026-02-05
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Cloud Computing,33,External,2026-03-10
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Cloud Computing,59,Practical,2026-02-12
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Distributed Systems,56,Internal,2026-02-05
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Distributed Systems,43,External,2026-03-10
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Distributed Systems,71,Practical,2026-02-12
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Data Mining,39,Internal,2026-02-05
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Data Mining,65,External,2026-03-10
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Data Mining,53,Practical,2026-02-12
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Research Methodology,37,Internal,2026-02-05
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Research Methodology,50,External,2026-03-10
+MT1079,Amit Sharma,amit.sharma.mt1079@example.com,M.TECH,1,Research Methodology,83,Practical,2026-02-12
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Advanced Algorithms,79,Internal,2026-02-05
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Advanced Algorithms,64,External,2026-03-10
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Advanced Algorithms,51,Practical,2026-02-12
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Machine Learning,33,Internal,2026-02-05
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Machine Learning,54,External,2026-03-10
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Machine Learning,46,Practical,2026-02-12
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Cloud Computing,55,Internal,2026-02-05
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Cloud Computing,68,External,2026-03-10
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Cloud Computing,23,Practical,2026-02-12
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Distributed Systems,83,Internal,2026-02-05
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Distributed Systems,57,External,2026-03-10
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Distributed Systems,26,Practical,2026-02-12
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Data Mining,49,Internal,2026-02-05
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Data Mining,63,External,2026-03-10
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Data Mining,55,Practical,2026-02-12
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Research Methodology,69,Internal,2026-02-05
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Research Methodology,33,External,2026-03-10
+MT1080,Tanya Pandey,tanya.pandey.mt1080@example.com,M.TECH,1,Research Methodology,61,Practical,2026-02-12
+M1081,Amit Reddy,amit.reddy.m1081@example.com,MBA,1,Marketing Management,22,Internal,2026-02-05
+M1081,Amit Reddy,amit.reddy.m1081@example.com,MBA,1,Marketing Management,48,External,2026-03-10
+M1081,Amit Reddy,amit.reddy.m1081@example.com,MBA,1,Financial Management,61,Internal,2026-02-05
+M1081,Amit Reddy,amit.reddy.m1081@example.com,MBA,1,Financial Management,17,External,2026-03-10
+M1081,Amit Reddy,amit.reddy.m1081@example.com,MBA,1,Human Resource Management,90,Internal,2026-02-05
+M1081,Amit Reddy,amit.reddy.m1081@example.com,MBA,1,Human Resource Management,51,External,2026-03-10
+M1081,Amit Reddy,amit.reddy.m1081@example.com,MBA,1,Operations Management,88,Internal,2026-02-05
+M1081,Amit Reddy,amit.reddy.m1081@example.com,MBA,1,Operations Management,85,External,2026-03-10
+M1081,Amit Reddy,amit.reddy.m1081@example.com,MBA,1,Business Analytics,74,Internal,2026-02-05
+M1081,Amit Reddy,amit.reddy.m1081@example.com,MBA,1,Business Analytics,72,External,2026-03-10
+M1081,Amit Reddy,amit.reddy.m1081@example.com,MBA,1,Strategic Management,56,Internal,2026-02-05
+M1081,Amit Reddy,amit.reddy.m1081@example.com,MBA,1,Strategic Management,63,External,2026-03-10
+M1082,Tanya Mehta,tanya.mehta.m1082@example.com,MBA,1,Marketing Management,94,Internal,2026-02-05
+M1082,Tanya Mehta,tanya.mehta.m1082@example.com,MBA,1,Marketing Management,36,External,2026-03-10
+M1082,Tanya Mehta,tanya.mehta.m1082@example.com,MBA,1,Financial Management,79,Internal,2026-02-05
+M1082,Tanya Mehta,tanya.mehta.m1082@example.com,MBA,1,Financial Management,55,External,2026-03-10
+M1082,Tanya Mehta,tanya.mehta.m1082@example.com,MBA,1,Human Resource Management,36,Internal,2026-02-05
+M1082,Tanya Mehta,tanya.mehta.m1082@example.com,MBA,1,Human Resource Management,94,External,2026-03-10
+M1082,Tanya Mehta,tanya.mehta.m1082@example.com,MBA,1,Operations Management,49,Internal,2026-02-05
+M1082,Tanya Mehta,tanya.mehta.m1082@example.com,MBA,1,Operations Management,35,External,2026-03-10
+M1082,Tanya Mehta,tanya.mehta.m1082@example.com,MBA,1,Business Analytics,66,Internal,2026-02-05
+M1082,Tanya Mehta,tanya.mehta.m1082@example.com,MBA,1,Business Analytics,41,External,2026-03-10
+M1082,Tanya Mehta,tanya.mehta.m1082@example.com,MBA,1,Strategic Management,89,Internal,2026-02-05
+M1082,Tanya Mehta,tanya.mehta.m1082@example.com,MBA,1,Strategic Management,77,External,2026-03-10
+M1083,Sanya Saxena,sanya.saxena.m1083@example.com,MBA,1,Marketing Management,72,Internal,2026-02-05
+M1083,Sanya Saxena,sanya.saxena.m1083@example.com,MBA,1,Marketing Management,53,External,2026-03-10
+M1083,Sanya Saxena,sanya.saxena.m1083@example.com,MBA,1,Financial Management,70,Internal,2026-02-05
+M1083,Sanya Saxena,sanya.saxena.m1083@example.com,MBA,1,Financial Management,50,External,2026-03-10
+M1083,Sanya Saxena,sanya.saxena.m1083@example.com,MBA,1,Human Resource Management,35,Internal,2026-02-05
+M1083,Sanya Saxena,sanya.saxena.m1083@example.com,MBA,1,Human Resource Management,48,External,2026-03-10
+M1083,Sanya Saxena,sanya.saxena.m1083@example.com,MBA,1,Operations Management,77,Internal,2026-02-05
+M1083,Sanya Saxena,sanya.saxena.m1083@example.com,MBA,1,Operations Management,75,External,2026-03-10
+M1083,Sanya Saxena,sanya.saxena.m1083@example.com,MBA,1,Business Analytics,56,Internal,2026-02-05
+M1083,Sanya Saxena,sanya.saxena.m1083@example.com,MBA,1,Business Analytics,32,External,2026-03-10
+M1083,Sanya Saxena,sanya.saxena.m1083@example.com,MBA,1,Strategic Management,58,Internal,2026-02-05
+M1083,Sanya Saxena,sanya.saxena.m1083@example.com,MBA,1,Strategic Management,59,External,2026-03-10
+M1084,Arjun Kapoor,arjun.kapoor.m1084@example.com,MBA,1,Marketing Management,55,Internal,2026-02-05
+M1084,Arjun Kapoor,arjun.kapoor.m1084@example.com,MBA,1,Marketing Management,56,External,2026-03-10
+M1084,Arjun Kapoor,arjun.kapoor.m1084@example.com,MBA,1,Financial Management,84,Internal,2026-02-05
+M1084,Arjun Kapoor,arjun.kapoor.m1084@example.com,MBA,1,Financial Management,57,External,2026-03-10
+M1084,Arjun Kapoor,arjun.kapoor.m1084@example.com,MBA,1,Human Resource Management,80,Internal,2026-02-05
+M1084,Arjun Kapoor,arjun.kapoor.m1084@example.com,MBA,1,Human Resource Management,50,External,2026-03-10
+M1084,Arjun Kapoor,arjun.kapoor.m1084@example.com,MBA,1,Operations Management,74,Internal,2026-02-05
+M1084,Arjun Kapoor,arjun.kapoor.m1084@example.com,MBA,1,Operations Management,64,External,2026-03-10
+M1084,Arjun Kapoor,arjun.kapoor.m1084@example.com,MBA,1,Business Analytics,62,Internal,2026-02-05
+M1084,Arjun Kapoor,arjun.kapoor.m1084@example.com,MBA,1,Business Analytics,80,External,2026-03-10
+M1084,Arjun Kapoor,arjun.kapoor.m1084@example.com,MBA,1,Strategic Management,74,Internal,2026-02-05
+M1084,Arjun Kapoor,arjun.kapoor.m1084@example.com,MBA,1,Strategic Management,60,External,2026-03-10
+M1085,Riya Malhotra,riya.malhotra.m1085@example.com,MBA,1,Marketing Management,44,Internal,2026-02-05
+M1085,Riya Malhotra,riya.malhotra.m1085@example.com,MBA,1,Marketing Management,47,External,2026-03-10
+M1085,Riya Malhotra,riya.malhotra.m1085@example.com,MBA,1,Financial Management,76,Internal,2026-02-05
+M1085,Riya Malhotra,riya.malhotra.m1085@example.com,MBA,1,Financial Management,52,External,2026-03-10
+M1085,Riya Malhotra,riya.malhotra.m1085@example.com,MBA,1,Human Resource Management,11,Internal,2026-02-05
+M1085,Riya Malhotra,riya.malhotra.m1085@example.com,MBA,1,Human Resource Management,14,External,2026-03-10
+M1085,Riya Malhotra,riya.malhotra.m1085@example.com,MBA,1,Operations Management,71,Internal,2026-02-05
+M1085,Riya Malhotra,riya.malhotra.m1085@example.com,MBA,1,Operations Management,70,External,2026-03-10
+M1085,Riya Malhotra,riya.malhotra.m1085@example.com,MBA,1,Business Analytics,38,Internal,2026-02-05
+M1085,Riya Malhotra,riya.malhotra.m1085@example.com,MBA,1,Business Analytics,63,External,2026-03-10
+M1085,Riya Malhotra,riya.malhotra.m1085@example.com,MBA,1,Strategic Management,43,Internal,2026-02-05
+M1085,Riya Malhotra,riya.malhotra.m1085@example.com,MBA,1,Strategic Management,69,External,2026-03-10
+M1086,Aditya Joshi,aditya.joshi.m1086@example.com,MBA,1,Marketing Management,70,Internal,2026-02-05
+M1086,Aditya Joshi,aditya.joshi.m1086@example.com,MBA,1,Marketing Management,53,External,2026-03-10
+M1086,Aditya Joshi,aditya.joshi.m1086@example.com,MBA,1,Financial Management,72,Internal,2026-02-05
+M1086,Aditya Joshi,aditya.joshi.m1086@example.com,MBA,1,Financial Management,85,External,2026-03-10
+M1086,Aditya Joshi,aditya.joshi.m1086@example.com,MBA,1,Human Resource Management,42,Internal,2026-02-05
+M1086,Aditya Joshi,aditya.joshi.m1086@example.com,MBA,1,Human Resource Management,45,External,2026-03-10
+M1086,Aditya Joshi,aditya.joshi.m1086@example.com,MBA,1,Operations Management,8,Internal,2026-02-05
+M1086,Aditya Joshi,aditya.joshi.m1086@example.com,MBA,1,Operations Management,28,External,2026-03-10
+M1086,Aditya Joshi,aditya.joshi.m1086@example.com,MBA,1,Business Analytics,21,Internal,2026-02-05
+M1086,Aditya Joshi,aditya.joshi.m1086@example.com,MBA,1,Business Analytics,28,External,2026-03-10
+M1086,Aditya Joshi,aditya.joshi.m1086@example.com,MBA,1,Strategic Management,48,Internal,2026-02-05
+M1086,Aditya Joshi,aditya.joshi.m1086@example.com,MBA,1,Strategic Management,57,External,2026-03-10
+M1087,Manish Iyer,manish.iyer.m1087@example.com,MBA,1,Marketing Management,45,Internal,2026-02-05
+M1087,Manish Iyer,manish.iyer.m1087@example.com,MBA,1,Marketing Management,49,External,2026-03-10
+M1087,Manish Iyer,manish.iyer.m1087@example.com,MBA,1,Financial Management,87,Internal,2026-02-05
+M1087,Manish Iyer,manish.iyer.m1087@example.com,MBA,1,Financial Management,76,External,2026-03-10
+M1087,Manish Iyer,manish.iyer.m1087@example.com,MBA,1,Human Resource Management,80,Internal,2026-02-05
+M1087,Manish Iyer,manish.iyer.m1087@example.com,MBA,1,Human Resource Management,57,External,2026-03-10
+M1087,Manish Iyer,manish.iyer.m1087@example.com,MBA,1,Operations Management,69,Internal,2026-02-05
+M1087,Manish Iyer,manish.iyer.m1087@example.com,MBA,1,Operations Management,57,External,2026-03-10
+M1087,Manish Iyer,manish.iyer.m1087@example.com,MBA,1,Business Analytics,59,Internal,2026-02-05
+M1087,Manish Iyer,manish.iyer.m1087@example.com,MBA,1,Business Analytics,50,External,2026-03-10
+M1087,Manish Iyer,manish.iyer.m1087@example.com,MBA,1,Strategic Management,68,Internal,2026-02-05
+M1087,Manish Iyer,manish.iyer.m1087@example.com,MBA,1,Strategic Management,56,External,2026-03-10
+M1088,Amrita Gupta,amrita.gupta.m1088@example.com,MBA,1,Marketing Management,62,Internal,2026-02-05
+M1088,Amrita Gupta,amrita.gupta.m1088@example.com,MBA,1,Marketing Management,51,External,2026-03-10
+M1088,Amrita Gupta,amrita.gupta.m1088@example.com,MBA,1,Financial Management,67,Internal,2026-02-05
+M1088,Amrita Gupta,amrita.gupta.m1088@example.com,MBA,1,Financial Management,90,External,2026-03-10
+M1088,Amrita Gupta,amrita.gupta.m1088@example.com,MBA,1,Human Resource Management,81,Internal,2026-02-05
+M1088,Amrita Gupta,amrita.gupta.m1088@example.com,MBA,1,Human Resource Management,46,External,2026-03-10
+M1088,Amrita Gupta,amrita.gupta.m1088@example.com,MBA,1,Operations Management,63,Internal,2026-02-05
+M1088,Amrita Gupta,amrita.gupta.m1088@example.com,MBA,1,Operations Management,88,External,2026-03-10
+M1088,Amrita Gupta,amrita.gupta.m1088@example.com,MBA,1,Business Analytics,58,Internal,2026-02-05
+M1088,Amrita Gupta,amrita.gupta.m1088@example.com,MBA,1,Business Analytics,75,External,2026-03-10
+M1088,Amrita Gupta,amrita.gupta.m1088@example.com,MBA,1,Strategic Management,70,Internal,2026-02-05
+M1088,Amrita Gupta,amrita.gupta.m1088@example.com,MBA,1,Strategic Management,94,External,2026-03-10
+M1089,Neha Singhania,neha.singhania.m1089@example.com,MBA,1,Marketing Management,64,Internal,2026-02-05
+M1089,Neha Singhania,neha.singhania.m1089@example.com,MBA,1,Marketing Management,79,External,2026-03-10
+M1089,Neha Singhania,neha.singhania.m1089@example.com,MBA,1,Financial Management,43,Internal,2026-02-05
+M1089,Neha Singhania,neha.singhania.m1089@example.com,MBA,1,Financial Management,59,External,2026-03-10
+M1089,Neha Singhania,neha.singhania.m1089@example.com,MBA,1,Human Resource Management,68,Internal,2026-02-05
+M1089,Neha Singhania,neha.singhania.m1089@example.com,MBA,1,Human Resource Management,59,External,2026-03-10
+M1089,Neha Singhania,neha.singhania.m1089@example.com,MBA,1,Operations Management,41,Internal,2026-02-05
+M1089,Neha Singhania,neha.singhania.m1089@example.com,MBA,1,Operations Management,75,External,2026-03-10
+M1089,Neha Singhania,neha.singhania.m1089@example.com,MBA,1,Business Analytics,86,Internal,2026-02-05
+M1089,Neha Singhania,neha.singhania.m1089@example.com,MBA,1,Business Analytics,35,External,2026-03-10
+M1089,Neha Singhania,neha.singhania.m1089@example.com,MBA,1,Strategic Management,61,Internal,2026-02-05
+M1089,Neha Singhania,neha.singhania.m1089@example.com,MBA,1,Strategic Management,87,External,2026-03-10
+M1090,Priya Trivedi,priya.trivedi.m1090@example.com,MBA,1,Marketing Management,42,Internal,2026-02-05
+M1090,Priya Trivedi,priya.trivedi.m1090@example.com,MBA,1,Marketing Management,89,External,2026-03-10
+M1090,Priya Trivedi,priya.trivedi.m1090@example.com,MBA,1,Financial Management,78,Internal,2026-02-05
+M1090,Priya Trivedi,priya.trivedi.m1090@example.com,MBA,1,Financial Management,81,External,2026-03-10
+M1090,Priya Trivedi,priya.trivedi.m1090@example.com,MBA,1,Human Resource Management,75,Internal,2026-02-05
+M1090,Priya Trivedi,priya.trivedi.m1090@example.com,MBA,1,Human Resource Management,48,External,2026-03-10
+M1090,Priya Trivedi,priya.trivedi.m1090@example.com,MBA,1,Operations Management,77,Internal,2026-02-05
+M1090,Priya Trivedi,priya.trivedi.m1090@example.com,MBA,1,Operations Management,54,External,2026-03-10
+M1090,Priya Trivedi,priya.trivedi.m1090@example.com,MBA,1,Business Analytics,38,Internal,2026-02-05
+M1090,Priya Trivedi,priya.trivedi.m1090@example.com,MBA,1,Business Analytics,19,External,2026-03-10
+M1090,Priya Trivedi,priya.trivedi.m1090@example.com,MBA,1,Strategic Management,54,Internal,2026-02-05
+M1090,Priya Trivedi,priya.trivedi.m1090@example.com,MBA,1,Strategic Management,44,External,2026-03-10
+M1091,Anjali Iyer,anjali.iyer.m1091@example.com,MBA,1,Marketing Management,100,Internal,2026-02-05
+M1091,Anjali Iyer,anjali.iyer.m1091@example.com,MBA,1,Marketing Management,100,External,2026-03-10
+M1091,Anjali Iyer,anjali.iyer.m1091@example.com,MBA,1,Financial Management,82,Internal,2026-02-05
+M1091,Anjali Iyer,anjali.iyer.m1091@example.com,MBA,1,Financial Management,73,External,2026-03-10
+M1091,Anjali Iyer,anjali.iyer.m1091@example.com,MBA,1,Human Resource Management,47,Internal,2026-02-05
+M1091,Anjali Iyer,anjali.iyer.m1091@example.com,MBA,1,Human Resource Management,100,External,2026-03-10
+M1091,Anjali Iyer,anjali.iyer.m1091@example.com,MBA,1,Operations Management,53,Internal,2026-02-05
+M1091,Anjali Iyer,anjali.iyer.m1091@example.com,MBA,1,Operations Management,86,External,2026-03-10
+M1091,Anjali Iyer,anjali.iyer.m1091@example.com,MBA,1,Business Analytics,71,Internal,2026-02-05
+M1091,Anjali Iyer,anjali.iyer.m1091@example.com,MBA,1,Business Analytics,100,External,2026-03-10
+M1091,Anjali Iyer,anjali.iyer.m1091@example.com,MBA,1,Strategic Management,79,Internal,2026-02-05
+M1091,Anjali Iyer,anjali.iyer.m1091@example.com,MBA,1,Strategic Management,75,External,2026-03-10
+M1092,Tanya Mehta,tanya.mehta.m1092@example.com,MBA,1,Marketing Management,100,Internal,2026-02-05
+M1092,Tanya Mehta,tanya.mehta.m1092@example.com,MBA,1,Marketing Management,52,External,2026-03-10
+M1092,Tanya Mehta,tanya.mehta.m1092@example.com,MBA,1,Financial Management,42,Internal,2026-02-05
+M1092,Tanya Mehta,tanya.mehta.m1092@example.com,MBA,1,Financial Management,64,External,2026-03-10
+M1092,Tanya Mehta,tanya.mehta.m1092@example.com,MBA,1,Human Resource Management,100,Internal,2026-02-05
+M1092,Tanya Mehta,tanya.mehta.m1092@example.com,MBA,1,Human Resource Management,97,External,2026-03-10
+M1092,Tanya Mehta,tanya.mehta.m1092@example.com,MBA,1,Operations Management,71,Internal,2026-02-05
+M1092,Tanya Mehta,tanya.mehta.m1092@example.com,MBA,1,Operations Management,97,External,2026-03-10
+M1092,Tanya Mehta,tanya.mehta.m1092@example.com,MBA,1,Business Analytics,100,Internal,2026-02-05
+M1092,Tanya Mehta,tanya.mehta.m1092@example.com,MBA,1,Business Analytics,77,External,2026-03-10
+M1092,Tanya Mehta,tanya.mehta.m1092@example.com,MBA,1,Strategic Management,89,Internal,2026-02-05
+M1092,Tanya Mehta,tanya.mehta.m1092@example.com,MBA,1,Strategic Management,100,External,2026-03-10
+M1093,Manish Saxena,manish.saxena.m1093@example.com,MBA,1,Marketing Management,96,Internal,2026-02-05
+M1093,Manish Saxena,manish.saxena.m1093@example.com,MBA,1,Marketing Management,81,External,2026-03-10
+M1093,Manish Saxena,manish.saxena.m1093@example.com,MBA,1,Financial Management,60,Internal,2026-02-05
+M1093,Manish Saxena,manish.saxena.m1093@example.com,MBA,1,Financial Management,100,External,2026-03-10
+M1093,Manish Saxena,manish.saxena.m1093@example.com,MBA,1,Human Resource Management,93,Internal,2026-02-05
+M1093,Manish Saxena,manish.saxena.m1093@example.com,MBA,1,Human Resource Management,100,External,2026-03-10
+M1093,Manish Saxena,manish.saxena.m1093@example.com,MBA,1,Operations Management,84,Internal,2026-02-05
+M1093,Manish Saxena,manish.saxena.m1093@example.com,MBA,1,Operations Management,83,External,2026-03-10
+M1093,Manish Saxena,manish.saxena.m1093@example.com,MBA,1,Business Analytics,100,Internal,2026-02-05
+M1093,Manish Saxena,manish.saxena.m1093@example.com,MBA,1,Business Analytics,79,External,2026-03-10
+M1093,Manish Saxena,manish.saxena.m1093@example.com,MBA,1,Strategic Management,57,Internal,2026-02-05
+M1093,Manish Saxena,manish.saxena.m1093@example.com,MBA,1,Strategic Management,97,External,2026-03-10
+M1094,Ishaan Nair,ishaan.nair.m1094@example.com,MBA,1,Marketing Management,65,Internal,2026-02-05
+M1094,Ishaan Nair,ishaan.nair.m1094@example.com,MBA,1,Marketing Management,57,External,2026-03-10
+M1094,Ishaan Nair,ishaan.nair.m1094@example.com,MBA,1,Financial Management,72,Internal,2026-02-05
+M1094,Ishaan Nair,ishaan.nair.m1094@example.com,MBA,1,Financial Management,54,External,2026-03-10
+M1094,Ishaan Nair,ishaan.nair.m1094@example.com,MBA,1,Human Resource Management,93,Internal,2026-02-05
+M1094,Ishaan Nair,ishaan.nair.m1094@example.com,MBA,1,Human Resource Management,70,External,2026-03-10
+M1094,Ishaan Nair,ishaan.nair.m1094@example.com,MBA,1,Operations Management,99,Internal,2026-02-05
+M1094,Ishaan Nair,ishaan.nair.m1094@example.com,MBA,1,Operations Management,95,External,2026-03-10
+M1094,Ishaan Nair,ishaan.nair.m1094@example.com,MBA,1,Business Analytics,58,Internal,2026-02-05
+M1094,Ishaan Nair,ishaan.nair.m1094@example.com,MBA,1,Business Analytics,100,External,2026-03-10
+M1094,Ishaan Nair,ishaan.nair.m1094@example.com,MBA,1,Strategic Management,60,Internal,2026-02-05
+M1094,Ishaan Nair,ishaan.nair.m1094@example.com,MBA,1,Strategic Management,75,External,2026-03-10
+M1095,Amit Verma,amit.verma.m1095@example.com,MBA,1,Marketing Management,81,Internal,2026-02-05
+M1095,Amit Verma,amit.verma.m1095@example.com,MBA,1,Marketing Management,19,External,2026-03-10
+M1095,Amit Verma,amit.verma.m1095@example.com,MBA,1,Financial Management,66,Internal,2026-02-05
+M1095,Amit Verma,amit.verma.m1095@example.com,MBA,1,Financial Management,69,External,2026-03-10
+M1095,Amit Verma,amit.verma.m1095@example.com,MBA,1,Human Resource Management,89,Internal,2026-02-05
+M1095,Amit Verma,amit.verma.m1095@example.com,MBA,1,Human Resource Management,38,External,2026-03-10
+M1095,Amit Verma,amit.verma.m1095@example.com,MBA,1,Operations Management,70,Internal,2026-02-05
+M1095,Amit Verma,amit.verma.m1095@example.com,MBA,1,Operations Management,86,External,2026-03-10
+M1095,Amit Verma,amit.verma.m1095@example.com,MBA,1,Business Analytics,34,Internal,2026-02-05
+M1095,Amit Verma,amit.verma.m1095@example.com,MBA,1,Business Analytics,37,External,2026-03-10
+M1095,Amit Verma,amit.verma.m1095@example.com,MBA,1,Strategic Management,87,Internal,2026-02-05
+M1095,Amit Verma,amit.verma.m1095@example.com,MBA,1,Strategic Management,17,External,2026-03-10
+M1096,Karan Singhania,karan.singhania.m1096@example.com,MBA,1,Marketing Management,60,Internal,2026-02-05
+M1096,Karan Singhania,karan.singhania.m1096@example.com,MBA,1,Marketing Management,45,External,2026-03-10
+M1096,Karan Singhania,karan.singhania.m1096@example.com,MBA,1,Financial Management,6,Internal,2026-02-05
+M1096,Karan Singhania,karan.singhania.m1096@example.com,MBA,1,Financial Management,43,External,2026-03-10
+M1096,Karan Singhania,karan.singhania.m1096@example.com,MBA,1,Human Resource Management,59,Internal,2026-02-05
+M1096,Karan Singhania,karan.singhania.m1096@example.com,MBA,1,Human Resource Management,56,External,2026-03-10
+M1096,Karan Singhania,karan.singhania.m1096@example.com,MBA,1,Operations Management,73,Internal,2026-02-05
+M1096,Karan Singhania,karan.singhania.m1096@example.com,MBA,1,Operations Management,50,External,2026-03-10
+M1096,Karan Singhania,karan.singhania.m1096@example.com,MBA,1,Business Analytics,50,Internal,2026-02-05
+M1096,Karan Singhania,karan.singhania.m1096@example.com,MBA,1,Business Analytics,37,External,2026-03-10
+M1096,Karan Singhania,karan.singhania.m1096@example.com,MBA,1,Strategic Management,77,Internal,2026-02-05
+M1096,Karan Singhania,karan.singhania.m1096@example.com,MBA,1,Strategic Management,71,External,2026-03-10
+M1097,Priya Kapoor,priya.kapoor.m1097@example.com,MBA,1,Marketing Management,61,Internal,2026-02-05
+M1097,Priya Kapoor,priya.kapoor.m1097@example.com,MBA,1,Marketing Management,68,External,2026-03-10
+M1097,Priya Kapoor,priya.kapoor.m1097@example.com,MBA,1,Financial Management,34,Internal,2026-02-05
+M1097,Priya Kapoor,priya.kapoor.m1097@example.com,MBA,1,Financial Management,69,External,2026-03-10
+M1097,Priya Kapoor,priya.kapoor.m1097@example.com,MBA,1,Human Resource Management,44,Internal,2026-02-05
+M1097,Priya Kapoor,priya.kapoor.m1097@example.com,MBA,1,Human Resource Management,71,External,2026-03-10
+M1097,Priya Kapoor,priya.kapoor.m1097@example.com,MBA,1,Operations Management,74,Internal,2026-02-05
+M1097,Priya Kapoor,priya.kapoor.m1097@example.com,MBA,1,Operations Management,40,External,2026-03-10
+M1097,Priya Kapoor,priya.kapoor.m1097@example.com,MBA,1,Business Analytics,36,Internal,2026-02-05
+M1097,Priya Kapoor,priya.kapoor.m1097@example.com,MBA,1,Business Analytics,28,External,2026-03-10
+M1097,Priya Kapoor,priya.kapoor.m1097@example.com,MBA,1,Strategic Management,66,Internal,2026-02-05
+M1097,Priya Kapoor,priya.kapoor.m1097@example.com,MBA,1,Strategic Management,57,External,2026-03-10
+M1098,Neha Nair,neha.nair.m1098@example.com,MBA,1,Marketing Management,88,Internal,2026-02-05
+M1098,Neha Nair,neha.nair.m1098@example.com,MBA,1,Marketing Management,82,External,2026-03-10
+M1098,Neha Nair,neha.nair.m1098@example.com,MBA,1,Financial Management,74,Internal,2026-02-05
+M1098,Neha Nair,neha.nair.m1098@example.com,MBA,1,Financial Management,73,External,2026-03-10
+M1098,Neha Nair,neha.nair.m1098@example.com,MBA,1,Human Resource Management,60,Internal,2026-02-05
+M1098,Neha Nair,neha.nair.m1098@example.com,MBA,1,Human Resource Management,45,External,2026-03-10
+M1098,Neha Nair,neha.nair.m1098@example.com,MBA,1,Operations Management,93,Internal,2026-02-05
+M1098,Neha Nair,neha.nair.m1098@example.com,MBA,1,Operations Management,93,External,2026-03-10
+M1098,Neha Nair,neha.nair.m1098@example.com,MBA,1,Business Analytics,58,Internal,2026-02-05
+M1098,Neha Nair,neha.nair.m1098@example.com,MBA,1,Business Analytics,53,External,2026-03-10
+M1098,Neha Nair,neha.nair.m1098@example.com,MBA,1,Strategic Management,80,Internal,2026-02-05
+M1098,Neha Nair,neha.nair.m1098@example.com,MBA,1,Strategic Management,82,External,2026-03-10
+M1099,Siddharth Yadav,siddharth.yadav.m1099@example.com,MBA,1,Marketing Management,85,Internal,2026-02-05
+M1099,Siddharth Yadav,siddharth.yadav.m1099@example.com,MBA,1,Marketing Management,86,External,2026-03-10
+M1099,Siddharth Yadav,siddharth.yadav.m1099@example.com,MBA,1,Financial Management,63,Internal,2026-02-05
+M1099,Siddharth Yadav,siddharth.yadav.m1099@example.com,MBA,1,Financial Management,83,External,2026-03-10
+M1099,Siddharth Yadav,siddharth.yadav.m1099@example.com,MBA,1,Human Resource Management,53,Internal,2026-02-05
+M1099,Siddharth Yadav,siddharth.yadav.m1099@example.com,MBA,1,Human Resource Management,40,External,2026-03-10
+M1099,Siddharth Yadav,siddharth.yadav.m1099@example.com,MBA,1,Operations Management,95,Internal,2026-02-05
+M1099,Siddharth Yadav,siddharth.yadav.m1099@example.com,MBA,1,Operations Management,64,External,2026-03-10
+M1099,Siddharth Yadav,siddharth.yadav.m1099@example.com,MBA,1,Business Analytics,21,Internal,2026-02-05
+M1099,Siddharth Yadav,siddharth.yadav.m1099@example.com,MBA,1,Business Analytics,82,External,2026-03-10
+M1099,Siddharth Yadav,siddharth.yadav.m1099@example.com,MBA,1,Strategic Management,48,Internal,2026-02-05
+M1099,Siddharth Yadav,siddharth.yadav.m1099@example.com,MBA,1,Strategic Management,66,External,2026-03-10
+M1100,Siddharth Iyer,siddharth.iyer.m1100@example.com,MBA,1,Marketing Management,34,Internal,2026-02-05
+M1100,Siddharth Iyer,siddharth.iyer.m1100@example.com,MBA,1,Marketing Management,69,External,2026-03-10
+M1100,Siddharth Iyer,siddharth.iyer.m1100@example.com,MBA,1,Financial Management,81,Internal,2026-02-05
+M1100,Siddharth Iyer,siddharth.iyer.m1100@example.com,MBA,1,Financial Management,45,External,2026-03-10
+M1100,Siddharth Iyer,siddharth.iyer.m1100@example.com,MBA,1,Human Resource Management,80,Internal,2026-02-05
+M1100,Siddharth Iyer,siddharth.iyer.m1100@example.com,MBA,1,Human Resource Management,79,External,2026-03-10
+M1100,Siddharth Iyer,siddharth.iyer.m1100@example.com,MBA,1,Operations Management,83,Internal,2026-02-05
+M1100,Siddharth Iyer,siddharth.iyer.m1100@example.com,MBA,1,Operations Management,47,External,2026-03-10
+M1100,Siddharth Iyer,siddharth.iyer.m1100@example.com,MBA,1,Business Analytics,37,Internal,2026-02-05
+M1100,Siddharth Iyer,siddharth.iyer.m1100@example.com,MBA,1,Business Analytics,79,External,2026-03-10
+M1100,Siddharth Iyer,siddharth.iyer.m1100@example.com,MBA,1,Strategic Management,35,Internal,2026-02-05
+M1100,Siddharth Iyer,siddharth.iyer.m1100@example.com,MBA,1,Strategic Management,86,External,2026-03-10

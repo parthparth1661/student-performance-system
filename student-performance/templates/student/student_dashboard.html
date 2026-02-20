@@ -1,0 +1,142 @@
+{% extends "student/layout.html" %}
+
+{% block title %}Dashboard - {{ student.name }}{% endblock %}
+
+{% block content %}
+<!-- Top Profile Section -->
+<div class="glass-card mb-4">
+    <div class="row align-items-center">
+        <div class="col-md-auto text-center text-md-start">
+            <div class="profile-img mx-auto mx-md-0">
+                {{ student.name[0] | upper }}
+            </div>
+        </div>
+        <div class="col-md">
+            <h2 class="fw-bold mb-1">{{ student.name }}</h2>
+            <p class="text-secondary mb-0">
+                <i class="fas fa-id-card me-2"></i>Enrollment: {{ student.roll_no }} |
+                <i class="fas fa-university me-2"></i>{{ student.department }} |
+                <i class="fas fa-calendar-alt me-2"></i>Semester: {{ student.semester }}
+            </p>
+            <p class="text-secondary">
+                <i class="fas fa-envelope me-2"></i>{{ student.email }}
+            </p>
+        </div>
+        <div class="col-md-auto text-center mt-3 mt-md-0">
+            <a href="{{ url_for('student.download_report', enrollment_no=student.roll_no) }}" class="btn btn-glass">
+                <i class="fas fa-file-excel me-2"></i> Download Report
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Summary Cards -->
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="glass-card summary-card">
+            <p>Total Subjects</p>
+            <h3>{{ summary.total_subjects }}</h3>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card summary-card">
+            <p>Total Marks</p>
+            <h3>{{ summary.total_marks }}</h3>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card summary-card">
+            <p>Average Marks</p>
+            <h3>{{ summary.avg_marks }}</h3>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card summary-card">
+            <p>Overall Result</p>
+            <h3 class="{% if summary.overall_result == 'PASS' %}status-pass{% else %}status-fail{% endif %}">
+                {{ summary.overall_result }}
+            </h3>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <!-- Performance Table -->
+    <div class="col-lg-8">
+        <div class="glass-card h-100">
+            <h4 class="fw-bold mb-4">Academic Performance</h4>
+            <div class="table-responsive">
+                <table class="table table-glass">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Internal</th>
+                            <th>External</th>
+                            <th>Practical</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in marks_list %}
+                        <tr>
+                            <td class="fw-bold">{{ item.subject }}</td>
+                            <td>{{ item.internal }}</td>
+                            <td>{{ item.external }}</td>
+                            <td>{{ item.practical }}</td>
+                            <td class="fw-bold">{{ item.total }}</td>
+                            <td>
+                                <span class="{% if item.status == 'PASS' %}status-pass{% else %}status-fail{% endif %}">
+                                    {{ item.status }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Weak Subjects Section -->
+    <div class="col-lg-4">
+        <div class="glass-card h-100">
+            <h4 class="fw-bold mb-4">Areas for Improvement</h4>
+            {% set weak_count = 0 %}
+            {% for item in marks_list %}
+            {% if item.status == 'FAIL' or item.total < 120 %} <div class="weak-box">
+                <div class="weak-subject-name text-white">{{ item.subject }}</div>
+                <div class="weak-suggestion">{{ item.suggestion }}</div>
+        </div>
+        {% set weak_count = weak_count + 1 %}
+        {% endif %}
+        {% endfor %}
+
+        {% if weak_count == 0 %}
+        <div class="text-center py-5">
+            <i class="fas fa-check-circle text-success fs-1 mb-3"></i>
+            <p class="text-secondary">Great job! You don't have any weak subjects identified.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+</div>
+
+<!-- Charts Section -->
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="glass-card">
+            <h4 class="fw-bold mb-3 text-center">Performance by Subject</h4>
+            <img src="{{ url_for('static', filename='charts/student_' ~ student.roll_no ~ '_bar.png') }}"
+                class="img-fluid rounded-3" alt="Subject Bar Chart">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="glass-card">
+            <h4 class="fw-bold mb-3 text-center">Pass/Fail Summary</h4>
+            <img src="{{ url_for('static', filename='charts/student_' ~ student.roll_no ~ '_pie.png') }}"
+                class="img-fluid rounded-3" alt="Pass Fail Pie Chart">
+        </div>
+    </div>
+</div>
+{% endblock %}

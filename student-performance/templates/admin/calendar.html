@@ -1,0 +1,88 @@
+{% extends "admin/layout.html" %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Academic Calendar</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{{ url_for('admin.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Academic Calendar</li>
+    </ol>
+
+    <div class="row">
+        <!-- Add/Update Term Form -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-calendar-plus me-1"></i> Set Term Dates
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('admin.academic_calendar') }}" method="POST">
+                        <div class="mb-3">
+                            <label class="form-label">Department</label>
+                            <select name="department" class="form-select" required>
+                                <option value="">Select</option>
+                                {% for dept in departments %}
+                                <option value="{{ dept }}">{{ dept }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Semester</label>
+                            <select name="semester" class="form-select" required>
+                                <option value="">Select</option>
+                                {% for sem in semesters %}
+                                <option value="{{ sem }}">{{ sem }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Start Date</label>
+                            <input type="date" name="start_date" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">End Date</label>
+                            <input type="date" name="end_date" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Set Dates</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Existing Terms Table -->
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-calendar-alt me-1"></i> Existing Terms
+                </div>
+                <div class="card-body">
+                    {% if terms %}
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Department</th>
+                                <th>Semester</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for term in terms %}
+                            <tr>
+                                <td>{{ term.department }}</td>
+                                <td>{{ term.semester }}</td>
+                                <td>{{ term.start_date }}</td>
+                                <td>{{ term.end_date }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <p class="text-muted text-center py-3">No academic terms set yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,226 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+<div class="row mb-4 align-items-center">
+    <div class="col-md-6">
+        <h2 class="h3 mb-0 fw-bold">Student Performance Analysis</h2>
+        <p class="text-muted small mb-0">Detailed academic report and predictive insights for individual students.</p>
+    </div>
+    <div class="col-md-6 text-end">
+        <button onclick="window.print()" class="btn btn-outline-primary btn-sm px-3 py-2 rounded-3 shadow-sm">
+            <i class="fas fa-print me-2"></i>Print Official Report
+        </button>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Student Info Sidebar -->
+    <div class="col-xl-4 col-lg-5">
+        <div class="card border-0 shadow-sm overflow-hidden mb-4">
+            <div class="card-header bg-white py-3 border-0">
+                <h6 class="m-0 fw-bold text-primary"><i class="fas fa-id-card me-2"></i>Student Profile</h6>
+            </div>
+            <div class="card-body p-4 pt-0 text-center">
+                <div class="profile-avatar mb-4 mx-auto">
+                    <img src="https://ui-avatars.com/api/?name={{ student.name }}&background=4F46E5&color=fff&size=128"
+                        alt="{{ student.name }}" class="rounded-circle shadow-sm border border-4 border-white"
+                        width="100">
+                </div>
+                <h4 class="fw-bold mb-1">{{ student.name }}</h4>
+                <p class="text-muted small mb-3">{{ student.email }}</p>
+
+                <div class="row g-2 mb-4">
+                    <div class="col-6">
+                        <div class="p-3 bg-light rounded-4 text-start">
+                            <label class="text-uppercase x-small fw-bold text-muted mb-1 d-block">Enrollment No</label>
+                            <span class="fw-bold text-dark">{{ student.roll_no }}</span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-3 bg-light rounded-4 text-start">
+                            <label class="text-uppercase x-small fw-bold text-muted mb-1 d-block">Semester</label>
+                            <span class="fw-bold text-dark">{{ student.semester }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                {% if stats %}
+                <div
+                    class="p-4 rounded-4 shadow-sm {{ 'bg-gradient-success' if stats.pass_status == 'Pass' else 'bg-gradient-danger' }} text-white mb-2">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-uppercase small fw-bold opacity-75">Academic Status</span>
+                        <span
+                            class="badge bg-white {{ 'text-success' if stats.pass_status == 'Pass' else 'text-danger' }} rounded-pill px-3">
+                            {{ stats.pass_status }}
+                        </span>
+                    </div>
+                    <h1 class="display-4 fw-bold mb-0">{{ stats.percentage }}%</h1>
+                    <p class="mb-0 opacity-75">Calculated Grade: <strong>{{ stats.grade }}</strong></p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if stats %}
+        <div class="card border-0 shadow-sm mb-4 overflow-hidden">
+            <div class="card-header bg-white py-3 border-0">
+                <h6 class="m-0 fw-bold text-info"><i class="fas fa-brain me-2"></i>Performance Insights</h6>
+            </div>
+            <div class="card-body p-4 pt-0">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item px-0 border-0 mb-3">
+                        <div class="d-flex align-items-center mb-1">
+                            <div class="icon-sm bg-success-light text-success rounded-circle me-2">
+                                <i class="fas fa-arrow-up x-small"></i>
+                            </div>
+                            <span class="small fw-bold text-secondary text-uppercase">Strongest Area</span>
+                        </div>
+                        <h6 class="fw-bold mb-0 ps-4">{{ stats.strongest_subject }} ({{ stats.strongest_marks }}/100)
+                        </h6>
+                    </div>
+                    <div class="list-group-item px-0 border-0 mb-3">
+                        <div class="d-flex align-items-center mb-1">
+                            <div class="icon-sm bg-danger-light text-danger rounded-circle me-2">
+                                <i class="fas fa-arrow-down x-small"></i>
+                            </div>
+                            <span class="small fw-bold text-secondary text-uppercase">Area for Growth</span>
+                        </div>
+                        <h6 class="fw-bold mb-0 ps-4">{{ stats.weakest_subject }} ({{ stats.weakest_marks }}/100)</h6>
+                    </div>
+                </div>
+                <div class="p-3 bg-info bg-opacity-10 border-start border-4 border-info rounded-end-4 mt-2">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-lightbulb text-info me-2"></i>
+                        <span class="fw-bold text-info small">Growth Strategy</span>
+                    </div>
+                    <p class="text-dark small mb-0">{{ stats.suggestion }}</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Charts & Tables -->
+    <div class="col-xl-8 col-lg-7">
+        {% if marks_list %}
+        <!-- Performance Visualization -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white py-3 border-0 d-flex justify-content-between align-items-center">
+                <h6 class="m-0 fw-bold text-primary"><i class="fas fa-chart-pie me-2"></i>Performance Visualization</h6>
+                <span class="badge bg-light text-primary border px-3">Live Analysis</span>
+            </div>
+            <div class="card-body p-4">
+                <div class="row g-4">
+                    <div class="col-md-7">
+                        <div
+                            class="chart-container bg-light rounded-4 p-3 text-center border overflow-hidden shadow-inset">
+                            <img src="{{ url_for('static', filename='charts/student_' ~ student.roll_no ~ '_bar.png') }}"
+                                class="img-fluid rounded-3" alt="Performance Bar Chart"
+                                onerror="this.src='https://placehold.co/600x400/f8fafc/4f46e5?text=Processing+Chart...'">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div
+                            class="chart-container bg-light rounded-4 p-3 text-center border overflow-hidden shadow-inset">
+                            <img src="{{ url_for('static', filename='charts/student_' ~ student.roll_no ~ '_pie.png') }}"
+                                class="img-fluid rounded-3" alt="Pass/Fail Pie Chart"
+                                onerror="this.src='https://placehold.co/400x400/f8fafc/4f46e5?text=Processing...'">
+                        </div>
+                    </div>
+                </div>
+                {% if marks_list|length > 1 %}
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div
+                            class="chart-container bg-light rounded-4 p-4 text-center border overflow-hidden shadow-inset">
+                            <h6 class="text-muted small text-uppercase mb-3 fw-bold">Academic Performance Trend</h6>
+                            <img src="{{ url_for('static', filename='charts/student_' ~ student.roll_no ~ '_line.png') }}"
+                                class="img-fluid rounded-3" style="max-height: 280px;" alt="Performance Trend"
+                                onerror="this.src='https://placehold.co/800x300/f8fafc/4f46e5?text=Trend+Normalization...'">
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Marks Transcript -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white py-3 border-0">
+                <h6 class="m-0 fw-bold text-primary"><i class="fas fa-list-check me-2"></i>Marks Transcript</h6>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead class="bg-light text-secondary small text-uppercase fw-bold">
+                            <tr>
+                                <th class="ps-4">Subject Name</th>
+                                <th>Exam Type</th>
+                                <th>Assessment Date</th>
+                                <th class="text-center">Score</th>
+                                <th class="pe-4 text-end">Completion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for m in marks_list %}
+                            <tr>
+                                <td class="ps-4 fw-bold text-dark">{{ m.subject }}</td>
+                                <td>
+                                    <span class="badge bg-light text-secondary border px-2 py-1">
+                                        {{ 'Mid-Term' if m.exam_type == 'Mid' else 'Final Exam' if m.exam_type ==
+                                        'EndSem' else m.exam_type }}
+                                    </span>
+                                </td>
+                                <td class="text-muted small">{{ m.exam_date }}</td>
+                                <td class="text-center fw-bold">
+                                    <span class="{{ 'text-success' if m.marks >= 35 else 'text-danger' }}">
+                                        {{ m.marks }}%
+                                    </span>
+                                </td>
+                                <td class="pe-4 text-end">
+                                    {% if m.marks >= 35 %}
+                                    <span
+                                        class="badge bg-success-light text-success border-success border-opacity-10 rounded-pill px-3">
+                                        <i class="fas fa-check-circle me-1 small"></i>Passed
+                                    </span>
+                                    {% else %}
+                                    <span
+                                        class="badge bg-danger-light text-danger border-danger border-opacity-10 rounded-pill px-3">
+                                        <i class="fas fa-times-circle me-1 small"></i>Failed
+                                    </span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot class="bg-light border-top-0">
+                            <tr class="fw-bold text-dark">
+                                <td colspan="3" class="ps-4 text-end text-muted small text-uppercase">Aggregate
+                                    Performance:</td>
+                                <td class="text-center h5 mb-0 fw-bold text-primary">{{ stats.total_marks }}</td>
+                                <td class="pe-4 text-end h5 mb-0 fw-bold text-primary">{{ stats.percentage }}%</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-5 text-center">
+                <div class="icon-shape bg-warning bg-opacity-10 text-warning rounded-circle p-4 mb-4 mx-auto"
+                    style="width: 80px; height: 80px;">
+                    <i class="fas fa-exclamation-triangle fa-2x"></i>
+                </div>
+                <h5 class="fw-bold">No Records Found</h5>
+                <p class="text-muted small mb-4">There are no assessment records available for this student in the
+                    database.</p>
+                <a href="{{ url_for('admin.add_marks') }}" class="btn btn-primary px-4">
+                    <i class="fas fa-plus me-2"></i>Add First Record
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

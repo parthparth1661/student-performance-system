@@ -1,0 +1,118 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="h3 mb-1">Student Management</h2>
+        <p class="text-muted small mb-0">Manage and filter your student records easily.</p>
+    </div>
+    <a href="{{ url_for('admin.add_student') }}" class="btn btn-primary d-inline-flex align-items-center">
+        <i class="fas fa-plus me-2"></i> Add New Student
+    </a>
+</div>
+
+<!-- Search & Filter Box -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body p-4">
+        <form method="GET" action="{{ url_for('admin.view_students') }}" class="row g-3">
+            <div class="col-md-3">
+                <label class="form-label">Enrollment No</label>
+                <input type="text" name="roll_no" class="form-control" placeholder="Search Enrollment No..."
+                    value="{{ filters.get('roll_no', '') }}">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Name</label>
+                <input type="text" name="name" class="form-control" placeholder="Search Name..."
+                    value="{{ filters.get('name', '') }}">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Department</label>
+                <select name="department" class="form-select text-muted">
+                    <option value="">All Depts</option>
+                    {% for dept in ['BCA', 'MCA', 'B.TECH', 'M.TECH', 'MBA'] %}
+                    <option value="{{ dept }}" {{ 'selected' if filters.get('department')==dept }}>{{ dept }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Semester</label>
+                <select name="semester" class="form-select text-muted">
+                    <option value="">All Sem</option>
+                    {% for sem in semesters %}
+                    <option value="{{ sem }}" {{ 'selected' if filters.get('semester')==sem|string }}>{{ sem }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-search me-2"></i>Filter
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Students Table -->
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th class="ps-4">Enrollment No</th>
+                        <th>Student Name</th>
+                        <th>Email Address</th>
+                        <th>Department</th>
+                        <th>Semester</th>
+                        <th class="text-end pe-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td class="ps-4 fw-bold text-primary">{{ student.roll_no }}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="https://ui-avatars.com/api/?name={{ student.name }}&background=random"
+                                    class="rounded-circle me-3" width="30" height="30">
+                                <span>{{ student.name }}</span>
+                            </div>
+                        </td>
+                        <td class="text-muted">{{ student.email }}</td>
+                        <td>
+                            <span class="badge bg-light text-secondary border">{{ student.department }}</span>
+                        </td>
+                        <td>
+                            <span class="badge bg-indigo bg-opacity-10 text-primary border-primary border-opacity-25"
+                                style="background-color: rgba(79, 70, 229, 0.1); color: #4F46E5;">Sem {{
+                                student.semester }}</span>
+                        </td>
+                        <td class="text-end pe-4">
+                            <div class="d-flex justify-content-end gap-2">
+                                <a href="{{ url_for('admin.edit_student', id=student.student_id) }}"
+                                    class="btn btn-sm btn-light text-primary" title="Edit">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+                                <a href="{{ url_for('admin.delete_student', id=student.student_id) }}"
+                                    class="btn btn-sm btn-light text-danger"
+                                    onclick="return confirm('Are you sure you want to delete this student?')"
+                                    title="Delete">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center py-5 text-muted">
+                            <i class="fas fa-user-slash fa-3x mb-3 opacity-25"></i>
+                            <p class="mb-0">No student records found matching your filters.</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

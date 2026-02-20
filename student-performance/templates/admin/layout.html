@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Student Performance Analysis</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h4><i class="fas fa-graduation-cap me-2 text-primary"></i>SPDA Admin</h4>
+                <button type="button" id="sidebarCollapseMobile" class="btn d-md-none text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <ul class="list-unstyled components">
+                <div class="sidebar-section-title">Main</div>
+                <li class="{{ 'active' if request.endpoint == 'admin.dashboard' }}">
+                    <a href="{{ url_for('admin.dashboard') }}">
+                        <i class="fas fa-th-large"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <div class="sidebar-section-title">Management</div>
+                <li
+                    class="{{ 'active' if request.endpoint == 'admin.view_students' or request.endpoint == 'admin.add_student' }}">
+                    <a href="{{ url_for('admin.view_students') }}">
+                        <i class="fas fa-user-graduate"></i>
+                        <span>Students</span>
+                    </a>
+                </li>
+                <li
+                    class="{{ 'active' if request.endpoint == 'admin.view_marks' or request.endpoint == 'admin.add_marks' }}">
+                    <a href="{{ url_for('admin.view_marks') }}">
+                        <i class="fas fa-file-invoice"></i>
+                        <span>Marks Records</span>
+                    </a>
+                </li>
+
+                <div class="sidebar-section-title">Reports & Data</div>
+                <li class="{{ 'active' if 'student_report' in request.endpoint }}">
+                    <a href="{{ url_for('admin.student_report_search') }}">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>Performance Reports</span>
+                    </a>
+                </li>
+                <li class="{{ 'active' if request.endpoint == 'admin.upload_csv' }}">
+                    <a href="{{ url_for('admin.upload_csv') }}">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>Bulk Upload</span>
+                    </a>
+                </li>
+
+                <div class="sidebar-section-title">Attendance</div>
+                <li class="{{ 'active' if request.endpoint == 'admin.mark_attendance' }}">
+                    <a href="{{ url_for('admin.mark_attendance') }}">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Mark Attendance</span>
+                    </a>
+                </li>
+                <li class="{{ 'active' if request.endpoint == 'admin.upload_attendance' }}">
+                    <a href="{{ url_for('admin.upload_attendance') }}">
+                        <i class="fas fa-file-csv"></i>
+                        <span>Upload Attendance</span>
+                    </a>
+                </li>
+                <li class="{{ 'active' if request.endpoint == 'admin.view_attendance' }}">
+                    <a href="{{ url_for('admin.view_attendance') }}">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>View Attendance</span>
+                    </a>
+                </li>
+                <li class="{{ 'active' if request.endpoint == 'admin.attendance_summary' }}">
+                    <a href="{{ url_for('admin.attendance_summary') }}">
+                        <i class="fas fa-file-contract"></i>
+                        <span>Attendance Summary</span>
+                    </a>
+                </li>
+
+                <div class="sidebar-section-title">System</div>
+                <li class="{{ 'active' if request.endpoint == 'admin.academic_calendar' }}">
+                    <a href="{{ url_for('admin.academic_calendar') }}">
+                        <i class="fas fa-calendar-week"></i>
+                        <span>Academic Calendar</span>
+                    </a>
+                </li>
+                <li class="{{ 'active' if request.endpoint == 'admin.reset_data' }}">
+                    <a href="{{ url_for('admin.reset_data') }}" class="text-danger">
+                        <i class="fas fa-sync-alt text-danger"></i>
+                        <span class="text-danger">Reset All Data</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+            <!-- Top Navbar -->
+            <nav class="navbar navbar-expand-lg top-navbar">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-light me-3">
+                        <i class="fas fa-align-left"></i>
+                    </button>
+
+
+                    <div class="ms-auto d-flex align-items-center">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
+                                data-bs-toggle="dropdown">
+                                <img src="https://ui-avatars.com/api/?name={{ session.get('admin_username', 'Admin') }}&background=4F46E5&color=fff"
+                                    alt="Profile" class="rounded-circle me-2" width="35">
+                                <span class="d-none d-md-inline fw-medium">{{ session.get('admin_username', 'Super
+                                    Admin') }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-3">
+                                <li><a class="dropdown-item" href="{{ url_for('admin.profile') }}"><i
+                                            class="fas fa-user me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('admin.change_password') }}"><i
+                                            class="fas fa-key me-2"></i>Change Password</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="{{ url_for('admin.logout') }}"><i
+                                            class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid px-4 fade-in">
+                <!-- Flash Messages -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category if category != 'danger' else 'danger' }} alert-dismissible fade show rounded-4 border-0 shadow-sm mb-4"
+                    role="alert">
+                    <i class="fas fa-{{ 'check-circle' if category == 'success' else 'exclamation-circle' }} me-2"></i>
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Sidebar Toggle Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+            const sidebarCollapse = document.getElementById('sidebarCollapse');
+            const sidebarCollapseMobile = document.getElementById('sidebarCollapseMobile');
+
+            function toggleSidebar() {
+                sidebar.classList.toggle('active');
+                content.classList.toggle('active');
+            }
+
+            sidebarCollapse.addEventListener('click', toggleSidebar);
+            sidebarCollapseMobile.addEventListener('click', toggleSidebar);
+        });
+    </script>
+</body>
+
+</html>

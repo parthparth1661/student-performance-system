@@ -1,0 +1,68 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7 col-lg-6">
+        <div class="card border-0 shadow-sm overflow-hidden">
+            <div class="card-header bg-white py-3 border-0">
+                <div class="d-flex align-items-center">
+                    <div class="icon-shape bg-warning bg-opacity-10 text-warning rounded-3 p-3 me-3">
+                        <i class="fas fa-user-edit"></i>
+                    </div>
+                    <div>
+                        <h5 class="mb-0 fw-bold">Edit Student Record</h5>
+                        <p class="text-muted small mb-0">Modify the registration details for <strong>{{ student.name
+                                }}</strong>.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-4 pt-2">
+                <form method="POST">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Enrollment No</label>
+                            <input type="text" name="roll_no" class="form-control" required
+                                value="{{ student.roll_no }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Student Name</label>
+                            <input type="text" name="name" class="form-control" required value="{{ student.name }}">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" name="email" class="form-control" required value="{{ student.email }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Department</label>
+                            <select name="department" class="form-select" required>
+                                <option value="BCA" {{ 'selected' if student.department=='BCA' }}>BCA</option>
+                                <option value="MCA" {{ 'selected' if student.department=='MCA' }}>MCA</option>
+                                <option value="B.TECH" {{ 'selected' if student.department=='B.TECH' }}>B.TECH</option>
+                                <option value="M.TECH" {{ 'selected' if student.department=='M.TECH' }}>M.TECH</option>
+                                <option value="MBA" {{ 'selected' if student.department=='MBA' }}>MBA</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Semester</label>
+                            <select name="semester" class="form-select" required>
+                                {% for i in range(1, 7) %}
+                                <option value="{{ i }}" {{ 'selected' if student.semester==i }}>Semester {{ i }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 d-flex gap-2">
+                        <button type="submit" class="btn btn-warning px-4 py-2 text-dark fw-bold">
+                            <i class="fas fa-check me-2"></i>Update Student Details
+                        </button>
+                        <a href="{{ url_for('admin.view_students') }}" class="btn btn-light px-4 py-2 text-secondary">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
