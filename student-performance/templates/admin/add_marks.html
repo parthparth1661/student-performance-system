@@ -1,97 +1,55 @@
 {% extends 'admin/layout.html' %}
 
 {% block content %}
+<div class="mb-4">
+    <h2 class="fw-bold mb-0 text-dark">Add New Marks Record</h2>
+    <p class="text-muted">Directly insert academic data into SPDA database</p>
+</div>
+
 <div class="row justify-content-center">
-    <div class="col-md-7 col-lg-6">
-        <div class="card border-0 shadow-sm overflow-hidden">
-            <div class="card-header bg-white py-3 border-0">
-                <div class="d-flex align-items-center">
-                    <div class="icon-shape bg-info bg-opacity-10 text-info rounded-3 p-3 me-3">
-                        <i class="fas fa-file-signature"></i>
+    <div class="col-lg-7">
+        <div class="card border-0 shadow-sm rounded-4 p-4">
+            <form action="{{ url_for('admin.add_marks') }}" method="POST">
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-secondary">Search Student (Enrollment No)</label>
+                    <select name="enrollment_no" class="form-select rounded-pill border-light bg-light" required>
+                         <option value="">-- Choose Student --</option>
+                         {% for s in students %}<option value="{{ s.enrollment_no }}">{{ s.enrollment_no }} - {{ s.name }}</option>{% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-secondary">Course Subject</label>
+                    <select name="subject_id" class="form-select rounded-pill border-light bg-light" required>
+                         <option value="">-- Choose Subject --</option>
+                         {% for sub in subjects %}<option value="{{ sub.subject_id }}">{{ sub.subject_name }} ({{ sub.department }})</option>{% endfor %}
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold text-secondary">Exam Component</label>
+                        <select name="exam_type" class="form-select rounded-pill border-light bg-light" required>
+                            <option value="Internal">Internal (30)</option>
+                            <option value="External">External (70)</option>
+                            <option value="Practical">Practical (50)</option>
+                        </select>
                     </div>
-                    <div>
-                        <h5 class="mb-0 fw-bold">Record Student Marks</h5>
-                        <p class="text-muted small mb-0">Enter assessment scores for a specific student and subject.</p>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label fw-bold text-secondary">Obtained</label>
+                        <input type="number" name="marks_obtained" class="form-control rounded-pill border-light bg-light" required placeholder="0">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label fw-bold text-secondary">Total Max</label>
+                        <input type="number" name="total_marks" class="form-control rounded-pill border-light bg-light" required placeholder="100" value="100">
                     </div>
                 </div>
-            </div>
-            <div class="card-body p-4 pt-2">
-                <form method="POST">
-                    <div class="mb-4">
-                        <label class="form-label fw-medium">Student Enrollment No</label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light border-end-0"><i
-                                    class="fas fa-id-card text-muted"></i></span>
-                            <input type="text" name="roll_no" class="form-control" required
-                                placeholder="Enter student enrollment no (e.g., ENR001)">
-                        </div>
-                    </div>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label fw-medium">Subject</label>
-                            <select name="subject" class="form-select text-muted" required>
-                                <option value="" selected disabled>Select Subject</option>
-                                {% for subject in subjects %}
-                                <option value="{{ subject }}">{{ subject }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-medium">Marks (0-100)</label>
-                            <input type="number" name="marks" class="form-control" required min="0" max="100"
-                                placeholder="Score">
-                        </div>
-                    </div>
-                    <div class="row g-3 mt-2">
-                        <div class="col-md-6">
-                            <label class="form-label fw-medium">Exam Type</label>
-                            <select name="exam_type" id="exam_type" class="form-select text-muted" required>
-                                <option value="" selected disabled>Select Type</option>
-                                <option value="Internal">Internal</option>
-                                <option value="External">External</option>
-                                <option value="Practical">Practical</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-medium">Exam Date</label>
-                            <input type="date" name="exam_date" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 d-flex gap-2">
-                        <button type="submit" class="btn btn-primary px-4 py-2">
-                            <i class="fas fa-save me-2"></i>Save Record
-                        </button>
-                        <a href="{{ url_for('admin.view_marks') }}" class="btn btn-light px-4 py-2 text-secondary">
-                            Cancel
-                        </a>
-                    </div>
-                </form>
-            </div>
+                <div class="mt-4 text-center">
+                    <button type="submit" class="btn btn-primary px-5 rounded-pill shadow-lg py-3">
+                         <i class="fas fa-plus me-2"></i>Add Record
+                    </button>
+                    <a href="{{ url_for('admin.view_marks') }}" class="btn btn-light px-4 rounded-pill py-3 ms-2">Cancel</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-
-<script>
-    document.querySelector('input[name="roll_no"]').addEventListener('blur', function () {
-        const rollNo = this.value.trim();
-        if (!rollNo) return;
-
-        fetch(`/admin/get_student_dept/${rollNo}`)
-            .then(response => response.json())
-            .then(data => {
-                const practicalOption = document.querySelector('#exam_type option[value="Practical"]');
-                const examSelect = document.querySelector('#exam_type');
-
-                if (data.department === 'MBA') {
-                    practicalOption.disabled = true;
-                    if (examSelect.value === 'Practical') {
-                        examSelect.value = '';
-                    }
-                } else {
-                    practicalOption.disabled = false;
-                }
-            })
-            .catch(err => console.log('Error fetching student dept:', err));
-    });
-</script>
 {% endblock %}

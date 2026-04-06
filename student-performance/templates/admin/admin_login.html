@@ -47,13 +47,13 @@
 
                     <form action="{{ url_for('admin.login') }}" method="POST">
 
-                        <!-- Username Field -->
+                        <!-- Email Field -->
                         <div class="mb-3 position-relative">
-                            <label for="username" class="form-label visually-hidden">Username</label>
+                            <label for="email" class="form-label visually-hidden">Email Address</label>
                             <div class="input-with-icon">
-                                <i class="fas fa-user"></i>
-                                <input type="text" class="form-control" id="username" name="username"
-                                    placeholder="Username" required autofocus>
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="Email Address" required autofocus>
                             </div>
                         </div>
 

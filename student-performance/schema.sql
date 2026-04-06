@@ -1,6 +1,6 @@
 -- Create Database
-CREATE DATABASE IF NOT EXISTS student_performance_db;
-USE student_performance_db;
+CREATE DATABASE IF NOT EXISTS SPDA;
+USE SPDA;
 
 -- Create Students Table
 CREATE TABLE IF NOT EXISTS students (

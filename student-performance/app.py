@@ -7,6 +7,7 @@ import os
 app = Flask(__name__)
 # 1. Force Logout on App Start: Random key invalidates old sessions on restart
 app.secret_key = os.urandom(24)
+app.config['MYSQL_DB'] = 'SPDA' # Set Default Database 🔥
 
 # Initialize database
 init_db()
@@ -17,9 +18,8 @@ app.register_blueprint(student_bp)
 
 @app.route('/')
 def index():
-    # 2. Strict Logout on Root Access
-    session.clear()
-    return redirect(url_for('admin.login'))
+    from flask import render_template
+    return render_template('landing_page.html')
 
 if __name__ == '__main__':
     # Ensure charts directory exists

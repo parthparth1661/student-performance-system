@@ -1,0 +1,56 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+<div class="mb-4">
+    <h2 class="fw-bold mb-0 text-dark">Log Daily Attendance</h2>
+    <p class="text-muted">Insert attendance record into SPDA system</p>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm rounded-4 p-4">
+            <form action="{{ url_for('admin.add_attendance') }}" method="POST">
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-secondary">Student Selection</label>
+                    <select name="enrollment_no" class="form-select rounded-pill border-light bg-light shadow-sm py-2" required>
+                         <option value="">-- Choose Student --</option>
+                         {% for s in students %}<option value="{{ s.enrollment_no }}">{{ s.enrollment_no }} - {{ s.name }}</option>{% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-secondary">Subject / Lecture</label>
+                    <select name="subject_id" class="form-select rounded-pill border-light bg-light shadow-sm py-2" required>
+                         <option value="">-- Choose Subject --</option>
+                         {% for sub in subjects %}<option value="{{ sub.subject_id }}">{{ sub.subject_name }} (Sem {{ sub.semester }})</option>{% endfor %}
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold text-secondary">Date</label>
+                        <input type="date" name="date" class="form-control rounded-pill border-light bg-light shadow-sm py-2" required value="{{ today_date }}">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold text-secondary">Attendance Status</label>
+                        <div class="d-flex gap-3 mt-1">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="att_present" value="Present" checked>
+                                <label class="form-check-label text-success fw-bold" for="att_present">Present</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="att_absent" value="Absent">
+                                <label class="form-check-label text-danger fw-bold" for="att_absent">Absent</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 text-center">
+                    <button type="submit" class="btn btn-primary px-5 rounded-pill shadow-lg py-3">
+                         <i class="fas fa-check-circle me-2"></i>Mark Attendance
+                    </button>
+                    <a href="{{ url_for('admin.view_attendance') }}" class="btn btn-light px-4 rounded-pill py-3 ms-2">View Records</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-0 text-dark">Subject Catalog</h2>
+        <p class="text-muted">Academic curriculum Management for SPDA</p>
+    </div>
+    <a href="{{ url_for('admin.add_subject') }}" class="btn btn-primary px-4 rounded-pill">
+        <i class="fas fa-plus me-2"></i>Add Subject
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="bg-light">
+                <tr>
+                    <th class="ps-4">ID</th>
+                    <th>Subject Name</th>
+                    <th>Department</th>
+                    <th>Semester</th>
+                    <th>Faculty In-Charge</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sub in subjects %}
+                <tr>
+                    <td class="ps-4 text-muted small">SUB-{{ sub.subject_id }}</td>
+                    <td><div class="fw-bold text-dark">{{ sub.subject_name }}</div></td>
+                    <td>{{ sub.department }}</td>
+                    <td><span class="badge bg-primary-soft text-primary rounded-pill px-3">Sem {{ sub.semester }}</span></td>
+                    <td class="fw-medium">{{ sub.faculty_name or 'Not Assigned' }}</td>
+                    <td class="text-center">
+                        <a href="{{ url_for('admin.delete_subject', subject_id=sub.subject_id) }}" 
+                           class="btn btn-sm btn-outline-danger rounded-circle"
+                           onclick="return confirm('Delete {{ sub.subject_name }}?')">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="text-center py-5 text-muted">No subjects found in the catalog.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

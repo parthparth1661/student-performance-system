@@ -1,0 +1,54 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+<div class="mb-4">
+    <h2 class="fw-bold mb-0 text-dark">Add New Subject</h2>
+    <p class="text-muted">Define academic curriculum for departments</p>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm rounded-4 p-4">
+            <form action="{{ url_for('admin.add_subject') }}" method="POST">
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-secondary">Subject Title</label>
+                    <input type="text" name="subject_name" class="form-control rounded-pill border-light bg-light" required placeholder="e.g. Database Management Systems">
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold text-secondary">Department</label>
+                        <select name="department" class="form-select rounded-pill border-light bg-light" required>
+                             <option value="">Select Dept</option>
+                             <option value="BCA">BCA</option>
+                             <option value="MCA">MCA</option>
+                             <option value="B.TECH">B.TECH</option>
+                             <option value="MBA">MBA</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold text-secondary">Semester</label>
+                        <select name="semester" class="form-select rounded-pill border-light bg-light" required>
+                            <option value="">Select Sem</option>
+                            {% for i in range(1,9) %}<option value="{{ i }}">{{ i }}</option>{% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-secondary">Assigned Faculty</label>
+                    <select name="faculty_id" class="form-select rounded-pill border-light bg-light">
+                        <option value="">-- Choose Faculty --</option>
+                        {% for f in faculties %}
+                        <option value="{{ f.faculty_id }}">{{ f.faculty_name }} ({{ f.department }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mt-4 text-center">
+                    <button type="submit" class="btn btn-primary px-5 rounded-pill shadow-lg py-3">
+                         <i class="fas fa-save me-2"></i>Create Subject
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

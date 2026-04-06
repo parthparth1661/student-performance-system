@@ -1,0 +1,42 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+<div class="mb-4">
+    <h2 class="fw-bold mb-0 text-dark">Enroll Faculty</h2>
+    <p class="text-muted">Register a new teaching faculty member</p>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm rounded-4 p-4">
+            <form action="{{ url_for('admin.add_faculty') }}" method="POST">
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-secondary">Faculty Full Name</label>
+                    <input type="text" name="faculty_name" class="form-control rounded-pill border-light bg-light" placeholder="e.g. Dr. Jane Smith" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-secondary">Email Address</label>
+                    <input type="email" name="email" class="form-control rounded-pill border-light bg-light" placeholder="e.g. janesmith@university.com" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-secondary">Department</label>
+                    <select name="department" class="form-select rounded-pill border-light bg-light" required>
+                        <option value="">Select Dept</option>
+                        <option value="BCA">BCA</option>
+                        <option value="MCA">MCA</option>
+                        <option value="B.TECH">B.TECH</option>
+                        <option value="M.TECH">M.TECH</option>
+                        <option value="MBA">MBA</option>
+                    </select>
+                </div>
+                <div class="mt-4 text-center">
+                    <button type="submit" class="btn btn-primary px-5 rounded-pill shadow-lg py-3">
+                        <i class="fas fa-save me-2"></i>Enroll Faculty
+                    </button>
+                    <a href="{{ url_for('admin.view_faculty') }}" class="btn btn-light px-4 rounded-pill py-3 ms-2">Back to Directory</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

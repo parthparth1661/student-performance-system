@@ -36,7 +36,7 @@ def login():
         return redirect(url_for('student.dashboard'))
         
     if request.method == 'POST':
-        roll_no = request.form.get('roll_no')
+        enrollment_no = request.form.get('roll_no') # using 'roll_no' from form for compatibility
         password = request.form.get('password')
         
         conn = get_db_connection()
@@ -45,14 +45,13 @@ def login():
             return render_template('student/login.html')
             
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM students WHERE roll_no = %s", (roll_no,))
+        cursor.execute("SELECT * FROM students WHERE enrollment_no = %s", (enrollment_no,))
         student = cursor.fetchone()
         conn.close()
         
         if student and student['password_hash'] and check_password_hash(student['password_hash'], password):
             session['student_logged_in'] = True
-            session['student_id'] = student['student_id']
-            session['student_roll_no'] = student['roll_no']
+            session['student_enrollment_no'] = student['enrollment_no']
             session['student_name'] = student['name']
             session['is_password_changed'] = bool(student['is_password_changed'])
             
@@ -61,7 +60,7 @@ def login():
                 
             return redirect(url_for('student.dashboard'))
         else:
-            flash("Invalid Roll Number or Password.", "danger")
+            flash("Invalid Enrollment No or Password.", "danger")
             
     return render_template('student/login.html')
 
@@ -78,10 +77,6 @@ def change_password():
             flash("Passwords do not match!", "danger")
             return redirect(url_for('student.change_password'))
             
-        if len(new_password) < 8:
-             flash("Password must be at least 8 characters long.", "danger")
-             return redirect(url_for('student.change_password'))
-            
         conn = get_db_connection()
         try:
             hashed_pw = generate_password_hash(new_password)
@@ -89,8 +84,8 @@ def change_password():
             cursor.execute("""
                 UPDATE students 
                 SET password_hash=%s, is_password_changed=TRUE 
-                WHERE student_id=%s
-            """, (hashed_pw, session['student_id']))
+                WHERE enrollment_no=%s
+            """, (hashed_pw, session['student_enrollment_no']))
             conn.commit()
             
             session['is_password_changed'] = True
@@ -103,21 +98,13 @@ def change_password():
             
     return render_template('student/change_password.html')
 
-@student_bp.route('/logout')
-def logout():
-    session.clear()
-    flash("Logged out successfully.", "info")
-    return redirect(url_for('student.login'))
-
 @student_bp.route('/dashboard')
 def dashboard():
-    # Helper functions use db connection internally
-    enrollment_no = session['student_roll_no']
+    enrollment_no = session['student_enrollment_no']
     student = get_student_details(enrollment_no)
     marks_list = get_student_marks(enrollment_no)
     summary = calculate_student_summary(enrollment_no)
     
-    # Generate charts
     generate_student_charts_new(enrollment_no)
     
     return render_template('student/student_dashboard.html', 
@@ -127,7 +114,7 @@ def dashboard():
 
 @student_bp.route('/report/download')
 def download_report():
-    enrollment_no = session['student_roll_no']
+    enrollment_no = session['student_enrollment_no']
     file_path = export_student_report_excel(enrollment_no)
     if file_path and os.path.exists(file_path):
         return send_file(file_path, as_attachment=True, download_name=f'student_{enrollment_no}_report.xlsx')

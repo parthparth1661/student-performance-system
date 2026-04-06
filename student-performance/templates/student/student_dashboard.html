@@ -14,7 +14,7 @@
         <div class="col-md">
             <h2 class="fw-bold mb-1">{{ student.name }}</h2>
             <p class="text-secondary mb-0">
-                <i class="fas fa-id-card me-2"></i>Enrollment: {{ student.roll_no }} |
+                <i class="fas fa-id-card me-2"></i>Enrollment: {{ student.enrollment_no }} |
                 <i class="fas fa-university me-2"></i>{{ student.department }} |
                 <i class="fas fa-calendar-alt me-2"></i>Semester: {{ student.semester }}
             </p>
@@ -23,7 +23,7 @@
             </p>
         </div>
         <div class="col-md-auto text-center mt-3 mt-md-0">
-            <a href="{{ url_for('student.download_report', enrollment_no=student.roll_no) }}" class="btn btn-glass">
+            <a href="{{ url_for('student.download_report') }}" class="btn btn-glass">
                 <i class="fas fa-file-excel me-2"></i> Download Report
             </a>
         </div>
@@ -127,14 +127,14 @@
     <div class="col-md-6">
         <div class="glass-card">
             <h4 class="fw-bold mb-3 text-center">Performance by Subject</h4>
-            <img src="{{ url_for('static', filename='charts/student_' ~ student.roll_no ~ '_bar.png') }}"
+            <img src="{{ url_for('static', filename='charts/student_' ~ student.enrollment_no ~ '_bar.png') }}"
                 class="img-fluid rounded-3" alt="Subject Bar Chart">
         </div>
     </div>
     <div class="col-md-6">
         <div class="glass-card">
             <h4 class="fw-bold mb-3 text-center">Pass/Fail Summary</h4>
-            <img src="{{ url_for('static', filename='charts/student_' ~ student.roll_no ~ '_pie.png') }}"
+            <img src="{{ url_for('static', filename='charts/student_' ~ student.enrollment_no ~ '_pie.png') }}"
                 class="img-fluid rounded-3" alt="Pass Fail Pie Chart">
         </div>
     </div>

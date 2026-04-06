@@ -35,72 +35,50 @@
                 </li>
 
                 <div class="sidebar-section-title">Management</div>
-                <li
-                    class="{{ 'active' if request.endpoint == 'admin.view_students' or request.endpoint == 'admin.add_student' }}">
+                <li class="{{ 'active' if 'student' in request.endpoint }}">
                     <a href="{{ url_for('admin.view_students') }}">
                         <i class="fas fa-user-graduate"></i>
                         <span>Students</span>
                     </a>
                 </li>
-                <li
-                    class="{{ 'active' if request.endpoint == 'admin.view_marks' or request.endpoint == 'admin.add_marks' }}">
+                <li class="{{ 'active' if 'subject' in request.endpoint }}">
+                    <a href="{{ url_for('admin.view_subjects') }}">
+                        <i class="fas fa-book"></i>
+                        <span>Subjects</span>
+                    </a>
+                </li>
+                <li class="{{ 'active' if 'faculty' in request.endpoint }}">
+                    <a href="{{ url_for('admin.view_faculty') }}">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>Faculty</span>
+                    </a>
+                </li>
+
+                <div class="sidebar-section-title">Academic Data</div>
+                <li class="{{ 'active' if 'marks' in request.endpoint }}">
                     <a href="{{ url_for('admin.view_marks') }}">
                         <i class="fas fa-file-invoice"></i>
                         <span>Marks Records</span>
                     </a>
                 </li>
-
-                <div class="sidebar-section-title">Reports & Data</div>
-                <li class="{{ 'active' if 'student_report' in request.endpoint }}">
-                    <a href="{{ url_for('admin.student_report_search') }}">
-                        <i class="fas fa-chart-pie"></i>
-                        <span>Performance Reports</span>
-                    </a>
-                </li>
-                <li class="{{ 'active' if request.endpoint == 'admin.upload_csv' }}">
-                    <a href="{{ url_for('admin.upload_csv') }}">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <span>Bulk Upload</span>
-                    </a>
-                </li>
-
-                <div class="sidebar-section-title">Attendance</div>
-                <li class="{{ 'active' if request.endpoint == 'admin.mark_attendance' }}">
-                    <a href="{{ url_for('admin.mark_attendance') }}">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>Mark Attendance</span>
-                    </a>
-                </li>
-                <li class="{{ 'active' if request.endpoint == 'admin.upload_attendance' }}">
-                    <a href="{{ url_for('admin.upload_attendance') }}">
-                        <i class="fas fa-file-csv"></i>
-                        <span>Upload Attendance</span>
-                    </a>
-                </li>
-                <li class="{{ 'active' if request.endpoint == 'admin.view_attendance' }}">
+                <li class="{{ 'active' if 'attendance' in request.endpoint }}">
                     <a href="{{ url_for('admin.view_attendance') }}">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>View Attendance</span>
-                    </a>
-                </li>
-                <li class="{{ 'active' if request.endpoint == 'admin.attendance_summary' }}">
-                    <a href="{{ url_for('admin.attendance_summary') }}">
-                        <i class="fas fa-file-contract"></i>
-                        <span>Attendance Summary</span>
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Attendance Logs</span>
                     </a>
                 </li>
 
-                <div class="sidebar-section-title">System</div>
-                <li class="{{ 'active' if request.endpoint == 'admin.academic_calendar' }}">
-                    <a href="{{ url_for('admin.academic_calendar') }}">
-                        <i class="fas fa-calendar-week"></i>
-                        <span>Academic Calendar</span>
+                <div class="sidebar-section-title">System Tools</div>
+                <li class="{{ 'active' if request.endpoint == 'admin.bulk_upload' }}">
+                    <a href="{{ url_for('admin.bulk_upload') }}">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>Bulk Import (CSV)</span>
                     </a>
                 </li>
-                <li class="{{ 'active' if request.endpoint == 'admin.reset_data' }}">
-                    <a href="{{ url_for('admin.reset_data') }}" class="text-danger">
-                        <i class="fas fa-sync-alt text-danger"></i>
-                        <span class="text-danger">Reset All Data</span>
+                <li>
+                    <a href="{{ url_for('admin.logout') }}" class="text-danger">
+                        <i class="fas fa-sign-out-alt text-danger"></i>
+                        <span class="text-danger">Logout</span>
                     </a>
                 </li>
             </ul>
@@ -120,10 +98,9 @@
                         <div class="dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
                                 data-bs-toggle="dropdown">
-                                <img src="https://ui-avatars.com/api/?name={{ session.get('admin_username', 'Admin') }}&background=4F46E5&color=fff"
+                                <img src="https://ui-avatars.com/api/?name={{ session.get('admin_email', 'Admin') }}&background=4F46E5&color=fff"
                                     alt="Profile" class="rounded-circle me-2" width="35">
-                                <span class="d-none d-md-inline fw-medium">{{ session.get('admin_username', 'Super
-                                    Admin') }}</span>
+                                <span class="d-none d-md-inline fw-medium text-white">{{ session.get('admin_email', 'Administrator') }}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-3">
                                 <li><a class="dropdown-item" href="{{ url_for('admin.profile') }}"><i

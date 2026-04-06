@@ -1,0 +1,96 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+<div class="mb-4">
+    <a href="{{ url_for('admin.dashboard') }}" class="btn btn-sm btn-link text-decoration-none p-0 mb-2">
+        <i class="fas fa-arrow-left me-1"></i> Back to Dashboard
+    </a>
+    <h2 class="fw-bold mb-0">Student Performance Detail</h2>
+    <p class="text-muted small">Deep-dive analysis for {{ student.name }} ({{ student.enrollment_no }})</p>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm p-4 text-center rounded-4 h-100">
+            <p class="text-muted small mb-1">Overall Average</p>
+            <h2 class="fw-bold text-primary mb-0">{{ summary.avg_marks }}%</h2>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm p-4 text-center rounded-4 h-100">
+            <p class="text-muted small mb-1">Recorded Marks</p>
+            <h2 class="fw-bold mb-0">{{ marks_list|length }} Records</h2>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm p-4 text-center rounded-4 h-100">
+            <p class="text-muted small mb-1">Result Status</p>
+            <h2 class="fw-bold {% if summary.overall_result == 'PASS' %}text-success{% else %}text-danger{% endif %} mb-0">
+                {{ summary.overall_result }}
+            </h2>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm p-4 rounded-4 h-100 d-flex align-items-center justify-content-center">
+            <a href="{{ url_for('student.download_report', enrollment_no=student.enrollment_no) }}" class="btn btn-outline-success rounded-pill fw-bold w-100">
+                <i class="fas fa-file-excel me-2"></i>Download XL
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-12">
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="card-header bg-white border-0 py-3">
+                <h6 class="mb-0 fw-bold">Performance Ledger</h6>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="ps-4">Subject</th>
+                            <th>Internal</th>
+                            <th>External</th>
+                            <th>Practical</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in marks_list %}
+                        <tr>
+                            <td class="ps-4 fw-bold">{{ item.subject }}</td>
+                            <td>{{ item.internal }}</td>
+                            <td>{{ item.external }}</td>
+                            <td>{{ item.practical }}</td>
+                            <td class="fw-bold">{{ item.total }}</td>
+                            <td>
+                                <span class="badge {% if item.status == 'PASS' %}bg-success-soft text-success{% else %}bg-danger-soft text-danger{% endif %} rounded-pill px-3">
+                                    {{ item.status }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm rounded-4 p-4 text-center">
+            <h6 class="fw-bold mb-3 text-muted">Subject Performance</h6>
+            <img src="{{ url_for('static', filename='charts/student_' ~ student.enrollment_no ~ '_bar.png') }}" class="img-fluid rounded-3" alt="Bar Chart">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm rounded-4 p-4 text-center">
+            <h6 class="fw-bold mb-3 text-muted">Academic Progress</h6>
+            <img src="{{ url_for('static', filename='charts/student_' ~ student.enrollment_no ~ '_pie.png') }}" class="img-fluid rounded-3" alt="Pie Chart">
+        </div>
+    </div>
+</div>
+{% endblock %}
