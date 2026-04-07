@@ -1,23 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
 
 :root {
-    --primary-color: #4F46E5;
-    --primary-hover: #4338CA;
-    --secondary-color: #64748B;
-    --success-color: #22C55E;
-    --danger-color: #EF4444;
-    --warning-color: #F59E0B;
-    --info-color: #06B6D4;
-    --background-color: #F8FAFC;
-    --sidebar-bg: #1E293B;
+    --primary-color: #6c5ce7;
+    --primary-hover: #5b4bc4;
+    --secondary-color: #636e72;
+    --success-color: #00b894;
+    --danger-color: #e17055;
+    --warning-color: #fdcb6e;
+    --info-color: #0984e3;
+    --background-color: #f5f6fa;
+    --sidebar-bg: #2d3436;
     --card-bg: #FFFFFF;
-    --text-main: #1E293B;
-    --text-muted: #64748B;
-    --border-color: #E2E8F0;
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --border-color: #dfe6e9;
     --sidebar-width: 260px;
     --sidebar-collapsed-width: 80px;
     --transition-speed: 0.3s;
 }
+
+/* Soft UI Utility Classes */
+.bg-primary-soft { background-color: #f1f0ff !important; color: #6c5ce7 !important; }
+.bg-success-soft { background-color: #e6f7f3 !important; color: #00b894 !important; }
+.bg-warning-soft { background-color: #fef8eb !important; color: #fdcb6e !important; }
+.bg-danger-soft  { background-color: #fef2f2 !important; color: #e17055 !important; }
+.bg-info-soft    { background-color: #e3f2fd !important; color: #0984e3 !important; }
+.bg-indigo-soft  { background-color: #f1f0ff !important; color: #6c5ce7 !important; }
 
 body {
     font-family: 'Inter', sans-serif;

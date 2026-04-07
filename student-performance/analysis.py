@@ -5,11 +5,14 @@ import matplotlib.pyplot as plt
 import os
 from db import get_db_connection
 
-# Ensure charts directory exists
+# Ensure vital directories exist for charts and exports
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CHARTS_DIR = os.path.join(BASE_DIR, 'static', 'charts')
-if not os.path.exists(CHARTS_DIR):
-    os.makedirs(CHARTS_DIR)
+UPLOADS_DIR = os.path.join(BASE_DIR, 'static', 'uploads')
+
+for directory in [CHARTS_DIR, UPLOADS_DIR]:
+    if not os.path.exists(directory):
+        os.makedirs(directory)
 
 DEPARTMENT_SUBJECTS = {
     'BCA': ['Python Programming', 'Java Programming', 'DBMS', 'Data Structures', 'Operating Systems', 'Web Technology'],
@@ -19,172 +22,280 @@ DEPARTMENT_SUBJECTS = {
     'MBA': ['Marketing Management', 'Financial Management', 'Human Resource Management', 'Operations Management', 'Business Analytics', 'Strategic Management']
 }
 
+def build_dashboard_conditions(filters={}):
+    """Centralized high-precision filter builder for all analytical modules"""
+    conditions = []
+    values = []
+    
+    department = filters.get('department')
+    semester = filters.get('semester')
+    subject = filters.get('subject')
+    search = filters.get('search')
+    attendance_filter = filters.get('attendance')
+
+    if department:
+        conditions.append("s.department = %s")
+        values.append(department)
+
+    if semester:
+        conditions.append("s.semester = %s")
+        values.append(semester)
+
+    if subject:
+        # Join subjects to allow subject_name filtering
+        conditions.append("sub.subject_name = %s")
+        values.append(subject)
+
+    if search:
+        conditions.append("(s.name LIKE %s OR s.enrollment_no LIKE %s)")
+        values.append(f"%{search}%")
+        values.append(f"%{search}%")
+
+    if attendance_filter == "low":
+        conditions.append("""
+        s.enrollment_no IN (
+            SELECT enrollment_no 
+            FROM attendance 
+            GROUP BY enrollment_no 
+            HAVING (COUNT(CASE WHEN status='Present' THEN 1 END)*100.0/NULLIF(COUNT(*), 0)) < 75
+        )
+        """)
+    elif attendance_filter == "high":
+        conditions.append("""
+        s.enrollment_no IN (
+            SELECT enrollment_no 
+            FROM attendance 
+            GROUP BY enrollment_no 
+            HAVING (COUNT(CASE WHEN status='Present' THEN 1 END)*100.0/NULLIF(COUNT(*), 0)) >= 75
+        )
+        """)
+    
+    where_clause = " WHERE " + " AND ".join(conditions) if conditions else ""
+    return where_clause, values
+
 def get_dashboard_stats(filters={}):
     conn = get_db_connection()
     if not conn:
-        return None
+        return {'total_students': 0, 'total_subjects': 0, 'avg_marks': 0, 'attendance_percentage': 0, 'low_attendance_count': 0, 'top_performer': 'N/A'}
     
     try:
         cursor = conn.cursor(dictionary=True)
         
-        # 0. Shared Filtering Logic
-        core_where = []
-        core_vals = []
-        if filters.get('department'):
-            core_where.append("s.department = %s")
-            core_vals.append(filters['department'])
-        if filters.get('semester'):
-            core_where.append("s.semester = %s")
-            core_vals.append(filters['semester'])
-        
-        where_clause = " WHERE " + " AND ".join(core_where) if core_where else ""
+        # 🎯 1. GET CENTRALIZED CONDITIONS
+        where_clause, values = build_dashboard_conditions(filters)
 
-        # 1. Total Students
-        cursor.execute(f"SELECT COUNT(*) as count FROM students s {where_clause}", core_vals)
-        total_students = cursor.fetchone()['count']
+        # 🥇 TOTAL STUDENTS
+        cursor.execute(f"SELECT COUNT(*) as count FROM students s {where_clause}", values)
+        total_students = cursor.fetchone()['count'] or 0
         
-        # 2. Total Faculty (Faculty are usually global, but let's filter if requested)
-        cursor.execute("SELECT COUNT(*) as count FROM faculty")
-        total_faculty = cursor.fetchone()['count']
+        # 🥈 TOTAL SUBJECTS (Context-Aware Calculation)
+        department = filters.get('department')
+        if department:
+            cursor.execute("SELECT COUNT(*) as count FROM subjects WHERE department = %s", (department,))
+        else:
+            cursor.execute("SELECT COUNT(*) as count FROM subjects")
+        total_subjects = cursor.fetchone()['count'] or 0
         
-        # 3. Total Subjects
-        sub_where = " WHERE " + " AND ".join(core_where).replace('s.', '') if core_where else ""
-        sub_vals = [v for v in core_vals]
-        cursor.execute(f"SELECT COUNT(*) as count FROM subjects {sub_where}", sub_vals)
-        total_subjects = cursor.fetchone()['count']
-        
-        # 4. Total Marks Records
-        cursor.execute(f"""
-            SELECT COUNT(*) as count 
-            FROM marks m 
-            JOIN students s ON m.enrollment_no = s.enrollment_no 
-            {where_clause}
-        """, core_vals)
-        total_marks = cursor.fetchone()['count']
-        
-        # 5. Pass/Fail Counts
-        cursor.execute("""
-            SELECT 
-                SUM(CASE WHEN marks_obtained >= (total_marks * 0.35) THEN 1 ELSE 0 END) as pass_count,
-                SUM(CASE WHEN marks_obtained < (total_marks * 0.35) THEN 1 ELSE 0 END) as fail_count
-            FROM marks
-        """)
-        res = cursor.fetchone()
-        pass_count = res['pass_count'] or 0
-        fail_count = res['fail_count'] or 0
-        
-        # 6. Top Students
-        cursor.execute("""
-            SELECT s.enrollment_no as roll_no, s.name, AVG(m.marks_obtained) as avg_marks
-            FROM students s
-            JOIN marks m ON s.enrollment_no = m.enrollment_no
-            GROUP BY s.enrollment_no, s.name
-            ORDER BY avg_marks DESC
-            LIMIT 5
-        """)
-        top_students = cursor.fetchall()
-        
-        # 7. Attendance stats
-        cursor.execute("SELECT COUNT(*) as count FROM attendance WHERE status = 'Present'")
-        present = cursor.fetchone()['count'] or 0
-        cursor.execute("SELECT COUNT(*) as count FROM attendance")
-        total_att = cursor.fetchone()['count'] or 0
-        avg_attendance = (present / total_att * 100) if total_att > 0 else 0
-
-        # 8. Chart Data
-        cursor.execute("""
-            SELECT sub.subject_name as subject, AVG(m.marks_obtained) as avg_marks
-            FROM marks m
-            JOIN subjects sub ON m.subject_id = sub.subject_id
-            GROUP BY m.subject_id
-        """)
-        subject_avg_data = cursor.fetchall()
-
-        cursor.execute("SELECT marks_obtained FROM marks")
-        all_marks_raw = cursor.fetchall()
-        all_marks = [row['marks_obtained'] for row in all_marks_raw]
-
-        # 9. NEW CORE METRICS (STEP 1) 🎯
-        cursor.execute(f"""
+        # 🥉 AVERAGE MARKS
+        avg_query = f"""
             SELECT AVG(m.marks_obtained) AS avg_marks 
             FROM marks m
             JOIN students s ON m.enrollment_no = s.enrollment_no
+            JOIN subjects sub ON m.subject_id = sub.subject_id
             {where_clause}
-        """, core_vals)
-        avg_marks = cursor.fetchone()['avg_marks'] or 0
+        """
+        cursor.execute(avg_query, values)
+        avg_marks = round(cursor.fetchone()['avg_marks'] or 0, 2)
         
-        cursor.execute(f"""
+        # 🏆 ATTENDANCE %
+        attn_query = f"""
             SELECT (COUNT(CASE WHEN a.status='Present' THEN 1 END) * 100.0 / NULLIF(COUNT(*), 0)) 
             AS attendance_percentage 
             FROM attendance a
             JOIN students s ON a.enrollment_no = s.enrollment_no
+            LEFT JOIN subjects sub ON a.subject_id = sub.subject_id
             {where_clause}
-        """, core_vals)
-        attendance_percentage = cursor.fetchone()['attendance_percentage'] or 0
+        """
+        cursor.execute(attn_query, values)
+        attendance_percentage = round(cursor.fetchone()['attendance_percentage'] or 0, 2)
 
-        # 📊 --- NEW MATPLOTLIB ANALYTICS (STEP 3 & 4) ---
-        import matplotlib.pyplot as plt
-        import os
-
-        # --- BAR CHART: AVG MARKS (STEP 3) ---
-        bar_query = f"""
-            SELECT sub.subject_name, AVG(m.marks_obtained) as avg_marks
+        # 💡 TOP PERFORMER
+        top_query = f"""
+            SELECT s.name, AVG(m.marks_obtained) as avg_marks
             FROM students s
             JOIN marks m ON s.enrollment_no = m.enrollment_no
             JOIN subjects sub ON m.subject_id = sub.subject_id
             {where_clause}
+            GROUP BY s.enrollment_no, s.name
+            ORDER BY avg_marks DESC
+            LIMIT 1
+        """
+        cursor.execute(top_query, values)
+        top_data = cursor.fetchone()
+        top_performer = top_data['name'] if top_data else "N/A"
+
+        # ⚠️ AT RISK COUNT (Below 75%)
+        # Note: We strip the attendance input to count ALL defaulters within the ACTIVE context (Dept/Sem)
+        risk_filters = filters.copy()
+        risk_filters.pop('attendance', None)
+        risk_where, risk_values = build_dashboard_conditions(risk_filters)
+        
+        # 🎯 Smart Base Logic for Syntax Robustness
+        risk_base = risk_where if risk_where else " WHERE 1=1 "
+        
+        cursor.execute(f"""
+            SELECT COUNT(DISTINCT s.enrollment_no) as count
+            FROM students s
+            LEFT JOIN subjects sub ON 1=1
+            {risk_base}
+            AND s.enrollment_no IN (
+                SELECT enrollment_no FROM attendance 
+                GROUP BY enrollment_no 
+                HAVING (COUNT(CASE WHEN status='Present' THEN 1 END)*100.0/NULLIF(COUNT(*), 0)) < 75
+            )
+        """, risk_values)
+        low_attendance_count = cursor.fetchone()['count'] or 0
+
+        # --- CHART 1: SUBJECT PERFORMANCE (BAR) ---
+        bar_query = f"""
+            SELECT sub.subject_name, AVG(m.marks_obtained) as avg_marks
+            FROM students s
+            JOIN marks m ON s.enrollment_no = s.enrollment_no
+            JOIN subjects sub ON m.subject_id = sub.subject_id
+            {where_clause}
             GROUP BY sub.subject_name
         """
-        cursor.execute(bar_query, core_vals)
+        cursor.execute(bar_query, values)
         bar_data = cursor.fetchall()
         
+        # --- CHART 1: SUBJECT PERFORMANCE (BAR) ---
         if bar_data:
             subjects = [row['subject_name'] for row in bar_data]
             marks = [float(row['avg_marks']) for row in bar_data]
-            plt.figure(figsize=(6,4))
-            plt.bar(subjects, marks, color='purple')
-            plt.title("Average Marks per Subject")
-            plt.xlabel("Subjects")
-            plt.ylabel("Marks")
+            plt.figure(figsize=(8, 5), dpi=100)
+            plt.style.use('seaborn-v0_8-whitegrid')
+            plt.bar(subjects, marks, color='#6c5ce7', width=0.6)
+            plt.title("Subject Performance", fontsize=12, fontweight='bold', pad=20)
+            plt.xlabel("Subjects", fontsize=10, fontweight='600')
+            plt.ylabel("Average Marks", fontsize=10, fontweight='600')
+            plt.ylim(0, 100)
+            plt.xticks(rotation=20, ha='right', fontsize=9)
             plt.tight_layout()
-            plt.savefig("static/bar_chart.png")
+            plt.savefig("static/bar.png", transparent=True)
+            plt.close()
+        else:
+            plt.figure(figsize=(8, 5), dpi=100)
+            plt.text(0.5, 0.5, "Insufficient Data for Analysis", ha='center', va='center', fontsize=12, color='#b2bec3')
+            plt.title("Subject Performance", fontsize=12, fontweight='bold', pad=20)
+            plt.gca().axis('off')
+            plt.savefig("static/bar.png", transparent=True)
             plt.close()
 
-        # --- PIE CHART: ATTENDANCE (STEP 4) ---
-        pie_query = f"""
-            SELECT a.status, COUNT(*) as count
-            FROM attendance a
-            JOIN students s ON a.enrollment_no = s.enrollment_no
-            {where_clause}
-            GROUP BY a.status
-        """
-        cursor.execute(pie_query, core_vals)
-        pie_data = cursor.fetchall()
-        
+        # --- CHART 2: ATTENDANCE DISTRIBUTION (PIE) ---
         if pie_data:
             labels = [row['status'] for row in pie_data]
             counts = [row['count'] for row in pie_data]
-            plt.figure(figsize=(5,5))
-            plt.pie(counts, labels=labels, autopct='%1.1f%%', colors=['#4f46e5', '#f59e0b', '#ef4444'])
-            plt.title("Attendance Distribution")
-            plt.savefig("static/pie_chart.png")
+            plt.figure(figsize=(6, 6), dpi=100)
+            colors = ['#00b894', '#e17055', '#fdcb6e'] 
+            plt.pie(counts, labels=labels, autopct='%1.1f%%', colors=colors[:len(labels)], 
+                    startangle=140, pctdistance=0.85, wedgeprops={'edgecolor': 'white', 'linewidth': 3})
+            centre_circle = plt.Circle((0,0), 0.70, fc='white')
+            plt.gca().add_artist(centre_circle)
+            plt.title("Attendance Distribution", fontsize=12, fontweight='bold', pad=20)
+            plt.tight_layout()
+            plt.savefig("static/pie.png", transparent=True)
+            plt.close()
+        else:
+            plt.figure(figsize=(6, 6), dpi=100)
+            plt.text(0.5, 0.5, "No Attendance Records", ha='center', va='center')
+            plt.title("Attendance Distribution", fontsize=12, fontweight='bold', pad=20)
+            plt.gca().axis('off')
+            plt.savefig("static/pie.png", transparent=True)
+            plt.close()
+
+        # --- CHART 3: PERFORMANCE TREND (LINE) ---
+        if line_data:
+            labels = [row['exam_type'] for row in line_data]
+            marks = [float(row['avg_marks']) for row in line_data]
+            plt.figure(figsize=(8, 5), dpi=100)
+            plt.plot(labels, marks, marker='o', markersize=8, color='#0984e3', linewidth=3)
+            plt.title("Performance Trend", fontsize=12, fontweight='bold', pad=20)
+            plt.grid(True, linestyle='--', alpha=0.7)
+            plt.ylim(0, 100)
+            plt.tight_layout()
+            plt.savefig("static/line.png", transparent=True)
+            plt.close()
+        else:
+            plt.figure(figsize=(8, 5), dpi=100)
+            plt.text(0.5, 0.5, "Insufficient Data Records", ha='center', va='center')
+            plt.title("Performance Trend", fontsize=12, fontweight='bold', pad=20)
+            plt.gca().axis('off')
+            plt.savefig("static/line.png", transparent=True)
+            plt.close()
+
+        # --- CHART 4: TOP STUDENTS (HORIZONTAL BAR) ---
+        if top_plot_data:
+            names = [row['name'] for row in top_plot_data]
+            marks = [float(row['avg_marks']) for row in top_plot_data]
+            plt.figure(figsize=(8, 5), dpi=100)
+            plt.barh(names[::-1], marks[::-1], color='#fdcb6e')
+            plt.title("Top 5 Students Leaderboard", fontsize=12, fontweight='bold', pad=20)
+            plt.xlim(0, 100)
+            plt.tight_layout()
+            plt.savefig("static/top.png", transparent=True)
+            plt.close()
+        else:
+            plt.figure(figsize=(8, 5), dpi=100)
+            plt.text(0.5, 0.5, "No Performers Ranked", ha='center', va='center')
+            plt.title("Top 5 Students Leaderboard", fontsize=12, fontweight='bold', pad=20)
+            plt.gca().axis('off')
+            plt.savefig("static/top.png", transparent=True)
             plt.close()
 
         cursor.close()
         conn.close()
-        
         return {
-            'total_students': total_students,
-            'total_faculty': total_faculty,
-            'total_subjects': total_subjects,
-            'total_marks': total_marks,
-            'avg_marks': round(avg_marks, 2),
-            'attendance_percentage': round(attendance_percentage, 2),
-            'top_students': top_students
+            'total_students': total_students, 'total_subjects': total_subjects,
+            'avg_marks': avg_marks, 'attendance_percentage': attendance_percentage,
+            'low_attendance_count': low_attendance_count, 'top_performer': top_performer
         }
     except Exception as e:
-        print(f"Error getting dashboard stats: {e}")
-        return None
+        print(f"Error in analytics suite: {e}")
+        return {'total_students': 0, 'total_subjects': 0, 'avg_marks': 0, 'attendance_percentage': 0, 'low_attendance_count': 0, 'top_performer': "N/A"}
+
+def get_performance_overview(department=None, semester=None, subject=None, search=None, attendance=None):
+    """Deep analytical student ledger with fully synchronized filtering"""
+    conn = get_db_connection()
+    if not conn: return []
+    try:
+        cursor = conn.cursor(dictionary=True)
+        # Re-use the centralized condition engine
+        where_clause, values = build_dashboard_conditions({
+            'department': department, 'semester': semester,
+            'subject': subject, 'search': search, 'attendance': attendance
+        })
+        
+        query = f"""
+            SELECT 
+                s.name,
+                sub.subject_name,
+                AVG(m.marks_obtained) AS avg_marks,
+                (COUNT(CASE WHEN a.status='Present' THEN 1 END)*100.0/NULLIF(COUNT(a.attendance_id), 0)) AS attendance_percentage
+            FROM students s
+            JOIN marks m ON s.enrollment_no = m.enrollment_no
+            JOIN subjects sub ON m.subject_id = sub.subject_id
+            JOIN attendance a ON s.enrollment_no = a.enrollment_no AND sub.subject_id = a.subject_id
+            {where_clause}
+            GROUP BY s.name, sub.subject_name
+        """
+        cursor.execute(query, values)
+        data = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        return data
+    except Exception as e:
+        print(f"Error in ledger overview: {e}")
+        return []
 
 def generate_subject_avg_chart(subject_avg):
     """Generates an HD Subject-wise Average Marks Bar Chart"""
@@ -263,8 +374,12 @@ def get_working_days(department, semester):
 def process_csv(file_path, department=None, semester=None):
     try:
         df = pd.read_csv(file_path)
+        # Normalize headers: strip, lower, and map roll_no -> enrollment_no 🎯
         cols = [c.strip().lower() for c in df.columns]
-        df.columns = cols # Normalize headers
+        df.columns = cols 
+        if 'roll_no' in cols and 'enrollment_no' not in cols:
+            df.rename(columns={'roll_no': 'enrollment_no'}, inplace=True)
+            cols = list(df.columns)
         
         conn = get_db_connection()
         if not conn:
@@ -280,6 +395,7 @@ def process_csv(file_path, department=None, semester=None):
             
             for idx, row in df.iterrows():
                 try:
+                    # 🔐 Default password: enrollment_no + @123
                     default_pw = str(row['enrollment_no']) + "@123"
                     pw_hash = generate_password_hash(default_pw)
                     
@@ -819,15 +935,19 @@ def export_student_excel(enrollment_no):
     except Exception as e:
         print(f"Error exporting student excel: {e}")
         return None
-def get_performance_overview(department=None, semester=None):
-    """Dynamic query for performance overview with filters"""
+def get_performance_overview(department=None, semester=None, subject=None, search=None, attendance=None):
+    """Deep analytical student ledger with fully synchronized filtering"""
     conn = get_db_connection()
     if not conn: return []
-    
     try:
         cursor = conn.cursor(dictionary=True)
-        # Use attendance_id for COUNT
-        query = """
+        # 🎯 Re-use the centralized condition engine
+        where_clause, values = build_dashboard_conditions({
+            'department': department, 'semester': semester,
+            'subject': subject, 'search': search, 'attendance': attendance
+        })
+        
+        query = f"""
             SELECT 
                 s.name,
                 sub.subject_name,
@@ -836,45 +956,41 @@ def get_performance_overview(department=None, semester=None):
             FROM students s
             JOIN marks m ON s.enrollment_no = m.enrollment_no
             JOIN subjects sub ON m.subject_id = sub.subject_id
-            JOIN attendance a 
-                ON s.enrollment_no = a.enrollment_no 
-                AND sub.subject_id = a.subject_id
+            JOIN attendance a ON s.enrollment_no = a.enrollment_no AND sub.subject_id = a.subject_id
+            {where_clause}
+            GROUP BY s.name, sub.subject_name
         """
-        
-        conditions = []
-        values = []
-        
-        if department and department != 'All':
-            conditions.append("s.department = %s")
-            values.append(department)
-            
-        if semester and semester != 'All':
-            conditions.append("s.semester = %s")
-            values.append(semester)
-            
-        if conditions:
-            query += " WHERE " + " AND ".join(conditions)
-            
-        query += " GROUP BY s.name, sub.subject_name"
-        
         cursor.execute(query, values)
         data = cursor.fetchall()
         cursor.close()
         conn.close()
         return data
     except Exception as e:
-        print(f"Error in performance overview: {e}")
+        print(f"Error in ledger overview: {e}")
         return []
 
-def export_admin_excel(department='All', semester='All'):
-    """Exports filtered performance overview to Excel"""
+        cursor.execute(query, values)
+        data = cursor.fetchall()
+        
+        cursor.close()
+        conn.close()
+        return data
+    except Exception as e:
+        print(f"Error in deep analytical overview: {e}")
+        return []
+
+def export_admin_excel(department='All', semester='All', subject='All', search=None, attendance=None):
+    """Exports globally filtered performance overview to high-fidelity Excel report"""
     try:
         import pandas as pd
-        data = get_performance_overview(department, semester)
+        data = get_performance_overview(department, semester, subject, search, attendance)
         if not data: return None
         
         df = pd.DataFrame(data)
-        file_name = f"performance_report_{department}_{semester}.xlsx"
+        # Professional Column Names
+        df.columns = ['Student Name', 'Subject Name', 'Average Marks', 'Attendance %']
+        
+        file_name = f"admin_analytics_report_{date.today().strftime('%Y%m%d')}.xlsx"
         file_path = os.path.join(UPLOADS_DIR, file_name)
         
         if not os.path.exists(UPLOADS_DIR):
@@ -883,7 +999,7 @@ def export_admin_excel(department='All', semester='All'):
         df.to_excel(file_path, index=False)
         return file_path
     except Exception as e:
-        print(f"Error exporting admin excel: {e}")
+        print(f"Error exporting analytical report: {e}")
         return None
 
 def export_student_report_excel(roll_no):

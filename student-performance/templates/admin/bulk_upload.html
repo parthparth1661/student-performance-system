@@ -1,66 +1,49 @@
 {% extends 'admin/layout.html' %}
 
 {% block content %}
-<div class="mb-4">
-    <h2 class="fw-bold mb-0">Bulk Data Import</h2>
-    <p class="text-muted">Upload CSV files to automatically populate students, marks, or attendance data.</p>
-</div>
-
-<div class="row justify-content-center">
+<div class="row mb-4 align-items-center">
     <div class="col-md-8">
-        <div class="card border-0 shadow-sm rounded-4 p-4">
-            <h5 class="fw-bold mb-4">Upload CSV File</h5>
-            
-            <form action="{{ url_for('admin.bulk_upload') }}" method="POST" enctype="multipart/form-data">
-                <div class="upload-area mb-4 p-5 text-center border-dashed rounded-4">
-                    <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
-                    <h6>Drop your file here or click to browse</h6>
-                    <p class="text-muted small">Only CSV files are supported</p>
-                    <input type="file" name="file" class="form-control" required accept=".csv">
-                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-white border rounded-3 h-100 shadow-sm">
+                                    <div class="fw-bold text-success mb-2 small">PERFORMANCE MARKS</div>
+                                    <code class="text-muted" style="font-size: 0.7rem;">enrollment_no, subject_id,<br>exam_type, marks_obtained</code>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-white border rounded-3 h-100 shadow-sm">
+                                    <div class="fw-bold text-warning mb-2 small">ATTENDANCE LOGS</div>
+                                    <code class="text-muted" style="font-size: 0.7rem;">enrollment_no, subject_id,<br>date, status</code>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="mb-4">
-                    <h6 class="fw-bold">CSV Format Requirements:</h6>
-                    <div class="row g-3 mt-1">
-                        <div class="col-md-4">
-                            <div class="p-3 bg-light rounded-3 small">
-                                <strong>Students:</strong><br>
-                                roll_no, name, email,<br>department, semester
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="p-3 bg-light rounded-3 small">
-                                <strong>Marks:</strong><br>
-                                enrollment_no, subject_id,<br>exam_type, marks_obtained
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="p-3 bg-light rounded-3 small">
-                                <strong>Attendance:</strong><br>
-                                enrollment_no, subject_id,<br>date, status
-                            </div>
-                        </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary py-3 rounded-3 fw-bold shadow-lg">
+                            <i class="fas fa-rocket me-2"></i>Execute Batch Import Process
+                        </button>
                     </div>
-                </div>
-
-                <div class="d-grid mt-4">
-                    <button type="submit" class="btn btn-primary py-3 rounded-pill fw-bold">
-                        <i class="fas fa-check-circle me-2"></i>Process & Import Data
-                    </button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
 <style>
     .border-dashed {
-        border: 2px dashed #e2e8f0;
-        transition: all 0.2s ease;
+        border: 2px dashed #dfe6e9;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .border-dashed:hover {
-        border-color: #4F46E5;
-        background: #f8fafc;
+        border-color: var(--primary-color);
+        background: #f1f0ff !important;
+        transform: translateY(-2px);
+    }
+    .upload-area {
+        cursor: pointer;
+    }
+    .letter-spacing-1 {
+        letter-spacing: 1px;
     }
 </style>
 {% endblock %}

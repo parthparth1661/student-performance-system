@@ -7,52 +7,6 @@
         <div class="col-md-8 col-lg-6">
             <div class="card shadow rounded-4 border-0 h-100">
                 <div class="card-header bg-white border-0 pt-4 pb-0 text-center">
-                    <div class="position-relative d-inline-block mb-3">
-                        <img src="https://ui-avatars.com/api/?name={{ admin.username }}&background=4F46E5&color=fff&size=150"
-                            alt="Profile" class="rounded-circle img-thumbnail shadow-sm"
-                            style="width: 120px; height: 120px;">
-                    </div>
-                    <h4 class="fw-bold text-dark mb-1">{{ admin.full_name or admin.username }}</h4>
-                    <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2">
-                        <i class="fas fa-user-shield me-1"></i> {{ admin.username }}
-                    </span>
-                </div>
-
-                <div class="card-body p-4">
-                    <form action="{{ url_for('admin.update_profile') }}" method="POST">
-                        <div class="mb-3">
-                            <label class="form-label text-muted fw-medium small text-uppercase">Username
-                                (Read-only)</label>
-                            <input type="text" class="form-control bg-light" value="{{ admin.username }}" readonly>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label text-muted fw-medium small text-uppercase">Full Name</label>
-                            <input type="text" class="form-control" name="full_name" value="{{ admin.full_name or '' }}"
-                                placeholder="Enter full name">
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label text-muted fw-medium small text-uppercase">Email Address</label>
-                            <input type="email" class="form-control" name="email" value="{{ admin.email or '' }}"
-                                placeholder="Enter email address">
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="form-label text-muted fw-medium small text-uppercase">Member Since</label>
-                            <input type="text" class="form-control bg-light" value="{{ admin.created_at or 'N/A' }}"
-                                readonly>
-                        </div>
-
-                        <div
-                            class="d-grid gap-2 d-flex justify-content-between align-items-center mt-5 pt-3 border-top">
-                            <a href="{{ url_for('admin.change_password') }}"
-                                class="text-decoration-none text-danger fw-medium">
-                                <i class="fas fa-key me-1"></i> Change Password
-                            </a>
-                            <button type="submit" class="btn btn-primary px-4 rounded-3 shadow-sm">
-                                <i class="fas fa-save me-2"></i>Save Changes
-                            </button>
                         </div>
                     </form>
                 </div>

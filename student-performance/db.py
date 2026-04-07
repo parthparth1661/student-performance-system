@@ -3,24 +3,28 @@ from mysql.connector import Error
 
 def get_db_connection():
     try:
-        # 🎯 STRICT CONFIGURATION: SPDA Only
+        # 1️⃣ Check Database Connection 🎯
         connection = mysql.connector.connect(
-            host='localhost',
-            user='root',
-            password='',
-            database='SPDA'
+            host="localhost",
+            user="root",
+            password="",
+            database="SPDA"
         )
         
-        # 🔥 SAFETY CHECK: Validation
+        # 2️⃣ Verify Active Database 🕵️‍♂️
         cursor = connection.cursor()
         cursor.execute("SELECT DATABASE()")
-        db_name = cursor.fetchone()[0]
-        cursor.close()
+        db_info = cursor.fetchone()
+        print(f"Active Database: {db_info}")
         
-        if db_name.upper() != "SPDA":
+        # 4️⃣ Add Safety Check (IMPORTANT 🔥)
+        db = db_info[0]
+        if db.upper() != "SPDA":
+            cursor.close()
             connection.close()
-            raise Exception(f"CRITICAL ERROR: Connected to unauthorized database '{db_name}'! Connection terminated.")
+            raise Exception("Wrong database connected!")
             
+        cursor.close()
         return connection
     except Error as e:
         print(f"Error connecting to SPDA MySQL: {e}")
@@ -116,6 +120,23 @@ def init_db():
             """)
             
             connection.commit()
+            
+            # 🚀 START: SUPER ADMIN SENTINEL (FIRST RUN EXPERIENCE)
+            cursor.execute("SELECT COUNT(*) as count FROM admin")
+            if cursor.fetchone()[0] == 0:
+                from werkzeug.security import generate_password_hash
+                default_email = 'admin@spda.com'
+                default_pass = 'Admin@123'
+                hashed_pass = generate_password_hash(default_pass)
+                
+                cursor.execute("""
+                    INSERT INTO admin (email, password) 
+                    VALUES (%s, %s)
+                """, (default_email, hashed_pass))
+                connection.commit()
+                print(f"✨ Super Admin initialized: {default_email} / {default_pass}")
+            # 🚀 END: SUPER ADMIN SENTINEL
+            
             cursor.close()
             connection.close()
             print("SPDA Database and standardized tables initialized.")

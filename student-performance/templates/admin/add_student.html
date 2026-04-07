@@ -1,54 +1,56 @@
 {% extends 'admin/layout.html' %}
 
 {% block content %}
-<div class="mb-4">
-    <h2 class="fw-bold mb-0 text-dark">Add New Student</h2>
-    <p class="text-muted">Register a new student into the SPDA system</p>
-</div>
+<div class="row justify-content-center py-4">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4 p-5">
+            <div class="text-center mb-5">
+                <div class="bg-primary-soft text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+                    <i class="fas fa-user-plus fa-2x"></i>
+                </div>
+                <h2 class="fw-bold text-dark mb-1">Register New Student</h2>
+                <p class="text-muted small">Initialize a new academic profile in the SPDA Registry.</p>
+            </div>
 
-<div class="row justify-content-center">
-    <div class="col-lg-6">
-        <div class="card border-0 shadow-sm rounded-4 p-4">
-            <form action="{{ url_for('admin.add_student') }}" method="POST">
-                <div class="mb-3">
-                    <label class="form-label fw-bold text-secondary">Enrollment No</label>
-                    <input type="text" name="enrollment_no" class="form-control rounded-pill border-light bg-light" placeholder="e.g. 21BCA001" required>
+            <form method="POST" class="row g-4">
+                <div class="col-md-6">
+                    <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Student Name</label>
+                    <input type="text" name="name" class="form-control bg-light border-0 py-2 px-3 rounded-3" placeholder="Enter Full Name" required>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label fw-bold text-secondary">Full Name</label>
-                    <input type="text" name="name" class="form-control rounded-pill border-light bg-light" placeholder="e.g. John Doe" required>
+                <div class="col-md-6">
+                    <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Enrollment No</label>
+                    <input type="text" name="enrollment_no" class="form-control bg-light border-0 py-2 px-3 rounded-3" placeholder="SPDA-202X-XXXX" required>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label fw-bold text-secondary">Email</label>
-                    <input type="email" name="email" class="form-control rounded-pill border-light bg-light" placeholder="e.g. john@example.com" required>
+                <div class="col-md-12">
+                    <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Email Address</label>
+                    <input type="email" name="email" class="form-control bg-light border-0 py-2 px-3 rounded-3" placeholder="student@university.edu" required>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold text-secondary">Department</label>
-                        <select name="department" class="form-select rounded-pill border-light bg-light" required>
-                            <option value="">Select Dept</option>
-                            <option value="BCA">BCA</option>
-                            <option value="MCA">MCA</option>
-                            <option value="B.TECH">B.TECH</option>
-                            <option value="M.TECH">M.TECH</option>
-                            <option value="MBA">MBA</option>
-                        </select>
+                <div class="col-md-6">
+                    <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Department</label>
+                    <select name="department" class="form-select bg-light border-0 py-2 px-3 rounded-3" required>
+                        <option value="BCA">BCA</option>
+                        <option value="MCA">MCA</option>
+                        <option value="B.TECH">B.TECH</option>
+                        <option value="MBA">MBA</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Semester</label>
+                    <select name="semester" class="form-select bg-light border-0 py-2 px-3 rounded-3" required>
+                        {% for i in range(1, 9) %}
+                        <option value="{{ i }}">Semester {{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-12">
+                    <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Secure Password</label>
+                    <input type="password" name="password" class="form-control bg-light border-0 py-2 px-3 rounded-3" placeholder="••••••••" required>
+                </div>
+                <div class="col-12 mt-5">
+                    <div class="d-flex gap-3">
+                        <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill shadow-sm fw-bold">Register Profile</button>
+                        <a href="{{ url_for('admin.view_students') }}" class="btn btn-light px-5 py-2 rounded-pill border fw-bold text-muted">Cancel</a>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold text-secondary">Semester</label>
-                        <select name="semester" class="form-select rounded-pill border-light bg-light" required>
-                            <option value="">Select Sem</option>
-                            {% for i in range(1, 9) %}
-                            <option value="{{ i }}">Semester {{ i }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-                <div class="mt-4 text-center">
-                    <button type="submit" class="btn btn-primary px-5 rounded-pill shadow-lg py-3">
-                        <i class="fas fa-plus me-2"></i>Add Student
-                    </button>
-                    <a href="{{ url_for('admin.view_students') }}" class="btn btn-light px-4 rounded-pill py-3 ms-2">Cancel</a>
                 </div>
             </form>
         </div>

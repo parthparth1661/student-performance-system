@@ -3,38 +3,49 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h2 class="fw-bold mb-0 text-dark">Subject Catalog</h2>
-        <p class="text-muted">Academic curriculum Management for SPDA</p>
+        <h2 class="fw-bold mb-0 text-dark">Subject Catalogue</h2>
+        <p class="text-muted small">Manage academic subjects and departmental distribution.</p>
     </div>
-    <a href="{{ url_for('admin.add_subject') }}" class="btn btn-primary px-4 rounded-pill">
+    <a href="{{ url_for('admin.add_subject') }}" class="btn btn-primary px-4 shadow-sm">
         <i class="fas fa-plus me-2"></i>Add Subject
     </a>
 </div>
 
-<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-5 p-0">
+    <div class="px-4 py-3 border-bottom d-flex justify-content-between align-items-center bg-white">
+        <h6 class="fw-bold m-0 text-dark">Subject Registry</h6>
+        <div class="bg-light rounded-pill px-3 py-1 small text-muted font-medium">
+            Total Subjects: {{ subjects|length }}
+        </div>
+    </div>
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
             <thead class="bg-light">
-                <tr>
-                    <th class="ps-4">ID</th>
-                    <th>Subject Name</th>
-                    <th>Department</th>
-                    <th>Semester</th>
-                    <th>Faculty In-Charge</th>
-                    <th class="text-center">Actions</th>
+                <tr class="text-muted small text-uppercase fw-bold">
+                    <th class="ps-4 py-3">Subject Name</th>
+                    <th class="py-3">Subject ID</th>
+                    <th class="py-3">Department</th>
+                    <th class="py-3 text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                {% for sub in subjects %}
+                {% for subject in subjects %}
                 <tr>
-                    <td class="ps-4 text-muted small">SUB-{{ sub.subject_id }}</td>
-                    <td><div class="fw-bold text-dark">{{ sub.subject_name }}</div></td>
-                    <td>{{ sub.department }}</td>
-                    <td><span class="badge bg-primary-soft text-primary rounded-pill px-3">Sem {{ sub.semester }}</span></td>
-                    <td class="fw-medium">{{ sub.faculty_name or 'Not Assigned' }}</td>
+                    <td class="ps-4">
+                        <div class="fw-bold text-dark">{{ subject.subject_name }}</div>
+                    </td>
+                    <td class="text-secondary small fw-medium">{{ subject.subject_id }}</td>
+                    <td>
+                        <span class="badge bg-light border text-dark rounded-pill px-3 py-2 fw-bold" style="font-size: 0.75rem;">
+                            SEM {{ sub.semester }}
+                        </span>
+                    </td>
+                    <td class="fw-medium text-dark italic">
+                        <i class="fas fa-user-tie me-2 text-muted"></i>{{ sub.faculty_name or 'Pending Assignment' }}
+                    </td>
                     <td class="text-center">
                         <a href="{{ url_for('admin.delete_subject', subject_id=sub.subject_id) }}" 
-                           class="btn btn-sm btn-outline-danger rounded-circle"
+                           class="btn btn-sm btn-light border p-2 rounded-3 shadow-sm text-danger"
                            onclick="return confirm('Delete {{ sub.subject_name }}?')">
                             <i class="fas fa-trash-alt"></i>
                         </a>
@@ -42,7 +53,10 @@
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="6" class="text-center py-5 text-muted">No subjects found in the catalog.</td>
+                    <td colspan="5" class="text-center py-5 text-muted">
+                        <i class="fas fa-book-open fa-3x mb-3 d-block opacity-25"></i>
+                        No subjects found in the academic catalog.
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -3,44 +3,51 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h2 class="fw-bold mb-0">Daily Attendance Log</h2>
-        <p class="text-muted">Direct view and analysis of student attendance records</p>
+        <h2 class="fw-bold mb-0 text-dark">Attendance Audit</h2>
+        <p class="text-muted small">Monitor student engagement and attendance logs Across the institution.</p>
     </div>
-    <a href="{{ url_for('admin.add_attendance') }}" class="btn btn-primary px-4 rounded-pill">
-        <i class="fas fa-plus me-2"></i>Record Attendance
+    <a href="{{ url_for('admin.mark_attendance') }}" class="btn btn-primary px-4 shadow-sm">
+        <i class="fas fa-calendar-plus me-2"></i>Log Attendance
     </a>
 </div>
 
-<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-5 p-0">
+    <div class="px-4 py-3 border-bottom d-flex justify-content-between align-items-center bg-white">
+        <h6 class="fw-bold m-0 text-dark">Attendance Registry</h6>
+        <div class="bg-light rounded-pill px-3 py-1 small text-muted font-medium">
+            Active Logs: {{ attendance|length }}
+        </div>
+    </div>
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
             <thead class="bg-light">
-                <tr>
-                    <th class="ps-4">Student Name</th>
-                    <th>Enrollment No</th>
-                    <th>Subject</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th class="text-center">Actions</th>
+                <tr class="text-muted small text-uppercase fw-bold">
+                    <th class="ps-4 py-3">Student / Identity</th>
+                    <th class="py-3">Subject</th>
+                    <th class="py-3">Timestamp</th>
+                    <th class="py-3 text-center">Status</th>
+                    <th class="py-3 text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                {% for record in records %}
+                {% for a in attendance %}
                 <tr>
-                    <td class="ps-4 fw-bold text-dark">{{ record.student_name }}</td>
-                    <td class="text-primary">{{ record.enrollment_no }}</td>
-                    <td class="fw-medium">{{ record.subject_name }}</td>
-                    <td class="text-secondary small">{{ record.date.strftime('%d-%b-%Y') if record.date else 'N/A' }}</td>
-                    <td>
-                        {% if record.status == 'Present' %}
-                        <span class="badge bg-success-soft text-success rounded-pill px-3">Present</span>
+                    <td class="ps-4 py-3">
+                        <div class="fw-bold text-dark">{{ a.student_name }}</div>
+                        <div class="text-muted small">{{ a.enrollment_no }}</div>
+                    </td>
+                    <td class="text-secondary small fw-medium">{{ a.subject_name }}</td>
+                    <td class="text-muted small">{{ a.date }}</td>
+                    <td class="text-center">
+                        {% if a.status == 'Present' %}
+                        <span class="badge bg-success-soft rounded-pill-sm px-3 fw-bold">PRESENT</span>
                         {% else %}
-                        <span class="badge bg-danger-soft text-danger rounded-pill px-3">Absent</span>
+                        <span class="badge bg-danger-soft rounded-pill-sm px-3 fw-bold">ABSENT</span>
                         {% endif %}
                     </td>
                     <td class="text-center">
                         <a href="{{ url_for('admin.delete_attendance', attendance_id=record.attendance_id) }}" 
-                           class="btn btn-sm btn-outline-danger rounded-circle"
+                           class="btn btn-sm btn-light border p-2 rounded-3 shadow-sm text-danger"
                            onclick="return confirm('Delete this record?')">
                             <i class="fas fa-trash-alt"></i>
                         </a>
@@ -48,7 +55,10 @@
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="6" class="text-center py-5 text-muted">No attendance logs available.</td>
+                    <td colspan="5" class="text-center py-5 text-muted">
+                        <i class="fas fa-calendar-check fa-3x mb-3 d-block opacity-25"></i>
+                        No attendance logs recorded in the system.
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

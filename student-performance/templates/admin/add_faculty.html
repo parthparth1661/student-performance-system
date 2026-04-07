@@ -1,26 +1,29 @@
 {% extends 'admin/layout.html' %}
 
 {% block content %}
-<div class="mb-4">
-    <h2 class="fw-bold mb-0 text-dark">Enroll Faculty</h2>
-    <p class="text-muted">Register a new teaching faculty member</p>
-</div>
+<div class="row justify-content-center py-4">
+    <div class="col-lg-7">
+        <div class="card border-0 shadow-sm rounded-4 p-5">
+            <div class="text-center mb-5">
+                <div class="bg-success-soft text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+                    <i class="fas fa-user-tie fa-2x"></i>
+                </div>
+                <h2 class="fw-bold text-dark mb-1">Add Faculty Member</h2>
+                <p class="text-muted small">Initialize a new faculty profile in the academic staff registry.</p>
+            </div>
 
-<div class="row justify-content-center">
-    <div class="col-lg-6">
-        <div class="card border-0 shadow-sm rounded-4 p-4">
-            <form action="{{ url_for('admin.add_faculty') }}" method="POST">
-                <div class="mb-3">
-                    <label class="form-label fw-bold text-secondary">Faculty Full Name</label>
-                    <input type="text" name="faculty_name" class="form-control rounded-pill border-light bg-light" placeholder="e.g. Dr. Jane Smith" required>
+            <form action="{{ url_for('admin.add_faculty') }}" method="POST" class="row g-4">
+                <div class="col-12">
+                    <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Full Name</label>
+                    <input type="text" name="faculty_name" class="form-control bg-light border-0 py-2 px-3 rounded-3" placeholder="e.g. Dr. Sarah Johnson" required>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label fw-bold text-secondary">Email Address</label>
-                    <input type="email" name="email" class="form-control rounded-pill border-light bg-light" placeholder="e.g. janesmith@university.com" required>
+                <div class="col-md-12">
+                    <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Email Address</label>
+                    <input type="email" name="email" class="form-control bg-light border-0 py-2 px-3 rounded-3" placeholder="sarah.j@university.edu" required>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label fw-bold text-secondary">Department</label>
-                    <select name="department" class="form-select rounded-pill border-light bg-light" required>
+                <div class="col-md-12">
+                    <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Department</label>
+                    <select name="department" class="form-select bg-light border-0 py-2 px-3 rounded-3" required>
                         <option value="">Select Dept</option>
                         <option value="BCA">BCA</option>
                         <option value="MCA">MCA</option>
@@ -29,11 +32,11 @@
                         <option value="MBA">MBA</option>
                     </select>
                 </div>
-                <div class="mt-4 text-center">
-                    <button type="submit" class="btn btn-primary px-5 rounded-pill shadow-lg py-3">
-                        <i class="fas fa-save me-2"></i>Enroll Faculty
-                    </button>
-                    <a href="{{ url_for('admin.view_faculty') }}" class="btn btn-light px-4 rounded-pill py-3 ms-2">Back to Directory</a>
+                <div class="col-12 mt-5">
+                    <div class="d-flex gap-3">
+                        <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill shadow-sm fw-bold">Register Faculty</button>
+                        <a href="{{ url_for('admin.view_faculty') }}" class="btn btn-light px-5 py-2 rounded-pill border fw-bold text-muted">Cancel</a>
+                    </div>
                 </div>
             </form>
         </div>
