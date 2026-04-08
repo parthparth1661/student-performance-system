@@ -209,6 +209,43 @@
         border-bottom: 1px solid #f1f5f9;
         font-size: 14px;
     }
+
+    /* 📊 PAGINATION UI */
+    .pagination-box {
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        border-top: 1px solid #e2e8f0;
+    }
+
+    .page-link {
+        padding: 8px 16px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        color: #64748b;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+
+    .page-link:hover {
+        background: #f8fafc;
+        color: #6366f1;
+    }
+
+    .page-link.active {
+        background: #6366f1;
+        color: white;
+        border-color: #6366f1;
+    }
+
+    .page-link.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
 </style>
 
 <div class="dashboard-view">
@@ -411,24 +448,28 @@
             <table class="table table-hover align-middle mb-0">
                 <thead>
                     <tr>
-                        <th class="ps-4">Registry ID / Identity</th>
-                        <th>Academic Module</th>
-                        <th class="text-center">Score Index</th>
-                        <th class="text-center">Presence Vector</th>
-                        <th class="text-center">Security Status</th>
+                        <th class="ps-4">Enrollment No</th>
+                        <th>Student Name</th>
+                        <th>Department</th>
+                        <th>Semester</th>
+                        <th>Subject</th>
+                        <th class="text-center">Marks</th>
+                        <th class="text-center">Attendance %</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for row in performance_overview %}
                     <tr>
-                        <td class="ps-4">
-                            <div class="fw-bold text-dark">{{ row.name }}</div>
-                            <div class="text-muted small">{{ row.enrollment_no }}</div>
+                        <td class="ps-4 fw-bold text-dark">{{ row.enrollment_no }}</td>
+                        <td>
+                            <div class="fw-semibold text-dark">{{ row.name }}</div>
                         </td>
+                        <td class="text-muted small fw-bold">{{ row.department }}</td>
+                        <td class="text-muted small fw-bold">Sem {{ row.semester }}</td>
                         <td class="small fw-semibold text-secondary">{{ row.subject_name }}</td>
                         <td class="text-center">
-                            <span class="fw-bold fs-6 {{ 'text-primary' if row.avg_marks >= 35 else 'text-danger' }}">
-                                {{ row.avg_marks|round(1) }}
+                            <span class="badge {{ 'bg-success-soft text-success' if row.marks_obtained >= 35 else 'bg-danger-soft text-danger' }} rounded-pill px-3">
+                                {{ row.marks_obtained|round(1) }}
                             </span>
                         </td>
                         <td class="text-center">
@@ -441,22 +482,42 @@
                                 <span class="small fw-bold text-muted">{{ row.attendance_percentage|round(1) }}%</span>
                             </div>
                         </td>
-                        <td class="text-center">
-                            {% if row.attendance_percentage >= 75 and row.avg_marks >= 35 %}
-                            <span class="badge bg-success-soft text-success rounded-pill px-3 fw-bold">VERIFIED</span>
-                            {% else %}
-                            <span class="badge bg-danger-soft text-danger rounded-pill px-3 fw-bold">REVIEW</span>
-                            {% endif %}
-                        </td>
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="5" class="text-center py-5 text-muted small">No administrative records match the selected discovery criteria.</td>
+                        <td colspan="7" class="text-center py-5 text-muted small">No administrative records match the selected discovery criteria.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
+
+        <!-- 📊 PAGINATION CONTROLS -->
+        {% if total_pages > 1 %}
+        <div class="pagination-box">
+            {% if page > 1 %}
+            <a href="{{ url_for('admin.dashboard', page=page-1, **filters) }}" class="page-link">Prev</a>
+            {% else %}
+            <a href="#" class="page-link disabled">Prev</a>
+            {% endif %}
+
+            {% for p in range(1, total_pages + 1) %}
+                {% if p == 1 or p == total_pages or (p >= page - 2 and p <= page + 2) %}
+                <a href="{{ url_for('admin.dashboard', page=p, **filters) }}" class="page-link {{ 'active' if p == page }}">
+                    {{ p }}
+                </a>
+                {% elif p == page - 3 or p == page + 3 %}
+                <span class="text-muted px-2">...</span>
+                {% endif %}
+            {% endfor %}
+
+            {% if page < total_pages %}
+            <a href="{{ url_for('admin.dashboard', page=page+1, **filters) }}" class="page-link">Next</a>
+            {% else %}
+            <a href="#" class="page-link disabled">Next</a>
+            {% endif %}
+        </div>
+        {% endif %}
     </div>
 </div>
 

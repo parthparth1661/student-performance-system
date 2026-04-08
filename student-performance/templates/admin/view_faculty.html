@@ -34,9 +34,9 @@
                     <td class="ps-4 py-3">
                         <div class="d-flex align-items-center">
                             <div class="bg-success-soft text-success rounded-circle d-flex align-items-center justify-content-center fw-bold me-3" style="width: 40px; height: 40px; font-size: 14px;">
-                                {{ f.name[:2]|upper }}
+                                {{ f.faculty_name[:2]|upper }}
                             </div>
-                            <div class="fw-bold text-dark">{{ f.name }}</div>
+                            <div class="fw-bold text-dark">{{ f.faculty_name }}</div>
                         </div>
                     </td>
                     <td class="text-secondary small fw-medium">{{ f.email }}</td>
@@ -45,7 +45,7 @@
                     </td>
                     <td class="text-center">
                         <div class="d-flex justify-content-center gap-2">
-                             <a href="{{ url_for('admin.delete_faculty', email=f.email) }}" class="btn btn-sm btn-light border rounded-pill-sm px-3 fw-bold text-danger" onclick="return confirm('Remove faculty record?')">
+                             <a href="{{ url_for('admin.delete_faculty', faculty_id=f.faculty_id) }}" class="btn btn-sm btn-light border rounded-pill-sm px-3 fw-bold text-danger" onclick="return confirm('Remove faculty record?')">
                                 <i class="fas fa-trash me-1"></i> Remove
                             </a>
                         </div>

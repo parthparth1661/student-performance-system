@@ -5,6 +5,7 @@ from db import get_db_connection
 from analysis import get_dashboard_stats, generate_dashboard_charts, get_performance_overview
 from datetime import date
 import os
+import math
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -63,18 +64,22 @@ def dashboard():
         'subject': request.args.get('subject')
     }
 
+    page = request.args.get('page', 1, type=int)
+    limit = 10
+    offset = (page - 1) * limit
+
     # 📊 🧬 STEP 2: GENERATE ANALYTICS & CHARTS
     stats = get_dashboard_stats(filters)
     chart_paths = generate_dashboard_charts(filters)
     
-    # 📋 🧬 STEP 3: GET PERFORMANCE LEDGER
-    performance_overview = get_performance_overview(
-        department=filters['department'],
-        semester=filters['semester'],
-        subject=filters['subject'],
-        search=filters['search'],
-        attendance=filters['attendance']
+    # 📋 🧬 STEP 3: GET PERFORMANCE LEDGER (PAGINATED)
+    performance_overview, total_records = get_performance_overview(
+        filters=filters,
+        limit=limit,
+        offset=offset
     )
+    
+    total_pages = math.ceil(total_records / limit)
 
     # Fetch all subjects for the filter dropdown
     conn = get_db_connection()
@@ -90,6 +95,8 @@ def dashboard():
                          charts=chart_paths,
                          performance_overview=performance_overview,
                          subjects=all_subjects,
+                         page=page,
+                         total_pages=total_pages,
                          today_date=date.today().strftime('%d %b %Y'))
 
 # --- 🧑🎓 1. STUDENTS MODULE ---
@@ -127,6 +134,53 @@ def add_student():
         finally:
             conn.close()
     return render_template('admin/add_student.html')
+
+@admin_bp.route('/students/edit/<enrollment_no>', methods=['GET', 'POST'])
+def edit_student(enrollment_no):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        department = request.form['department']
+        semester = request.form['semester']
+        
+        try:
+            cursor.execute("""
+                UPDATE students 
+                SET name=%s, email=%s, department=%s, semester=%s 
+                WHERE enrollment_no=%s
+            """, (name, email, department, semester, enrollment_no))
+            conn.commit()
+            flash("Student details updated!", "success")
+            return redirect(url_for('admin.view_students'))
+        except Exception as e:
+            flash(f"Error: {e}", "danger")
+    
+    cursor.execute("SELECT * FROM students WHERE enrollment_no = %s", (enrollment_no,))
+    student = cursor.fetchone()
+    conn.close()
+    
+    if not student:
+        flash("Student not found.", "danger")
+        return redirect(url_for('admin.view_students'))
+        
+    return render_template('admin/add_student.html', student=student, edit_mode=True)
+
+@admin_bp.route('/students/delete/<enrollment_no>')
+def delete_student(enrollment_no):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("DELETE FROM students WHERE enrollment_no = %s", (enrollment_no,))
+        conn.commit()
+        flash("Student deleted successfully.", "success")
+    except Exception as e:
+        flash(f"Error: {e}", "danger")
+    finally:
+        conn.close()
+    return redirect(url_for('admin.view_students'))
 
 # --- 📚 2. SUBJECTS MODULE ---
 @admin_bp.route('/subjects')
@@ -169,15 +223,73 @@ def add_subject():
     conn.close()
     return render_template('admin/add_subject.html', faculties=faculties)
 
+@admin_bp.route('/subjects/edit/<int:subject_id>', methods=['GET', 'POST'])
+def edit_subject(subject_id):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM faculty")
+    faculties = cursor.fetchall()
+    
+    if request.method == 'POST':
+        subject_name = request.form['subject_name']
+        department = request.form['department']
+        semester = request.form['semester']
+        faculty_id = request.form.get('faculty_id')
+        
+        try:
+            cursor.execute("""
+                UPDATE subjects 
+                SET subject_name=%s, department=%s, semester=%s, faculty_id=%s
+                WHERE subject_id=%s
+            """, (subject_name, department, semester, faculty_id, subject_id))
+            conn.commit()
+            flash("Subject updated!", "success")
+            return redirect(url_for('admin.view_subjects'))
+        except Exception as e:
+            flash(f"Error: {e}", "danger")
+            
+    cursor.execute("SELECT * FROM subjects WHERE subject_id = %s", (subject_id,))
+    subject = cursor.fetchone()
+    conn.close()
+    return render_template('admin/add_subject.html', subject=subject, faculties=faculties, edit_mode=True)
+
+@admin_bp.route('/subjects/delete/<int:subject_id>')
+def delete_subject(subject_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("DELETE FROM subjects WHERE subject_id = %s", (subject_id,))
+        conn.commit()
+        flash("Subject deleted!", "success")
+    except Exception as e:
+        flash(f"Error: {e}", "danger")
+    finally:
+        conn.close()
+    return redirect(url_for('admin.view_subjects'))
+
 # --- 👨🏫 3. FACULTY MODULE ---
 @admin_bp.route('/faculty')
 def view_faculty():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT * FROM faculty")
-    faculties = cursor.fetchall()
+    faculty_list = cursor.fetchall()
     conn.close()
-    return render_template('admin/view_faculty.html', faculties=faculties)
+    return render_template('admin/view_faculty.html', faculty=faculty_list)
+
+@admin_bp.route('/faculty/delete/<faculty_id>')
+def delete_faculty(faculty_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("DELETE FROM faculty WHERE faculty_id = %s", (faculty_id,))
+        conn.commit()
+        flash("Faculty record removed.", "success")
+    except Exception as e:
+        flash(f"Error: {e}", "danger")
+    finally:
+        conn.close()
+    return redirect(url_for('admin.view_faculty'))
 
 @admin_bp.route('/faculty/add', methods=['GET', 'POST'])
 def add_faculty():
@@ -247,7 +359,19 @@ def add_marks():
     conn.close()
     return render_template('admin/add_marks.html', students=students, subjects=subjects)
 
-# --- 📅 5. ATTENDANCE MODULE ---
+@admin_bp.route('/marks/delete/<int:marks_id>')
+def delete_marks(marks_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("DELETE FROM marks WHERE marks_id = %s", (marks_id,))
+        conn.commit()
+        flash("Marks record deleted.", "success")
+    except Exception as e:
+        flash(f"Error: {e}", "danger")
+    finally:
+        conn.close()
+    return redirect(url_for('admin.view_marks'))
 @admin_bp.route('/attendance')
 def view_attendance():
     conn = get_db_connection()
@@ -288,68 +412,10 @@ def add_attendance():
         except Exception as e:
             flash(f"Error: {e}", "danger")
     
-    conn.close()
     return render_template('admin/add_attendance.html', 
                           students=students, 
                           subjects=subjects, 
                           today_date=date.today().strftime('%Y-%m-%d'))
-# --- DELETE & BULK ROUTES ---
-
-@admin_bp.route('/students/delete/<enrollment_no>')
-def delete_student(enrollment_no):
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    try:
-        cursor.execute("DELETE FROM students WHERE enrollment_no = %s", (enrollment_no,))
-        conn.commit()
-        flash("Student removed successfully.", "success")
-    except Exception as e:
-        flash(f"Error: {e}", "danger")
-    finally:
-        conn.close()
-    return redirect(url_for('admin.view_students'))
-
-@admin_bp.route('/faculty/delete/<int:faculty_id>')
-def delete_faculty(faculty_id):
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    try:
-        cursor.execute("DELETE FROM faculty WHERE faculty_id = %s", (faculty_id,))
-        conn.commit()
-        flash("Faculty member removed.", "success")
-    except Exception as e:
-        flash(f"Error: {e}", "danger")
-    finally:
-        conn.close()
-    return redirect(url_for('admin.view_faculty'))
-
-@admin_bp.route('/subjects/delete/<int:subject_id>')
-def delete_subject(subject_id):
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    try:
-        cursor.execute("DELETE FROM subjects WHERE subject_id = %s", (subject_id,))
-        conn.commit()
-        flash("Subject removed.", "success")
-    except Exception as e:
-        flash(f"Error: {e}", "danger")
-    finally:
-        conn.close()
-    return redirect(url_for('admin.view_subjects'))
-
-@admin_bp.route('/marks/delete/<int:marks_id>')
-def delete_marks(marks_id):
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    try:
-        cursor.execute("DELETE FROM marks WHERE marks_id = %s", (marks_id,))
-        conn.commit()
-        flash("Marks record deleted.", "success")
-    except Exception as e:
-        flash(f"Error: {e}", "danger")
-    finally:
-        conn.close()
-    return redirect(url_for('admin.view_marks'))
 
 @admin_bp.route('/attendance/delete/<int:attendance_id>')
 def delete_attendance(attendance_id):
@@ -364,6 +430,7 @@ def delete_attendance(attendance_id):
     finally:
         conn.close()
     return redirect(url_for('admin.view_attendance'))
+# --- 🛰️ BULK & SYSTEM ROUTES ---
 
 @admin_bp.route('/bulk-upload', methods=['GET', 'POST'])
 def bulk_upload():

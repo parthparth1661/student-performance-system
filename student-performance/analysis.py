@@ -315,39 +315,57 @@ def generate_dashboard_charts(filters={}):
         return {}
 
 
-def get_performance_overview(department=None, semester=None, subject=None, search=None, attendance=None):
-    """Deep analytical student ledger with fully synchronized filtering"""
+def get_performance_overview(filters={}, limit=10, offset=0):
+    """Deep analytical student ledger with fully synchronized filtering and pagination"""
     conn = get_db_connection()
-    if not conn: return []
+    if not conn: return [], 0
     try:
         cursor = conn.cursor(dictionary=True)
-        # Re-use the centralized condition engine
-        where_clause, values = build_dashboard_conditions({
-            'department': department, 'semester': semester,
-            'subject': subject, 'search': search, 'attendance': attendance
-        })
+        where_clause, values = build_dashboard_conditions(filters)
         
+        # 1. Fetch Paginated Records
         query = f"""
             SELECT 
+                s.enrollment_no,
                 s.name,
+                s.department,
+                s.semester,
                 sub.subject_name,
-                AVG(m.marks_obtained) AS avg_marks,
+                AVG(m.marks_obtained) AS marks_obtained,
                 (COUNT(CASE WHEN a.status='Present' THEN 1 END)*100.0/NULLIF(COUNT(a.attendance_id), 0)) AS attendance_percentage
             FROM students s
             JOIN marks m ON s.enrollment_no = m.enrollment_no
             JOIN subjects sub ON m.subject_id = sub.subject_id
             JOIN attendance a ON s.enrollment_no = a.enrollment_no AND sub.subject_id = a.subject_id
             {where_clause}
-            GROUP BY s.name, sub.subject_name
+            GROUP BY s.enrollment_no, s.name, s.department, s.semester, sub.subject_name
+            ORDER BY s.enrollment_no ASC
+            LIMIT %s OFFSET %s
         """
-        cursor.execute(query, values)
+        cursor.execute(query, values + [limit, offset])
         data = cursor.fetchall()
+        
+        # 2. Count Total Records (for pagination logic)
+        count_query = f"""
+            SELECT COUNT(*) as total FROM (
+                SELECT s.enrollment_no, sub.subject_id
+                FROM students s
+                JOIN marks m ON s.enrollment_no = m.enrollment_no
+                JOIN subjects sub ON m.subject_id = sub.subject_id
+                JOIN attendance a ON s.enrollment_no = a.enrollment_no AND sub.subject_id = a.subject_id
+                {where_clause}
+                GROUP BY s.enrollment_no, sub.subject_id
+            ) as subquery
+        """
+        cursor.execute(count_query, values)
+        total_records = cursor.fetchone()['total'] or 0
+        
         cursor.close()
         conn.close()
-        return data
+        return data, total_records
     except Exception as e:
         print(f"Error in ledger overview: {e}")
-        return []
+        return [], 0
 
 def generate_subject_avg_chart(subject_avg):
     """Generates an HD Subject-wise Average Marks Bar Chart"""
@@ -987,55 +1005,19 @@ def export_student_excel(enrollment_no):
     except Exception as e:
         print(f"Error exporting student excel: {e}")
         return None
-def get_performance_overview(department=None, semester=None, subject=None, search=None, attendance=None):
-    """Deep analytical student ledger with fully synchronized filtering"""
-    conn = get_db_connection()
-    if not conn: return []
-    try:
-        cursor = conn.cursor(dictionary=True)
-        # 🎯 Re-use the centralized condition engine
-        where_clause, values = build_dashboard_conditions({
-            'department': department, 'semester': semester,
-            'subject': subject, 'search': search, 'attendance': attendance
-        })
-        
-        query = f"""
-            SELECT 
-                s.name,
-                sub.subject_name,
-                AVG(m.marks_obtained) AS avg_marks,
-                (COUNT(CASE WHEN a.status='Present' THEN 1 END)*100.0/NULLIF(COUNT(a.attendance_id), 0)) AS attendance_percentage
-            FROM students s
-            JOIN marks m ON s.enrollment_no = m.enrollment_no
-            JOIN subjects sub ON m.subject_id = sub.subject_id
-            JOIN attendance a ON s.enrollment_no = a.enrollment_no AND sub.subject_id = a.subject_id
-            {where_clause}
-            GROUP BY s.name, sub.subject_name
-        """
-        cursor.execute(query, values)
-        data = cursor.fetchall()
-        cursor.close()
-        conn.close()
-        return data
-    except Exception as e:
-        print(f"Error in ledger overview: {e}")
-        return []
-
-        cursor.execute(query, values)
-        data = cursor.fetchall()
-        
-        cursor.close()
-        conn.close()
-        return data
-    except Exception as e:
-        print(f"Error in deep analytical overview: {e}")
-        return []
 
 def export_admin_excel(department='All', semester='All', subject='All', search=None, attendance=None):
     """Exports globally filtered performance overview to high-fidelity Excel report"""
     try:
         import pandas as pd
-        data = get_performance_overview(department, semester, subject, search, attendance)
+        filters = {
+            'department': department if department != 'All' else None,
+            'semester': semester if semester != 'All' else None,
+            'subject': subject if subject != 'All' else None,
+            'search': search,
+            'attendance': attendance
+        }
+        data, _ = get_performance_overview(filters=filters, limit=5000) # High limit for export
         if not data: return None
         
         df = pd.DataFrame(data)
