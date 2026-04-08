@@ -156,102 +156,8 @@ def get_dashboard_stats(filters={}):
         """, risk_values)
         low_attendance_count = cursor.fetchone()['count'] or 0
 
-        # --- CHART 1: SUBJECT PERFORMANCE (BAR) ---
-        bar_query = f"""
-            SELECT sub.subject_name, AVG(m.marks_obtained) as avg_marks
-            FROM students s
-            JOIN marks m ON s.enrollment_no = s.enrollment_no
-            JOIN subjects sub ON m.subject_id = sub.subject_id
-            {where_clause}
-            GROUP BY sub.subject_name
-        """
-        cursor.execute(bar_query, values)
-        bar_data = cursor.fetchall()
+        # --- CHART GENERATION IS NOW HANDLED BY generate_dashboard_charts() ---
         
-        # --- CHART 1: SUBJECT PERFORMANCE (BAR) ---
-        if bar_data:
-            subjects = [row['subject_name'] for row in bar_data]
-            marks = [float(row['avg_marks']) for row in bar_data]
-            plt.figure(figsize=(8, 5), dpi=100)
-            plt.style.use('seaborn-v0_8-whitegrid')
-            plt.bar(subjects, marks, color='#6c5ce7', width=0.6)
-            plt.title("Subject Performance", fontsize=12, fontweight='bold', pad=20)
-            plt.xlabel("Subjects", fontsize=10, fontweight='600')
-            plt.ylabel("Average Marks", fontsize=10, fontweight='600')
-            plt.ylim(0, 100)
-            plt.xticks(rotation=20, ha='right', fontsize=9)
-            plt.tight_layout()
-            plt.savefig("static/bar.png", transparent=True)
-            plt.close()
-        else:
-            plt.figure(figsize=(8, 5), dpi=100)
-            plt.text(0.5, 0.5, "Insufficient Data for Analysis", ha='center', va='center', fontsize=12, color='#b2bec3')
-            plt.title("Subject Performance", fontsize=12, fontweight='bold', pad=20)
-            plt.gca().axis('off')
-            plt.savefig("static/bar.png", transparent=True)
-            plt.close()
-
-        # --- CHART 2: ATTENDANCE DISTRIBUTION (PIE) ---
-        if pie_data:
-            labels = [row['status'] for row in pie_data]
-            counts = [row['count'] for row in pie_data]
-            plt.figure(figsize=(6, 6), dpi=100)
-            colors = ['#00b894', '#e17055', '#fdcb6e'] 
-            plt.pie(counts, labels=labels, autopct='%1.1f%%', colors=colors[:len(labels)], 
-                    startangle=140, pctdistance=0.85, wedgeprops={'edgecolor': 'white', 'linewidth': 3})
-            centre_circle = plt.Circle((0,0), 0.70, fc='white')
-            plt.gca().add_artist(centre_circle)
-            plt.title("Attendance Distribution", fontsize=12, fontweight='bold', pad=20)
-            plt.tight_layout()
-            plt.savefig("static/pie.png", transparent=True)
-            plt.close()
-        else:
-            plt.figure(figsize=(6, 6), dpi=100)
-            plt.text(0.5, 0.5, "No Attendance Records", ha='center', va='center')
-            plt.title("Attendance Distribution", fontsize=12, fontweight='bold', pad=20)
-            plt.gca().axis('off')
-            plt.savefig("static/pie.png", transparent=True)
-            plt.close()
-
-        # --- CHART 3: PERFORMANCE TREND (LINE) ---
-        if line_data:
-            labels = [row['exam_type'] for row in line_data]
-            marks = [float(row['avg_marks']) for row in line_data]
-            plt.figure(figsize=(8, 5), dpi=100)
-            plt.plot(labels, marks, marker='o', markersize=8, color='#0984e3', linewidth=3)
-            plt.title("Performance Trend", fontsize=12, fontweight='bold', pad=20)
-            plt.grid(True, linestyle='--', alpha=0.7)
-            plt.ylim(0, 100)
-            plt.tight_layout()
-            plt.savefig("static/line.png", transparent=True)
-            plt.close()
-        else:
-            plt.figure(figsize=(8, 5), dpi=100)
-            plt.text(0.5, 0.5, "Insufficient Data Records", ha='center', va='center')
-            plt.title("Performance Trend", fontsize=12, fontweight='bold', pad=20)
-            plt.gca().axis('off')
-            plt.savefig("static/line.png", transparent=True)
-            plt.close()
-
-        # --- CHART 4: TOP STUDENTS (HORIZONTAL BAR) ---
-        if top_plot_data:
-            names = [row['name'] for row in top_plot_data]
-            marks = [float(row['avg_marks']) for row in top_plot_data]
-            plt.figure(figsize=(8, 5), dpi=100)
-            plt.barh(names[::-1], marks[::-1], color='#fdcb6e')
-            plt.title("Top 5 Students Leaderboard", fontsize=12, fontweight='bold', pad=20)
-            plt.xlim(0, 100)
-            plt.tight_layout()
-            plt.savefig("static/top.png", transparent=True)
-            plt.close()
-        else:
-            plt.figure(figsize=(8, 5), dpi=100)
-            plt.text(0.5, 0.5, "No Performers Ranked", ha='center', va='center')
-            plt.title("Top 5 Students Leaderboard", fontsize=12, fontweight='bold', pad=20)
-            plt.gca().axis('off')
-            plt.savefig("static/top.png", transparent=True)
-            plt.close()
-
         cursor.close()
         conn.close()
         return {
@@ -262,6 +168,152 @@ def get_dashboard_stats(filters={}):
     except Exception as e:
         print(f"Error in analytics suite: {e}")
         return {'total_students': 0, 'total_subjects': 0, 'avg_marks': 0, 'attendance_percentage': 0, 'low_attendance_count': 0, 'top_performer': "N/A"}
+
+def generate_dashboard_charts(filters={}):
+    """Generates 4 high-fidelity analytical charts for the admin dashboard"""
+    conn = get_db_connection()
+    if not conn: return {}
+    
+    # Ensure charts directory exists
+    if not os.path.exists(CHARTS_DIR):
+        os.makedirs(CHARTS_DIR)
+
+    try:
+        cursor = conn.cursor(dictionary=True)
+        where_clause, values = build_dashboard_conditions(filters)
+        
+        chart_paths = {
+            'subject_avg': 'static/charts/subject_avg.png',
+            'attendance_pie': 'static/charts/attendance_pie.png',
+            'performance_trend': 'static/charts/performance_trend.png',
+            'top_students': 'static/charts/top_students.png'
+        }
+
+        # 1. Subject-wise Average Marks (Bar Chart)
+        bar_query = f"""
+            SELECT sub.subject_name, AVG(m.marks_obtained) as avg_marks
+            FROM marks m
+            JOIN subjects sub ON m.subject_id = sub.subject_id
+            JOIN students s ON s.enrollment_no = m.enrollment_no
+            {where_clause}
+            GROUP BY sub.subject_name
+        """
+        cursor.execute(bar_query, values)
+        bar_data = cursor.fetchall()
+
+        plt.figure(figsize=(8, 5), dpi=100)
+        plt.style.use('seaborn-v0_8-whitegrid')
+        if bar_data:
+            subjects = [row['subject_name'] for row in bar_data]
+            marks = [float(row['avg_marks']) for row in bar_data]
+            bars = plt.bar(subjects, marks, color='#6366f1', width=0.6, alpha=0.9)
+            plt.title("Subject Performance Analysis", fontsize=12, fontweight='700', pad=20)
+            plt.ylim(0, 100)
+            plt.xticks(rotation=20, ha='right', fontsize=9)
+            for bar in bars:
+                yval = bar.get_height()
+                plt.text(bar.get_x() + bar.get_width()/2, yval + 1, f'{round(yval, 1)}', ha='center', va='bottom', fontsize=8, fontweight='bold')
+        else:
+            plt.text(0.5, 0.5, "Insufficient Data Records", ha='center', va='center', color='#94a3b8')
+        plt.tight_layout()
+        plt.savefig(os.path.join(BASE_DIR, chart_paths['subject_avg']), transparent=False, facecolor='white')
+        plt.close()
+
+        # 2. Attendance Distribution (Pie Chart)
+        pie_query = f"""
+            SELECT 
+                SUM(CASE WHEN a.status='Present' THEN 1 ELSE 0 END) as present,
+                SUM(CASE WHEN a.status='Absent' THEN 1 ELSE 0 END) as absent
+            FROM attendance a
+            JOIN students s ON s.enrollment_no = a.enrollment_no
+            LEFT JOIN subjects sub ON a.subject_id = sub.subject_id
+            {where_clause}
+        """
+        cursor.execute(pie_query, values)
+        pie_data = cursor.fetchone()
+
+        plt.figure(figsize=(6, 6), dpi=100)
+        if pie_data and (pie_data['present'] or pie_data['absent']):
+            labels = ['Present', 'Absent']
+            sizes = [pie_data['present'] or 0, pie_data['absent'] or 0]
+            colors = ['#10b981', '#ef4444']
+            plt.pie(sizes, labels=labels, autopct='%1.1f%%', colors=colors, 
+                    startangle=140, pctdistance=0.85, wedgeprops={'edgecolor': 'white', 'linewidth': 2})
+            centre_circle = plt.Circle((0,0), 0.70, fc='white')
+            plt.gca().add_artist(centre_circle)
+            plt.title("Attendance Distribution", fontsize=12, fontweight='700', pad=20)
+        else:
+            plt.text(0.5, 0.5, "No Records Found", ha='center', va='center', color='#94a3b8')
+        plt.tight_layout()
+        plt.savefig(os.path.join(BASE_DIR, chart_paths['attendance_pie']), transparent=False, facecolor='white')
+        plt.close()
+
+        # 3. Performance Trend (Line Chart)
+        line_query = f"""
+            SELECT exam_type, AVG(marks_obtained) as avg_marks
+            FROM marks m
+            JOIN students s ON s.enrollment_no = m.enrollment_no
+            LEFT JOIN subjects sub ON m.subject_id = sub.subject_id
+            {where_clause}
+            GROUP BY exam_type
+            ORDER BY exam_type
+        """
+        cursor.execute(line_query, values)
+        line_data = cursor.fetchall()
+
+        plt.figure(figsize=(8, 5), dpi=100)
+        if line_data:
+            exams = [row['exam_type'] for row in line_data]
+            marks = [float(row['avg_marks']) for row in line_data]
+            plt.plot(exams, marks, marker='o', markersize=8, color='#6366f1', linewidth=3, markerfacecolor='white', markeredgewidth=2)
+            plt.fill_between(exams, marks, alpha=0.1, color='#6366f1')
+            plt.title("Institutional Performance Trend", fontsize=12, fontweight='700', pad=20)
+            plt.ylim(0, 100)
+            plt.grid(True, linestyle='--', alpha=0.5)
+        else:
+            plt.text(0.5, 0.5, "Insufficient Trend Data", ha='center', va='center', color='#94a3b8')
+        plt.tight_layout()
+        plt.savefig(os.path.join(BASE_DIR, chart_paths['performance_trend']), transparent=False, facecolor='white')
+        plt.close()
+
+        # 4. Top 5 Students (Bar Chart)
+        top_query = f"""
+            SELECT s.name, AVG(m.marks_obtained) as avg_marks
+            FROM students s
+            JOIN marks m ON s.enrollment_no = m.enrollment_no
+            LEFT JOIN subjects sub ON m.subject_id = sub.subject_id
+            {where_clause}
+            GROUP BY s.name
+            ORDER BY AVG(m.marks_obtained) DESC
+            LIMIT 5
+        """
+        cursor.execute(top_query, values)
+        top_data = cursor.fetchall()
+
+        plt.figure(figsize=(8, 5), dpi=100)
+        if top_data:
+            names = [row['name'] for row in top_data]
+            marks = [float(row['avg_marks']) for row in top_data]
+            plt.bar(names, marks, color='#f59e0b', width=0.5, alpha=0.9)
+            plt.title("Top 5 Performers", fontsize=12, fontweight='700', pad=20)
+            plt.ylim(0, 100)
+            plt.xticks(rotation=15, ha='right', fontsize=9)
+            for i, v in enumerate(marks):
+                plt.text(i, v + 2, str(round(v, 1)), ha='center', fontweight='bold', fontsize=8)
+        else:
+            plt.text(0.5, 0.5, "No Rankings Available", ha='center', va='center', color='#94a3b8')
+        plt.tight_layout()
+        plt.savefig(os.path.join(BASE_DIR, chart_paths['top_students']), transparent=False, facecolor='white')
+        plt.close()
+
+        cursor.close()
+        conn.close()
+        return chart_paths
+
+    except Exception as e:
+        print(f"Chart Engine Error: {e}")
+        return {}
+
 
 def get_performance_overview(department=None, semester=None, subject=None, search=None, attendance=None):
     """Deep analytical student ledger with fully synchronized filtering"""

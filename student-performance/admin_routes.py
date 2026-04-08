@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
 from db import get_db_connection
+from analysis import get_dashboard_stats, generate_dashboard_charts, get_performance_overview
 from datetime import date
 import os
 
@@ -53,7 +54,7 @@ def logout():
 @admin_bp.route('/')
 @admin_bp.route('/dashboard')
 def dashboard():
-    # 🎯 🧠 STEP 1: GET FILTER VALUES (DISCOVERY)
+    # 🎯 🧠 STEP 1: GET FILTER VALUES
     filters = {
         'department': request.args.get('department'),
         'semester': request.args.get('semester'),
@@ -62,145 +63,31 @@ def dashboard():
         'subject': request.args.get('subject')
     }
 
-    # 🧱 🧬 STEP 2: BUILD DYNAMIC CONDITIONS (MULTI-LEVEL)
-    conditions = []
-    values = []
+    # 📊 🧬 STEP 2: GENERATE ANALYTICS & CHARTS
+    stats = get_dashboard_stats(filters)
+    chart_paths = generate_dashboard_charts(filters)
     
-    if filters['department']:
-        conditions.append("s.department = %s")
-        values.append(filters['department'])
-    if filters['semester']:
-        conditions.append("s.semester = %s")
-        values.append(filters['semester'])
-    if filters.get('subject'):
-        conditions.append("su.subject_name = %s")
-        values.append(filters['subject'])
-    if filters['search']:
-        search_query = f"%{filters['search']}%"
-        conditions.append("(s.name LIKE %s OR s.enrollment_no LIKE %s)")
-        values.append(search_query)
-        values.append(search_query)
-    
-    # --- 🛰️ STEP 3: ATTENDANCE AUDIT LOGIC (SUBQUERY) ---
-    if filters['attendance'] == "low":
-        conditions.append("""
-            s.enrollment_no IN (
-                SELECT enrollment_no FROM attendance 
-                GROUP BY enrollment_no 
-                HAVING (COUNT(CASE WHEN status='Present' THEN 1 END) * 100.0 / COUNT(*)) < 75
-            )
-        """)
-    elif filters['attendance'] == "high":
-        conditions.append("""
-            s.enrollment_no IN (
-                SELECT enrollment_no FROM attendance 
-                GROUP BY enrollment_no 
-                HAVING (COUNT(CASE WHEN status='Present' THEN 1 END) * 100.0 / COUNT(*)) >= 75
-            )
-        """)
+    # 📋 🧬 STEP 3: GET PERFORMANCE LEDGER
+    performance_overview = get_performance_overview(
+        department=filters['department'],
+        semester=filters['semester'],
+        subject=filters['subject'],
+        search=filters['search'],
+        attendance=filters['attendance']
+    )
 
+    # Fetch all subjects for the filter dropdown
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
-    stats = {}
-    performance_overview = []
-    all_subjects = []
-
-    try:
-        # Fetch all subjects for the filter dropdown
-        cursor.execute("SELECT DISTINCT subject_name FROM subjects ORDER BY subject_name ASC")
-        all_subjects = [r['subject_name'] for r in cursor.fetchall()]
-
-        # --- Apply Conditions to KPI Suite ---
-        where_clause = " WHERE " + " AND ".join(conditions) if conditions else ""
-
-        # 📊 1. Total Students
-        cursor.execute("SELECT COUNT(*) AS total FROM students s" + where_clause, values)
-        stats['total_students'] = cursor.fetchone()['total']
-
-        # 📊 2. Total Subjects (Respecting Dept/Sem filters)
-        sub_conditions = []
-        sub_values = []
-        if filters['department']:
-            sub_conditions.append("department = %s")
-            sub_values.append(filters['department'])
-        if filters['semester']:
-            sub_conditions.append("semester = %s")
-            sub_values.append(filters['semester'])
-        
-        sub_where = " WHERE " + " AND ".join(sub_conditions) if sub_conditions else ""
-        cursor.execute("SELECT COUNT(*) AS total FROM subjects" + sub_where, sub_values)
-        stats['total_subjects'] = cursor.fetchone()['total']
-
-        # 📊 3. Average Marks
-        query = """SELECT AVG(m.marks_obtained) AS avg FROM marks m
-                   JOIN students s ON m.enrollment_no = s.enrollment_no
-                   LEFT JOIN subjects su ON m.subject_id = su.subject_id"""
-        cursor.execute(query + where_clause, values)
-        res = cursor.fetchone()
-        stats['avg_marks'] = round(res['avg'], 1) if res['avg'] else 0
-
-        # 📊 4. Overall Attendance %
-        query = """SELECT (COUNT(CASE WHEN a.status='Present' THEN 1 END) * 100.0 / COUNT(*)) AS att 
-                   FROM attendance a
-                   JOIN students s ON a.enrollment_no = s.enrollment_no
-                   LEFT JOIN subjects su ON a.subject_id = su.subject_id"""
-        cursor.execute(query + where_clause, values)
-        res = cursor.fetchone()
-        stats['attendance_percentage'] = round(res['att'], 1) if res['att'] else 0
-
-        # 📊 5. Low Attendance Count
-        query_low = """
-            SELECT COUNT(DISTINCT s.enrollment_no) as count FROM students s
-            JOIN attendance a ON s.enrollment_no = a.enrollment_no
-            LEFT JOIN subjects su ON a.subject_id = su.subject_id
-            """ + where_clause + (" AND " if conditions else " WHERE ") + """
-            s.enrollment_no IN (
-                SELECT enrollment_no FROM attendance 
-                GROUP BY enrollment_no 
-                HAVING (COUNT(CASE WHEN status='Present' THEN 1 END) * 100.0 / COUNT(*)) < 75
-            )
-        """
-        cursor.execute(query_low, values)
-        stats['low_attendance_count'] = cursor.fetchone()['count']
-
-        # 📊 6. Top Performer
-        query_top = """
-            SELECT s.name, AVG(m.marks_obtained) as avg_m FROM students s
-            JOIN marks m ON s.enrollment_no = m.enrollment_no
-            LEFT JOIN subjects su ON m.subject_id = su.subject_id
-            """ + where_clause + """
-            GROUP BY s.enrollment_no, s.name
-            ORDER BY avg_m DESC LIMIT 1
-        """
-        cursor.execute(query_top, values)
-        res_top = cursor.fetchone()
-        stats['top_performer'] = res_top['name'] if res_top else "N/A"
-
-        # 📊 Ledger Table (High-Fidelity JOINs)
-        query_ledger = """
-            SELECT s.enrollment_no, s.name, su.subject_name,
-            AVG(m.marks_obtained) AS avg_marks,
-            (COUNT(CASE WHEN a.status='Present' THEN 1 END) * 100.0 / COUNT(*)) AS attendance_percentage
-            FROM students s
-            LEFT JOIN marks m ON s.enrollment_no = m.enrollment_no
-            LEFT JOIN subjects su ON m.subject_id = su.subject_id
-            LEFT JOIN attendance a ON s.enrollment_no = a.enrollment_no
-        """
-        if conditions: query_ledger += " WHERE " + " AND ".join(conditions)
-        query_ledger += " GROUP BY s.enrollment_no, s.name, su.subject_name ORDER BY s.name ASC"
-        cursor.execute(query_ledger, values)
-        performance_overview = cursor.fetchall()
-
-    except Exception as e:
-        print(f"Discovery Engine Error: {str(e)}")
-        stats = {'total_students': 0, 'avg_marks': 0, 'attendance_percentage': 0, 'total_subjects': 0, 'low_attendance_count': 0, 'top_performer': 'N/A'}
-    finally:
-        cursor.close()
-        conn.close()
+    cursor.execute("SELECT DISTINCT subject_name FROM subjects ORDER BY subject_name ASC")
+    all_subjects = [r['subject_name'] for r in cursor.fetchall()]
+    cursor.close()
+    conn.close()
 
     return render_template('admin/admin_dashboard.html', 
                          stats=stats, 
                          filters=filters, 
+                         charts=chart_paths,
                          performance_overview=performance_overview,
                          subjects=all_subjects,
                          today_date=date.today().strftime('%d %b %Y'))
