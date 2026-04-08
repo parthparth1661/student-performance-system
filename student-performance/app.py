@@ -21,6 +21,22 @@ def index():
     from flask import render_template
     return render_template('landing_page.html')
 
+@app.route('/profile')
+def profile():
+    from flask import render_template, session, redirect, url_for
+    if not session.get('admin_email'):
+        return redirect(url_for('admin.login'))
+    
+    from db import get_db_connection
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM admin WHERE email = %s", (session.get('admin_email'),))
+    admin_data = cursor.fetchone()
+    conn.close()
+    
+    return render_template('profile.html', admin=admin_data)
+
+
 if __name__ == '__main__':
     # Ensure charts directory exists
     if not os.path.exists('static/charts'):
