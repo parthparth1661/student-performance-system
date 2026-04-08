@@ -100,7 +100,7 @@
         .sidebar-nav {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .nav-item {
@@ -113,26 +113,47 @@
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .nav-item i {
             font-size: 18px;
-            width: 20px;
+            width: 24px;
             text-align: center;
+            opacity: 0.8;
+            transition: transform 0.25s ease;
         }
 
         .nav-item:hover {
             color: #ffffff;
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-item:hover i {
+            opacity: 1;
+            transform: translateX(3px);
         }
 
         .nav-item.active {
             color: #ffffff;
             background-color: var(--primary-color);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.25);
         }
+
+        .nav-item.active i {
+            opacity: 1;
+        }
+
+        .nav-item.logout {
+            color: #f87171;
+            opacity: 0.9;
+        }
+
+        .nav-item.logout:hover {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
 
         /* 🏁 MAIN CONTENT WRAPPER */
         .main-wrapper {
@@ -292,7 +313,7 @@
             </a>
             
             <div style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
-                <a href="{{ url_for('admin.logout') }}" class="nav-item text-danger">
+                <a href="{{ url_for('admin.logout') }}" class="nav-item logout">
                     <i class="fas fa-power-off"></i>
                     <span>Logout</span>
                 </a>
