@@ -220,16 +220,54 @@ def delete_student(enrollment_no):
 # --- 📚 2. SUBJECTS MODULE ---
 @admin_bp.route('/subjects')
 def view_subjects():
+    department = request.args.get('department')
+    semester = request.args.get('semester')
+    search = request.args.get('search')
+    page = request.args.get('page', 1, type=int)
+    limit = 10
+    offset = (page - 1) * limit
+
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute("""
+    
+    query = """
         SELECT s.*, f.faculty_name 
         FROM subjects s 
         LEFT JOIN faculty f ON s.faculty_id = f.faculty_id
-    """)
+        WHERE 1=1
+    """
+    params = []
+
+    if department and department != 'All':
+        query += " AND s.department = %s"
+        params.append(department)
+    
+    if semester and semester != 'All':
+        query += " AND s.semester = %s"
+        params.append(semester)
+        
+    if search:
+        query += " AND s.subject_name LIKE %s"
+        params.append(f"%{search}%")
+
+    # Count for pagination
+    count_query = query.replace("s.*, f.faculty_name", "COUNT(*)")
+    cursor.execute(count_query, params)
+    total_records = cursor.fetchone()['COUNT(*)']
+    total_pages = math.ceil(total_records / limit)
+
+    query += " LIMIT %s OFFSET %s"
+    params.extend([limit, offset])
+    
+    cursor.execute(query, params)
     subjects = cursor.fetchall()
     conn.close()
-    return render_template('admin/view_subjects.html', subjects=subjects)
+    
+    return render_template('admin/view_subjects.html', 
+                          subjects=subjects, 
+                          page=page, 
+                          total_pages=total_pages,
+                          filters={'department': department, 'semester': semester, 'search': search})
 
 @admin_bp.route('/subjects/add', methods=['GET', 'POST'])
 def add_subject():
