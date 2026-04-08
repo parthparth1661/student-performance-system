@@ -1,59 +1,97 @@
 {% extends 'admin/layout.html' %}
 
 {% block content %}
-<div class="row justify-content-center py-4">
-    <div class="col-lg-8">
-        <div class="card border-0 shadow-sm rounded-4 p-5">
-            <div class="text-center mb-5">
-                <div class="bg-primary-soft text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
-                    <i class="fas fa-user-plus fa-2x"></i>
+<div class="row justify-content-center py-5">
+    <div class="col-lg-7">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-white">
+            <div class="bg-primary py-4 px-5 text-white d-flex align-items-center justify-content-between">
+                <div>
+                    <h3 class="fw-bold mb-0">{% if edit_mode %}Update Student Profile{% else %}Register New Student{% endif %}</h3>
+                    <p class="opacity-75 small mb-0">{% if edit_mode %}Modify existing academic credentials.{% else %}Initialize a new identity in the academic registry.{% endif %}</p>
                 </div>
-                <h2 class="fw-bold text-dark mb-1">Register New Student</h2>
-                <p class="text-muted small">Initialize a new academic profile in the SPDA Registry.</p>
+                <i class="fas {% if edit_mode %}fa-user-edit{% else %}fa-user-plus{% endif %} fa-2x opacity-50"></i>
             </div>
-
-            <form method="POST" class="row g-4">
-                <div class="col-md-6">
-                    <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Student Name</label>
-                    <input type="text" name="name" class="form-control bg-light border-0 py-2 px-3 rounded-3" placeholder="Enter Full Name" required>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Enrollment No</label>
-                    <input type="text" name="enrollment_no" class="form-control bg-light border-0 py-2 px-3 rounded-3" placeholder="SPDA-202X-XXXX" required>
-                </div>
-                <div class="col-md-12">
-                    <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Email Address</label>
-                    <input type="email" name="email" class="form-control bg-light border-0 py-2 px-3 rounded-3" placeholder="student@university.edu" required>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Department</label>
-                    <select name="department" class="form-select bg-light border-0 py-2 px-3 rounded-3" required>
-                        <option value="BCA">BCA</option>
-                        <option value="MCA">MCA</option>
-                        <option value="B.TECH">B.TECH</option>
-                        <option value="MBA">MBA</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Semester</label>
-                    <select name="semester" class="form-select bg-light border-0 py-2 px-3 rounded-3" required>
-                        {% for i in range(1, 9) %}
-                        <option value="{{ i }}">Semester {{ i }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-md-12">
-                    <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Secure Password</label>
-                    <input type="password" name="password" class="form-control bg-light border-0 py-2 px-3 rounded-3" placeholder="••••••••" required>
-                </div>
-                <div class="col-12 mt-5">
-                    <div class="d-flex gap-3">
-                        <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill shadow-sm fw-bold">Register Profile</button>
-                        <a href="{{ url_for('admin.view_students') }}" class="btn btn-light px-5 py-2 rounded-pill border fw-bold text-muted">Cancel</a>
+            
+            <div class="card-body p-5">
+                <form method="POST" class="row g-4">
+                    <div class="col-md-12 mb-2">
+                        <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Full Name</label>
+                        <div class="input-group border rounded-3 overflow-hidden">
+                            <span class="input-group-text bg-light border-0"><i class="fas fa-user text-muted"></i></span>
+                            <input type="text" name="name" class="form-control border-0 py-2 px-3" placeholder="e.g. Parth Parth" value="{{ student.name if student else '' }}" required>
+                        </div>
                     </div>
-                </div>
-            </form>
+
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Enrollment Number</label>
+                        <div class="input-group border rounded-3 overflow-hidden">
+                            <span class="input-group-text bg-light border-0"><i class="fas fa-id-card text-muted"></i></span>
+                            <input type="text" name="enrollment_no" class="form-control border-0 py-2 px-3" placeholder="SPDA-202X-XXX" value="{{ student.enrollment_no if student else '' }}" {% if edit_mode %}readonly{% endif %} required>
+                        </div>
+                        {% if edit_mode %}<div class="extra-small text-muted mt-1 px-1">Enrollment number cannot be changed once registered.</div>{% endif %}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Email Address</label>
+                        <div class="input-group border rounded-3 overflow-hidden">
+                            <span class="input-group-text bg-light border-0"><i class="fas fa-envelope text-muted"></i></span>
+                            <input type="email" name="email" class="form-control border-0 py-2 px-3" placeholder="student@example.com" value="{{ student.email if student else '' }}" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Department</label>
+                        <div class="input-group border rounded-3 overflow-hidden">
+                            <span class="input-group-text bg-light border-0"><i class="fas fa-university text-muted"></i></span>
+                            <select name="department" class="form-select border-0 py-2 px-3" required>
+                                <option value="BCA" {% if student and student.department == 'BCA' %}selected{% endif %}>BCA (Bachelor of Computer Applications)</option>
+                                <option value="MCA" {% if student and student.department == 'MCA' %}selected{% endif %}>MCA (Master of Computer Applications)</option>
+                                <option value="B.TECH" {% if student and student.department == 'B.TECH' %}selected{% endif %}>B.TECH (Bachelor of Technology)</option>
+                                <option value="MBA" {% if student and student.department == 'MBA' %}selected{% endif %}>MBA (Master of Business Administration)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Semester</label>
+                        <div class="input-group border rounded-3 overflow-hidden">
+                            <span class="input-group-text bg-light border-0"><i class="fas fa-calendar-alt text-muted"></i></span>
+                            <select name="semester" class="form-select border-0 py-2 px-3" required>
+                                {% for i in range(1, 9) %}
+                                <option value="{{ i }}" {% if student and student.semester|string == i|string %}selected{% endif %}>Semester {{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-12 pt-4">
+                        <hr class="border-dashed opacity-25">
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <a href="{{ url_for('admin.view_students') }}" class="btn btn-light px-4 py-2 border rounded-pill fw-bold text-muted small">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Records
+                            </a>
+                            <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill shadow-lg fw-bold">
+                                {% if edit_mode %}<i class="fas fa-save me-2"></i>Update Profile{% else %}<i class="fas fa-check-circle me-2"></i>Confirm Registration{% endif %}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
+<style>
+.border-dashed { border-style: dashed !important; }
+.letter-spacing-sm { letter-spacing: 0.1em; }
+.extra-small { font-size: 11px; }
+.form-control:focus, .form-select:focus {
+    box-shadow: none;
+    background-color: #fff !important;
+}
+.input-group:focus-within {
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+</style>
 {% endblock %}

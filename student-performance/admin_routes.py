@@ -102,12 +102,47 @@ def dashboard():
 # --- 🧑🎓 1. STUDENTS MODULE ---
 @admin_bp.route('/students')
 def view_students():
+    department = request.args.get('department')
+    semester = request.args.get('semester')
+    search = request.args.get('search')
+    page = request.args.get('page', 1, type=int)
+    limit = 10
+    offset = (page - 1) * limit
+
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM students")
+
+    query = "SELECT * FROM students WHERE 1=1"
+    params = []
+
+    if department:
+        query += " AND department = %s"
+        params.append(department)
+    if semester:
+        query += " AND semester = %s"
+        params.append(semester)
+    if search:
+        query += " AND (name LIKE %s OR enrollment_no LIKE %s)"
+        params.extend([f"%{search}%", f"%{search}%"])
+
+    # Get total count for pagination
+    count_query = "SELECT COUNT(*) as total FROM (" + query + ") as t"
+    cursor.execute(count_query, params)
+    total_records = cursor.fetchone()['total']
+    total_pages = math.ceil(total_records / limit)
+
+    # Get paginated data
+    query += " LIMIT %s OFFSET %s"
+    params.extend([limit, offset])
+    cursor.execute(query, params)
     students = cursor.fetchall()
+    
     conn.close()
-    return render_template('admin/view_students.html', students=students)
+    return render_template('admin/view_students.html', 
+                          students=students, 
+                          page=page, 
+                          total_pages=total_pages,
+                          filters={'department': department, 'semester': semester, 'search': search})
 
 @admin_bp.route('/students/add', methods=['GET', 'POST'])
 def add_student():
