@@ -630,48 +630,70 @@ def calculate_student_summary(enrollment_no):
     }
 
 def generate_student_charts_new(enrollment_no):
-    """Generates charts specifically for the student dashboard"""
+    """Generates analytical charts for the student detail report"""
     subjects_data = get_student_marks(enrollment_no)
-    if not subjects_data:
-        return
     
-    # Chart 1: Subject-wise Total Marks (Bar)
-    plt.figure(figsize=(12, 6), dpi=200)
-    subjects = [item['subject'] for item in subjects_data]
-    totals = [item['total'] for item in subjects_data]
-    
-    colors = ['#3B82F6', '#6366F1', '#8B5CF6', '#EC4899', '#10B981', '#F59E0B'] # Vibrant palette
-    plt.bar(subjects, totals, color=colors[:len(subjects)], alpha=0.9, edgecolor='white', linewidth=1)
-    
-    plt.title(f'Subject-wise Total Performance', fontsize=16, fontweight='bold', pad=25)
-    plt.xlabel('Subjects', fontsize=12)
-    plt.ylabel('Total Marks', fontsize=12)
-    plt.xticks(rotation=20, ha='right')
-    plt.grid(axis='y', linestyle='--', alpha=0.3)
-    plt.tight_layout()
-    
-    bar_path = os.path.join(CHARTS_DIR, f'student_{enrollment_no}_bar.png')
-    plt.savefig(bar_path, bbox_inches="tight")
-    plt.close()
-
-    # Chart 2: Pass vs Fail Subjects (Pie)
-    pass_count = sum(1 for item in subjects_data if item['status'] == "PASS")
-    fail_count = sum(1 for item in subjects_data if item['status'] == "FAIL")
-    
-    plt.figure(figsize=(12, 6), dpi=200)
-    if pass_count + fail_count > 0:
-        plt.pie([pass_count, fail_count], labels=['Pass', 'Fail'], 
-                colors=['#10B981', '#EF4444'], autopct='%1.1f%%', 
-                startangle=140, wedgeprops={'edgecolor': 'white', 'linewidth': 2})
-    else:
-        plt.text(0.5, 0.5, 'No Data', ha='center', va='center')
+    # 📊 Chart 1: Subject-wise Total Marks (Professional Bar Chart)
+    if subjects_data:
+        plt.figure(figsize=(12, 6), dpi=200)
+        subjects = [item['subject'] for item in subjects_data]
+        totals = [item['total'] for item in subjects_data]
         
-    plt.title('Pass vs Fail Subjects', fontsize=16, fontweight='bold', pad=25)
-    plt.tight_layout()
-    
-    pie_path = os.path.join(CHARTS_DIR, f'student_{enrollment_no}_pie.png')
-    plt.savefig(pie_path, bbox_inches="tight")
-    plt.close()
+        plt.bar(subjects, totals, color='#6366f1', alpha=0.9, edgecolor='white', linewidth=1)
+        
+        plt.title('Subject-wise Performance Analysis', fontsize=18, fontweight='bold', pad=30, color='#1e293b')
+        plt.xlabel('Academic Subjects', fontsize=12, fontweight='bold', color='#64748b')
+        plt.ylabel('Total Marks Obtained', fontsize=12, fontweight='bold', color='#64748b')
+        plt.xticks(rotation=20, ha='right', fontsize=10)
+        plt.yticks(fontsize=10)
+        plt.grid(axis='y', linestyle='--', alpha=0.4)
+        plt.ylim(0, 105)
+        
+        # Add value labels on top of bars
+        for i, v in enumerate(totals):
+            plt.text(i, v + 2, str(v), ha='center', fontsize=10, fontweight='bold', color='#4f46e5')
+            
+        plt.tight_layout()
+        plt.savefig(os.path.join(CHARTS_DIR, f'student_{enrollment_no}_bar.png'), bbox_inches="tight")
+        plt.close()
+
+    # 🍕 Chart 2: Attendance Distribution (High-Fidelity Pie Chart)
+    conn = get_db_connection()
+    if conn:
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("""
+            SELECT 
+                SUM(CASE WHEN status='Present' THEN 1 ELSE 0 END) as present,
+                SUM(CASE WHEN status='Absent' THEN 1 ELSE 0 END) as absent
+            FROM attendance
+            WHERE enrollment_no = %s
+        """, (enrollment_no,))
+        att_data = cursor.fetchone()
+        present = att_data['present'] or 0
+        absent = att_data['absent'] or 0
+        
+        plt.figure(figsize=(12, 7), dpi=200)
+        if present + absent > 0:
+            wedges, texts, autotexts = plt.pie(
+                [present, absent], 
+                labels=['Present', 'Absent'], 
+                autopct='%1.1f%%',
+                colors=['#10b981', '#ef4444'],
+                startangle=140, 
+                explode=(0.05, 0),
+                wedgeprops={'edgecolor': 'white', 'linewidth': 3, 'antialiased': True}
+            )
+            plt.setp(autotexts, size=12, weight="bold", color="white")
+            plt.setp(texts, size=12, weight="bold")
+            plt.title('Attendance Distribution Overview', fontsize=18, fontweight='bold', pad=30, color='#1e293b')
+        else:
+            plt.text(0.5, 0.5, 'No Attendance Data Available', ha='center', va='center', fontsize=14, color='#94a3b8')
+        
+        plt.tight_layout()
+        plt.savefig(os.path.join(CHARTS_DIR, f'student_{enrollment_no}_pie.png'), bbox_inches="tight")
+        plt.close()
+        cursor.close()
+        conn.close()
 
 def export_student_report_excel(enrollment_no):
     """Exports student marks data to Excel"""
