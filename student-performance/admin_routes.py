@@ -340,52 +340,148 @@ def delete_subject(subject_id):
         conn.close()
     return redirect(url_for('admin.view_subjects'))
 
-# --- 👨🏫 3. FACULTY MODULE ---
-@admin_bp.route('/faculty')
-def view_faculty():
-    conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM faculty")
-    faculty_list = cursor.fetchall()
-    conn.close()
-    return render_template('admin/view_faculty.html', faculty=faculty_list)
-
-@admin_bp.route('/faculty/delete/<faculty_id>')
+@admin_bp.route('/faculty/delete/<int:faculty_id>')
 def delete_faculty(faculty_id):
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
         cursor.execute("DELETE FROM faculty WHERE faculty_id = %s", (faculty_id,))
         conn.commit()
-        flash("Faculty record removed.", "success")
+        flash("Faculty member and their subject associations removed successfully.", "success")
     except Exception as e:
         flash(f"Error: {e}", "danger")
     finally:
         conn.close()
     return redirect(url_for('admin.view_faculty'))
 
+# --- 👨‍🏫 3. FACULTY MODULE ---
+@admin_bp.route('/faculty')
+def view_faculty():
+    department = request.args.get('department')
+    search = request.args.get('search')
+    page = request.args.get('page', 1, type=int)
+    limit = 10
+    offset = (page - 1) * limit
+
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    # Complex query to get faculty with their mapped subjects
+    query = """
+        SELECT f.*, GROUP_CONCAT(sub.subject_name SEPARATOR ', ') as subjects_mapped
+        FROM faculty f
+        LEFT JOIN subjects sub ON f.faculty_id = sub.faculty_id
+        WHERE 1=1
+    """
+    params = []
+
+    if department and department != 'All':
+        query += " AND f.department = %s"
+        params.append(department)
+        
+    if search:
+        query += " AND (f.faculty_name LIKE %s OR f.email LIKE %s)"
+        params.extend([f"%{search}%", f"%{search}%"])
+
+    query += " GROUP BY f.faculty_id"
+
+    # Count for pagination
+    count_query = f"SELECT COUNT(*) as count FROM ({query}) as sub_query"
+    cursor.execute(count_query, params)
+    total_records = cursor.fetchone()['count']
+    total_pages = math.ceil(total_records / limit)
+
+    query += " LIMIT %s OFFSET %s"
+    params.extend([limit, offset])
+    
+    cursor.execute(query, params)
+    faculty_list = cursor.fetchall()
+    conn.close()
+    
+    return render_template('admin/view_faculty.html', 
+                          faculty=faculty_list, 
+                          page=page, 
+                          total_pages=total_pages,
+                          filters={'department': department, 'search': search})
+
 @admin_bp.route('/faculty/add', methods=['GET', 'POST'])
 def add_faculty():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    # Fetch subjects for mapping
+    cursor.execute("SELECT subject_id, subject_name, department FROM subjects")
+    subjects = cursor.fetchall()
+    
     if request.method == 'POST':
-        faculty_name = request.form['faculty_name']
+        name = request.form['faculty_name']
         email = request.form['email']
         department = request.form['department']
+        subject_id = request.form.get('subject_id') # Individual mapping
         
-        conn = get_db_connection()
-        cursor = conn.cursor()
         try:
             cursor.execute("""
                 INSERT INTO faculty (faculty_name, email, department)
                 VALUES (%s, %s, %s)
-            """, (faculty_name, email, department))
+            """, (name, email, department))
+            new_faculty_id = cursor.lastrowid
+            
+            # Map the subject if selected
+            if subject_id:
+                cursor.execute("UPDATE subjects SET faculty_id = %s WHERE subject_id = %s", (new_faculty_id, subject_id))
+            
             conn.commit()
-            flash("Faculty added successfully!", "success")
+            flash("Faculty added and subject mapped successfully!", "success")
             return redirect(url_for('admin.view_faculty'))
         except Exception as e:
             flash(f"Error: {e}", "danger")
-        finally:
-            conn.close()
-    return render_template('admin/add_faculty.html')
+    
+    conn.close()
+    return render_template('admin/add_faculty.html', subjects=subjects)
+
+@admin_bp.route('/faculty/edit/<int:faculty_id>', methods=['GET', 'POST'])
+def edit_faculty(faculty_id):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    # Fetch subjects for mapping
+    cursor.execute("SELECT subject_id, subject_name, department FROM subjects")
+    subjects = cursor.fetchall()
+    
+    if request.method == 'POST':
+        name = request.form['faculty_name']
+        email = request.form['email']
+        department = request.form['department']
+        subject_id = request.form.get('subject_id')
+        
+        try:
+            cursor.execute("""
+                UPDATE faculty 
+                SET faculty_name=%s, email=%s, department=%s
+                WHERE faculty_id=%s
+            """, (name, email, department, faculty_id))
+            
+            # Reset previous mapping if we want to ensure only one mapping or just add
+            if subject_id:
+                # Update the selected subject to this faculty
+                cursor.execute("UPDATE subjects SET faculty_id = %s WHERE subject_id = %s", (faculty_id, subject_id))
+            
+            conn.commit()
+            flash("Faculty details and subject mapping updated!", "success")
+            return redirect(url_for('admin.view_faculty'))
+        except Exception as e:
+            flash(f"Error: {e}", "danger")
+            
+    cursor.execute("SELECT * FROM faculty WHERE faculty_id = %s", (faculty_id,))
+    f_data = cursor.fetchone()
+    
+    # Get currently mapped subject ID (assuming primary)
+    cursor.execute("SELECT subject_id FROM subjects WHERE faculty_id = %s LIMIT 1", (faculty_id,))
+    mapped_sub = cursor.fetchone()
+    current_subject_id = mapped_sub['subject_id'] if mapped_sub else None
+    
+    conn.close()
+    return render_template('admin/add_faculty.html', faculty=f_data, subjects=subjects, current_subject_id=current_subject_id, edit_mode=True)
 
 # --- 📊 4. MARKS MODULE ---
 @admin_bp.route('/marks')

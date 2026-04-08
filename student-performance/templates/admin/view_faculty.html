@@ -1,63 +1,149 @@
 {% extends 'admin/layout.html' %}
 
+{% block page_title %}Faculty Management{% endblock %}
+
 {% block content %}
+<!-- 🛰️ HEADER SECTOR -->
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h2 class="fw-bold mb-0 text-dark">Faculty Management</h2>
-        <p class="text-muted small">Manage academic staff and faculty assignments.</p>
+        <h2 class="fw-bold mb-0 text-dark">Institutional Faculty Registry</h2>
+        <p class="text-muted small">Manage academic staff and departmental subject assignments.</p>
     </div>
-    <a href="{{ url_for('admin.add_faculty') }}" class="btn btn-primary px-4 shadow-sm">
-        <i class="fas fa-user-plus me-2"></i>Add Faculty
+    <a href="{{ url_for('admin.add_faculty') }}" class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm transition-hover">
+        <i class="fas fa-plus me-2"></i>Add New Faculty
     </a>
 </div>
 
-<div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-5 p-0">
-    <div class="px-4 py-3 border-bottom d-flex justify-content-between align-items-center bg-white">
-        <h6 class="fw-bold m-0 text-dark">Faculty Registry</h6>
-        <div class="bg-light rounded-pill px-3 py-1 small text-muted font-medium">
-            Total Staff: {{ faculty|length }}
+<!-- 🔍 SMART FILTER ENGINE -->
+<div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4 transition-hover">
+    <form method="GET" action="{{ url_for('admin.view_faculty') }}" class="row g-3">
+        <div class="col-md-4">
+            <label class="form-label extra-small fw-bold text-uppercase text-muted">Department</label>
+            <select name="department" class="form-select border-0 bg-light rounded-3">
+                <option value="All">All Departments</option>
+                <option value="BCA" {% if filters.department == 'BCA' %}selected{% endif %}>BCA</option>
+                <option value="MCA" {% if filters.department == 'MCA' %}selected{% endif %}>MCA</option>
+                <option value="B.TECH" {% if filters.department == 'B.TECH' %}selected{% endif %}>B.TECH</option>
+                <option value="M.TECH" {% if filters.department == 'M.TECH' %}selected{% endif %}>M.TECH</option>
+                <option value="MBA" {% if filters.department == 'MBA' %}selected{% endif %}>MBA</option>
+            </select>
         </div>
-    </div>
+        <div class="col-md-5">
+            <label class="form-label extra-small fw-bold text-uppercase text-muted">Search Faculty</label>
+            <div class="input-group">
+                <span class="input-group-text border-0 bg-light text-muted"><i class="fas fa-search"></i></span>
+                <input type="text" name="search" class="form-control border-0 bg-light" placeholder="Name or Email address..." value="{{ filters.search or '' }}">
+            </div>
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100 rounded-3 fw-bold">Apply Filter</button>
+        </div>
+    </form>
+</div>
+
+<!-- 📦 FACULTY DATA MATRIX -->
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white">
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
             <thead class="bg-light">
-                <tr class="text-muted small text-uppercase fw-bold">
-                    <th class="ps-4 py-3">Faculty / Identity</th>
+                <tr class="text-muted extra-small text-uppercase fw-bold">
+                    <th class="ps-4 py-3">Faculty Instructor</th>
                     <th class="py-3">Email Address</th>
                     <th class="py-3">Department</th>
-                    <th class="py-3 text-center">Actions</th>
+                    <th class="py-3">Current Assignments</th>
+                    <th class="py-3 text-center pe-4">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for f in faculty %}
                 <tr>
-                    <td class="ps-4 py-3">
+                    <td class="ps-4">
                         <div class="d-flex align-items-center">
-                            <div class="bg-success-soft text-success rounded-circle d-flex align-items-center justify-content-center fw-bold me-3" style="width: 40px; height: 40px; font-size: 14px;">
-                                {{ f.faculty_name[:2]|upper }}
+                            <div class="admin-avatar me-3" style="width: 40px; height: 40px; background-color: var(--primary-color);">
+                                {{ f.faculty_name[:1].upper() }}{{ f.faculty_name.split(' ')[-1][:1].upper() if ' ' in f.faculty_name else '' }}
                             </div>
-                            <div class="fw-bold text-dark">{{ f.faculty_name }}</div>
+                            <div>
+                                <div class="fw-bold text-dark">{{ f.faculty_name }}</div>
+                                <div class="extra-small text-muted">ID: #FAC-0{{ f.faculty_id }}</div>
+                            </div>
                         </div>
                     </td>
-                    <td class="text-secondary small fw-medium">{{ f.email }}</td>
                     <td>
-                        <span class="badge bg-indigo-soft rounded-pill-sm px-3">{{ f.department }}</span>
+                        <span class="text-muted small">{{ f.email }}</span>
                     </td>
-                    <td class="text-center">
-                        <div class="d-flex justify-content-center gap-2">
-                             <a href="{{ url_for('admin.delete_faculty', faculty_id=f.faculty_id) }}" class="btn btn-sm btn-light border rounded-pill-sm px-3 fw-bold text-danger" onclick="return confirm('Remove faculty record?')">
-                                <i class="fas fa-trash me-1"></i> Remove
-                            </a>
+                    <td>
+                        <span class="badge bg-light border text-dark rounded-pill px-3 py-2 fw-bold" style="font-size: 0.7rem;">
+                            {{ f.department }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if f.subjects_mapped %}
+                        <span class="text-dark small fw-medium">
+                            <i class="fas fa-book-open me-2 text-primary opacity-50"></i>{{ f.subjects_mapped }}
+                        </span>
+                        {% else %}
+                        <span class="badge bg-danger-soft text-danger rounded-pill px-3 py-1 extra-small">No Subject Mapped</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-center pe-4">
+                        <div class="dropdown">
+                            <button class="btn btn-light btn-sm rounded-3 border-0 shadow-sm" data-bs-toggle="dropdown">
+                                <i class="fas fa-ellipsis-v text-muted"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-3 small">
+                                <li><a class="dropdown-item py-2" href="{{ url_for('admin.edit_faculty', faculty_id=f.faculty_id) }}"><i class="fas fa-edit me-2 text-primary"></i>Modify Profile</a></li>
+                                <li><hr class="dropdown-divider opacity-50"></li>
+                                <li><a class="dropdown-item py-2 text-danger" href="{{ url_for('admin.delete_faculty', faculty_id=f.faculty_id) }}" onclick="return confirm('Archiving faculty member #{{ f.faculty_id }}? This will unmap all assigned subjects.')"><i class="fas fa-user-minus me-2"></i>Delete Record</a></li>
+                            </ul>
                         </div>
                     </td>
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="4" class="text-center py-5 text-muted small">No faculty members found in the database.</td>
+                    <td colspan="5" class="text-center py-5">
+                        <div class="py-4">
+                            <i class="fas fa-chalkboard-teacher fa-3x mb-3 text-muted opacity-25"></i>
+                            <h6 class="text-muted fw-bold">No Faculty Records Found</h6>
+                            <p class="extra-small text-muted">Try adjusting your filters or adding a new instructor.</p>
+                        </div>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
+
+<!-- 📄 PAGINATION SECTOR -->
+{% if total_pages > 1 %}
+<div class="d-flex justify-content-between align-items-center mt-4 px-2">
+    <div class="extra-small text-muted fw-medium">
+        Showing Page <span class="text-dark">{{ page }}</span> of {{ total_pages }}
+    </div>
+    <nav>
+        <ul class="pagination pagination-sm mb-0 gap-2">
+            {% if page > 1 %}
+            <li class="page-item"><a class="page-link border-0 rounded-3 shadow-sm px-3" href="{{ url_for('admin.view_faculty', page=page-1, **filters) }}"><i class="fas fa-chevron-left"></i></a></li>
+            {% endif %}
+            
+            {% for p in range(1, total_pages + 1) %}
+            <li class="page-item {% if p == page %}active{% endif %}">
+                <a class="page-link border-0 rounded-3 shadow-sm px-3" href="{{ url_for('admin.view_faculty', page=p, **filters) }}">{{ p }}</a>
+            </li>
+            {% endfor %}
+
+            {% if page < total_pages %}
+            <li class="page-item"><a class="page-link border-0 rounded-3 shadow-sm px-3" href="{{ url_for('admin.view_faculty', page=page+1, **filters) }}"><i class="fas fa-chevron-right"></i></a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endif %}
+
+<style>
+.bg-danger-soft { background-color: rgba(239, 68, 68, 0.1); }
+.extra-small { font-size: 0.75rem; }
+.transition-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.transition-hover:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+</style>
 {% endblock %}
