@@ -1124,27 +1124,63 @@ def export_pdf():
     flash("Export failed.", "danger")
     return redirect(url_for('admin.view_reports'))
 
+# --- 👤 ADMIN PROFILE MODULE ---
 @admin_bp.route('/profile')
 def profile():
-    return render_template('admin/admin_profile.html', email=session.get('admin_email'))
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM admin WHERE email = %s", (session.get('admin_email'),))
+    admin_data = cursor.fetchone()
+    conn.close()
+    return render_template('admin/admin_profile.html', admin=admin_data)
 
-@admin_bp.route('/change-password', methods=['GET', 'POST'])
-def change_password():
-    if request.method == 'POST':
-        old_pw = request.form.get('old_password')
-        new_pw = request.form.get('new_password')
-        conn = get_db_connection()
-        cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM admin WHERE email = %s", (session.get('admin_email'),))
-        admin = cursor.fetchone()
-        
-        if admin and check_password_hash(admin['password'], old_pw):
-            hashed = generate_password_hash(new_pw)
-            cursor.execute("UPDATE admin SET password = %s WHERE email = %s", (hashed, admin['email']))
-            conn.commit()
-            flash("Password updated successfully!", "success")
-        else:
-            flash("Invalid current password.", "danger")
-        cursor.close()
+@admin_bp.route('/update_profile', methods=['POST'])
+def update_profile():
+    name = request.form.get('name')
+    email = request.form.get('email')
+    old_email = session.get('admin_email')
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("UPDATE admin SET name=%s, email=%s WHERE email=%s", (name, email, old_email))
+        conn.commit()
+        session['admin_email'] = email
+        flash("Identity Profile updated successfully!", "success")
+    except Exception as e:
+        flash(f"Profile update failed: {e}", "danger")
+    finally:
         conn.close()
-    return render_template('admin/change_password.html')
+    return redirect(url_for('admin.profile'))
+
+@admin_bp.route('/change_password', methods=['POST'])
+def change_password():
+    current_pw = request.form.get('current_password')
+    new_pw = request.form.get('new_password')
+    confirm_pw = request.form.get('confirm_password')
+    
+    if new_pw != confirm_pw:
+        flash("New passwords do not match!", "danger")
+        return redirect(url_for('admin.profile'))
+        
+    if not new_pw:
+        flash("Mandatory credentials cannot be empty!", "danger")
+        return redirect(url_for('admin.profile'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM admin WHERE email = %s", (session.get('admin_email'),))
+    admin = cursor.fetchone()
+    
+    if admin and check_password_hash(admin['password'], current_pw):
+        hashed = generate_password_hash(new_pw)
+        cursor.execute("UPDATE admin SET password=%s WHERE email=%s", (hashed, admin['email']))
+        conn.commit()
+        flash("Security credentials updated successfully!", "success")
+    else:
+        flash("Identity verification failed. Current password incorrect.", "danger")
+    
+    conn.close()
+    return redirect(url_for('admin.profile'))
+
+

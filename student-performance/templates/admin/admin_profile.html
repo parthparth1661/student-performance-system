@@ -1,37 +1,95 @@
 {% extends 'admin/layout.html' %}
 
+{% block page_title %}Admin Control Profile{% endblock %}
+
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card border-0 shadow-sm rounded-4 text-center p-5">
-            <img src="https://ui-avatars.com/api/?name={{ session.get('admin_email', 'Admin') }}&size=128&background=4F46E5&color=fff"
-                alt="Profile" class="rounded-circle mb-4 mx-auto border border-4 border-light shadow-sm" width="128">
-            <h3 class="fw-bold mb-1">Administrative Profile</h3>
-            <p class="text-muted">{{ email }}</p>
-            
-            <div class="mt-4 pt-4 border-top">
-                <div class="row g-3">
-                    <div class="col-6">
-                        <div class="p-3 bg-light rounded-3">
-                            <span class="small text-muted d-block uppercase fw-bold mb-1">Account Role</span>
-                            <span class="fw-bold text-primary">Super Administrator</span>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="p-3 bg-light rounded-3">
-                            <span class="small text-muted d-block uppercase fw-bold mb-1">Security Status</span>
-                            <span class="fw-bold text-success">Active & Secure</span>
-                        </div>
-                    </div>
+<div class="row g-4">
+    <!-- 👤 1️⃣ PROFILE INFO CARD (Read-only) -->
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden transition-hover h-100">
+            <div class="card-body p-4 text-center">
+                <div class="admin-avatar mx-auto mb-3 shadow-sm" style="width: 80px; height: 80px; font-size: 2rem;">
+                    {{ admin.name[0]|upper if admin.name else 'A' }}
+                </div>
+                <h5 class="fw-bold text-dark mb-1">{{ admin.name }}</h5>
+                <p class="text-muted small mb-3">{{ admin.email }}</p>
+                <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 border border-primary-subtle">
+                    <i class="fas fa-user-shield me-2"></i>System Administrator
+                </span>
+                
+                <hr class="my-4 opacity-50">
+                
+                <div class="text-start">
+                    <label class="extra-small fw-bold text-uppercase text-muted d-block mb-1">Account Role</label>
+                    <p class="small fw-semibold text-dark mb-3">Institutional Administrator</p>
+                    
+                    <label class="extra-small fw-bold text-uppercase text-muted d-block mb-1">System Status</label>
+                    <p class="small fw-semibold text-success mb-0"><i class="fas fa-check-circle me-1"></i>Active & Verified</p>
                 </div>
             </div>
-            
-            <div class="mt-4">
-                <a href="{{ url_for('admin.change_password') }}" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm">
-                    <i class="fas fa-key me-2"></i>Update Security Settings
-                </a>
+        </div>
+    </div>
+
+    <!-- ✏️ 2️⃣ EDIT PROFILE FORM -->
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4 bg-white mb-4 transition-hover">
+            <div class="card-header bg-white border-0 px-4 py-3 border-bottom">
+                <h6 class="fw-bold m-0"><i class="fas fa-user-edit me-2 text-primary"></i>Modify Identity Details</h6>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('admin.update_profile') }}" method="POST" class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Full Name</label>
+                        <input type="text" name="name" class="form-control border-0 bg-light rounded-3 py-2" value="{{ admin.name }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Email Address</label>
+                        <input type="email" name="email" class="form-control border-0 bg-light rounded-3 py-2" value="{{ admin.email }}" required>
+                    </div>
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-primary rounded-3 fw-bold px-4 py-2 shadow-sm">
+                            <i class="fas fa-save me-2"></i>Update Identity
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 🔐 3️⃣ CHANGE PASSWORD CARD -->
+        <div class="card border-0 shadow-sm rounded-4 bg-white transition-hover">
+            <div class="card-header bg-white border-0 px-4 py-3 border-bottom">
+                <h6 class="fw-bold m-0"><i class="fas fa-shield-alt me-2 text-danger"></i>Security & Credentials</h6>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('admin.change_password') }}" method="POST" class="row g-3">
+                    <div class="col-12">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Current Verification Password</label>
+                        <input type="password" name="current_password" class="form-control border-0 bg-light rounded-3 py-2" placeholder="••••••••" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">New Security Password</label>
+                        <input type="password" name="new_password" class="form-control border-0 bg-light rounded-3 py-2" placeholder="••••••••" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Confirm New Password</label>
+                        <input type="password" name="confirm_password" class="form-control border-0 bg-light rounded-3 py-2" placeholder="••••••••" required>
+                    </div>
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-dark rounded-3 fw-bold px-4 py-2 shadow-sm">
+                            <i class="fas fa-key me-2"></i>Update Security Credentials
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+.bg-primary-subtle { background: rgba(99, 102, 241, 0.1); }
+.extra-small { font-size: 0.75rem; }
+.transition-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.transition-hover:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.08) !important; }
+.form-control:focus { background: white !important; border: 1px solid #6366f1 !important; box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1); }
+</style>
 {% endblock %}
