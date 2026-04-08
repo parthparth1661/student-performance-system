@@ -1,10 +1,181 @@
 {% extends 'admin/layout.html' %}
 
+{% block page_title %}{{ 'Edit Academic Record' if edit_mode else 'Add New Marks' }}{% endblock %}
+
 {% block content %}
-                    <a href="{{ url_for('admin.view_marks') }}" class="btn btn-light px-4 rounded-pill py-3 ms-2">Cancel</a>
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <!-- 🛰️ NAVIGATION HUB -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="{{ url_for('admin.view_marks') }}" class="btn btn-light border rounded-3 px-3 shadow-sm transition-hover">
+                <i class="fas fa-arrow-left me-2"></i>Back to Ledger
+            </a>
+            <h4 class="fw-bold mb-0 text-dark">{{ 'Modify Score Matrix' if edit_mode else 'New Academic Entry' }}</h4>
+        </div>
+
+        <!-- 🧬 MARK CONFIGURATION FORM -->
+        <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
+            <form method="POST" id="markForm">
+                <div class="row g-4">
+                    {% if not edit_mode %}
+                    <!-- Student Selection -->
+                    <div class="col-md-12">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Select Student</label>
+                        <select name="enrollment_no" class="form-select border-1 border-light-subtle bg-light rounded-3 py-3 px-4" required>
+                            <option value="">Choose student by enrollment...</option>
+                            {% for s in students %}
+                            <option value="{{ s.enrollment_no }}">{{ s.enrollment_no }} - {{ s.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="form-text extra-small text-muted mt-2">Only registered students are visible here.</div>
+                    </div>
+
+                    <!-- Subject Selection -->
+                    <div class="col-md-12">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Course Subject</label>
+                        <select name="subject_id" class="form-select border-1 border-light-subtle bg-light rounded-3 py-3 px-4" required>
+                            <option value="">Select subject context...</option>
+                            {% for sub in subjects %}
+                            <option value="{{ sub.subject_id }}">{{ sub.subject_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% else %}
+                    <!-- locked View for Edit Mode -->
+                    <div class="col-12">
+                        <div class="p-4 bg-primary-subtle rounded-4 border-start border-primary border-4 mb-2">
+                            <label class="extra-small fw-bold text-uppercase text-primary d-block mb-1">Editing Record For</label>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 class="fw-bold text-dark mb-0">{{ mark.student_name }}</h5>
+                                    <p class="text-muted small mb-0">{{ mark.enrollment_no }} | {{ mark.subject_name }}</p>
+                                </div>
+                                <span class="badge bg-primary rounded-pill px-3 py-2">ID: #{{ mark.marks_id }}</span>
+                            </div>
+                        </div>
+                        <input type="hidden" name="enrollment_no" value="{{ mark.enrollment_no }}">
+                        <input type="hidden" name="subject_id" value="{{ mark.subject_id }}">
+                    </div>
+                    {% endif %}
+
+                    <!-- Exam Type -->
+                    <div class="col-md-12">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Exam Type</label>
+                        <div class="row g-2">
+                            <div class="col-md-4">
+                                <input type="radio" class="btn-check" name="exam_type" id="typeMid" value="Mid" {% if edit_mode and mark.exam_type == 'Mid' %}checked{% elif not edit_mode %}checked{% endif %} required>
+                                <label class="btn btn-outline-primary w-100 py-3 rounded-3 fw-bold" for="typeMid">Mid Term</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="radio" class="btn-check" name="exam_type" id="typeFinal" value="Final" {% if edit_mode and mark.exam_type == 'Final' %}checked{% endif %}>
+                                <label class="btn btn-outline-primary w-100 py-3 rounded-3 fw-bold" for="typeFinal">Final Exam</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="radio" class="btn-check" name="exam_type" id="typeInternal" value="Internal" {% if edit_mode and mark.exam_type == 'Internal' %}checked{% endif %}>
+                                <label class="btn btn-outline-primary w-100 py-3 rounded-3 fw-bold" for="typeInternal">Internal</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Marks Matrix -->
+                    <div class="col-md-6">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Marks Obtained (0-100)</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-0 bg-light text-primary"><i class="fas fa-edit"></i></span>
+                            <input type="number" name="marks_obtained" id="marks_obtained" step="0.5" min="0" max="100" 
+                                   class="form-control border-0 bg-light rounded-2 py-3 fw-bold text-indigo" 
+                                   placeholder="Score..." value="{{ mark.marks_obtained if edit_mode else '' }}" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Total Marks</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-0 bg-light text-muted"><i class="fas fa-flag-checkered"></i></span>
+                            <input type="number" name="total_marks" id="total_marks" step="1" min="1" 
+                                   class="form-control border-0 bg-light rounded-2 py-3 fw-bold text-muted" 
+                                   placeholder="100" value="{{ mark.total_marks if edit_mode else '100' }}" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🏁 ACTION CENTER -->
+                <div class="mt-5 border-top pt-4 d-flex justify-content-between align-items-center">
+                    <p class="extra-small text-muted mb-0"><i class="fas fa-shield-alt me-1 text-success"></i> Data integrity checks will be performed on submission.</p>
+                    <div class="d-flex gap-3">
+                        <button type="reset" class="btn btn-light px-4 py-3 rounded-3 fw-bold">Reset</button>
+                        <button type="submit" class="btn btn-primary px-5 py-3 rounded-3 fw-bold shadow-sm transition-hover">
+                            <i class="fas fa-save me-2"></i>{{ 'Update Academic Record' if edit_mode else 'Save Mark Entry' }}
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
+
+        <!-- 🛡️ VALIDATION HUB (DYNAMIC) -->
+        <div id="validationAlert" class="mt-4 p-3 bg-danger-subtle rounded-4 border border-danger border-opacity-10 d-none align-items-center animate__animated animate__shakeX">
+            <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px; flex-shrink: 0;">
+                <i class="fas fa-times"></i>
+            </div>
+            <p class="extra-small text-danger mb-0 fw-bold" id="errorMsg">
+                Validation Error: Marks obtained cannot exceed the total marks threshold.
+            </p>
+        </div>
     </div>
 </div>
+
+<script>
+    const form = document.getElementById('markForm');
+    const obtainedInp = document.getElementById('marks_obtained');
+    const totalInp = document.getElementById('total_marks');
+    const alertBox = document.getElementById('validationAlert');
+    const errorMsg = document.getElementById('errorMsg');
+
+    form.addEventListener('submit', (e) => {
+        const obtained = parseFloat(obtainedInp.value);
+        const total = parseFloat(totalInp.value);
+        
+        let error = null;
+
+        if (obtained > total) {
+            error = "Sanity Check Failed: Obtained marks cannot exceed total possible marks (" + total + ").";
+        } else if (obtained > 100) {
+            error = "Maximum Threshold Exceeded: Marks must be within the range of 0 to 100.";
+        } else if (obtained < 0) {
+            error = "Invalid Input: Marks cannot be negative.";
+        }
+
+        if (error) {
+            e.preventDefault();
+            errorMsg.innerText = error;
+            alertBox.classList.remove('d-none');
+            alertBox.classList.add('d-flex');
+            obtainedInp.classList.add('is-invalid');
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+    });
+
+    [obtainedInp, totalInp].forEach(inp => {
+        inp.addEventListener('input', () => {
+            alertBox.classList.add('d-none');
+            alertBox.classList.remove('d-flex');
+            obtainedInp.classList.remove('is-invalid');
+        });
+    });
+</script>
+
+<style>
+.text-indigo { color: #6366f1; }
+.bg-primary-subtle { background-color: #eef2ff !important; }
+.bg-danger-subtle { background-color: #fef2f2 !important; }
+.extra-small { font-size: 0.75rem; }
+.is-invalid { border: 2px solid #ef4444 !important; }
+.transition-hover { transition: all 0.2s ease; }
+.transition-hover:hover { transform: translateY(-2px); filter: brightness(1.1); }
+.btn-primary { background-color: #6366f1; border-color: #6366f1; }
+.btn-outline-primary { color: #6366f1; border-color: #6366f1; }
+.btn-outline-primary:hover { background-color: #6366f1; border-color: #6366f1; color: white; }
+.btn-check:checked + .btn-outline-primary { background-color: #6366f1; color: white; box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3); }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 {% endblock %}

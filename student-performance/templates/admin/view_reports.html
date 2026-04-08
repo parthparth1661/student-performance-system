@@ -43,6 +43,118 @@
     </form>
 </div>
 
+<!-- 🧠 INTELLIGENT INSIGHTS HUB (NEW 🔥) -->
+<div class="row g-4 mb-5">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden transition-hover">
+            <div class="card-header bg-white border-bottom p-4 d-flex justify-content-between align-items-center">
+                 <div class="d-flex align-items-center">
+                    <span class="bg-primary text-white p-2 rounded-3 me-3 shadow-sm"><i class="fas fa-robot"></i></span>
+                    <div>
+                        <h5 class="text-dark m-0 fw-bold">Academic Intelligence & Insights</h5>
+                        <p class="extra-small text-muted m-0">Automatically generated analysis based on current filters</p>
+                    </div>
+                 </div>
+                 <span class="badge bg-light text-primary border rounded-pill px-3 py-2">Real-time Analytics</span>
+            </div>
+            <div class="card-body p-4">
+                <div class="row g-4">
+                    <!-- 💡 Overall Performance -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="insight-card p-4 rounded-4 h-100 {% if data.insights.avg_marks > 75 %}insight-success{% elif data.insights.avg_marks >= 50 %}insight-warning{% else %}insight-danger{% endif %}">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="insight-icon shadow-sm rounded-3 me-3">📊</div>
+                                <h6 class="m-0 fw-bold text-dark">Institutional Health</h6>
+                            </div>
+                            <h4 class="fw-bold mb-1 {% if data.insights.avg_marks > 75 %}text-success{% elif data.insights.avg_marks >= 50 %}text-warning{% else %}text-danger{% endif %}">{{ data.insights.avg_marks }}%</h4>
+                            <p class="text-dark fw-semibold mb-2">"{{ data.insights.performance_label }}"</p>
+                            <div class="progress rounded-pill" style="height: 6px; background: rgba(0,0,0,0.05);">
+                                <div class="progress-bar rounded-pill {% if data.insights.avg_marks > 75 %}bg-success{% elif data.insights.avg_marks >= 50 %}bg-warning{% else %}bg-danger{% endif %}" style="width: {{ data.insights.avg_marks }}%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 🏆 Top Subject -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="insight-card p-4 rounded-4 h-100 bg-light border-0">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="insight-icon shadow-sm rounded-3 me-3 bg-white">🏆</div>
+                                <h6 class="m-0 fw-bold text-dark">Top Performing Subject</h6>
+                            </div>
+                            {% if data.insights.top_subject %}
+                            <h5 class="fw-bold text-primary mb-1">{{ data.insights.top_subject.subject_name }}</h5>
+                            <p class="small text-muted mb-0">Highest internal engagement with an average of <span class="fw-bold text-dark">{{ data.insights.top_subject.avg_marks|round(1) }}</span></p>
+                            {% else %}
+                            <p class="text-muted m-0">Insufficient data for benchmarking</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- ⚠️ Weak Subject -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="insight-card p-4 rounded-4 h-100 bg-light border-0">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="insight-icon shadow-sm rounded-3 me-3 bg-white">⚠️</div>
+                                <h6 class="m-0 fw-bold text-dark">Subject Focus Required</h6>
+                            </div>
+                            {% if data.insights.weak_subject %}
+                            <h5 class="fw-bold text-danger mb-1">{{ data.insights.weak_subject.subject_name }}</h5>
+                            <p class="small text-muted mb-0">Performance bottleneck detected (Avg: <span class="fw-bold text-danger">{{ data.insights.weak_subject.avg_marks|round(1) }}</span>)</p>
+                            {% else %}
+                            <p class="text-muted m-0">No bottlenecks identified</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- 👑 Top Student -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="insight-card p-4 rounded-4 h-100 bg-light border-0">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="insight-icon shadow-sm rounded-3 me-3 bg-white">👑</div>
+                                <h6 class="m-0 fw-bold text-dark">Academic Star Performer</h6>
+                            </div>
+                            {% if data.insights.top_student %}
+                            <h5 class="fw-bold text-dark mb-1">{{ data.insights.top_student.name }}</h5>
+                            <p class="small text-muted mb-0">Consistently leading with <span class="fw-bold text-primary">{{ data.insights.top_student.avg_marks|round(1) }}%</span> aggregate score.</p>
+                            {% else %}
+                            <p class="text-muted m-0">No data available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- 📈 Success Velocity -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="insight-card p-4 rounded-4 h-100 bg-light border-0">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="insight-icon shadow-sm rounded-3 me-3 bg-white">📈</div>
+                                <h6 class="m-0 fw-bold text-dark">Success Velocity</h6>
+                            </div>
+                            {% if data.insights.pass_percent %}
+                            <h5 class="fw-bold text-success mb-1">{{ data.insights.pass_percent }}% Pass Rate</h5>
+                            <p class="small text-muted mb-0"><span class="fw-bold text-dark">{{ 100 - data.insights.pass_percent }}%</span> of student population requires immediate mentorship.</p>
+                            {% else %}
+                            <p class="text-muted m-0">Awaiting result data</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- 📉 Risk Detection -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="insight-card p-4 rounded-4 h-100 bg-light border-0">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="insight-icon shadow-sm rounded-3 me-3 bg-white">📉</div>
+                                <h6 class="m-0 fw-bold text-dark">Performance Risk Alert</h6>
+                            </div>
+                            <h5 class="fw-bold {% if data.insights.low_performers_count > 0 %}text-danger{% else %}text-success{% endif %} mb-1">{{ data.insights.low_performers_count }} Students at Risk</h5>
+                            <p class="small text-muted mb-0">Students flagged for being below the 40% threshold across subjects.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- 📦 EXPORT ACTION HUB -->
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h5 class="fw-bold text-dark m-0"><i class="fas fa-chart-line me-2 text-primary"></i>Executive Data Visualizations</h5>
@@ -135,5 +247,13 @@
 .extra-small { font-size: 0.75rem; }
 .transition-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
 .transition-hover:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.08) !important; }
+
+/* 🧠 Insight Card Styles */
+.insight-card { border: 1px solid rgba(0,0,0,0.05); transition: all 0.3s ease; }
+.insight-icon { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+.insight-success { background: #f0fdf4; border-color: #bcf0da; }
+.insight-warning { background: #fffbeb; border-color: #fde68a; }
+.insight-danger { background: #fef2f2; border-color: #fecaca; }
+.bg-primary-soft { background: rgba(99, 102, 241, 0.1); }
 </style>
 {% endblock %}

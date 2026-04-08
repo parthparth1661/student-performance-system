@@ -510,25 +510,101 @@ def faculty_profile_view(faculty_id):
 # --- 📊 4. MARKS MODULE ---
 @admin_bp.route('/marks')
 def view_marks():
+    enrollment = request.args.get('enrollment')
+    department = request.args.get('department')
+    semester = request.args.get('semester')
+    subject_id = request.args.get('subject_id')
+    exam_type = request.args.get('exam_type')
+    
+    page = request.args.get('page', 1, type=int)
+    limit = 10
+    offset = (page - 1) * limit
+
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute("""
-        SELECT m.*, s.name as student_name, sub.subject_name 
+    
+    # Base query for marks with joins for filtering
+    query = """
+        SELECT m.*, s.name as student_name, sub.subject_name, sub.department, sub.semester
         FROM marks m
         JOIN students s ON m.enrollment_no = s.enrollment_no
         JOIN subjects sub ON m.subject_id = sub.subject_id
-    """)
-    marks_list = cursor.fetchall()
-    conn.close()
-    return render_template('admin/view_marks.html', marks_list=marks_list)
+        WHERE 1=1
+    """
+    params = []
 
+    if enrollment:
+        query += " AND (m.enrollment_no LIKE %s OR s.name LIKE %s)"
+        params.extend([f"%{enrollment}%", f"%{enrollment}%"])
+    
+    if department and department != 'All':
+        query += " AND sub.department = %s"
+        params.append(department)
+        
+    if semester and semester != 'All':
+        query += " AND sub.semester = %s"
+        params.append(semester)
+
+    if subject_id and subject_id != 'All':
+        query += " AND m.subject_id = %s"
+        params.append(subject_id)
+        
+    if exam_type and exam_type != 'All':
+        query += " AND m.exam_type = %s"
+        params.append(exam_type)
+
+    # 📊 Calculate Summary Stats for the CURRENT FILTERED SET
+    stats_query = f"""
+        SELECT 
+            COUNT(*) as total_entries,
+            AVG(marks_obtained) as avg_marks,
+            MAX(marks_obtained) as top_score,
+            SUM(CASE WHEN status = 'PASS' THEN 1 ELSE 0 END) as pass_count
+        FROM ({query}) as filtered_marks
+    """
+    cursor.execute(stats_query, params)
+    marks_stats = cursor.fetchone()
+
+    # Calculate total records for pagination
+    count_query = f"SELECT COUNT(*) as count FROM ({query}) as sub_query"
+    cursor.execute(count_query, params)
+    total_records = cursor.fetchone()['count']
+    total_pages = math.ceil(total_records / limit)
+
+    query += " ORDER BY m.marks_id DESC LIMIT %s OFFSET %s"
+    params.extend([limit, offset])
+    
+    cursor.execute(query, params)
+    marks_list = cursor.fetchall()
+
+    # Fetch subjects for filter dropdown
+    cursor.execute("SELECT subject_id, subject_name FROM subjects ORDER BY subject_name")
+    all_subjects = cursor.fetchall()
+    
+    conn.close()
+    return render_template('admin/view_marks.html', 
+                          marks_list=marks_list, 
+                          subjects=all_subjects,
+                          stats=marks_stats,
+                          page=page, 
+                          total_pages=total_pages,
+                          filters={
+                              'enrollment': enrollment, 
+                              'department': department,
+                              'semester': semester,
+                              'subject_id': subject_id, 
+                              'exam_type': exam_type
+                          })
+
+@admin_bp.route('/add_marks', methods=['GET', 'POST'])
 @admin_bp.route('/marks/add', methods=['GET', 'POST'])
 def add_marks():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM students")
+    
+    cursor.execute("SELECT enrollment_no, name FROM students ORDER BY enrollment_no")
     students = cursor.fetchall()
-    cursor.execute("SELECT * FROM subjects")
+    cursor.execute("SELECT subject_id, subject_name FROM subjects ORDER BY subject_name")
     subjects = cursor.fetchall()
     
     if request.method == 'POST':
@@ -538,20 +614,92 @@ def add_marks():
         marks_obtained = request.form['marks_obtained']
         total_marks = request.form.get('total_marks', 100)
         
-        try:
-            cursor.execute("""
-                INSERT INTO marks (enrollment_no, subject_id, exam_type, marks_obtained, total_marks)
-                VALUES (%s, %s, %s, %s, %s)
-            """, (enrollment_no, subject_id, exam_type, marks_obtained, total_marks))
-            conn.commit()
-            flash("Marks added successfully!", "success")
-            return redirect(url_for('admin.view_marks'))
-        except Exception as e:
-            flash(f"Error: {e}", "danger")
+        # ⚠️ VALIDATION (STRICT 🔥)
+        if not all([enrollment_no, subject_id, exam_type, marks_obtained]):
+            flash("All fields are mandatory!", "danger")
+        else:
+            try:
+                marks_obtained = float(marks_obtained)
+                total_marks = float(total_marks)
+                
+                if marks_obtained < 0 or marks_obtained > 100:
+                    flash("Validation Error: Marks must be between 0 and 100.", "danger")
+                elif marks_obtained > total_marks:
+                    flash(f"Sanity Check Failed: Obtained marks ({marks_obtained}) cannot exceed total marks ({total_marks})!", "danger")
+                else:
+                    # 🛡️ PREVENT DUPLICATE ENTRY (same student + subject + exam)
+                    cursor.execute("""
+                        SELECT * FROM marks 
+                        WHERE enrollment_no = %s AND subject_id = %s AND exam_type = %s
+                    """, (enrollment_no, subject_id, exam_type))
+                    
+                    if cursor.fetchone():
+                        flash(f"Duplicate Entry Warning: Record already exists for Student {enrollment_no} in this subject and exam type.", "warning")
+                    else:
+                        # Auto-calculate status
+                        status = 'PASS' if (marks_obtained / total_marks) * 100 >= 40 else 'FAIL'
+                        
+                        cursor.execute("""
+                            INSERT INTO marks (enrollment_no, subject_id, exam_type, marks_obtained, total_marks, status)
+                            VALUES (%s, %s, %s, %s, %s, %s)
+                        """, (enrollment_no, subject_id, exam_type, marks_obtained, total_marks, status))
+                        conn.commit()
+                        flash(f"Result for {enrollment_no} registered successfully!", "success")
+                        return redirect(url_for('admin.view_marks'))
+            except ValueError:
+                flash("Invalid numeric value for marks.", "danger")
+            except Exception as e:
+                flash(f"Database Error: {e}", "danger")
     
     conn.close()
     return render_template('admin/add_marks.html', students=students, subjects=subjects)
 
+@admin_bp.route('/edit_marks/<int:marks_id>', methods=['GET', 'POST'])
+@admin_bp.route('/marks/edit/<int:marks_id>', methods=['GET', 'POST'])
+def edit_marks(marks_id):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    if request.method == 'POST':
+        marks_obtained = float(request.form['marks_obtained'])
+        total_marks = float(request.form.get('total_marks', 100))
+        exam_type = request.form['exam_type']
+        
+        if marks_obtained < 0 or marks_obtained > 100:
+            flash("Validation Error: Marks must be between 0 and 100.", "danger")
+        elif marks_obtained > total_marks:
+            flash("Validation Error: Marks obtained exceeds total possible marks.", "danger")
+        else:
+            status = 'PASS' if (marks_obtained / total_marks) * 100 >= 40 else 'FAIL'
+            try:
+                cursor.execute("""
+                    UPDATE marks 
+                    SET marks_obtained=%s, total_marks=%s, exam_type=%s, status=%s
+                    WHERE marks_id=%s
+                """, (marks_obtained, total_marks, exam_type, status, marks_id))
+                conn.commit()
+                flash("Academic record updated successfully.", "success")
+                return redirect(url_for('admin.view_marks'))
+            except Exception as e:
+                flash(f"Update Error: {e}", "danger")
+
+    cursor.execute("""
+        SELECT m.*, s.name as student_name, sub.subject_name 
+        FROM marks m
+        JOIN students s ON m.enrollment_no = s.enrollment_no
+        JOIN subjects sub ON m.subject_id = sub.subject_id
+        WHERE m.marks_id = %s
+    """, (marks_id,))
+    mark_data = cursor.fetchone()
+    conn.close()
+    
+    if not mark_data:
+        flash("Record not found.", "danger")
+        return redirect(url_for('admin.view_marks'))
+        
+    return render_template('admin/add_marks.html', mark=mark_data, edit_mode=True)
+
+@admin_bp.route('/delete_marks/<int:marks_id>')
 @admin_bp.route('/marks/delete/<int:marks_id>')
 def delete_marks(marks_id):
     conn = get_db_connection()
@@ -559,12 +707,13 @@ def delete_marks(marks_id):
     try:
         cursor.execute("DELETE FROM marks WHERE marks_id = %s", (marks_id,))
         conn.commit()
-        flash("Marks record deleted.", "success")
+        flash("Marks record permanently removed.", "success")
     except Exception as e:
-        flash(f"Error: {e}", "danger")
+        flash(f"Deletion Error: {e}", "danger")
     finally:
         conn.close()
     return redirect(url_for('admin.view_marks'))
+
 @admin_bp.route('/attendance')
 def view_attendance():
     conn = get_db_connection()

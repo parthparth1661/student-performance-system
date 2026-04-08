@@ -1333,12 +1333,87 @@ def get_report_data(filters={}):
         """, values)
         attendance = cursor.fetchone()
         
+        # 🏥 6. AUTO-INSIGHTS ENGINE (NEW 🔥)
+        insights = {}
+        
+        # A. Overall performance
+        cursor.execute(f"""
+            SELECT AVG(m.marks_obtained) as avg 
+            FROM marks m 
+            JOIN students s ON m.enrollment_no = s.enrollment_no 
+            JOIN subjects sub ON m.subject_id = sub.subject_id
+            {where_clause}
+        """, values)
+        avg_val = cursor.fetchone()['avg'] or 0
+        insights['avg_marks'] = round(avg_val, 2)
+        if avg_val > 75: insights['performance_label'] = "Excellent overall performance"
+        elif avg_val >= 50: insights['performance_label'] = "Average performance"
+        else: insights['performance_label'] = "Performance needs improvement"
+
+        # B. Top performing subject
+        cursor.execute(f"""
+            SELECT sub.subject_name, AVG(m.marks_obtained) as avg_marks
+            FROM marks m
+            JOIN subjects sub ON m.subject_id = sub.subject_id
+            JOIN students s ON m.enrollment_no = s.enrollment_no
+            {where_clause}
+            GROUP BY sub.subject_id
+            ORDER BY avg_marks DESC
+            LIMIT 1
+        """, values)
+        insights['top_subject'] = cursor.fetchone()
+
+        # C. Weak subject detection
+        cursor.execute(f"""
+            SELECT sub.subject_name, AVG(m.marks_obtained) as avg_marks
+            FROM marks m
+            JOIN subjects sub ON m.subject_id = sub.subject_id
+            JOIN students s ON m.enrollment_no = s.enrollment_no
+            {where_clause}
+            GROUP BY sub.subject_id
+            ORDER BY avg_marks ASC
+            LIMIT 1
+        """, values)
+        insights['weak_subject'] = cursor.fetchone()
+
+        # D. Pass/Fail Analysis
+        if pass_fail and (pass_fail['pass_count'] or pass_fail['fail_count']):
+            total = (pass_fail['pass_count'] or 0) + (pass_fail['fail_count'] or 0)
+            insights['pass_percent'] = round((pass_fail['pass_count'] or 0) / total * 100, 1) if total > 0 else 0
+            insights['fail_percent'] = round((pass_fail['fail_count'] or 0) / total * 100, 1) if total > 0 else 0
+        
+        # E. Top student
+        cursor.execute(f"""
+            SELECT s.name, AVG(m.marks_obtained) as avg_marks
+            FROM students s
+            JOIN marks m ON s.enrollment_no = m.enrollment_no
+            JOIN subjects sub ON m.subject_id = sub.subject_id
+            {where_clause}
+            GROUP BY s.enrollment_no, s.name
+            ORDER BY avg_marks DESC
+            LIMIT 1
+        """, values)
+        insights['top_student'] = cursor.fetchone()
+
+        # F. Low performers (Below 40)
+        cursor.execute(f"""
+            SELECT COUNT(DISTINCT m.enrollment_no) as count
+            FROM marks m
+            JOIN students s ON m.enrollment_no = s.enrollment_no
+            JOIN subjects sub ON m.subject_id = sub.subject_id
+            {where_clause}
+            AND m.marks_obtained < 40
+        """, values)
+        insights['low_performers_count'] = cursor.fetchone()['count'] or 0
+
+
         return {
             'dept_perf': dept_perf,
             'sem_perf': sem_perf,
             'sub_perf': sub_perf,
             'pass_fail': pass_fail,
-            'attendance': attendance
+            'attendance': attendance,
+            'insights': insights
         }
     except Exception as e:
         print(f"Error fetching report data: {e}")

@@ -101,6 +101,7 @@ def init_db():
                     exam_type VARCHAR(50),
                     marks_obtained INT,
                     total_marks INT DEFAULT 100,
+                    status VARCHAR(20),
                     FOREIGN KEY (enrollment_no) REFERENCES students(enrollment_no) ON DELETE CASCADE,
                     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE
                 )
