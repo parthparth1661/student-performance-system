@@ -483,6 +483,30 @@ def edit_faculty(faculty_id):
     conn.close()
     return render_template('admin/add_faculty.html', faculty=f_data, subjects=subjects, current_subject_id=current_subject_id, edit_mode=True)
 
+@admin_bp.route('/faculty/analytics')
+def faculty_analytics():
+    filters = {'department': request.args.get('department')}
+    from analysis import get_faculty_analytics, generate_faculty_performance_charts
+    
+    analytics_data = get_faculty_analytics(filters)
+    generate_faculty_performance_charts(analytics_data)
+    
+    return render_template('admin/faculty_analytics.html', 
+                          analytics=analytics_data, 
+                          filters=filters)
+
+@admin_bp.route('/faculty/profile/<int:faculty_id>')
+def faculty_profile_view(faculty_id):
+    from analysis import get_single_faculty_detail
+    data = get_single_faculty_detail(faculty_id)
+    if not data:
+        flash("Faculty profile not found.", "danger")
+        return redirect(url_for('admin.view_faculty'))
+    
+    return render_template('admin/faculty_detail.html', 
+                          profile=data['profile'], 
+                          subjects=data['subjects'])
+
 # --- 📊 4. MARKS MODULE ---
 @admin_bp.route('/marks')
 def view_marks():

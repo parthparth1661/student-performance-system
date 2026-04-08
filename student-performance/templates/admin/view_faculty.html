@@ -9,9 +9,14 @@
         <h2 class="fw-bold mb-0 text-dark">Institutional Faculty Registry</h2>
         <p class="text-muted small">Manage academic staff and departmental subject assignments.</p>
     </div>
-    <a href="{{ url_for('admin.add_faculty') }}" class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm transition-hover">
-        <i class="fas fa-plus me-2"></i>Add New Faculty
-    </a>
+    <div class="d-flex gap-2">
+        <a href="{{ url_for('admin.faculty_analytics') }}" class="btn btn-indigo text-white px-4 rounded-3 fw-bold shadow-sm transition-hover">
+            <i class="fas fa-chart-pie me-2"></i>Performance Analytics
+        </a>
+        <a href="{{ url_for('admin.add_faculty') }}" class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm transition-hover">
+            <i class="fas fa-plus me-2"></i>Add New Faculty
+        </a>
+    </div>
 </div>
 
 <!-- 🔍 SMART FILTER ENGINE -->
@@ -86,15 +91,21 @@
                         {% endif %}
                     </td>
                     <td class="text-center pe-4">
-                        <div class="dropdown">
-                            <button class="btn btn-light btn-sm rounded-3 border-0 shadow-sm" data-bs-toggle="dropdown">
-                                <i class="fas fa-ellipsis-v text-muted"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-3 small">
-                                <li><a class="dropdown-item py-2" href="{{ url_for('admin.edit_faculty', faculty_id=f.faculty_id) }}"><i class="fas fa-edit me-2 text-primary"></i>Modify Profile</a></li>
-                                <li><hr class="dropdown-divider opacity-50"></li>
-                                <li><a class="dropdown-item py-2 text-danger" href="{{ url_for('admin.delete_faculty', faculty_id=f.faculty_id) }}" onclick="return confirm('Archiving faculty member #{{ f.faculty_id }}? This will unmap all assigned subjects.')"><i class="fas fa-user-minus me-2"></i>Delete Record</a></li>
-                            </ul>
+                        <div class="d-flex justify-content-center align-items-center gap-2">
+                            <a href="{{ url_for('admin.faculty_profile_view', faculty_id=f.faculty_id) }}" 
+                               class="btn-analytics transition-hover" title="Pedagogical Analytics">
+                                <i class="fas fa-chart-line me-1"></i>Analytics
+                            </a>
+                            <div class="dropdown">
+                                <button class="btn btn-light btn-sm rounded-3 border-0 shadow-sm" data-bs-toggle="dropdown">
+                                    <i class="fas fa-ellipsis-v text-muted"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-3 small">
+                                    <li><a class="dropdown-item py-2" href="{{ url_for('admin.edit_faculty', faculty_id=f.faculty_id) }}"><i class="fas fa-edit me-2 text-primary"></i>Modify Profile</a></li>
+                                    <li><hr class="dropdown-divider opacity-50"></li>
+                                    <li><a class="dropdown-item py-2 text-danger" href="{{ url_for('admin.delete_faculty', faculty_id=f.faculty_id) }}" onclick="return confirm('Archiving faculty member #{{ f.faculty_id }}? This will unmap all assigned subjects.')"><i class="fas fa-user-minus me-2"></i>Delete Record</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -142,6 +153,47 @@
 
 <style>
 .bg-danger-soft { background-color: rgba(239, 68, 68, 0.1); }
+.btn-indigo {
+    background: #6366f1;
+    color: #ffffff !important;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    transition: all 0.25s ease;
+}
+
+.btn-indigo:hover {
+    background: #4f46e5;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.btn-analytics {
+    background: #10b981;
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    border: 1px solid #10b981;
+}
+
+.btn-analytics:hover {
+    background: #059669;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
 .extra-small { font-size: 0.75rem; }
 .transition-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .transition-hover:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }

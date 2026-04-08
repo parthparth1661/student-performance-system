@@ -1,0 +1,105 @@
+{% extends 'admin/layout.html' %}
+
+{% block page_title %}Faculty Pedagogical Profile{% endblock %}
+
+{% block content %}
+<!-- 🛰️ NAVIGATION HUB -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <a href="{{ url_for('admin.faculty_analytics') }}" class="btn btn-light border rounded-3 px-3 shadow-sm">
+        <i class="fas fa-arrow-left me-2"></i>Back to Analytics
+    </a>
+    <h5 class="fw-bold mb-0 text-dark">Analytical Profile: {{ profile.faculty_name }}</h5>
+</div>
+
+<div class="row g-4 mb-5">
+    <!-- 1. Master Identity Card -->
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100 text-center">
+            <div class="admin-avatar mx-auto mb-4" style="width: 100px; height: 100px; font-size: 2.5rem; background-color: var(--primary-color);">
+                {{ profile.faculty_name[:1].upper() }}{{ profile.faculty_name.split(' ')[-1][:1].upper() if ' ' in profile.faculty_name else '' }}
+            </div>
+            <h4 class="fw-bold text-dark mb-1">{{ profile.faculty_name }}</h4>
+            <p class="text-muted small mb-4">{{ profile.email }}</p>
+            
+            <div class="badge bg-primary-soft text-primary px-4 py-2 rounded-pill fw-bold mb-5 shadow-sm border border-primary border-opacity-10">
+                {{ profile.department }} HOST DEPT
+            </div>
+
+            <div class="row g-3 text-start">
+                <div class="col-6">
+                    <div class="p-3 bg-light rounded-4">
+                        <div class="extra-small text-muted fw-bold text-uppercase mb-1">Global Avg</div>
+                        <div class="h5 fw-bold m-0 text-indigo">{{ "%.1f"|format(profile.global_avg or 0) }}%</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 bg-light rounded-4">
+                        <div class="extra-small text-muted fw-bold text-uppercase mb-1">Students</div>
+                        <div class="h5 fw-bold m-0 text-dark">{{ profile.unique_students or 0 }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Subject Breakdown Matrix -->
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100">
+            <h6 class="fw-bold mb-4 text-dark d-flex align-items-center">
+                <span class="bg-indigo-soft text-indigo p-2 rounded-3 me-3"><i class="fas fa-book-open"></i></span>
+                Academic Subject Breakdown
+            </h6>
+            
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr class="text-muted extra-small text-uppercase fw-bold">
+                            <th class="ps-3 py-3">Subject Module</th>
+                            <th class="py-3">Performance</th>
+                            <th class="py-3">Success Matrix</th>
+                            <th class="py-3">Audience</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sub in subjects %}
+                        <tr>
+                            <td class="ps-3">
+                                <div class="fw-bold text-dark">{{ sub.subject_name }}</div>
+                                <div class="extra-small text-muted">Semester {{ sub.semester }}</div>
+                            </td>
+                            <td>
+                                <div class="fw-bold text-indigo">{{ "%.1f"|format(sub.avg_marks or 0) }}%</div>
+                            </td>
+                            <td>
+                                <div class="badge {% if sub.pass_pct >= 75 %}bg-success{% elif sub.pass_pct >= 50 %}bg-warning{% else %}bg-danger{% endif %} text-white px-3 py-1 rounded-pill small">
+                                    {{ "%.1f"|format(sub.pass_pct or 0) }}% PASS
+                                </div>
+                            </td>
+                            <td>
+                                <span class="small text-muted fw-medium">{{ sub.entry_count or 0 }} Records</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-4 p-3 bg-primary-soft rounded-4 border border-primary border-opacity-10 d-flex align-items-center">
+                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px; flex-shrink: 0;">
+                    <i class="fas fa-info-circle extra-small"></i>
+                </div>
+                <p class="extra-small text-dark mb-0 fw-medium">
+                    Stats are calculated based on all active mark entries in the SPDA Institutional Ledger for this faculty member.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.text-indigo { color: #6366f1; }
+.bg-primary-soft { background: rgba(99, 102, 241, 0.08); }
+.bg-indigo-soft { background: rgba(99, 102, 241, 0.1); }
+.extra-small { font-size: 0.75rem; }
+</style>
+{% endblock %}

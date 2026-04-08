@@ -1532,3 +1532,110 @@ def export_report_pdf(filters={}, data={}):
     except Exception as e:
         print(f"Error exporting PDF report: {e}")
         return None
+
+def get_faculty_analytics(filters={}):
+    """Aggregate teacher-level performance metrics based on student outcomes"""
+    conn = get_db_connection()
+    if not conn: return []
+    
+    try:
+        cursor = conn.cursor(dictionary=True)
+        query = """
+            SELECT f.faculty_id, f.faculty_name, f.department, f.email,
+                   GROUP_CONCAT(DISTINCT sub.subject_name SEPARATOR ', ') as subjects_taught,
+                   AVG((m.marks_obtained / m.total_marks) * 100) as avg_marks,
+                   (COUNT(CASE WHEN (m.marks_obtained / m.total_marks) * 100 >= 40 THEN 1 END)*100.0 / NULLIF(COUNT(m.marks_id), 0)) as pass_percentage,
+                   COUNT(DISTINCT m.enrollment_no) as total_students
+            FROM faculty f
+            JOIN subjects sub ON f.faculty_id = sub.faculty_id
+            LEFT JOIN marks m ON sub.subject_id = m.subject_id
+            WHERE 1=1
+        """
+        params = []
+        if filters.get('department') and filters['department'] != 'All':
+            query += " AND f.department = %s"
+            params.append(filters['department'])
+            
+        query += " GROUP BY f.faculty_id ORDER BY avg_marks DESC"
+        cursor.execute(query, params)
+        analytics = cursor.fetchall()
+        
+        for record in analytics:
+            avg = float(record['avg_marks'] or 0)
+            if avg > 75: record['status'] = 'Excellent'
+            elif avg >= 50: record['status'] = 'Average'
+            else: record['status'] = 'Needs Improvement'
+            
+        return analytics
+    except Exception as e:
+        print(f"Error in faculty analytics calculation: {e}")
+        return []
+    finally:
+        conn.close()
+
+def generate_faculty_performance_charts(analytics):
+    """Generate comparative charts for faculty benchmarking"""
+    try:
+        if not analytics: return
+        plt.style.use('ggplot')
+        
+        names = [f['faculty_name'][:12] + '..' if len(f['faculty_name']) > 12 else f['faculty_name'] for f in analytics]
+        avg_marks = [float(f['avg_marks'] or 0) for f in analytics]
+        
+        plt.figure(figsize=(12, 6))
+        colors = ['#10b981' if x > 75 else '#6366f1' if x >= 50 else '#ef4444' for x in avg_marks]
+        
+        plt.bar(names, avg_marks, color=colors, alpha=0.85, edgecolor='#334155', linewidth=1)
+        plt.axhline(y=50, color='#94a3b8', linestyle='--', alpha=0.5, label='Benchmark (50%)')
+        plt.title('Faculty Performance Index (Student Success Rate)', fontsize=14, fontweight='bold', pad=20)
+        plt.ylabel('Average Performance (%)', fontweight='bold')
+        plt.ylim(0, 100)
+        plt.xticks(rotation=15, fontsize=9)
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(os.path.join(CHARTS_DIR, 'faculty_benchmarking.png'), dpi=200)
+        plt.close()
+    except Exception as e:
+        print(f"Faculty chart error: {e}")
+
+def get_single_faculty_detail(faculty_id):
+    """Deep dive into a specific faculty's teaching metrics and trends"""
+    conn = get_db_connection()
+    if not conn: return None
+    
+    try:
+        cursor = conn.cursor(dictionary=True)
+        # Profile & Global Stats
+        cursor.execute("""
+            SELECT f.*, 
+                   AVG((m.marks_obtained / m.total_marks) * 100) as global_avg,
+                   COUNT(DISTINCT m.enrollment_no) as unique_students
+            FROM faculty f
+            LEFT JOIN subjects sub ON f.faculty_id = sub.faculty_id
+            LEFT JOIN marks m ON sub.subject_id = m.subject_id
+            WHERE f.faculty_id = %s
+            GROUP BY f.faculty_id
+        """, (faculty_id,))
+        profile = cursor.fetchone()
+        
+        if not profile: return None
+        
+        # Subject-wise breakdown
+        cursor.execute("""
+            SELECT sub.subject_name, sub.semester,
+                   AVG((m.marks_obtained / m.total_marks) * 100) as avg_marks,
+                   (COUNT(CASE WHEN (m.marks_obtained / m.total_marks) * 100 >= 40 THEN 1 END)*100.0 / NULLIF(COUNT(m.marks_id), 0)) as pass_pct,
+                   COUNT(m.marks_id) as entry_count
+            FROM subjects sub
+            LEFT JOIN marks m ON sub.subject_id = m.subject_id
+            WHERE sub.faculty_id = %s
+            GROUP BY sub.subject_id
+        """, (faculty_id,))
+        subjects = cursor.fetchall()
+        
+        return {'profile': profile, 'subjects': subjects}
+    except Exception as e:
+        print(f"Error in single faculty detail: {e}")
+        return None
+    finally:
+        conn.close()
