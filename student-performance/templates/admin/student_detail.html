@@ -24,11 +24,14 @@
     </div>
     <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
         <div class="d-flex gap-2 justify-content-lg-end">
-            <a href="mailto:{{ student.email }}" class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm">
-                <i class="fas fa-envelope me-2"></i>Send Email
+            <a href="{{ url_for('admin.download_student_report', enrollment_no=student.enrollment_no) }}" class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm">
+                <i class="fas fa-file-pdf me-2"></i>Download PDF
+            </a>
+            <a href="mailto:{{ student.email }}" class="btn btn-light border px-4 rounded-3 fw-bold shadow-sm">
+                <i class="fas fa-envelope me-2"></i>Email
             </a>
             <a href="{{ url_for('admin.edit_student', enrollment_no=student.enrollment_no) }}" class="btn btn-light border px-4 rounded-3 fw-bold shadow-sm">
-                <i class="fas fa-edit me-2"></i>Edit Profile
+                <i class="fas fa-edit me-2"></i>Edit
             </a>
         </div>
     </div>

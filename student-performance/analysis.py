@@ -1082,3 +1082,188 @@ def export_student_report_excel(roll_no):
     except Exception as e:
         print(f"Error in student report export: {e}")
         return None
+
+def generate_student_report_pdf(enrollment_no):
+    """Generates a professional PDF performance report for a student"""
+    try:
+        from fpdf import FPDF
+        from datetime import date
+        
+        student = get_student_details(enrollment_no)
+        marks_list = get_student_marks(enrollment_no)
+        summary = calculate_student_summary(enrollment_no)
+        
+        if not student: return None
+
+        # --- FETCH ATTENDANCE DATA ---
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("""
+            SELECT 
+                COUNT(*) as total,
+                SUM(CASE WHEN status='Present' THEN 1 ELSE 0 END) as present,
+                SUM(CASE WHEN status='Absent' THEN 1 ELSE 0 END) as absent
+            FROM attendance
+            WHERE enrollment_no = %s
+        """, (enrollment_no,))
+        att_summary = cursor.fetchone()
+        
+        total_classes = att_summary['total'] or 0
+        present_days = att_summary['present'] or 0
+        att_percent = round((present_days / total_classes * 100), 2) if total_classes > 0 else 0
+        conn.close()
+
+        class PDF(FPDF):
+            def header(self):
+                # Gradient-like header bar
+                self.set_fill_color(99, 102, 241) # Indigo-600
+                self.rect(0, 0, 210, 35, 'F')
+                self.set_y(10)
+                self.set_font('Helvetica', 'B', 22)
+                self.set_text_color(255, 255, 255)
+                self.cell(0, 10, ' STUDENT PERFORMANCE REPORT ', ln=True, align='C')
+                self.set_font('Helvetica', 'I', 10)
+                self.cell(0, 5, f'SPDA Academic System | Generated: {date.today().strftime("%d %B, %Y")}', ln=True, align='C')
+                self.ln(10)
+
+            def footer(self):
+                self.set_y(-15)
+                self.set_font('Helvetica', 'I', 8)
+                self.set_text_color(128, 128, 128)
+                self.cell(0, 10, f'Page {self.page_no()} | This is a computer generated report', align='C')
+
+        pdf = PDF()
+        pdf.add_page()
+        pdf.set_auto_page_break(auto=True, margin=15)
+        
+        # 🟢 SECTION 1: STUDENT PROFILE
+        pdf.ln(15)
+        pdf.set_font('Helvetica', 'B', 14)
+        pdf.set_text_color(30, 41, 59)
+        pdf.cell(0, 10, '1. STUDENT PROFILE', ln=True)
+        pdf.set_draw_color(226, 232, 240)
+        pdf.line(10, pdf.get_y(), 200, pdf.get_y())
+        pdf.ln(5)
+        
+        pdf.set_font('Helvetica', 'B', 11)
+        pdf.set_text_color(71, 85, 105)
+        pdf.cell(40, 8, 'Full Name:')
+        pdf.set_font('Helvetica', '', 11)
+        pdf.cell(60, 8, student['name'])
+        pdf.set_font('Helvetica', 'B', 11)
+        pdf.cell(40, 8, 'Enrollment No:')
+        pdf.set_font('Helvetica', '', 11)
+        pdf.cell(40, 8, student['enrollment_no'], ln=True)
+        
+        pdf.set_font('Helvetica', 'B', 11)
+        pdf.cell(40, 8, 'Department:')
+        pdf.set_font('Helvetica', '', 11)
+        pdf.cell(60, 8, student['department'])
+        pdf.set_font('Helvetica', 'B', 11)
+        pdf.cell(40, 8, 'Semester:')
+        pdf.set_font('Helvetica', '', 11)
+        pdf.cell(40, 8, str(student['semester']), ln=True)
+        pdf.ln(10)
+
+        # 🟡 SECTION 2: PERFORMANCE KEY METRICS
+        pdf.set_font('Helvetica', 'B', 14)
+        pdf.set_text_color(30, 41, 59)
+        pdf.cell(0, 10, '2. SYSTEM KPI SUMMARY', ln=True)
+        pdf.line(10, pdf.get_y(), 200, pdf.get_y())
+        pdf.ln(5)
+
+        # Draw summary boxes
+        start_y = pdf.get_y()
+        pdf.set_fill_color(248, 250, 252)
+        pdf.rect(10, start_y, 60, 25, 'F')
+        pdf.rect(75, start_y, 60, 25, 'F')
+        pdf.rect(140, start_y, 60, 25, 'F')
+        
+        pdf.set_font('Helvetica', 'B', 10)
+        pdf.set_text_color(100, 116, 139)
+        pdf.text(15, start_y + 8, 'AVERAGE SCORE')
+        pdf.text(80, start_y + 8, 'ATTENDANCE')
+        pdf.text(145, start_y + 8, 'RESULT STATUS')
+        
+        pdf.set_font('Helvetica', 'B', 16)
+        pdf.set_text_color(99, 102, 241)
+        pdf.text(15, start_y + 20, f'{summary["avg_marks"]}%')
+        
+        if att_percent < 75: pdf.set_text_color(239, 68, 68)
+        else: pdf.set_text_color(16, 185, 129)
+        pdf.text(80, start_y + 20, f'{att_percent}%')
+        
+        if summary["overall_result"] == 'PASS': pdf.set_text_color(16, 185, 129)
+        else: pdf.set_text_color(239, 68, 68)
+        pdf.text(145, start_y + 20, summary["overall_result"])
+        
+        pdf.set_y(start_y + 35)
+
+        # 🔴 SECTION 3: ACADEMIC DETAILS TABLE
+        pdf.set_font('Helvetica', 'B', 14)
+        pdf.set_text_color(30, 41, 59)
+        pdf.cell(0, 10, '3. SUBJECT-WISE BREAKDOWN', ln=True)
+        pdf.line(10, pdf.get_y(), 200, pdf.get_y())
+        pdf.ln(5)
+        
+        # Table Header
+        pdf.set_fill_color(99, 102, 241)
+        pdf.set_text_color(255, 255, 255)
+        pdf.set_font('Helvetica', 'B', 11)
+        pdf.cell(80, 10, ' Academic Subject', 0, 0, 'L', True)
+        pdf.cell(30, 10, 'Internal', 0, 0, 'C', True)
+        pdf.cell(30, 10, 'External', 0, 0, 'C', True)
+        pdf.cell(25, 10, 'Total', 0, 0, 'C', True)
+        pdf.cell(25, 10, 'Verdict', 0, 1, 'C', True)
+        
+        # Table Body
+        pdf.set_font('Helvetica', '', 10)
+        pdf.set_text_color(30, 41, 59)
+        fill = False
+        for item in marks_list:
+            if fill: pdf.set_fill_color(248, 250, 252)
+            else: pdf.set_fill_color(255, 255, 255)
+            
+            pdf.cell(80, 10, f' {item["subject"]}', 'B', 0, 'L', True)
+            pdf.cell(30, 10, str(item["internal"]), 'B', 0, 'C', True)
+            pdf.cell(30, 10, str(item["external"]), 'B', 0, 'C', True)
+            pdf.set_font('Helvetica', 'B', 10)
+            pdf.cell(25, 10, str(item["total"]), 'B', 0, 'C', True)
+            
+            if item["status"] == 'PASS': pdf.set_text_color(16, 185, 129)
+            else: pdf.set_text_color(239, 68, 68)
+            pdf.cell(25, 10, item["status"], 'B', 1, 'C', True)
+            
+            pdf.set_text_color(30, 41, 59)
+            pdf.set_font('Helvetica', '', 10)
+            fill = not fill
+        
+        pdf.ln(10)
+
+        # 🔵 SECTION 4: ATTENDANCE & CONDUCT
+        pdf.set_font('Helvetica', 'B', 14)
+        pdf.cell(0, 10, '4. ATTENDANCE & CONDUCT REMARKS', ln=True)
+        pdf.line(10, pdf.get_y(), 200, pdf.get_y())
+        pdf.ln(5)
+        
+        pdf.set_font('Helvetica', '', 11)
+        pdf.cell(0, 8, f'- Total Sessions Scheduled: {total_classes}', ln=True)
+        pdf.cell(0, 8, f'- Physical Presence Recorded: {present_days} sessions', ln=True)
+        pdf.cell(0, 8, f'- Unauthorized Absences: {att_summary["absent"] or 0} sessions', ln=True)
+        
+        pdf.ln(5)
+        pdf.set_font('Helvetica', 'B', 12)
+        pdf.set_text_color(99, 102, 241)
+        remark = "Exemplary Performance" if summary["avg_marks"] >= 85 and att_percent >= 85 else "Satisfactory" if summary["avg_marks"] >= 60 else "Requires Mentorship"
+        pdf.cell(0, 10, f'Final Remark: {remark}', ln=True)
+
+        file_name = f'Report_{enrollment_no}.pdf'
+        file_path = os.path.join(UPLOADS_DIR, file_name)
+        if not os.path.exists(UPLOADS_DIR): os.makedirs(UPLOADS_DIR)
+        
+        pdf.output(file_path)
+        return file_path
+        
+    except Exception as e:
+        print(f"Error in PDF generation layer: {e}")
+        return None

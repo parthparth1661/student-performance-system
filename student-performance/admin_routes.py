@@ -591,8 +591,17 @@ def student_report_view(enrollment_no):
                           attendance=att_info,
                           detailed_attendance=detailed_attendance)
 
-@admin_bp.route('/profile')
-def profile():
+@admin_bp.route('/student-report/<enrollment_no>/download')
+def download_student_report(enrollment_no):
+    from analysis import generate_student_report_pdf
+    from flask import send_file
+    
+    file_path = generate_student_report_pdf(enrollment_no)
+    if file_path and os.path.exists(file_path):
+        return send_file(file_path, as_attachment=True)
+    
+    flash("Error generating PDF report. Please try again.", "danger")
+    return redirect(url_for('admin.student_report_view', enrollment_no=enrollment_no))
     return render_template('admin/admin_profile.html', email=session.get('admin_email'))
 
 @admin_bp.route('/change-password', methods=['GET', 'POST'])
