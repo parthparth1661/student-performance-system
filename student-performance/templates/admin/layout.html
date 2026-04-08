@@ -278,6 +278,10 @@
                 <i class="fas fa-poll"></i>
                 <span>Academic Marks</span>
             </a>
+            <a href="{{ url_for('admin.view_attendance') }}" class="nav-item {{ 'active' if 'attendance' in request.endpoint }}">
+                <i class="fas fa-user-check"></i>
+                <span>Attendance Hub</span>
+            </a>
             <a href="{{ url_for('admin.view_reports') }}" class="nav-item {{ 'active' if request.endpoint == 'admin.view_reports' }}">
                 <i class="fas fa-chart-line"></i>
                 <span>Reports Center</span>

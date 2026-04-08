@@ -714,27 +714,138 @@ def delete_marks(marks_id):
         conn.close()
     return redirect(url_for('admin.view_marks'))
 
+# --- 🛰️ 5. ATTENDANCE MODULE ---
 @admin_bp.route('/attendance')
 def view_attendance():
+    enrollment = request.args.get('enrollment')
+    department = request.args.get('department')
+    semester = request.args.get('semester')
+    subject_id = request.args.get('subject_id')
+    status_filter = request.args.get('status')
+    date_filter = request.args.get('date')
+    
+    page = request.args.get('page', 1, type=int)
+    limit = 10
+    offset = (page - 1) * limit
+
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute("""
-        SELECT a.*, s.name as student_name, sub.subject_name 
+    
+    # Base query with joins
+    query = """
+        SELECT a.*, s.name as student_name, sub.subject_name, sub.department, sub.semester
         FROM attendance a
         JOIN students s ON a.enrollment_no = s.enrollment_no
         JOIN subjects sub ON a.subject_id = sub.subject_id
-    """)
-    records = cursor.fetchall()
-    conn.close()
-    return render_template('admin/view_attendance.html', records=records)
+        WHERE 1=1
+    """
+    params = []
 
-@admin_bp.route('/attendance/add', methods=['GET', 'POST'])
+    if enrollment:
+        query += " AND (a.enrollment_no LIKE %s OR s.name LIKE %s)"
+        params.extend([f"%{enrollment}%", f"%{enrollment}%"])
+    
+    if department and department != 'All':
+        query += " AND sub.department = %s"
+        params.append(department)
+        
+    if semester and semester != 'All':
+        query += " AND sub.semester = %s"
+        params.append(semester)
+
+    if subject_id and subject_id != 'All':
+        query += " AND a.subject_id = %s"
+        params.append(subject_id)
+        
+    if status_filter and status_filter != 'All':
+        query += " AND a.status = %s"
+        params.append(status_filter)
+
+    if date_filter:
+        query += " AND a.date = %s"
+        params.append(date_filter)
+
+    # 📊 Calculate Summary Stats
+    stats_query = f"""
+        SELECT 
+            COUNT(*) as total_classes,
+            SUM(CASE WHEN status = 'Present' THEN 1 ELSE 0 END) as present_count,
+            SUM(CASE WHEN status = 'Absent' THEN 1 ELSE 0 END) as absent_count
+        FROM ({query}) as filtered_att
+    """
+    cursor.execute(stats_query, params)
+    att_stats = cursor.fetchone()
+    
+    # Calculate Attendance %
+    if att_stats and att_stats['total_classes'] > 0:
+        att_stats['percent'] = round((att_stats['present_count'] / att_stats['total_classes']) * 100, 2)
+    else:
+        att_stats = {'total_classes': 0, 'present_count': 0, 'absent_count': 0, 'percent': 0}
+
+    # ⚠️ ALERT SYSTEM: Identify low attendance students (<75%)
+    # We check across all students in the selected department/semester context
+    alert_query = """
+        SELECT s.name, s.enrollment_no,
+        (SUM(CASE WHEN a.status='Present' THEN 1 ELSE 0 END)*100.0/NULLIF(COUNT(a.attendance_id), 0)) as attendance_pct
+        FROM students s
+        LEFT JOIN attendance a ON s.enrollment_no = a.enrollment_no
+        JOIN subjects sub ON 1=1 -- Placeholder to allow filtering by subject if needed, but usually alerts are global
+    """
+    # Simplified alert for now to avoid complex group by logic errors during filtration
+    cursor.execute("""
+        SELECT s.name, s.enrollment_no,
+        (SUM(CASE WHEN a.status='Present' THEN 1 ELSE 0 END)*100.0/NULLIF(COUNT(a.attendance_id), 0)) as attendance_pct
+        FROM students s
+        JOIN attendance a ON s.enrollment_no = a.enrollment_no
+        GROUP BY s.enrollment_no
+        HAVING attendance_pct < 75
+    """)
+    low_attendance_students = cursor.fetchall()
+    low_att_count = len(low_attendance_students)
+    low_att_ids = [s['enrollment_no'] for s in low_attendance_students]
+
+    # Pagination data
+    count_query = f"SELECT COUNT(*) as count FROM ({query}) as sub_query"
+    cursor.execute(count_query, params)
+    total_records = cursor.fetchone()['count']
+    total_pages = math.ceil(total_records / limit)
+
+    # Fetch final paginated data
+    query += " ORDER BY a.date DESC, a.attendance_id DESC LIMIT %s OFFSET %s"
+    params.extend([limit, offset])
+    cursor.execute(query, params)
+    attendance_list = cursor.fetchall()
+
+    # Helpers
+    cursor.execute("SELECT subject_id, subject_name FROM subjects ORDER BY subject_name")
+    all_subjects = cursor.fetchall()
+    
+    conn.close()
+    return render_template('admin/view_attendance.html', 
+                          attendance_list=attendance_list, 
+                          subjects=all_subjects,
+                          stats=att_stats,
+                          low_att_count=low_att_count,
+                          low_att_ids=low_att_ids,
+                          page=page, 
+                          total_pages=total_pages,
+                          filters={
+                              'enrollment': enrollment, 
+                              'department': department,
+                              'semester': semester,
+                              'subject_id': subject_id,
+                              'status': status_filter,
+                              'date': date_filter
+                          })
+
+@admin_bp.route('/add_attendance', methods=['GET', 'POST'])
 def add_attendance():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM students")
+    
+    cursor.execute("SELECT enrollment_no, name FROM students ORDER BY enrollment_no")
     students = cursor.fetchall()
-    cursor.execute("SELECT * FROM subjects")
+    cursor.execute("SELECT subject_id, subject_name FROM subjects ORDER BY subject_name")
     subjects = cursor.fetchall()
     
     if request.method == 'POST':
@@ -743,32 +854,77 @@ def add_attendance():
         att_date = request.form['date']
         status = request.form['status']
         
-        try:
+        # ⚠️ VALIDATION (STRICT 🔥)
+        if not all([enrollment_no, subject_id, att_date, status]):
+            flash("All fields are required!", "danger")
+        else:
+            # 🛡️ PREVENT DUPLICATE ENTRY (same student + subject + date)
             cursor.execute("""
-                INSERT INTO attendance (enrollment_no, subject_id, date, status)
-                VALUES (%s, %s, %s, %s)
-            """, (enrollment_no, subject_id, att_date, status))
-            conn.commit()
-            flash("Attendance marked successfully!", "success")
-            return redirect(url_for('admin.view_attendance'))
-        except Exception as e:
-            flash(f"Error: {e}", "danger")
+                SELECT * FROM attendance 
+                WHERE enrollment_no = %s AND subject_id = %s AND date = %s
+            """, (enrollment_no, subject_id, att_date))
+            
+            if cursor.fetchone():
+                flash(f"Duplicate Error: Attendance already marked for {enrollment_no} on {att_date} for this subject.", "warning")
+            else:
+                try:
+                    cursor.execute("""
+                        INSERT INTO attendance (enrollment_no, subject_id, date, status)
+                        VALUES (%s, %s, %s, %s)
+                    """, (enrollment_no, subject_id, att_date, status))
+                    conn.commit()
+                    flash(f"Attendance for {enrollment_no} recorded successfully!", "success")
+                    return redirect(url_for('admin.view_attendance'))
+                except Exception as e:
+                    flash(f"System Error: {e}", "danger")
     
+    conn.close()
     return render_template('admin/add_attendance.html', 
                           students=students, 
                           subjects=subjects, 
-                          today_date=date.today().strftime('%Y-%m-%d'))
+                          today=date.today().strftime('%Y-%m-%d'))
 
-@admin_bp.route('/attendance/delete/<int:attendance_id>')
+@admin_bp.route('/edit_attendance/<int:attendance_id>', methods=['GET', 'POST'])
+def edit_attendance(attendance_id):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    if request.method == 'POST':
+        status = request.form['status']
+        try:
+            cursor.execute("UPDATE attendance SET status=%s WHERE attendance_id=%s", (status, attendance_id))
+            conn.commit()
+            flash("Attendance status updated.", "success")
+            return redirect(url_for('admin.view_attendance'))
+        except Exception as e:
+            flash(f"Update Error: {e}", "danger")
+
+    cursor.execute("""
+        SELECT a.*, s.name as student_name, sub.subject_name 
+        FROM attendance a
+        JOIN students s ON a.enrollment_no = s.enrollment_no
+        JOIN subjects sub ON a.subject_id = sub.subject_id
+        WHERE a.attendance_id = %s
+    """, (attendance_id,))
+    record = cursor.fetchone()
+    conn.close()
+    
+    if not record:
+        flash("Record not found.", "danger")
+        return redirect(url_for('admin.view_attendance'))
+        
+    return render_template('admin/add_attendance.html', record=record, edit_mode=True)
+
+@admin_bp.route('/delete_attendance/<int:attendance_id>')
 def delete_attendance(attendance_id):
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
         cursor.execute("DELETE FROM attendance WHERE attendance_id = %s", (attendance_id,))
         conn.commit()
-        flash("Attendance record removed.", "success")
+        flash("Attendance record permanently deleted.", "success")
     except Exception as e:
-        flash(f"Error: {e}", "danger")
+        flash(f"Deletion failed: {e}", "danger")
     finally:
         conn.close()
     return redirect(url_for('admin.view_attendance'))
