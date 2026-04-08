@@ -640,6 +640,67 @@ def download_student_report(enrollment_no):
     
     flash("Error generating PDF report. Please try again.", "danger")
     return redirect(url_for('admin.student_report_view', enrollment_no=enrollment_no))
+
+@admin_bp.route('/reports')
+def view_reports():
+    filters = {
+        'department': request.args.get('department'),
+        'semester': request.args.get('semester'),
+        'subject': request.args.get('subject')
+    }
+    
+    from analysis import get_report_data, generate_report_charts
+    data = get_report_data(filters)
+    generate_report_charts(data)
+    
+    # Get subjects for filter dropdown
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    if filters['department'] and filters['department'] != 'All':
+        cursor.execute("SELECT DISTINCT subject_name FROM subjects WHERE department = %s", (filters['department'],))
+    else:
+        cursor.execute("SELECT DISTINCT subject_name FROM subjects")
+    subjects = [row['subject_name'] for row in cursor.fetchall()]
+    conn.close()
+    
+    return render_template('admin/view_reports.html', 
+                          data=data, 
+                          filters=filters, 
+                          subjects=subjects)
+
+@admin_bp.route('/reports/export/csv')
+def export_csv():
+    filters = {
+        'department': request.args.get('department'),
+        'semester': request.args.get('semester'),
+        'subject': request.args.get('subject')
+    }
+    from analysis import export_report_csv
+    file_path = export_report_csv(filters)
+    if file_path:
+        from flask import send_file
+        return send_file(file_path, as_attachment=True)
+    flash("Export failed.", "danger")
+    return redirect(url_for('admin.view_reports'))
+
+@admin_bp.route('/reports/export/pdf')
+def export_pdf():
+    filters = {
+        'department': request.args.get('department'),
+        'semester': request.args.get('semester'),
+        'subject': request.args.get('subject')
+    }
+    from analysis import get_report_data, export_report_pdf
+    data = get_report_data(filters)
+    file_path = export_report_pdf(filters, data)
+    if file_path:
+        from flask import send_file
+        return send_file(file_path, as_attachment=True)
+    flash("Export failed.", "danger")
+    return redirect(url_for('admin.view_reports'))
+
+@admin_bp.route('/profile')
+def profile():
     return render_template('admin/admin_profile.html', email=session.get('admin_email'))
 
 @admin_bp.route('/change-password', methods=['GET', 'POST'])

@@ -1267,3 +1267,268 @@ def generate_student_report_pdf(enrollment_no):
     except Exception as e:
         print(f"Error in PDF generation layer: {e}")
         return None
+
+def get_report_data(filters={}):
+    """Aggregate all statistical data required for the high-fidelity reports page"""
+    conn = get_db_connection()
+    if not conn: return {}
+    
+    try:
+        cursor = conn.cursor(dictionary=True)
+        where_clause, values = build_dashboard_conditions(filters)
+        
+        # 🟢 1. DEPARTMENT-WISE PERFORMANCE
+        cursor.execute(f"""
+            SELECT s.department, AVG(m.total_marks) as avg_marks
+            FROM students s
+            JOIN marks m ON s.enrollment_no = m.enrollment_no
+            {where_clause}
+            GROUP BY s.department
+        """, values)
+        dept_perf = cursor.fetchall()
+        
+        # 🟡 2. SEMESTER-WISE PERFORMANCE
+        cursor.execute(f"""
+            SELECT s.semester, AVG(m.total_marks) as avg_marks
+            FROM students s
+            JOIN marks m ON s.enrollment_no = m.enrollment_no
+            {where_clause}
+            GROUP BY s.semester
+            ORDER BY s.semester
+        """, values)
+        sem_perf = cursor.fetchall()
+        
+        # 🔴 3. SUBJECT-WISE PERFORMANCE
+        cursor.execute(f"""
+            SELECT sub.subject_name, AVG(m.total_marks) as avg_marks
+            FROM marks m
+            JOIN subjects sub ON m.subject_id = sub.subject_id
+            JOIN students s ON m.enrollment_no = s.enrollment_no
+            {where_clause}
+            GROUP BY sub.subject_name
+            ORDER BY avg_marks DESC
+            LIMIT 10
+        """, values)
+        sub_perf = cursor.fetchall()
+        
+        # 🔵 4. PASS/FAIL RATIO
+        cursor.execute(f"""
+            SELECT 
+                SUM(CASE WHEN m.status = 'PASS' THEN 1 ELSE 0 END) as pass_count,
+                SUM(CASE WHEN m.status = 'FAIL' THEN 1 ELSE 0 END) as fail_count
+            FROM marks m
+            JOIN students s ON m.enrollment_no = s.enrollment_no
+            {where_clause}
+        """, values)
+        pass_fail = cursor.fetchone()
+        
+        # 🟣 5. ATTENDANCE SUMMARY
+        cursor.execute(f"""
+            SELECT 
+                SUM(CASE WHEN a.status = 'Present' THEN 1 ELSE 0 END) as present,
+                SUM(CASE WHEN a.status = 'Absent' THEN 1 ELSE 0 END) as absent
+            FROM attendance a
+            JOIN students s ON a.enrollment_no = s.enrollment_no
+            {where_clause}
+        """, values)
+        attendance = cursor.fetchone()
+        
+        return {
+            'dept_perf': dept_perf,
+            'sem_perf': sem_perf,
+            'sub_perf': sub_perf,
+            'pass_fail': pass_fail,
+            'attendance': attendance
+        }
+    except Exception as e:
+        print(f"Error fetching report data: {e}")
+        return {}
+    finally:
+        conn.close()
+
+def generate_report_charts(data, suffix='report'):
+    """Generate the full analytical suite of charts for the reporting engine"""
+    try:
+        from datetime import date
+        plt.style.use('ggplot')
+        
+        # 1. Department-wise Performance (Bar)
+        if data.get('dept_perf'):
+            plt.figure(figsize=(10, 6))
+            depts = [d['department'] for d in data['dept_perf']]
+            marks = [float(d['avg_marks']) for d in data['dept_perf']]
+            bars = plt.bar(depts, marks, color='#6366f1', alpha=0.8, edgecolor='#4f46e5', linewidth=1.5)
+            plt.title('Performance benchmarking by Department', fontsize=14, fontweight='bold', pad=20)
+            plt.ylabel('Average Marks Aggregate (%)', fontweight='bold')
+            plt.grid(axis='y', linestyle='--', alpha=0.5)
+            # Add labels
+            for bar in bars:
+                yval = bar.get_height()
+                plt.text(bar.get_x() + bar.get_width()/2, yval + 1, f'{yval:.1f}%', ha='center', va='bottom', fontweight='bold')
+            plt.tight_layout()
+            plt.savefig(os.path.join(CHARTS_DIR, f'{suffix}_dept.png'), dpi=200)
+            plt.close()
+
+        # 2. Semester trend (Line)
+        if data.get('sem_perf'):
+            plt.figure(figsize=(10, 6))
+            sems = [f"Sem {d['semester']}" for d in data['sem_perf']]
+            marks = [float(d['avg_marks']) for d in data['sem_perf']]
+            plt.plot(sems, marks, marker='o', linestyle='-', color='#ec4899', linewidth=3, markersize=8, markerfacecolor='white', markeredgewidth=2)
+            plt.fill_between(sems, marks, color='#fbcfe8', alpha=0.3)
+            plt.title('Academic Growth Curve across Semesters', fontsize=14, fontweight='bold', pad=20)
+            plt.ylabel('Average Score (%)', fontweight='bold')
+            plt.grid(True, linestyle=':', alpha=0.6)
+            plt.tight_layout()
+            plt.savefig(os.path.join(CHARTS_DIR, f'{suffix}_sem.png'), dpi=200)
+            plt.close()
+
+        # 3. Subject Distribution (Horizontal Bar)
+        if data.get('sub_perf'):
+            plt.figure(figsize=(10, 6))
+            subs = [d['subject_name'][:15] + '...' if len(d['subject_name']) > 15 else d['subject_name'] for d in data['sub_perf']]
+            marks = [float(d['avg_marks']) for d in data['sub_perf']]
+            plt.barh(subs, marks, color='#10b981', alpha=0.8)
+            plt.title('Top 10 High-Performing Subjects', fontsize=14, fontweight='bold', pad=20)
+            plt.xlabel('Average Marks (%)', fontweight='bold')
+            plt.gca().invert_yaxis()
+            plt.tight_layout()
+            plt.savefig(os.path.join(CHARTS_DIR, f'{suffix}_sub.png'), dpi=200)
+            plt.close()
+
+        # 4. Pass/Fail Success Ratio (Donut)
+        if data.get('pass_fail'):
+            pf = data['pass_fail']
+            counts = [pf['pass_count'] or 0, pf['fail_count'] or 0]
+            if sum(counts) > 0:
+                plt.figure(figsize=(8, 8))
+                plt.pie(counts, labels=['Pass', 'Fail'], autopct='%1.1f%%', colors=['#10b981', '#ef4444'], 
+                        startangle=140, pctdistance=0.85, wedgeprops={'width': 0.4, 'edgecolor': 'w'})
+                plt.title('Institutional Pass/Fail Velocity', fontsize=14, fontweight='bold', pad=10)
+                plt.tight_layout()
+                plt.savefig(os.path.join(CHARTS_DIR, f'{suffix}_pf.png'), dpi=200)
+                plt.close()
+
+        # 5. Attendance Distribution (Donut)
+        if data.get('attendance'):
+            att = data['attendance']
+            counts = [att['present'] or 0, att['absent'] or 0]
+            if sum(counts) > 0:
+                plt.figure(figsize=(8, 8))
+                plt.pie(counts, labels=['Present', 'Absent'], autopct='%1.1f%%', colors=['#6366f1', '#f97316'], 
+                        startangle=140, pctdistance=0.85, wedgeprops={'width': 0.4, 'edgecolor': 'w'})
+                plt.title('Campus Engagement (Attendance)', fontsize=14, fontweight='bold', pad=10)
+                plt.tight_layout()
+                plt.savefig(os.path.join(CHARTS_DIR, f'{suffix}_att.png'), dpi=200)
+                plt.close()
+
+        return True
+    except Exception as e:
+        print(f"Error generating report charts: {e}")
+        return False
+
+def export_report_csv(filters={}):
+    """Export the filtered raw data to CSV for tabular analysis"""
+    try:
+        from datetime import date
+        where_clause, values = build_dashboard_conditions(filters)
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        
+        query = f"""
+            SELECT s.enrollment_no, s.name, s.department, s.semester, 
+                   sub.subject_name, m.total_marks, m.status
+            FROM students s
+            JOIN marks m ON s.enrollment_no = m.enrollment_no
+            JOIN subjects sub ON m.subject_id = sub.subject_id
+            {where_clause}
+            ORDER BY s.enrollment_no
+        """
+        cursor.execute(query, values)
+        data = cursor.fetchall()
+        conn.close()
+        
+        if not data: return None
+        
+        df = pd.DataFrame(data)
+        file_name = f"analytical_report_{date.today().strftime('%Y%m%d')}.csv"
+        file_path = os.path.join(UPLOADS_DIR, file_name)
+        df.to_csv(file_path, index=False)
+        return file_path
+    except Exception as e:
+        print(f"Error exporting CSV: {e}")
+        return None
+
+def export_report_pdf(filters={}, data={}):
+    """Generate a comprehensive multi-chart PDF summary of the filtered academic landscape"""
+    try:
+        from fpdf import FPDF
+        from datetime import date
+        
+        class PDF(FPDF):
+            def header(self):
+                self.set_fill_color(99, 102, 241)
+                self.rect(0, 0, 210, 40, 'F')
+                self.set_y(10)
+                self.set_font('Helvetica', 'B', 24)
+                self.set_text_color(255, 255, 255)
+                self.cell(0, 10, ' SPDA ANALYTICAL INSIGHTS ', ln=True, align='C')
+                self.set_font('Helvetica', 'I', 10)
+                self.cell(0, 5, f'Generated: {date.today().strftime("%d %B, %Y")} | Academic Intelligence Unit', ln=True, align='C')
+                self.ln(20)
+
+        pdf = PDF()
+        pdf.add_page()
+        
+        # 1. Executive Summary
+        pdf.ln(15)
+        pdf.set_font('Helvetica', 'B', 16)
+        pdf.set_text_color(30, 41, 59)
+        pdf.cell(0, 10, '1. Filter Parameters & Scope', ln=True)
+        pdf.set_draw_color(226, 232, 240)
+        pdf.line(10, pdf.get_y(), 200, pdf.get_y())
+        pdf.ln(5)
+        
+        pdf.set_font('Helvetica', '', 11)
+        pdf.cell(0, 7, f"Department Focus: {filters.get('department') or 'Institutional Wide'}", ln=True)
+        pdf.cell(0, 7, f"Semester Layer: {filters.get('semester') or 'All Semesters'}", ln=True)
+        pdf.cell(0, 7, f"Subject Focus: {filters.get('subject') or 'Global Curriculum'}", ln=True)
+        pdf.ln(10)
+
+        # 2. Key Charting Insights
+        chart_files = [
+            ('Performance Benchmarking by Department', 'report_dept.png'),
+            ('Academic Growth Curve across Semesters', 'report_sem.png'),
+            ('Critical Subject Strength Distribution', 'report_sub.png')
+        ]
+        
+        for title, img in chart_files:
+            img_path = os.path.join(CHARTS_DIR, img)
+            if os.path.exists(img_path):
+                pdf.set_font('Helvetica', 'B', 14)
+                pdf.cell(0, 10, title, ln=True)
+                pdf.image(img_path, x=15, w=180)
+                pdf.ln(15)
+                
+                # Manual Page Breaks for better layout
+                if title != 'Critical Subject Strength Distribution':
+                    pdf.add_page()
+
+        # Final Outcome Summary
+        pdf.add_page()
+        pdf.set_font('Helvetica', 'B', 16)
+        pdf.cell(0, 10, 'Final Success & Engagement Distribution', ln=True)
+        pdf.line(10, pdf.get_y(), 200, pdf.get_y())
+        pdf.ln(10)
+        
+        if os.path.exists(os.path.join(CHARTS_DIR, 'report_pf.png')):
+            pdf.image(os.path.join(CHARTS_DIR, 'report_pf.png'), x=10, w=90)
+        if os.path.exists(os.path.join(CHARTS_DIR, 'report_att.png')):
+            pdf.image(os.path.join(CHARTS_DIR, 'report_att.png'), x=110, y=pdf.get_y()-90, w=90)
+
+        file_path = os.path.join(UPLOADS_DIR, f"Institutional_Report_{date.today().strftime('%Y%m%d')}.pdf")
+        pdf.output(file_path)
+        return file_path
+    except Exception as e:
+        print(f"Error exporting PDF report: {e}")
+        return None
