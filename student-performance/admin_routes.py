@@ -545,7 +545,51 @@ def student_report_view(enrollment_no):
     summary = calculate_student_summary(enrollment_no)
     generate_student_charts_new(enrollment_no)
     
-    return render_template('admin/student_detail.html', student=student, marks_list=marks_list, summary=summary)
+    # --- FETCH ATTENDANCE DATA ---
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    # 1. Attendance Summary
+    cursor.execute("""
+        SELECT 
+            COUNT(*) as total,
+            SUM(CASE WHEN status='Present' THEN 1 ELSE 0 END) as present,
+            SUM(CASE WHEN status='Absent' THEN 1 ELSE 0 END) as absent
+        FROM attendance
+        WHERE enrollment_no = %s
+    """, (enrollment_no,))
+    att_summary = cursor.fetchone()
+    
+    total_classes = att_summary['total'] or 0
+    present_days = att_summary['present'] or 0
+    att_percent = round((present_days / total_classes * 100), 2) if total_classes > 0 else 0
+    
+    # 2. Detailed Attendance Table (Recent 10)
+    cursor.execute("""
+        SELECT a.date, a.status, sub.subject_name
+        FROM attendance a
+        JOIN subjects sub ON a.subject_id = sub.subject_id
+        WHERE a.enrollment_no = %s
+        ORDER BY a.date DESC
+        LIMIT 10
+    """, (enrollment_no,))
+    detailed_attendance = cursor.fetchall()
+    
+    conn.close()
+    
+    att_info = {
+        'total': total_classes,
+        'present': present_days,
+        'absent': att_summary['absent'] or 0,
+        'percent': att_percent
+    }
+    
+    return render_template('admin/student_detail.html', 
+                          student=student, 
+                          marks_list=marks_list, 
+                          summary=summary,
+                          attendance=att_info,
+                          detailed_attendance=detailed_attendance)
 
 @admin_bp.route('/profile')
 def profile():
