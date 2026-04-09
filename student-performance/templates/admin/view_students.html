@@ -162,17 +162,19 @@
 {% endif %}
 
 <style>
+.student-row { transition: background 0.2s ease; }
 .student-row:hover {
-    background-color: #f8fafc !important;
+    background-color: rgba(0,0,0,0.03) !important;
 }
 .bg-primary-soft { background-color: rgba(99, 102, 241, 0.1); }
 .bg-indigo-soft { background-color: rgba(79, 70, 229, 0.1); }
 .text-indigo { color: #4f46e9; }
 .border-indigo-faded { border: 1px solid rgba(79, 70, 229, 0.15); }
-.btn-indigo { background-color: #4f46e9; color: white; border: none; }
-.btn-indigo:hover { background-color: #4338ca; color: white; }
+.btn-indigo { background-color: #4f46e9; color: white; border: none; transition: transform 0.15s ease, background-color 0.2s ease; }
+.btn-indigo:hover { background-color: #4338ca; color: white; transform: scale(1.03); }
 .extra-small { font-size: 0.7rem; }
 .letter-spacing-sm { letter-spacing: 0.05rem; }
-.page-link:hover { background-color: #f1f5f9 !important; color: #4f46e9 !important; }
+.page-link { transition: transform 0.15s ease, background-color 0.2s ease; }
+.page-link:hover { background-color: #f1f5f9 !important; color: #4f46e9 !important; transform: scale(1.03); }
 </style>
 {% endblock %}

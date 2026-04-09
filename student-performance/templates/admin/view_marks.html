@@ -220,12 +220,14 @@
 .bg-info-subtle { background-color: #f0f9ff !important; }
 .bg-warning-subtle { background-color: #fffbeb !important; }
 .extra-small { font-size: 0.75rem; }
-.transition-hover { transition: all 0.2s ease-in-out; }
-.transition-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 15px rgba(99, 102, 241, 0.2) !important; }
-.btn-primary { background-color: #6366f1; border-color: #6366f1; }
-.btn-primary:hover { background-color: #4f46e5; border-color: #4f46e5; }
-.btn-outline-danger:hover { background-color: #ef4444; border-color: #ef4444; }
-.pagination .page-link { color: #64748b; background: white; border: 1px solid #e2e8f0; }
+.transition-hover { transition: transform 0.15s ease !important; }
+.transition-hover:hover { transform: scale(1.03) !important; }
+.btn-primary { background-color: #6366f1; border-color: #6366f1; transition: transform 0.15s ease, background-color 0.2s ease; }
+.btn-primary:hover { background-color: #4f46e5; border-color: #4f46e5; transform: scale(1.03); }
+.btn-outline-danger { transition: transform 0.15s ease, background-color 0.2s ease; }
+.btn-outline-danger:hover { background-color: #ef4444; border-color: #ef4444; transform: scale(1.03); }
+.pagination .page-link { color: #64748b; background: white; border: 1px solid #e2e8f0; transition: transform 0.15s ease, background-color 0.2s ease; }
+.pagination .page-link:hover { transform: scale(1.03); }
 .pagination .active .page-link { background: #6366f1 !important; color: white !important; }
 .icon-shape { border-radius: 12px; }
 </style>

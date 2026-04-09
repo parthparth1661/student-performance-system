@@ -70,7 +70,7 @@
         font-size: 13px;
         font-weight: 600;
         cursor: pointer;
-        transition: background 0.2s;
+        transition: transform 0.15s ease, background 0.2s;
         white-space: nowrap;
         display: flex;
         align-items: center;
@@ -79,6 +79,7 @@
 
     .btn-apply:hover {
         background: #4f46e5;
+        transform: scale(1.03);
     }
 
     /* 3. MODERN KPI GRID SYSTEM (STRICT 20px) */
@@ -97,14 +98,14 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        transition: all 0.2s ease;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
         height: 120px;
         text-decoration: none;
     }
 
     .kpi-card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
 
     .kpi-info {
@@ -234,6 +235,7 @@
     .page-link:hover {
         background: #f8fafc;
         color: #6366f1;
+        transform: scale(1.03);
     }
 
     .page-link.active {
