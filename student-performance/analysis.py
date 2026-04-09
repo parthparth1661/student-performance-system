@@ -207,12 +207,22 @@ def generate_dashboard_charts(filters={}):
             subjects = [row['subject_name'] for row in bar_data]
             marks = [float(row['avg_marks']) for row in bar_data]
             bars = plt.bar(subjects, marks, color='#6366f1', width=0.6, alpha=0.9)
-            plt.title("Subject Performance Analysis", fontsize=12, fontweight='700', pad=20)
-            plt.ylim(0, 100)
+            
+            # --- IMPROVEMENTS 🔥 ---
+            plt.title("Subject-wise Marks", fontsize=13, fontweight='bold', pad=15)
+            plt.xlabel("Subjects", fontsize=10, fontweight='600')
+            plt.ylabel("Average Marks (%)", fontsize=10, fontweight='600')
+            plt.grid(axis='y', linestyle='--', alpha=0.7)
+            plt.ylim(0, 110)
             plt.xticks(rotation=20, ha='right', fontsize=9)
-            for bar in bars:
-                yval = bar.get_height()
-                plt.text(bar.get_x() + bar.get_width()/2, yval + 1, f'{round(yval, 1)}', ha='center', va='bottom', fontsize=8, fontweight='bold')
+            
+            # Show values and highlight TOP
+            max_val = max(marks) if marks else 0
+            for i, v in enumerate(marks):
+                plt.text(i, v + 1.5, f'{round(v, 1)}', ha='center', fontsize=9, fontweight='bold', color='#1e293b')
+                if v == max_val and v > 0:
+                    plt.text(i, v + 6, "TOP", ha='center', fontsize=8, fontweight='900', color='#4f46e5', 
+                             bbox=dict(facecolor='white', alpha=0.8, edgecolor='#6366f1', boxstyle='round,pad=0.2'))
         else:
             plt.text(0.5, 0.5, "Insufficient Data Records", ha='center', va='center', color='#94a3b8')
         plt.tight_layout()
@@ -267,9 +277,17 @@ def generate_dashboard_charts(filters={}):
             marks = [float(row['avg_marks']) for row in line_data]
             plt.plot(exams, marks, marker='o', markersize=8, color='#6366f1', linewidth=3, markerfacecolor='white', markeredgewidth=2)
             plt.fill_between(exams, marks, alpha=0.1, color='#6366f1')
-            plt.title("Institutional Performance Trend", fontsize=12, fontweight='700', pad=20)
-            plt.ylim(0, 100)
-            plt.grid(True, linestyle='--', alpha=0.5)
+            
+            # --- IMPROVEMENTS 🔥 ---
+            plt.title("Performance Trend", fontsize=13, fontweight='bold', pad=15)
+            plt.xlabel("Exam Type", fontsize=10, fontweight='600')
+            plt.ylabel("Average Marks (%)", fontsize=10, fontweight='600')
+            plt.grid(True, linestyle='--', alpha=0.7)
+            plt.ylim(0, 110)
+            
+            # Show values
+            for i, v in enumerate(marks):
+                plt.text(i, v + 3, f'{round(v, 1)}', ha='center', fontsize=9, fontweight='bold', color='#1e293b')
         else:
             plt.text(0.5, 0.5, "Insufficient Trend Data", ha='center', va='center', color='#94a3b8')
         plt.tight_layout()
@@ -295,11 +313,21 @@ def generate_dashboard_charts(filters={}):
             names = [row['name'] for row in top_data]
             marks = [float(row['avg_marks']) for row in top_data]
             plt.bar(names, marks, color='#f59e0b', width=0.5, alpha=0.9)
-            plt.title("Top 5 Performers", fontsize=12, fontweight='700', pad=20)
-            plt.ylim(0, 100)
+            
+            # --- IMPROVEMENTS 🔥 ---
+            plt.title("Top 5 Students", fontsize=13, fontweight='bold', pad=15)
+            plt.xlabel("Students", fontsize=10, fontweight='600')
+            plt.ylabel("Overall Index (%)", fontsize=10, fontweight='600')
+            plt.grid(axis='y', linestyle='--', alpha=0.7)
+            plt.ylim(0, 110)
             plt.xticks(rotation=15, ha='right', fontsize=9)
+            
+            # Show values and highlight TOP
+            max_val = max(marks) if marks else 0
             for i, v in enumerate(marks):
-                plt.text(i, v + 2, str(round(v, 1)), ha='center', fontweight='bold', fontsize=8)
+                plt.text(i, v + 2, f'{round(v, 1)}', ha='center', fontweight='bold', fontsize=9)
+                if v == max_val and v > 0:
+                     plt.text(i, v + 7, "🏆", ha='center', fontsize=12)
         else:
             plt.text(0.5, 0.5, "No Rankings Available", ha='center', va='center', color='#94a3b8')
         plt.tight_layout()
@@ -376,19 +404,26 @@ def generate_subject_avg_chart(subject_avg):
         averages = [float(row['avg_marks']) if row['avg_marks'] is not None else 0 for row in subject_avg]
         
         bars = plt.bar(subjects, averages, color='#4F46E5', edgecolor='#3730A3', alpha=0.85, width=0.6)
+        
+        # --- IMPROVEMENTS 🔥 ---
+        plt.title('Subject-wise Average Marks', fontsize=16, fontweight='bold', pad=25)
+        plt.xlabel('Subjects', fontsize=12, fontweight='bold')
+        plt.ylabel('Average Marks', fontsize=12, fontweight='bold')
+        plt.grid(axis='y', linestyle='--', alpha=0.7)
+        plt.ylim(0, 115)
+        plt.xticks(rotation=30, ha='right', fontsize=10)
+        
+        # Show values and highlight TOP
+        max_val = max(averages) if averages else 0
         for bar in bars:
             yval = bar.get_height()
-            plt.text(bar.get_x() + bar.get_width()/2, yval + 1, round(yval, 1), 
+            plt.text(bar.get_x() + bar.get_width()/2, yval + 1.5, round(yval, 1), 
                      ha='center', va='bottom', fontsize=10, fontweight='bold', color='#1E293B')
+            if yval == max_val and yval > 0:
+                 plt.text(bar.get_x() + bar.get_width()/2, yval + 6, "BEST", ha='center', fontsize=9, fontweight='bold', color='#4F46E5')
     else:
         plt.text(0.5, 0.5, 'No Data Available', ha='center', va='center', fontsize=14)
 
-    plt.title('Subject-wise Average Marks', fontsize=16, fontweight='bold', pad=25)
-    plt.xlabel('Subjects', fontsize=12, fontweight='bold')
-    plt.ylabel('Average Marks', fontsize=12, fontweight='bold')
-    plt.ylim(0, 110)
-    plt.xticks(rotation=30, ha='right', fontsize=10)
-    plt.grid(axis='y', linestyle='--', alpha=0.4)
     plt.tight_layout()
     plt.savefig(os.path.join(CHARTS_DIR, 'admin_subject_avg.png'), bbox_inches="tight")
     plt.close()
@@ -423,7 +458,11 @@ def generate_marks_distribution(all_marks):
     plt.figure(figsize=(12, 6), dpi=200)
     
     if all_marks:
-        plt.hist(all_marks, bins=10, range=(0, 100), color='#8B5CF6', edgecolor='#7C3AED', alpha=0.8, rwidth=0.9)
+        n, bins, patches = plt.hist(all_marks, bins=10, range=(0, 100), color='#8B5CF6', edgecolor='#7C3AED', alpha=0.8, rwidth=0.9)
+        # Add labels to histogram bins
+        for i in range(len(n)):
+            if n[i] > 0:
+                plt.text(bins[i] + (bins[i+1]-bins[i])/2, n[i] + 0.2, int(n[i]), ha='center', fontweight='bold')
     else:
         plt.text(0.5, 0.5, 'No Data Available', ha='center', va='center', fontsize=14)
         
@@ -431,7 +470,7 @@ def generate_marks_distribution(all_marks):
     plt.xlabel('Marks (Range)', fontsize=12, fontweight='bold')
     plt.ylabel('Number of Students', fontsize=12, fontweight='bold')
     plt.xticks(range(0, 101, 10))
-    plt.grid(axis='y', linestyle='--', alpha=0.4)
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
     plt.savefig(os.path.join(CHARTS_DIR, 'admin_distribution.png'), bbox_inches="tight")
     plt.close()
@@ -639,19 +678,24 @@ def generate_student_charts_new(enrollment_no):
         subjects = [item['subject'] for item in subjects_data]
         totals = [item['total'] for item in subjects_data]
         
-        plt.bar(subjects, totals, color='#6366f1', alpha=0.9, edgecolor='white', linewidth=1)
+        bars = plt.bar(subjects, totals, color='#6366f1', alpha=0.9, edgecolor='white', linewidth=1)
         
+        # --- IMPROVEMENTS 🔥 ---
         plt.title('Subject-wise Performance Analysis', fontsize=18, fontweight='bold', pad=30, color='#1e293b')
         plt.xlabel('Academic Subjects', fontsize=12, fontweight='bold', color='#64748b')
         plt.ylabel('Total Marks Obtained', fontsize=12, fontweight='bold', color='#64748b')
         plt.xticks(rotation=20, ha='right', fontsize=10)
         plt.yticks(fontsize=10)
-        plt.grid(axis='y', linestyle='--', alpha=0.4)
-        plt.ylim(0, 105)
+        plt.grid(axis='y', linestyle='--', alpha=0.7)
+        plt.ylim(0, 115)
         
-        # Add value labels on top of bars
+        # Add value labels on top of bars and highlight BEST
+        max_val = max(totals) if totals else 0
         for i, v in enumerate(totals):
             plt.text(i, v + 2, str(v), ha='center', fontsize=10, fontweight='bold', color='#4f46e5')
+            if v == max_val and v > 0:
+                plt.text(i, v + 7, "BEST SCORE", ha='center', fontsize=9, fontweight='bold', color='#6366f1',
+                         bbox=dict(facecolor='white', alpha=0.9, edgecolor='#6366f1', boxstyle='round,pad=0.3'))
             
         plt.tight_layout()
         plt.savefig(os.path.join(CHARTS_DIR, f'student_{enrollment_no}_bar.png'), bbox_inches="tight")
