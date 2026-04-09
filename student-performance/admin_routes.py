@@ -72,18 +72,54 @@ def dashboard():
     stats = get_dashboard_stats(filters)
     chart_paths = generate_dashboard_charts(filters)
     
-    # 📋 🧬 STEP 3: GET PERFORMANCE LEDGER (PAGINATED)
-    performance_overview, total_records = get_performance_overview(
-        filters=filters,
-        limit=limit,
-        offset=offset
-    )
-    
-    total_pages = math.ceil(total_records / limit)
-
-    # Fetch all subjects for the filter dropdown
+    # 📋 🧬 STEP 3: FETCH NEW ANALYTICS (TOP PERFORMERS & ALERTS)
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
+    
+    # 1. Top Performers
+    cursor.execute("""
+        SELECT s.name, AVG(m.marks_obtained) as avg_marks
+        FROM students s
+        JOIN marks m ON s.enrollment_no = m.enrollment_no
+        GROUP BY s.enrollment_no
+        ORDER BY avg_marks DESC
+        LIMIT 5
+    """)
+    top_students = cursor.fetchall()
+
+    # 2. Low Performance Alerts (Combined)
+    # Marks < 40
+    cursor.execute("""
+        SELECT DISTINCT s.name, 'Low Marks' as reason
+        FROM students s
+        JOIN marks m ON s.enrollment_no = m.enrollment_no
+        WHERE m.marks_obtained < 40
+    """)
+    low_marks = cursor.fetchall()
+
+    # Attendance < 75%
+    cursor.execute("""
+        SELECT s.name, 'Low Attendance' as reason
+        FROM attendance a
+        JOIN students s ON a.enrollment_no = s.enrollment_no
+        GROUP BY s.enrollment_no
+        HAVING (SUM(CASE WHEN status='Present' THEN 1 ELSE 0 END)*100.0/COUNT(*)) < 75
+    """)
+    low_attendance = cursor.fetchall()
+    
+    # Merge and deduplicate alerts (preferring showing both if applicable, but keep it simple)
+    alerts_dict = {}
+    for entry in low_marks:
+        alerts_dict[entry['name']] = "Critical Marks"
+    for entry in low_attendance:
+        if entry['name'] in alerts_dict:
+            alerts_dict[entry['name']] += " & Attendance"
+        else:
+            alerts_dict[entry['name']] = "Low Attendance"
+    
+    low_students = [{'name': name, 'reason': reason} for name, reason in alerts_dict.items()]
+
+    # Fetch all subjects for the filter dropdown
     cursor.execute("SELECT DISTINCT subject_name FROM subjects ORDER BY subject_name ASC")
     all_subjects = [r['subject_name'] for r in cursor.fetchall()]
     cursor.close()
@@ -93,10 +129,9 @@ def dashboard():
                          stats=stats, 
                          filters=filters, 
                          charts=chart_paths,
-                         performance_overview=performance_overview,
+                         top_students=top_students,
+                         low_students=low_students,
                          subjects=all_subjects,
-                         page=page,
-                         total_pages=total_pages,
                          today_date=date.today().strftime('%d %b %Y'))
 
 # --- 🧑🎓 1. STUDENTS MODULE ---

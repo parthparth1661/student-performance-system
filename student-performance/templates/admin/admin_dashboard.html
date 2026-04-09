@@ -436,90 +436,83 @@
                 {% endif %}
             </div>
         </div>
-    </div>
-
-    <!-- AUDIT REGISTRY LEDGER -->
-    <div class="ledger-grid">
-        <div class="px-4 py-3 bg-white border-bottom d-flex justify-content-between align-items-center">
-            <h6 class="fw-bold m-0 text-dark small text-uppercase letter-spacing-sm">System Audit Ledger</h6>
-            <a href="{{ url_for('admin.export_excel', **filters) }}" class="btn btn-sm btn-outline-primary rounded-pill px-4 fw-bold">
-                <i class="fas fa-file-export me-1"></i> Data Export
-            </a>
-        </div>
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-                <thead>
-                    <tr>
-                        <th class="ps-4">Enrollment No</th>
-                        <th>Student Name</th>
-                        <th>Department</th>
-                        <th>Semester</th>
-                        <th>Subject</th>
-                        <th class="text-center">Marks</th>
-                        <th class="text-center">Attendance %</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for row in performance_overview %}
-                    <tr>
-                        <td class="ps-4 fw-bold text-dark">{{ row.enrollment_no }}</td>
-                        <td>
-                            <div class="fw-semibold text-dark">{{ row.name }}</div>
-                        </td>
-                        <td class="text-muted small fw-bold">{{ row.department }}</td>
-                        <td class="text-muted small fw-bold">Sem {{ row.semester }}</td>
-                        <td class="small fw-semibold text-secondary">{{ row.subject_name }}</td>
-                        <td class="text-center">
-                            <span class="badge {{ 'bg-success-soft text-success' if row.marks_obtained >= 35 else 'bg-danger-soft text-danger' }} rounded-pill px-3">
-                                {{ row.marks_obtained|round(1) }}
-                            </span>
-                        </td>
-                        <td class="text-center">
-                            <div class="d-flex align-items-center justify-content-center gap-2">
-                                <div class="progress rounded-pill flex-grow-1" style="height: 5px; max-width: 60px;">
-                                    <div class="progress-bar {{ 'bg-success' if row.attendance_percentage >= 75 else 'bg-danger' }} progress-sync" 
-                                         role="progressbar" 
-                                         data-width="{{ row.attendance_percentage }}"></div>
-                                </div>
-                                <span class="small fw-bold text-muted">{{ row.attendance_percentage|round(1) }}%</span>
-                            </div>
-                        </td>
-                    </tr>
-                    {% else %}
-                    <tr>
-                        <td colspan="7" class="text-center py-5 text-muted small">No administrative records match the selected discovery criteria.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+       <!-- 6. ANALYTICS INSIGHTS (NEW) -->
+    <div class="row g-3 mt-1">
+        <!-- TOP PERFORMERS -->
+        <div class="col-lg-6">
+            <div class="chart-container">
+                <div class="chart-header">
+                    <div class="chart-label">🏆 Top Performers (Leaderboard)</div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th class="ps-0" style="background: transparent; border-bottom: 2px solid #f1f5f9;">Rank</th>
+                                <th style="background: transparent; border-bottom: 2px solid #f1f5f9;">Name</th>
+                                <th class="text-center" style="background: transparent; border-bottom: 2px solid #f1f5f9;">Score Index</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in top_students %}
+                            <tr>
+                                <td class="ps-0 fw-bold text-indigo">#{{ loop.index }}</td>
+                                <td>
+                                    <div class="fw-semibold text-dark">{{ s.name }}</div>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge bg-success-soft text-success rounded-pill px-3">
+                                        {{ s.avg_marks|round(1) }}%
+                                    </span>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="3" class="text-center py-4 text-muted small">No performance data available.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        <!-- 📊 PAGINATION CONTROLS -->
-        {% if total_pages > 1 %}
-        <div class="pagination-box">
-            {% if page > 1 %}
-            <a href="{{ url_for('admin.dashboard', page=page-1, **filters) }}" class="page-link">Prev</a>
-            {% else %}
-            <a href="#" class="page-link disabled">Prev</a>
-            {% endif %}
-
-            {% for p in range(1, total_pages + 1) %}
-                {% if p == 1 or p == total_pages or (p >= page - 2 and p <= page + 2) %}
-                <a href="{{ url_for('admin.dashboard', page=p, **filters) }}" class="page-link {{ 'active' if p == page }}">
-                    {{ p }}
-                </a>
-                {% elif p == page - 3 or p == page + 3 %}
-                <span class="text-muted px-2">...</span>
-                {% endif %}
-            {% endfor %}
-
-            {% if page < total_pages %}
-            <a href="{{ url_for('admin.dashboard', page=page+1, **filters) }}" class="page-link">Next</a>
-            {% else %}
-            <a href="#" class="page-link disabled">Next</a>
-            {% endif %}
+        <!-- LOW PERFORMANCE ALERTS -->
+        <div class="col-lg-6">
+            <div class="chart-container">
+                <div class="chart-header">
+                    <div class="chart-label">⚠️ Performance Risk Alerts</div>
+                </div>
+                <div class="table-responsive" style="max-height: 280px; overflow-y: auto;">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th class="ps-0" style="background: transparent; border-bottom: 2px solid #f1f5f9;">Student Name</th>
+                                <th class="text-center" style="background: transparent; border-bottom: 2px solid #f1f5f9;">Risk category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in low_students %}
+                            <tr>
+                                <td class="ps-0">
+                                    <div class="fw-semibold text-dark">{{ s.name }}</div>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge bg-danger-soft text-danger rounded-pill px-3">
+                                        {{ s.reason }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="2" class="text-center py-4 text-muted small">All students are meeting baseline benchmarks.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        {% endif %}
     </div>
 </div>
 
