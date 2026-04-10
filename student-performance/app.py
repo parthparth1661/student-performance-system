@@ -172,6 +172,58 @@ def upload_subjects_csv():
 
     return redirect(url_for('admin.view_subjects'))
 
+@app.route('/upload_attendance_csv', methods=['POST'])
+def upload_attendance_csv():
+    from flask import request, redirect, url_for, session
+    if not session.get('admin_logged_in'):
+        return redirect(url_for('admin.login'))
+
+    file = request.files['file']
+    import csv
+    from db import get_db_connection
+
+    try:
+        data = csv.DictReader(file.read().decode('utf-8').splitlines())
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        for row in data:
+            en_no = row.get('enrollment_no')
+            subject_name = row.get('subject')
+            att_date = row.get('date')
+            status = row.get('status')
+
+            if not all([en_no, subject_name, att_date, status]):
+                continue
+
+            # 🛡️ 1. Validate Subject
+            cursor.execute("SELECT subject_id FROM subjects WHERE subject_name=%s", (subject_name,))
+            res = cursor.fetchone()
+            if not res: continue
+            sub_id = res[0]
+
+            # 🛡️ 2. Status check
+            if status not in ['Present', 'Absent']:
+                continue
+
+            # 🛡️ 3. Duplicate check (prevent double logging for same student+subject+day)
+            cursor.execute("SELECT attendance_id FROM attendance WHERE enrollment_no=%s AND subject_id=%s AND date=%s", (en_no, sub_id, att_date))
+            if cursor.fetchone():
+                continue
+
+            # insert into DB
+            cursor.execute(
+                "INSERT INTO attendance (enrollment_no, subject_id, date, status) VALUES (%s,%s,%s,%s)",
+                (en_no, sub_id, att_date, status)
+            )
+
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        print(f"Attendance Upload error: {e}")
+
+    return redirect(url_for('admin.view_attendance'))
+
 
 if __name__ == '__main__':
     # Ensure charts directory exists
