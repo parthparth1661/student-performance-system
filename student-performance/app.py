@@ -78,6 +78,59 @@ def upload_students_csv():
 
     return redirect(url_for('admin.view_students'))
 
+@app.route('/upload_marks_csv', methods=['POST'])
+def upload_marks_csv():
+    from flask import request, redirect, url_for, session
+    if not session.get('admin_logged_in'):
+        return redirect(url_for('admin.login'))
+
+    file = request.files['file']
+    import csv
+    from db import get_db_connection
+
+    try:
+        data = csv.DictReader(file.read().decode('utf-8').splitlines())
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        for row in data:
+            enrollment_no = row.get('enrollment_no')
+            subject = row.get('subject')
+            marks_obtained = row.get('marks')
+
+            if not enrollment_no or not subject or not marks_obtained:
+                continue
+
+            # 🛡️ 1. Validate Subject Existence
+            cursor.execute("SELECT subject_id FROM subjects WHERE subject_name=%s", (subject,))
+            sub_res = cursor.fetchone()
+            if not sub_res: 
+                continue # Skip if subject not found
+            subject_id = sub_res[0]
+
+            # 🛡️ 2. Validate Student Existence
+            cursor.execute("SELECT enrollment_no FROM students WHERE enrollment_no=%s", (enrollment_no,))
+            if not cursor.fetchone():
+                continue # Skip if student not found
+
+            # 🛡️ 3. Safe Insert with logical defaults
+            try:
+                marks_val = float(marks_obtained)
+                status = 'PASS' if marks_val >= 40 else 'FAIL'
+                cursor.execute(
+                    "INSERT INTO marks (enrollment_no, subject_id, marks_obtained, exam_type, status) VALUES (%s,%s,%s,%s,%s)",
+                    (enrollment_no, subject_id, marks_val, 'Final', status)
+                )
+            except ValueError:
+                continue
+
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        print(f"Marks Upload Error: {e}")
+
+    return redirect(url_for('admin.view_marks'))
+
 
 if __name__ == '__main__':
     # Ensure charts directory exists
