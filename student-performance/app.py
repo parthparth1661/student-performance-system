@@ -61,6 +61,11 @@ def upload_students_csv():
             if not name or not enrollment_no:
                 continue
 
+            # 🛡️ Duplicate check (Safe & Simple)
+            cursor.execute("SELECT enrollment_no FROM students WHERE enrollment_no=%s", (enrollment_no,))
+            if cursor.fetchone():
+                continue
+
             # Default credentials for Bulk Upload
             email = f"{enrollment_no}@spda.com"
             pw_hash = generate_password_hash(enrollment_no + "@123")

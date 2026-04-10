@@ -190,7 +190,19 @@ def add_student():
         
         conn = get_db_connection()
         cursor = conn.cursor()
+        
+        # 1️⃣ FIELD VALIDATION
+        if not all([enrollment_no, name, email, department, semester]):
+            flash("Operation Aborted: All student fields are mandatory.", "danger")
+            return render_template('admin/add_student.html')
+
         try:
+            # 2️⃣ DUPLICATE PREVENTION
+            cursor.execute("SELECT enrollment_no FROM students WHERE enrollment_no = %s", (enrollment_no,))
+            if cursor.fetchone():
+                flash(f"System Conflict: Student with ID {enrollment_no} is already registered.", "warning")
+                return render_template('admin/add_student.html')
+
             pw_hash = generate_password_hash(enrollment_no + "@123")
             cursor.execute("""
                 INSERT INTO students (enrollment_no, name, email, department, semester, password_hash)
@@ -201,7 +213,7 @@ def add_student():
             cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Added student: {name} ({enrollment_no})",))
             
             conn.commit()
-            flash("Student added successfully!", "success")
+            flash("Student record successfully established.", "success")
             return redirect(url_for('admin.view_students'))
         except Exception as e:
             flash(f"Error: {e}", "danger")
@@ -321,13 +333,28 @@ def add_subject():
         semester = request.form['semester']
         faculty_id = request.form.get('faculty_id')
         
+        # 1️⃣ FIELD VALIDATION
+        if not all([subject_name, department, semester]):
+            flash("Input Error: Subject name, department, and semester are required.", "danger")
+            return render_template('admin/add_subject.html', faculties=faculties)
+            
         try:
+            # 2️⃣ DUPLICATE PREVENTION
+            cursor.execute("SELECT subject_id FROM subjects WHERE subject_name=%s AND department=%s AND semester=%s", (subject_name, department, semester))
+            if cursor.fetchone():
+                flash(f"Catalogue Conflict: '{subject_name}' already exists for {department} Sem {semester}.", "warning")
+                return render_template('admin/add_subject.html', faculties=faculties)
+
             cursor.execute("""
                 INSERT INTO subjects (subject_name, department, semester, faculty_id)
                 VALUES (%s, %s, %s, %s)
             """, (subject_name, department, semester, faculty_id))
+            
+            # 📝 LOG ACTION
+            cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Added Subject: {subject_name}",))
+
             conn.commit()
-            flash("Subject added successfully!", "success")
+            flash("Curriculum successfully updated with new subject.", "success")
             return redirect(url_for('admin.view_subjects'))
         except Exception as e:
             flash(f"Error: {e}", "danger")
@@ -653,9 +680,10 @@ def add_marks():
         marks_obtained = request.form['marks_obtained']
         total_marks = request.form.get('total_marks', 100)
         
-        # ⚠️ VALIDATION (STRICT 🔥)
+        # 1️⃣ FIELD VALIDATION (STRICT)
         if not all([enrollment_no, subject_id, exam_type, marks_obtained]):
-            flash("All fields are mandatory!", "danger")
+            flash("Security Alert: Missing critical performance data fields.", "danger")
+            return render_template('admin/add_marks.html', students=students, subjects=subjects)
         else:
             try:
                 marks_obtained = float(marks_obtained)
@@ -897,9 +925,16 @@ def add_attendance():
         att_date = request.form['date']
         status = request.form['status']
         
-        # ⚠️ VALIDATION (STRICT 🔥)
+        # 1️⃣ FIELD VALIDATION
         if not all([enrollment_no, subject_id, att_date, status]):
-            flash("All fields are required!", "danger")
+            flash("Compliance Alert: All attendance registry fields must be populated.", "danger")
+            return render_template('admin/add_attendance.html', students=students, subjects=subjects, today=date.today().strftime('%Y-%m-%d'))
+
+        # 2️⃣ STATUS VALIDATION
+        if status not in ['Present', 'Absent']:
+            flash("Sanity Check Failed: Invalid attendance status detected.", "danger")
+            return render_template('admin/add_attendance.html', students=students, subjects=subjects, today=date.today().strftime('%Y-%m-%d'))
+
         else:
             # 🛡️ PREVENT DUPLICATE ENTRY (same student + subject + date)
             cursor.execute("""
