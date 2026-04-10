@@ -131,6 +131,47 @@ def upload_marks_csv():
 
     return redirect(url_for('admin.view_marks'))
 
+@app.route('/upload_subjects_csv', methods=['POST'])
+def upload_subjects_csv():
+    from flask import request, redirect, url_for, session
+    if not session.get('admin_logged_in'):
+        return redirect(url_for('admin.login'))
+
+    file = request.files['file']
+    import csv
+    from db import get_db_connection
+
+    try:
+        data = csv.DictReader(file.read().decode('utf-8').splitlines())
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        for row in data:
+            name = row.get('subject_name')
+            dept = row.get('department')
+            sem = row.get('semester')
+
+            if not name or not dept or not sem:
+                continue
+
+            # 🛡️ Duplicate check (Optional but safe)
+            cursor.execute("SELECT subject_id FROM subjects WHERE subject_name=%s AND department=%s AND semester=%s", (name, dept, sem))
+            if cursor.fetchone():
+                continue
+
+            # insert into DB
+            cursor.execute(
+                "INSERT INTO subjects (subject_name, department, semester) VALUES (%s,%s,%s)",
+                (name, dept, sem)
+            )
+
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        print(f"Subjects Upload error: {e}")
+
+    return redirect(url_for('admin.view_subjects'))
+
 
 if __name__ == '__main__':
     # Ensure charts directory exists
