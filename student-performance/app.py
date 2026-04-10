@@ -255,6 +255,85 @@ def logs():
     conn.close()
     return render_template('admin/logs.html', logs=logs_data)
 
+@app.route('/export_students_csv')
+def export_students_csv():
+    from flask import session, redirect, url_for, Response
+    if not session.get('admin_logged_in'):
+        return redirect(url_for('admin.login'))
+        
+    import csv
+    import io
+    from db import get_db_connection
+
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT name, enrollment_no, department, semester FROM students")
+    data = cursor.fetchall()
+    
+    # 📝 LOG ACTION
+    cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", ("Exported Students list to CSV",))
+    conn.commit()
+    conn.close()
+
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow(['Name', 'Enrollment No', 'Department', 'Semester'])
+    for row in data:
+        writer.writerow([row['name'], row['enrollment_no'], row['department'], row['semester']])
+
+    return Response(output.getvalue(), mimetype='text/csv',
+                    headers={"Content-Disposition": "attachment;filename=students.csv"})
+
+@app.route('/export_students_pdf')
+def export_students_pdf():
+    from flask import session, redirect, url_for, send_file
+    if not session.get('admin_logged_in'):
+        return redirect(url_for('admin.login'))
+        
+    from reportlab.lib.pagesizes import letter
+    from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
+    from reportlab.lib.styles import getSampleStyleSheet
+    from reportlab.lib import colors
+    import io
+    from db import get_db_connection
+
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT name, enrollment_no, department, semester FROM students")
+    data = cursor.fetchall()
+    
+    # 📝 LOG ACTION
+    cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", ("Exported Students list to PDF",))
+    conn.commit()
+    conn.close()
+
+    buffer = io.BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=letter)
+    elements = []
+
+    styles = getSampleStyleSheet()
+    elements.append(Paragraph("Student Registry Report - SPDA", styles['Title']))
+    
+    table_data = [['Name', 'Enrollment No', 'Department', 'Semester']]
+    for row in data:
+        table_data.append([row['name'], row['enrollment_no'], row['department'], str(row['semester'])])
+
+    t = Table(table_data)
+    t.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#6366f1')),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('GRID', (0, 0), (-1, -1), 1, colors.grey),
+        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.whitesmoke, colors.white])
+    ]))
+    elements.append(t)
+    doc.build(elements)
+    
+    buffer.seek(0)
+    return send_file(buffer, as_attachment=True, download_name='students.pdf', mimetype='application/pdf')
+
 
 if __name__ == '__main__':
     # Ensure charts directory exists

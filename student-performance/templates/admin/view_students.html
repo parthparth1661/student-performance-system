@@ -15,6 +15,16 @@
             </button>
         </form>
 
+        <div class="dropdown">
+            <button class="btn btn-light border px-4 py-2 rounded-3 shadow-sm fw-bold dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                <i class="fas fa-download me-2"></i>Export
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3">
+                <li><a class="dropdown-item py-2" href="/export_students_csv"><i class="fas fa-file-csv me-2 text-success"></i>Export CSV</a></li>
+                <li><a class="dropdown-item py-2" href="/export_students_pdf"><i class="fas fa-file-pdf me-2 text-danger"></i>Export PDF</a></li>
+            </ul>
+        </div>
+
         <a href="{{ url_for('admin.add_student') }}" class="btn btn-primary px-4 py-2 rounded-3 shadow-sm fw-bold">
             <i class="fas fa-plus me-2"></i>Add New Student
         </a>
