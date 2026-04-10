@@ -70,6 +70,9 @@ def upload_students_csv():
                 "INSERT INTO students (name, enrollment_no, email, department, semester, password_hash) VALUES (%s,%s,%s,%s,%s,%s)",
                 (name, enrollment_no, email, department, semester, pw_hash)
             )
+            
+            # 📝 LOG ACTION (Minimal)
+            cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Bulk Upload: Student {enrollment_no}",))
 
         conn.commit()
         conn.close()
@@ -121,6 +124,9 @@ def upload_marks_csv():
                     "INSERT INTO marks (enrollment_no, subject_id, marks_obtained, exam_type, status) VALUES (%s,%s,%s,%s,%s)",
                     (enrollment_no, subject_id, marks_val, 'Final', status)
                 )
+                
+                # 📝 LOG ACTION
+                cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Bulk Upload: Marks for {enrollment_no}",))
             except ValueError:
                 continue
 
@@ -164,6 +170,9 @@ def upload_subjects_csv():
                 "INSERT INTO subjects (subject_name, department, semester) VALUES (%s,%s,%s)",
                 (name, dept, sem)
             )
+            
+            # 📝 LOG ACTION
+            cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Bulk Upload: Subject {name}",))
 
         conn.commit()
         conn.close()
@@ -216,6 +225,9 @@ def upload_attendance_csv():
                 "INSERT INTO attendance (enrollment_no, subject_id, date, status) VALUES (%s,%s,%s,%s)",
                 (en_no, sub_id, att_date, status)
             )
+            
+            # 📝 LOG ACTION
+            cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Bulk Upload: Attendance for {en_no}",))
 
         conn.commit()
         conn.close()
@@ -223,6 +235,20 @@ def upload_attendance_csv():
         print(f"Attendance Upload error: {e}")
 
     return redirect(url_for('admin.view_attendance'))
+
+@app.route('/logs')
+def logs():
+    from flask import session, redirect, url_for, render_template
+    if not session.get('admin_logged_in'):
+        return redirect(url_for('admin.login'))
+        
+    from db import get_db_connection
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM activity_logs ORDER BY timestamp DESC")
+    logs_data = cursor.fetchall()
+    conn.close()
+    return render_template('admin/logs.html', logs=logs_data)
 
 
 if __name__ == '__main__':

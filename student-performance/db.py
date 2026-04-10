@@ -119,6 +119,15 @@ def init_db():
                     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE
                 )
             """)
+
+            # 7. Activity Logs Table (Minimal implementation 🎯)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS activity_logs (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    action TEXT,
+                    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
             
             connection.commit()
             

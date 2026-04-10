@@ -310,6 +310,10 @@
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>Faculty</span>
             </a>
+            <a href="/logs" class="nav-item {{ 'active' if request.endpoint == 'logs' }}">
+                <i class="fas fa-history"></i>
+                <span>Activity Logs</span>
+            </a>
             
             <div style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
                 <a href="{{ url_for('admin.logout') }}" class="nav-item logout">

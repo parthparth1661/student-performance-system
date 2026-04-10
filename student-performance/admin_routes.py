@@ -196,6 +196,10 @@ def add_student():
                 INSERT INTO students (enrollment_no, name, email, department, semester, password_hash)
                 VALUES (%s, %s, %s, %s, %s, %s)
             """, (enrollment_no, name, email, department, semester, pw_hash))
+            
+            # 📝 LOG ACTION
+            cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Added student: {name} ({enrollment_no})",))
+            
             conn.commit()
             flash("Student added successfully!", "success")
             return redirect(url_for('admin.view_students'))
@@ -678,6 +682,10 @@ def add_marks():
                             INSERT INTO marks (enrollment_no, subject_id, exam_type, marks_obtained, total_marks, status)
                             VALUES (%s, %s, %s, %s, %s, %s)
                         """, (enrollment_no, subject_id, exam_type, marks_obtained, total_marks, status))
+                        
+                        # 📝 LOG ACTION
+                        cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Added marks for {enrollment_no} in Subject ID: {subject_id}",))
+                        
                         conn.commit()
                         flash(f"Result for {enrollment_no} registered successfully!", "success")
                         return redirect(url_for('admin.view_marks'))
@@ -907,6 +915,10 @@ def add_attendance():
                         INSERT INTO attendance (enrollment_no, subject_id, date, status)
                         VALUES (%s, %s, %s, %s)
                     """, (enrollment_no, subject_id, att_date, status))
+                    
+                    # 📝 LOG ACTION
+                    cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Marked attendance: {enrollment_no} on {att_date}",))
+                    
                     conn.commit()
                     flash(f"Attendance for {enrollment_no} recorded successfully!", "success")
                     return redirect(url_for('admin.view_attendance'))
