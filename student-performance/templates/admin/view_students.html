@@ -6,9 +6,19 @@
         <h2 class="fw-bold mb-0 text-dark">Student Management</h2>
         <p class="text-muted small">Comprehensive registry of all academic profiles and enrollments.</p>
     </div>
-    <a href="{{ url_for('admin.add_student') }}" class="btn btn-primary px-4 py-2 rounded-3 shadow-sm fw-bold">
-        <i class="fas fa-plus me-2"></i>Add New Student
-    </a>
+    <div class="d-flex gap-3 align-items-center">
+        <!-- 📥 CSV BULK UPLOAD -->
+        <form action="/upload_students_csv" method="POST" enctype="multipart/form-data" class="d-flex gap-2 align-items-center bg-white p-2 rounded-3 shadow-sm border">
+            <input type="file" name="file" accept=".csv" class="form-control form-control-sm border-0 bg-light" style="max-width: 180px;" required>
+            <button type="submit" class="btn btn-success btn-sm px-3 fw-bold rounded-2">
+                <i class="fas fa-file-csv me-1"></i>Upload
+            </button>
+        </form>
+
+        <a href="{{ url_for('admin.add_student') }}" class="btn btn-primary px-4 py-2 rounded-3 shadow-sm fw-bold">
+            <i class="fas fa-plus me-2"></i>Add New Student
+        </a>
+    </div>
 </div>
 
 <!-- 🔍 FILTER BAR (SaaS Style) -->

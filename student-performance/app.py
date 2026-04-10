@@ -36,6 +36,48 @@ def profile():
     
     return render_template('profile.html', admin=admin_data)
 
+@app.route('/upload_students_csv', methods=['POST'])
+def upload_students_csv():
+    from flask import request, redirect, url_for, session
+    if not session.get('admin_logged_in'):
+        return redirect(url_for('admin.login'))
+
+    file = request.files['file']
+    import csv
+    from db import get_db_connection
+    from werkzeug.security import generate_password_hash
+
+    try:
+        data = csv.DictReader(file.read().decode('utf-8').splitlines())
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        for row in data:
+            name = row.get('name')
+            enrollment_no = row.get('enrollment_no')
+            department = row.get('department')
+            semester = row.get('semester')
+
+            if not name or not enrollment_no:
+                continue
+
+            # Default credentials for Bulk Upload
+            email = f"{enrollment_no}@spda.com"
+            pw_hash = generate_password_hash(enrollment_no + "@123")
+
+            # insert into DB
+            cursor.execute(
+                "INSERT INTO students (name, enrollment_no, email, department, semester, password_hash) VALUES (%s,%s,%s,%s,%s,%s)",
+                (name, enrollment_no, email, department, semester, pw_hash)
+            )
+
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        print(f"Upload error: {e}")
+
+    return redirect(url_for('admin.view_students'))
+
 
 if __name__ == '__main__':
     # Ensure charts directory exists
