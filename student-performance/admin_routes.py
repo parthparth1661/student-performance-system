@@ -24,11 +24,24 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email') or request.form.get('username') # Handle both for compatibility
         password = request.form.get('password')
+        
         conn = get_db_connection()
         if not conn:
             flash("Database connection error!", "danger")
             return render_template('admin/admin_login.html')
+            
         cursor = conn.cursor(dictionary=True)
+
+        # 1️⃣ REQUIRED FIELD VALIDATION
+        if not email or not password:
+            flash("Operations Aborted: All credentials are required.", "warning")
+            return render_template('admin/admin_login.html')
+            
+        # 2️⃣ BASIC PASSWORD CHECK (SAFE)
+        if len(password) < 4:
+            flash("Credential Violation: Password too short.", "warning")
+            return render_template('admin/admin_login.html')
+
         try:
             cursor.execute("SELECT * FROM admin WHERE email = %s", (email,))
             admin = cursor.fetchone()

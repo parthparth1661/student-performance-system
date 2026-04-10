@@ -1,1981 +1,541 @@
-roll_no,subject,marks,exam_type,exam_date
-BCA1001,Python Programming,61,Internal,2026-02-05
-BCA1001,Python Programming,72,Practical,2026-02-15
-BCA1001,Python Programming,74,External,2026-03-10
-BCA1001,DBMS,61,Internal,2026-02-05
-BCA1001,DBMS,51,Practical,2026-02-15
-BCA1001,DBMS,77,External,2026-03-10
-BCA1001,Data Structures,60,Internal,2026-02-05
-BCA1001,Data Structures,72,Practical,2026-02-15
-BCA1001,Data Structures,70,External,2026-03-10
-BCA1001,Web Technology,73,Internal,2026-02-05
-BCA1001,Web Technology,53,Practical,2026-02-15
-BCA1001,Web Technology,74,External,2026-03-10
-BCA1001,Operating Systems,53,Internal,2026-02-05
-BCA1001,Operating Systems,63,Practical,2026-02-15
-BCA1001,Operating Systems,71,External,2026-03-10
-BCA1001,Mathematics,72,Internal,2026-02-05
-BCA1001,Mathematics,75,Practical,2026-02-15
-BCA1001,Mathematics,66,External,2026-03-10
-BCA1002,Python Programming,95,Internal,2026-02-05
-BCA1002,Python Programming,85,Practical,2026-02-15
-BCA1002,Python Programming,85,External,2026-03-10
-BCA1002,DBMS,94,Internal,2026-02-05
-BCA1002,DBMS,88,Practical,2026-02-15
-BCA1002,DBMS,92,External,2026-03-10
-BCA1002,Data Structures,85,Internal,2026-02-05
-BCA1002,Data Structures,85,Practical,2026-02-15
-BCA1002,Data Structures,94,External,2026-03-10
-BCA1002,Web Technology,87,Internal,2026-02-05
-BCA1002,Web Technology,86,Practical,2026-02-15
-BCA1002,Web Technology,95,External,2026-03-10
-BCA1002,Operating Systems,90,Internal,2026-02-05
-BCA1002,Operating Systems,87,Practical,2026-02-15
-BCA1002,Operating Systems,87,External,2026-03-10
-BCA1002,Mathematics,86,Internal,2026-02-05
-BCA1002,Mathematics,86,Practical,2026-02-15
-BCA1002,Mathematics,95,External,2026-03-10
-BCA1003,Python Programming,64,Internal,2026-02-05
-BCA1003,Python Programming,78,Practical,2026-02-15
-BCA1003,Python Programming,61,External,2026-03-10
-BCA1003,DBMS,73,Internal,2026-02-05
-BCA1003,DBMS,63,Practical,2026-02-15
-BCA1003,DBMS,53,External,2026-03-10
-BCA1003,Data Structures,55,Internal,2026-02-05
-BCA1003,Data Structures,52,Practical,2026-02-15
-BCA1003,Data Structures,53,External,2026-03-10
-BCA1003,Web Technology,67,Internal,2026-02-05
-BCA1003,Web Technology,78,Practical,2026-02-15
-BCA1003,Web Technology,54,External,2026-03-10
-BCA1003,Operating Systems,63,Internal,2026-02-05
-BCA1003,Operating Systems,74,Practical,2026-02-15
-BCA1003,Operating Systems,78,External,2026-03-10
-BCA1003,Mathematics,63,Internal,2026-02-05
-BCA1003,Mathematics,64,Practical,2026-02-15
-BCA1003,Mathematics,75,External,2026-03-10
-BCA1004,Python Programming,77,Internal,2026-02-05
-BCA1004,Python Programming,57,Practical,2026-02-15
-BCA1004,Python Programming,69,External,2026-03-10
-BCA1004,DBMS,64,Internal,2026-02-05
-BCA1004,DBMS,51,Practical,2026-02-15
-BCA1004,DBMS,63,External,2026-03-10
-BCA1004,Data Structures,53,Internal,2026-02-05
-BCA1004,Data Structures,75,Practical,2026-02-15
-BCA1004,Data Structures,60,External,2026-03-10
-BCA1004,Web Technology,71,Internal,2026-02-05
-BCA1004,Web Technology,58,Practical,2026-02-15
-BCA1004,Web Technology,56,External,2026-03-10
-BCA1004,Operating Systems,76,Internal,2026-02-05
-BCA1004,Operating Systems,71,Practical,2026-02-15
-BCA1004,Operating Systems,55,External,2026-03-10
-BCA1004,Mathematics,61,Internal,2026-02-05
-BCA1004,Mathematics,51,Practical,2026-02-15
-BCA1004,Mathematics,79,External,2026-03-10
-BCA1005,Python Programming,63,Internal,2026-02-05
-BCA1005,Python Programming,69,Practical,2026-02-15
-BCA1005,Python Programming,68,External,2026-03-10
-BCA1005,DBMS,50,Internal,2026-02-05
-BCA1005,DBMS,76,Practical,2026-02-15
-BCA1005,DBMS,56,External,2026-03-10
-BCA1005,Data Structures,75,Internal,2026-02-05
-BCA1005,Data Structures,70,Practical,2026-02-15
-BCA1005,Data Structures,61,External,2026-03-10
-BCA1005,Web Technology,50,Internal,2026-02-05
-BCA1005,Web Technology,80,Practical,2026-02-15
-BCA1005,Web Technology,54,External,2026-03-10
-BCA1005,Operating Systems,55,Internal,2026-02-05
-BCA1005,Operating Systems,77,Practical,2026-02-15
-BCA1005,Operating Systems,79,External,2026-03-10
-BCA1005,Mathematics,51,Internal,2026-02-05
-BCA1005,Mathematics,52,Practical,2026-02-15
-BCA1005,Mathematics,77,External,2026-03-10
-BCA1006,Python Programming,31,Internal,2026-02-05
-BCA1006,Python Programming,31,Practical,2026-02-15
-BCA1006,Python Programming,23,External,2026-03-10
-BCA1006,DBMS,38,Internal,2026-02-05
-BCA1006,DBMS,26,Practical,2026-02-15
-BCA1006,DBMS,38,External,2026-03-10
-BCA1006,Data Structures,38,Internal,2026-02-05
-BCA1006,Data Structures,34,Practical,2026-02-15
-BCA1006,Data Structures,26,External,2026-03-10
-BCA1006,Web Technology,39,Internal,2026-02-05
-BCA1006,Web Technology,33,Practical,2026-02-15
-BCA1006,Web Technology,21,External,2026-03-10
-BCA1006,Operating Systems,35,Internal,2026-02-05
-BCA1006,Operating Systems,31,Practical,2026-02-15
-BCA1006,Operating Systems,23,External,2026-03-10
-BCA1006,Mathematics,35,Internal,2026-02-05
-BCA1006,Mathematics,31,Practical,2026-02-15
-BCA1006,Mathematics,39,External,2026-03-10
-BCA1007,Python Programming,80,Internal,2026-02-05
-BCA1007,Python Programming,60,Practical,2026-02-15
-BCA1007,Python Programming,62,External,2026-03-10
-BCA1007,DBMS,78,Internal,2026-02-05
-BCA1007,DBMS,53,Practical,2026-02-15
-BCA1007,DBMS,52,External,2026-03-10
-BCA1007,Data Structures,80,Internal,2026-02-05
-BCA1007,Data Structures,80,Practical,2026-02-15
-BCA1007,Data Structures,71,External,2026-03-10
-BCA1007,Web Technology,78,Internal,2026-02-05
-BCA1007,Web Technology,64,Practical,2026-02-15
-BCA1007,Web Technology,52,External,2026-03-10
-BCA1007,Operating Systems,80,Internal,2026-02-05
-BCA1007,Operating Systems,70,Practical,2026-02-15
-BCA1007,Operating Systems,78,External,2026-03-10
-BCA1007,Mathematics,58,Internal,2026-02-05
-BCA1007,Mathematics,78,Practical,2026-02-15
-BCA1007,Mathematics,54,External,2026-03-10
-BCA1008,Python Programming,91,Internal,2026-02-05
-BCA1008,Python Programming,95,Practical,2026-02-15
-BCA1008,Python Programming,91,External,2026-03-10
-BCA1008,DBMS,91,Internal,2026-02-05
-BCA1008,DBMS,88,Practical,2026-02-15
-BCA1008,DBMS,86,External,2026-03-10
-BCA1008,Data Structures,88,Internal,2026-02-05
-BCA1008,Data Structures,90,Practical,2026-02-15
-BCA1008,Data Structures,92,External,2026-03-10
-BCA1008,Web Technology,85,Internal,2026-02-05
-BCA1008,Web Technology,88,Practical,2026-02-15
-BCA1008,Web Technology,88,External,2026-03-10
-BCA1008,Operating Systems,95,Internal,2026-02-05
-BCA1008,Operating Systems,88,Practical,2026-02-15
-BCA1008,Operating Systems,85,External,2026-03-10
-BCA1008,Mathematics,92,Internal,2026-02-05
-BCA1008,Mathematics,87,Practical,2026-02-15
-BCA1008,Mathematics,91,External,2026-03-10
-BCA1009,Python Programming,24,Internal,2026-02-05
-BCA1009,Python Programming,20,Practical,2026-02-15
-BCA1009,Python Programming,23,External,2026-03-10
-BCA1009,DBMS,29,Internal,2026-02-05
-BCA1009,DBMS,25,Practical,2026-02-15
-BCA1009,DBMS,35,External,2026-03-10
-BCA1009,Data Structures,31,Internal,2026-02-05
-BCA1009,Data Structures,39,Practical,2026-02-15
-BCA1009,Data Structures,26,External,2026-03-10
-BCA1009,Web Technology,31,Internal,2026-02-05
-BCA1009,Web Technology,26,Practical,2026-02-15
-BCA1009,Web Technology,21,External,2026-03-10
-BCA1009,Operating Systems,33,Internal,2026-02-05
-BCA1009,Operating Systems,23,Practical,2026-02-15
-BCA1009,Operating Systems,38,External,2026-03-10
-BCA1009,Mathematics,29,Internal,2026-02-05
-BCA1009,Mathematics,29,Practical,2026-02-15
-BCA1009,Mathematics,32,External,2026-03-10
-BCA1010,Python Programming,66,Internal,2026-02-05
-BCA1010,Python Programming,58,Practical,2026-02-15
-BCA1010,Python Programming,55,External,2026-03-10
-BCA1010,DBMS,62,Internal,2026-02-05
-BCA1010,DBMS,76,Practical,2026-02-15
-BCA1010,DBMS,71,External,2026-03-10
-BCA1010,Data Structures,73,Internal,2026-02-05
-BCA1010,Data Structures,80,Practical,2026-02-15
-BCA1010,Data Structures,76,External,2026-03-10
-BCA1010,Web Technology,52,Internal,2026-02-05
-BCA1010,Web Technology,67,Practical,2026-02-15
-BCA1010,Web Technology,58,External,2026-03-10
-BCA1010,Operating Systems,61,Internal,2026-02-05
-BCA1010,Operating Systems,67,Practical,2026-02-15
-BCA1010,Operating Systems,65,External,2026-03-10
-BCA1010,Mathematics,66,Internal,2026-02-05
-BCA1010,Mathematics,63,Practical,2026-02-15
-BCA1010,Mathematics,57,External,2026-03-10
-BCA1011,Python Programming,21,Internal,2026-02-05
-BCA1011,Python Programming,39,Practical,2026-02-15
-BCA1011,Python Programming,20,External,2026-03-10
-BCA1011,DBMS,32,Internal,2026-02-05
-BCA1011,DBMS,37,Practical,2026-02-15
-BCA1011,DBMS,21,External,2026-03-10
-BCA1011,Data Structures,35,Internal,2026-02-05
-BCA1011,Data Structures,36,Practical,2026-02-15
-BCA1011,Data Structures,26,External,2026-03-10
-BCA1011,Web Technology,28,Internal,2026-02-05
-BCA1011,Web Technology,24,Practical,2026-02-15
-BCA1011,Web Technology,29,External,2026-03-10
-BCA1011,Operating Systems,40,Internal,2026-02-05
-BCA1011,Operating Systems,21,Practical,2026-02-15
-BCA1011,Operating Systems,21,External,2026-03-10
-BCA1011,Mathematics,39,Internal,2026-02-05
-BCA1011,Mathematics,31,Practical,2026-02-15
-BCA1011,Mathematics,40,External,2026-03-10
-BCA1012,Python Programming,60,Internal,2026-02-05
-BCA1012,Python Programming,75,Practical,2026-02-15
-BCA1012,Python Programming,79,External,2026-03-10
-BCA1012,DBMS,50,Internal,2026-02-05
-BCA1012,DBMS,58,Practical,2026-02-15
-BCA1012,DBMS,64,External,2026-03-10
-BCA1012,Data Structures,69,Internal,2026-02-05
-BCA1012,Data Structures,71,Practical,2026-02-15
-BCA1012,Data Structures,51,External,2026-03-10
-BCA1012,Web Technology,67,Internal,2026-02-05
-BCA1012,Web Technology,54,Practical,2026-02-15
-BCA1012,Web Technology,62,External,2026-03-10
-BCA1012,Operating Systems,50,Internal,2026-02-05
-BCA1012,Operating Systems,77,Practical,2026-02-15
-BCA1012,Operating Systems,74,External,2026-03-10
-BCA1012,Mathematics,69,Internal,2026-02-05
-BCA1012,Mathematics,53,Practical,2026-02-15
-BCA1012,Mathematics,68,External,2026-03-10
-BCA1013,Python Programming,91,Internal,2026-02-05
-BCA1013,Python Programming,90,Practical,2026-02-15
-BCA1013,Python Programming,86,External,2026-03-10
-BCA1013,DBMS,89,Internal,2026-02-05
-BCA1013,DBMS,91,Practical,2026-02-15
-BCA1013,DBMS,93,External,2026-03-10
-BCA1013,Data Structures,94,Internal,2026-02-05
-BCA1013,Data Structures,95,Practical,2026-02-15
-BCA1013,Data Structures,85,External,2026-03-10
-BCA1013,Web Technology,93,Internal,2026-02-05
-BCA1013,Web Technology,85,Practical,2026-02-15
-BCA1013,Web Technology,86,External,2026-03-10
-BCA1013,Operating Systems,85,Internal,2026-02-05
-BCA1013,Operating Systems,85,Practical,2026-02-15
-BCA1013,Operating Systems,92,External,2026-03-10
-BCA1013,Mathematics,95,Internal,2026-02-05
-BCA1013,Mathematics,91,Practical,2026-02-15
-BCA1013,Mathematics,87,External,2026-03-10
-BCA1014,Python Programming,68,Internal,2026-02-05
-BCA1014,Python Programming,52,Practical,2026-02-15
-BCA1014,Python Programming,55,External,2026-03-10
-BCA1014,DBMS,56,Internal,2026-02-05
-BCA1014,DBMS,60,Practical,2026-02-15
-BCA1014,DBMS,68,External,2026-03-10
-BCA1014,Data Structures,77,Internal,2026-02-05
-BCA1014,Data Structures,61,Practical,2026-02-15
-BCA1014,Data Structures,57,External,2026-03-10
-BCA1014,Web Technology,66,Internal,2026-02-05
-BCA1014,Web Technology,68,Practical,2026-02-15
-BCA1014,Web Technology,75,External,2026-03-10
-BCA1014,Operating Systems,54,Internal,2026-02-05
-BCA1014,Operating Systems,72,Practical,2026-02-15
-BCA1014,Operating Systems,61,External,2026-03-10
-BCA1014,Mathematics,58,Internal,2026-02-05
-BCA1014,Mathematics,56,Practical,2026-02-15
-BCA1014,Mathematics,66,External,2026-03-10
-BCA1015,Python Programming,36,Internal,2026-02-05
-BCA1015,Python Programming,40,Practical,2026-02-15
-BCA1015,Python Programming,20,External,2026-03-10
-BCA1015,DBMS,23,Internal,2026-02-05
-BCA1015,DBMS,23,Practical,2026-02-15
-BCA1015,DBMS,28,External,2026-03-10
-BCA1015,Data Structures,26,Internal,2026-02-05
-BCA1015,Data Structures,36,Practical,2026-02-15
-BCA1015,Data Structures,36,External,2026-03-10
-BCA1015,Web Technology,28,Internal,2026-02-05
-BCA1015,Web Technology,20,Practical,2026-02-15
-BCA1015,Web Technology,37,External,2026-03-10
-BCA1015,Operating Systems,28,Internal,2026-02-05
-BCA1015,Operating Systems,33,Practical,2026-02-15
-BCA1015,Operating Systems,22,External,2026-03-10
-BCA1015,Mathematics,35,Internal,2026-02-05
-BCA1015,Mathematics,31,Practical,2026-02-15
-BCA1015,Mathematics,37,External,2026-03-10
-BCA2001,Python Programming,59,Internal,2026-02-05
-BCA2001,Python Programming,52,Practical,2026-02-15
-BCA2001,Python Programming,51,External,2026-03-10
-BCA2001,DBMS,69,Internal,2026-02-05
-BCA2001,DBMS,73,Practical,2026-02-15
-BCA2001,DBMS,61,External,2026-03-10
-BCA2001,Data Structures,65,Internal,2026-02-05
-BCA2001,Data Structures,59,Practical,2026-02-15
-BCA2001,Data Structures,52,External,2026-03-10
-BCA2001,Web Technology,78,Internal,2026-02-05
-BCA2001,Web Technology,79,Practical,2026-02-15
-BCA2001,Web Technology,74,External,2026-03-10
-BCA2001,Operating Systems,76,Internal,2026-02-05
-BCA2001,Operating Systems,57,Practical,2026-02-15
-BCA2001,Operating Systems,71,External,2026-03-10
-BCA2001,Mathematics,77,Internal,2026-02-05
-BCA2001,Mathematics,77,Practical,2026-02-15
-BCA2001,Mathematics,73,External,2026-03-10
-BCA2002,Python Programming,78,Internal,2026-02-05
-BCA2002,Python Programming,69,Practical,2026-02-15
-BCA2002,Python Programming,55,External,2026-03-10
-BCA2002,DBMS,75,Internal,2026-02-05
-BCA2002,DBMS,75,Practical,2026-02-15
-BCA2002,DBMS,54,External,2026-03-10
-BCA2002,Data Structures,74,Internal,2026-02-05
-BCA2002,Data Structures,50,Practical,2026-02-15
-BCA2002,Data Structures,73,External,2026-03-10
-BCA2002,Web Technology,65,Internal,2026-02-05
-BCA2002,Web Technology,78,Practical,2026-02-15
-BCA2002,Web Technology,59,External,2026-03-10
-BCA2002,Operating Systems,71,Internal,2026-02-05
-BCA2002,Operating Systems,62,Practical,2026-02-15
-BCA2002,Operating Systems,70,External,2026-03-10
-BCA2002,Mathematics,56,Internal,2026-02-05
-BCA2002,Mathematics,70,Practical,2026-02-15
-BCA2002,Mathematics,70,External,2026-03-10
-BCA2003,Python Programming,23,Internal,2026-02-05
-BCA2003,Python Programming,39,Practical,2026-02-15
-BCA2003,Python Programming,33,External,2026-03-10
-BCA2003,DBMS,38,Internal,2026-02-05
-BCA2003,DBMS,25,Practical,2026-02-15
-BCA2003,DBMS,35,External,2026-03-10
-BCA2003,Data Structures,30,Internal,2026-02-05
-BCA2003,Data Structures,27,Practical,2026-02-15
-BCA2003,Data Structures,25,External,2026-03-10
-BCA2003,Web Technology,23,Internal,2026-02-05
-BCA2003,Web Technology,39,Practical,2026-02-15
-BCA2003,Web Technology,23,External,2026-03-10
-BCA2003,Operating Systems,29,Internal,2026-02-05
-BCA2003,Operating Systems,22,Practical,2026-02-15
-BCA2003,Operating Systems,40,External,2026-03-10
-BCA2003,Mathematics,37,Internal,2026-02-05
-BCA2003,Mathematics,31,Practical,2026-02-15
-BCA2003,Mathematics,23,External,2026-03-10
-BCA2004,Python Programming,59,Internal,2026-02-05
-BCA2004,Python Programming,50,Practical,2026-02-15
-BCA2004,Python Programming,77,External,2026-03-10
-BCA2004,DBMS,62,Internal,2026-02-05
-BCA2004,DBMS,69,Practical,2026-02-15
-BCA2004,DBMS,75,External,2026-03-10
-BCA2004,Data Structures,78,Internal,2026-02-05
-BCA2004,Data Structures,71,Practical,2026-02-15
-BCA2004,Data Structures,69,External,2026-03-10
-BCA2004,Web Technology,50,Internal,2026-02-05
-BCA2004,Web Technology,58,Practical,2026-02-15
-BCA2004,Web Technology,75,External,2026-03-10
-BCA2004,Operating Systems,52,Internal,2026-02-05
-BCA2004,Operating Systems,63,Practical,2026-02-15
-BCA2004,Operating Systems,54,External,2026-03-10
-BCA2004,Mathematics,50,Internal,2026-02-05
-BCA2004,Mathematics,56,Practical,2026-02-15
-BCA2004,Mathematics,53,External,2026-03-10
-BCA2005,Python Programming,77,Internal,2026-02-05
-BCA2005,Python Programming,67,Practical,2026-02-15
-BCA2005,Python Programming,73,External,2026-03-10
-BCA2005,DBMS,67,Internal,2026-02-05
-BCA2005,DBMS,75,Practical,2026-02-15
-BCA2005,DBMS,66,External,2026-03-10
-BCA2005,Data Structures,75,Internal,2026-02-05
-BCA2005,Data Structures,74,Practical,2026-02-15
-BCA2005,Data Structures,56,External,2026-03-10
-BCA2005,Web Technology,73,Internal,2026-02-05
-BCA2005,Web Technology,53,Practical,2026-02-15
-BCA2005,Web Technology,80,External,2026-03-10
-BCA2005,Operating Systems,73,Internal,2026-02-05
-BCA2005,Operating Systems,67,Practical,2026-02-15
-BCA2005,Operating Systems,69,External,2026-03-10
-BCA2005,Mathematics,50,Internal,2026-02-05
-BCA2005,Mathematics,73,Practical,2026-02-15
-BCA2005,Mathematics,73,External,2026-03-10
-BCA2006,Python Programming,75,Internal,2026-02-05
-BCA2006,Python Programming,55,Practical,2026-02-15
-BCA2006,Python Programming,55,External,2026-03-10
-BCA2006,DBMS,80,Internal,2026-02-05
-BCA2006,DBMS,80,Practical,2026-02-15
-BCA2006,DBMS,69,External,2026-03-10
-BCA2006,Data Structures,50,Internal,2026-02-05
-BCA2006,Data Structures,50,Practical,2026-02-15
-BCA2006,Data Structures,66,External,2026-03-10
-BCA2006,Web Technology,51,Internal,2026-02-05
-BCA2006,Web Technology,50,Practical,2026-02-15
-BCA2006,Web Technology,50,External,2026-03-10
-BCA2006,Operating Systems,70,Internal,2026-02-05
-BCA2006,Operating Systems,70,Practical,2026-02-15
-BCA2006,Operating Systems,59,External,2026-03-10
-BCA2006,Mathematics,53,Internal,2026-02-05
-BCA2006,Mathematics,64,Practical,2026-02-15
-BCA2006,Mathematics,50,External,2026-03-10
-BCA2007,Python Programming,59,Internal,2026-02-05
-BCA2007,Python Programming,60,Practical,2026-02-15
-BCA2007,Python Programming,54,External,2026-03-10
-BCA2007,DBMS,73,Internal,2026-02-05
-BCA2007,DBMS,51,Practical,2026-02-15
-BCA2007,DBMS,58,External,2026-03-10
-BCA2007,Data Structures,56,Internal,2026-02-05
-BCA2007,Data Structures,55,Practical,2026-02-15
-BCA2007,Data Structures,67,External,2026-03-10
-BCA2007,Web Technology,63,Internal,2026-02-05
-BCA2007,Web Technology,70,Practical,2026-02-15
-BCA2007,Web Technology,72,External,2026-03-10
-BCA2007,Operating Systems,66,Internal,2026-02-05
-BCA2007,Operating Systems,65,Practical,2026-02-15
-BCA2007,Operating Systems,62,External,2026-03-10
-BCA2007,Mathematics,72,Internal,2026-02-05
-BCA2007,Mathematics,58,Practical,2026-02-15
-BCA2007,Mathematics,74,External,2026-03-10
-BCA2008,Python Programming,23,Internal,2026-02-05
-BCA2008,Python Programming,24,Practical,2026-02-15
-BCA2008,Python Programming,40,External,2026-03-10
-BCA2008,DBMS,24,Internal,2026-02-05
-BCA2008,DBMS,40,Practical,2026-02-15
-BCA2008,DBMS,28,External,2026-03-10
-BCA2008,Data Structures,34,Internal,2026-02-05
-BCA2008,Data Structures,24,Practical,2026-02-15
-BCA2008,Data Structures,23,External,2026-03-10
-BCA2008,Web Technology,37,Internal,2026-02-05
-BCA2008,Web Technology,36,Practical,2026-02-15
-BCA2008,Web Technology,31,External,2026-03-10
-BCA2008,Operating Systems,30,Internal,2026-02-05
-BCA2008,Operating Systems,29,Practical,2026-02-15
-BCA2008,Operating Systems,37,External,2026-03-10
-BCA2008,Mathematics,21,Internal,2026-02-05
-BCA2008,Mathematics,28,Practical,2026-02-15
-BCA2008,Mathematics,34,External,2026-03-10
-BCA2009,Python Programming,95,Internal,2026-02-05
-BCA2009,Python Programming,90,Practical,2026-02-15
-BCA2009,Python Programming,95,External,2026-03-10
-BCA2009,DBMS,88,Internal,2026-02-05
-BCA2009,DBMS,94,Practical,2026-02-15
-BCA2009,DBMS,89,External,2026-03-10
-BCA2009,Data Structures,85,Internal,2026-02-05
-BCA2009,Data Structures,85,Practical,2026-02-15
-BCA2009,Data Structures,89,External,2026-03-10
-BCA2009,Web Technology,93,Internal,2026-02-05
-BCA2009,Web Technology,94,Practical,2026-02-15
-BCA2009,Web Technology,90,External,2026-03-10
-BCA2009,Operating Systems,87,Internal,2026-02-05
-BCA2009,Operating Systems,90,Practical,2026-02-15
-BCA2009,Operating Systems,86,External,2026-03-10
-BCA2009,Mathematics,91,Internal,2026-02-05
-BCA2009,Mathematics,88,Practical,2026-02-15
-BCA2009,Mathematics,93,External,2026-03-10
-BCA2010,Python Programming,20,Internal,2026-02-05
-BCA2010,Python Programming,20,Practical,2026-02-15
-BCA2010,Python Programming,35,External,2026-03-10
-BCA2010,DBMS,20,Internal,2026-02-05
-BCA2010,DBMS,39,Practical,2026-02-15
-BCA2010,DBMS,27,External,2026-03-10
-BCA2010,Data Structures,30,Internal,2026-02-05
-BCA2010,Data Structures,27,Practical,2026-02-15
-BCA2010,Data Structures,40,External,2026-03-10
-BCA2010,Web Technology,26,Internal,2026-02-05
-BCA2010,Web Technology,38,Practical,2026-02-15
-BCA2010,Web Technology,20,External,2026-03-10
-BCA2010,Operating Systems,24,Internal,2026-02-05
-BCA2010,Operating Systems,34,Practical,2026-02-15
-BCA2010,Operating Systems,39,External,2026-03-10
-BCA2010,Mathematics,31,Internal,2026-02-05
-BCA2010,Mathematics,36,Practical,2026-02-15
-BCA2010,Mathematics,26,External,2026-03-10
-BCA2011,Python Programming,59,Internal,2026-02-05
-BCA2011,Python Programming,55,Practical,2026-02-15
-BCA2011,Python Programming,65,External,2026-03-10
-BCA2011,DBMS,70,Internal,2026-02-05
-BCA2011,DBMS,55,Practical,2026-02-15
-BCA2011,DBMS,74,External,2026-03-10
-BCA2011,Data Structures,73,Internal,2026-02-05
-BCA2011,Data Structures,55,Practical,2026-02-15
-BCA2011,Data Structures,50,External,2026-03-10
-BCA2011,Web Technology,55,Internal,2026-02-05
-BCA2011,Web Technology,50,Practical,2026-02-15
-BCA2011,Web Technology,78,External,2026-03-10
-BCA2011,Operating Systems,77,Internal,2026-02-05
-BCA2011,Operating Systems,66,Practical,2026-02-15
-BCA2011,Operating Systems,59,External,2026-03-10
-BCA2011,Mathematics,67,Internal,2026-02-05
-BCA2011,Mathematics,52,Practical,2026-02-15
-BCA2011,Mathematics,55,External,2026-03-10
-BCA2012,Python Programming,74,Internal,2026-02-05
-BCA2012,Python Programming,55,Practical,2026-02-15
-BCA2012,Python Programming,60,External,2026-03-10
-BCA2012,DBMS,70,Internal,2026-02-05
-BCA2012,DBMS,67,Practical,2026-02-15
-BCA2012,DBMS,74,External,2026-03-10
-BCA2012,Data Structures,56,Internal,2026-02-05
-BCA2012,Data Structures,67,Practical,2026-02-15
-BCA2012,Data Structures,80,External,2026-03-10
-BCA2012,Web Technology,71,Internal,2026-02-05
-BCA2012,Web Technology,63,Practical,2026-02-15
-BCA2012,Web Technology,54,External,2026-03-10
-BCA2012,Operating Systems,58,Internal,2026-02-05
-BCA2012,Operating Systems,72,Practical,2026-02-15
-BCA2012,Operating Systems,80,External,2026-03-10
-BCA2012,Mathematics,73,Internal,2026-02-05
-BCA2012,Mathematics,58,Practical,2026-02-15
-BCA2012,Mathematics,69,External,2026-03-10
-BCA2013,Python Programming,90,Internal,2026-02-05
-BCA2013,Python Programming,89,Practical,2026-02-15
-BCA2013,Python Programming,85,External,2026-03-10
-BCA2013,DBMS,92,Internal,2026-02-05
-BCA2013,DBMS,86,Practical,2026-02-15
-BCA2013,DBMS,93,External,2026-03-10
-BCA2013,Data Structures,92,Internal,2026-02-05
-BCA2013,Data Structures,87,Practical,2026-02-15
-BCA2013,Data Structures,90,External,2026-03-10
-BCA2013,Web Technology,86,Internal,2026-02-05
-BCA2013,Web Technology,86,Practical,2026-02-15
-BCA2013,Web Technology,94,External,2026-03-10
-BCA2013,Operating Systems,95,Internal,2026-02-05
-BCA2013,Operating Systems,86,Practical,2026-02-15
-BCA2013,Operating Systems,93,External,2026-03-10
-BCA2013,Mathematics,95,Internal,2026-02-05
-BCA2013,Mathematics,94,Practical,2026-02-15
-BCA2013,Mathematics,86,External,2026-03-10
-BCA2014,Python Programming,68,Internal,2026-02-05
-BCA2014,Python Programming,78,Practical,2026-02-15
-BCA2014,Python Programming,61,External,2026-03-10
-BCA2014,DBMS,64,Internal,2026-02-05
-BCA2014,DBMS,52,Practical,2026-02-15
-BCA2014,DBMS,59,External,2026-03-10
-BCA2014,Data Structures,78,Internal,2026-02-05
-BCA2014,Data Structures,78,Practical,2026-02-15
-BCA2014,Data Structures,58,External,2026-03-10
-BCA2014,Web Technology,78,Internal,2026-02-05
-BCA2014,Web Technology,52,Practical,2026-02-15
-BCA2014,Web Technology,71,External,2026-03-10
-BCA2014,Operating Systems,74,Internal,2026-02-05
-BCA2014,Operating Systems,71,Practical,2026-02-15
-BCA2014,Operating Systems,80,External,2026-03-10
-BCA2014,Mathematics,52,Internal,2026-02-05
-BCA2014,Mathematics,76,Practical,2026-02-15
-BCA2014,Mathematics,61,External,2026-03-10
-BCA2015,Python Programming,52,Internal,2026-02-05
-BCA2015,Python Programming,53,Practical,2026-02-15
-BCA2015,Python Programming,54,External,2026-03-10
-BCA2015,DBMS,69,Internal,2026-02-05
-BCA2015,DBMS,70,Practical,2026-02-15
-BCA2015,DBMS,60,External,2026-03-10
-BCA2015,Data Structures,70,Internal,2026-02-05
-BCA2015,Data Structures,61,Practical,2026-02-15
-BCA2015,Data Structures,59,External,2026-03-10
-BCA2015,Web Technology,65,Internal,2026-02-05
-BCA2015,Web Technology,78,Practical,2026-02-15
-BCA2015,Web Technology,77,External,2026-03-10
-BCA2015,Operating Systems,60,Internal,2026-02-05
-BCA2015,Operating Systems,69,Practical,2026-02-15
-BCA2015,Operating Systems,75,External,2026-03-10
-BCA2015,Mathematics,59,Internal,2026-02-05
-BCA2015,Mathematics,56,Practical,2026-02-15
-BCA2015,Mathematics,57,External,2026-03-10
-MCA1001,Advanced Python,61,Internal,2026-02-05
-MCA1001,Advanced Python,80,Practical,2026-02-15
-MCA1001,Advanced Python,71,External,2026-03-10
-MCA1001,DSA,75,Internal,2026-02-05
-MCA1001,DSA,76,Practical,2026-02-15
-MCA1001,DSA,78,External,2026-03-10
-MCA1001,Cloud Computing,61,Internal,2026-02-05
-MCA1001,Cloud Computing,60,Practical,2026-02-15
-MCA1001,Cloud Computing,76,External,2026-03-10
-MCA1001,Machine Learning,80,Internal,2026-02-05
-MCA1001,Machine Learning,78,Practical,2026-02-15
-MCA1001,Machine Learning,68,External,2026-03-10
-MCA1001,Software Engineering,56,Internal,2026-02-05
-MCA1001,Software Engineering,52,Practical,2026-02-15
-MCA1001,Software Engineering,52,External,2026-03-10
-MCA1001,Research Methods,50,Internal,2026-02-05
-MCA1001,Research Methods,67,Practical,2026-02-15
-MCA1001,Research Methods,73,External,2026-03-10
-MCA1002,Advanced Python,78,Internal,2026-02-05
-MCA1002,Advanced Python,66,Practical,2026-02-15
-MCA1002,Advanced Python,79,External,2026-03-10
-MCA1002,DSA,63,Internal,2026-02-05
-MCA1002,DSA,75,Practical,2026-02-15
-MCA1002,DSA,51,External,2026-03-10
-MCA1002,Cloud Computing,80,Internal,2026-02-05
-MCA1002,Cloud Computing,75,Practical,2026-02-15
-MCA1002,Cloud Computing,66,External,2026-03-10
-MCA1002,Machine Learning,66,Internal,2026-02-05
-MCA1002,Machine Learning,61,Practical,2026-02-15
-MCA1002,Machine Learning,74,External,2026-03-10
-MCA1002,Software Engineering,65,Internal,2026-02-05
-MCA1002,Software Engineering,52,Practical,2026-02-15
-MCA1002,Software Engineering,53,External,2026-03-10
-MCA1002,Research Methods,50,Internal,2026-02-05
-MCA1002,Research Methods,52,Practical,2026-02-15
-MCA1002,Research Methods,79,External,2026-03-10
-MCA1003,Advanced Python,59,Internal,2026-02-05
-MCA1003,Advanced Python,71,Practical,2026-02-15
-MCA1003,Advanced Python,80,External,2026-03-10
-MCA1003,DSA,61,Internal,2026-02-05
-MCA1003,DSA,59,Practical,2026-02-15
-MCA1003,DSA,58,External,2026-03-10
-MCA1003,Cloud Computing,70,Internal,2026-02-05
-MCA1003,Cloud Computing,67,Practical,2026-02-15
-MCA1003,Cloud Computing,57,External,2026-03-10
-MCA1003,Machine Learning,77,Internal,2026-02-05
-MCA1003,Machine Learning,58,Practical,2026-02-15
-MCA1003,Machine Learning,62,External,2026-03-10
-MCA1003,Software Engineering,55,Internal,2026-02-05
-MCA1003,Software Engineering,73,Practical,2026-02-15
-MCA1003,Software Engineering,65,External,2026-03-10
-MCA1003,Research Methods,62,Internal,2026-02-05
-MCA1003,Research Methods,73,Practical,2026-02-15
-MCA1003,Research Methods,70,External,2026-03-10
-MCA1004,Advanced Python,68,Internal,2026-02-05
-MCA1004,Advanced Python,57,Practical,2026-02-15
-MCA1004,Advanced Python,76,External,2026-03-10
-MCA1004,DSA,77,Internal,2026-02-05
-MCA1004,DSA,76,Practical,2026-02-15
-MCA1004,DSA,62,External,2026-03-10
-MCA1004,Cloud Computing,51,Internal,2026-02-05
-MCA1004,Cloud Computing,61,Practical,2026-02-15
-MCA1004,Cloud Computing,54,External,2026-03-10
-MCA1004,Machine Learning,57,Internal,2026-02-05
-MCA1004,Machine Learning,72,Practical,2026-02-15
-MCA1004,Machine Learning,58,External,2026-03-10
-MCA1004,Software Engineering,56,Internal,2026-02-05
-MCA1004,Software Engineering,53,Practical,2026-02-15
-MCA1004,Software Engineering,54,External,2026-03-10
-MCA1004,Research Methods,64,Internal,2026-02-05
-MCA1004,Research Methods,70,Practical,2026-02-15
-MCA1004,Research Methods,77,External,2026-03-10
-MCA1005,Advanced Python,20,Internal,2026-02-05
-MCA1005,Advanced Python,28,Practical,2026-02-15
-MCA1005,Advanced Python,37,External,2026-03-10
-MCA1005,DSA,35,Internal,2026-02-05
-MCA1005,DSA,34,Practical,2026-02-15
-MCA1005,DSA,20,External,2026-03-10
-MCA1005,Cloud Computing,21,Internal,2026-02-05
-MCA1005,Cloud Computing,34,Practical,2026-02-15
-MCA1005,Cloud Computing,39,External,2026-03-10
-MCA1005,Machine Learning,24,Internal,2026-02-05
-MCA1005,Machine Learning,40,Practical,2026-02-15
-MCA1005,Machine Learning,34,External,2026-03-10
-MCA1005,Software Engineering,28,Internal,2026-02-05
-MCA1005,Software Engineering,20,Practical,2026-02-15
-MCA1005,Software Engineering,39,External,2026-03-10
-MCA1005,Research Methods,28,Internal,2026-02-05
-MCA1005,Research Methods,20,Practical,2026-02-15
-MCA1005,Research Methods,34,External,2026-03-10
-MCA1006,Advanced Python,80,Internal,2026-02-05
-MCA1006,Advanced Python,75,Practical,2026-02-15
-MCA1006,Advanced Python,74,External,2026-03-10
-MCA1006,DSA,65,Internal,2026-02-05
-MCA1006,DSA,66,Practical,2026-02-15
-MCA1006,DSA,51,External,2026-03-10
-MCA1006,Cloud Computing,73,Internal,2026-02-05
-MCA1006,Cloud Computing,65,Practical,2026-02-15
-MCA1006,Cloud Computing,65,External,2026-03-10
-MCA1006,Machine Learning,59,Internal,2026-02-05
-MCA1006,Machine Learning,72,Practical,2026-02-15
-MCA1006,Machine Learning,65,External,2026-03-10
-MCA1006,Software Engineering,56,Internal,2026-02-05
-MCA1006,Software Engineering,75,Practical,2026-02-15
-MCA1006,Software Engineering,80,External,2026-03-10
-MCA1006,Research Methods,66,Internal,2026-02-05
-MCA1006,Research Methods,57,Practical,2026-02-15
-MCA1006,Research Methods,63,External,2026-03-10
-MCA1007,Advanced Python,32,Internal,2026-02-05
-MCA1007,Advanced Python,22,Practical,2026-02-15
-MCA1007,Advanced Python,36,External,2026-03-10
-MCA1007,DSA,26,Internal,2026-02-05
-MCA1007,DSA,24,Practical,2026-02-15
-MCA1007,DSA,24,External,2026-03-10
-MCA1007,Cloud Computing,37,Internal,2026-02-05
-MCA1007,Cloud Computing,31,Practical,2026-02-15
-MCA1007,Cloud Computing,39,External,2026-03-10
-MCA1007,Machine Learning,22,Internal,2026-02-05
-MCA1007,Machine Learning,23,Practical,2026-02-15
-MCA1007,Machine Learning,26,External,2026-03-10
-MCA1007,Software Engineering,30,Internal,2026-02-05
-MCA1007,Software Engineering,40,Practical,2026-02-15
-MCA1007,Software Engineering,26,External,2026-03-10
-MCA1007,Research Methods,33,Internal,2026-02-05
-MCA1007,Research Methods,22,Practical,2026-02-15
-MCA1007,Research Methods,32,External,2026-03-10
-MCA1008,Advanced Python,32,Internal,2026-02-05
-MCA1008,Advanced Python,20,Practical,2026-02-15
-MCA1008,Advanced Python,38,External,2026-03-10
-MCA1008,DSA,35,Internal,2026-02-05
-MCA1008,DSA,22,Practical,2026-02-15
-MCA1008,DSA,28,External,2026-03-10
-MCA1008,Cloud Computing,31,Internal,2026-02-05
-MCA1008,Cloud Computing,21,Practical,2026-02-15
-MCA1008,Cloud Computing,21,External,2026-03-10
-MCA1008,Machine Learning,25,Internal,2026-02-05
-MCA1008,Machine Learning,32,Practical,2026-02-15
-MCA1008,Machine Learning,23,External,2026-03-10
-MCA1008,Software Engineering,24,Internal,2026-02-05
-MCA1008,Software Engineering,20,Practical,2026-02-15
-MCA1008,Software Engineering,25,External,2026-03-10
-MCA1008,Research Methods,21,Internal,2026-02-05
-MCA1008,Research Methods,22,Practical,2026-02-15
-MCA1008,Research Methods,26,External,2026-03-10
-MCA1009,Advanced Python,64,Internal,2026-02-05
-MCA1009,Advanced Python,73,Practical,2026-02-15
-MCA1009,Advanced Python,55,External,2026-03-10
-MCA1009,DSA,57,Internal,2026-02-05
-MCA1009,DSA,54,Practical,2026-02-15
-MCA1009,DSA,65,External,2026-03-10
-MCA1009,Cloud Computing,66,Internal,2026-02-05
-MCA1009,Cloud Computing,52,Practical,2026-02-15
-MCA1009,Cloud Computing,67,External,2026-03-10
-MCA1009,Machine Learning,51,Internal,2026-02-05
-MCA1009,Machine Learning,54,Practical,2026-02-15
-MCA1009,Machine Learning,63,External,2026-03-10
-MCA1009,Software Engineering,57,Internal,2026-02-05
-MCA1009,Software Engineering,56,Practical,2026-02-15
-MCA1009,Software Engineering,55,External,2026-03-10
-MCA1009,Research Methods,60,Internal,2026-02-05
-MCA1009,Research Methods,79,Practical,2026-02-15
-MCA1009,Research Methods,78,External,2026-03-10
-MCA1010,Advanced Python,91,Internal,2026-02-05
-MCA1010,Advanced Python,91,Practical,2026-02-15
-MCA1010,Advanced Python,87,External,2026-03-10
-MCA1010,DSA,93,Internal,2026-02-05
-MCA1010,DSA,93,Practical,2026-02-15
-MCA1010,DSA,92,External,2026-03-10
-MCA1010,Cloud Computing,94,Internal,2026-02-05
-MCA1010,Cloud Computing,92,Practical,2026-02-15
-MCA1010,Cloud Computing,95,External,2026-03-10
-MCA1010,Machine Learning,90,Internal,2026-02-05
-MCA1010,Machine Learning,92,Practical,2026-02-15
-MCA1010,Machine Learning,95,External,2026-03-10
-MCA1010,Software Engineering,90,Internal,2026-02-05
-MCA1010,Software Engineering,92,Practical,2026-02-15
-MCA1010,Software Engineering,85,External,2026-03-10
-MCA1010,Research Methods,93,Internal,2026-02-05
-MCA1010,Research Methods,88,Practical,2026-02-15
-MCA1010,Research Methods,93,External,2026-03-10
-MCA1011,Advanced Python,30,Internal,2026-02-05
-MCA1011,Advanced Python,22,Practical,2026-02-15
-MCA1011,Advanced Python,21,External,2026-03-10
-MCA1011,DSA,28,Internal,2026-02-05
-MCA1011,DSA,26,Practical,2026-02-15
-MCA1011,DSA,36,External,2026-03-10
-MCA1011,Cloud Computing,23,Internal,2026-02-05
-MCA1011,Cloud Computing,22,Practical,2026-02-15
-MCA1011,Cloud Computing,28,External,2026-03-10
-MCA1011,Machine Learning,32,Internal,2026-02-05
-MCA1011,Machine Learning,22,Practical,2026-02-15
-MCA1011,Machine Learning,24,External,2026-03-10
-MCA1011,Software Engineering,27,Internal,2026-02-05
-MCA1011,Software Engineering,25,Practical,2026-02-15
-MCA1011,Software Engineering,25,External,2026-03-10
-MCA1011,Research Methods,37,Internal,2026-02-05
-MCA1011,Research Methods,36,Practical,2026-02-15
-MCA1011,Research Methods,32,External,2026-03-10
-MCA1012,Advanced Python,80,Internal,2026-02-05
-MCA1012,Advanced Python,58,Practical,2026-02-15
-MCA1012,Advanced Python,66,External,2026-03-10
-MCA1012,DSA,61,Internal,2026-02-05
-MCA1012,DSA,56,Practical,2026-02-15
-MCA1012,DSA,71,External,2026-03-10
-MCA1012,Cloud Computing,52,Internal,2026-02-05
-MCA1012,Cloud Computing,54,Practical,2026-02-15
-MCA1012,Cloud Computing,65,External,2026-03-10
-MCA1012,Machine Learning,55,Internal,2026-02-05
-MCA1012,Machine Learning,60,Practical,2026-02-15
-MCA1012,Machine Learning,67,External,2026-03-10
-MCA1012,Software Engineering,60,Internal,2026-02-05
-MCA1012,Software Engineering,55,Practical,2026-02-15
-MCA1012,Software Engineering,59,External,2026-03-10
-MCA1012,Research Methods,56,Internal,2026-02-05
-MCA1012,Research Methods,57,Practical,2026-02-15
-MCA1012,Research Methods,56,External,2026-03-10
-MCA1013,Advanced Python,76,Internal,2026-02-05
-MCA1013,Advanced Python,59,Practical,2026-02-15
-MCA1013,Advanced Python,61,External,2026-03-10
-MCA1013,DSA,75,Internal,2026-02-05
-MCA1013,DSA,72,Practical,2026-02-15
-MCA1013,DSA,65,External,2026-03-10
-MCA1013,Cloud Computing,65,Internal,2026-02-05
-MCA1013,Cloud Computing,76,Practical,2026-02-15
-MCA1013,Cloud Computing,67,External,2026-03-10
-MCA1013,Machine Learning,75,Internal,2026-02-05
-MCA1013,Machine Learning,73,Practical,2026-02-15
-MCA1013,Machine Learning,51,External,2026-03-10
-MCA1013,Software Engineering,75,Internal,2026-02-05
-MCA1013,Software Engineering,59,Practical,2026-02-15
-MCA1013,Software Engineering,74,External,2026-03-10
-MCA1013,Research Methods,58,Internal,2026-02-05
-MCA1013,Research Methods,59,Practical,2026-02-15
-MCA1013,Research Methods,60,External,2026-03-10
-MCA1014,Advanced Python,22,Internal,2026-02-05
-MCA1014,Advanced Python,21,Practical,2026-02-15
-MCA1014,Advanced Python,25,External,2026-03-10
-MCA1014,DSA,30,Internal,2026-02-05
-MCA1014,DSA,40,Practical,2026-02-15
-MCA1014,DSA,23,External,2026-03-10
-MCA1014,Cloud Computing,27,Internal,2026-02-05
-MCA1014,Cloud Computing,33,Practical,2026-02-15
-MCA1014,Cloud Computing,38,External,2026-03-10
-MCA1014,Machine Learning,30,Internal,2026-02-05
-MCA1014,Machine Learning,28,Practical,2026-02-15
-MCA1014,Machine Learning,38,External,2026-03-10
-MCA1014,Software Engineering,20,Internal,2026-02-05
-MCA1014,Software Engineering,34,Practical,2026-02-15
-MCA1014,Software Engineering,24,External,2026-03-10
-MCA1014,Research Methods,33,Internal,2026-02-05
-MCA1014,Research Methods,31,Practical,2026-02-15
-MCA1014,Research Methods,22,External,2026-03-10
-MCA1015,Advanced Python,75,Internal,2026-02-05
-MCA1015,Advanced Python,80,Practical,2026-02-15
-MCA1015,Advanced Python,72,External,2026-03-10
-MCA1015,DSA,56,Internal,2026-02-05
-MCA1015,DSA,55,Practical,2026-02-15
-MCA1015,DSA,59,External,2026-03-10
-MCA1015,Cloud Computing,71,Internal,2026-02-05
-MCA1015,Cloud Computing,58,Practical,2026-02-15
-MCA1015,Cloud Computing,76,External,2026-03-10
-MCA1015,Machine Learning,75,Internal,2026-02-05
-MCA1015,Machine Learning,69,Practical,2026-02-15
-MCA1015,Machine Learning,65,External,2026-03-10
-MCA1015,Software Engineering,71,Internal,2026-02-05
-MCA1015,Software Engineering,61,Practical,2026-02-15
-MCA1015,Software Engineering,54,External,2026-03-10
-MCA1015,Research Methods,72,Internal,2026-02-05
-MCA1015,Research Methods,58,Practical,2026-02-15
-MCA1015,Research Methods,60,External,2026-03-10
-MCA2001,Advanced Python,54,Internal,2026-02-05
-MCA2001,Advanced Python,70,Practical,2026-02-15
-MCA2001,Advanced Python,54,External,2026-03-10
-MCA2001,DSA,71,Internal,2026-02-05
-MCA2001,DSA,63,Practical,2026-02-15
-MCA2001,DSA,63,External,2026-03-10
-MCA2001,Cloud Computing,78,Internal,2026-02-05
-MCA2001,Cloud Computing,77,Practical,2026-02-15
-MCA2001,Cloud Computing,51,External,2026-03-10
-MCA2001,Machine Learning,53,Internal,2026-02-05
-MCA2001,Machine Learning,61,Practical,2026-02-15
-MCA2001,Machine Learning,79,External,2026-03-10
-MCA2001,Software Engineering,69,Internal,2026-02-05
-MCA2001,Software Engineering,50,Practical,2026-02-15
-MCA2001,Software Engineering,55,External,2026-03-10
-MCA2001,Research Methods,74,Internal,2026-02-05
-MCA2001,Research Methods,79,Practical,2026-02-15
-MCA2001,Research Methods,68,External,2026-03-10
-MCA2002,Advanced Python,55,Internal,2026-02-05
-MCA2002,Advanced Python,64,Practical,2026-02-15
-MCA2002,Advanced Python,75,External,2026-03-10
-MCA2002,DSA,67,Internal,2026-02-05
-MCA2002,DSA,56,Practical,2026-02-15
-MCA2002,DSA,70,External,2026-03-10
-MCA2002,Cloud Computing,72,Internal,2026-02-05
-MCA2002,Cloud Computing,73,Practical,2026-02-15
-MCA2002,Cloud Computing,75,External,2026-03-10
-MCA2002,Machine Learning,75,Internal,2026-02-05
-MCA2002,Machine Learning,57,Practical,2026-02-15
-MCA2002,Machine Learning,66,External,2026-03-10
-MCA2002,Software Engineering,68,Internal,2026-02-05
-MCA2002,Software Engineering,51,Practical,2026-02-15
-MCA2002,Software Engineering,67,External,2026-03-10
-MCA2002,Research Methods,56,Internal,2026-02-05
-MCA2002,Research Methods,52,Practical,2026-02-15
-MCA2002,Research Methods,65,External,2026-03-10
-MCA2003,Advanced Python,79,Internal,2026-02-05
-MCA2003,Advanced Python,59,Practical,2026-02-15
-MCA2003,Advanced Python,55,External,2026-03-10
-MCA2003,DSA,68,Internal,2026-02-05
-MCA2003,DSA,58,Practical,2026-02-15
-MCA2003,DSA,53,External,2026-03-10
-MCA2003,Cloud Computing,52,Internal,2026-02-05
-MCA2003,Cloud Computing,66,Practical,2026-02-15
-MCA2003,Cloud Computing,75,External,2026-03-10
-MCA2003,Machine Learning,55,Internal,2026-02-05
-MCA2003,Machine Learning,73,Practical,2026-02-15
-MCA2003,Machine Learning,61,External,2026-03-10
-MCA2003,Software Engineering,68,Internal,2026-02-05
-MCA2003,Software Engineering,61,Practical,2026-02-15
-MCA2003,Software Engineering,61,External,2026-03-10
-MCA2003,Research Methods,68,Internal,2026-02-05
-MCA2003,Research Methods,77,Practical,2026-02-15
-MCA2003,Research Methods,63,External,2026-03-10
-MCA2004,Advanced Python,80,Internal,2026-02-05
-MCA2004,Advanced Python,60,Practical,2026-02-15
-MCA2004,Advanced Python,54,External,2026-03-10
-MCA2004,DSA,67,Internal,2026-02-05
-MCA2004,DSA,53,Practical,2026-02-15
-MCA2004,DSA,50,External,2026-03-10
-MCA2004,Cloud Computing,72,Internal,2026-02-05
-MCA2004,Cloud Computing,78,Practical,2026-02-15
-MCA2004,Cloud Computing,72,External,2026-03-10
-MCA2004,Machine Learning,69,Internal,2026-02-05
-MCA2004,Machine Learning,67,Practical,2026-02-15
-MCA2004,Machine Learning,78,External,2026-03-10
-MCA2004,Software Engineering,75,Internal,2026-02-05
-MCA2004,Software Engineering,72,Practical,2026-02-15
-MCA2004,Software Engineering,80,External,2026-03-10
-MCA2004,Research Methods,73,Internal,2026-02-05
-MCA2004,Research Methods,77,Practical,2026-02-15
-MCA2004,Research Methods,53,External,2026-03-10
-MCA2005,Advanced Python,73,Internal,2026-02-05
-MCA2005,Advanced Python,54,Practical,2026-02-15
-MCA2005,Advanced Python,56,External,2026-03-10
-MCA2005,DSA,74,Internal,2026-02-05
-MCA2005,DSA,64,Practical,2026-02-15
-MCA2005,DSA,64,External,2026-03-10
-MCA2005,Cloud Computing,52,Internal,2026-02-05
-MCA2005,Cloud Computing,70,Practical,2026-02-15
-MCA2005,Cloud Computing,62,External,2026-03-10
-MCA2005,Machine Learning,79,Internal,2026-02-05
-MCA2005,Machine Learning,62,Practical,2026-02-15
-MCA2005,Machine Learning,60,External,2026-03-10
-MCA2005,Software Engineering,79,Internal,2026-02-05
-MCA2005,Software Engineering,52,Practical,2026-02-15
-MCA2005,Software Engineering,62,External,2026-03-10
-MCA2005,Research Methods,61,Internal,2026-02-05
-MCA2005,Research Methods,58,Practical,2026-02-15
-MCA2005,Research Methods,64,External,2026-03-10
-MCA2006,Advanced Python,91,Internal,2026-02-05
-MCA2006,Advanced Python,91,Practical,2026-02-15
-MCA2006,Advanced Python,85,External,2026-03-10
-MCA2006,DSA,90,Internal,2026-02-05
-MCA2006,DSA,91,Practical,2026-02-15
-MCA2006,DSA,89,External,2026-03-10
-MCA2006,Cloud Computing,90,Internal,2026-02-05
-MCA2006,Cloud Computing,90,Practical,2026-02-15
-MCA2006,Cloud Computing,88,External,2026-03-10
-MCA2006,Machine Learning,87,Internal,2026-02-05
-MCA2006,Machine Learning,95,Practical,2026-02-15
-MCA2006,Machine Learning,86,External,2026-03-10
-MCA2006,Software Engineering,92,Internal,2026-02-05
-MCA2006,Software Engineering,89,Practical,2026-02-15
-MCA2006,Software Engineering,90,External,2026-03-10
-MCA2006,Research Methods,88,Internal,2026-02-05
-MCA2006,Research Methods,95,Practical,2026-02-15
-MCA2006,Research Methods,85,External,2026-03-10
-MCA2007,Advanced Python,53,Internal,2026-02-05
-MCA2007,Advanced Python,64,Practical,2026-02-15
-MCA2007,Advanced Python,75,External,2026-03-10
-MCA2007,DSA,69,Internal,2026-02-05
-MCA2007,DSA,63,Practical,2026-02-15
-MCA2007,DSA,67,External,2026-03-10
-MCA2007,Cloud Computing,53,Internal,2026-02-05
-MCA2007,Cloud Computing,58,Practical,2026-02-15
-MCA2007,Cloud Computing,55,External,2026-03-10
-MCA2007,Machine Learning,60,Internal,2026-02-05
-MCA2007,Machine Learning,60,Practical,2026-02-15
-MCA2007,Machine Learning,60,External,2026-03-10
-MCA2007,Software Engineering,59,Internal,2026-02-05
-MCA2007,Software Engineering,70,Practical,2026-02-15
-MCA2007,Software Engineering,63,External,2026-03-10
-MCA2007,Research Methods,65,Internal,2026-02-05
-MCA2007,Research Methods,52,Practical,2026-02-15
-MCA2007,Research Methods,70,External,2026-03-10
-MCA2008,Advanced Python,71,Internal,2026-02-05
-MCA2008,Advanced Python,54,Practical,2026-02-15
-MCA2008,Advanced Python,70,External,2026-03-10
-MCA2008,DSA,64,Internal,2026-02-05
-MCA2008,DSA,58,Practical,2026-02-15
-MCA2008,DSA,75,External,2026-03-10
-MCA2008,Cloud Computing,78,Internal,2026-02-05
-MCA2008,Cloud Computing,64,Practical,2026-02-15
-MCA2008,Cloud Computing,57,External,2026-03-10
-MCA2008,Machine Learning,79,Internal,2026-02-05
-MCA2008,Machine Learning,69,Practical,2026-02-15
-MCA2008,Machine Learning,58,External,2026-03-10
-MCA2008,Software Engineering,67,Internal,2026-02-05
-MCA2008,Software Engineering,59,Practical,2026-02-15
-MCA2008,Software Engineering,76,External,2026-03-10
-MCA2008,Research Methods,77,Internal,2026-02-05
-MCA2008,Research Methods,79,Practical,2026-02-15
-MCA2008,Research Methods,65,External,2026-03-10
-MCA2009,Advanced Python,79,Internal,2026-02-05
-MCA2009,Advanced Python,70,Practical,2026-02-15
-MCA2009,Advanced Python,67,External,2026-03-10
-MCA2009,DSA,53,Internal,2026-02-05
-MCA2009,DSA,66,Practical,2026-02-15
-MCA2009,DSA,71,External,2026-03-10
-MCA2009,Cloud Computing,74,Internal,2026-02-05
-MCA2009,Cloud Computing,62,Practical,2026-02-15
-MCA2009,Cloud Computing,78,External,2026-03-10
-MCA2009,Machine Learning,52,Internal,2026-02-05
-MCA2009,Machine Learning,57,Practical,2026-02-15
-MCA2009,Machine Learning,76,External,2026-03-10
-MCA2009,Software Engineering,67,Internal,2026-02-05
-MCA2009,Software Engineering,56,Practical,2026-02-15
-MCA2009,Software Engineering,77,External,2026-03-10
-MCA2009,Research Methods,69,Internal,2026-02-05
-MCA2009,Research Methods,74,Practical,2026-02-15
-MCA2009,Research Methods,59,External,2026-03-10
-MCA2010,Advanced Python,92,Internal,2026-02-05
-MCA2010,Advanced Python,88,Practical,2026-02-15
-MCA2010,Advanced Python,86,External,2026-03-10
-MCA2010,DSA,95,Internal,2026-02-05
-MCA2010,DSA,88,Practical,2026-02-15
-MCA2010,DSA,87,External,2026-03-10
-MCA2010,Cloud Computing,88,Internal,2026-02-05
-MCA2010,Cloud Computing,92,Practical,2026-02-15
-MCA2010,Cloud Computing,88,External,2026-03-10
-MCA2010,Machine Learning,87,Internal,2026-02-05
-MCA2010,Machine Learning,86,Practical,2026-02-15
-MCA2010,Machine Learning,94,External,2026-03-10
-MCA2010,Software Engineering,95,Internal,2026-02-05
-MCA2010,Software Engineering,89,Practical,2026-02-15
-MCA2010,Software Engineering,85,External,2026-03-10
-MCA2010,Research Methods,91,Internal,2026-02-05
-MCA2010,Research Methods,91,Practical,2026-02-15
-MCA2010,Research Methods,87,External,2026-03-10
-MCA2011,Advanced Python,86,Internal,2026-02-05
-MCA2011,Advanced Python,86,Practical,2026-02-15
-MCA2011,Advanced Python,90,External,2026-03-10
-MCA2011,DSA,93,Internal,2026-02-05
-MCA2011,DSA,93,Practical,2026-02-15
-MCA2011,DSA,89,External,2026-03-10
-MCA2011,Cloud Computing,92,Internal,2026-02-05
-MCA2011,Cloud Computing,85,Practical,2026-02-15
-MCA2011,Cloud Computing,95,External,2026-03-10
-MCA2011,Machine Learning,91,Internal,2026-02-05
-MCA2011,Machine Learning,85,Practical,2026-02-15
-MCA2011,Machine Learning,95,External,2026-03-10
-MCA2011,Software Engineering,89,Internal,2026-02-05
-MCA2011,Software Engineering,90,Practical,2026-02-15
-MCA2011,Software Engineering,86,External,2026-03-10
-MCA2011,Research Methods,86,Internal,2026-02-05
-MCA2011,Research Methods,89,Practical,2026-02-15
-MCA2011,Research Methods,90,External,2026-03-10
-MCA2012,Advanced Python,69,Internal,2026-02-05
-MCA2012,Advanced Python,74,Practical,2026-02-15
-MCA2012,Advanced Python,67,External,2026-03-10
-MCA2012,DSA,62,Internal,2026-02-05
-MCA2012,DSA,64,Practical,2026-02-15
-MCA2012,DSA,63,External,2026-03-10
-MCA2012,Cloud Computing,70,Internal,2026-02-05
-MCA2012,Cloud Computing,77,Practical,2026-02-15
-MCA2012,Cloud Computing,59,External,2026-03-10
-MCA2012,Machine Learning,65,Internal,2026-02-05
-MCA2012,Machine Learning,75,Practical,2026-02-15
-MCA2012,Machine Learning,57,External,2026-03-10
-MCA2012,Software Engineering,69,Internal,2026-02-05
-MCA2012,Software Engineering,79,Practical,2026-02-15
-MCA2012,Software Engineering,60,External,2026-03-10
-MCA2012,Research Methods,73,Internal,2026-02-05
-MCA2012,Research Methods,74,Practical,2026-02-15
-MCA2012,Research Methods,60,External,2026-03-10
-MCA2013,Advanced Python,76,Internal,2026-02-05
-MCA2013,Advanced Python,77,Practical,2026-02-15
-MCA2013,Advanced Python,63,External,2026-03-10
-MCA2013,DSA,51,Internal,2026-02-05
-MCA2013,DSA,61,Practical,2026-02-15
-MCA2013,DSA,78,External,2026-03-10
-MCA2013,Cloud Computing,58,Internal,2026-02-05
-MCA2013,Cloud Computing,74,Practical,2026-02-15
-MCA2013,Cloud Computing,51,External,2026-03-10
-MCA2013,Machine Learning,57,Internal,2026-02-05
-MCA2013,Machine Learning,74,Practical,2026-02-15
-MCA2013,Machine Learning,74,External,2026-03-10
-MCA2013,Software Engineering,53,Internal,2026-02-05
-MCA2013,Software Engineering,69,Practical,2026-02-15
-MCA2013,Software Engineering,60,External,2026-03-10
-MCA2013,Research Methods,69,Internal,2026-02-05
-MCA2013,Research Methods,69,Practical,2026-02-15
-MCA2013,Research Methods,50,External,2026-03-10
-MCA2014,Advanced Python,52,Internal,2026-02-05
-MCA2014,Advanced Python,61,Practical,2026-02-15
-MCA2014,Advanced Python,52,External,2026-03-10
-MCA2014,DSA,71,Internal,2026-02-05
-MCA2014,DSA,73,Practical,2026-02-15
-MCA2014,DSA,73,External,2026-03-10
-MCA2014,Cloud Computing,75,Internal,2026-02-05
-MCA2014,Cloud Computing,52,Practical,2026-02-15
-MCA2014,Cloud Computing,72,External,2026-03-10
-MCA2014,Machine Learning,71,Internal,2026-02-05
-MCA2014,Machine Learning,77,Practical,2026-02-15
-MCA2014,Machine Learning,72,External,2026-03-10
-MCA2014,Software Engineering,78,Internal,2026-02-05
-MCA2014,Software Engineering,50,Practical,2026-02-15
-MCA2014,Software Engineering,51,External,2026-03-10
-MCA2014,Research Methods,66,Internal,2026-02-05
-MCA2014,Research Methods,72,Practical,2026-02-15
-MCA2014,Research Methods,66,External,2026-03-10
-MCA2015,Advanced Python,26,Internal,2026-02-05
-MCA2015,Advanced Python,20,Practical,2026-02-15
-MCA2015,Advanced Python,23,External,2026-03-10
-MCA2015,DSA,33,Internal,2026-02-05
-MCA2015,DSA,37,Practical,2026-02-15
-MCA2015,DSA,29,External,2026-03-10
-MCA2015,Cloud Computing,29,Internal,2026-02-05
-MCA2015,Cloud Computing,40,Practical,2026-02-15
-MCA2015,Cloud Computing,39,External,2026-03-10
-MCA2015,Machine Learning,30,Internal,2026-02-05
-MCA2015,Machine Learning,22,Practical,2026-02-15
-MCA2015,Machine Learning,40,External,2026-03-10
-MCA2015,Software Engineering,38,Internal,2026-02-05
-MCA2015,Software Engineering,28,Practical,2026-02-15
-MCA2015,Software Engineering,34,External,2026-03-10
-MCA2015,Research Methods,21,Internal,2026-02-05
-MCA2015,Research Methods,24,Practical,2026-02-15
-MCA2015,Research Methods,37,External,2026-03-10
-BTECH1001,Engineering Maths,78,Internal,2026-02-05
-BTECH1001,Engineering Maths,54,Practical,2026-02-15
-BTECH1001,Engineering Maths,70,External,2026-03-10
-BTECH1001,DBMS,53,Internal,2026-02-05
-BTECH1001,DBMS,67,Practical,2026-02-15
-BTECH1001,DBMS,67,External,2026-03-10
-BTECH1001,OS,61,Internal,2026-02-05
-BTECH1001,OS,56,Practical,2026-02-15
-BTECH1001,OS,51,External,2026-03-10
-BTECH1001,Networks,80,Internal,2026-02-05
-BTECH1001,Networks,65,Practical,2026-02-15
-BTECH1001,Networks,79,External,2026-03-10
-BTECH1001,Data Structures,62,Internal,2026-02-05
-BTECH1001,Data Structures,50,Practical,2026-02-15
-BTECH1001,Data Structures,75,External,2026-03-10
-BTECH1001,Software Engineering,51,Internal,2026-02-05
-BTECH1001,Software Engineering,51,Practical,2026-02-15
-BTECH1001,Software Engineering,75,External,2026-03-10
-BTECH1002,Engineering Maths,91,Internal,2026-02-05
-BTECH1002,Engineering Maths,85,Practical,2026-02-15
-BTECH1002,Engineering Maths,87,External,2026-03-10
-BTECH1002,DBMS,91,Internal,2026-02-05
-BTECH1002,DBMS,92,Practical,2026-02-15
-BTECH1002,DBMS,95,External,2026-03-10
-BTECH1002,OS,89,Internal,2026-02-05
-BTECH1002,OS,93,Practical,2026-02-15
-BTECH1002,OS,92,External,2026-03-10
-BTECH1002,Networks,89,Internal,2026-02-05
-BTECH1002,Networks,90,Practical,2026-02-15
-BTECH1002,Networks,93,External,2026-03-10
-BTECH1002,Data Structures,87,Internal,2026-02-05
-BTECH1002,Data Structures,85,Practical,2026-02-15
-BTECH1002,Data Structures,91,External,2026-03-10
-BTECH1002,Software Engineering,92,Internal,2026-02-05
-BTECH1002,Software Engineering,95,Practical,2026-02-15
-BTECH1002,Software Engineering,92,External,2026-03-10
-BTECH1003,Engineering Maths,67,Internal,2026-02-05
-BTECH1003,Engineering Maths,54,Practical,2026-02-15
-BTECH1003,Engineering Maths,56,External,2026-03-10
-BTECH1003,DBMS,51,Internal,2026-02-05
-BTECH1003,DBMS,66,Practical,2026-02-15
-BTECH1003,DBMS,66,External,2026-03-10
-BTECH1003,OS,54,Internal,2026-02-05
-BTECH1003,OS,75,Practical,2026-02-15
-BTECH1003,OS,59,External,2026-03-10
-BTECH1003,Networks,68,Internal,2026-02-05
-BTECH1003,Networks,54,Practical,2026-02-15
-BTECH1003,Networks,67,External,2026-03-10
-BTECH1003,Data Structures,64,Internal,2026-02-05
-BTECH1003,Data Structures,71,Practical,2026-02-15
-BTECH1003,Data Structures,70,External,2026-03-10
-BTECH1003,Software Engineering,69,Internal,2026-02-05
-BTECH1003,Software Engineering,69,Practical,2026-02-15
-BTECH1003,Software Engineering,75,External,2026-03-10
-BTECH1004,Engineering Maths,50,Internal,2026-02-05
-BTECH1004,Engineering Maths,68,Practical,2026-02-15
-BTECH1004,Engineering Maths,63,External,2026-03-10
-BTECH1004,DBMS,62,Internal,2026-02-05
-BTECH1004,DBMS,74,Practical,2026-02-15
-BTECH1004,DBMS,68,External,2026-03-10
-BTECH1004,OS,64,Internal,2026-02-05
-BTECH1004,OS,80,Practical,2026-02-15
-BTECH1004,OS,51,External,2026-03-10
-BTECH1004,Networks,65,Internal,2026-02-05
-BTECH1004,Networks,63,Practical,2026-02-15
-BTECH1004,Networks,63,External,2026-03-10
-BTECH1004,Data Structures,66,Internal,2026-02-05
-BTECH1004,Data Structures,68,Practical,2026-02-15
-BTECH1004,Data Structures,77,External,2026-03-10
-BTECH1004,Software Engineering,56,Internal,2026-02-05
-BTECH1004,Software Engineering,75,Practical,2026-02-15
-BTECH1004,Software Engineering,61,External,2026-03-10
-BTECH1005,Engineering Maths,77,Internal,2026-02-05
-BTECH1005,Engineering Maths,59,Practical,2026-02-15
-BTECH1005,Engineering Maths,61,External,2026-03-10
-BTECH1005,DBMS,71,Internal,2026-02-05
-BTECH1005,DBMS,67,Practical,2026-02-15
-BTECH1005,DBMS,72,External,2026-03-10
-BTECH1005,OS,71,Internal,2026-02-05
-BTECH1005,OS,64,Practical,2026-02-15
-BTECH1005,OS,65,External,2026-03-10
-BTECH1005,Networks,65,Internal,2026-02-05
-BTECH1005,Networks,66,Practical,2026-02-15
-BTECH1005,Networks,61,External,2026-03-10
-BTECH1005,Data Structures,52,Internal,2026-02-05
-BTECH1005,Data Structures,67,Practical,2026-02-15
-BTECH1005,Data Structures,55,External,2026-03-10
-BTECH1005,Software Engineering,68,Internal,2026-02-05
-BTECH1005,Software Engineering,70,Practical,2026-02-15
-BTECH1005,Software Engineering,59,External,2026-03-10
-BTECH1006,Engineering Maths,24,Internal,2026-02-05
-BTECH1006,Engineering Maths,20,Practical,2026-02-15
-BTECH1006,Engineering Maths,40,External,2026-03-10
-BTECH1006,DBMS,33,Internal,2026-02-05
-BTECH1006,DBMS,25,Practical,2026-02-15
-BTECH1006,DBMS,30,External,2026-03-10
-BTECH1006,OS,29,Internal,2026-02-05
-BTECH1006,OS,39,Practical,2026-02-15
-BTECH1006,OS,37,External,2026-03-10
-BTECH1006,Networks,28,Internal,2026-02-05
-BTECH1006,Networks,26,Practical,2026-02-15
-BTECH1006,Networks,24,External,2026-03-10
-BTECH1006,Data Structures,30,Internal,2026-02-05
-BTECH1006,Data Structures,29,Practical,2026-02-15
-BTECH1006,Data Structures,36,External,2026-03-10
-BTECH1006,Software Engineering,28,Internal,2026-02-05
-BTECH1006,Software Engineering,34,Practical,2026-02-15
-BTECH1006,Software Engineering,25,External,2026-03-10
-BTECH1007,Engineering Maths,71,Internal,2026-02-05
-BTECH1007,Engineering Maths,52,Practical,2026-02-15
-BTECH1007,Engineering Maths,50,External,2026-03-10
-BTECH1007,DBMS,77,Internal,2026-02-05
-BTECH1007,DBMS,64,Practical,2026-02-15
-BTECH1007,DBMS,78,External,2026-03-10
-BTECH1007,OS,68,Internal,2026-02-05
-BTECH1007,OS,71,Practical,2026-02-15
-BTECH1007,OS,65,External,2026-03-10
-BTECH1007,Networks,70,Internal,2026-02-05
-BTECH1007,Networks,66,Practical,2026-02-15
-BTECH1007,Networks,74,External,2026-03-10
-BTECH1007,Data Structures,64,Internal,2026-02-05
-BTECH1007,Data Structures,55,Practical,2026-02-15
-BTECH1007,Data Structures,73,External,2026-03-10
-BTECH1007,Software Engineering,59,Internal,2026-02-05
-BTECH1007,Software Engineering,54,Practical,2026-02-15
-BTECH1007,Software Engineering,73,External,2026-03-10
-BTECH1008,Engineering Maths,55,Internal,2026-02-05
-BTECH1008,Engineering Maths,55,Practical,2026-02-15
-BTECH1008,Engineering Maths,71,External,2026-03-10
-BTECH1008,DBMS,74,Internal,2026-02-05
-BTECH1008,DBMS,80,Practical,2026-02-15
-BTECH1008,DBMS,53,External,2026-03-10
-BTECH1008,OS,72,Internal,2026-02-05
-BTECH1008,OS,63,Practical,2026-02-15
-BTECH1008,OS,51,External,2026-03-10
-BTECH1008,Networks,75,Internal,2026-02-05
-BTECH1008,Networks,62,Practical,2026-02-15
-BTECH1008,Networks,80,External,2026-03-10
-BTECH1008,Data Structures,51,Internal,2026-02-05
-BTECH1008,Data Structures,64,Practical,2026-02-15
-BTECH1008,Data Structures,73,External,2026-03-10
-BTECH1008,Software Engineering,64,Internal,2026-02-05
-BTECH1008,Software Engineering,75,Practical,2026-02-15
-BTECH1008,Software Engineering,58,External,2026-03-10
-BTECH1009,Engineering Maths,53,Internal,2026-02-05
-BTECH1009,Engineering Maths,69,Practical,2026-02-15
-BTECH1009,Engineering Maths,51,External,2026-03-10
-BTECH1009,DBMS,72,Internal,2026-02-05
-BTECH1009,DBMS,60,Practical,2026-02-15
-BTECH1009,DBMS,69,External,2026-03-10
-BTECH1009,OS,67,Internal,2026-02-05
-BTECH1009,OS,67,Practical,2026-02-15
-BTECH1009,OS,65,External,2026-03-10
-BTECH1009,Networks,64,Internal,2026-02-05
-BTECH1009,Networks,72,Practical,2026-02-15
-BTECH1009,Networks,71,External,2026-03-10
-BTECH1009,Data Structures,79,Internal,2026-02-05
-BTECH1009,Data Structures,52,Practical,2026-02-15
-BTECH1009,Data Structures,59,External,2026-03-10
-BTECH1009,Software Engineering,64,Internal,2026-02-05
-BTECH1009,Software Engineering,76,Practical,2026-02-15
-BTECH1009,Software Engineering,58,External,2026-03-10
-BTECH1010,Engineering Maths,36,Internal,2026-02-05
-BTECH1010,Engineering Maths,35,Practical,2026-02-15
-BTECH1010,Engineering Maths,28,External,2026-03-10
-BTECH1010,DBMS,34,Internal,2026-02-05
-BTECH1010,DBMS,27,Practical,2026-02-15
-BTECH1010,DBMS,39,External,2026-03-10
-BTECH1010,OS,33,Internal,2026-02-05
-BTECH1010,OS,27,Practical,2026-02-15
-BTECH1010,OS,25,External,2026-03-10
-BTECH1010,Networks,33,Internal,2026-02-05
-BTECH1010,Networks,28,Practical,2026-02-15
-BTECH1010,Networks,30,External,2026-03-10
-BTECH1010,Data Structures,32,Internal,2026-02-05
-BTECH1010,Data Structures,21,Practical,2026-02-15
-BTECH1010,Data Structures,38,External,2026-03-10
-BTECH1010,Software Engineering,23,Internal,2026-02-05
-BTECH1010,Software Engineering,38,Practical,2026-02-15
-BTECH1010,Software Engineering,30,External,2026-03-10
-BTECH1011,Engineering Maths,37,Internal,2026-02-05
-BTECH1011,Engineering Maths,28,Practical,2026-02-15
-BTECH1011,Engineering Maths,28,External,2026-03-10
-BTECH1011,DBMS,23,Internal,2026-02-05
-BTECH1011,DBMS,20,Practical,2026-02-15
-BTECH1011,DBMS,36,External,2026-03-10
-BTECH1011,OS,40,Internal,2026-02-05
-BTECH1011,OS,34,Practical,2026-02-15
-BTECH1011,OS,22,External,2026-03-10
-BTECH1011,Networks,40,Internal,2026-02-05
-BTECH1011,Networks,34,Practical,2026-02-15
-BTECH1011,Networks,31,External,2026-03-10
-BTECH1011,Data Structures,40,Internal,2026-02-05
-BTECH1011,Data Structures,37,Practical,2026-02-15
-BTECH1011,Data Structures,39,External,2026-03-10
-BTECH1011,Software Engineering,32,Internal,2026-02-05
-BTECH1011,Software Engineering,34,Practical,2026-02-15
-BTECH1011,Software Engineering,27,External,2026-03-10
-BTECH1012,Engineering Maths,63,Internal,2026-02-05
-BTECH1012,Engineering Maths,74,Practical,2026-02-15
-BTECH1012,Engineering Maths,57,External,2026-03-10
-BTECH1012,DBMS,74,Internal,2026-02-05
-BTECH1012,DBMS,72,Practical,2026-02-15
-BTECH1012,DBMS,66,External,2026-03-10
-BTECH1012,OS,77,Internal,2026-02-05
-BTECH1012,OS,75,Practical,2026-02-15
-BTECH1012,OS,73,External,2026-03-10
-BTECH1012,Networks,76,Internal,2026-02-05
-BTECH1012,Networks,53,Practical,2026-02-15
-BTECH1012,Networks,76,External,2026-03-10
-BTECH1012,Data Structures,77,Internal,2026-02-05
-BTECH1012,Data Structures,77,Practical,2026-02-15
-BTECH1012,Data Structures,75,External,2026-03-10
-BTECH1012,Software Engineering,66,Internal,2026-02-05
-BTECH1012,Software Engineering,78,Practical,2026-02-15
-BTECH1012,Software Engineering,61,External,2026-03-10
-BTECH1013,Engineering Maths,68,Internal,2026-02-05
-BTECH1013,Engineering Maths,67,Practical,2026-02-15
-BTECH1013,Engineering Maths,69,External,2026-03-10
-BTECH1013,DBMS,54,Internal,2026-02-05
-BTECH1013,DBMS,56,Practical,2026-02-15
-BTECH1013,DBMS,50,External,2026-03-10
-BTECH1013,OS,63,Internal,2026-02-05
-BTECH1013,OS,55,Practical,2026-02-15
-BTECH1013,OS,73,External,2026-03-10
-BTECH1013,Networks,68,Internal,2026-02-05
-BTECH1013,Networks,80,Practical,2026-02-15
-BTECH1013,Networks,76,External,2026-03-10
-BTECH1013,Data Structures,52,Internal,2026-02-05
-BTECH1013,Data Structures,76,Practical,2026-02-15
-BTECH1013,Data Structures,68,External,2026-03-10
-BTECH1013,Software Engineering,58,Internal,2026-02-05
-BTECH1013,Software Engineering,57,Practical,2026-02-15
-BTECH1013,Software Engineering,56,External,2026-03-10
-BTECH1014,Engineering Maths,62,Internal,2026-02-05
-BTECH1014,Engineering Maths,52,Practical,2026-02-15
-BTECH1014,Engineering Maths,52,External,2026-03-10
-BTECH1014,DBMS,65,Internal,2026-02-05
-BTECH1014,DBMS,51,Practical,2026-02-15
-BTECH1014,DBMS,52,External,2026-03-10
-BTECH1014,OS,54,Internal,2026-02-05
-BTECH1014,OS,68,Practical,2026-02-15
-BTECH1014,OS,53,External,2026-03-10
-BTECH1014,Networks,69,Internal,2026-02-05
-BTECH1014,Networks,52,Practical,2026-02-15
-BTECH1014,Networks,59,External,2026-03-10
-BTECH1014,Data Structures,52,Internal,2026-02-05
-BTECH1014,Data Structures,62,Practical,2026-02-15
-BTECH1014,Data Structures,61,External,2026-03-10
-BTECH1014,Software Engineering,63,Internal,2026-02-05
-BTECH1014,Software Engineering,53,Practical,2026-02-15
-BTECH1014,Software Engineering,74,External,2026-03-10
-BTECH1015,Engineering Maths,26,Internal,2026-02-05
-BTECH1015,Engineering Maths,32,Practical,2026-02-15
-BTECH1015,Engineering Maths,35,External,2026-03-10
-BTECH1015,DBMS,34,Internal,2026-02-05
-BTECH1015,DBMS,35,Practical,2026-02-15
-BTECH1015,DBMS,40,External,2026-03-10
-BTECH1015,OS,30,Internal,2026-02-05
-BTECH1015,OS,39,Practical,2026-02-15
-BTECH1015,OS,35,External,2026-03-10
-BTECH1015,Networks,20,Internal,2026-02-05
-BTECH1015,Networks,30,Practical,2026-02-15
-BTECH1015,Networks,32,External,2026-03-10
-BTECH1015,Data Structures,25,Internal,2026-02-05
-BTECH1015,Data Structures,29,Practical,2026-02-15
-BTECH1015,Data Structures,33,External,2026-03-10
-BTECH1015,Software Engineering,22,Internal,2026-02-05
-BTECH1015,Software Engineering,23,Practical,2026-02-15
-BTECH1015,Software Engineering,24,External,2026-03-10
-BTECH2001,Engineering Maths,91,Internal,2026-02-05
-BTECH2001,Engineering Maths,94,Practical,2026-02-15
-BTECH2001,Engineering Maths,87,External,2026-03-10
-BTECH2001,DBMS,94,Internal,2026-02-05
-BTECH2001,DBMS,87,Practical,2026-02-15
-BTECH2001,DBMS,92,External,2026-03-10
-BTECH2001,OS,87,Internal,2026-02-05
-BTECH2001,OS,91,Practical,2026-02-15
-BTECH2001,OS,93,External,2026-03-10
-BTECH2001,Networks,87,Internal,2026-02-05
-BTECH2001,Networks,85,Practical,2026-02-15
-BTECH2001,Networks,90,External,2026-03-10
-BTECH2001,Data Structures,86,Internal,2026-02-05
-BTECH2001,Data Structures,92,Practical,2026-02-15
-BTECH2001,Data Structures,86,External,2026-03-10
-BTECH2001,Software Engineering,95,Internal,2026-02-05
-BTECH2001,Software Engineering,88,Practical,2026-02-15
-BTECH2001,Software Engineering,95,External,2026-03-10
-BTECH2002,Engineering Maths,59,Internal,2026-02-05
-BTECH2002,Engineering Maths,59,Practical,2026-02-15
-BTECH2002,Engineering Maths,66,External,2026-03-10
-BTECH2002,DBMS,69,Internal,2026-02-05
-BTECH2002,DBMS,72,Practical,2026-02-15
-BTECH2002,DBMS,61,External,2026-03-10
-BTECH2002,OS,58,Internal,2026-02-05
-BTECH2002,OS,64,Practical,2026-02-15
-BTECH2002,OS,67,External,2026-03-10
-BTECH2002,Networks,58,Internal,2026-02-05
-BTECH2002,Networks,55,Practical,2026-02-15
-BTECH2002,Networks,64,External,2026-03-10
-BTECH2002,Data Structures,70,Internal,2026-02-05
-BTECH2002,Data Structures,67,Practical,2026-02-15
-BTECH2002,Data Structures,62,External,2026-03-10
-BTECH2002,Software Engineering,57,Internal,2026-02-05
-BTECH2002,Software Engineering,71,Practical,2026-02-15
-BTECH2002,Software Engineering,80,External,2026-03-10
-BTECH2003,Engineering Maths,40,Internal,2026-02-05
-BTECH2003,Engineering Maths,40,Practical,2026-02-15
-BTECH2003,Engineering Maths,37,External,2026-03-10
-BTECH2003,DBMS,23,Internal,2026-02-05
-BTECH2003,DBMS,36,Practical,2026-02-15
-BTECH2003,DBMS,34,External,2026-03-10
-BTECH2003,OS,29,Internal,2026-02-05
-BTECH2003,OS,33,Practical,2026-02-15
-BTECH2003,OS,28,External,2026-03-10
-BTECH2003,Networks,39,Internal,2026-02-05
-BTECH2003,Networks,39,Practical,2026-02-15
-BTECH2003,Networks,36,External,2026-03-10
-BTECH2003,Data Structures,26,Internal,2026-02-05
-BTECH2003,Data Structures,34,Practical,2026-02-15
-BTECH2003,Data Structures,23,External,2026-03-10
-BTECH2003,Software Engineering,37,Internal,2026-02-05
-BTECH2003,Software Engineering,28,Practical,2026-02-15
-BTECH2003,Software Engineering,38,External,2026-03-10
-BTECH2004,Engineering Maths,71,Internal,2026-02-05
-BTECH2004,Engineering Maths,57,Practical,2026-02-15
-BTECH2004,Engineering Maths,66,External,2026-03-10
-BTECH2004,DBMS,73,Internal,2026-02-05
-BTECH2004,DBMS,80,Practical,2026-02-15
-BTECH2004,DBMS,77,External,2026-03-10
-BTECH2004,OS,72,Internal,2026-02-05
-BTECH2004,OS,54,Practical,2026-02-15
-BTECH2004,OS,57,External,2026-03-10
-BTECH2004,Networks,77,Internal,2026-02-05
-BTECH2004,Networks,79,Practical,2026-02-15
-BTECH2004,Networks,79,External,2026-03-10
-BTECH2004,Data Structures,54,Internal,2026-02-05
-BTECH2004,Data Structures,56,Practical,2026-02-15
-BTECH2004,Data Structures,79,External,2026-03-10
-BTECH2004,Software Engineering,53,Internal,2026-02-05
-BTECH2004,Software Engineering,64,Practical,2026-02-15
-BTECH2004,Software Engineering,77,External,2026-03-10
-BTECH2005,Engineering Maths,80,Internal,2026-02-05
-BTECH2005,Engineering Maths,51,Practical,2026-02-15
-BTECH2005,Engineering Maths,72,External,2026-03-10
-BTECH2005,DBMS,56,Internal,2026-02-05
-BTECH2005,DBMS,79,Practical,2026-02-15
-BTECH2005,DBMS,73,External,2026-03-10
-BTECH2005,OS,68,Internal,2026-02-05
-BTECH2005,OS,62,Practical,2026-02-15
-BTECH2005,OS,50,External,2026-03-10
-BTECH2005,Networks,68,Internal,2026-02-05
-BTECH2005,Networks,69,Practical,2026-02-15
-BTECH2005,Networks,77,External,2026-03-10
-BTECH2005,Data Structures,62,Internal,2026-02-05
-BTECH2005,Data Structures,72,Practical,2026-02-15
-BTECH2005,Data Structures,54,External,2026-03-10
-BTECH2005,Software Engineering,68,Internal,2026-02-05
-BTECH2005,Software Engineering,67,Practical,2026-02-15
-BTECH2005,Software Engineering,73,External,2026-03-10
-BTECH2006,Engineering Maths,54,Internal,2026-02-05
-BTECH2006,Engineering Maths,79,Practical,2026-02-15
-BTECH2006,Engineering Maths,73,External,2026-03-10
-BTECH2006,DBMS,66,Internal,2026-02-05
-BTECH2006,DBMS,51,Practical,2026-02-15
-BTECH2006,DBMS,52,External,2026-03-10
-BTECH2006,OS,55,Internal,2026-02-05
-BTECH2006,OS,69,Practical,2026-02-15
-BTECH2006,OS,77,External,2026-03-10
-BTECH2006,Networks,61,Internal,2026-02-05
-BTECH2006,Networks,77,Practical,2026-02-15
-BTECH2006,Networks,72,External,2026-03-10
-BTECH2006,Data Structures,75,Internal,2026-02-05
-BTECH2006,Data Structures,78,Practical,2026-02-15
-BTECH2006,Data Structures,58,External,2026-03-10
-BTECH2006,Software Engineering,71,Internal,2026-02-05
-BTECH2006,Software Engineering,50,Practical,2026-02-15
-BTECH2006,Software Engineering,60,External,2026-03-10
-BTECH2007,Engineering Maths,53,Internal,2026-02-05
-BTECH2007,Engineering Maths,68,Practical,2026-02-15
-BTECH2007,Engineering Maths,68,External,2026-03-10
-BTECH2007,DBMS,60,Internal,2026-02-05
-BTECH2007,DBMS,60,Practical,2026-02-15
-BTECH2007,DBMS,69,External,2026-03-10
-BTECH2007,OS,74,Internal,2026-02-05
-BTECH2007,OS,52,Practical,2026-02-15
-BTECH2007,OS,80,External,2026-03-10
-BTECH2007,Networks,60,Internal,2026-02-05
-BTECH2007,Networks,76,Practical,2026-02-15
-BTECH2007,Networks,66,External,2026-03-10
-BTECH2007,Data Structures,58,Internal,2026-02-05
-BTECH2007,Data Structures,78,Practical,2026-02-15
-BTECH2007,Data Structures,68,External,2026-03-10
-BTECH2007,Software Engineering,52,Internal,2026-02-05
-BTECH2007,Software Engineering,59,Practical,2026-02-15
-BTECH2007,Software Engineering,56,External,2026-03-10
-BTECH2008,Engineering Maths,22,Internal,2026-02-05
-BTECH2008,Engineering Maths,38,Practical,2026-02-15
-BTECH2008,Engineering Maths,37,External,2026-03-10
-BTECH2008,DBMS,20,Internal,2026-02-05
-BTECH2008,DBMS,29,Practical,2026-02-15
-BTECH2008,DBMS,24,External,2026-03-10
-BTECH2008,OS,39,Internal,2026-02-05
-BTECH2008,OS,33,Practical,2026-02-15
-BTECH2008,OS,24,External,2026-03-10
-BTECH2008,Networks,38,Internal,2026-02-05
-BTECH2008,Networks,40,Practical,2026-02-15
-BTECH2008,Networks,38,External,2026-03-10
-BTECH2008,Data Structures,36,Internal,2026-02-05
-BTECH2008,Data Structures,28,Practical,2026-02-15
-BTECH2008,Data Structures,40,External,2026-03-10
-BTECH2008,Software Engineering,31,Internal,2026-02-05
-BTECH2008,Software Engineering,21,Practical,2026-02-15
-BTECH2008,Software Engineering,28,External,2026-03-10
-BTECH2009,Engineering Maths,69,Internal,2026-02-05
-BTECH2009,Engineering Maths,75,Practical,2026-02-15
-BTECH2009,Engineering Maths,79,External,2026-03-10
-BTECH2009,DBMS,77,Internal,2026-02-05
-BTECH2009,DBMS,52,Practical,2026-02-15
-BTECH2009,DBMS,60,External,2026-03-10
-BTECH2009,OS,74,Internal,2026-02-05
-BTECH2009,OS,79,Practical,2026-02-15
-BTECH2009,OS,74,External,2026-03-10
-BTECH2009,Networks,70,Internal,2026-02-05
-BTECH2009,Networks,63,Practical,2026-02-15
-BTECH2009,Networks,63,External,2026-03-10
-BTECH2009,Data Structures,71,Internal,2026-02-05
-BTECH2009,Data Structures,77,Practical,2026-02-15
-BTECH2009,Data Structures,61,External,2026-03-10
-BTECH2009,Software Engineering,50,Internal,2026-02-05
-BTECH2009,Software Engineering,69,Practical,2026-02-15
-BTECH2009,Software Engineering,50,External,2026-03-10
-BTECH2010,Engineering Maths,30,Internal,2026-02-05
-BTECH2010,Engineering Maths,30,Practical,2026-02-15
-BTECH2010,Engineering Maths,40,External,2026-03-10
-BTECH2010,DBMS,21,Internal,2026-02-05
-BTECH2010,DBMS,40,Practical,2026-02-15
-BTECH2010,DBMS,38,External,2026-03-10
-BTECH2010,OS,31,Internal,2026-02-05
-BTECH2010,OS,35,Practical,2026-02-15
-BTECH2010,OS,34,External,2026-03-10
-BTECH2010,Networks,26,Internal,2026-02-05
-BTECH2010,Networks,37,Practical,2026-02-15
-BTECH2010,Networks,20,External,2026-03-10
-BTECH2010,Data Structures,36,Internal,2026-02-05
-BTECH2010,Data Structures,26,Practical,2026-02-15
-BTECH2010,Data Structures,37,External,2026-03-10
-BTECH2010,Software Engineering,24,Internal,2026-02-05
-BTECH2010,Software Engineering,28,Practical,2026-02-15
-BTECH2010,Software Engineering,32,External,2026-03-10
-BTECH2011,Engineering Maths,34,Internal,2026-02-05
-BTECH2011,Engineering Maths,40,Practical,2026-02-15
-BTECH2011,Engineering Maths,32,External,2026-03-10
-BTECH2011,DBMS,22,Internal,2026-02-05
-BTECH2011,DBMS,33,Practical,2026-02-15
-BTECH2011,DBMS,27,External,2026-03-10
-BTECH2011,OS,23,Internal,2026-02-05
-BTECH2011,OS,26,Practical,2026-02-15
-BTECH2011,OS,33,External,2026-03-10
-BTECH2011,Networks,29,Internal,2026-02-05
-BTECH2011,Networks,26,Practical,2026-02-15
-BTECH2011,Networks,28,External,2026-03-10
-BTECH2011,Data Structures,24,Internal,2026-02-05
-BTECH2011,Data Structures,21,Practical,2026-02-15
-BTECH2011,Data Structures,30,External,2026-03-10
-BTECH2011,Software Engineering,32,Internal,2026-02-05
-BTECH2011,Software Engineering,23,Practical,2026-02-15
-BTECH2011,Software Engineering,29,External,2026-03-10
-BTECH2012,Engineering Maths,92,Internal,2026-02-05
-BTECH2012,Engineering Maths,95,Practical,2026-02-15
-BTECH2012,Engineering Maths,86,External,2026-03-10
-BTECH2012,DBMS,89,Internal,2026-02-05
-BTECH2012,DBMS,93,Practical,2026-02-15
-BTECH2012,DBMS,85,External,2026-03-10
-BTECH2012,OS,93,Internal,2026-02-05
-BTECH2012,OS,90,Practical,2026-02-15
-BTECH2012,OS,85,External,2026-03-10
-BTECH2012,Networks,91,Internal,2026-02-05
-BTECH2012,Networks,91,Practical,2026-02-15
-BTECH2012,Networks,87,External,2026-03-10
-BTECH2012,Data Structures,94,Internal,2026-02-05
-BTECH2012,Data Structures,91,Practical,2026-02-15
-BTECH2012,Data Structures,95,External,2026-03-10
-BTECH2012,Software Engineering,93,Internal,2026-02-05
-BTECH2012,Software Engineering,93,Practical,2026-02-15
-BTECH2012,Software Engineering,92,External,2026-03-10
-BTECH2013,Engineering Maths,66,Internal,2026-02-05
-BTECH2013,Engineering Maths,65,Practical,2026-02-15
-BTECH2013,Engineering Maths,79,External,2026-03-10
-BTECH2013,DBMS,72,Internal,2026-02-05
-BTECH2013,DBMS,69,Practical,2026-02-15
-BTECH2013,DBMS,53,External,2026-03-10
-BTECH2013,OS,53,Internal,2026-02-05
-BTECH2013,OS,53,Practical,2026-02-15
-BTECH2013,OS,66,External,2026-03-10
-BTECH2013,Networks,70,Internal,2026-02-05
-BTECH2013,Networks,59,Practical,2026-02-15
-BTECH2013,Networks,55,External,2026-03-10
-BTECH2013,Data Structures,54,Internal,2026-02-05
-BTECH2013,Data Structures,76,Practical,2026-02-15
-BTECH2013,Data Structures,80,External,2026-03-10
-BTECH2013,Software Engineering,69,Internal,2026-02-05
-BTECH2013,Software Engineering,76,Practical,2026-02-15
-BTECH2013,Software Engineering,55,External,2026-03-10
-BTECH2014,Engineering Maths,54,Internal,2026-02-05
-BTECH2014,Engineering Maths,59,Practical,2026-02-15
-BTECH2014,Engineering Maths,57,External,2026-03-10
-BTECH2014,DBMS,51,Internal,2026-02-05
-BTECH2014,DBMS,61,Practical,2026-02-15
-BTECH2014,DBMS,79,External,2026-03-10
-BTECH2014,OS,74,Internal,2026-02-05
-BTECH2014,OS,52,Practical,2026-02-15
-BTECH2014,OS,54,External,2026-03-10
-BTECH2014,Networks,76,Internal,2026-02-05
-BTECH2014,Networks,54,Practical,2026-02-15
-BTECH2014,Networks,54,External,2026-03-10
-BTECH2014,Data Structures,77,Internal,2026-02-05
-BTECH2014,Data Structures,77,Practical,2026-02-15
-BTECH2014,Data Structures,59,External,2026-03-10
-BTECH2014,Software Engineering,77,Internal,2026-02-05
-BTECH2014,Software Engineering,79,Practical,2026-02-15
-BTECH2014,Software Engineering,71,External,2026-03-10
-BTECH2015,Engineering Maths,58,Internal,2026-02-05
-BTECH2015,Engineering Maths,60,Practical,2026-02-15
-BTECH2015,Engineering Maths,71,External,2026-03-10
-BTECH2015,DBMS,56,Internal,2026-02-05
-BTECH2015,DBMS,78,Practical,2026-02-15
-BTECH2015,DBMS,58,External,2026-03-10
-BTECH2015,OS,80,Internal,2026-02-05
-BTECH2015,OS,73,Practical,2026-02-15
-BTECH2015,OS,79,External,2026-03-10
-BTECH2015,Networks,76,Internal,2026-02-05
-BTECH2015,Networks,76,Practical,2026-02-15
-BTECH2015,Networks,61,External,2026-03-10
-BTECH2015,Data Structures,53,Internal,2026-02-05
-BTECH2015,Data Structures,62,Practical,2026-02-15
-BTECH2015,Data Structures,60,External,2026-03-10
-BTECH2015,Software Engineering,78,Internal,2026-02-05
-BTECH2015,Software Engineering,58,Practical,2026-02-15
-BTECH2015,Software Engineering,55,External,2026-03-10
-MBA1001,Marketing,75,Internal,2026-02-05
-MBA1001,Marketing,72,External,2026-03-10
-MBA1001,Finance,73,Internal,2026-02-05
-MBA1001,Finance,69,External,2026-03-10
-MBA1001,HRM,78,Internal,2026-02-05
-MBA1001,HRM,58,External,2026-03-10
-MBA1001,Operations,75,Internal,2026-02-05
-MBA1001,Operations,69,External,2026-03-10
-MBA1001,Business Analytics,53,Internal,2026-02-05
-MBA1001,Business Analytics,58,External,2026-03-10
-MBA1001,Strategic Management,65,Internal,2026-02-05
-MBA1001,Strategic Management,74,External,2026-03-10
-MBA1002,Marketing,30,Internal,2026-02-05
-MBA1002,Marketing,31,External,2026-03-10
-MBA1002,Finance,26,Internal,2026-02-05
-MBA1002,Finance,23,External,2026-03-10
-MBA1002,HRM,31,Internal,2026-02-05
-MBA1002,HRM,26,External,2026-03-10
-MBA1002,Operations,39,Internal,2026-02-05
-MBA1002,Operations,27,External,2026-03-10
-MBA1002,Business Analytics,21,Internal,2026-02-05
-MBA1002,Business Analytics,20,External,2026-03-10
-MBA1002,Strategic Management,27,Internal,2026-02-05
-MBA1002,Strategic Management,32,External,2026-03-10
-MBA1003,Marketing,79,Internal,2026-02-05
-MBA1003,Marketing,80,External,2026-03-10
-MBA1003,Finance,62,Internal,2026-02-05
-MBA1003,Finance,62,External,2026-03-10
-MBA1003,HRM,77,Internal,2026-02-05
-MBA1003,HRM,76,External,2026-03-10
-MBA1003,Operations,72,Internal,2026-02-05
-MBA1003,Operations,75,External,2026-03-10
-MBA1003,Business Analytics,68,Internal,2026-02-05
-MBA1003,Business Analytics,57,External,2026-03-10
-MBA1003,Strategic Management,55,Internal,2026-02-05
-MBA1003,Strategic Management,76,External,2026-03-10
-MBA1004,Marketing,68,Internal,2026-02-05
-MBA1004,Marketing,58,External,2026-03-10
-MBA1004,Finance,67,Internal,2026-02-05
-MBA1004,Finance,58,External,2026-03-10
-MBA1004,HRM,58,Internal,2026-02-05
-MBA1004,HRM,73,External,2026-03-10
-MBA1004,Operations,51,Internal,2026-02-05
-MBA1004,Operations,57,External,2026-03-10
-MBA1004,Business Analytics,62,Internal,2026-02-05
-MBA1004,Business Analytics,78,External,2026-03-10
-MBA1004,Strategic Management,60,Internal,2026-02-05
-MBA1004,Strategic Management,72,External,2026-03-10
-MBA1005,Marketing,26,Internal,2026-02-05
-MBA1005,Marketing,28,External,2026-03-10
-MBA1005,Finance,25,Internal,2026-02-05
-MBA1005,Finance,26,External,2026-03-10
-MBA1005,HRM,31,Internal,2026-02-05
-MBA1005,HRM,28,External,2026-03-10
-MBA1005,Operations,27,Internal,2026-02-05
-MBA1005,Operations,38,External,2026-03-10
-MBA1005,Business Analytics,20,Internal,2026-02-05
-MBA1005,Business Analytics,28,External,2026-03-10
-MBA1005,Strategic Management,24,Internal,2026-02-05
-MBA1005,Strategic Management,30,External,2026-03-10
-MBA1006,Marketing,88,Internal,2026-02-05
-MBA1006,Marketing,91,External,2026-03-10
-MBA1006,Finance,93,Internal,2026-02-05
-MBA1006,Finance,94,External,2026-03-10
-MBA1006,HRM,85,Internal,2026-02-05
-MBA1006,HRM,90,External,2026-03-10
-MBA1006,Operations,92,Internal,2026-02-05
-MBA1006,Operations,91,External,2026-03-10
-MBA1006,Business Analytics,85,Internal,2026-02-05
-MBA1006,Business Analytics,89,External,2026-03-10
-MBA1006,Strategic Management,93,Internal,2026-02-05
-MBA1006,Strategic Management,90,External,2026-03-10
-MBA1007,Marketing,61,Internal,2026-02-05
-MBA1007,Marketing,62,External,2026-03-10
-MBA1007,Finance,71,Internal,2026-02-05
-MBA1007,Finance,63,External,2026-03-10
-MBA1007,HRM,80,Internal,2026-02-05
-MBA1007,HRM,58,External,2026-03-10
-MBA1007,Operations,65,Internal,2026-02-05
-MBA1007,Operations,70,External,2026-03-10
-MBA1007,Business Analytics,69,Internal,2026-02-05
-MBA1007,Business Analytics,77,External,2026-03-10
-MBA1007,Strategic Management,72,Internal,2026-02-05
-MBA1007,Strategic Management,65,External,2026-03-10
-MBA1008,Marketing,55,Internal,2026-02-05
-MBA1008,Marketing,68,External,2026-03-10
-MBA1008,Finance,75,Internal,2026-02-05
-MBA1008,Finance,60,External,2026-03-10
-MBA1008,HRM,69,Internal,2026-02-05
-MBA1008,HRM,59,External,2026-03-10
-MBA1008,Operations,52,Internal,2026-02-05
-MBA1008,Operations,60,External,2026-03-10
-MBA1008,Business Analytics,79,Internal,2026-02-05
-MBA1008,Business Analytics,51,External,2026-03-10
-MBA1008,Strategic Management,75,Internal,2026-02-05
-MBA1008,Strategic Management,52,External,2026-03-10
-MBA1009,Marketing,77,Internal,2026-02-05
-MBA1009,Marketing,61,External,2026-03-10
-MBA1009,Finance,71,Internal,2026-02-05
-MBA1009,Finance,53,External,2026-03-10
-MBA1009,HRM,67,Internal,2026-02-05
-MBA1009,HRM,75,External,2026-03-10
-MBA1009,Operations,73,Internal,2026-02-05
-MBA1009,Operations,54,External,2026-03-10
-MBA1009,Business Analytics,79,Internal,2026-02-05
-MBA1009,Business Analytics,59,External,2026-03-10
-MBA1009,Strategic Management,53,Internal,2026-02-05
-MBA1009,Strategic Management,57,External,2026-03-10
-MBA1010,Marketing,89,Internal,2026-02-05
-MBA1010,Marketing,86,External,2026-03-10
-MBA1010,Finance,90,Internal,2026-02-05
-MBA1010,Finance,91,External,2026-03-10
-MBA1010,HRM,87,Internal,2026-02-05
-MBA1010,HRM,87,External,2026-03-10
-MBA1010,Operations,95,Internal,2026-02-05
-MBA1010,Operations,88,External,2026-03-10
-MBA1010,Business Analytics,85,Internal,2026-02-05
-MBA1010,Business Analytics,90,External,2026-03-10
-MBA1010,Strategic Management,87,Internal,2026-02-05
-MBA1010,Strategic Management,89,External,2026-03-10
-MBA1011,Marketing,21,Internal,2026-02-05
-MBA1011,Marketing,21,External,2026-03-10
-MBA1011,Finance,30,Internal,2026-02-05
-MBA1011,Finance,21,External,2026-03-10
-MBA1011,HRM,38,Internal,2026-02-05
-MBA1011,HRM,37,External,2026-03-10
-MBA1011,Operations,23,Internal,2026-02-05
-MBA1011,Operations,23,External,2026-03-10
-MBA1011,Business Analytics,24,Internal,2026-02-05
-MBA1011,Business Analytics,40,External,2026-03-10
-MBA1011,Strategic Management,37,Internal,2026-02-05
-MBA1011,Strategic Management,28,External,2026-03-10
-MBA1012,Marketing,64,Internal,2026-02-05
-MBA1012,Marketing,52,External,2026-03-10
-MBA1012,Finance,79,Internal,2026-02-05
-MBA1012,Finance,61,External,2026-03-10
-MBA1012,HRM,76,Internal,2026-02-05
-MBA1012,HRM,70,External,2026-03-10
-MBA1012,Operations,76,Internal,2026-02-05
-MBA1012,Operations,75,External,2026-03-10
-MBA1012,Business Analytics,52,Internal,2026-02-05
-MBA1012,Business Analytics,52,External,2026-03-10
-MBA1012,Strategic Management,51,Internal,2026-02-05
-MBA1012,Strategic Management,73,External,2026-03-10
-MBA1013,Marketing,31,Internal,2026-02-05
-MBA1013,Marketing,27,External,2026-03-10
-MBA1013,Finance,29,Internal,2026-02-05
-MBA1013,Finance,26,External,2026-03-10
-MBA1013,HRM,24,Internal,2026-02-05
-MBA1013,HRM,23,External,2026-03-10
-MBA1013,Operations,22,Internal,2026-02-05
-MBA1013,Operations,21,External,2026-03-10
-MBA1013,Business Analytics,38,Internal,2026-02-05
-MBA1013,Business Analytics,35,External,2026-03-10
-MBA1013,Strategic Management,33,Internal,2026-02-05
-MBA1013,Strategic Management,39,External,2026-03-10
-MBA1014,Marketing,53,Internal,2026-02-05
-MBA1014,Marketing,68,External,2026-03-10
-MBA1014,Finance,68,Internal,2026-02-05
-MBA1014,Finance,52,External,2026-03-10
-MBA1014,HRM,66,Internal,2026-02-05
-MBA1014,HRM,57,External,2026-03-10
-MBA1014,Operations,60,Internal,2026-02-05
-MBA1014,Operations,61,External,2026-03-10
-MBA1014,Business Analytics,69,Internal,2026-02-05
-MBA1014,Business Analytics,50,External,2026-03-10
-MBA1014,Strategic Management,57,Internal,2026-02-05
-MBA1014,Strategic Management,56,External,2026-03-10
-MBA1015,Marketing,89,Internal,2026-02-05
-MBA1015,Marketing,94,External,2026-03-10
-MBA1015,Finance,93,Internal,2026-02-05
-MBA1015,Finance,90,External,2026-03-10
-MBA1015,HRM,86,Internal,2026-02-05
-MBA1015,HRM,95,External,2026-03-10
-MBA1015,Operations,89,Internal,2026-02-05
-MBA1015,Operations,93,External,2026-03-10
-MBA1015,Business Analytics,91,Internal,2026-02-05
-MBA1015,Business Analytics,91,External,2026-03-10
-MBA1015,Strategic Management,87,Internal,2026-02-05
-MBA1015,Strategic Management,95,External,2026-03-10
-MBA2001,Marketing,65,Internal,2026-02-05
-MBA2001,Marketing,78,External,2026-03-10
-MBA2001,Finance,50,Internal,2026-02-05
-MBA2001,Finance,75,External,2026-03-10
-MBA2001,HRM,72,Internal,2026-02-05
-MBA2001,HRM,50,External,2026-03-10
-MBA2001,Operations,66,Internal,2026-02-05
-MBA2001,Operations,61,External,2026-03-10
-MBA2001,Business Analytics,51,Internal,2026-02-05
-MBA2001,Business Analytics,62,External,2026-03-10
-MBA2001,Strategic Management,76,Internal,2026-02-05
-MBA2001,Strategic Management,73,External,2026-03-10
-MBA2002,Marketing,59,Internal,2026-02-05
-MBA2002,Marketing,72,External,2026-03-10
-MBA2002,Finance,50,Internal,2026-02-05
-MBA2002,Finance,54,External,2026-03-10
-MBA2002,HRM,61,Internal,2026-02-05
-MBA2002,HRM,72,External,2026-03-10
-MBA2002,Operations,61,Internal,2026-02-05
-MBA2002,Operations,53,External,2026-03-10
-MBA2002,Business Analytics,58,Internal,2026-02-05
-MBA2002,Business Analytics,69,External,2026-03-10
-MBA2002,Strategic Management,56,Internal,2026-02-05
-MBA2002,Strategic Management,57,External,2026-03-10
-MBA2003,Marketing,33,Internal,2026-02-05
-MBA2003,Marketing,25,External,2026-03-10
-MBA2003,Finance,37,Internal,2026-02-05
-MBA2003,Finance,28,External,2026-03-10
-MBA2003,HRM,30,Internal,2026-02-05
-MBA2003,HRM,20,External,2026-03-10
-MBA2003,Operations,25,Internal,2026-02-05
-MBA2003,Operations,37,External,2026-03-10
-MBA2003,Business Analytics,32,Internal,2026-02-05
-MBA2003,Business Analytics,39,External,2026-03-10
-MBA2003,Strategic Management,35,Internal,2026-02-05
-MBA2003,Strategic Management,39,External,2026-03-10
-MBA2004,Marketing,73,Internal,2026-02-05
-MBA2004,Marketing,59,External,2026-03-10
-MBA2004,Finance,75,Internal,2026-02-05
-MBA2004,Finance,68,External,2026-03-10
-MBA2004,HRM,66,Internal,2026-02-05
-MBA2004,HRM,52,External,2026-03-10
-MBA2004,Operations,64,Internal,2026-02-05
-MBA2004,Operations,78,External,2026-03-10
-MBA2004,Business Analytics,66,Internal,2026-02-05
-MBA2004,Business Analytics,53,External,2026-03-10
-MBA2004,Strategic Management,76,Internal,2026-02-05
-MBA2004,Strategic Management,76,External,2026-03-10
-MBA2005,Marketing,90,Internal,2026-02-05
-MBA2005,Marketing,88,External,2026-03-10
-MBA2005,Finance,95,Internal,2026-02-05
-MBA2005,Finance,85,External,2026-03-10
-MBA2005,HRM,90,Internal,2026-02-05
-MBA2005,HRM,94,External,2026-03-10
-MBA2005,Operations,87,Internal,2026-02-05
-MBA2005,Operations,85,External,2026-03-10
-MBA2005,Business Analytics,95,Internal,2026-02-05
-MBA2005,Business Analytics,90,External,2026-03-10
-MBA2005,Strategic Management,94,Internal,2026-02-05
-MBA2005,Strategic Management,95,External,2026-03-10
-MBA2006,Marketing,77,Internal,2026-02-05
-MBA2006,Marketing,74,External,2026-03-10
-MBA2006,Finance,57,Internal,2026-02-05
-MBA2006,Finance,63,External,2026-03-10
-MBA2006,HRM,68,Internal,2026-02-05
-MBA2006,HRM,67,External,2026-03-10
-MBA2006,Operations,58,Internal,2026-02-05
-MBA2006,Operations,71,External,2026-03-10
-MBA2006,Business Analytics,58,Internal,2026-02-05
-MBA2006,Business Analytics,63,External,2026-03-10
-MBA2006,Strategic Management,59,Internal,2026-02-05
-MBA2006,Strategic Management,71,External,2026-03-10
-MBA2007,Marketing,63,Internal,2026-02-05
-MBA2007,Marketing,56,External,2026-03-10
-MBA2007,Finance,64,Internal,2026-02-05
-MBA2007,Finance,77,External,2026-03-10
-MBA2007,HRM,66,Internal,2026-02-05
-MBA2007,HRM,50,External,2026-03-10
-MBA2007,Operations,67,Internal,2026-02-05
-MBA2007,Operations,52,External,2026-03-10
-MBA2007,Business Analytics,56,Internal,2026-02-05
-MBA2007,Business Analytics,50,External,2026-03-10
-MBA2007,Strategic Management,77,Internal,2026-02-05
-MBA2007,Strategic Management,73,External,2026-03-10
-MBA2008,Marketing,58,Internal,2026-02-05
-MBA2008,Marketing,71,External,2026-03-10
-MBA2008,Finance,53,Internal,2026-02-05
-MBA2008,Finance,63,External,2026-03-10
-MBA2008,HRM,60,Internal,2026-02-05
-MBA2008,HRM,76,External,2026-03-10
-MBA2008,Operations,56,Internal,2026-02-05
-MBA2008,Operations,76,External,2026-03-10
-MBA2008,Business Analytics,51,Internal,2026-02-05
-MBA2008,Business Analytics,55,External,2026-03-10
-MBA2008,Strategic Management,67,Internal,2026-02-05
-MBA2008,Strategic Management,65,External,2026-03-10
-MBA2009,Marketing,85,Internal,2026-02-05
-MBA2009,Marketing,95,External,2026-03-10
-MBA2009,Finance,88,Internal,2026-02-05
-MBA2009,Finance,93,External,2026-03-10
-MBA2009,HRM,87,Internal,2026-02-05
-MBA2009,HRM,93,External,2026-03-10
-MBA2009,Operations,92,Internal,2026-02-05
-MBA2009,Operations,94,External,2026-03-10
-MBA2009,Business Analytics,85,Internal,2026-02-05
-MBA2009,Business Analytics,90,External,2026-03-10
-MBA2009,Strategic Management,88,Internal,2026-02-05
-MBA2009,Strategic Management,88,External,2026-03-10
-MBA2010,Marketing,34,Internal,2026-02-05
-MBA2010,Marketing,38,External,2026-03-10
-MBA2010,Finance,34,Internal,2026-02-05
-MBA2010,Finance,39,External,2026-03-10
-MBA2010,HRM,23,Internal,2026-02-05
-MBA2010,HRM,29,External,2026-03-10
-MBA2010,Operations,22,Internal,2026-02-05
-MBA2010,Operations,30,External,2026-03-10
-MBA2010,Business Analytics,32,Internal,2026-02-05
-MBA2010,Business Analytics,39,External,2026-03-10
-MBA2010,Strategic Management,39,Internal,2026-02-05
-MBA2010,Strategic Management,29,External,2026-03-10
-MBA2011,Marketing,79,Internal,2026-02-05
-MBA2011,Marketing,53,External,2026-03-10
-MBA2011,Finance,70,Internal,2026-02-05
-MBA2011,Finance,62,External,2026-03-10
-MBA2011,HRM,67,Internal,2026-02-05
-MBA2011,HRM,67,External,2026-03-10
-MBA2011,Operations,77,Internal,2026-02-05
-MBA2011,Operations,72,External,2026-03-10
-MBA2011,Business Analytics,57,Internal,2026-02-05
-MBA2011,Business Analytics,51,External,2026-03-10
-MBA2011,Strategic Management,62,Internal,2026-02-05
-MBA2011,Strategic Management,74,External,2026-03-10
-MBA2012,Marketing,51,Internal,2026-02-05
-MBA2012,Marketing,51,External,2026-03-10
-MBA2012,Finance,76,Internal,2026-02-05
-MBA2012,Finance,57,External,2026-03-10
-MBA2012,HRM,74,Internal,2026-02-05
-MBA2012,HRM,53,External,2026-03-10
-MBA2012,Operations,70,Internal,2026-02-05
-MBA2012,Operations,65,External,2026-03-10
-MBA2012,Business Analytics,58,Internal,2026-02-05
-MBA2012,Business Analytics,67,External,2026-03-10
-MBA2012,Strategic Management,60,Internal,2026-02-05
-MBA2012,Strategic Management,57,External,2026-03-10
-MBA2013,Marketing,30,Internal,2026-02-05
-MBA2013,Marketing,31,External,2026-03-10
-MBA2013,Finance,21,Internal,2026-02-05
-MBA2013,Finance,35,External,2026-03-10
-MBA2013,HRM,29,Internal,2026-02-05
-MBA2013,HRM,38,External,2026-03-10
-MBA2013,Operations,24,Internal,2026-02-05
-MBA2013,Operations,26,External,2026-03-10
-MBA2013,Business Analytics,38,Internal,2026-02-05
-MBA2013,Business Analytics,32,External,2026-03-10
-MBA2013,Strategic Management,22,Internal,2026-02-05
-MBA2013,Strategic Management,22,External,2026-03-10
-MBA2014,Marketing,68,Internal,2026-02-05
-MBA2014,Marketing,62,External,2026-03-10
-MBA2014,Finance,79,Internal,2026-02-05
-MBA2014,Finance,56,External,2026-03-10
-MBA2014,HRM,50,Internal,2026-02-05
-MBA2014,HRM,80,External,2026-03-10
-MBA2014,Operations,75,Internal,2026-02-05
-MBA2014,Operations,69,External,2026-03-10
-MBA2014,Business Analytics,73,Internal,2026-02-05
-MBA2014,Business Analytics,77,External,2026-03-10
-MBA2014,Strategic Management,57,Internal,2026-02-05
-MBA2014,Strategic Management,59,External,2026-03-10
-MBA2015,Marketing,63,Internal,2026-02-05
-MBA2015,Marketing,73,External,2026-03-10
-MBA2015,Finance,50,Internal,2026-02-05
-MBA2015,Finance,53,External,2026-03-10
-MBA2015,HRM,54,Internal,2026-02-05
-MBA2015,HRM,69,External,2026-03-10
-MBA2015,Operations,59,Internal,2026-02-05
-MBA2015,Operations,77,External,2026-03-10
-MBA2015,Business Analytics,50,Internal,2026-02-05
-MBA2015,Business Analytics,57,External,2026-03-10
-MBA2015,Strategic Management,79,Internal,2026-02-05
-MBA2015,Strategic Management,68,External,2026-03-10
+enrollment_no,subject,department,semester,mid_marks,viva_marks,external_marks
+BCA-101,Programming in C,BCA,1,12,3,12
+BCA-102,Programming in C,BCA,1,8,3,11
+BCA-103,Programming in C,BCA,1,9,4,17
+BCA-104,Programming in C,BCA,1,17,5,36
+BCA-105,Programming in C,BCA,1,16,7,39
+BCA-106,Programming in C,BCA,1,18,6,28
+BCA-107,Programming in C,BCA,1,25,8,49
+BCA-108,Programming in C,BCA,1,26,10,58
+BCA-109,Programming in C,BCA,1,30,10,58
+BCA-101,Mathematics-I,BCA,1,11,4,18
+BCA-102,Mathematics-I,BCA,1,11,4,14
+BCA-103,Mathematics-I,BCA,1,7,3,15
+BCA-104,Mathematics-I,BCA,1,15,5,38
+BCA-105,Mathematics-I,BCA,1,21,5,31
+BCA-106,Mathematics-I,BCA,1,22,7,27
+BCA-107,Mathematics-I,BCA,1,29,10,52
+BCA-108,Mathematics-I,BCA,1,26,10,51
+BCA-109,Mathematics-I,BCA,1,27,10,57
+BCA-101,Digital Logic,BCA,1,8,4,18
+BCA-102,Digital Logic,BCA,1,11,1,19
+BCA-103,Digital Logic,BCA,1,8,3,11
+BCA-104,Digital Logic,BCA,1,21,6,36
+BCA-105,Digital Logic,BCA,1,19,7,27
+BCA-106,Digital Logic,BCA,1,16,6,27
+BCA-107,Digital Logic,BCA,1,27,8,46
+BCA-108,Digital Logic,BCA,1,26,8,58
+BCA-109,Digital Logic,BCA,1,30,10,56
+BCA-101,Communication Skills,BCA,1,12,1,13
+BCA-102,Communication Skills,BCA,1,10,4,12
+BCA-103,Communication Skills,BCA,1,7,4,13
+BCA-104,Communication Skills,BCA,1,17,5,29
+BCA-105,Communication Skills,BCA,1,17,6,25
+BCA-106,Communication Skills,BCA,1,21,7,35
+BCA-107,Communication Skills,BCA,1,25,10,57
+BCA-108,Communication Skills,BCA,1,29,9,51
+BCA-109,Communication Skills,BCA,1,30,10,54
+BCA-101,Computer Fundamentals,BCA,1,8,2,10
+BCA-102,Computer Fundamentals,BCA,1,10,4,19
+BCA-103,Computer Fundamentals,BCA,1,6,1,11
+BCA-104,Computer Fundamentals,BCA,1,21,6,30
+BCA-105,Computer Fundamentals,BCA,1,18,7,28
+BCA-106,Computer Fundamentals,BCA,1,22,6,36
+BCA-107,Computer Fundamentals,BCA,1,27,8,59
+BCA-108,Computer Fundamentals,BCA,1,26,9,60
+BCA-109,Computer Fundamentals,BCA,1,26,9,48
+BCA-201,Data Structures,BCA,2,8,3,18
+BCA-202,Data Structures,BCA,2,7,3,11
+BCA-203,Data Structures,BCA,2,6,4,15
+BCA-204,Data Structures,BCA,2,16,5,27
+BCA-205,Data Structures,BCA,2,20,5,33
+BCA-206,Data Structures,BCA,2,17,5,39
+BCA-207,Data Structures,BCA,2,27,9,55
+BCA-208,Data Structures,BCA,2,30,10,60
+BCA-209,Data Structures,BCA,2,30,10,50
+BCA-201,Mathematics-II,BCA,2,11,2,12
+BCA-202,Mathematics-II,BCA,2,5,3,17
+BCA-203,Mathematics-II,BCA,2,10,3,15
+BCA-204,Mathematics-II,BCA,2,17,6,35
+BCA-205,Mathematics-II,BCA,2,18,5,35
+BCA-206,Mathematics-II,BCA,2,20,6,25
+BCA-207,Mathematics-II,BCA,2,25,8,49
+BCA-208,Mathematics-II,BCA,2,30,9,59
+BCA-209,Mathematics-II,BCA,2,29,9,56
+BCA-201,OOP using Java,BCA,2,12,1,14
+BCA-202,OOP using Java,BCA,2,11,4,11
+BCA-203,OOP using Java,BCA,2,7,3,15
+BCA-204,OOP using Java,BCA,2,21,5,35
+BCA-205,OOP using Java,BCA,2,22,7,33
+BCA-206,OOP using Java,BCA,2,16,5,26
+BCA-207,OOP using Java,BCA,2,27,10,54
+BCA-208,OOP using Java,BCA,2,25,10,57
+BCA-209,OOP using Java,BCA,2,26,9,59
+BCA-201,Web Technology,BCA,2,9,1,13
+BCA-202,Web Technology,BCA,2,6,3,17
+BCA-203,Web Technology,BCA,2,6,3,19
+BCA-204,Web Technology,BCA,2,19,7,36
+BCA-205,Web Technology,BCA,2,16,7,33
+BCA-206,Web Technology,BCA,2,16,6,40
+BCA-207,Web Technology,BCA,2,25,9,49
+BCA-208,Web Technology,BCA,2,26,8,56
+BCA-209,Web Technology,BCA,2,30,8,57
+BCA-201,Computer Organization,BCA,2,7,4,15
+BCA-202,Computer Organization,BCA,2,6,4,11
+BCA-203,Computer Organization,BCA,2,7,4,18
+BCA-204,Computer Organization,BCA,2,20,6,39
+BCA-205,Computer Organization,BCA,2,17,5,39
+BCA-206,Computer Organization,BCA,2,19,6,32
+BCA-207,Computer Organization,BCA,2,29,10,57
+BCA-208,Computer Organization,BCA,2,28,10,53
+BCA-209,Computer Organization,BCA,2,26,9,58
+BCA-301,Database Management System,BCA,3,8,4,20
+BCA-302,Database Management System,BCA,3,6,4,12
+BCA-303,Database Management System,BCA,3,8,3,11
+BCA-304,Database Management System,BCA,3,20,7,28
+BCA-305,Database Management System,BCA,3,15,6,30
+BCA-306,Database Management System,BCA,3,17,7,39
+BCA-307,Database Management System,BCA,3,29,10,48
+BCA-308,Database Management System,BCA,3,27,9,56
+BCA-309,Database Management System,BCA,3,25,10,49
+BCA-301,Operating Systems,BCA,3,12,2,15
+BCA-302,Operating Systems,BCA,3,8,2,20
+BCA-303,Operating Systems,BCA,3,5,3,11
+BCA-304,Operating Systems,BCA,3,19,7,32
+BCA-305,Operating Systems,BCA,3,15,5,26
+BCA-306,Operating Systems,BCA,3,17,5,40
+BCA-307,Operating Systems,BCA,3,25,9,60
+BCA-308,Operating Systems,BCA,3,30,10,50
+BCA-309,Operating Systems,BCA,3,29,10,45
+BCA-301,Software Engineering,BCA,3,6,3,17
+BCA-302,Software Engineering,BCA,3,5,2,15
+BCA-303,Software Engineering,BCA,3,9,4,15
+BCA-304,Software Engineering,BCA,3,18,7,35
+BCA-305,Software Engineering,BCA,3,21,7,39
+BCA-306,Software Engineering,BCA,3,22,6,28
+BCA-307,Software Engineering,BCA,3,26,9,49
+BCA-308,Software Engineering,BCA,3,28,8,58
+BCA-309,Software Engineering,BCA,3,29,10,57
+BCA-301,Python Programming,BCA,3,6,1,20
+BCA-302,Python Programming,BCA,3,9,1,12
+BCA-303,Python Programming,BCA,3,11,2,14
+BCA-304,Python Programming,BCA,3,16,5,29
+BCA-305,Python Programming,BCA,3,18,6,27
+BCA-306,Python Programming,BCA,3,18,7,37
+BCA-307,Python Programming,BCA,3,29,8,48
+BCA-308,Python Programming,BCA,3,25,8,51
+BCA-309,Python Programming,BCA,3,27,8,46
+BCA-301,Data Communication,BCA,3,11,1,10
+BCA-302,Data Communication,BCA,3,9,1,15
+BCA-303,Data Communication,BCA,3,10,3,11
+BCA-304,Data Communication,BCA,3,18,7,29
+BCA-305,Data Communication,BCA,3,16,5,27
+BCA-306,Data Communication,BCA,3,16,6,40
+BCA-307,Data Communication,BCA,3,30,9,53
+BCA-308,Data Communication,BCA,3,30,9,50
+BCA-309,Data Communication,BCA,3,30,10,58
+BCA-401,Artificial Intelligence,BCA,4,11,2,12
+BCA-402,Artificial Intelligence,BCA,4,5,2,10
+BCA-403,Artificial Intelligence,BCA,4,10,3,19
+BCA-404,Artificial Intelligence,BCA,4,18,6,28
+BCA-405,Artificial Intelligence,BCA,4,15,7,30
+BCA-406,Artificial Intelligence,BCA,4,19,5,27
+BCA-407,Artificial Intelligence,BCA,4,28,8,51
+BCA-408,Artificial Intelligence,BCA,4,27,9,57
+BCA-409,Artificial Intelligence,BCA,4,28,10,52
+BCA-401,Cloud Computing,BCA,4,9,2,14
+BCA-402,Cloud Computing,BCA,4,11,1,10
+BCA-403,Cloud Computing,BCA,4,12,2,15
+BCA-404,Cloud Computing,BCA,4,18,5,38
+BCA-405,Cloud Computing,BCA,4,18,5,38
+BCA-406,Cloud Computing,BCA,4,17,6,40
+BCA-407,Cloud Computing,BCA,4,25,10,46
+BCA-408,Cloud Computing,BCA,4,25,8,51
+BCA-409,Cloud Computing,BCA,4,25,10,60
+BCA-401,Cyber Security,BCA,4,8,3,11
+BCA-402,Cyber Security,BCA,4,11,3,11
+BCA-403,Cyber Security,BCA,4,6,1,19
+BCA-404,Cyber Security,BCA,4,16,6,25
+BCA-405,Cyber Security,BCA,4,15,7,29
+BCA-406,Cyber Security,BCA,4,18,7,30
+BCA-407,Cyber Security,BCA,4,30,10,47
+BCA-408,Cyber Security,BCA,4,26,8,53
+BCA-409,Cyber Security,BCA,4,30,8,45
+BCA-401,Mobile App Development,BCA,4,10,1,11
+BCA-402,Mobile App Development,BCA,4,9,3,19
+BCA-403,Mobile App Development,BCA,4,12,3,17
+BCA-404,Mobile App Development,BCA,4,15,5,38
+BCA-405,Mobile App Development,BCA,4,20,6,26
+BCA-406,Mobile App Development,BCA,4,19,7,39
+BCA-407,Mobile App Development,BCA,4,25,9,49
+BCA-408,Mobile App Development,BCA,4,25,9,53
+BCA-409,Mobile App Development,BCA,4,25,9,58
+BCA-401,Project Work,BCA,4,6,4,19
+BCA-402,Project Work,BCA,4,6,4,11
+BCA-403,Project Work,BCA,4,6,3,18
+BCA-404,Project Work,BCA,4,22,6,28
+BCA-405,Project Work,BCA,4,17,7,39
+BCA-406,Project Work,BCA,4,16,7,32
+BCA-407,Project Work,BCA,4,29,8,46
+BCA-408,Project Work,BCA,4,28,8,57
+BCA-409,Project Work,BCA,4,25,9,48
+MCA-101,Data Structures,MCA,1,7,4,18
+MCA-102,Data Structures,MCA,1,9,4,12
+MCA-103,Data Structures,MCA,1,10,1,18
+MCA-104,Data Structures,MCA,1,22,5,36
+MCA-105,Data Structures,MCA,1,19,5,33
+MCA-106,Data Structures,MCA,1,17,6,30
+MCA-107,Data Structures,MCA,1,28,10,59
+MCA-108,Data Structures,MCA,1,28,9,48
+MCA-109,Data Structures,MCA,1,25,10,58
+MCA-101,Discrete Mathematics,MCA,1,9,3,19
+MCA-102,Discrete Mathematics,MCA,1,12,3,20
+MCA-103,Discrete Mathematics,MCA,1,12,1,15
+MCA-104,Discrete Mathematics,MCA,1,21,7,26
+MCA-105,Discrete Mathematics,MCA,1,15,7,32
+MCA-106,Discrete Mathematics,MCA,1,20,7,36
+MCA-107,Discrete Mathematics,MCA,1,29,8,58
+MCA-108,Discrete Mathematics,MCA,1,27,10,53
+MCA-109,Discrete Mathematics,MCA,1,25,10,56
+MCA-101,Operating Systems,MCA,1,8,2,13
+MCA-102,Operating Systems,MCA,1,12,3,13
+MCA-103,Operating Systems,MCA,1,10,3,13
+MCA-104,Operating Systems,MCA,1,18,7,31
+MCA-105,Operating Systems,MCA,1,21,6,30
+MCA-106,Operating Systems,MCA,1,19,5,39
+MCA-107,Operating Systems,MCA,1,25,10,49
+MCA-108,Operating Systems,MCA,1,27,8,48
+MCA-109,Operating Systems,MCA,1,28,8,52
+MCA-101,Software Engineering,MCA,1,9,2,11
+MCA-102,Software Engineering,MCA,1,11,2,19
+MCA-103,Software Engineering,MCA,1,12,2,19
+MCA-104,Software Engineering,MCA,1,20,6,27
+MCA-105,Software Engineering,MCA,1,18,7,36
+MCA-106,Software Engineering,MCA,1,15,7,26
+MCA-107,Software Engineering,MCA,1,27,10,50
+MCA-108,Software Engineering,MCA,1,30,10,52
+MCA-109,Software Engineering,MCA,1,30,9,55
+MCA-101,DBMS,MCA,1,9,1,16
+MCA-102,DBMS,MCA,1,6,1,13
+MCA-103,DBMS,MCA,1,12,1,16
+MCA-104,DBMS,MCA,1,16,5,38
+MCA-105,DBMS,MCA,1,18,7,35
+MCA-106,DBMS,MCA,1,16,5,28
+MCA-107,DBMS,MCA,1,27,10,45
+MCA-108,DBMS,MCA,1,26,8,48
+MCA-109,DBMS,MCA,1,27,8,58
+MCA-201,Advanced Java,MCA,2,12,2,20
+MCA-202,Advanced Java,MCA,2,7,4,14
+MCA-203,Advanced Java,MCA,2,10,3,16
+MCA-204,Advanced Java,MCA,2,19,7,36
+MCA-205,Advanced Java,MCA,2,18,7,39
+MCA-206,Advanced Java,MCA,2,18,6,29
+MCA-207,Advanced Java,MCA,2,28,9,58
+MCA-208,Advanced Java,MCA,2,25,10,45
+MCA-209,Advanced Java,MCA,2,27,9,54
+MCA-201,Computer Networks,MCA,2,7,4,16
+MCA-202,Computer Networks,MCA,2,9,1,19
+MCA-203,Computer Networks,MCA,2,10,1,20
+MCA-204,Computer Networks,MCA,2,22,7,25
+MCA-205,Computer Networks,MCA,2,20,7,39
+MCA-206,Computer Networks,MCA,2,15,6,34
+MCA-207,Computer Networks,MCA,2,27,8,56
+MCA-208,Computer Networks,MCA,2,25,9,55
+MCA-209,Computer Networks,MCA,2,28,8,46
+MCA-201,Web Development,MCA,2,5,4,16
+MCA-202,Web Development,MCA,2,7,1,19
+MCA-203,Web Development,MCA,2,10,2,20
+MCA-204,Web Development,MCA,2,21,5,37
+MCA-205,Web Development,MCA,2,16,5,27
+MCA-206,Web Development,MCA,2,19,5,35
+MCA-207,Web Development,MCA,2,25,10,59
+MCA-208,Web Development,MCA,2,25,9,56
+MCA-209,Web Development,MCA,2,28,10,59
+MCA-201,Data Mining,MCA,2,6,1,20
+MCA-202,Data Mining,MCA,2,6,3,12
+MCA-203,Data Mining,MCA,2,9,2,15
+MCA-204,Data Mining,MCA,2,16,6,32
+MCA-205,Data Mining,MCA,2,19,5,30
+MCA-206,Data Mining,MCA,2,18,5,29
+MCA-207,Data Mining,MCA,2,28,8,55
+MCA-208,Data Mining,MCA,2,28,9,45
+MCA-209,Data Mining,MCA,2,30,9,47
+MCA-201,System Programming,MCA,2,7,4,10
+MCA-202,System Programming,MCA,2,9,1,12
+MCA-203,System Programming,MCA,2,10,1,13
+MCA-204,System Programming,MCA,2,19,7,34
+MCA-205,System Programming,MCA,2,18,5,34
+MCA-206,System Programming,MCA,2,18,7,25
+MCA-207,System Programming,MCA,2,27,8,55
+MCA-208,System Programming,MCA,2,30,8,47
+MCA-209,System Programming,MCA,2,27,9,51
+MCA-301,Machine Learning,MCA,3,8,3,10
+MCA-302,Machine Learning,MCA,3,12,4,17
+MCA-303,Machine Learning,MCA,3,9,2,14
+MCA-304,Machine Learning,MCA,3,16,5,33
+MCA-305,Machine Learning,MCA,3,15,5,25
+MCA-306,Machine Learning,MCA,3,17,6,33
+MCA-307,Machine Learning,MCA,3,28,10,60
+MCA-308,Machine Learning,MCA,3,28,10,51
+MCA-309,Machine Learning,MCA,3,29,9,53
+MCA-301,Big Data Analytics,MCA,3,7,2,18
+MCA-302,Big Data Analytics,MCA,3,8,2,15
+MCA-303,Big Data Analytics,MCA,3,6,2,19
+MCA-304,Big Data Analytics,MCA,3,18,7,34
+MCA-305,Big Data Analytics,MCA,3,17,7,38
+MCA-306,Big Data Analytics,MCA,3,17,7,36
+MCA-307,Big Data Analytics,MCA,3,29,10,48
+MCA-308,Big Data Analytics,MCA,3,28,8,50
+MCA-309,Big Data Analytics,MCA,3,26,9,58
+MCA-301,Cloud Computing,MCA,3,8,4,12
+MCA-302,Cloud Computing,MCA,3,8,2,18
+MCA-303,Cloud Computing,MCA,3,12,2,14
+MCA-304,Cloud Computing,MCA,3,15,6,27
+MCA-305,Cloud Computing,MCA,3,15,6,36
+MCA-306,Cloud Computing,MCA,3,16,7,33
+MCA-307,Cloud Computing,MCA,3,30,8,60
+MCA-308,Cloud Computing,MCA,3,28,8,47
+MCA-309,Cloud Computing,MCA,3,30,10,52
+MCA-301,Cyber Security,MCA,3,9,1,18
+MCA-302,Cyber Security,MCA,3,6,2,19
+MCA-303,Cyber Security,MCA,3,7,3,10
+MCA-304,Cyber Security,MCA,3,15,5,27
+MCA-305,Cyber Security,MCA,3,17,6,37
+MCA-306,Cyber Security,MCA,3,17,6,31
+MCA-307,Cyber Security,MCA,3,28,9,57
+MCA-308,Cyber Security,MCA,3,27,9,46
+MCA-309,Cyber Security,MCA,3,29,9,50
+MCA-301,Mobile Computing,MCA,3,11,2,12
+MCA-302,Mobile Computing,MCA,3,9,4,15
+MCA-303,Mobile Computing,MCA,3,9,4,17
+MCA-304,Mobile Computing,MCA,3,21,5,25
+MCA-305,Mobile Computing,MCA,3,21,7,32
+MCA-306,Mobile Computing,MCA,3,20,6,39
+MCA-307,Mobile Computing,MCA,3,29,9,48
+MCA-308,Mobile Computing,MCA,3,29,8,46
+MCA-309,Mobile Computing,MCA,3,26,8,48
+MCA-401,Artificial Intelligence,MCA,4,9,4,13
+MCA-402,Artificial Intelligence,MCA,4,5,1,11
+MCA-403,Artificial Intelligence,MCA,4,9,4,10
+MCA-404,Artificial Intelligence,MCA,4,20,6,25
+MCA-405,Artificial Intelligence,MCA,4,22,6,26
+MCA-406,Artificial Intelligence,MCA,4,22,6,25
+MCA-407,Artificial Intelligence,MCA,4,30,10,51
+MCA-408,Artificial Intelligence,MCA,4,25,10,52
+MCA-409,Artificial Intelligence,MCA,4,25,8,47
+MCA-401,Blockchain Technology,MCA,4,7,4,12
+MCA-402,Blockchain Technology,MCA,4,8,3,14
+MCA-403,Blockchain Technology,MCA,4,6,4,11
+MCA-404,Blockchain Technology,MCA,4,22,5,28
+MCA-405,Blockchain Technology,MCA,4,17,6,27
+MCA-406,Blockchain Technology,MCA,4,22,5,35
+MCA-407,Blockchain Technology,MCA,4,28,10,45
+MCA-408,Blockchain Technology,MCA,4,30,10,50
+MCA-409,Blockchain Technology,MCA,4,27,8,51
+MCA-401,IoT,MCA,4,8,2,14
+MCA-402,IoT,MCA,4,5,4,11
+MCA-403,IoT,MCA,4,7,4,11
+MCA-404,IoT,MCA,4,19,7,28
+MCA-405,IoT,MCA,4,20,7,35
+MCA-406,IoT,MCA,4,20,5,39
+MCA-407,IoT,MCA,4,27,9,46
+MCA-408,IoT,MCA,4,25,8,46
+MCA-409,IoT,MCA,4,26,9,46
+MCA-401,Advanced DBMS,MCA,4,6,1,13
+MCA-402,Advanced DBMS,MCA,4,11,1,11
+MCA-403,Advanced DBMS,MCA,4,12,1,18
+MCA-404,Advanced DBMS,MCA,4,19,5,33
+MCA-405,Advanced DBMS,MCA,4,22,6,38
+MCA-406,Advanced DBMS,MCA,4,22,6,36
+MCA-407,Advanced DBMS,MCA,4,26,8,59
+MCA-408,Advanced DBMS,MCA,4,25,10,52
+MCA-409,Advanced DBMS,MCA,4,25,9,57
+MCA-401,Project Work,MCA,4,11,3,18
+MCA-402,Project Work,MCA,4,12,3,13
+MCA-403,Project Work,MCA,4,5,2,15
+MCA-404,Project Work,MCA,4,18,6,34
+MCA-405,Project Work,MCA,4,21,6,36
+MCA-406,Project Work,MCA,4,15,5,39
+MCA-407,Project Work,MCA,4,27,8,45
+MCA-408,Project Work,MCA,4,27,8,51
+MCA-409,Project Work,MCA,4,27,9,57
+MBA-101,Management Principles,MBA,1,6,2,11
+MBA-102,Management Principles,MBA,1,11,4,19
+MBA-103,Management Principles,MBA,1,8,1,16
+MBA-104,Management Principles,MBA,1,17,5,31
+MBA-105,Management Principles,MBA,1,20,7,34
+MBA-106,Management Principles,MBA,1,20,5,28
+MBA-107,Management Principles,MBA,1,29,10,58
+MBA-108,Management Principles,MBA,1,26,10,46
+MBA-109,Management Principles,MBA,1,30,10,57
+MBA-101,Business Economics,MBA,1,12,2,14
+MBA-102,Business Economics,MBA,1,12,3,11
+MBA-103,Business Economics,MBA,1,9,4,10
+MBA-104,Business Economics,MBA,1,16,5,26
+MBA-105,Business Economics,MBA,1,20,7,25
+MBA-106,Business Economics,MBA,1,20,7,40
+MBA-107,Business Economics,MBA,1,28,10,58
+MBA-108,Business Economics,MBA,1,25,10,48
+MBA-109,Business Economics,MBA,1,26,10,54
+MBA-101,Financial Accounting,MBA,1,12,3,20
+MBA-102,Financial Accounting,MBA,1,8,1,16
+MBA-103,Financial Accounting,MBA,1,11,2,15
+MBA-104,Financial Accounting,MBA,1,21,6,25
+MBA-105,Financial Accounting,MBA,1,19,7,26
+MBA-106,Financial Accounting,MBA,1,17,6,28
+MBA-107,Financial Accounting,MBA,1,29,9,46
+MBA-108,Financial Accounting,MBA,1,29,9,56
+MBA-109,Financial Accounting,MBA,1,29,9,48
+MBA-101,Organizational Behavior,MBA,1,11,1,12
+MBA-102,Organizational Behavior,MBA,1,5,1,16
+MBA-103,Organizational Behavior,MBA,1,12,2,10
+MBA-104,Organizational Behavior,MBA,1,15,6,29
+MBA-105,Organizational Behavior,MBA,1,16,7,30
+MBA-106,Organizational Behavior,MBA,1,20,5,31
+MBA-107,Organizational Behavior,MBA,1,30,10,46
+MBA-108,Organizational Behavior,MBA,1,29,10,57
+MBA-109,Organizational Behavior,MBA,1,30,8,50
+MBA-101,Marketing Management,MBA,1,7,1,19
+MBA-102,Marketing Management,MBA,1,7,4,17
+MBA-103,Marketing Management,MBA,1,9,1,10
+MBA-104,Marketing Management,MBA,1,20,7,34
+MBA-105,Marketing Management,MBA,1,20,6,26
+MBA-106,Marketing Management,MBA,1,18,6,28
+MBA-107,Marketing Management,MBA,1,25,8,58
+MBA-108,Marketing Management,MBA,1,28,8,56
+MBA-109,Marketing Management,MBA,1,26,8,49
+MBA-201,Human Resource Management,MBA,2,5,3,14
+MBA-202,Human Resource Management,MBA,2,9,1,18
+MBA-203,Human Resource Management,MBA,2,10,1,13
+MBA-204,Human Resource Management,MBA,2,21,5,25
+MBA-205,Human Resource Management,MBA,2,17,7,25
+MBA-206,Human Resource Management,MBA,2,22,5,30
+MBA-207,Human Resource Management,MBA,2,30,10,57
+MBA-208,Human Resource Management,MBA,2,26,8,46
+MBA-209,Human Resource Management,MBA,2,25,10,50
+MBA-201,Business Law,MBA,2,11,4,13
+MBA-202,Business Law,MBA,2,7,4,20
+MBA-203,Business Law,MBA,2,8,3,18
+MBA-204,Business Law,MBA,2,21,7,29
+MBA-205,Business Law,MBA,2,22,5,29
+MBA-206,Business Law,MBA,2,17,6,36
+MBA-207,Business Law,MBA,2,25,9,45
+MBA-208,Business Law,MBA,2,27,10,46
+MBA-209,Business Law,MBA,2,29,9,48
+MBA-201,Operations Management,MBA,2,8,2,11
+MBA-202,Operations Management,MBA,2,5,3,13
+MBA-203,Operations Management,MBA,2,5,2,10
+MBA-204,Operations Management,MBA,2,16,5,29
+MBA-205,Operations Management,MBA,2,17,5,30
+MBA-206,Operations Management,MBA,2,21,5,37
+MBA-207,Operations Management,MBA,2,26,9,50
+MBA-208,Operations Management,MBA,2,27,10,60
+MBA-209,Operations Management,MBA,2,30,8,57
+MBA-201,Cost Accounting,MBA,2,11,4,13
+MBA-202,Cost Accounting,MBA,2,11,1,14
+MBA-203,Cost Accounting,MBA,2,5,2,15
+MBA-204,Cost Accounting,MBA,2,15,5,30
+MBA-205,Cost Accounting,MBA,2,18,5,26
+MBA-206,Cost Accounting,MBA,2,20,5,35
+MBA-207,Cost Accounting,MBA,2,30,8,47
+MBA-208,Cost Accounting,MBA,2,26,9,47
+MBA-209,Cost Accounting,MBA,2,30,8,49
+MBA-201,Research Methodology,MBA,2,9,3,18
+MBA-202,Research Methodology,MBA,2,11,4,15
+MBA-203,Research Methodology,MBA,2,7,1,19
+MBA-204,Research Methodology,MBA,2,22,7,27
+MBA-205,Research Methodology,MBA,2,20,5,32
+MBA-206,Research Methodology,MBA,2,22,5,32
+MBA-207,Research Methodology,MBA,2,30,8,46
+MBA-208,Research Methodology,MBA,2,27,10,56
+MBA-209,Research Methodology,MBA,2,28,10,51
+MBA-301,Strategic Management,MBA,3,12,1,13
+MBA-302,Strategic Management,MBA,3,12,4,16
+MBA-303,Strategic Management,MBA,3,8,2,13
+MBA-304,Strategic Management,MBA,3,18,7,27
+MBA-305,Strategic Management,MBA,3,22,5,32
+MBA-306,Strategic Management,MBA,3,19,5,36
+MBA-307,Strategic Management,MBA,3,27,8,53
+MBA-308,Strategic Management,MBA,3,27,8,60
+MBA-309,Strategic Management,MBA,3,25,10,57
+MBA-301,Financial Management,MBA,3,6,1,19
+MBA-302,Financial Management,MBA,3,11,3,19
+MBA-303,Financial Management,MBA,3,6,3,10
+MBA-304,Financial Management,MBA,3,21,6,36
+MBA-305,Financial Management,MBA,3,16,6,31
+MBA-306,Financial Management,MBA,3,15,5,36
+MBA-307,Financial Management,MBA,3,29,9,46
+MBA-308,Financial Management,MBA,3,28,8,47
+MBA-309,Financial Management,MBA,3,30,8,48
+MBA-301,Supply Chain Management,MBA,3,5,2,11
+MBA-302,Supply Chain Management,MBA,3,6,4,11
+MBA-303,Supply Chain Management,MBA,3,8,4,20
+MBA-304,Supply Chain Management,MBA,3,16,6,30
+MBA-305,Supply Chain Management,MBA,3,18,7,26
+MBA-306,Supply Chain Management,MBA,3,15,6,25
+MBA-307,Supply Chain Management,MBA,3,25,10,53
+MBA-308,Supply Chain Management,MBA,3,27,8,48
+MBA-309,Supply Chain Management,MBA,3,25,8,60
+MBA-301,Entrepreneurship,MBA,3,11,1,11
+MBA-302,Entrepreneurship,MBA,3,10,2,17
+MBA-303,Entrepreneurship,MBA,3,6,3,10
+MBA-304,Entrepreneurship,MBA,3,15,5,28
+MBA-305,Entrepreneurship,MBA,3,18,7,32
+MBA-306,Entrepreneurship,MBA,3,18,7,35
+MBA-307,Entrepreneurship,MBA,3,30,8,52
+MBA-308,Entrepreneurship,MBA,3,26,8,59
+MBA-309,Entrepreneurship,MBA,3,29,8,52
+MBA-301,International Business,MBA,3,6,4,15
+MBA-302,International Business,MBA,3,11,4,17
+MBA-303,International Business,MBA,3,12,2,19
+MBA-304,International Business,MBA,3,16,6,27
+MBA-305,International Business,MBA,3,15,6,40
+MBA-306,International Business,MBA,3,20,6,25
+MBA-307,International Business,MBA,3,29,9,56
+MBA-308,International Business,MBA,3,26,9,46
+MBA-309,International Business,MBA,3,29,9,50
+MBA-401,Project Management,MBA,4,6,1,16
+MBA-402,Project Management,MBA,4,7,4,11
+MBA-403,Project Management,MBA,4,12,3,11
+MBA-404,Project Management,MBA,4,17,7,27
+MBA-405,Project Management,MBA,4,17,6,25
+MBA-406,Project Management,MBA,4,16,7,35
+MBA-407,Project Management,MBA,4,27,10,55
+MBA-408,Project Management,MBA,4,29,8,58
+MBA-409,Project Management,MBA,4,27,9,54
+MBA-401,Digital Marketing,MBA,4,7,4,19
+MBA-402,Digital Marketing,MBA,4,6,2,19
+MBA-403,Digital Marketing,MBA,4,6,4,11
+MBA-404,Digital Marketing,MBA,4,19,6,25
+MBA-405,Digital Marketing,MBA,4,22,7,33
+MBA-406,Digital Marketing,MBA,4,15,5,38
+MBA-407,Digital Marketing,MBA,4,29,9,52
+MBA-408,Digital Marketing,MBA,4,26,8,45
+MBA-409,Digital Marketing,MBA,4,30,9,54
+MBA-401,Business Analytics,MBA,4,11,4,11
+MBA-402,Business Analytics,MBA,4,7,2,10
+MBA-403,Business Analytics,MBA,4,10,4,13
+MBA-404,Business Analytics,MBA,4,15,5,31
+MBA-405,Business Analytics,MBA,4,16,6,30
+MBA-406,Business Analytics,MBA,4,21,6,30
+MBA-407,Business Analytics,MBA,4,29,8,49
+MBA-408,Business Analytics,MBA,4,26,8,58
+MBA-409,Business Analytics,MBA,4,25,10,47
+MBA-401,Corporate Governance,MBA,4,8,4,19
+MBA-402,Corporate Governance,MBA,4,8,1,10
+MBA-403,Corporate Governance,MBA,4,7,3,12
+MBA-404,Corporate Governance,MBA,4,20,5,27
+MBA-405,Corporate Governance,MBA,4,22,5,31
+MBA-406,Corporate Governance,MBA,4,21,7,37
+MBA-407,Corporate Governance,MBA,4,27,9,58
+MBA-408,Corporate Governance,MBA,4,29,10,58
+MBA-409,Corporate Governance,MBA,4,30,8,54
+MBA-401,Project Work,MBA,4,7,1,15
+MBA-402,Project Work,MBA,4,6,1,14
+MBA-403,Project Work,MBA,4,11,2,14
+MBA-404,Project Work,MBA,4,15,6,37
+MBA-405,Project Work,MBA,4,21,6,29
+MBA-406,Project Work,MBA,4,21,7,38
+MBA-407,Project Work,MBA,4,28,10,45
+MBA-408,Project Work,MBA,4,26,9,48
+MBA-409,Project Work,MBA,4,30,8,57

@@ -248,9 +248,29 @@
         opacity: 0.5;
         pointer-events: none;
     }
+
+    /* 📦 DASHBOARD EXPORT ACTIONS */
+    .dashboard-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+    }
 </style>
 
 <div class="dashboard-view">
+    
+    <div class="dashboard-actions">
+        <div class="d-flex align-items-center gap-2 bg-white p-2 px-3 rounded-4 shadow-sm border transition-hover">
+            <span class="extra-small fw-bold text-uppercase text-muted me-2" style="font-size: 10px; letter-spacing: 0.05em;">Global Registry Export</span>
+            <a href="/export_students_csv?department={{ filters.department or '' }}&semester={{ filters.semester or '' }}&search={{ filters.search or '' }}&attendance={{ filters.attendance or '' }}&subject={{ filters.subject or '' }}" class="btn btn-sm btn-light border-0 bg-light px-3 fw-bold rounded-3">
+                <i class="fas fa-file-csv me-1 text-success"></i>CSV
+            </a>
+            <a href="/export_students_pdf?department={{ filters.department or '' }}&semester={{ filters.semester or '' }}&search={{ filters.search or '' }}&attendance={{ filters.attendance or '' }}&subject={{ filters.subject or '' }}" class="btn btn-sm btn-light border-0 bg-light px-3 fw-bold rounded-3">
+                <i class="fas fa-file-pdf me-1 text-danger"></i>PDF
+            </a>
+        </div>
+    </div>
     
     <!-- 2. FILTER BAR (PIXEL PERFECT) -->
     <div class="filter-bar-container">

@@ -28,11 +28,15 @@
         <a href="{{ url_for('admin.add_student') }}" class="btn btn-primary px-4 py-2 rounded-3 shadow-sm fw-bold">
             <i class="fas fa-plus me-2"></i>Add New Student
         </a>
+        <!-- 🗑️ CLEAR DATA -->
+        <a href="/clear_students" class="btn btn-outline-danger px-4 py-2 rounded-3 shadow-sm fw-bold" onclick="return confirm('⚠️ SECURITY ALERT: This will permanently delete ALL Students, Marks, and Attendance records. This action is irreversible. Continue?')">
+            <i class="fas fa-trash-alt me-2"></i>Clear All
+        </a>
     </div>
 </div>
 
 <!-- 🔍 FILTER BAR (SaaS Style) -->
-<div class="card border-0 shadow-sm rounded-4 p-3 mb-4 bg-white">
+<div class="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-white">
     <form method="GET" class="row g-3 align-items-end">
         <div class="col-md-3">
             <label class="form-label small fw-bold text-muted text-uppercase letter-spacing-sm">Search</label>

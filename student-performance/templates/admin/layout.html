@@ -234,38 +234,41 @@
         }
 
         /* 📊 UNIVERSAL UI ANIMATIONS */
-        .card, .card-custom, .pixel-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .card:hover, .card-custom:hover, .pixel-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important;
-        }
-
-        tr {
-            transition: background 0.2s ease;
-        }
-
-        tr:hover {
-            background: rgba(0,0,0,0.03) !important;
-        }
-
-        button, .btn {
-            transition: transform 0.15s ease !important;
-        }
-
-        button:hover, .btn:hover {
-            transform: scale(1.03) !important;
-        }
+        /* 🚀 GLOBAL DESIGN SYSTEM CONSISTENCY */
+        .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1) !important; }
         
-        .alert {
-            animation: slideInRight 0.4s ease-out;
-        }
+        .btn { padding: 8px 18px; border-radius: 8px; font-weight: 600; font-size: 13px; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; border: 1px solid transparent; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn:hover { transform: translateY(-2px); }
+        .btn-sm { padding: 6px 12px; border-radius: 6px; font-size: 12px; }
+        .btn-primary { background-color: var(--primary-color); color: white; border: none; }
+        .btn-primary:hover { background-color: #4f46e5; color: white; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2); }
+        
+        .form-label-custom { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 8px; }
+        .form-control-custom { background-color: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px; padding: 10px 14px; font-size: 14px; transition: all 0.2s; width: 100%; }
+        .form-control-custom:focus { background-color: #ffffff; border-color: var(--primary-color); outline: none; box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1); }
+        
+        /* 📊 DATA TABLE REFINEMENT */
+        .table thead th { background: #f8fafc; color: var(--text-muted); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 14px 24px !important; border-bottom: 1px solid var(--border-color); }
+        .table tbody td { padding: 16px 24px !important; vertical-align: middle; border-bottom: 1px solid #f1f5f9; }
+        tr { transition: background 0.2s ease; }
+        tr:hover { background: rgba(0,0,0,0.02) !important; }
+        
+        /* ✨ UTILITY OVERLAYS */
+        .bg-primary-soft { background-color: rgba(99, 102, 241, 0.1) !important; color: var(--primary-color) !important; }
+        .bg-success-soft { background-color: rgba(16, 185, 129, 0.1) !important; color: #10b981 !important; }
+        .bg-danger-soft { background-color: rgba(239, 68, 68, 0.1) !important; color: #ef4444 !important; }
+        .bg-warning-soft { background-color: rgba(245, 158, 11, 0.1) !important; color: #f59e0b !important; }
+        .bg-indigo-soft { background-color: rgba(79, 70, 229, 0.1) !important; color: #4f46e9 !important; }
+        
+        .transition-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .transition-hover:hover { transform: translateY(-3px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1) !important; }
+        
+        .extra-small { font-size: 11px; }
+        .btn-indigo { background-color: var(--primary-color); color: white; }
+        .btn-indigo:hover { background-color: #4f46e5; color: white; }
 
+        .alert { animation: slideInRight 0.4s ease-out; }
         @keyframes slideInRight {
             from { transform: translateX(20px); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }

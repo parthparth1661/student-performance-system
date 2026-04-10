@@ -256,8 +256,8 @@
             <div class="logo-icon shadow-sm">
                 <i class="fas fa-shield-halved"></i>
             </div>
-            <h2>Admin Login</h2>
-            <p>Access the SPDA Command Center</p>
+            <h2>SPDA Admin Panel</h2>
+            <p>Institutional Analytics Command Center</p>
         </div>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -287,8 +287,11 @@
                 </div>
                 <div class="input-wrapper">
                     <i class="fas fa-lock input-icon"></i>
-                    <input type="password" name="password" id="password" placeholder="••••••••" required>
+                    <input type="password" name="password" id="password" placeholder="••••••••" required onkeyup="checkCaps(event)">
                     <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+                </div>
+                <div id="capsWarning" style="display:none; color: #ef4444; font-size: 11px; font-weight: 700; margin-top: 8px; text-transform: uppercase;">
+                    <i class="fas fa-keyboard me-1"></i> Warning: Caps Lock is ON
                 </div>
             </div>
 
@@ -323,6 +326,27 @@
         // toggle the eye slash icon
         this.classList.toggle('fa-eye-slash');
     });
+
+    // 🧱 LOADING STATE
+    document.querySelector("form").addEventListener("submit", function() {
+        const btn = document.querySelector(".btn-submit");
+        const span = btn.querySelector("span");
+        const icon = btn.querySelector("i");
+        
+        span.innerText = "Authorizing...";
+        icon.className = "fas fa-spinner fa-spin ms-2";
+        btn.style.opacity = "0.8";
+        btn.style.pointerEvents = "none";
+    });
+    // 🧱 CAPS LOCK WARNING
+    function checkCaps(e) {
+        const warning = document.getElementById("capsWarning");
+        if (e.getModifierState("CapsLock")) {
+            warning.style.display = "block";
+        } else {
+            warning.style.display = "none";
+        }
+    }
 </script>
 
 </body>
