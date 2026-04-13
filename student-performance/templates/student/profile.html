@@ -1,85 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic Profile | SPDA</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root { --primary: #6366f1; --bg: #f8fafc; }
-        body { font-family: 'Outfit', sans-serif; background-color: var(--bg); }
-        .sidebar { height: 100vh; background: #ffffff; border-right: 1px solid #e2e8f0; position: fixed; width: 260px; }
-        .main-content { margin-left: 260px; padding: 40px; }
-        .nav-link { color: #64748b; padding: 12px 25px; border-radius: 12px; margin: 5px 15px; transition: 0.2s; text-decoration: none; display: block; }
-        .nav-link:hover, .nav-link.active { background: #f1f5f9; color: var(--primary); font-weight: 700; }
-        .profile-card { background: white; border-radius: 32px; border: 1px solid #e2e8f0; overflow: hidden; }
-        .profile-header { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); height: 160px; }
-        .avatar-box { width: 120px; height: 120px; background: white; border-radius: 30px; margin-top: -60px; margin-left: 40px; border: 5px solid white; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--primary); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .info-group { padding: 30px 40px; }
-    </style>
-</head>
-<body>
+{% extends "student/layout.html" %}
 
-<nav class="sidebar">
-    <div class="px-4 py-5 text-center">
-        <h4 class="fw-bold text-primary"><i class="fas fa-graduation-cap me-2"></i>SPDA Portal</h4>
-    </div>
-    <div class="mt-4">
-        <a href="{{ url_for('student.dashboard') }}" class="nav-link"><i class="fas fa-th-large me-2"></i> Dashboard</a>
-        <a href="{{ url_for('student.profile') }}" class="nav-link active"><i class="fas fa-user-circle me-2"></i> Profile</a>
-        <a href="{{ url_for('student.change_password') }}" class="nav-link"><i class="fas fa-key me-2"></i> Security</a>
-        <div class="px-3 mt-5">
-            <hr class="text-muted opacity-25">
-            <a href="{{ url_for('student.logout') }}" class="nav-link text-danger"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
-        </div>
-    </div>
-</nav>
+{% block title %}My Profile{% endblock %}
+{% block page_title %}Student Identity{% endblock %}
 
-<main class="main-content">
-    <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <div class="profile-card shadow-sm bg-white">
-                <div class="profile-header"></div>
-                <div class="avatar-box">
-                    <i class="fas fa-user-graduate"></i>
-                </div>
-                
-                <div class="info-group">
-                    <div class="d-flex justify-content-between align-items-center mb-5">
-                        <div>
-                            <h1 class="fw-extrabold mb-0">{{ student.name }}</h1>
-                            <p class="text-muted fs-5">{{ student.department }} | Semester {{ student.semester }}</p>
-                        </div>
-                        <a href="{{ url_for('student.change_password') }}" class="btn btn-outline-primary rounded-pill px-4 fw-bold">
-                            Update Security
-                        </a>
+{% block extra_css %}
+<style>
+    .profile-card { border-radius: 24px; overflow: hidden; background: white; }
+    .cover { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); height: 160px; }
+    .avatar-wrapper { width: 120px; height: 120px; background: white; border-radius: 32px; margin-top: -60px; margin-left: 40px; border: 6px solid white; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #6366f1; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .profile-content { padding: 30px 40px; }
+    .info-label { font-size: 0.75rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+    .info-value { background: #f8fafc; padding: 12px 16px; border-radius: 12px; font-weight: 600; color: #1e293b; border: 1px solid #f1f5f9; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-xl-10">
+        <div class="profile-card shadow-sm border-0">
+            <div class="cover"></div>
+            <div class="avatar-wrapper">
+                <i class="bi bi-person-fill"></i>
+            </div>
+            
+            <div class="profile-content">
+                <div class="d-flex justify-content-between align-items-end mb-5">
+                    <div>
+                        <h1 class="fw-800 mb-1">{{ student.name }}</h1>
+                        <p class="text-muted mb-0 fw-500 fs-5">{{ student.department }} | Semester {{ student.semester }}</p>
                     </div>
+                    <a href="{{ url_for('student.change_password') }}" class="btn btn-primary rounded-pill px-4 fw-700 shadow-sm">
+                        <i class="bi bi-shield-lock me-2"></i> Update Security
+                    </a>
+                </div>
 
-                    <div class="row g-4">
-                        <div class="col-md-6">
-                            <label class="fw-bold small text-uppercase text-muted mb-2">Institutional Identification</label>
-                            <div class="p-3 bg-light rounded-3 fw-bold text-dark">{{ student.enrollment_no }}</div>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="info-label">Institutional ID</div>
+                        <div class="info-value">{{ student.enrollment_no }}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-label">Digital Correspondence</div>
+                        <div class="info-value">{{ student.email }}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-label">Current Academic Level</div>
+                        <div class="info-value">Semester {{ student.semester }} Member</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-label">Enrollment Status</div>
+                        <div class="info-value text-success d-flex align-items-center gap-2">
+                            <i class="bi bi-check-circle-fill"></i> Verified Institutional Active
                         </div>
-                        <div class="col-md-6">
-                            <label class="fw-bold small text-uppercase text-muted mb-2">Digital Correspondence</label>
-                            <div class="p-3 bg-light rounded-3 fw-bold text-dark">{{ student.email }}</div>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="fw-bold small text-uppercase text-muted mb-2">Academic Department</label>
-                            <div class="p-3 bg-light rounded-3 fw-bold text-dark">{{ student.department }} Engineering</div>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="fw-bold small text-uppercase text-muted mb-2">Enrollment Status</label>
-                            <div class="p-3 bg-light rounded-3 fw-bold text-success"><i class="fas fa-check-circle me-2"></i> Active Institutional Member</div>
+                    </div>
+                </div>
+
+                <div class="mt-5 p-4 bg-primary bg-opacity-10 rounded-4 border border-primary border-opacity-10">
+                    <div class="d-flex gap-3">
+                        <div class="text-primary fs-3"><i class="bi bi-info-square-fill"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-1 text-primary">Student Identity Protocol</h6>
+                            <p class="mb-0 text-primary-emphasis small">Your account is secured via institutional-level encryption. For any updates to sensitive records, please coordinate with the Administrative Secretariat via the helpdesk.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</main>
-
-</body>
-</html>
+</div>
+{% endblock %}

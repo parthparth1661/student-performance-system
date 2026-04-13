@@ -24,7 +24,7 @@ def login():
         return redirect(url_for('student.dashboard'))
         
     if request.method == 'POST':
-        enrollment_no = request.form.get('roll_no')
+        enrollment_no = request.form.get('enrollment_no')
         password = request.form.get('password')
         
         conn = get_db_connection()
@@ -58,8 +58,20 @@ def dashboard():
     
     # Fetch performance data via enrollment-locked analysis
     student_info = analysis.get_student_details(enrollment_no)
-    marks_data = analysis.get_student_marks(enrollment_no) # Internal, Viva, External breakdown
+    marks_data = analysis.get_student_marks(enrollment_no) 
     perf_summary = analysis.calculate_student_summary(enrollment_no)
+    
+    # Calculate Attendance Percentage for the UI
+    conn = analysis.get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("""
+        SELECT 
+            (COUNT(CASE WHEN status='Present' THEN 1 END) * 100.0 / NULLIF(COUNT(*), 0)) as attendance
+        FROM attendance WHERE enrollment_no = %s
+    """, (enrollment_no,))
+    attn_data = cursor.fetchone()
+    perf_summary['attendance_percentage'] = round(attn_data['attendance'] or 0, 2)
+    conn.close()
     
     # Generate dynamic performance visualizations
     analysis.generate_student_charts_new(enrollment_no)
@@ -67,7 +79,24 @@ def dashboard():
     return render_template('student/student_dashboard.html', 
                            student=student_info, 
                            marks_list=marks_data, 
-                           summary=perf_summary)
+                           summary=perf_summary,
+                           subjects=[m['subject'] for m in marks_data],
+                           marks=[m['total'] for m in marks_data])
+
+# 📈 ACADEMIC TRACKING: PERFORMANCE
+@student_bp.route('/performance')
+def performance():
+    enrollment_no = session['student_id']
+    student_info = analysis.get_student_details(enrollment_no)
+    marks_data = analysis.get_student_marks(enrollment_no)
+    perf_summary = analysis.calculate_student_summary(enrollment_no)
+    
+    return render_template('student/performance.html', 
+                           student=student_info, 
+                           marks_list=marks_data, 
+                           summary=perf_summary,
+                           subjects=[m['subject'] for m in marks_data],
+                           marks=[m['total'] for m in marks_data])
 
 # 👤 IDENTITY SECTOR: PROFILE
 @student_bp.route('/profile')
@@ -112,6 +141,26 @@ def change_password():
             flash("Identity verification failed. Current password incorrect.", "danger")
             
     return render_template('student/change_password.html')
+
+# 💬 COMMUNICATION: FEEDBACK
+@student_bp.route('/feedback', methods=['GET', 'POST'])
+def feedback():
+    if request.method == 'POST':
+        message = request.form.get('message')
+        enrollment_no = session['student_id']
+        
+        if message:
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO feedback (enrollment_no, message) VALUES (%s, %s)", (enrollment_no, message))
+            conn.commit()
+            conn.close()
+            flash("Feedback submitted successfully. Institutional improvement in progress.", "success")
+            return redirect(url_for('student.dashboard'))
+        
+    enrollment_no = session['student_id']
+    student_info = analysis.get_student_details(enrollment_no)
+    return render_template('student/feedback.html', student=student_info)
 
 # 🚪 SESSION TERMINATION: LOGOUT
 @student_bp.route('/logout')

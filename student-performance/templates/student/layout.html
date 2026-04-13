@@ -3,104 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Portal | SPDA System</title>
+    <title>{% block title %}Student Dashboard{% endblock %} | SPDA Portal</title>
+    <!-- 🚀 BOOTSTRAP 5 & ICONS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- 🎨 MODERN TYPOGRAPHY -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg: #f8fafc;
-            --card: #ffffff;
+            --sidebar-width: 260px;
             --primary: #6366f1;
-            --success: #10b981;
-            --text: #1e293b;
-            --border: #e2e8f0;
+            --sidebar-bg: #0f172a;
+            --topbar-bg: #ffffff;
+            --content-bg: #f8fafc;
         }
+
         body {
-            background: var(--bg);
-            font-family: 'Inter', sans-serif;
-            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--content-bg);
+            margin: 0;
             overflow-x: hidden;
         }
-        .navbar-student {
-            background: #ffffff;
-            border-bottom: 1px solid var(--border);
-            padding: 16px 0;
+
+        /* 🛰️ SIDEBAR NAVIGATION (FIXED) */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--sidebar-bg);
+            color: #cbd5e1;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .card {
-            background: var(--card);
-            border-radius: 16px;
+
+        .sidebar-brand {
+            padding: 2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar-brand i {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .sidebar-brand span {
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.02em;
+        }
+
+        .sidebar-nav {
+            flex-grow: 1;
+            padding: 0 1rem;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .nav-link i {
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            padding-left: 20px;
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        /* 🚀 MAIN WRAPPER */
+        .main-wrapper {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        /* 顶部导航 Topbar */
+        .topbar {
+            height: 70px;
+            background: var(--topbar-bg);
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--sidebar-bg);
+        }
+
+        .content-area {
+            padding: 2rem;
+        }
+
+        /* 📱 RESPONSIVE */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .main-wrapper {
+                margin-left: 0;
+            }
+            .sidebar.show {
+                transform: translateX(0);
+            }
+        }
+
+        /* Alert styling */
+        .alert {
+            border-radius: 12px;
             border: none;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: all 0.2s ease;
+            font-weight: 500;
         }
-        .progress { background-color: #f1f5f9; }
-        .bg-primary-soft { background: #f1f0ff; color: var(--primary); }
-        .bg-indigo-soft { background: #f1f0ff; color: var(--primary); }
-        .bg-success-soft { background: #ecfdf5; color: var(--success); }
-        .bg-danger-soft { background: #fef2f2; color: #ef4444; }
-        .rounded-pill-sm { border-radius: 8px; }
     </style>
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-student mb-4 shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-primary d-flex align-items-center" href="{{ url_for('student.dashboard') }}">
-                <div class="bg-primary-soft p-2 rounded-3 me-2">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                SPDA Student Portal
+
+    <div class="d-flex">
+        <!-- 🛰️ SIDEBAR -->
+        <div class="sidebar" id="sidebar">
+            <a href="/" class="sidebar-brand">
+                <i class="bi bi-cpu"></i>
+                <span>SPDA Academy</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#studentNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="studentNav">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link px-3 fw-medium" href="{{ url_for('student.dashboard') }}">
-                            <i class="fas fa-chart-line me-1 opacity-75"></i> Performance
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-3 fw-medium" href="{{ url_for('student.profile') }}">
-                            <i class="fas fa-user-circle me-1 opacity-75"></i> Profile
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-3 fw-medium" href="{{ url_for('student.feedback') }}">
-                            <i class="fas fa-comment-dots me-1 opacity-75"></i> Feedback
-                        </a>
-                    </li>
-                </ul>
-                <div class="ms-auto d-flex align-items-center gap-3">
-                    <span class="text-muted small fw-medium d-none d-md-block">{{ session.get('student_name', 'Student') }}</span>
-                    <a href="{{ url_for('student.logout') }}" class="btn btn-light border rounded-pill px-4 btn-sm fw-bold">
-                        <i class="fas fa-sign-out-alt me-1"></i> Logout
+
+            <nav class="sidebar-nav">
+                <a href="{{ url_for('student.dashboard') }}" class="nav-link {% if request.endpoint == 'student.dashboard' %}active{% endif %}">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+                <a href="{{ url_for('student.performance') }}" class="nav-link {% if request.endpoint == 'student.performance' %}active{% endif %}">
+                    <i class="bi bi-graph-up"></i> Performance
+                </a>
+                <a href="{{ url_for('student.profile') }}" class="nav-link {% if request.endpoint == 'student.profile' %}active{% endif %}">
+                    <i class="bi bi-person"></i> My Profile
+                </a>
+                <a href="{{ url_for('student.change_password') }}" class="nav-link {% if request.endpoint == 'student.change_password' %}active{% endif %}">
+                    <i class="bi bi-key"></i> Security
+                </a>
+                <a href="{{ url_for('student.feedback') }}" class="nav-link {% if request.endpoint == 'student.feedback' %}active{% endif %}">
+                    <i class="bi bi-chat-dots"></i> Feedback
+                </a>
+                
+                <div class="mt-5 pt-3">
+                    <hr class="text-white opacity-10">
+                    <a href="{{ url_for('student.logout') }}" class="nav-link text-danger-emphasis">
+                        <i class="bi bi-box-arrow-right"></i> Logout
                     </a>
                 </div>
-            </div>
+            </nav>
         </div>
-    </nav>
 
-    <div class="container py-4">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        {% for category, message in messages %}
-        <div class="alert alert-{{ category }} mb-4 py-2 border-0" role="alert">
-            {{ message }}
+        <!-- 🚀 MAIN WRAPPER -->
+        <div class="main-wrapper flex-grow-1">
+            
+            <!-- 🔝 TOPBAR -->
+            <header class="topbar">
+                <button class="btn btn-light d-lg-none" id="sidebarToggle">
+                    <i class="bi bi-list"></i>
+                </button>
+                
+                <h5 class="mb-0 fw-bold d-none d-md-block">{% block page_title %}Overview{% endblock %}</h5>
+                
+                <div class="user-profile ms-auto">
+                    <div class="text-end me-2 d-none d-sm-block">
+                        <p class="mb-0 fw-bold small text-dark">{{ session.get('student_name', 'Student') }}</p>
+                        <p class="mb-0 smaller text-muted" style="font-size: 0.7rem;">Verified Identity</p>
+                    </div>
+                    <div class="avatar">
+                        {{ session.get('student_name', 'S')[0] }}
+                    </div>
+                </div>
+            </header>
+
+            <!-- 📦 CONTENT AREA -->
+            <main class="content-area">
+                <div class="container-fluid">
+                    <!-- Notifications -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                        <div class="alert alert-{{ 'danger' if category == 'danger' else 'primary' }} alert-dismissible fade show" role="alert">
+                            <i class="bi bi-info-circle me-2"></i> {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+
+                    {% block content %}{% endblock %}
+                </div>
+            </main>
+
         </div>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
-
-        {% block content %}{% endblock %}
     </div>
 
-    <footer class="text-center py-4 text-secondary">
-        <p>&copy; 2026 Student Performance Data Analysis System</p>
-    </footer>
-
+    <!-- ⚙️ SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sidebar Toggle for Mobile
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        if(sidebarToggle) {
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('show');
+            });
+        }
+    </script>
+    {% block extra_js %}{% endblock %}
 </body>
-
 </html>

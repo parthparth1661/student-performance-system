@@ -13,7 +13,7 @@
                 <form action="{{ url_for('student.feedback') }}" method="POST">
                     <div class="mb-4">
                         <label for="enrollment" class="form-label fw-bold text-secondary text-uppercase small">Enrollment Number</label>
-                        <input type="text" class="form-control bg-light h-auto py-3 px-4 border-0" id="enrollment" value="{{ session['student_enrollment_no'] }}" readonly disabled>
+                        <input type="text" class="form-control bg-light h-auto py-3 px-4 border-0" id="enrollment" value="{{ session['student_id'] }}" readonly disabled>
                         <div class="form-text mt-2">Feedback is automatically linked to your student identity.</div>
                     </div>
                     

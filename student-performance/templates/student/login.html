@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Academy Portal | SPDA</title>
-    <!-- 🚀 BOOTSTRAP 5 CORE -->
+    <title>Student Login | SPDA Academy</title>
+    <!-- 🚀 BOOTSTRAP 5 & ICONS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- 🎨 ASSETS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- 🎨 MODERN TYPOGRAPHY -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --accent: #f43f5e;
-            --glass: rgba(255, 255, 255, 0.9);
+            --primary-hover: #4f46e5;
+            --success: #10b981;
+            --danger: #ef4444;
+            --bg-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --glass-bg: rgba(255, 255, 255, 0.95);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
             font-family: 'Outfit', sans-serif;
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            background: var(--bg-gradient);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -32,129 +34,113 @@
             position: relative;
         }
 
-        /* 🌫️ DYNAMIC BACKGROUND ART */
-        body::before {
-            content: "";
+        /* 🌪️ DYNAMIC BACKGROUND ELEMENTS */
+        .bg-shape {
             position: absolute;
+            z-index: -1;
+            filter: blur(80px);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: pulse 10s infinite alternate;
+        }
+
+        .shape-1 {
             width: 400px;
             height: 400px;
-            background: rgba(99, 102, 241, 0.1);
-            border-radius: 50%;
+            background: #818cf8;
             top: -100px;
             right: -100px;
-            z-index: -1;
-            filter: blur(80px);
         }
 
-        body::after {
-            content: "";
-            position: absolute;
+        .shape-2 {
             width: 300px;
             height: 300px;
-            background: rgba(244, 63, 94, 0.05);
-            border-radius: 50%;
+            background: #c084fc;
             bottom: -50px;
             left: -50px;
-            z-index: -1;
-            filter: blur(80px);
+            animation-delay: -5s;
         }
 
-        .auth-container {
+        @keyframes pulse {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.2) translate(30px, 30px); }
+        }
+
+        .login-container {
             width: 100%;
-            max-width: 460px;
-            animation: authEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            max-width: 400px;
+            animation: entrance 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes authEntrance {
-            from { opacity: 0; transform: scale(0.95) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
+        @keyframes entrance {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .auth-card {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 32px;
-            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.12);
-            padding: 50px 40px;
+        .login-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            padding: 40px;
             transition: var(--transition);
         }
 
-        .auth-card:hover {
-            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.15);
+        .login-card:hover {
+            box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.2);
         }
 
-        .brand-header {
-            text-align: center;
-            margin-bottom: 45px;
-        }
-
-        .brand-logo {
-            width: 72px;
-            height: 72px;
+        .logo-box {
+            width: 64px;
+            height: 64px;
             background: var(--primary);
             color: white;
-            border-radius: 22px;
-            display: inline-flex;
+            border-radius: 16px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 24px;
-            position: relative;
-            box-shadow: 0 12px 24px -6px rgba(99, 102, 241, 0.4);
+            font-size: 1.8rem;
+            margin: 0 auto 24px;
+            box-shadow: 0 8px 16px -4px rgba(99, 102, 241, 0.4);
         }
 
-        .brand-logo i { animation: logoFloat 3s ease-in-out infinite; }
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .brand-title {
+        .login-title {
             font-weight: 800;
-            font-size: 1.95rem;
-            color: #0f172a;
-            letter-spacing: -0.01em;
+            font-size: 1.75rem;
+            color: #1e293b;
             margin-bottom: 8px;
+            text-align: center;
         }
 
-        .brand-subtitle {
-            color: #64748b;
+        .login-subtitle {
             font-size: 0.95rem;
-            font-weight: 500;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 32px;
         }
 
-        /* 🔘 INPUT GROUP STYLING */
-        .form-label {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #475569;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 12px;
-            padding-left: 4px;
-        }
-
+        /* 🔘 CUSTOM INPUTS */
         .input-group {
-            background: #f8fafc;
+            background: #f1f5f9;
             border: 2px solid #f1f5f9;
-            border-radius: 18px;
-            padding: 2px 8px;
+            border-radius: 14px;
             transition: var(--transition);
+            overflow: hidden;
         }
 
         .input-group:focus-within {
             background: white;
             border-color: var(--primary);
-            box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
         }
 
         .input-group-text {
-            background: transparent;
-            border: none;
+            background: transparent !important;
+            border: none !important;
             color: #94a3b8;
-            padding-left: 12px;
-            transition: var(--transition);
+            padding-left: 16px;
+            padding-right: 12px;
         }
 
         .input-group:focus-within .input-group-text {
@@ -162,201 +148,192 @@
         }
 
         .form-control {
-            background: transparent;
-            border: none;
-            height: 54px;
-            font-weight: 600;
-            color: #0f172a;
+            background: transparent !important;
+            border: none !important;
+            padding: 14px 16px 14px 0;
+            font-weight: 500;
+            color: #1e293b;
             box-shadow: none !important;
         }
 
         .form-control::placeholder {
-            color: #cbd5e1;
-            font-weight: 500;
+            color: #94a3b8;
+            font-weight: 400;
         }
 
-        .password-toggle {
+        #togglePassword {
             cursor: pointer;
-            color: #94a3b8;
-            padding-right: 12px;
+            padding-right: 16px;
             transition: var(--transition);
         }
 
-        .password-toggle:hover { color: var(--primary); }
+        #togglePassword:hover {
+            color: var(--primary);
+        }
 
-        /* 🚀 AUTH BUTTON */
-        .btn-auth {
-            height: 58px;
+        /* 🚀 LOGIN BUTTON */
+        .btn-login {
             background: var(--primary);
             border: none;
-            border-radius: 18px;
+            border-radius: 14px;
             color: white;
             font-weight: 700;
-            font-size: 1.05rem;
-            letter-spacing: 0.02em;
-            box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+            font-size: 1rem;
+            padding: 14px;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
             transition: var(--transition);
-            margin-top: 15px;
         }
 
-        .btn-auth:hover {
-            background: var(--primary-dark);
+        .btn-login:hover {
+            background: var(--primary-hover);
             transform: translateY(-2px);
-            box-shadow: 0 20px 30px -5px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.3);
         }
 
-        .btn-auth:active { transform: translateY(0); }
+        .btn-login:active {
+            transform: translateY(0);
+        }
 
-        /* ⚠️ ALERTS */
-        .alert-premium {
-            background: #fff1f2;
-            border: 1px solid #fecdd3;
-            border-radius: 18px;
-            color: #9f1239;
+        /* ⚠️ ALERT STYLING */
+        .alert-custom {
+            border-radius: 14px;
             font-weight: 600;
             font-size: 0.9rem;
-            margin-bottom: 25px;
-            padding: 14px;
-            animation: alertBounce 0.5s ease;
+            padding: 12px;
+            border: none;
+            margin-bottom: 24px;
         }
 
-        @keyframes alertBounce {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        .auth-footer {
-            margin-top: 40px;
+        .footer-text {
             text-align: center;
+            margin-top: 32px;
+            font-size: 0.85rem;
+            color: #64748b;
         }
 
-        .footer-link {
+        .footer-text a {
             color: var(--primary);
-            font-weight: 700;
             text-decoration: none;
+            font-weight: 700;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 24px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            opacity: 0.8;
             transition: var(--transition);
         }
 
-        .footer-link:hover { text-decoration: underline; }
-
-        .secure-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #f1f5f9;
-            padding: 6px 14px;
-            border-radius: 12px;
-            color: #64748b;
-            font-size: 0.65rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-top: 20px;
-        }
-
-        @media (max-width: 480px) {
-            .auth-card { padding: 40px 24px; }
-            .brand-title { font-size: 1.6rem; }
+        .back-link:hover {
+            opacity: 1;
+            transform: translateX(-4px);
         }
     </style>
 </head>
 <body>
 
-<div class="auth-container">
-    <div class="auth-card">
-        <!-- 🎯 BRANDING UNIT -->
-        <div class="brand-header">
-            <div class="brand-logo">
-                <i class="bi bi-mortarboard-fill"></i>
-            </div>
-            <h1 class="brand-title">Student Login</h1>
-            <p class="brand-subtitle">Enter your institutional credentials to continue</p>
-        </div>
+<div class="bg-shape shape-1"></div>
+<div class="bg-shape shape-2"></div>
 
-        <!-- ⚠️ NOTIFICATIONS -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        {% for category, message in messages %}
-        <div class="alert alert-premium text-center">
-            <i class="bi bi-exclamation-circle-fill me-2"></i>
-            {{ message }}
+<div class="login-container">
+    <div class="login-card shadow-lg">
+        <div class="logo-box">
+            <i class="bi bi-mortarboard-fill"></i>
         </div>
-        {% endfor %}
-        {% endif %}
+        <h3 class="login-title">Student Login</h3>
+        <p class="login-subtitle">Access your academic command center</p>
+
+        <!-- ⚠️ ERROR HANDLING -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ 'danger' if category == 'danger' else 'primary' }} alert-custom text-center animate__animated animate__shakeX" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
         {% endwith %}
 
-        <!-- 🔐 SECURE AUTHENTICATION FORM -->
-        <form action="{{ url_for('student.login') }}" method="POST" id="loginForm" autocomplete="off">
-            <div class="mb-4">
-                <label class="form-label">Enrollment Number</label>
+        <form action="{{ url_for('student.login') }}" method="POST">
+            <!-- Enrollment Field -->
+            <div class="mb-3">
                 <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-person-vcard-fill"></i></span>
-                    <input type="text" name="roll_no" class="form-control" placeholder="e.g. 21020101" required autofocus>
+                    <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                    <input type="text" class="form-control" name="enrollment_no" placeholder="Enrollment No" required autofocus>
                 </div>
             </div>
 
-            <div class="mb-5">
-                <label class="form-label">Secure Password</label>
+            <!-- Password Field -->
+            <div class="mb-4">
                 <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-shield-lock-fill"></i></span>
-                    <input type="password" name="password" id="passwordField" class="form-control" placeholder="••••••••" required>
-                    <span class="input-group-text pe-3">
-                        <i class="bi bi-eye-slash-fill password-toggle fs-5" id="passwordToggle"></i>
+                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Secure Password" required>
+                    <span class="input-group-text" id="togglePassword">
+                        <i class="bi bi-eye-slash-fill"></i>
                     </span>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-auth w-100 mb-3" id="loginBtn">
-                Unlock Dashboard <i class="bi bi-arrow-right-short ms-1 fs-5"></i>
+            <!-- Login Button -->
+            <button type="submit" class="btn btn-login">
+                Login to Portal <i class="bi bi-arrow-right-short fs-5 ms-1"></i>
             </button>
         </form>
 
-        <div class="auth-footer">
-            <p class="text-muted small mb-0">Trouble accessing? <a href="#" class="footer-link">Support Desk</a></p>
-            <div class="secure-badge">
-                <i class="bi bi-shield-fill-check text-success"></i>
-                <span>SSL Encrypted Transmission</span>
-            </div>
+        <div class="footer-text">
+            Don't have access? <a href="#">Contact Faculty</a>
         </div>
     </div>
 
-    <!-- 🌐 QUICK NAV -->
-    <div class="text-center mt-4">
-        <a href="/" class="text-secondary text-decoration-none small fw-bold">
-            <i class="bi bi-chevron-left me-1"></i> Back to Institutional Hub
-        </a>
-    </div>
+    <a href="/" class="back-link">
+        <i class="bi bi-arrow-left"></i> Back to Landing Page
+    </a>
 </div>
 
-<!-- ⚙️ LOGIC ENGINES -->
+<!-- 🔑 PASSWORD TOGGLE LOGIC -->
 <script>
-    // 👁️ SECURE PASSWORD TOGGLE
-    const toggle = document.getElementById('passwordToggle');
-    const password = document.getElementById('passwordField');
+    const toggle = document.getElementById('togglePassword');
+    const password = document.getElementById('password');
 
     toggle.addEventListener('click', function () {
+        // Toggle the type attribute
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
-        
-        // Toggle icon visual
+
+        // Toggle the icon
+        const icon = this.querySelector('i');
         if (type === 'text') {
-            this.classList.remove('bi-eye-slash-fill');
-            this.classList.add('bi-eye-fill');
-            this.classList.add('text-primary');
+            icon.classList.remove('bi-eye-slash-fill');
+            icon.classList.add('bi-eye-fill');
+            icon.style.color = 'var(--primary)';
         } else {
-            this.classList.remove('bi-eye-fill');
-            this.classList.add('bi-eye-slash-fill');
-            this.classList.remove('text-primary');
+            icon.classList.remove('bi-eye-fill');
+            icon.classList.add('bi-eye-slash-fill');
+            icon.style.color = '#94a3b8';
         }
     });
 
-    // 🚀 BUTTON ANIMATION ENGINE
-    document.getElementById('loginForm').addEventListener('submit', function() {
-        const btn = document.getElementById('loginBtn');
-        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Validating Identity...';
-        btn.classList.add('disabled');
-        btn.style.opacity = '0.8';
+    // Simple Form Submission UX
+    const form = document.querySelector('form');
+    const loginBtn = document.querySelector('.btn-login');
+
+    form.addEventListener('submit', function() {
+        loginBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Authenticating...';
+        loginBtn.classList.add('disabled');
     });
 </script>
 

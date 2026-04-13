@@ -1,0 +1,119 @@
+{% extends "student/layout.html" %}
+
+{% block title %}Academic Performance{% endblock %}
+{% block page_title %}Academic Performance{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('performanceChart').getContext('2d');
+    const chartLabels = JSON.parse('{{ subjects|tojson|safe }}');
+    const chartData = JSON.parse('{{ marks|tojson|safe }}');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartLabels,
+            datasets: [{
+                label: 'Total Marks (Out of 100)',
+                data: chartData,
+                backgroundColor: 'rgba(99, 102, 241, 0.7)',
+                borderColor: '#6366f1',
+                borderWidth: 2,
+                borderRadius: 12,
+                barThickness: 30
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    grid: { color: '#f1f5f9' },
+                    ticks: { font: { family: 'Outfit', weight: 'bold' } }
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: { font: { family: 'Outfit', size: 10 } }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <!-- 📊 VISUAL ANALYTICS -->
+    <div class="col-xl-12">
+        <div class="card shadow-sm border-0 rounded-4 p-4 mb-4">
+            <h5 class="fw-bold mb-4"><i class="bi bi-bar-chart-fill me-2 text-primary"></i>Comparative Subject Analysis</h5>
+            <div style="height: 350px;">
+                <canvas id="performanceChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📝 FULL MARKS TABLE -->
+    <div class="col-xl-12">
+        <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+            <div class="px-4 py-3 bg-white border-bottom d-flex justify-content-between align-items-center">
+                <h5 class="fw-bold mb-0">Detailed Academic Ledger</h5>
+                <div class="d-flex gap-2">
+                    <span class="badge bg-primary rounded-pill">Mean: {{ summary.avg_marks }}%</span>
+                    <span class="badge {{ 'bg-success' if summary.overall_result == 'PASS' else 'bg-danger' }} rounded-pill">
+                        Result: {{ summary.overall_result }}
+                    </span>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr class="text-secondary small text-uppercase">
+                            <th class="ps-4">Subject</th>
+                            <th class="text-center">Internal (30)</th>
+                            <th class="text-center">Viva (10)</th>
+                            <th class="text-center">External (60)</th>
+                            <th class="text-center">Total (100)</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center pe-4">Pedagogical Insight</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for m in marks_list %}
+                        <tr>
+                            <td class="ps-4">
+                                <span class="fw-bold text-dark">{{ m.subject }}</span>
+                            </td>
+                            <td class="text-center font-monospace">{{ m.internal }}</td>
+                            <td class="text-center font-monospace">{{ m.viva }}</td>
+                            <td class="text-center font-monospace">{{ m.external }}</td>
+                            <td class="text-center">
+                                <span class="fw-800 text-primary">{{ m.total }}</span>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge {{ 'bg-success-subtle text-success' if m.status == 'PASS' else 'bg-danger-subtle text-danger' }} rounded-pill px-3">
+                                    {{ m.status }}
+                                </span>
+                            </td>
+                            <td class="text-center pe-4">
+                                <span class="small text-muted italic">{{ m.suggestion }}</span>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center py-5 text-muted">No academic data available.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

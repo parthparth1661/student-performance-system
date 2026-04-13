@@ -1,161 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Student Portal SPDA</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #6366f1;
-            --secondary: #64748b;
-            --success: #10b981;
-            --danger: #ef4444;
-            --bg: #f8fafc;
-        }
-        body { font-family: 'Outfit', sans-serif; background-color: var(--bg); color: #1e293b; }
-        .sidebar { height: 100vh; background: #ffffff; border-right: 1px solid #e2e8f0; position: fixed; width: 260px; z-index: 1000; }
-        .main-content { margin-left: 260px; padding: 40px; transition: all 0.3s; }
-        .nav-link { color: var(--secondary); font-weight: 500; padding: 12px 25px; border-radius: 12px; margin: 5px 15px; transition: all 0.2s; }
-        .nav-link:hover, .nav-link.active { background: #f1f5f9; color: var(--primary); }
-        .nav-link.active { font-weight: 700; }
-        .stat-card { background: white; border-radius: 20px; border: 1px solid #e2e8f0; padding: 25px; transition: transform 0.2s; }
-        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
-        .icon-box { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-        .table-custom { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; }
-        .badge-soft { padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 0.75rem; }
-        .bg-indigo-soft { background: #eef2ff; color: #6366f1; }
-        .bg-teal-soft { background: #f0fdf4; color: #10b981; }
-        @media (max-width: 992px) {
-            .sidebar { transform: translateX(-100%); width: 0; }
-            .main-content { margin-left: 0; }
-        }
-    </style>
-</head>
-<body>
+{% extends "student/layout.html" %}
 
-<!-- 🛰️ SIDEBAR NAVIGATION -->
-<nav class="sidebar">
-    <div class="px-4 py-5 text-center">
-        <h4 class="fw-bold text-primary"><i class="fas fa-graduation-cap me-2"></i>SPDA Portal</h4>
-        <p class="text-muted small">Student Command Center</p>
-    </div>
-    <div class="mt-4">
-        <a href="{{ url_for('student.dashboard') }}" class="nav-link active"><i class="fas fa-th-large me-2"></i> Dashboard</a>
-        <a href="{{ url_for('student.profile') }}" class="nav-link"><i class="fas fa-user-circle me-2"></i> Profile</a>
-        <a href="{{ url_for('student.change_password') }}" class="nav-link"><i class="fas fa-key me-2"></i> Security</a>
-        <div class="px-3 mt-5">
-            <hr class="text-muted opacity-25">
-            <a href="{{ url_for('student.logout') }}" class="nav-link text-danger"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
-        </div>
-    </div>
-</nav>
+{% block title %}Academic Dashboard{% endblock %}
+{% block page_title %}Academic Dashboard{% endblock %}
 
-<!-- 🚀 MAIN CONTENT SECTOR -->
-<main class="main-content">
-    <div class="d-flex justify-content-between align-items-center mb-5">
-        <div>
-            <h2 class="fw-extrabold mb-1">Welcome, {{ session['student_name'] }}</h2>
-            <p class="text-muted">Analyzing your academic trajectory for {{ student.department }} (Sem {{ student.semester }})</p>
-        </div>
-        <div class="text-end">
-            <span class="badge bg-indigo-soft badge-soft">ID: {{ session['student_id'] }}</span>
-        </div>
-    </div>
-
-    <!-- 📊 PERFORMANCE TILES -->
-    <div class="row g-4 mb-5">
-        <div class="col-md-3">
-            <div class="stat-card">
-                <div class="d-flex align-items-center mb-3">
-                    <div class="icon-box bg-primary text-white me-3"><i class="fas fa-book"></i></div>
-                    <span class="text-muted small fw-bold text-uppercase">Enrollments</span>
+{% block content %}
+<!-- 👤 WELCOME HEADER -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card bg-primary text-white border-0 shadow-sm p-4 rounded-4" style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h2 class="fw-800 mb-1 text-white">Welcome, {{ student.name }}</h2>
+                    <p class="mb-0 text-white-50 fw-500">You are currently viewing your pedagogical performance index for {{ student.department }} (Sem {{ student.semester }})</p>
                 </div>
-                <h3 class="fw-bold">{{ summary.total_subjects }} <small class="fs-6 text-muted">Subjects</small></h3>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="stat-card">
-                <div class="d-flex align-items-center mb-3">
-                    <div class="icon-box bg-success text-white me-3"><i class="fas fa-chart-pie"></i></div>
-                    <span class="text-muted small fw-bold text-uppercase">Avg. Percentage</span>
+                <div class="col-md-4 text-md-end d-none d-md-block">
+                    <div class="badge bg-white bg-opacity-20 p-2 px-3 rounded-pill">
+                        <i class="bi bi-clock-history me-1"></i> Data updated: Live
+                    </div>
                 </div>
-                <h3 class="fw-bold">{{ summary.avg_marks }}%</h3>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="stat-card">
-                <div class="d-flex align-items-center mb-3">
-                    <div class="icon-box bg-info text-white me-3"><i class="fas fa-calendar-check"></i></div>
-                    <span class="text-muted small fw-bold text-uppercase">Status</span>
+    </div>
+</div>
+
+<!-- 📊 PERFORMANCE METRICS -->
+<div class="row g-4 mb-4">
+    <!-- Total Subjects -->
+    <div class="col-md-4">
+        <div class="card shadow-sm p-4 h-100 border-0 rounded-4">
+            <div class="d-flex align-items-center mb-3">
+                <div class="bg-success-subtle text-success p-3 rounded-4 me-3">
+                    <i class="bi bi-book-half fs-4"></i>
                 </div>
-                <h3 class="fw-bold text-success">{{ summary.overall_result }}</h3>
+                <div>
+                    <h6 class="text-muted mb-0 small fw-bold text-uppercase tracking-wider">Total Subjects</h6>
+                    <h3 class="fw-800 mb-0">{{ summary.total_subjects }}</h3>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- 📦 ACADEMIC LEDGER -->
-    <div class="table-custom shadow-sm mb-5">
-        <div class="px-4 py-3 bg-white border-bottom d-flex justify-content-between align-items-center">
-            <h5 class="mb-0 fw-bold">Performance Breakdown</h5>
-            <span class="text-muted small">Academic Year 2023-24</span>
-        </div>
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-                <thead class="bg-light">
-                    <tr class="text-muted small text-uppercase fw-bold">
-                        <th class="ps-4">Subject Domain</th>
-                        <th class="text-center">Internal (30)</th>
-                        <th class="text-center">Viva (10)</th>
-                        <th class="text-center">External (60)</th>
-                        <th class="text-center">Total (100)</th>
-                        <th class="text-center pe-4">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for m in marks_list %}
-                    <tr>
-                        <td class="ps-4 fw-bold text-dark">{{ m.subject }}</td>
-                        <td class="text-center font-monospace">{{ m.internal }}</td>
-                        <td class="text-center font-monospace">{{ m.viva }}</td>
-                        <td class="text-center font-monospace">{{ m.external }}</td>
-                        <td class="text-center fw-extrabold text-primary">{{ m.total }}</td>
-                        <td class="text-center pe-4">
-                            {% if m.status == 'PASS' %}
-                                <span class="badge bg-teal-soft badge-soft">PASSED</span>
-                            {% else %}
-                                <span class="badge bg-danger-subtle text-danger badge-soft">FAILS</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% else %}
-                    <tr>
-                        <td colspan="6" class="text-center py-5 text-muted">No academic records available yet.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- 🗺️ VISUALIZATION SECTOR -->
-    <div class="row g-4">
-        <div class="col-lg-8">
-            <div class="stat-card h-100">
-                <h5 class="fw-bold mb-4">Component-wise Performance Analysis</h5>
-                <img src="{{ url_for('static', filename='charts/student_' + session['student_id'] + '_bar.png') }}?v={{ range(1, 999)|random }}" class="img-fluid rounded-3" alt="Performance Bar Chart">
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="stat-card h-100">
-                <h5 class="fw-bold mb-4">Attendance Fidelity</h5>
-                <img src="{{ url_for('static', filename='charts/student_' + session['student_id'] + '_pie.png') }}?v={{ range(1, 999)|random }}" class="img-fluid rounded-3" alt="Attendance Distribution">
+    <!-- Average Marks -->
+    <div class="col-md-4">
+        <div class="card shadow-sm p-4 h-100 border-0 rounded-4">
+            <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary-subtle text-primary p-3 rounded-4 me-3">
+                    <i class="bi bi-graph-up-arrow fs-4"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-0 small fw-bold text-uppercase tracking-wider">Average Marks</h6>
+                    <h3 class="fw-800 mb-0">{{ summary.avg_marks }}%</h3>
+                </div>
             </div>
         </div>
     </div>
-</main>
 
-</body>
-</html>
+    <!-- Attendance -->
+    <div class="col-md-4">
+        <div class="card shadow-sm p-4 h-100 border-0 rounded-4">
+            <div class="d-flex align-items-center mb-3">
+                <div class="bg-warning-subtle text-warning p-3 rounded-4 me-3">
+                    <i class="bi bi-calendar2-check fs-4"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-0 small fw-bold text-uppercase tracking-wider">Attendance</h6>
+                    <h3 class="fw-800 mb-0">{{ summary.attendance_percentage }}%</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <!-- 📝 QUICK PERFORMANCE OVERVIEW -->
+    <div class="col-lg-12">
+        <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+            <div class="px-4 py-3 bg-white border-bottom d-flex justify-content-between align-items-center">
+                <h5 class="fw-bold mb-0">Performance Transcript</h5>
+                <span class="badge {{ 'bg-success' if summary.overall_result == 'PASS' else 'bg-danger' }} rounded-pill">
+                    Overall: {{ summary.overall_result }}
+                </span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="ps-4">Subject Domain</th>
+                            <th class="text-center">Total Marks (100)</th>
+                            <th class="text-center">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for m in marks_list %}
+                        <tr>
+                            <td class="ps-4">
+                                <span class="fw-bold text-dark">{{ m.subject }}</span>
+                            </td>
+                            <td class="text-center fw-extrabold text-primary">{{ m.total }}</td>
+                            <td class="text-center">
+                                {% if m.total >= 35 %}
+                                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3">PASS</span>
+                                {% else %}
+                                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-3">FAIL</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="3" class="text-center py-5 text-muted">No academic records found for this term.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
