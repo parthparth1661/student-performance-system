@@ -16,15 +16,15 @@ admin_bp = Blueprint('admin', __name__)
 def check_admin_login():
     if request.endpoint in ['admin.login', 'admin.logout', 'admin.static']: 
         return
-    if not session.get('admin_logged_in'):
+    if 'admin_id' not in session:
         return redirect(url_for('admin.login'))
 
 @admin_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    if session.get('admin_logged_in'):
+    if 'admin_id' in session:
         return redirect(url_for('admin.dashboard'))
     if request.method == 'POST':
-        email = request.form.get('email') or request.form.get('username') # Handle both for compatibility
+        email = request.form.get('email') or request.form.get('username') 
         password = request.form.get('password')
         
         conn = get_db_connection()
@@ -34,21 +34,16 @@ def login():
             
         cursor = conn.cursor(dictionary=True)
 
-        # 1️⃣ REQUIRED FIELD VALIDATION
         if not email or not password:
             flash("Operations Aborted: All credentials are required.", "warning")
             return render_template('admin/admin_login.html')
             
-        # 2️⃣ BASIC PASSWORD CHECK (SAFE)
-        if len(password) < 4:
-            flash("Credential Violation: Password too short.", "warning")
-            return render_template('admin/admin_login.html')
-
         try:
             cursor.execute("SELECT * FROM admin WHERE email = %s", (email,))
             admin = cursor.fetchone()
             if admin and check_password_hash(admin['password'], password):
-                session['admin_logged_in'] = True
+                session.permanent = True
+                session['admin_id'] = admin['admin_id']
                 session['admin_email'] = admin['email']
                 flash(f"Welcome back, Administrator!", "success")
                 return redirect(url_for('admin.dashboard'))
@@ -224,8 +219,7 @@ def add_student():
                 VALUES (%s, %s, %s, %s, %s, %s)
             """, (enrollment_no, name, email, department, semester, pw_hash))
             
-            # 📝 LOG ACTION
-            cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Added student: {name} ({enrollment_no})",))
+
             
             conn.commit()
             flash("Student record successfully established.", "success")
@@ -369,9 +363,6 @@ def add_subject():
                 VALUES (%s, %s, %s, %s)
             """, (subject_name, department, semester, faculty_id))
             
-            # 📝 LOG ACTION
-            cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Added Subject: {subject_name}",))
-
             conn.commit()
             flash("Curriculum successfully updated with new subject.", "success")
             return redirect(url_for('admin.view_subjects'))
@@ -770,9 +761,6 @@ def add_marks():
                             VALUES (%s, %s, %s, %s, %s, %s)
                         """, (enrollment_no, subject_id, i_m, v_m, e_m, total_marks))
                         
-                        # 📝 LOG ACTION
-                        cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Added marks: Enrollment {enrollment_no}, Subject ID {subject_id}",))
-                        
                         conn.commit()
                         flash(f"Record for {enrollment_no} registered successfully!", "success")
                         # 🎯 Redirect back with filters for structured entry
@@ -1017,9 +1005,6 @@ def add_attendance():
                         VALUES (%s, %s, %s, %s)
                     """, (enrollment_no, subject_id, att_date, status))
                     
-                    # 📝 LOG ACTION
-                    cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Marked attendance: {enrollment_no} on {att_date}",))
-                    
                     conn.commit()
                     flash(f"Attendance for {enrollment_no} recorded successfully!", "success")
                     return redirect(url_for('admin.view_attendance'))
@@ -1139,145 +1124,226 @@ def reset_data():
         conn.commit()
         flash("All system data has been safely reset.", "success")
     except Exception as e:
-        flash(f"Error resetting data: {e}", "danger")
-    finally:
-        conn.close()
-    return redirect(url_for('admin.dashboard'))
-
-@admin_bp.route('/student-report/<enrollment_no>')
-def student_report_view(enrollment_no):
-    from analysis import get_student_details, get_student_marks, calculate_student_summary, generate_student_charts_new
-    student = get_student_details(enrollment_no)
-    if not student:
-        flash("Student not found.", "danger")
-        return redirect(url_for('admin.view_students'))
-    
-    marks_list = get_student_marks(enrollment_no)
-    summary = calculate_student_summary(enrollment_no)
-    generate_student_charts_new(enrollment_no)
-    
-    # --- FETCH ATTENDANCE DATA ---
-    conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
-    
-    # 1. Attendance Summary
-    cursor.execute("""
-        SELECT 
-            COUNT(*) as total,
-            SUM(CASE WHEN status='Present' THEN 1 ELSE 0 END) as present,
-            SUM(CASE WHEN status='Absent' THEN 1 ELSE 0 END) as absent
-        FROM attendance
-        WHERE enrollment_no = %s
-    """, (enrollment_no,))
-    att_summary = cursor.fetchone()
-    
-    total_classes = att_summary['total'] or 0
-    present_days = att_summary['present'] or 0
-    att_percent = round((present_days / total_classes * 100), 2) if total_classes > 0 else 0
-    
-    # 2. Detailed Attendance Table (Recent 10)
-    cursor.execute("""
-        SELECT a.date, a.status, sub.subject_name
-        FROM attendance a
-        JOIN subjects sub ON a.subject_id = sub.subject_id
-        WHERE a.enrollment_no = %s
-        ORDER BY a.date DESC
-        LIMIT 10
-    """, (enrollment_no,))
-    detailed_attendance = cursor.fetchall()
-    
-    conn.close()
-    
-    att_info = {
-        'total': total_classes,
-        'present': present_days,
-        'absent': att_summary['absent'] or 0,
-        'percent': att_percent
-    }
-    
-    return render_template('admin/student_detail.html', 
-                          student=student, 
-                          marks_list=marks_list, 
-                          summary=summary,
-                          attendance=att_info,
-                          detailed_attendance=detailed_attendance)
-
-@admin_bp.route('/student-report/<enrollment_no>/download')
-def download_student_report(enrollment_no):
-    from analysis import generate_student_report_pdf
-    from flask import send_file
-    
-    file_path = generate_student_report_pdf(enrollment_no)
-    if file_path and os.path.exists(file_path):
-        return send_file(file_path, as_attachment=True)
-    
-    flash("Error generating PDF report. Please try again.", "danger")
-    return redirect(url_for('admin.student_report_view', enrollment_no=enrollment_no))
+        flash(f"Error resetting data: {e}", "danger")# --- 📊 POWERFUL INSTITUTIONAL REPORT CENTER (v2.0) ---
 
 @admin_bp.route('/reports')
-def view_reports():
+def reports_marks():
+    # 🎯 🧠 STEP 1: FILTERS & PARAMETERS
     filters = {
-        'department': request.args.get('department'),
-        'semester': request.args.get('semester'),
-        'subject': request.args.get('subject')
+        'department': request.args.get('department', 'All'),
+        'semester': request.args.get('semester', 'All'),
+        'subject': request.args.get('subject', 'All'),
+        'search': request.args.get('search', '')
     }
     
-    from analysis import get_report_data, generate_report_charts
-    data = get_report_data(filters)
-    generate_report_charts(data)
-    
-    # Get subjects for filter dropdown
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
-    if filters['department'] and filters['department'] != 'All':
-        cursor.execute("SELECT DISTINCT subject_name FROM subjects WHERE department = %s", (filters['department'],))
-    else:
-        cursor.execute("SELECT DISTINCT subject_name FROM subjects")
-    subjects = [row['subject_name'] for row in cursor.fetchall()]
+    
+    # 🟡 1. BUILD DYNAMIC QUERY
+    query = """
+        SELECT s.name, s.enrollment_no, s.department, s.semester, 
+               sub.subject_name, m.internal_marks, m.viva_marks, m.external_marks, m.total_marks
+        FROM marks m
+        JOIN students s ON m.enrollment_no = s.enrollment_no
+        JOIN subjects sub ON m.subject_id = sub.subject_id
+    """
+    where_parts = []
+    values = []
+    
+    if filters['department'] != 'All':
+        where_parts.append("s.department = %s")
+        values.append(filters['department'])
+    if filters['semester'] != 'All':
+        where_parts.append("s.semester = %s")
+        values.append(filters['semester'])
+    if filters['subject'] != 'All':
+        where_parts.append("sub.subject_name = %s")
+        values.append(filters['subject'])
+    if filters['search']:
+        where_parts.append("(s.name LIKE %s OR s.enrollment_no LIKE %s)")
+        search_val = f"%{filters['search']}%"
+        values.extend([search_val, search_val])
+        
+    if where_parts:
+        query += " WHERE " + " AND ".join(where_parts)
+        
+    query += " ORDER BY s.enrollment_no ASC"
+    
+    cursor.execute(query, values)
+    marks_data = cursor.fetchall()
+    
+    # 📊 2. SUMMARY KPI CALCULATIONS
+    summary = {
+        'avg_marks': 0,
+        'pass_count': 0,
+        'fail_count': 0,
+        'top_performer': 'N/A'
+    }
+    
+    if marks_data:
+        total_m = [row['total_marks'] for row in marks_data]
+        summary['avg_marks'] = round(sum(total_m) / len(total_m), 1)
+        summary['pass_count'] = len([m for m in total_m if m >= 40])
+        summary['fail_count'] = len(total_m) - summary['pass_count']
+        
+        # Determine Top Performer from this view
+        top_row = max(marks_data, key=lambda x: x['total_marks'])
+        summary['top_performer'] = top_row['name']
+        
+    # 📑 3. DROPDOWN DATA
+    cursor.execute("SELECT DISTINCT department FROM students")
+    depts = [r['department'] for r in cursor.fetchall()]
+    cursor.execute("SELECT DISTINCT subject_name FROM subjects")
+    subjects_list = [r['subject_name'] for r in cursor.fetchall()]
+    
+    conn.close()
+    return render_template('admin/reports_marks.html', 
+                           data=marks_data, 
+                           summary=summary, 
+                           filters=filters,
+                           departments=depts,
+                           subjects=subjects_list)
+
+@admin_bp.route('/reports/student/<enrollment_no>')
+def reports_student_detail(enrollment_no):
+    from analysis import get_student_details, get_student_marks, calculate_student_summary
+    student = get_student_details(enrollment_no)
+    if not student:
+        flash("Subject Profile Missing.", "danger")
+        return redirect(url_for('admin.reports_marks'))
+        
+    marks = get_student_marks(enrollment_no)
+    summary = calculate_student_summary(enrollment_no)
+    
+    # Attendance Aggregate
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("""
+        SELECT COUNT(*) as total, SUM(CASE WHEN status='Present' THEN 1 ELSE 0 END) as present
+        FROM attendance WHERE enrollment_no = %s
+    """, (enrollment_no,))
+    att = cursor.fetchone()
     conn.close()
     
-    return render_template('admin/view_reports.html', 
-                          data=data, 
-                          filters=filters, 
-                          subjects=subjects)
+    att_percent = round((att['present'] / att['total'] * 100), 1) if att['total'] > 0 else 0
+    
+    return render_template('admin/reports_student_detail.html', 
+                           student=student, 
+                           marks=marks, 
+                           summary=summary,
+                           attendance={'percent': att_percent, 'total': att['total'], 'present': att['present']})
 
-@admin_bp.route('/reports/export/csv')
-def export_csv():
+@admin_bp.route('/reports/attendance')
+def reports_attendance():
     filters = {
-        'department': request.args.get('department'),
-        'semester': request.args.get('semester'),
-        'subject': request.args.get('subject')
+        'department': request.args.get('department', 'All'),
+        'semester': request.args.get('semester', 'All'),
+        'search': request.args.get('search', '')
     }
-    from analysis import export_report_csv
-    file_path = export_report_csv(filters)
-    if file_path:
-        from flask import send_file
-        return send_file(file_path, as_attachment=True)
-    flash("Export failed.", "danger")
-    return redirect(url_for('admin.view_reports'))
+    
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    query = """
+        SELECT s.name, s.enrollment_no, s.department, s.semester,
+               COUNT(a.attendance_id) as total_classes,
+               SUM(CASE WHEN a.status='Present' THEN 1 ELSE 0 END) as present_count
+        FROM students s
+        LEFT JOIN attendance a ON s.enrollment_no = a.enrollment_no
+    """
+    where_parts = []
+    values = []
+    
+    if filters['department'] != 'All':
+        where_parts.append("s.department = %s")
+        values.append(filters['department'])
+    if filters['semester'] != 'All':
+        where_parts.append("s.semester = %s")
+        values.append(filters['semester'])
+    if filters['search']:
+        where_parts.append("(s.name LIKE %s OR s.enrollment_no LIKE %s)")
+        sv = f"%{filters['search']}%"
+        values.extend([sv, sv])
+        
+    if where_parts:
+        query += " WHERE " + " AND ".join(where_parts)
+        
+    query += " GROUP BY s.enrollment_no ORDER BY s.enrollment_no ASC"
+    
+    cursor.execute(query, values)
+    attendance_data = cursor.fetchall()
+    
+    # Calculate percentages for each
+    for row in attendance_data:
+        row['percent'] = round((row['present_count'] / row['total_classes'] * 100), 1) if row['total_classes'] > 0 else 0
+        
+    cursor.execute("SELECT DISTINCT department FROM students")
+    depts = [r['department'] for r in cursor.fetchall()]
+    
+    conn.close()
+    return render_template('admin/reports_attendance.html', 
+                           data=attendance_data, 
+                           filters=filters, 
+                           departments=depts)
 
-@admin_bp.route('/reports/export/pdf')
-def export_pdf():
-    filters = {
-        'department': request.args.get('department'),
-        'semester': request.args.get('semester'),
-        'subject': request.args.get('subject')
-    }
-    from analysis import get_report_data, export_report_pdf
-    data = get_report_data(filters)
-    file_path = export_report_pdf(filters, data)
-    if file_path:
-        from flask import send_file
-        return send_file(file_path, as_attachment=True)
-    flash("Export failed.", "danger")
-    return redirect(url_for('admin.view_reports'))
+# --- 📄 EXPORT PROTOCOLS ---
+
+@admin_bp.route('/reports/export/<type>')
+def reports_export(type):
+    import csv
+    from io import StringIO
+    from flask import make_response
+    
+    # Simple CSV export logic for general reports
+    report_type = request.args.get('report_type', 'marks')
+    
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    if report_type == 'marks':
+        cursor.execute("""
+            SELECT s.name, s.enrollment_no, sub.subject_name, m.internal_marks, m.viva_marks, m.external_marks, m.total_marks
+            FROM marks m
+            JOIN students s ON m.enrollment_no = s.enrollment_no
+            JOIN subjects sub ON m.subject_id = sub.subject_id
+        """)
+        filename = "Academic_Marks_Report.csv"
+    else:
+        cursor.execute("""
+            SELECT s.name, s.enrollment_no, COUNT(a.attendance_id) as total, SUM(CASE WHEN a.status='Present' THEN 1 ELSE 0 END) as present
+            FROM students s
+            LEFT JOIN attendance a ON s.enrollment_no = a.enrollment_no
+            GROUP BY s.enrollment_no
+        """)
+        filename = "Attendance_Audit_Report.csv"
+        
+    data = cursor.fetchall()
+    conn.close()
+    
+    if not data:
+        flash("No data available for export.", "warning")
+        return redirect(url_for('admin.reports_marks'))
+
+    si = StringIO()
+    cw = csv.DictWriter(si, fieldnames=data[0].keys())
+    cw.writeheader()
+    cw.writerows(data)
+    
+    output = make_response(si.getvalue())
+    output.headers["Content-Disposition"] = f"attachment; filename={filename}"
+    output.headers["Content-type"] = "text/csv"
+    return output
+
 
 # --- 👤 ADMIN PROFILE MODULE ---
 @admin_bp.route('/profile')
 def profile():
+    if 'admin_id' not in session:
+        return redirect(url_for('admin.login'))
+        
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM admin WHERE email = %s", (session.get('admin_email'),))
+    cursor.execute("SELECT * FROM admin WHERE admin_id = %s", (session.get('admin_id'),))
     admin_data = cursor.fetchone()
     conn.close()
     return render_template('admin/admin_profile.html', admin=admin_data)

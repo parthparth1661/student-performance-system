@@ -1330,7 +1330,18 @@ def generate_student_report_pdf(enrollment_no):
 def get_report_data(filters={}):
     """Aggregate all statistical data required for the high-fidelity reports page"""
     conn = get_db_connection()
-    if not conn: return {}
+    if not conn: 
+        return {
+            'dept_perf': [], 'sem_perf': [], 'sub_perf': [],
+            'pass_fail': {'pass_count': 0, 'fail_count': 0},
+            'attendance': {'present': 0, 'absent': 0},
+            'insights': {
+                'avg_marks': 0, 'performance_label': 'Infrastructure Error',
+                'top_subject': None, 'weak_subject': None,
+                'pass_percent': 0, 'fail_percent': 0,
+                'top_student': None, 'low_performers_count': 0
+            }
+        }
     
     try:
         cursor = conn.cursor(dictionary=True)
@@ -1476,7 +1487,17 @@ def get_report_data(filters={}):
         }
     except Exception as e:
         print(f"Error fetching report data: {e}")
-        return {}
+        return {
+            'dept_perf': [], 'sem_perf': [], 'sub_perf': [],
+            'pass_fail': {'pass_count': 0, 'fail_count': 0},
+            'attendance': {'present': 0, 'absent': 0},
+            'insights': {
+                'avg_marks': 0, 'performance_label': 'Data Unavailable',
+                'top_subject': None, 'weak_subject': None,
+                'pass_percent': 0, 'fail_percent': 0,
+                'top_student': None, 'low_performers_count': 0
+            }
+        }
     finally:
         conn.close()
 

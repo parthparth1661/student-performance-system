@@ -8,7 +8,8 @@ from email.mime.text import MIMEText
 
 app = Flask(__name__)
 # 1. Force Logout on App Start: Random key invalidates old sessions on restart
-app.secret_key = os.urandom(24)
+app.secret_key = "SPDA_SECURE_ADMIN_KEY_2024"
+app.permanent_session_lifetime = 1800 # 30 mins
 app.config['MYSQL_DB'] = 'SPDA' 
 
 # 📧 EMAIL CONFIGURATION (GMAIL SMTP)
@@ -184,8 +185,7 @@ def upload_students_csv():
                 (name, enrollment_no, email, department, semester, pw_hash)
             )
             
-            # 📝 LOG ACTION (Minimal)
-            cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Bulk Upload: Student {enrollment_no}",))
+
 
         conn.commit()
         conn.close()
@@ -270,8 +270,7 @@ def upload_marks_csv():
                 VALUES (%s, %s, %s, %s, %s, %s)
             """, (en_no, sub_id, internal, viva, external, total_marks))
             
-            # 📝 LOG ACTION
-            cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Bulk Upload: Marks update for {en_no}",))
+            
 
         conn.commit()
         conn.close()
@@ -337,8 +336,7 @@ def upload_subjects_csv():
                 (name, dept, sem)
             )
             
-            # 📝 LOG ACTION
-            cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Bulk Upload: Subject {name}",))
+            
 
         conn.commit()
         conn.close()
@@ -473,19 +471,7 @@ def clear_attendance():
         conn.close()
     return redirect(url_for('admin.view_attendance'))
 
-@app.route('/logs')
-def logs():
-    from flask import session, redirect, url_for, render_template
-    if not session.get('admin_logged_in'):
-        return redirect(url_for('admin.login'))
-        
-    from db import get_db_connection
-    conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM activity_logs ORDER BY timestamp DESC")
-    logs_data = cursor.fetchall()
-    conn.close()
-    return render_template('admin/logs.html', logs=logs_data)
+
 
 @app.route('/export_students_csv')
 def export_students_csv():
@@ -511,8 +497,7 @@ def export_students_csv():
     
     conn = get_db_connection()
     cursor = conn.cursor()
-    # 📝 LOG ACTION
-    cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Exported Filtered Dashboard Data to CSV ({filters['department'] or 'All'})",))
+    
     conn.commit()
     conn.close()
 
@@ -568,7 +553,7 @@ def export_students_pdf():
 
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Generated Professional PDF Report for {filters['department'] or 'Global'}",))
+    
     conn.commit()
     conn.close()
 
