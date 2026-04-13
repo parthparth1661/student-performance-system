@@ -91,7 +91,7 @@ def dashboard():
     
     # 1. Top Performers
     cursor.execute("""
-        SELECT s.name, AVG(m.marks_obtained) as avg_marks
+        SELECT s.name, AVG(m.total_marks) as avg_marks
         FROM students s
         JOIN marks m ON s.enrollment_no = m.enrollment_no
         GROUP BY s.enrollment_no
@@ -106,7 +106,7 @@ def dashboard():
         SELECT DISTINCT s.name, 'Low Marks' as reason
         FROM students s
         JOIN marks m ON s.enrollment_no = m.enrollment_no
-        WHERE m.marks_obtained < 40
+        WHERE m.total_marks < 40
     """)
     low_marks = cursor.fetchall()
 
@@ -259,6 +259,10 @@ def edit_student(enrollment_no):
     
     cursor.execute("SELECT * FROM students WHERE enrollment_no = %s", (enrollment_no,))
     student = cursor.fetchone()
+    # Safely handle missing profile entries during dev migration if any
+    if not student:
+        flash("Student Identity Record not found.", "warning")
+        return redirect(url_for('admin.view_students'))
     conn.close()
     
     if not student:
@@ -636,9 +640,9 @@ def view_marks():
     stats_query = f"""
         SELECT 
             COUNT(*) as total_entries,
-            AVG(marks_obtained) as avg_marks,
-            MAX(marks_obtained) as top_score,
-            SUM(CASE WHEN status = 'PASS' THEN 1 ELSE 0 END) as pass_count
+            AVG(total_marks) as avg_marks,
+            MAX(total_marks) as top_score,
+            SUM(CASE WHEN total_marks >= 40 THEN 1 ELSE 0 END) as pass_count
         FROM ({query}) as filtered_marks
     """
     cursor.execute(stats_query, params)
@@ -650,11 +654,18 @@ def view_marks():
     total_records = cursor.fetchone()['count']
     total_pages = math.ceil(total_records / limit)
 
-    query += " ORDER BY m.marks_id DESC LIMIT %s OFFSET %s"
+    query += " ORDER BY m.id DESC LIMIT %s OFFSET %s"
     params.extend([limit, offset])
     
     cursor.execute(query, params)
     marks_list = cursor.fetchall()
+
+    # Post-process for display breakdown if template doesn't show it
+    for m in marks_list:
+        m['marks_obtained'] = m['total_marks']
+        m['status'] = 'PASS' if m['total_marks'] >= 40 else 'FAIL'
+        m['exam_type'] = f"I:{m['internal_marks']} V:{m['viva_marks']} E:{m['external_marks']}"
+        m['marks_id'] = m['id'] # Maintain compatibility with edit/delete links in template
 
     # Fetch subjects for filter dropdown
     cursor.execute("SELECT subject_id, subject_name FROM subjects ORDER BY subject_name")
@@ -681,62 +692,99 @@ def add_marks():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     
-    cursor.execute("SELECT enrollment_no, name FROM students ORDER BY enrollment_no")
-    students = cursor.fetchall()
-    cursor.execute("SELECT subject_id, subject_name FROM subjects ORDER BY subject_name")
-    subjects = cursor.fetchall()
+    # 🎯 STEP 1 & 2: Get filters from URL args
+    selected_dept = request.args.get('department')
+    selected_sem = request.args.get('semester')
+    
+    students = []
+    subjects = []
+    
+    if selected_dept and selected_sem:
+        # 🎯 STEP 2: FETCH STUDENTS BASED ON SELECTION
+        cursor.execute("""
+            SELECT enrollment_no, name 
+            FROM students 
+            WHERE department = %s AND semester = %s 
+            ORDER BY enrollment_no
+        """, (selected_dept, selected_sem))
+        students = cursor.fetchall()
+        
+        # 🎯 STEP 3: FETCH SUBJECTS
+        cursor.execute("""
+            SELECT subject_id, subject_name 
+            FROM subjects 
+            WHERE department = %s AND semester = %s 
+            ORDER BY subject_name
+        """, (selected_dept, selected_sem))
+        subjects = cursor.fetchall()
+    
+    # If no results found with filters, but filters were sent, flash a warning
+    if (selected_dept or selected_sem) and not (students or subjects):
+        if selected_dept and selected_sem:
+            flash(f"No active Student/Subject context found for {selected_dept} Sem {selected_sem}.", "warning")
     
     if request.method == 'POST':
         enrollment_no = request.form['enrollment_no']
         subject_id = request.form['subject_id']
-        exam_type = request.form['exam_type']
-        marks_obtained = request.form['marks_obtained']
-        total_marks = request.form.get('total_marks', 100)
+        internal_marks = request.form.get('internal_marks', 0)
+        viva_marks = request.form.get('viva_marks', 0)
+        external_marks = request.form.get('external_marks', 0)
         
         # 1️⃣ FIELD VALIDATION (STRICT)
-        if not all([enrollment_no, subject_id, exam_type, marks_obtained]):
+        if not all([enrollment_no, subject_id]):
             flash("Security Alert: Missing critical performance data fields.", "danger")
             return render_template('admin/add_marks.html', students=students, subjects=subjects)
         else:
             try:
-                marks_obtained = float(marks_obtained)
-                total_marks = float(total_marks)
+                i_m = float(internal_marks)
+                v_m = float(viva_marks)
+                e_m = float(external_marks)
                 
-                if marks_obtained < 0 or marks_obtained > 100:
-                    flash("Validation Error: Marks must be between 0 and 100.", "danger")
-                elif marks_obtained > total_marks:
-                    flash(f"Sanity Check Failed: Obtained marks ({marks_obtained}) cannot exceed total marks ({total_marks})!", "danger")
+                # 🧱 STEP 2 — CALCULATE TOTAL (MAIN LOGIC)
+                total_marks = i_m + v_m + e_m
+
+                # 🧱 STEP 5 — VALIDATION (IMPORTANT)
+                if not (0 <= i_m <= 30):
+                    flash("Internal marks must be 0-30", "danger")
+                elif not (0 <= v_m <= 10):
+                    flash("Viva marks must be 0-10", "danger")
+                elif not (0 <= e_m <= 60):
+                    flash("External marks must be 0-60", "danger")
+                elif total_marks > 100:
+                    flash("Invalid marks: Total cannot exceed 100", "danger")
                 else:
-                    # 🛡️ PREVENT DUPLICATE ENTRY (same student + subject + exam)
+                    # 🛡️ PREVENT DUPLICATE ENTRY (Fixed for new schema)
                     cursor.execute("""
                         SELECT * FROM marks 
-                        WHERE enrollment_no = %s AND subject_id = %s AND exam_type = %s
-                    """, (enrollment_no, subject_id, exam_type))
+                        WHERE enrollment_no = %s AND subject_id = %s
+                    """, (enrollment_no, subject_id))
                     
                     if cursor.fetchone():
-                        flash(f"Duplicate Entry Warning: Record already exists for Student {enrollment_no} in this subject and exam type.", "warning")
+                        flash(f"Duplicate Entry Warning: Record already exists for Student {enrollment_no} in this subject.", "warning")
                     else:
-                        # Auto-calculate status
-                        status = 'PASS' if (marks_obtained / total_marks) * 100 >= 40 else 'FAIL'
-                        
+                        # 🧱 STEP 3 — INSERT QUERY
                         cursor.execute("""
-                            INSERT INTO marks (enrollment_no, subject_id, exam_type, marks_obtained, total_marks, status)
+                            INSERT INTO marks (enrollment_no, subject_id, internal_marks, viva_marks, external_marks, total_marks)
                             VALUES (%s, %s, %s, %s, %s, %s)
-                        """, (enrollment_no, subject_id, exam_type, marks_obtained, total_marks, status))
+                        """, (enrollment_no, subject_id, i_m, v_m, e_m, total_marks))
                         
                         # 📝 LOG ACTION
-                        cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Added marks for {enrollment_no} in Subject ID: {subject_id}",))
+                        cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Added marks: Enrollment {enrollment_no}, Subject ID {subject_id}",))
                         
                         conn.commit()
-                        flash(f"Result for {enrollment_no} registered successfully!", "success")
-                        return redirect(url_for('admin.view_marks'))
+                        flash(f"Record for {enrollment_no} registered successfully!", "success")
+                        # 🎯 Redirect back with filters for structured entry
+                        return redirect(url_for('admin.add_marks', department=selected_dept, semester=selected_sem))
             except ValueError:
                 flash("Invalid numeric value for marks.", "danger")
             except Exception as e:
                 flash(f"Database Error: {e}", "danger")
     
-    conn.close()
-    return render_template('admin/add_marks.html', students=students, subjects=subjects)
+    return render_template('admin/add_marks.html', 
+                          students=students, 
+                          subjects=subjects, 
+                          selected_dept=selected_dept, 
+                          selected_sem=selected_sem)
 
 @admin_bp.route('/edit_marks/<int:marks_id>', methods=['GET', 'POST'])
 @admin_bp.route('/marks/edit/<int:marks_id>', methods=['GET', 'POST'])
@@ -745,34 +793,37 @@ def edit_marks(marks_id):
     cursor = conn.cursor(dictionary=True)
     
     if request.method == 'POST':
-        marks_obtained = float(request.form['marks_obtained'])
-        total_marks = float(request.form.get('total_marks', 100))
-        exam_type = request.form['exam_type']
-        
-        if marks_obtained < 0 or marks_obtained > 100:
-            flash("Validation Error: Marks must be between 0 and 100.", "danger")
-        elif marks_obtained > total_marks:
-            flash("Validation Error: Marks obtained exceeds total possible marks.", "danger")
-        else:
-            status = 'PASS' if (marks_obtained / total_marks) * 100 >= 40 else 'FAIL'
-            try:
-                cursor.execute("""
-                    UPDATE marks 
-                    SET marks_obtained=%s, total_marks=%s, exam_type=%s, status=%s
-                    WHERE marks_id=%s
-                """, (marks_obtained, total_marks, exam_type, status, marks_id))
-                conn.commit()
-                flash("Academic record updated successfully.", "success")
-                return redirect(url_for('admin.view_marks'))
-            except Exception as e:
-                flash(f"Update Error: {e}", "danger")
+        try:
+            i_m = float(request.form.get('internal_marks', 0))
+            v_m = float(request.form.get('viva_marks', 0))
+            e_m = float(request.form.get('external_marks', 0))
+            
+            # 🧱 STEP 5 — VALIDATION (IMPORTANT)
+            if not (0 <= i_m <= 30 and 0 <= v_m <= 10 and 0 <= e_m <= 60):
+                flash("Validation Error: Component scores must be within valid range (Int: 30, Viva: 10, Ext: 60)", "danger")
+            else:
+                total_marks = i_m + v_m + e_m
+                if total_marks > 100:
+                    flash("Invalid marks: Total cannot exceed 100", "danger")
+                else:
+                    cursor.execute("""
+                        UPDATE marks 
+                        SET internal_marks=%s, viva_marks=%s, external_marks=%s, total_marks=%s
+                        WHERE id = %s
+                    """, (i_m, v_m, e_m, total_marks, marks_id))
+                    
+                    conn.commit()
+                    flash("Academic record updated successfully!", "success")
+                    return redirect(url_for('admin.view_marks'))
+        except Exception as e:
+            flash(f"Update Error: {e}", "danger")
 
     cursor.execute("""
         SELECT m.*, s.name as student_name, sub.subject_name 
         FROM marks m
         JOIN students s ON m.enrollment_no = s.enrollment_no
         JOIN subjects sub ON m.subject_id = sub.subject_id
-        WHERE m.marks_id = %s
+        WHERE m.id = %s
     """, (marks_id,))
     mark_data = cursor.fetchone()
     conn.close()
@@ -789,7 +840,7 @@ def delete_marks(marks_id):
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
-        cursor.execute("DELETE FROM marks WHERE marks_id = %s", (marks_id,))
+        cursor.execute("DELETE FROM marks WHERE id = %s", (marks_id,))
         conn.commit()
         flash("Marks record permanently removed.", "success")
     except Exception as e:

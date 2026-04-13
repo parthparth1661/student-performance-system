@@ -119,38 +119,39 @@
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
             <thead class="bg-light border-bottom">
-                <tr class="text-muted small text-uppercase fw-bold">
-                    <th class="ps-4 py-3">Student Identity</th>
+                <tr class="text-muted small text-uppercase fw-bold text-center">
+                    <th class="ps-4 py-3 text-start">Student Name</th>
                     <th class="py-3">Enrollment No</th>
-                    <th class="py-3">Curriculum Context</th>
-                    <th class="py-3">Module Result</th>
-                    <th class="py-3 text-end pe-4">Actions</th>
+                    <th class="py-3">Internal</th>
+                    <th class="py-3">Viva</th>
+                    <th class="py-3">External</th>
+                    <th class="py-3">Total</th>
+                    <th class="py-3 text-end pe-4">Action</th>
                 </tr>
             </thead>
             <tbody>
                 {% for m in marks_list %}
-                <tr class="marks-row">
-                    <td class="ps-4 py-3">
+                <tr class="marks-row text-center">
+                    <td class="ps-4 py-3 text-start">
                         <div class="d-flex align-items-center">
                             <div class="bg-primary-soft text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold me-3" style="width: 44px; height: 44px; font-size: 14px;">
                                 {{ m.student_name[:2]|upper }}
                             </div>
                             <div>
                                 <div class="fw-bold text-dark">{{ m.student_name }}</div>
-                                <div class="text-muted extra-small">Sem {{ m.semester }} | {{ m.department }}</div>
+                                <div class="text-muted extra-small">{{ m.subject_name }} (Sem {{ m.semester }})</div>
                             </div>
                         </div>
                     </td>
                     <td class="text-secondary fw-medium">{{ m.enrollment_no }}</td>
+                    <td class="fw-bold text-dark">{{ m.internal_marks }}</td>
+                    <td class="fw-bold text-dark">{{ m.viva_marks }}</td>
+                    <td class="fw-bold text-dark">{{ m.external_marks }}</td>
                     <td>
-                        <div class="fw-bold text-dark small">{{ m.subject_name }}</div>
-                        <div class="extra-small text-muted">{{ m.exam_type }}</div>
-                    </td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <span class="fw-bold fs-5 {% if m.status == 'PASS' %}text-primary{% else %}text-danger{% endif %} me-2">{{ m.marks_obtained }}</span>
-                            <span class="badge {% if m.status == 'PASS' %}bg-success-soft text-success{% else %}bg-danger-soft text-danger{% endif %} border px-2 py-1 rounded-pill extra-small fw-bold">
-                                {{ m.status }}
+                        <div class="d-flex align-items-center justify-content-center">
+                            <span class="fw-bold fs-5 {% if m.total_marks >= 40 %}text-primary{% else %}text-danger{% endif %} me-2">{{ m.total_marks }}</span>
+                            <span class="badge {% if m.total_marks >= 40 %}bg-success-soft text-success{% else %}bg-danger-soft text-danger{% endif %} border px-2 py-1 rounded-pill extra-small fw-bold">
+                                {{ 'PASS' if m.total_marks >= 40 else 'FAIL' }}
                             </span>
                         </div>
                     </td>
@@ -161,13 +162,13 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3">
                                 <li>
-                                    <a class="dropdown-item py-2" href="{{ url_for('admin.edit_marks', marks_id=m.marks_id) }}">
+                                    <a class="dropdown-item py-2" href="{{ url_for('admin.edit_marks', marks_id=m.id) }}">
                                         <i class="fas fa-edit me-2 text-primary opacity-75"></i> Edit Score
                                     </a>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <a class="dropdown-item py-2 text-danger" href="{{ url_for('admin.delete_marks', marks_id=m.marks_id) }}" onclick="return confirm('CRITICAL: Permanent deletion of marks record for {{ m.student_name }}?')">
+                                    <a class="dropdown-item py-2 text-danger" href="{{ url_for('admin.delete_marks', marks_id=m.id) }}" onclick="return confirm('CRITICAL: Permanent deletion of marks record for {{ m.student_name }}?')">
                                         <i class="fas fa-trash-alt me-2 opacity-75"></i> Remove Record
                                     </a>
                                 </li>
@@ -226,7 +227,21 @@
 
 <style>
 .marks-row { transition: background 0.2s ease; }
-.marks-row:hover { background-color: rgba(0,0,0,0.03) !important; }
+.marks-row:hover {
+    background-color: rgba(99, 102, 241, 0.03) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+th, td {
+    text-align: center;
+    padding: 10px !important;
+}
+.text-start {
+    text-align: left !important;
+}
+.text-end {
+    text-align: right !important;
+}
 .bg-primary-soft { background-color: rgba(99, 102, 241, 0.1); }
 .bg-success-soft { background-color: rgba(34, 197, 94, 0.1); }
 .bg-info-soft { background-color: rgba(6, 182, 212, 0.1); }

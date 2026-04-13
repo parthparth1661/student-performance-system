@@ -57,7 +57,7 @@ def build_dashboard_conditions(filters={}):
             SELECT enrollment_no 
             FROM attendance 
             GROUP BY enrollment_no 
-            HAVING (COUNT(CASE WHEN status='Present' THEN 1 END)*100.0/NULLIF(COUNT(*), 0)) < 75
+            HAVING COALESCE(COUNT(CASE WHEN status='Present' THEN 1 END)*100.0/NULLIF(COUNT(*), 0), 0) < 75
         )
         """)
     elif attendance_filter == "high":
@@ -66,7 +66,7 @@ def build_dashboard_conditions(filters={}):
             SELECT enrollment_no 
             FROM attendance 
             GROUP BY enrollment_no 
-            HAVING (COUNT(CASE WHEN status='Present' THEN 1 END)*100.0/NULLIF(COUNT(*), 0)) >= 75
+            HAVING COALESCE(COUNT(CASE WHEN status='Present' THEN 1 END)*100.0/NULLIF(COUNT(*), 0), 0) >= 75
         )
         """)
     
@@ -98,7 +98,7 @@ def get_dashboard_stats(filters={}):
         
         # 🥉 AVERAGE MARKS
         avg_query = f"""
-            SELECT AVG(m.marks_obtained) AS avg_marks 
+            SELECT AVG(m.total_marks) AS avg_marks 
             FROM marks m
             JOIN students s ON m.enrollment_no = s.enrollment_no
             JOIN subjects sub ON m.subject_id = sub.subject_id
@@ -109,7 +109,7 @@ def get_dashboard_stats(filters={}):
         
         # 🏆 ATTENDANCE %
         attn_query = f"""
-            SELECT (COUNT(CASE WHEN a.status='Present' THEN 1 END) * 100.0 / NULLIF(COUNT(*), 0)) 
+            SELECT COALESCE(COUNT(CASE WHEN a.status='Present' THEN 1 END) * 100.0 / NULLIF(COUNT(*), 0), 0) 
             AS attendance_percentage 
             FROM attendance a
             JOIN students s ON a.enrollment_no = s.enrollment_no
@@ -121,7 +121,7 @@ def get_dashboard_stats(filters={}):
 
         # 💡 TOP PERFORMER
         top_query = f"""
-            SELECT s.name, AVG(m.marks_obtained) as avg_marks
+            SELECT s.name, AVG(m.total_marks) as avg_marks
             FROM students s
             JOIN marks m ON s.enrollment_no = m.enrollment_no
             JOIN subjects sub ON m.subject_id = sub.subject_id
@@ -151,7 +151,7 @@ def get_dashboard_stats(filters={}):
             AND s.enrollment_no IN (
                 SELECT enrollment_no FROM attendance 
                 GROUP BY enrollment_no 
-                HAVING (COUNT(CASE WHEN status='Present' THEN 1 END)*100.0/NULLIF(COUNT(*), 0)) < 75
+                HAVING COALESCE(COUNT(CASE WHEN status='Present' THEN 1 END)*100.0/NULLIF(COUNT(*), 0), 0) < 75
             )
         """, risk_values)
         low_attendance_count = cursor.fetchone()['count'] or 0
@@ -191,7 +191,7 @@ def generate_dashboard_charts(filters={}):
 
         # 1. Subject-wise Average Marks (Bar Chart)
         bar_query = f"""
-            SELECT sub.subject_name, AVG(m.marks_obtained) as avg_marks
+            SELECT sub.subject_name, AVG(m.total_marks) as avg_marks
             FROM marks m
             JOIN subjects sub ON m.subject_id = sub.subject_id
             JOIN students s ON s.enrollment_no = m.enrollment_no
@@ -258,15 +258,15 @@ def generate_dashboard_charts(filters={}):
         plt.savefig(os.path.join(BASE_DIR, chart_paths['attendance_pie']), transparent=False, facecolor='white')
         plt.close()
 
-        # 3. Performance Trend (Line Chart)
+        # 3. Performance Trend (Simplified to Subjects since exam_type is gone)
         line_query = f"""
-            SELECT exam_type, AVG(marks_obtained) as avg_marks
+            SELECT sub.subject_name, AVG(m.total_marks) as avg_marks
             FROM marks m
             JOIN students s ON s.enrollment_no = m.enrollment_no
             LEFT JOIN subjects sub ON m.subject_id = sub.subject_id
             {where_clause}
-            GROUP BY exam_type
-            ORDER BY exam_type
+            GROUP BY sub.subject_name
+            ORDER BY sub.subject_name
         """
         cursor.execute(line_query, values)
         line_data = cursor.fetchall()
@@ -296,13 +296,13 @@ def generate_dashboard_charts(filters={}):
 
         # 4. Top 5 Students (Bar Chart)
         top_query = f"""
-            SELECT s.name, AVG(m.marks_obtained) as avg_marks
+            SELECT s.name, AVG(m.total_marks) as avg_marks
             FROM students s
             JOIN marks m ON s.enrollment_no = m.enrollment_no
             LEFT JOIN subjects sub ON m.subject_id = sub.subject_id
             {where_clause}
             GROUP BY s.name
-            ORDER BY AVG(m.marks_obtained) DESC
+            ORDER BY AVG(m.total_marks) DESC
             LIMIT 5
         """
         cursor.execute(top_query, values)
@@ -359,8 +359,8 @@ def get_performance_overview(filters={}, limit=10, offset=0):
                 s.department,
                 s.semester,
                 sub.subject_name,
-                AVG(m.marks_obtained) AS marks_obtained,
-                (COUNT(CASE WHEN a.status='Present' THEN 1 END)*100.0/NULLIF(COUNT(a.attendance_id), 0)) AS attendance_percentage
+                AVG(m.total_marks) AS marks_obtained,
+                COALESCE(COUNT(CASE WHEN a.status='Present' THEN 1 END)*100.0/NULLIF(COUNT(a.attendance_id), 0), 0) AS attendance_percentage
             FROM students s
             JOIN marks m ON s.enrollment_no = m.enrollment_no
             JOIN subjects sub ON m.subject_id = sub.subject_id
@@ -518,19 +518,56 @@ def process_csv(file_path, department=None, semester=None):
                     errors.append(f"Row {idx+2}: {str(e)}")
             msg_type = "Student"
 
-        # 2. MARKS CSV: enrollment_no, subject_id, exam_type, marks_obtained, total_marks
-        elif all(x in cols for x in ['enrollment_no', 'subject_id', 'exam_type', 'marks_obtained']):
+        # 2. MARKS CSV: enrollment_no, subject, department, semester, internal_marks, viva_marks, external_marks
+        elif all(x in cols for x in ['enrollment_no', 'subject', 'department', 'semester', 'internal_marks', 'viva_marks', 'external_marks']):
             for idx, row in df.iterrows():
                 try:
-                    total_marks = row.get('total_marks', 100)
+                    # 🎯 Get subject_id using (subject + department + semester)
                     cursor.execute("""
-                        INSERT INTO marks (enrollment_no, subject_id, exam_type, marks_obtained, total_marks)
-                        VALUES (%s, %s, %s, %s, %s)
-                    """, (row['enrollment_no'], row['subject_id'], row['exam_type'], row['marks_obtained'], total_marks))
+                        SELECT subject_id FROM subjects 
+                        WHERE subject_name = %s AND department = %s AND semester = %s
+                    """, (row['subject'], row['department'], row['semester']))
+                    sub_res = cursor.fetchone()
+                    
+                    if not sub_res:
+                        errors.append(f"Row {idx+2}: Subject '{row['subject']}' not found in catalog.")
+                        continue
+                        
+                    subject_id = sub_res[0]
+                    
+                    # 🎯 Validate student exists using enrollment_no
+                    cursor.execute("SELECT enrollment_no FROM students WHERE enrollment_no = %s", (row['enrollment_no'],))
+                    if not cursor.fetchone():
+                        errors.append(f"Row {idx+2}: Student '{row['enrollment_no']}' not registered.")
+                        continue
+                        
+                    i_m = int(row['internal_marks'])
+                    v_m = int(row['viva_marks'])
+                    e_m = int(row['external_marks'])
+                    total_m = i_m + v_m + e_m
+                    
+                    # 🧱 STEP 3 — INSERT / UPDATE LOGIC (Duplicate Prevention via ON DUPLICATE KEY)
+                    # Note: We need a unique constraint on (enrollment_no, subject_id) for this to work correctly
+                    # or check manually.
+                    cursor.execute("SELECT id FROM marks WHERE enrollment_no = %s AND subject_id = %s", (row['enrollment_no'], subject_id))
+                    existing = cursor.fetchone()
+                    
+                    if existing:
+                        cursor.execute("""
+                            UPDATE marks 
+                            SET internal_marks=%s, viva_marks=%s, external_marks=%s, total_marks=%s 
+                            WHERE id=%s
+                        """, (i_m, v_m, e_m, total_m, existing[0]))
+                    else:
+                        cursor.execute("""
+                            INSERT INTO marks (enrollment_no, subject_id, internal_marks, viva_marks, external_marks, total_marks)
+                            VALUES (%s, %s, %s, %s, %s, %s)
+                        """, (row['enrollment_no'], subject_id, i_m, v_m, e_m, total_m))
+                    
                     success_count += 1
                 except Exception as e:
                     errors.append(f"Row {idx+2}: {str(e)}")
-            msg_type = "Marks"
+            msg_type = "Marks (Breakdown)"
 
         # 3. ATTENDANCE CSV: enrollment_no, subject_id, date, status
         elif all(x in cols for x in ['enrollment_no', 'subject_id', 'date', 'status']):
@@ -601,39 +638,19 @@ def get_student_marks(enrollment_no):
         cursor.close()
         conn.close()
 
-        if not marks_records:
-            return []
-
-        df = pd.DataFrame(marks_records)
-        
         subjects_data = []
-        for subject_name in df['subject_name'].unique():
-            subj_df = df[df['subject_name'] == subject_name]
+        for row in marks_records:
+            total = row['total_marks']
+            status = "PASS" if total >= 40 else "FAIL"
             
-            internal = subj_df[subj_df['exam_type'] == 'Internal']['marks_obtained'].sum()
-            external = subj_df[subj_df['exam_type'] == 'External']['marks_obtained'].sum()
-            
-            practical = 0
-            if dept == 'MBA':
-                p_display = "N/A"
-            else:
-                practical = subj_df[subj_df['exam_type'] == 'Practical']['marks_obtained'].sum()
-                p_display = int(practical)
-
-            total = internal + external + practical
-            
-            has_external = not subj_df[subj_df['exam_type'] == 'External'].empty
-            status = "PASS" if (has_external and external >= (subj_df[subj_df['exam_type'] == 'External']['total_marks'].iloc[0] * 0.35)) else "FAIL"
-            
-            suggestion = "" # Simplified
             subjects_data.append({
-                'subject': subject_name,
-                'internal': int(internal),
-                'external': int(external),
-                'practical': p_display,
-                'total': int(total),
+                'subject': row['subject_name'],
+                'internal': row['internal_marks'],
+                'viva': row['viva_marks'],
+                'external': row['external_marks'],
+                'total': total,
                 'status': status,
-                'suggestion': suggestion
+                'suggestion': "Consistent effort required." if total < 60 else "Good performance."
             })
             
         return subjects_data
@@ -654,12 +671,10 @@ def calculate_student_summary(enrollment_no):
     aggregate_total = sum(item['total'] for item in subjects_data)
     avg_marks = aggregate_total / total_subjects if total_subjects > 0 else 0
     
-    # Overall Result rule: If any subject has marks < 35 in External -> FAIL
+    # Overall Result rule: If avg marks < 40 -> FAIL
     overall_result = "PASS"
-    for item in subjects_data:
-        if item['status'] == "FAIL":
-            overall_result = "FAIL"
-            break
+    if avg_marks < 40:
+        overall_result = "FAIL"
             
     return {
         'total_subjects': total_subjects,
@@ -965,13 +980,13 @@ def get_weak_students_external(threshold=35):
     try:
         cursor = conn.cursor(dictionary=True)
         cursor.execute("""
-            SELECT s.enrollment_no as roll_no, s.name, s.department, s.semester, COUNT(m.marks_id) as fail_count
+            SELECT s.enrollment_no as roll_no, s.name, s.department, s.semester, COUNT(m.id) as fail_count
             FROM students s
             JOIN marks m ON s.enrollment_no = m.enrollment_no
-            WHERE m.exam_type = 'External' AND m.marks_obtained < (m.total_marks * 0.35)
+            WHERE m.total_marks < 35
             GROUP BY s.enrollment_no
             ORDER BY fail_count DESC
-        """)
+        """, ())
         weak_students = cursor.fetchall()
         cursor.close()
         conn.close()
@@ -1382,7 +1397,7 @@ def get_report_data(filters={}):
         
         # A. Overall performance
         cursor.execute(f"""
-            SELECT AVG(m.marks_obtained) as avg 
+            SELECT AVG(m.total_marks) as avg 
             FROM marks m 
             JOIN students s ON m.enrollment_no = s.enrollment_no 
             JOIN subjects sub ON m.subject_id = sub.subject_id
@@ -1396,7 +1411,7 @@ def get_report_data(filters={}):
 
         # B. Top performing subject
         cursor.execute(f"""
-            SELECT sub.subject_name, AVG(m.marks_obtained) as avg_marks
+            SELECT sub.subject_name, AVG(m.total_marks) as avg_marks
             FROM marks m
             JOIN subjects sub ON m.subject_id = sub.subject_id
             JOIN students s ON m.enrollment_no = s.enrollment_no
@@ -1409,7 +1424,7 @@ def get_report_data(filters={}):
 
         # C. Weak subject detection
         cursor.execute(f"""
-            SELECT sub.subject_name, AVG(m.marks_obtained) as avg_marks
+            SELECT sub.subject_name, AVG(m.total_marks) as avg_marks
             FROM marks m
             JOIN subjects sub ON m.subject_id = sub.subject_id
             JOIN students s ON m.enrollment_no = s.enrollment_no
@@ -1428,7 +1443,7 @@ def get_report_data(filters={}):
         
         # E. Top student
         cursor.execute(f"""
-            SELECT s.name, AVG(m.marks_obtained) as avg_marks
+            SELECT s.name, AVG(m.total_marks) as avg_marks
             FROM students s
             JOIN marks m ON s.enrollment_no = m.enrollment_no
             JOIN subjects sub ON m.subject_id = sub.subject_id
@@ -1446,7 +1461,7 @@ def get_report_data(filters={}):
             JOIN students s ON m.enrollment_no = s.enrollment_no
             JOIN subjects sub ON m.subject_id = sub.subject_id
             {where_clause}
-            AND m.marks_obtained < 40
+            AND m.total_marks < 40
         """, values)
         insights['low_performers_count'] = cursor.fetchone()['count'] or 0
 
@@ -1662,8 +1677,8 @@ def get_faculty_analytics(filters={}):
         query = """
             SELECT f.faculty_id, f.faculty_name, f.department, f.email,
                    GROUP_CONCAT(DISTINCT sub.subject_name SEPARATOR ', ') as subjects_taught,
-                   AVG((m.marks_obtained / m.total_marks) * 100) as avg_marks,
-                   (COUNT(CASE WHEN (m.marks_obtained / m.total_marks) * 100 >= 40 THEN 1 END)*100.0 / NULLIF(COUNT(m.marks_id), 0)) as pass_percentage,
+                   AVG(m.total_marks) as avg_marks,
+                   COALESCE(COUNT(CASE WHEN m.total_marks >= 40 THEN 1 END)*100.0 / NULLIF(COUNT(m.id), 0), 0) as pass_percentage,
                    COUNT(DISTINCT m.enrollment_no) as total_students
             FROM faculty f
             JOIN subjects sub ON f.faculty_id = sub.faculty_id
@@ -1727,7 +1742,7 @@ def get_single_faculty_detail(faculty_id):
         # Profile & Global Stats
         cursor.execute("""
             SELECT f.*, 
-                   AVG((m.marks_obtained / m.total_marks) * 100) as global_avg,
+                   AVG(m.total_marks) as global_avg,
                    COUNT(DISTINCT m.enrollment_no) as unique_students
             FROM faculty f
             LEFT JOIN subjects sub ON f.faculty_id = sub.faculty_id
@@ -1742,9 +1757,9 @@ def get_single_faculty_detail(faculty_id):
         # Subject-wise breakdown
         cursor.execute("""
             SELECT sub.subject_name, sub.semester,
-                   AVG((m.marks_obtained / m.total_marks) * 100) as avg_marks,
-                   (COUNT(CASE WHEN (m.marks_obtained / m.total_marks) * 100 >= 40 THEN 1 END)*100.0 / NULLIF(COUNT(m.marks_id), 0)) as pass_pct,
-                   COUNT(m.marks_id) as entry_count
+                   AVG(m.total_marks) as avg_marks,
+                   COALESCE(COUNT(CASE WHEN m.total_marks >= 40 THEN 1 END)*100.0 / NULLIF(COUNT(m.id), 0), 0) as pass_pct,
+                   COUNT(m.id) as entry_count
             FROM subjects sub
             LEFT JOIN marks m ON sub.subject_id = m.subject_id
             WHERE sub.faculty_id = %s

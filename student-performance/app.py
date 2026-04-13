@@ -110,11 +110,26 @@ def upload_marks_csv():
             dept = row.get('department')
             sem = row.get('semester')
             
+            # 🧱 STEP 2 — CALCULATE TOTAL (MAIN LOGIC)
             # Handle different CSV headers (marks vs components)
-            mid = row.get('mid_marks', 0)
-            viva = row.get('viva_marks', 0)
-            ext = row.get('external_marks', 0)
-            total_obtained = float(mid) + float(viva) + float(ext)
+            try:
+                internal = float(row.get('internal_marks') or 0)
+                viva = float(row.get('viva_marks') or 0)
+                external = float(row.get('external_marks') or 0)
+            except ValueError:
+                print(f"Skipping row for {en_no}: Invalid numeric marks")
+                continue
+                
+            total_marks = internal + viva + external
+
+            # 🧱 STEP 5 — VALIDATION (IMPORTANT)
+            if not (0 <= internal <= 30 and 0 <= viva <= 10 and 0 <= external <= 60):
+                print(f"Skipping row for {en_no}: Component range violation")
+                continue
+
+            if total_marks > 100:
+                print("Invalid marks") # Per Step 5 requirements
+                continue
 
             if not en_no or not subject or not dept or not sem:
                 continue
@@ -136,18 +151,17 @@ def upload_marks_csv():
 
             # 🛡️ 3. Duplicate Prevention (enrollment_no + subject_id)
             cursor.execute("""
-                SELECT marks_id FROM marks 
+                SELECT id FROM marks 
                 WHERE enrollment_no=%s AND subject_id=%s
             """, (en_no, sub_id))
             if cursor.fetchone():
                 continue
 
-            # 🛡️ 4. Safe Insert
-            status = 'PASS' if total_obtained >= 40 else 'FAIL'
-            cursor.execute(
-                "INSERT INTO marks (enrollment_no, subject_id, marks_obtained, exam_type, status) VALUES (%s,%s,%s,%s,%s)",
-                (en_no, sub_id, total_obtained, 'Final', status)
-            )
+            # 🛡️ 4. Safe Insert (Mapping components to DB)
+            cursor.execute("""
+                INSERT INTO marks (enrollment_no, subject_id, internal_marks, viva_marks, external_marks, total_marks) 
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (en_no, sub_id, internal, viva, external, total_marks))
             
             # 📝 LOG ACTION
             cursor.execute("INSERT INTO activity_logs (action) VALUES (%s)", (f"Bulk Upload: Marks update for {en_no}",))

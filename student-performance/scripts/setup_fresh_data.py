@@ -46,7 +46,7 @@ INDIAN_NAMES_LAST = [
 def cleanup_files():
     print("--- 1. Cleaning Old Files ---")
     patterns = [
-        '*.csv', # Root directory CSVs
+        'data/*.csv', # Data directory CSVs
         'uploads/*.csv', 
         'static/uploads/*.csv', 
         'static/charts/*.png',
@@ -116,7 +116,7 @@ def generate_datasets():
                 })
                 
     df_students = pd.DataFrame(students_data)
-    df_students.to_csv('students.csv', index=False)
+    df_students.to_csv('data/students.csv', index=False)
     print(f"Generated students.csv ({len(df_students)} records)")
 
     # 3.2 MARKS
@@ -152,7 +152,7 @@ def generate_datasets():
                 })
                 
     df_marks = pd.DataFrame(marks_data)
-    df_marks.to_csv('marks.csv', index=False)
+    df_marks.to_csv('data/marks.csv', index=False)
     print(f"Generated marks.csv ({len(df_marks)} records)")
 
     # 3.3 ATTENDANCE
@@ -198,7 +198,7 @@ def generate_datasets():
             current_date += timedelta(days=1)
             
     df_attendance = pd.DataFrame(attendance_data)
-    df_attendance.to_csv('attendance.csv', index=False)
+    df_attendance.to_csv('data/attendance.csv', index=False)
     print(f"Generated attendance.csv ({len(df_attendance)} records)")
 
 # --- 4. IMPORT TO DATABASE ---
@@ -221,7 +221,7 @@ def import_data():
         
         # 4.2 Import Students
         print("Importing Students...")
-        df_students = pd.read_csv('students.csv').fillna('')
+        df_students = pd.read_csv('data/students.csv').fillna('')
         for _, row in df_students.iterrows():
             default_pw = f"{row['roll_no']}@123"
             pw_hash = generate_password_hash(default_pw)
@@ -237,7 +237,7 @@ def import_data():
         
         # 4.3 Import Marks
         print("Importing Marks...")
-        df_marks = pd.read_csv('marks.csv').fillna('')
+        df_marks = pd.read_csv('data/marks.csv').fillna('')
         marks_values = []
         for _, row in df_marks.iterrows():
             sid = student_map.get(row['roll_no'])
@@ -253,7 +253,7 @@ def import_data():
             
         # 4.4 Import Attendance
         print("Importing Attendance (this might take a moment)...")
-        df_attendance = pd.read_csv('attendance.csv').fillna('')
+        df_attendance = pd.read_csv('data/attendance.csv').fillna('')
         
         # Batch insert for performance
         batch_size = 1000

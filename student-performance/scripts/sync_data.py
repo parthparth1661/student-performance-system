@@ -8,7 +8,7 @@ def sync_data():
     cursor = conn.cursor()
     
     # 1. Upload Students (if missing)
-    with open('students.csv', 'r', encoding='utf-8') as f:
+    with open('data/students.csv', 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
             cursor.execute("SELECT enrollment_no FROM students WHERE enrollment_no=%s", (row['enrollment_no'],))
@@ -22,7 +22,7 @@ def sync_data():
                 """, (row['name'], row['enrollment_no'], email, row['department'], row['semester'], pw))
     
     # 2. Upload Subjects (if missing)
-    with open('subjects.csv', 'r', encoding='utf-8') as f:
+    with open('data/subjects.csv', 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
             cursor.execute("SELECT subject_id FROM subjects WHERE subject_name=%s AND department=%s AND semester=%s", 
@@ -32,7 +32,7 @@ def sync_data():
                                (row['subject_name'], row['department'], row['semester']))
     
     # 3. Upload Attendance
-    with open('attendance.csv', 'r', encoding='utf-8') as f:
+    with open('data/attendance.csv', 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         count = 0
         for row in reader:
