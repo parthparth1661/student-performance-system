@@ -51,11 +51,33 @@
                 </div>
                 SPDA Student Portal
             </a>
-            <div class="ms-auto d-flex align-items-center gap-3">
-                <span class="text-muted small fw-medium d-none d-md-block">{{ session.get('student_name', 'Student') }}</span>
-                <a href="{{ url_for('student.logout') }}" class="btn btn-light border rounded-pill px-4 btn-sm fw-bold">
-                    <i class="fas fa-sign-out-alt me-1"></i> Logout
-                </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#studentNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="studentNav">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link px-3 fw-medium" href="{{ url_for('student.dashboard') }}">
+                            <i class="fas fa-chart-line me-1 opacity-75"></i> Performance
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 fw-medium" href="{{ url_for('student.profile') }}">
+                            <i class="fas fa-user-circle me-1 opacity-75"></i> Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 fw-medium" href="{{ url_for('student.feedback') }}">
+                            <i class="fas fa-comment-dots me-1 opacity-75"></i> Feedback
+                        </a>
+                    </li>
+                </ul>
+                <div class="ms-auto d-flex align-items-center gap-3">
+                    <span class="text-muted small fw-medium d-none d-md-block">{{ session.get('student_name', 'Student') }}</span>
+                    <a href="{{ url_for('student.logout') }}" class="btn btn-light border rounded-pill px-4 btn-sm fw-bold">
+                        <i class="fas fa-sign-out-alt me-1"></i> Logout
+                    </a>
+                </div>
             </div>
         </div>
     </nav>

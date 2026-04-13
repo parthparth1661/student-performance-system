@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Profile | SPDA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #6366f1; --bg: #f8fafc; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg); }
+        .sidebar { height: 100vh; background: #ffffff; border-right: 1px solid #e2e8f0; position: fixed; width: 260px; }
+        .main-content { margin-left: 260px; padding: 40px; }
+        .nav-link { color: #64748b; padding: 12px 25px; border-radius: 12px; margin: 5px 15px; transition: 0.2s; text-decoration: none; display: block; }
+        .nav-link:hover, .nav-link.active { background: #f1f5f9; color: var(--primary); font-weight: 700; }
+        .profile-card { background: white; border-radius: 32px; border: 1px solid #e2e8f0; overflow: hidden; }
+        .profile-header { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); height: 160px; }
+        .avatar-box { width: 120px; height: 120px; background: white; border-radius: 30px; margin-top: -60px; margin-left: 40px; border: 5px solid white; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--primary); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .info-group { padding: 30px 40px; }
+    </style>
+</head>
+<body>
+
+<nav class="sidebar">
+    <div class="px-4 py-5 text-center">
+        <h4 class="fw-bold text-primary"><i class="fas fa-graduation-cap me-2"></i>SPDA Portal</h4>
+    </div>
+    <div class="mt-4">
+        <a href="{{ url_for('student.dashboard') }}" class="nav-link"><i class="fas fa-th-large me-2"></i> Dashboard</a>
+        <a href="{{ url_for('student.profile') }}" class="nav-link active"><i class="fas fa-user-circle me-2"></i> Profile</a>
+        <a href="{{ url_for('student.change_password') }}" class="nav-link"><i class="fas fa-key me-2"></i> Security</a>
+        <div class="px-3 mt-5">
+            <hr class="text-muted opacity-25">
+            <a href="{{ url_for('student.logout') }}" class="nav-link text-danger"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
+        </div>
+    </div>
+</nav>
+
+<main class="main-content">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="profile-card shadow-sm bg-white">
+                <div class="profile-header"></div>
+                <div class="avatar-box">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                
+                <div class="info-group">
+                    <div class="d-flex justify-content-between align-items-center mb-5">
+                        <div>
+                            <h1 class="fw-extrabold mb-0">{{ student.name }}</h1>
+                            <p class="text-muted fs-5">{{ student.department }} | Semester {{ student.semester }}</p>
+                        </div>
+                        <a href="{{ url_for('student.change_password') }}" class="btn btn-outline-primary rounded-pill px-4 fw-bold">
+                            Update Security
+                        </a>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label class="fw-bold small text-uppercase text-muted mb-2">Institutional Identification</label>
+                            <div class="p-3 bg-light rounded-3 fw-bold text-dark">{{ student.enrollment_no }}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold small text-uppercase text-muted mb-2">Digital Correspondence</label>
+                            <div class="p-3 bg-light rounded-3 fw-bold text-dark">{{ student.email }}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold small text-uppercase text-muted mb-2">Academic Department</label>
+                            <div class="p-3 bg-light rounded-3 fw-bold text-dark">{{ student.department }} Engineering</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold small text-uppercase text-muted mb-2">Enrollment Status</label>
+                            <div class="p-3 bg-light rounded-3 fw-bold text-success"><i class="fas fa-check-circle me-2"></i> Active Institutional Member</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

@@ -210,44 +210,6 @@
         border-bottom: 1px solid #f1f5f9;
         font-size: 14px;
     }
-
-    /* 📊 PAGINATION UI */
-    .pagination-box {
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 5px;
-        border-top: 1px solid #e2e8f0;
-    }
-
-    .page-link {
-        padding: 8px 16px;
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        color: #64748b;
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 600;
-        transition: all 0.2s;
-    }
-
-    .page-link:hover {
-        background: #f8fafc;
-        color: #6366f1;
-        transform: scale(1.03);
-    }
-
-    .page-link.active {
-        background: #6366f1;
-        color: white;
-        border-color: #6366f1;
-    }
-
-    .page-link.disabled {
-        opacity: 0.5;
-        pointer-events: none;
-    }
 </style>
 
 <div class="dashboard-view">
@@ -300,7 +262,7 @@
             </button>
             
             {% if filters.department or filters.semester or filters.subject or filters.search or filters.attendance %}
-            <a href="{{ url_for('admin.dashboard') }}" class="btn-icon" title="Reset Filters" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
+            <a href="{{ url_for('admin.dashboard') }}" class="btn-icon" title="Reset Filters" style="text-decoration: none; display: flex; align-items: center; justify-content: center; margin-left: 10px; color: #64748b;">
                 <i class="fas fa-redo"></i>
             </a>
             {% endif %}
@@ -399,7 +361,7 @@
         <div class="col-lg-6">
             <div class="chart-container">
                 <div class="chart-header">
-                    <div class="chart-label">Attendance Distribution (Present vs Absent)</div>
+                    <div class="chart-label">Attendance Distribution</div>
                 </div>
                 {% if charts.attendance_pie %}
                 <img src="{{ url_for('static', filename='charts/attendance_pie.png') }}?v={{ range(1, 999) | random }}" class="asset-img" alt="Attendance Pie Chart" style="max-height: 280px; object-fit: contain;">
@@ -415,7 +377,7 @@
         <div class="col-lg-6">
             <div class="chart-container">
                 <div class="chart-header">
-                    <div class="chart-label">Student Performance Trend (Exam Type)</div>
+                    <div class="chart-label">Pedagogical Component Metrics</div>
                 </div>
                 {% if charts.performance_trend %}
                 <img src="{{ url_for('static', filename='charts/performance_trend.png') }}?v={{ range(1, 999) | random }}" class="asset-img" alt="Performance Trend Chart">
@@ -436,21 +398,22 @@
                 {% endif %}
             </div>
         </div>
-       <!-- 6. ANALYTICS INSIGHTS (NEW) -->
+    </div>
+
+    <!-- 6. ANALYTICS INSIGHTS -->
     <div class="row g-3 mt-1">
-        <!-- TOP PERFORMERS -->
         <div class="col-lg-6">
             <div class="chart-container">
                 <div class="chart-header">
-                    <div class="chart-label">🏆 Top Performers (Leaderboard)</div>
+                    <div class="chart-label">🏆 Top Performers</div>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
                         <thead>
-                            <tr>
-                                <th class="ps-0" style="background: transparent; border-bottom: 2px solid #f1f5f9;">Rank</th>
-                                <th style="background: transparent; border-bottom: 2px solid #f1f5f9;">Name</th>
-                                <th class="text-center" style="background: transparent; border-bottom: 2px solid #f1f5f9;">Score Index</th>
+                            <tr class="text-muted extra-small text-uppercase fw-bold">
+                                <th class="ps-0">Rank</th>
+                                <th>Name</th>
+                                <th class="text-center">Score Index</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -461,7 +424,7 @@
                                     <div class="fw-semibold text-dark">{{ s.name }}</div>
                                 </td>
                                 <td class="text-center">
-                                    <span class="badge bg-success-soft text-success rounded-pill px-3">
+                                    <span class="badge bg-success-subtle text-success rounded-pill px-3">
                                         {{ s.avg_marks|round(1) }}%
                                     </span>
                                 </td>
@@ -477,7 +440,6 @@
             </div>
         </div>
 
-        <!-- LOW PERFORMANCE ALERTS -->
         <div class="col-lg-6">
             <div class="chart-container">
                 <div class="chart-header">
@@ -486,9 +448,9 @@
                 <div class="table-responsive" style="max-height: 280px; overflow-y: auto;">
                     <table class="table table-hover align-middle mb-0">
                         <thead>
-                            <tr>
-                                <th class="ps-0" style="background: transparent; border-bottom: 2px solid #f1f5f9;">Student Name</th>
-                                <th class="text-center" style="background: transparent; border-bottom: 2px solid #f1f5f9;">Risk category</th>
+                            <tr class="text-muted extra-small text-uppercase fw-bold">
+                                <th class="ps-0">Student Name</th>
+                                <th class="text-center">Risk category</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -498,7 +460,7 @@
                                     <div class="fw-semibold text-dark">{{ s.name }}</div>
                                 </td>
                                 <td class="text-center">
-                                    <span class="badge bg-danger-soft text-danger rounded-pill px-3">
+                                    <span class="badge bg-danger-subtle text-danger rounded-pill px-3">
                                         {{ s.reason }}
                                     </span>
                                 </td>
@@ -515,12 +477,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.progress-sync').forEach(function(el) {
-            el.style.width = el.dataset.width + '%';
-        });
-    });
-</script>
 {% endblock %}

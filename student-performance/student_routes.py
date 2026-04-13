@@ -1,123 +1,121 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, send_file, session
-from analysis import (
-    get_student_details,
-    get_student_marks,
-    calculate_student_summary,
-    generate_student_charts_new,
-    export_student_report_excel
-)
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from db import get_db_connection
 from werkzeug.security import check_password_hash, generate_password_hash
-import os
+import analysis
 
 student_bp = Blueprint('student', __name__, url_prefix='/student')
 
-# --- Middleware for Login Protection ---
+# 🛡️ BRIDGE SECURITY: PROTECT ALL STUDENT ROUTES
 @student_bp.before_request
-def check_student_login():
-    # Allow login, static, and change_password without full dashboard access
-    allowed = ['student.login', 'student.change_password', 'student.logout', 'study_static']
-    if request.endpoint in allowed:
+def student_auth_guard():
+    # Public routes that don't need authentication
+    public_endpoints = ['student.login', 'static']
+    if request.endpoint in public_endpoints:
         return
-        
-    # Check if student is logged in
-    if not session.get('student_logged_in'):
+    
+    # Check session
+    if 'student_id' not in session:
         return redirect(url_for('student.login'))
-        
-    # Force password change if needed
-    # Note: We need to allow the change_password route itself, which is handled above
-    if not session.get('is_password_changed') and request.endpoint != 'student.change_password':
-        flash("Please change your password to continue.", "warning")
-        return redirect(url_for('student.change_password'))
 
+# 🔑 AUTHENTICATION UNIT: LOGIN
 @student_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    if session.get('student_logged_in'):
+    if 'student_id' in session:
         return redirect(url_for('student.dashboard'))
         
     if request.method == 'POST':
-        enrollment_no = request.form.get('roll_no') # using 'roll_no' from form for compatibility
+        enrollment_no = request.form.get('roll_no')
         password = request.form.get('password')
         
         conn = get_db_connection()
-        if not conn:
-            flash("Database connection error!", "danger")
-            return render_template('student/login.html')
-            
         cursor = conn.cursor(dictionary=True)
         cursor.execute("SELECT * FROM students WHERE enrollment_no = %s", (enrollment_no,))
         student = cursor.fetchone()
         conn.close()
         
-        if student and student['password_hash'] and check_password_hash(student['password_hash'], password):
-            session['student_logged_in'] = True
-            session['student_enrollment_no'] = student['enrollment_no']
+        if student and check_password_hash(student['password_hash'], password):
+            # Establish secure session
+            session['student_id'] = student['enrollment_no']
             session['student_name'] = student['name']
+            session['student_dept'] = student['department']
             session['is_password_changed'] = bool(student['is_password_changed'])
             
+            # 🔄 FORCED ROTATION: Redirect if using default password
             if not student['is_password_changed']:
+                flash("Initial access detected. Security protocol requires password rotation.", "warning")
                 return redirect(url_for('student.change_password'))
                 
             return redirect(url_for('student.dashboard'))
         else:
-            flash("Invalid Enrollment No or Password.", "danger")
+            flash("Invalid institutional credentials. Please verify your identity.", "danger")
             
     return render_template('student/login.html')
 
+# 📊 ANALYTICAL HUB: DASHBOARD
+@student_bp.route('/dashboard')
+def dashboard():
+    enrollment_no = session['student_id']
+    
+    # Fetch performance data via enrollment-locked analysis
+    student_info = analysis.get_student_details(enrollment_no)
+    marks_data = analysis.get_student_marks(enrollment_no) # Internal, Viva, External breakdown
+    perf_summary = analysis.calculate_student_summary(enrollment_no)
+    
+    # Generate dynamic performance visualizations
+    analysis.generate_student_charts_new(enrollment_no)
+    
+    return render_template('student/student_dashboard.html', 
+                           student=student_info, 
+                           marks_list=marks_data, 
+                           summary=perf_summary)
+
+# 👤 IDENTITY SECTOR: PROFILE
+@student_bp.route('/profile')
+def profile():
+    enrollment_no = session['student_id']
+    student_info = analysis.get_student_details(enrollment_no)
+    return render_template('student/profile.html', student=student_info)
+
+# 🔐 SECURITY PROTOCOL: CHANGE PASSWORD
 @student_bp.route('/change_password', methods=['GET', 'POST'])
 def change_password():
-    if not session.get('student_logged_in'):
-        return redirect(url_for('student.login'))
-        
     if request.method == 'POST':
+        current_password = request.form.get('current_password')
         new_password = request.form.get('new_password')
         confirm_password = request.form.get('confirm_password')
         
         if new_password != confirm_password:
-            flash("Passwords do not match!", "danger")
+            flash("New credentials do not match.", "danger")
             return redirect(url_for('student.change_password'))
             
         conn = get_db_connection()
-        try:
-            hashed_pw = generate_password_hash(new_password)
-            cursor = conn.cursor()
+        cursor = conn.cursor(dictionary=True)
+        # Verify identity again for security
+        cursor.execute("SELECT password_hash FROM students WHERE enrollment_no = %s", (session['student_id'],))
+        student = cursor.fetchone()
+        
+        if student and check_password_hash(student['password_hash'], current_password):
+            new_hash = generate_password_hash(new_password)
             cursor.execute("""
                 UPDATE students 
-                SET password_hash=%s, is_password_changed=TRUE 
-                WHERE enrollment_no=%s
-            """, (hashed_pw, session['student_enrollment_no']))
+                SET password_hash = %s, is_password_changed = TRUE 
+                WHERE enrollment_no = %s
+            """, (new_hash, session['student_id']))
             conn.commit()
+            conn.close()
             
             session['is_password_changed'] = True
-            flash("Password changed successfully!", "success")
+            flash("Credentials updated successfully. Security protocol verified.", "success")
             return redirect(url_for('student.dashboard'))
-        except Exception as e:
-            flash(f"Error: {str(e)}", "danger")
-        finally:
+        else:
             conn.close()
+            flash("Identity verification failed. Current password incorrect.", "danger")
             
     return render_template('student/change_password.html')
 
-@student_bp.route('/dashboard')
-def dashboard():
-    enrollment_no = session['student_enrollment_no']
-    student = get_student_details(enrollment_no)
-    marks_list = get_student_marks(enrollment_no)
-    summary = calculate_student_summary(enrollment_no)
-    
-    generate_student_charts_new(enrollment_no)
-    
-    return render_template('student/student_dashboard.html', 
-                           student=student, 
-                           marks_list=marks_list, 
-                           summary=summary)
-
-@student_bp.route('/report/download')
-def download_report():
-    enrollment_no = session['student_enrollment_no']
-    file_path = export_student_report_excel(enrollment_no)
-    if file_path and os.path.exists(file_path):
-        return send_file(file_path, as_attachment=True, download_name=f'student_{enrollment_no}_report.xlsx')
-    else:
-        flash("Could not generate Excel report.", "danger")
-        return redirect(url_for('student.dashboard'))
+# 🚪 SESSION TERMINATION: LOGOUT
+@student_bp.route('/logout')
+def logout():
+    session.clear()
+    flash("Session terminated successfully.", "info")
+    return redirect(url_for('student.login'))

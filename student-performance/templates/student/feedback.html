@@ -1,0 +1,39 @@
+{% extends "student/layout.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="header-section mb-5 text-center">
+            <h1 class="fw-bold mb-2">Student Feedback</h1>
+            <p class="text-secondary">Your voice helps us improve. Share your thoughts directly with the administration.</p>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body p-5">
+                <form action="{{ url_for('student.feedback') }}" method="POST">
+                    <div class="mb-4">
+                        <label for="enrollment" class="form-label fw-bold text-secondary text-uppercase small">Enrollment Number</label>
+                        <input type="text" class="form-control bg-light h-auto py-3 px-4 border-0" id="enrollment" value="{{ session['student_enrollment_no'] }}" readonly disabled>
+                        <div class="form-text mt-2">Feedback is automatically linked to your student identity.</div>
+                    </div>
+                    
+                    <div class="mb-5">
+                        <label for="message" class="form-label fw-bold text-secondary text-uppercase small">Your Message / Suggestions</label>
+                        <textarea class="form-control bg-light border-0 py-3 px-4" id="message" name="message" rows="6" placeholder="Tell us what's on your mind..." required></textarea>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary py-3 fw-bold rounded-pill shadow-sm">
+                            <i class="fas fa-paper-plane me-2"></i> Submit Anonymous Feedback
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="mt-5 text-center text-secondary small">
+            <p><i class="fas fa-info-circle me-1"></i> Feedback is strictly monitored to ensure a professional academic environment.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
