@@ -182,26 +182,39 @@ def view_students():
 @admin_bp.route('/students/add', methods=['GET', 'POST'])
 def add_student():
     if request.method == 'POST':
+        import re
         enrollment_no = request.form['enrollment_no']
         name = request.form['name']
         email = request.form['email']
         department = request.form['department']
         semester = request.form['semester']
+        contact_no = request.form.get('contact_no', '')
+
+        # 🇮🇳 Indian Mobile Validation (10 digits, starts with 6-9)
+        if contact_no and not re.match(r'^[6-9]\d{9}$', contact_no):
+            flash("Invalid Identity: Please enter a valid 10-digit Indian mobile number.", "warning")
+            return render_template('admin/add_student.html', form_data=request.form)
         
         conn = get_db_connection()
         cursor = conn.cursor()
         try:
+            # Check Uniqueness
+            cursor.execute("SELECT enrollment_no FROM students WHERE enrollment_no = %s", (enrollment_no,))
+            if cursor.fetchone():
+                flash("ID Conflict: Enrollment number already exists.", "danger")
+                return render_template('admin/add_student.html', form_data=request.form)
+
             # 🛡️ Default Protocol: password = enrollment_no
             pw_hash = generate_password_hash(enrollment_no)
             cursor.execute("""
-                INSERT INTO students (enrollment_no, name, email, department, semester, password_hash)
-                VALUES (%s, %s, %s, %s, %s, %s)
-            """, (enrollment_no, name, email, department, semester, pw_hash))
+                INSERT INTO students (enrollment_no, name, email, department, semester, contact_no, password_hash)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+            """, (enrollment_no, name, email, department, semester, contact_no, pw_hash))
             conn.commit()
-            flash("Student added successfully!", "success")
+            flash("Success: Student identity record established.", "success")
             return redirect(url_for('admin.view_students'))
         except Exception as e:
-            flash(f"Error: {e}", "danger")
+            flash(f"System Error: {e}", "danger")
         finally:
             conn.close()
     return render_template('admin/add_student.html')
@@ -212,32 +225,42 @@ def edit_student(enrollment_no):
     cursor = conn.cursor(dictionary=True)
     
     if request.method == 'POST':
+        import re
         name = request.form['name']
         email = request.form['email']
         department = request.form['department']
         semester = request.form['semester']
+        contact_no = request.form.get('contact_no', '')
+
+        # 🇮🇳 Indian Mobile Validation
+        if contact_no and not re.match(r'^[6-9]\d{9}$', contact_no):
+            flash("Invalid Identity: Please enter a valid 10-digit Indian mobile number.", "warning")
+            student_data = dict(request.form)
+            student_data['enrollment_no'] = enrollment_no
+            return render_template('admin/add_student.html', student=student_data, edit_mode=True)
         
         try:
             cursor.execute("""
                 UPDATE students 
-                SET name=%s, email=%s, department=%s, semester=%s 
+                SET name=%s, email=%s, department=%s, semester=%s, contact_no=%s
                 WHERE enrollment_no=%s
-            """, (name, email, department, semester, enrollment_no))
+            """, (name, email, department, semester, contact_no, enrollment_no))
             conn.commit()
-            flash("Student details updated!", "success")
+            flash("Profile Synchronized: Student record updated successfully.", "success")
             return redirect(url_for('admin.view_students'))
         except Exception as e:
-            flash(f"Error: {e}", "danger")
+            flash(f"Update Failure: {e}", "danger")
     
     cursor.execute("SELECT * FROM students WHERE enrollment_no = %s", (enrollment_no,))
     student = cursor.fetchone()
     conn.close()
     
     if not student:
-        flash("Student not found.", "danger")
+        flash("Record Missing: Identity not found.", "danger")
         return redirect(url_for('admin.view_students'))
         
     return render_template('admin/add_student.html', student=student, edit_mode=True)
+
 
 @admin_bp.route('/students/delete/<enrollment_no>')
 def delete_student(enrollment_no):
@@ -252,6 +275,8 @@ def delete_student(enrollment_no):
     finally:
         conn.close()
     return redirect(url_for('admin.view_students'))
+
+
 
 # --- 📚 2. SUBJECTS MODULE ---
 @admin_bp.route('/subjects')

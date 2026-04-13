@@ -1,0 +1,86 @@
+{% extends 'admin/layout.html' %}
+
+{% block page_title %}{{ 'Modify' if edit_mode else 'Create' }} Institutional Identity Record{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="card-header bg-white border-bottom p-4">
+                <h5 class="fw-bold m-0 d-flex align-items-center">
+                    <span class="bg-primary text-white p-2 rounded-3 me-3"><i class="fas fa-id-card"></i></span>
+                    {{ 'Profile Synchronization' if edit_mode else 'New Academic Enrollment' }}
+                </h5>
+            </div>
+            <div class="card-body p-5">
+                <form method="POST" class="row g-4">
+                    <div class="col-md-6">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Legal Full Name</label>
+                        <input type="text" name="name" class="form-control py-2 border-0 bg-light" value="{{ student.name if student else '' }}" required placeholder="e.g. Johnathan Doe">
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Institutional Enrollment ID</label>
+                        <input type="text" name="enrollment_no" class="form-control py-2 border-0 bg-light fw-bold" 
+                               value="{{ student.enrollment_no if student else '' }}" 
+                               {% if edit_mode %}readonly disabled{% endif %} required placeholder="e.g. SPDA/2024/001">
+                        {% if edit_mode %}
+                        <div class="extra-small text-muted italic mt-1"><i class="fas fa-lock me-1"></i> Identity ID is non-mutable after registration.</div>
+                        <input type="hidden" name="enrollment_no" value="{{ student.enrollment_no }}">
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Academic Email Gateway</label>
+                        <input type="email" name="email" class="form-control py-2 border-0 bg-light" value="{{ student.email if student else '' }}" required placeholder="e.g. student.id@spda.com">
+                    </div>
+
+                    <div class="col-md-5">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Institutional Wing (Dept)</label>
+                        <select name="department" class="form-select py-2 border-0 bg-light" required>
+                            <option value="">Select Department...</option>
+                            <option value="BCA" {% if student and student.department == 'BCA' %}selected{% endif %}>BCA (Bus. Inf. Systems)</option>
+                            <option value="MCA" {% if student and student.department == 'MCA' %}selected{% endif %}>MCA (Comp. App.)</option>
+                            <option value="B.TECH" {% if student and student.department == 'B.TECH' %}selected{% endif %}>B.TECH (Engineering)</option>
+                            <option value="MBA" {% if student and student.department == 'MBA' %}selected{% endif %}>MBA (Mgmt.)</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Progression Phase (Sem)</label>
+                        <select name="semester" class="form-select py-2 border-0 bg-light" required>
+                            {% for i in range(1, 9) %}
+                            <option value="{{ i }}" {% if student and student.semester == i %}selected{% endif %}>Semester {{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Identity Contact (Phone)</label>
+                        <input type="text" name="phone" class="form-control py-2 border-0 bg-light" value="{{ student.phone if student else '' }}" placeholder="+91 0000 000 000">
+                    </div>
+
+                    {% if not edit_mode %}
+                    <div class="col-12 mt-2">
+                        <div class="alert alert-info border-0 rounded-3 small p-3 d-flex align-items-center mb-0">
+                            <i class="fas fa-shield-alt fs-5 me-3"></i>
+                            <div>
+                                <h6 class="fw-bold m-0 mb-1">Security Provisioning Protocol</h6>
+                                <p class="m-0 opacity-75">The default authentication credential will match the provided Enrollment ID. Mandatory password rotation will be enforced upon initial login.</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="col-12 mt-5 text-end">
+                        <a href="{{ url_for('admin.manage_students') }}" class="btn btn-light px-4 py-2 fw-bold text-muted rounded-pill me-2">Cancel</a>
+                        <button type="submit" class="btn btn-primary px-5 py-2 fw-bold rounded-pill shadow-sm">
+                            <i class="fas fa-check-circle me-2"></i> {{ 'Synchronize Identity' if edit_mode else 'Commit Enrollment' }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
