@@ -6,6 +6,8 @@ from analysis import get_dashboard_stats, generate_dashboard_charts, get_perform
 from datetime import date
 import os
 import math
+import smtplib
+from email.mime.text import MIMEText
 
 admin_bp = Blueprint('admin', __name__)
 
