@@ -339,20 +339,27 @@ def add_subject():
     
     if request.method == 'POST':
         subject_name = request.form['subject_name']
+        subject_code = request.form['subject_code'].strip().upper()
         department = request.form['department']
         semester = request.form['semester']
+        credits = request.form.get('credits', 0)
         faculty_id = request.form.get('faculty_id')
         
         try:
-            cursor.execute("""
-                INSERT INTO subjects (subject_name, department, semester, faculty_id)
-                VALUES (%s, %s, %s, %s)
-            """, (subject_name, department, semester, faculty_id))
-            conn.commit()
-            flash("Subject added successfully!", "success")
-            return redirect(url_for('admin.view_subjects'))
+            # Check Uniqueness for Code
+            cursor.execute("SELECT subject_id FROM subjects WHERE subject_code = %s", (subject_code,))
+            if cursor.fetchone():
+                flash(f"ID Conflict: Subject code '{subject_code}' is already registered.", "warning")
+            else:
+                cursor.execute("""
+                    INSERT INTO subjects (subject_name, subject_code, department, semester, credits, faculty_id)
+                    VALUES (%s, %s, %s, %s, %s, %s)
+                """, (subject_name, subject_code, department, semester, credits, faculty_id))
+                conn.commit()
+                flash("Success: Academic subject established in catalogue.", "success")
+                return redirect(url_for('admin.view_subjects'))
         except Exception as e:
-            flash(f"Error: {e}", "danger")
+            flash(f"System Error: {e}", "danger")
     
     conn.close()
     return render_template('admin/add_subject.html', faculties=faculties)
@@ -366,21 +373,28 @@ def edit_subject(subject_id):
     
     if request.method == 'POST':
         subject_name = request.form['subject_name']
+        subject_code = request.form['subject_code'].strip().upper()
         department = request.form['department']
         semester = request.form['semester']
+        credits = request.form.get('credits', 0)
         faculty_id = request.form.get('faculty_id')
         
         try:
-            cursor.execute("""
-                UPDATE subjects 
-                SET subject_name=%s, department=%s, semester=%s, faculty_id=%s
-                WHERE subject_id=%s
-            """, (subject_name, department, semester, faculty_id, subject_id))
-            conn.commit()
-            flash("Subject updated!", "success")
-            return redirect(url_for('admin.view_subjects'))
+            # Check Uniqueness for Code if changed
+            cursor.execute("SELECT subject_id FROM subjects WHERE subject_code = %s AND subject_id != %s", (subject_code, subject_id))
+            if cursor.fetchone():
+                flash(f"ID Conflict: Subject code '{subject_code}' is already assigned to another course.", "warning")
+            else:
+                cursor.execute("""
+                    UPDATE subjects 
+                    SET subject_name=%s, subject_code=%s, department=%s, semester=%s, credits=%s, faculty_id=%s
+                    WHERE subject_id=%s
+                """, (subject_name, subject_code, department, semester, credits, faculty_id, subject_id))
+                conn.commit()
+                flash("Profile Synchronized: Course details updated successfully.", "success")
+                return redirect(url_for('admin.view_subjects'))
         except Exception as e:
-            flash(f"Error: {e}", "danger")
+            flash(f"Update Protocol Error: {e}", "danger")
             
     cursor.execute("SELECT * FROM subjects WHERE subject_id = %s", (subject_id,))
     subject = cursor.fetchone()

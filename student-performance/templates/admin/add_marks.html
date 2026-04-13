@@ -7,8 +7,9 @@
     <div class="col-lg-8">
         <!-- 🛰️ NAVIGATION HUB -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <a href="{{ url_for('admin.view_marks') }}" class="btn btn-light border rounded-3 px-3 shadow-sm transition-hover">
-                <i class="fas fa-arrow-left me-2"></i>Back to Ledger
+            <a href="{{ url_for('admin.view_marks') }}"
+                class="btn btn-light border rounded-3 px-3 shadow-sm transition-hover">
+                <i class="fas fa-arrow-left me-2"></i>Back
             </a>
             <h4 class="fw-bold mb-0 text-dark">{{ 'Modify Score Matrix' if edit_mode else 'New Academic Entry' }}</h4>
         </div>
@@ -21,7 +22,8 @@
                     <!-- Student Selection -->
                     <div class="col-md-12">
                         <label class="form-label extra-small fw-bold text-uppercase text-muted">Select Student</label>
-                        <select name="enrollment_no" class="form-select border-1 border-light-subtle bg-light rounded-3 py-3 px-4" required>
+                        <select name="enrollment_no"
+                            class="form-select border-1 border-light-subtle bg-light rounded-3 py-3 px-4" required>
                             <option value="">Choose student by enrollment...</option>
                             {% for s in students %}
                             <option value="{{ s.enrollment_no }}">{{ s.enrollment_no }} - {{ s.name }}</option>
@@ -32,7 +34,8 @@
                     <!-- Subject Selection -->
                     <div class="col-md-12">
                         <label class="form-label extra-small fw-bold text-uppercase text-muted">Course Subject</label>
-                        <select name="subject_id" class="form-select border-1 border-light-subtle bg-light rounded-3 py-3 px-4" required>
+                        <select name="subject_id"
+                            class="form-select border-1 border-light-subtle bg-light rounded-3 py-3 px-4" required>
                             <option value="">Select subject context...</option>
                             {% for sub in subjects %}
                             <option value="{{ sub.subject_id }}">{{ sub.subject_name }}</option>
@@ -43,11 +46,14 @@
                     <!-- locked View for Edit Mode -->
                     <div class="col-12">
                         <div class="p-4 bg-primary-subtle rounded-4 border-start border-primary border-4 mb-2">
-                            <label class="extra-small fw-bold text-uppercase text-primary d-block mb-1">Editing Record For</label>
+                            <label class="extra-small fw-bold text-uppercase text-primary d-block mb-1">Editing Record
+                                For</label>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h5 class="fw-bold text-dark mb-0 text-truncate" style="max-width: 300px;">{{ mark.student_name }}</h5>
-                                    <p class="text-muted small mb-0">{{ mark.enrollment_no }} | {{ mark.subject_name }}</p>
+                                    <h5 class="fw-bold text-dark mb-0 text-truncate" style="max-width: 300px;">{{
+                                        mark.student_name }}</h5>
+                                    <p class="text-muted small mb-0">{{ mark.enrollment_no }} | {{ mark.subject_name }}
+                                    </p>
                                 </div>
                                 <span class="badge bg-primary rounded-pill px-3 py-2">ID: #{{ mark.id }}</span>
                             </div>
@@ -62,34 +68,41 @@
                         <div class="row g-3">
                             <!-- Internal Marks -->
                             <div class="col-md-4">
-                                <label class="form-label extra-small fw-bold text-uppercase text-muted">Internal (0-30)</label>
+                                <label class="form-label extra-small fw-bold text-uppercase text-muted">Internal
+                                    (0-30)</label>
                                 <div class="input-group">
-                                    <span class="input-group-text border-0 bg-light"><i class="fas fa-pencil-alt text-primary"></i></span>
-                                    <input type="number" name="internal_marks" id="internal_marks" step="1" min="0" max="30" 
-                                           class="form-control border-0 bg-light py-3 fw-bold" 
-                                           placeholder="Mid/Assgn" value="{{ mark.internal_marks if edit_mode else '' }}" required>
+                                    <span class="input-group-text border-0 bg-light"><i
+                                            class="fas fa-pencil-alt text-primary"></i></span>
+                                    <input type="number" name="internal_marks" id="internal_marks" step="1" min="0"
+                                        max="30" class="form-control border-0 bg-light py-3 fw-bold"
+                                        placeholder="Mid/Assgn" value="{{ mark.internal_marks if edit_mode else '' }}"
+                                        required>
                                 </div>
                             </div>
 
                             <!-- Viva Marks -->
                             <div class="col-md-4">
-                                <label class="form-label extra-small fw-bold text-uppercase text-muted">Viva (0-10)</label>
+                                <label class="form-label extra-small fw-bold text-uppercase text-muted">Viva
+                                    (0-10)</label>
                                 <div class="input-group">
-                                    <span class="input-group-text border-0 bg-light"><i class="fas fa-microphone text-primary"></i></span>
-                                    <input type="number" name="viva_marks" id="viva_marks" step="1" min="0" max="10" 
-                                           class="form-control border-0 bg-light py-3 fw-bold" 
-                                           placeholder="Oral" value="{{ mark.viva_marks if edit_mode else '' }}" required>
+                                    <span class="input-group-text border-0 bg-light"><i
+                                            class="fas fa-microphone text-primary"></i></span>
+                                    <input type="number" name="viva_marks" id="viva_marks" step="1" min="0" max="10"
+                                        class="form-control border-0 bg-light py-3 fw-bold" placeholder="Oral"
+                                        value="{{ mark.viva_marks if edit_mode else '' }}" required>
                                 </div>
                             </div>
 
                             <!-- External Marks -->
                             <div class="col-md-4">
-                                <label class="form-label extra-small fw-bold text-uppercase text-muted">External (0-60)</label>
+                                <label class="form-label extra-small fw-bold text-uppercase text-muted">External
+                                    (0-60)</label>
                                 <div class="input-group">
-                                    <span class="input-group-text border-0 bg-light"><i class="fas fa-file-signature text-primary"></i></span>
-                                    <input type="number" name="external_marks" id="external_marks" step="1" min="0" max="60" 
-                                           class="form-control border-0 bg-light py-3 fw-bold" 
-                                           placeholder="Final" value="{{ mark.external_marks if edit_mode else '' }}" required>
+                                    <span class="input-group-text border-0 bg-light"><i
+                                            class="fas fa-file-signature text-primary"></i></span>
+                                    <input type="number" name="external_marks" id="external_marks" step="1" min="0"
+                                        max="60" class="form-control border-0 bg-light py-3 fw-bold" placeholder="Final"
+                                        value="{{ mark.external_marks if edit_mode else '' }}" required>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +116,8 @@
                                 <p class="extra-small text-muted mb-0">Total Performance Index (max 100)</p>
                             </div>
                             <div class="text-end">
-                                <span class="h3 fw-bold text-primary mb-0" id="totalDisplay">{{ mark.total_marks if edit_mode else '0' }}</span>
+                                <span class="h3 fw-bold text-primary mb-0" id="totalDisplay">{{ mark.total_marks if
+                                    edit_mode else '0' }}</span>
                                 <span class="text-muted fw-bold">/ 100</span>
                             </div>
                         </div>
@@ -112,10 +126,13 @@
 
                 <!-- 🏁 ACTION CENTER -->
                 <div class="mt-5 border-top pt-4 d-flex justify-content-between align-items-center">
-                    <p class="extra-small text-muted mb-0 d-none d-md-block"><i class="fas fa-check-circle me-1 text-success"></i> Sum of components is auto-calculated.</p>
+                    <p class="extra-small text-muted mb-0 d-none d-md-block"><i
+                            class="fas fa-check-circle me-1 text-success"></i> Sum of components is auto-calculated.</p>
                     <div class="d-flex gap-3 w-100 w-md-auto">
-                        <button type="reset" class="btn btn-light px-4 py-3 rounded-3 fw-bold flex-grow-1">Reset</button>
-                        <button type="submit" class="btn btn-primary px-5 py-3 rounded-3 fw-bold shadow-sm transition-hover flex-grow-1">
+                        <button type="reset"
+                            class="btn btn-light px-4 py-3 rounded-3 fw-bold flex-grow-1">Reset</button>
+                        <button type="submit"
+                            class="btn btn-primary px-5 py-3 rounded-3 fw-bold shadow-sm transition-hover flex-grow-1">
                             <i class="fas fa-save me-2"></i>{{ 'Update Matrix' if edit_mode else 'Save Entry' }}
                         </button>
                     </div>
@@ -142,10 +159,26 @@
 </script>
 
 <style>
-.bg-primary-subtle { background-color: #eef2ff !important; }
-.extra-small { font-size: 0.75rem; }
-.transition-hover { transition: all 0.2s ease; }
-.transition-hover:hover { transform: translateY(-2px); filter: brightness(1.1); }
-.btn-primary { background-color: #6366f1; border-color: #6366f1; }
+    .bg-primary-subtle {
+        background-color: #eef2ff !important;
+    }
+
+    .extra-small {
+        font-size: 0.75rem;
+    }
+
+    .transition-hover {
+        transition: all 0.2s ease;
+    }
+
+    .transition-hover:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.1);
+    }
+
+    .btn-primary {
+        background-color: #6366f1;
+        border-color: #6366f1;
+    }
 </style>
 {% endblock %}
