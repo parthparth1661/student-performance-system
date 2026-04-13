@@ -145,22 +145,31 @@ def change_password():
 # 💬 COMMUNICATION: FEEDBACK
 @student_bp.route('/feedback', methods=['GET', 'POST'])
 def feedback():
-    if request.method == 'POST':
-        message = request.form.get('message')
-        enrollment_no = session['student_id']
-        
-        if message:
-            conn = get_db_connection()
-            cursor = conn.cursor()
-            cursor.execute("INSERT INTO feedback (enrollment_no, message) VALUES (%s, %s)", (enrollment_no, message))
-            conn.commit()
-            conn.close()
-            flash("Feedback submitted successfully. Institutional improvement in progress.", "success")
-            return redirect(url_for('student.dashboard'))
-        
     enrollment_no = session['student_id']
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    if request.method == 'POST':
+        subject = request.form.get('subject')
+        message = request.form.get('message')
+        f_type = request.form.get('type')
+        
+        if message and subject:
+            cursor.execute("""
+                INSERT INTO feedback (enrollment_no, subject, message, type) 
+                VALUES (%s, %s, %s, %s)
+            """, (enrollment_no, subject, message, f_type))
+            conn.commit()
+            flash("Feedback submitted successfully. Institutional tracking ID assigned.", "success")
+            return redirect(url_for('student.feedback'))
+    
+    # Fetch history for the logged-in student ONLY
+    cursor.execute("SELECT * FROM feedback WHERE enrollment_no = %s ORDER BY created_at DESC", (enrollment_no,))
+    history = cursor.fetchall()
+    
     student_info = analysis.get_student_details(enrollment_no)
-    return render_template('student/feedback.html', student=student_info)
+    conn.close()
+    return render_template('student/feedback.html', student=student_info, history=history)
 
 # 🚪 SESSION TERMINATION: LOGOUT
 @student_bp.route('/logout')

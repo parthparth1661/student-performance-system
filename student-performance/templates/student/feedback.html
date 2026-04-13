@@ -1,38 +1,106 @@
 {% extends "student/layout.html" %}
 
+{% block title %}Institutional Feedback{% endblock %}
+{% block page_title %}Feedback Repository{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-card { background: white; border-radius: 20px; border: 1px solid #e2e8f0; padding: 30px; }
+    .history-card { background: white; border-radius: 20px; border: 1px solid #e2e8f0; }
+    .status-badge { font-size: 0.75rem; padding: 4px 12px; border-radius: 20px; font-weight: 700; }
+    .bg-pending { background-color: #fef3c7; color: #92400e; }
+    .bg-reviewed { background-color: #dcfce7; color: #166534; }
+    .bg-resolved { background-color: #dbeafe; color: #1e40af; }
+    .reply-box { background: #f8fafc; border-left: 4px solid #6366f1; padding: 15px; border-radius: 0 12px 12px 0; margin-top: 10px; }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-lg-8">
-        <div class="header-section mb-5 text-center">
-            <h1 class="fw-bold mb-2">Student Feedback</h1>
-            <p class="text-secondary">Your voice helps us improve. Share your thoughts directly with the administration.</p>
+<div class="row g-4">
+    <!-- 📝 SUBMISSION FORM -->
+    <div class="col-lg-5">
+        <div class="form-card shadow-sm">
+            <h5 class="fw-bold mb-4 text-primary"><i class="bi bi-pencil-square me-2"></i>New Submission</h5>
+            <form action="{{ url_for('student.feedback') }}" method="POST">
+                <!-- Subject -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold text-muted small text-uppercase">Subject Title</label>
+                    <input type="text" name="subject" class="form-control rounded-3" placeholder="Summary of your feedback" required>
+                </div>
+
+                <!-- Type -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold text-muted small text-uppercase">Feedback Category</label>
+                    <select name="type" class="form-select rounded-3">
+                        <option value="General Feedback">General Feedback</option>
+                        <option value="Suggestion">Suggestion</option>
+                        <option value="Complaint">Complaint</option>
+                        <option value="Issue Report">Issue Report</option>
+                    </select>
+                </div>
+
+                <!-- Message -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold text-muted small text-uppercase">Detailed Description</label>
+                    <textarea name="message" class="form-control rounded-3" rows="5" placeholder="Please provide specific details..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-3 rounded-3 fw-bold shadow-sm">
+                    <i class="bi bi-send-fill me-2"></i>Commit Feedback
+                </button>
+            </form>
         </div>
+    </div>
 
-        <div class="card shadow-sm">
-            <div class="card-body p-5">
-                <form action="{{ url_for('student.feedback') }}" method="POST">
-                    <div class="mb-4">
-                        <label for="enrollment" class="form-label fw-bold text-secondary text-uppercase small">Enrollment Number</label>
-                        <input type="text" class="form-control bg-light h-auto py-3 px-4 border-0" id="enrollment" value="{{ session['student_id'] }}" readonly disabled>
-                        <div class="form-text mt-2">Feedback is automatically linked to your student identity.</div>
-                    </div>
-                    
-                    <div class="mb-5">
-                        <label for="message" class="form-label fw-bold text-secondary text-uppercase small">Your Message / Suggestions</label>
-                        <textarea class="form-control bg-light border-0 py-3 px-4" id="message" name="message" rows="6" placeholder="Tell us what's on your mind..." required></textarea>
-                    </div>
-
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary py-3 fw-bold rounded-pill shadow-sm">
-                            <i class="fas fa-paper-plane me-2"></i> Submit Anonymous Feedback
-                        </button>
-                    </div>
-                </form>
+    <!-- 📜 HISTORY VIEW -->
+    <div class="col-lg-7">
+        <div class="history-card shadow-sm h-100 overflow-hidden">
+            <div class="p-4 border-bottom bg-light">
+                <h5 class="fw-bold mb-0">Submission History</h5>
             </div>
-        </div>
-
-        <div class="mt-5 text-center text-secondary small">
-            <p><i class="fas fa-info-circle me-1"></i> Feedback is strictly monitored to ensure a professional academic environment.</p>
+            <div class="p-0">
+                <div class="accordion accordion-flush" id="feedbackAccordion">
+                    {% for f in history %}
+                    <div class="accordion-item border-bottom">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed px-4 py-3" type="button" data-bs-toggle="collapse" data-bs-target="#f-{{ f.id }}">
+                                <div class="w-100 me-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <span class="fw-bold text-dark">{{ f.subject }}</span>
+                                        <span class="status-badge bg-{{ f.status|lower }}">{{ f.status }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between text-muted x-small">
+                                        <span>{{ f.type }}</span>
+                                        <span>{{ f.created_at.strftime('%d %b %Y') }}</span>
+                                    </div>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="f-{{ f.id }}" class="accordion-collapse collapse" data-bs-parent="#feedbackAccordion">
+                            <div class="accordion-body px-4 py-3">
+                                <p class="mb-3 text-secondary small">{{ f.message }}</p>
+                                
+                                {% if f.admin_reply %}
+                                <div class="reply-box">
+                                    <h6 class="fw-bold small mb-1 text-primary">Department Response:</h6>
+                                    <p class="mb-0 small text-dark">{{ f.admin_reply }}</p>
+                                </div>
+                                {% else %}
+                                <div class="text-muted small italic">
+                                    <i class="bi bi-hourglass-split me-1"></i> Under formal institutional review
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="p-5 text-center text-muted">
+                        <i class="bi bi-archive fs-1 opacity-25 d-block mb-3"></i>
+                        No feedback history found.
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 </div>

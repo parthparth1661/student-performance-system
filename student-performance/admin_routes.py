@@ -1202,4 +1202,106 @@ def change_password():
     conn.close()
     return redirect(url_for('admin.profile'))
 
+# --- 💬 6. FEEDBACK MODULE ---
+@admin_bp.route('/feedback')
+def view_feedback():
+    f_type = request.args.get('type')
+    status = request.args.get('status')
+    
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    query = """
+        SELECT f.*, s.name as student_name 
+        FROM feedback f 
+        LEFT JOIN students s ON f.enrollment_no = s.enrollment_no 
+        WHERE 1=1
+    """
+    params = []
+    
+    if f_type and f_type != 'All':
+        query += " AND f.type = %s"
+        params.append(f_type)
+    
+    if status and status != 'All':
+        query += " AND f.status = %s"
+        params.append(status)
+        
+    query += " ORDER BY f.created_at DESC"
+    
+    cursor.execute(query, params)
+    feedback_list = cursor.fetchall()
+    
+    # Statistics
+    cursor.execute("SELECT COUNT(*) as total FROM feedback")
+    total_feedback = cursor.fetchone()['total']
+    
+    cursor.execute("SELECT COUNT(*) as pending FROM feedback WHERE status = 'Pending'")
+    pending_count = cursor.fetchone()['pending']
+    
+    conn.close()
+    return render_template('admin/view_feedback.html', 
+                         feedback=feedback_list, 
+                         total=total_feedback,
+                         pending=pending_count,
+                         filters={'type': f_type, 'status': status})
+
+@admin_bp.route('/feedback/manage/<int:feedback_id>')
+def manage_feedback(feedback_id):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    # Fetch feedback with student details
+    query = """
+        SELECT f.*, s.name as student_name 
+        FROM feedback f 
+        LEFT JOIN students s ON f.enrollment_no = s.enrollment_no 
+        WHERE f.id = %s
+    """
+    cursor.execute(query, (feedback_id,))
+    feedback = cursor.fetchone()
+    conn.close()
+    
+    if not feedback:
+        flash("Feedback record not found.", "danger")
+        return redirect(url_for('admin.view_feedback'))
+        
+    return render_template('admin/view_feedback_detail.html', feedback=feedback)
+
+@admin_bp.route('/feedback/update/<int:feedback_id>', methods=['POST'])
+def update_feedback(feedback_id):
+    status = request.form.get('status')
+    reply = request.form.get('admin_reply')
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("""
+            UPDATE feedback 
+            SET status = %s, admin_reply = %s 
+            WHERE id = %s
+        """, (status, reply, feedback_id))
+        conn.commit()
+        flash("Feedback successfully reviewed and updated.", "success")
+    except Exception as e:
+        flash(f"Update Failure: {e}", "danger")
+    finally:
+        conn.close()
+    return redirect(url_for('admin.view_feedback'))
+
+@admin_bp.route('/feedback/delete/<int:feedback_id>')
+def delete_feedback(feedback_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("DELETE FROM feedback WHERE id = %s", (feedback_id,))
+        conn.commit()
+        flash("Institutional feedback record purged.", "success")
+    except Exception as e:
+        flash(f"Purge Error: {e}", "danger")
+    finally:
+        conn.close()
+    return redirect(url_for('admin.view_feedback'))
+
+
 
