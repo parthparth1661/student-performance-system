@@ -71,15 +71,27 @@ def dashboard():
     """, (enrollment_no,))
     attn_data = cursor.fetchone()
     perf_summary['attendance_percentage'] = round(attn_data['attendance'] or 0, 2)
-    conn.close()
+    # Fetch Feedback Status Counts
+    cursor.execute("""
+        SELECT 
+            COUNT(CASE WHEN status='Pending' THEN 1 END) as pending,
+            COUNT(CASE WHEN status='Reviewed' THEN 1 END) as reviewed,
+            COUNT(CASE WHEN status='Resolved' THEN 1 END) as resolved
+        FROM feedback WHERE enrollment_no = %s
+    """, (enrollment_no,))
+    fb_stats = cursor.fetchone()
     
-    # Generate dynamic performance visualizations
-    analysis.generate_student_charts_new(enrollment_no)
+    # Fetch Latest Notices (REMOVED)
+    
+    # Fetch Recent Activity (REMOVED)
+    
+    conn.close()
     
     return render_template('student/student_dashboard.html', 
                            student=student_info, 
                            marks_list=marks_data, 
                            summary=perf_summary,
+                           fb_stats=fb_stats,
                            subjects=[m['subject'] for m in marks_data],
                            marks=[m['total'] for m in marks_data])
 
@@ -91,19 +103,18 @@ def performance():
     marks_data = analysis.get_student_marks(enrollment_no)
     perf_summary = analysis.calculate_student_summary(enrollment_no)
     
+    # Advanced logic for highlights
+    highest_sub = max(marks_data, key=lambda x: x['total']) if marks_data else None
+    lowest_sub = min(marks_data, key=lambda x: x['total']) if marks_data else None
+    total_marks_sum = sum(m['total'] for m in marks_data)
+    
     return render_template('student/performance.html', 
                            student=student_info, 
                            marks_list=marks_data, 
                            summary=perf_summary,
+                           highlights={'highest': highest_sub, 'lowest': lowest_sub, 'total_sum': total_marks_sum},
                            subjects=[m['subject'] for m in marks_data],
                            marks=[m['total'] for m in marks_data])
-
-# 👤 IDENTITY SECTOR: PROFILE
-@student_bp.route('/profile')
-def profile():
-    enrollment_no = session['student_id']
-    student_info = analysis.get_student_details(enrollment_no)
-    return render_template('student/profile.html', student=student_info)
 
 # 🔐 SECURITY PROTOCOL: CHANGE PASSWORD
 @student_bp.route('/change_password', methods=['GET', 'POST'])
@@ -119,7 +130,6 @@ def change_password():
             
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
-        # Verify identity again for security
         cursor.execute("SELECT password_hash FROM students WHERE enrollment_no = %s", (session['student_id'],))
         student = cursor.fetchone()
         
@@ -132,15 +142,35 @@ def change_password():
             """, (new_hash, session['student_id']))
             conn.commit()
             conn.close()
-            
-            session['is_password_changed'] = True
-            flash("Credentials updated successfully. Security protocol verified.", "success")
+            flash("Identity credentials secured. Protocol complete.", "success")
             return redirect(url_for('student.dashboard'))
         else:
             conn.close()
-            flash("Identity verification failed. Current password incorrect.", "danger")
+            flash("Identity verification failed. Current credentials incorrect.", "danger")
             
     return render_template('student/change_password.html')
+
+# 👤 IDENTITY SECTOR: PROFILE MANAGEMENT
+@student_bp.route('/profile', methods=['GET', 'POST'])
+def profile():
+    enrollment_no = session['student_id']
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    if request.method == 'POST':
+        email = request.form.get('email')
+        phone = request.form.get('phone')
+        
+        cursor.execute("UPDATE students SET email=%s, phone=%s WHERE enrollment_no=%s", 
+                       (email, phone, enrollment_no))
+        conn.commit()
+        flash("Identity record synchronized successfully.", "success")
+        return redirect(url_for('student.profile'))
+        
+    cursor.execute("SELECT * FROM students WHERE enrollment_no = %s", (enrollment_no,))
+    student_info = cursor.fetchone()
+    conn.close()
+    return render_template('student/profile.html', student=student_info)
 
 # 💬 COMMUNICATION: FEEDBACK
 @student_bp.route('/feedback', methods=['GET', 'POST'])

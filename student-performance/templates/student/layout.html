@@ -13,110 +13,125 @@
     <style>
         :root {
             --sidebar-width: 260px;
+            --topbar-height: 64px;
             --primary: #6366f1;
-            --sidebar-bg: #0f172a;
+            --sidebar-bg: #111827;
             --topbar-bg: #ffffff;
             --content-bg: #f8fafc;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
             background-color: var(--content-bg);
             margin: 0;
             overflow-x: hidden;
+            color: #1e293b;
         }
 
-        /* 🛰️ SIDEBAR NAVIGATION (FIXED) */
+        /* 🛰️ SIDEBAR NAVIGATION */
         .sidebar {
             width: var(--sidebar-width);
             height: 100vh;
             background: var(--sidebar-bg);
-            color: #cbd5e1;
+            color: #94a3b8;
             position: fixed;
             left: 0;
             top: 0;
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             display: flex;
             flex-direction: column;
             border-right: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .sidebar-brand {
-            padding: 2rem 1.5rem;
+            padding: 24px;
             display: flex;
             align-items: center;
             gap: 12px;
             color: white;
             text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .sidebar-brand i {
-            font-size: 1.8rem;
+            font-size: 24px;
             color: var(--primary);
         }
 
         .sidebar-brand span {
-            font-weight: 800;
-            font-size: 1.25rem;
+            font-weight: 700;
+            font-size: 18px;
             letter-spacing: -0.02em;
         }
 
         .sidebar-nav {
             flex-grow: 1;
-            padding: 0 1rem;
+            padding: 24px 16px;
         }
 
         .nav-link {
             color: #94a3b8;
             padding: 12px 16px;
-            border-radius: 12px;
-            margin-bottom: 6px;
+            border-radius: var(--radius-md);
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 12px;
             font-weight: 500;
-            transition: all 0.3s;
+            font-size: 14px;
+            transition: var(--transition);
             text-decoration: none;
         }
 
         .nav-link i {
-            font-size: 1.2rem;
-            transition: all 0.3s;
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
         }
 
         .nav-link:hover {
             background: rgba(255, 255, 255, 0.05);
             color: white;
-            padding-left: 20px;
         }
 
         .nav-link.active {
             background: var(--primary);
             color: white;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
         }
 
         /* 🚀 MAIN WRAPPER */
         .main-wrapper {
             margin-left: var(--sidebar-width);
             min-height: 100vh;
-            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
         }
 
-        /* 顶部导航 Topbar */
+        /* 🔝 TOPBAR */
         .topbar {
-            height: 70px;
+            height: var(--topbar-height);
             background: var(--topbar-bg);
             border-bottom: 1px solid #e2e8f0;
-            padding: 0 2rem;
+            padding: 0 32px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             position: sticky;
             top: 0;
             z-index: 900;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        }
+
+        .page-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+            color: #0f172a;
         }
 
         .user-profile {
@@ -126,40 +141,43 @@
         }
 
         .avatar {
-            width: 38px;
-            height: 38px;
-            background: #e2e8f0;
+            width: 40px;
+            height: 40px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            color: var(--sidebar-bg);
+            color: var(--primary);
         }
 
         .content-area {
-            padding: 2rem;
+            padding: 32px;
+            flex: 1;
         }
 
         /* 📱 RESPONSIVE */
         @media (max-width: 992px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-            .main-wrapper {
-                margin-left: 0;
-            }
-            .sidebar.show {
-                transform: translateX(0);
-            }
+            .sidebar { transform: translateX(-100%); }
+            .main-wrapper { margin-left: 0; }
+            .sidebar.show { transform: translateX(0); }
+            .topbar { padding: 0 16px; }
         }
 
-        /* Alert styling */
-        .alert {
-            border-radius: 12px;
-            border: none;
-            font-weight: 500;
+        /* LUXURY CARDS */
+        .card {
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-lg);
+            transition: var(--transition);
         }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     </style>
     {% block extra_css %}{% endblock %}
 </head>
@@ -181,10 +199,10 @@
                     <i class="bi bi-graph-up"></i> Performance
                 </a>
                 <a href="{{ url_for('student.profile') }}" class="nav-link {% if request.endpoint == 'student.profile' %}active{% endif %}">
-                    <i class="bi bi-person"></i> My Profile
+                    <i class="bi bi-person-badge"></i> My Profile
                 </a>
                 <a href="{{ url_for('student.change_password') }}" class="nav-link {% if request.endpoint == 'student.change_password' %}active{% endif %}">
-                    <i class="bi bi-key"></i> Security
+                    <i class="bi bi-shield-lock"></i> Security Hub
                 </a>
                 <a href="{{ url_for('student.feedback') }}" class="nav-link {% if request.endpoint == 'student.feedback' %}active{% endif %}">
                     <i class="bi bi-chat-dots"></i> Feedback
