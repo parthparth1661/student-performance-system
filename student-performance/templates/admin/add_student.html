@@ -1,163 +1,158 @@
 {% extends 'admin/layout.html' %}
 
-{% block page_title %}<h5 class="mb-0 fw-semibold">Student Management</h5>{% endblock %}
+{% block page_title %}<h5 class="fw-bold mb-0 text-dark"><i class="bi bi-people me-2"></i>Student Management</h5>{%
+endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-lg-8">
-        <!-- 🎨 PIXEL-PERFECT PROFILE HEADER -->
-        <div class="card border-0 shadow-sm rounded-4 mb-4 bg-white overflow-hidden">
-            <div class="card-body p-4 d-flex align-items-center justify-content-between bg-primary-soft">
-                <div class="d-flex align-items-center">
-                    <div class="bg-primary text-white p-3 rounded-3 shadow-sm me-4">
-                        <i class="fas fa-id-card-alt fs-3"></i>
-                    </div>
-                    <div>
-                        <h4 class="fw-bold m-0 text-dark">
-                            <i class="fas fa-user-edit me-2 text-primary"></i>{{ 'Update Student Profile' if edit_mode
-                            else 'Add New Student' }}
-                        </h4>
-                        <p class="text-muted small m-0">{{ 'Edit and update student details' if edit_mode else 'Create a
-                            new student record in the system' }}</p>
-                    </div>
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- 🎨 HEADER SECTOR -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h4 class="fw-bold mb-1 text-dark">{{ 'Modify Student Record' if edit_mode else 'Register New
+                        Student' }}</h4>
+                    <p class="text-muted small mb-0">{{ 'Update institutional identity and academic placement' if
+                        edit_mode else 'Create a new institutional identity in the central registry' }}</p>
                 </div>
-                <a href="{{ url_for('admin.view_students') }}" class="btn btn-light border-0 shadow-sm px-4 fw-bold">
-                    <i class="fas fa-arrow-left me-2"></i>Back
+                <a href="{{ url_for('admin.view_students') }}"
+                    class="btn btn-light border shadow-sm px-4 fw-bold rounded-3 transition-hover">
+                    <i class="bi bi-arrow-left me-2"></i>Back to Directory
                 </a>
             </div>
-        </div>
 
-        <!-- 🧪 DATA ENTRY CARD -->
-        <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden p-0 mb-5">
-            <div class="card-body p-5">
-                <form method="POST" class="row g-4">
-                    <!-- Identity Section -->
-                    <div class="col-12 mb-2">
-                        <h6 class="text-uppercase small fw-bold text-primary letter-spacing-1">Student Details</h6>
-                        <hr class="mt-2 opacity-10">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label small fw-bold text-muted"><i
-                                class="fas fa-user me-2 text-primary opacity-50"></i>Full Name</label>
-                        <input type="text" name="name" class="form-control py-2 border-0 bg-light rounded-3"
-                            value="{{ student.name if student else (form_data.name if form_data else '') }}" required
-                            placeholder="e.g. John Doe">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label small fw-bold text-muted"><i
-                                class="fas fa-fingerprint me-2 text-primary opacity-50"></i>Enrollment Number</label>
-                        <input type="text" name="enrollment_no"
-                            class="form-control py-2 border-0 bg-light rounded-3 font-monospace"
-                            value="{{ student.enrollment_no if student else (form_data.enrollment_no if form_data else '') }}"
-                            required placeholder="e.g. SPDA2024001" 
-                            {% if edit_mode %}readonly style="cursor: not-allowed;"{% endif %}>
-                        {% if edit_mode %}
-                        <small class="text-muted extra-small mt-1 d-block"><i class="fas fa-lock me-1"></i>
-                            Enrollment number is fixed and cannot be edited.</small>
-                        {% endif %}
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label small fw-bold text-muted"><i
-                                class="fas fa-envelope me-2 text-primary opacity-50"></i>Email</label>
-                        <input type="email" name="email" class="form-control py-2 border-0 bg-light rounded-3"
-                            value="{{ student.email if student else (form_data.email if form_data else '') }}" required
-                            placeholder="student@example.com">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label small fw-bold text-muted"><i
-                                class="fas fa-phone me-2 text-primary opacity-50"></i>Contact Number (India)</label>
-                        <div class="input-group">
-                            <span class="input-group-text border-0 bg-light text-muted small">+91</span>
-                            <input type="text" name="contact_no"
-                                class="form-control py-2 border-0 bg-light rounded-end-3"
-                                value="{{ student.contact_no if student else (form_data.contact_no if form_data else '') }}"
-                                required placeholder="e.g. 9876543210" pattern="[6-9]{1}[0-9]{9}" maxlength="10"
-                                title="Must be a 10-digit Indian mobile number starting with 6, 7, 8, or 9">
+            <!-- 🧪 DATA ENTRY CARD -->
+            <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+                <div class="card-body p-4 p-md-5">
+                    <form method="POST" class="row g-4">
+                        <!-- Group 1: Personal Identity -->
+                        <div class="col-12 border-bottom pb-2 mb-2">
+                            <label class="fw-bold text-uppercase small text-primary"
+                                style="letter-spacing: 0.1em;">Personal Identity</label>
                         </div>
-                        <small class="text-muted extra-small mt-1 d-block">10-digit mobile number required.</small>
-                    </div>
 
-                    <!-- Academy Section -->
-                    <div class="col-12 mb-2 mt-4">
-                        <h6 class="text-uppercase small fw-bold text-primary letter-spacing-1">Department Information
-                        </h6>
-                        <hr class="mt-2 opacity-10">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label small fw-bold text-muted"><i
-                                class="fas fa-building me-2 text-primary opacity-50"></i>Department</label>
-                        <select name="department" class="form-select py-2 border-0 bg-light rounded-3" required>
-                            <option value="">Select Department</option>
-                            <option value="BCA" {% if (student and student.department=='BCA' ) or (form_data and
-                                form_data.department=='BCA' ) %}selected{% endif %}>BCA (Comp. Apps)</option>
-                            <option value="MCA" {% if (student and student.department=='MCA' ) or (form_data and
-                                form_data.department=='MCA' ) %}selected{% endif %}>MCA (Master Apps)</option>
-                            <option value="B.TECH" {% if (student and student.department=='B.TECH' ) or (form_data and
-                                form_data.department=='B.TECH' ) %}selected{% endif %}>B.TECH (Engineering)</option>
-                            <option value="MBA" {% if (student and student.department=='MBA' ) or (form_data and
-                                form_data.department=='MBA' ) %}selected{% endif %}>MBA (Mgmt)</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label small fw-bold text-muted"><i
-                                class="fas fa-layer-group me-2 text-primary opacity-50"></i>Semester</label>
-                        <select name="semester" class="form-select py-2 border-0 bg-light rounded-3" required>
-                            <option value="">Select Semester</option>
-                            {% for i in range(1, 9) %}
-                            <option value="{{ i }}" {% if (student and student.semester==i) or (form_data and
-                                form_data.semester==i|string) %}selected{% endif %}>Semester {{ i }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="col-12 mt-5 text-end">
-                        <div class="d-flex gap-3 justify-content-end align-items-center">
-                            <span class="text-muted small"><i class="fas fa-info-circle me-1"></i>Enrollment number is fixed.</span>
-                            <button type="submit"
-                                class="btn btn-primary px-5 py-3 rounded-pill fw-bold shadow-sm transition-scale">
-                                <i class="fas fa-check-circle me-2"></i>{{ 'Update Student Profile' if edit_mode else
-                                'Save Student Profile' }}
-                            </button>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold small text-muted">Full Name</label>
+                            <input type="text" name="name"
+                                class="form-control form-control-lg border-0 bg-light rounded-3 px-4"
+                                value="{{ student.name if student else (form_data.name if form_data else '') }}"
+                                required placeholder="e.g. Alexander Hamilton">
                         </div>
-                    </div>
-                </form>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold small text-muted">Enrollment Number</label>
+                            <input type="text" name="enrollment_no"
+                                class="form-control form-control-lg border-0 bg-light rounded-3 px-4 font-monospace"
+                                value="{{ student.enrollment_no if student else (form_data.enrollment_no if form_data else '') }}"
+                                required placeholder="e.g. SPDA2024001" {% if edit_mode %}readonly
+                                style="cursor: not-allowed; opacity: 0.7;" {% endif %}>
+                            {% if edit_mode %}
+                            <div class="mt-2 extra-small text-muted"><i class="bi bi-lock-fill me-1"></i>System-locked
+                                unique identifier</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold small text-muted">Student Email</label>
+                            <input type="email" name="email"
+                                class="form-control form-control-lg border-0 bg-light rounded-3 px-4"
+                                value="{{ student.email if student else (form_data.email if form_data else '') }}"
+                                required placeholder="student@university.edu">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold small text-muted">Contact Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text border-0 bg-light px-4 text-muted">+91</span>
+                                <input type="text" name="contact_no"
+                                    class="form-control form-control-lg border-0 bg-light rounded-end-3 px-4"
+                                    value="{{ student.contact_no if student else (form_data.contact_no if form_data else '') }}"
+                                    required placeholder="9876543210" pattern="[6-9]{1}[0-9]{9}" maxlength="10">
+                            </div>
+                        </div>
+
+                        <!-- Group 2: Academic Placement -->
+                        <div class="col-12 border-bottom pb-2 mb-2 mt-5">
+                            <label class="fw-bold text-uppercase small text-primary"
+                                style="letter-spacing: 0.1em;">Academic Placement</label>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold small text-muted">Department</label>
+                            <select name="department"
+                                class="form-select form-select-lg border-0 bg-light rounded-3 px-4" required>
+                                <option value="">Select Department...</option>
+                                <option value="BCA" {% if (student and student.department=='BCA' ) or (form_data and
+                                    form_data.department=='BCA' ) %}selected{% endif %}>BCA (Computer Applications)
+                                </option>
+                                <option value="MCA" {% if (student and student.department=='MCA' ) or (form_data and
+                                    form_data.department=='MCA' ) %}selected{% endif %}>MCA (Master Applications)
+                                </option>
+                                <option value="B.TECH" {% if (student and student.department=='B.TECH' ) or (form_data
+                                    and form_data.department=='B.TECH' ) %}selected{% endif %}>B.TECH (Engineering &
+                                    Tech)</option>
+                                <option value="MBA" {% if (student and student.department=='MBA' ) or (form_data and
+                                    form_data.department=='MBA' ) %}selected{% endif %}>MBA (Professional Management)
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold small text-muted">Current Semester</label>
+                            <select name="semester" class="form-select form-select-lg border-0 bg-light rounded-3 px-4"
+                                required>
+                                <option value="">Select Semester...</option>
+                                {% for i in range(1, 9) %}
+                                <option value="{{ i }}" {% if (student and student.semester==i) or (form_data and
+                                    form_data.semester==i|string) %}selected{% endif %}>Semester {{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- 🏁 ACTION FOOTER -->
+                        <div class="col-12 mt-5 pt-4 border-top">
+                            <div class="d-flex justify-content-end gap-3">
+                                <a href="{{ url_for('admin.view_students') }}"
+                                    class="btn btn-light px-5 py-3 rounded-pill fw-bold text-muted transition-hover">Discard
+                                    Changes</a>
+                                <button type="submit"
+                                    class="btn btn-primary px-5 py-3 rounded-pill fw-bold shadow-sm transition-hover">
+                                    <i class="bi bi-check-circle-fill me-2"></i>{{ 'Update Registration' if edit_mode
+                                    else 'Complete Registration' }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <style>
-    .bg-primary-soft {
-        background-color: rgba(99, 102, 241, 0.05);
+    .transition-hover {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .letter-spacing-1 {
-        letter-spacing: 0.05rem;
+    .transition-hover:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1) !important;
     }
 
-    .extra-small {
-        font-size: 0.75rem;
-    }
-
-    .italic {
-        font-style: italic;
-    }
-
-    .transition-scale:hover {
-        transform: scale(1.02);
+    .form-control-lg,
+    .form-select-lg {
+        font-size: 1rem;
     }
 
     .form-control:focus,
     .form-select:focus {
-        background-color: #fff !important;
-        box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.1) !important;
+        background-color: #ffffff !important;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1) !important;
         border: none !important;
+    }
+
+    .extra-small {
+        font-size: 0.75rem;
     }
 </style>
 {% endblock %}

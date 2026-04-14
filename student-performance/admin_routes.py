@@ -187,6 +187,7 @@ def view_students():
                           students=students, 
                           page=page, 
                           total_pages=total_pages,
+                          total_students=total_records,
                           filters={'department': department, 'semester': semester, 'search': search})
 
 @admin_bp.route('/students/add', methods=['GET', 'POST'])
