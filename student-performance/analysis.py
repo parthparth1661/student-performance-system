@@ -258,106 +258,41 @@ def generate_dashboard_charts(filters={}):
         plt.savefig(os.path.join(BASE_DIR, chart_paths['attendance_pie']), transparent=False, facecolor='white')
         plt.close()
 
-<<<<<<< HEAD
-        # 3. Performance Trend (Simplified to Subjects since exam_type is gone)
+        # 3. Performance Trend (Simplified to Subjects)
         line_query = f"""
             SELECT sub.subject_name, AVG(m.total_marks) as avg_marks
-=======
-        # 3. Performance Component Trend (Line Chart)
-        line_query = f"""
-            SELECT 
-                AVG(internal_marks) as avg_internal,
-                AVG(viva_marks) as avg_viva,
-                AVG(external_marks) as avg_external
->>>>>>> student-panel
             FROM marks m
             JOIN students s ON s.enrollment_no = m.enrollment_no
             LEFT JOIN subjects sub ON m.subject_id = sub.subject_id
             {where_clause}
-<<<<<<< HEAD
             GROUP BY sub.subject_name
             ORDER BY sub.subject_name
-=======
->>>>>>> student-panel
         """
         cursor.execute(line_query, values)
-        line_data = cursor.fetchone()
-
-        plt.figure(figsize=(8, 5), dpi=100)
-        if line_data and line_data['avg_internal'] is not None:
-            exams = ['Internal', 'Viva', 'External']
-            marks = [
-                float(line_data['avg_internal'] or 0),
-                float(line_data['avg_viva'] or 0),
-                float(line_data['avg_external'] or 0)
-            ]
-            plt.plot(exams, marks, marker='o', markersize=8, color='#6366f1', linewidth=3, markerfacecolor='white', markeredgewidth=2)
-            plt.fill_between(exams, marks, alpha=0.1, color='#6366f1')
-            
-            # --- IMPROVEMENTS 🔥 ---
-            plt.title("Performance Trend", fontsize=13, fontweight='bold', pad=15)
-            plt.xlabel("Exam Type", fontsize=10, fontweight='600')
-            plt.ylabel("Average Marks (%)", fontsize=10, fontweight='600')
-            plt.grid(True, linestyle='--', alpha=0.7)
-            plt.ylim(0, 110)
-            
-            # Show values
-            for i, v in enumerate(marks):
-                plt.text(i, v + 3, f'{round(v, 1)}', ha='center', fontsize=9, fontweight='bold', color='#1e293b')
-        else:
-            plt.text(0.5, 0.5, "Insufficient Trend Data", ha='center', va='center', color='#94a3b8')
-        plt.tight_layout()
-        plt.savefig(os.path.join(BASE_DIR, chart_paths['performance_trend']), transparent=False, facecolor='white')
-        plt.close()
-
-        # 4. Top 5 Students (Bar Chart)
+        line_data = cursor.fetchall()
+        
+        # 4. Top Students (Leaderboard)
         top_query = f"""
             SELECT s.name, AVG(m.total_marks) as avg_marks
             FROM students s
             JOIN marks m ON s.enrollment_no = m.enrollment_no
-            LEFT JOIN subjects sub ON m.subject_id = sub.subject_id
             {where_clause}
-            GROUP BY s.name
-            ORDER BY AVG(m.total_marks) DESC
+            GROUP BY s.enrollment_no
+            ORDER BY avg_marks DESC
             LIMIT 5
         """
         cursor.execute(top_query, values)
         top_data = cursor.fetchall()
 
-        plt.figure(figsize=(8, 5), dpi=100)
-        if top_data:
-            names = [row['name'] for row in top_data]
-            marks = [float(row['avg_marks']) for row in top_data]
-            plt.bar(names, marks, color='#f59e0b', width=0.5, alpha=0.9)
-            
-            # --- IMPROVEMENTS 🔥 ---
-            plt.title("Top 5 Students", fontsize=13, fontweight='bold', pad=15)
-            plt.xlabel("Students", fontsize=10, fontweight='600')
-            plt.ylabel("Overall Index (%)", fontsize=10, fontweight='600')
-            plt.grid(axis='y', linestyle='--', alpha=0.7)
-            plt.ylim(0, 110)
-            plt.xticks(rotation=15, ha='right', fontsize=9)
-            
-            # Show values and highlight TOP
-            max_val = max(marks) if marks else 0
-            for i, v in enumerate(marks):
-                plt.text(i, v + 2, f'{round(v, 1)}', ha='center', fontweight='bold', fontsize=9)
-                if v == max_val and v > 0:
-                     plt.text(i, v + 7, "🏆", ha='center', fontsize=12)
-        else:
-            plt.text(0.5, 0.5, "No Rankings Available", ha='center', va='center', color='#94a3b8')
-        plt.tight_layout()
-        plt.savefig(os.path.join(BASE_DIR, chart_paths['top_students']), transparent=False, facecolor='white')
-        plt.close()
-
         cursor.close()
         conn.close()
         return chart_paths
-
     except Exception as e:
-        print(f"Chart Engine Error: {e}")
+        print(f"Chart generation error: {e}")
         return {}
-
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            conn.close()
 
 def get_performance_overview(filters={}, limit=10, offset=0):
     """Deep analytical student ledger with fully synchronized filtering and pagination"""
@@ -375,13 +310,8 @@ def get_performance_overview(filters={}, limit=10, offset=0):
                 s.department,
                 s.semester,
                 sub.subject_name,
-<<<<<<< HEAD
                 AVG(m.total_marks) AS marks_obtained,
                 COALESCE(COUNT(CASE WHEN a.status='Present' THEN 1 END)*100.0/NULLIF(COUNT(a.attendance_id), 0), 0) AS attendance_percentage
-=======
-                AVG(m.total_marks) AS avg_marks,
-                (COUNT(CASE WHEN a.status='Present' THEN 1 END)*100.0/NULLIF(COUNT(a.attendance_id), 0)) AS attendance_percentage
->>>>>>> student-panel
             FROM students s
             JOIN marks m ON s.enrollment_no = m.enrollment_no
             JOIN subjects sub ON m.subject_id = sub.subject_id
@@ -401,7 +331,7 @@ def get_performance_overview(filters={}, limit=10, offset=0):
                 FROM students s
                 JOIN marks m ON s.enrollment_no = m.enrollment_no
                 JOIN subjects sub ON m.subject_id = sub.subject_id
-                JOIN attendance a ON s.enrollment_no = a.enrollment_no AND sub.subject_id = a.subject_id
+                LEFT JOIN attendance a ON s.enrollment_no = a.enrollment_no AND sub.subject_id = a.subject_id
                 {where_clause}
                 GROUP BY s.enrollment_no, sub.subject_id
             ) as subquery
@@ -415,6 +345,7 @@ def get_performance_overview(filters={}, limit=10, offset=0):
     except Exception as e:
         print(f"Error in ledger overview: {e}")
         return [], 0
+
 
 def generate_subject_avg_chart(subject_avg):
     """Generates an HD Subject-wise Average Marks Bar Chart"""
@@ -538,7 +469,6 @@ def process_csv(file_path, department=None, semester=None):
                     errors.append(f"Row {idx+2}: {str(e)}")
             msg_type = "Student"
 
-<<<<<<< HEAD
         # 2. MARKS CSV: enrollment_no, subject, department, semester, internal_marks, viva_marks, external_marks
         elif all(x in cols for x in ['enrollment_no', 'subject', 'department', 'semester', 'internal_marks', 'viva_marks', 'external_marks']):
             for idx, row in df.iterrows():
@@ -585,21 +515,6 @@ def process_csv(file_path, department=None, semester=None):
                             VALUES (%s, %s, %s, %s, %s, %s)
                         """, (row['enrollment_no'], subject_id, i_m, v_m, e_m, total_m))
                     
-=======
-        # 2. MARKS CSV: enrollment_no, subject_id, internal_marks, viva_marks, external_marks
-        elif all(x in cols for x in ['enrollment_no', 'subject_id', 'internal_marks', 'viva_marks', 'external_marks']):
-            for idx, row in df.iterrows():
-                try:
-                    i = int(row['internal_marks'])
-                    v = int(row['viva_marks'])
-                    e = int(row['external_marks'])
-                    t = i + v + e
-                    cursor.execute("""
-                        INSERT INTO marks (enrollment_no, subject_id, internal_marks, viva_marks, external_marks, total_marks)
-                        VALUES (%s, %s, %s, %s, %s, %s)
-                        ON DUPLICATE KEY UPDATE internal_marks=VALUES(internal_marks), viva_marks=VALUES(viva_marks), external_marks=VALUES(external_marks), total_marks=VALUES(total_marks)
-                    """, (row['enrollment_no'], row['subject_id'], i, v, e, t))
->>>>>>> student-panel
                     success_count += 1
                 except Exception as e:
                     errors.append(f"Row {idx+2}: {str(e)}")
@@ -666,7 +581,6 @@ def get_student_marks(enrollment_no):
         cursor.close()
         conn.close()
 
-<<<<<<< HEAD
         subjects_data = []
         for row in marks_records:
             total = row['total_marks']
@@ -680,28 +594,6 @@ def get_student_marks(enrollment_no):
                 'total': total,
                 'status': status,
                 'suggestion': "Consistent effort required." if total < 60 else "Good performance."
-=======
-        if not marks_records: return []
-
-        subjects_data = []
-        for row in marks_records:
-            internal = row.get('internal_marks', 0)
-            viva = row.get('viva_marks', 0)
-            external = row.get('external_marks', 0)
-            total = row.get('total_marks', 0)
-            
-            # Simple pass check: if external < 21 (35% of 60) -> FAIL
-            status = "PASS" if external >= 21 else "FAIL"
-            
-            subjects_data.append({
-                'subject': row['subject_name'],
-                'internal': int(internal),
-                'viva': int(viva),
-                'external': int(external),
-                'total': int(total),
-                'status': status,
-                'suggestion': "Needs focus" if status == "FAIL" else "Good"
->>>>>>> student-panel
             })
             
         return subjects_data
@@ -1034,11 +926,7 @@ def get_weak_students_external(threshold=35):
             SELECT s.enrollment_no as roll_no, s.name, s.department, s.semester, COUNT(m.id) as fail_count
             FROM students s
             JOIN marks m ON s.enrollment_no = m.enrollment_no
-<<<<<<< HEAD
             WHERE m.total_marks < 35
-=======
-            WHERE m.external_marks < 21
->>>>>>> student-panel
             GROUP BY s.enrollment_no
             ORDER BY fail_count DESC
         """, ())
@@ -1754,11 +1642,7 @@ def get_faculty_analytics(filters={}):
             SELECT f.faculty_id, f.faculty_name, f.department, f.email,
                    GROUP_CONCAT(DISTINCT sub.subject_name SEPARATOR ', ') as subjects_taught,
                    AVG(m.total_marks) as avg_marks,
-<<<<<<< HEAD
                    COALESCE(COUNT(CASE WHEN m.total_marks >= 40 THEN 1 END)*100.0 / NULLIF(COUNT(m.id), 0), 0) as pass_percentage,
-=======
-                   (COUNT(CASE WHEN m.external_marks >= 21 THEN 1 END)*100.0 / NULLIF(COUNT(m.id), 0)) as pass_percentage,
->>>>>>> student-panel
                    COUNT(DISTINCT m.enrollment_no) as total_students
             FROM faculty f
             JOIN subjects sub ON f.faculty_id = sub.faculty_id
@@ -1838,11 +1722,7 @@ def get_single_faculty_detail(faculty_id):
         cursor.execute("""
             SELECT sub.subject_name, sub.semester,
                    AVG(m.total_marks) as avg_marks,
-<<<<<<< HEAD
                    COALESCE(COUNT(CASE WHEN m.total_marks >= 40 THEN 1 END)*100.0 / NULLIF(COUNT(m.id), 0), 0) as pass_pct,
-=======
-                   (COUNT(CASE WHEN m.external_marks >= 21 THEN 1 END)*100.0 / NULLIF(COUNT(m.id), 0)) as pass_pct,
->>>>>>> student-panel
                    COUNT(m.id) as entry_count
             FROM subjects sub
             LEFT JOIN marks m ON sub.subject_id = m.subject_id

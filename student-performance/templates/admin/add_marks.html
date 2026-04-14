@@ -53,16 +53,9 @@
                     {% if not edit_mode %}
                     <!-- Student Selection -->
                     <div class="col-md-12">
-<<<<<<< HEAD
                         <label class="form-label extra-small fw-bold text-uppercase text-muted">Select Student (Filtered)</label>
                         <select name="enrollment_no" class="form-select border-1 border-light-subtle bg-light rounded-3 py-3 px-4" required>
                             <option value="">Choose student from {{ selected_dept }} Sem {{ selected_sem }}...</option>
-=======
-                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Select Student</label>
-                        <select name="enrollment_no"
-                            class="form-select border-1 border-light-subtle bg-light rounded-3 py-3 px-4" required>
-                            <option value="">Choose student by enrollment...</option>
->>>>>>> student-panel
                             {% for s in students %}
                             <option value="{{ s.enrollment_no }}">{{ s.enrollment_no }} - {{ s.name }}</option>
                             {% endfor %}
@@ -71,16 +64,9 @@
 
                     <!-- Subject Selection -->
                     <div class="col-md-12">
-<<<<<<< HEAD
                         <label class="form-label extra-small fw-bold text-uppercase text-muted">Course Subject (Filtered)</label>
                         <select name="subject_id" class="form-select border-1 border-light-subtle bg-light rounded-3 py-3 px-4" required>
                             <option value="">Select subject for this context...</option>
-=======
-                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Course Subject</label>
-                        <select name="subject_id"
-                            class="form-select border-1 border-light-subtle bg-light rounded-3 py-3 px-4" required>
-                            <option value="">Select subject context...</option>
->>>>>>> student-panel
                             {% for sub in subjects %}
                             <option value="{{ sub.subject_id }}">{{ sub.subject_name }}</option>
                             {% endfor %}
@@ -90,7 +76,6 @@
                     <!-- Identity View for Edit Mode -->
                     <div class="col-12">
                         <div class="p-4 bg-primary-subtle rounded-4 border-start border-primary border-4 mb-2">
-<<<<<<< HEAD
                             <label class="extra-small fw-bold text-uppercase text-primary d-block mb-3">Academic Record Identity</label>
                             <div class="row g-3">
                                 <div class="col-sm-6">
@@ -105,18 +90,6 @@
                                     <div class="text-muted extra-small fw-bold text-uppercase opacity-75">Subject</div>
                                     <div class="fw-bold text-dark">{{ mark.subject_name }}</div>
                                 </div>
-=======
-                            <label class="extra-small fw-bold text-uppercase text-primary d-block mb-1">Editing Record
-                                For</label>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <h5 class="fw-bold text-dark mb-0 text-truncate" style="max-width: 300px;">{{
-                                        mark.student_name }}</h5>
-                                    <p class="text-muted small mb-0">{{ mark.enrollment_no }} | {{ mark.subject_name }}
-                                    </p>
-                                </div>
-                                <span class="badge bg-primary rounded-pill px-3 py-2">ID: #{{ mark.id }}</span>
->>>>>>> student-panel
                             </div>
                         </div>
                         <input type="hidden" name="enrollment_no" value="{{ mark.enrollment_no }}">
@@ -124,7 +97,6 @@
                     </div>
                     {% endif %}
 
-<<<<<<< HEAD
                     <!-- Component Marks Matrix -->
                     <div class="col-md-4">
                         <label class="form-label extra-small fw-bold text-uppercase text-muted">Internal (0-30)</label>
@@ -153,65 +125,6 @@
                             <input type="number" name="marks_obtained" id="marks_obtained" 
                                    class="form-control border-0 bg-primary-subtle rounded-2 py-3 fw-bold text-primary" 
                                    value="{{ mark.marks_obtained if edit_mode else '0' }}" readonly>
-=======
-                    <!-- 📊 SCORE COMPONENTS MATRIX -->
-                    <div class="col-12">
-                        <div class="row g-3">
-                            <!-- Internal Marks -->
-                            <div class="col-md-4">
-                                <label class="form-label extra-small fw-bold text-uppercase text-muted">Internal
-                                    (0-30)</label>
-                                <div class="input-group">
-                                    <span class="input-group-text border-0 bg-light"><i
-                                            class="fas fa-pencil-alt text-primary"></i></span>
-                                    <input type="number" name="internal_marks" id="internal_marks" step="1" min="0"
-                                        max="30" class="form-control border-0 bg-light py-3 fw-bold"
-                                        placeholder="Mid/Assgn" value="{{ mark.internal_marks if edit_mode else '' }}"
-                                        required>
-                                </div>
-                            </div>
-
-                            <!-- Viva Marks -->
-                            <div class="col-md-4">
-                                <label class="form-label extra-small fw-bold text-uppercase text-muted">Viva
-                                    (0-10)</label>
-                                <div class="input-group">
-                                    <span class="input-group-text border-0 bg-light"><i
-                                            class="fas fa-microphone text-primary"></i></span>
-                                    <input type="number" name="viva_marks" id="viva_marks" step="1" min="0" max="10"
-                                        class="form-control border-0 bg-light py-3 fw-bold" placeholder="Oral"
-                                        value="{{ mark.viva_marks if edit_mode else '' }}" required>
-                                </div>
-                            </div>
-
-                            <!-- External Marks -->
-                            <div class="col-md-4">
-                                <label class="form-label extra-small fw-bold text-uppercase text-muted">External
-                                    (0-60)</label>
-                                <div class="input-group">
-                                    <span class="input-group-text border-0 bg-light"><i
-                                            class="fas fa-file-signature text-primary"></i></span>
-                                    <input type="number" name="external_marks" id="external_marks" step="1" min="0"
-                                        max="60" class="form-control border-0 bg-light py-3 fw-bold" placeholder="Final"
-                                        value="{{ mark.external_marks if edit_mode else '' }}" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Computed Total (Read-Only Preview) -->
-                    <div class="col-12 mt-4">
-                        <div class="bg-light rounded-3 p-4 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="fw-bold text-dark mb-0">Aggregate Score Calculation</h6>
-                                <p class="extra-small text-muted mb-0">Total Performance Index (max 100)</p>
-                            </div>
-                            <div class="text-end">
-                                <span class="h3 fw-bold text-primary mb-0" id="totalDisplay">{{ mark.total_marks if
-                                    edit_mode else '0' }}</span>
-                                <span class="text-muted fw-bold">/ 100</span>
-                            </div>
->>>>>>> student-panel
                         </div>
                     </div>
                 </div>
@@ -245,7 +158,6 @@
 </div>
 
 <script>
-<<<<<<< HEAD
     const form = document.getElementById('markForm');
     const internalInp = document.getElementById('internal_marks');
     const vivaInp = document.getElementById('viva_marks');
@@ -288,20 +200,6 @@
             alertBox.classList.add('d-flex');
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
-=======
-    const internal = document.getElementById('internal_marks');
-    const viva = document.getElementById('viva_marks');
-    const external = document.getElementById('external_marks');
-    const display = document.getElementById('totalDisplay');
-
-    function updateTotal() {
-        const val = (parseInt(internal.value) || 0) + (parseInt(viva.value) || 0) + (parseInt(external.value) || 0);
-        display.innerText = val;
-    }
-
-    [internal, viva, external].forEach(inp => {
-        inp.addEventListener('input', updateTotal);
->>>>>>> student-panel
     });
 </script>
 
