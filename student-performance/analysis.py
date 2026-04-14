@@ -258,23 +258,39 @@ def generate_dashboard_charts(filters={}):
         plt.savefig(os.path.join(BASE_DIR, chart_paths['attendance_pie']), transparent=False, facecolor='white')
         plt.close()
 
+<<<<<<< HEAD
         # 3. Performance Trend (Simplified to Subjects since exam_type is gone)
         line_query = f"""
             SELECT sub.subject_name, AVG(m.total_marks) as avg_marks
+=======
+        # 3. Performance Component Trend (Line Chart)
+        line_query = f"""
+            SELECT 
+                AVG(internal_marks) as avg_internal,
+                AVG(viva_marks) as avg_viva,
+                AVG(external_marks) as avg_external
+>>>>>>> student-panel
             FROM marks m
             JOIN students s ON s.enrollment_no = m.enrollment_no
             LEFT JOIN subjects sub ON m.subject_id = sub.subject_id
             {where_clause}
+<<<<<<< HEAD
             GROUP BY sub.subject_name
             ORDER BY sub.subject_name
+=======
+>>>>>>> student-panel
         """
         cursor.execute(line_query, values)
-        line_data = cursor.fetchall()
+        line_data = cursor.fetchone()
 
         plt.figure(figsize=(8, 5), dpi=100)
-        if line_data:
-            exams = [row['exam_type'] for row in line_data]
-            marks = [float(row['avg_marks']) for row in line_data]
+        if line_data and line_data['avg_internal'] is not None:
+            exams = ['Internal', 'Viva', 'External']
+            marks = [
+                float(line_data['avg_internal'] or 0),
+                float(line_data['avg_viva'] or 0),
+                float(line_data['avg_external'] or 0)
+            ]
             plt.plot(exams, marks, marker='o', markersize=8, color='#6366f1', linewidth=3, markerfacecolor='white', markeredgewidth=2)
             plt.fill_between(exams, marks, alpha=0.1, color='#6366f1')
             
@@ -359,12 +375,17 @@ def get_performance_overview(filters={}, limit=10, offset=0):
                 s.department,
                 s.semester,
                 sub.subject_name,
+<<<<<<< HEAD
                 AVG(m.total_marks) AS marks_obtained,
                 COALESCE(COUNT(CASE WHEN a.status='Present' THEN 1 END)*100.0/NULLIF(COUNT(a.attendance_id), 0), 0) AS attendance_percentage
+=======
+                AVG(m.total_marks) AS avg_marks,
+                (COUNT(CASE WHEN a.status='Present' THEN 1 END)*100.0/NULLIF(COUNT(a.attendance_id), 0)) AS attendance_percentage
+>>>>>>> student-panel
             FROM students s
             JOIN marks m ON s.enrollment_no = m.enrollment_no
             JOIN subjects sub ON m.subject_id = sub.subject_id
-            JOIN attendance a ON s.enrollment_no = a.enrollment_no AND sub.subject_id = a.subject_id
+            LEFT JOIN attendance a ON s.enrollment_no = a.enrollment_no AND sub.subject_id = a.subject_id
             {where_clause}
             GROUP BY s.enrollment_no, s.name, s.department, s.semester, sub.subject_name
             ORDER BY s.enrollment_no ASC
@@ -504,9 +525,8 @@ def process_csv(file_path, department=None, semester=None):
             
             for idx, row in df.iterrows():
                 try:
-                    # 🔐 Default password: enrollment_no + @123
-                    default_pw = str(row['enrollment_no']) + "@123"
-                    pw_hash = generate_password_hash(default_pw)
+                    # 🛡️ Default Protocol: password = enrollment_no
+                    pw_hash = generate_password_hash(str(row['enrollment_no']))
                     
                     cursor.execute("""
                         INSERT INTO students (enrollment_no, name, email, department, semester, password_hash, is_password_changed)
@@ -518,6 +538,7 @@ def process_csv(file_path, department=None, semester=None):
                     errors.append(f"Row {idx+2}: {str(e)}")
             msg_type = "Student"
 
+<<<<<<< HEAD
         # 2. MARKS CSV: enrollment_no, subject, department, semester, internal_marks, viva_marks, external_marks
         elif all(x in cols for x in ['enrollment_no', 'subject', 'department', 'semester', 'internal_marks', 'viva_marks', 'external_marks']):
             for idx, row in df.iterrows():
@@ -564,6 +585,21 @@ def process_csv(file_path, department=None, semester=None):
                             VALUES (%s, %s, %s, %s, %s, %s)
                         """, (row['enrollment_no'], subject_id, i_m, v_m, e_m, total_m))
                     
+=======
+        # 2. MARKS CSV: enrollment_no, subject_id, internal_marks, viva_marks, external_marks
+        elif all(x in cols for x in ['enrollment_no', 'subject_id', 'internal_marks', 'viva_marks', 'external_marks']):
+            for idx, row in df.iterrows():
+                try:
+                    i = int(row['internal_marks'])
+                    v = int(row['viva_marks'])
+                    e = int(row['external_marks'])
+                    t = i + v + e
+                    cursor.execute("""
+                        INSERT INTO marks (enrollment_no, subject_id, internal_marks, viva_marks, external_marks, total_marks)
+                        VALUES (%s, %s, %s, %s, %s, %s)
+                        ON DUPLICATE KEY UPDATE internal_marks=VALUES(internal_marks), viva_marks=VALUES(viva_marks), external_marks=VALUES(external_marks), total_marks=VALUES(total_marks)
+                    """, (row['enrollment_no'], row['subject_id'], i, v, e, t))
+>>>>>>> student-panel
                     success_count += 1
                 except Exception as e:
                     errors.append(f"Row {idx+2}: {str(e)}")
@@ -614,20 +650,12 @@ def get_student_details(enrollment_no):
         return None
 
 def get_student_marks(enrollment_no):
-    """Fetches and aggregates marks for a student by subject"""
+    """Fetches and aggregates marks for a student by subject using the new schema"""
     conn = get_db_connection()
     if not conn: return []
     try:
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT department FROM students WHERE enrollment_no = %s", (enrollment_no,))
-        student = cursor.fetchone()
-        if not student:
-            conn.close()
-            return []
-        
-        dept = student['department']
-
-        # Fetch all marks for this student with subject details
+        # 🛡️ Enrollment-Locked Query
         cursor.execute("""
             SELECT m.*, sub.subject_name 
             FROM marks m 
@@ -638,6 +666,7 @@ def get_student_marks(enrollment_no):
         cursor.close()
         conn.close()
 
+<<<<<<< HEAD
         subjects_data = []
         for row in marks_records:
             total = row['total_marks']
@@ -651,6 +680,28 @@ def get_student_marks(enrollment_no):
                 'total': total,
                 'status': status,
                 'suggestion': "Consistent effort required." if total < 60 else "Good performance."
+=======
+        if not marks_records: return []
+
+        subjects_data = []
+        for row in marks_records:
+            internal = row.get('internal_marks', 0)
+            viva = row.get('viva_marks', 0)
+            external = row.get('external_marks', 0)
+            total = row.get('total_marks', 0)
+            
+            # Simple pass check: if external < 21 (35% of 60) -> FAIL
+            status = "PASS" if external >= 21 else "FAIL"
+            
+            subjects_data.append({
+                'subject': row['subject_name'],
+                'internal': int(internal),
+                'viva': int(viva),
+                'external': int(external),
+                'total': int(total),
+                'status': status,
+                'suggestion': "Needs focus" if status == "FAIL" else "Good"
+>>>>>>> student-panel
             })
             
         return subjects_data
@@ -983,7 +1034,11 @@ def get_weak_students_external(threshold=35):
             SELECT s.enrollment_no as roll_no, s.name, s.department, s.semester, COUNT(m.id) as fail_count
             FROM students s
             JOIN marks m ON s.enrollment_no = m.enrollment_no
+<<<<<<< HEAD
             WHERE m.total_marks < 35
+=======
+            WHERE m.external_marks < 21
+>>>>>>> student-panel
             GROUP BY s.enrollment_no
             ORDER BY fail_count DESC
         """, ())
@@ -1015,7 +1070,7 @@ def export_admin_excel(department='All', semester='All'):
         
         # 2. Marks Sheet
         query_m = """
-            SELECT m.enrollment_no, s.name, sub.subject_name, m.marks_obtained, m.total_marks, m.exam_type
+            SELECT m.enrollment_no, s.name, sub.subject_name, m.internal_marks, m.viva_marks, m.external_marks, m.total_marks
             FROM marks m
             JOIN students s ON m.enrollment_no = s.enrollment_no
             JOIN subjects sub ON m.subject_id = sub.subject_id
@@ -1384,8 +1439,8 @@ def get_report_data(filters={}):
         # 🔵 4. PASS/FAIL RATIO
         cursor.execute(f"""
             SELECT 
-                SUM(CASE WHEN m.status = 'PASS' THEN 1 ELSE 0 END) as pass_count,
-                SUM(CASE WHEN m.status = 'FAIL' THEN 1 ELSE 0 END) as fail_count
+                SUM(CASE WHEN m.external_marks >= 21 THEN 1 ELSE 0 END) as pass_count,
+                SUM(CASE WHEN m.external_marks < 21 THEN 1 ELSE 0 END) as fail_count
             FROM marks m
             JOIN students s ON m.enrollment_no = s.enrollment_no
             {where_clause}
@@ -1699,7 +1754,11 @@ def get_faculty_analytics(filters={}):
             SELECT f.faculty_id, f.faculty_name, f.department, f.email,
                    GROUP_CONCAT(DISTINCT sub.subject_name SEPARATOR ', ') as subjects_taught,
                    AVG(m.total_marks) as avg_marks,
+<<<<<<< HEAD
                    COALESCE(COUNT(CASE WHEN m.total_marks >= 40 THEN 1 END)*100.0 / NULLIF(COUNT(m.id), 0), 0) as pass_percentage,
+=======
+                   (COUNT(CASE WHEN m.external_marks >= 21 THEN 1 END)*100.0 / NULLIF(COUNT(m.id), 0)) as pass_percentage,
+>>>>>>> student-panel
                    COUNT(DISTINCT m.enrollment_no) as total_students
             FROM faculty f
             JOIN subjects sub ON f.faculty_id = sub.faculty_id
@@ -1779,7 +1838,11 @@ def get_single_faculty_detail(faculty_id):
         cursor.execute("""
             SELECT sub.subject_name, sub.semester,
                    AVG(m.total_marks) as avg_marks,
+<<<<<<< HEAD
                    COALESCE(COUNT(CASE WHEN m.total_marks >= 40 THEN 1 END)*100.0 / NULLIF(COUNT(m.id), 0), 0) as pass_pct,
+=======
+                   (COUNT(CASE WHEN m.external_marks >= 21 THEN 1 END)*100.0 / NULLIF(COUNT(m.id), 0)) as pass_pct,
+>>>>>>> student-panel
                    COUNT(m.id) as entry_count
             FROM subjects sub
             LEFT JOIN marks m ON sub.subject_id = m.subject_id

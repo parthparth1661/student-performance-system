@@ -1,77 +1,128 @@
 {% extends 'admin/layout.html' %}
 
+{% block page_title %}<h5 class="mb-0 fw-semibold">Student Management</h5>{% endblock %}
+
 {% block content %}
-<div class="row justify-content-center py-5">
-    <div class="col-lg-7">
-        <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-white">
-            <div class="bg-primary py-4 px-5 text-white d-flex align-items-center justify-content-between">
-                <div>
-                    <h3 class="fw-bold mb-0">{% if edit_mode %}Update Student Profile{% else %}Register New Student{% endif %}</h3>
-                    <p class="opacity-75 small mb-0">{% if edit_mode %}Modify existing academic credentials.{% else %}Initialize a new identity in the academic registry.{% endif %}</p>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <!-- 🎨 PIXEL-PERFECT PROFILE HEADER -->
+        <div class="card border-0 shadow-sm rounded-4 mb-4 bg-white overflow-hidden">
+            <div class="card-body p-4 d-flex align-items-center justify-content-between bg-primary-soft">
+                <div class="d-flex align-items-center">
+                    <div class="bg-primary text-white p-3 rounded-3 shadow-sm me-4">
+                        <i class="fas fa-id-card-alt fs-3"></i>
+                    </div>
+                    <div>
+                        <h4 class="fw-bold m-0 text-dark">
+                            <i class="fas fa-user-edit me-2 text-primary"></i>{{ 'Update Student Profile' if edit_mode
+                            else 'Add New Student' }}
+                        </h4>
+                        <p class="text-muted small m-0">{{ 'Edit and update student details' if edit_mode else 'Create a
+                            new student record in the system' }}</p>
+                    </div>
                 </div>
-                <i class="fas {% if edit_mode %}fa-user-edit{% else %}fa-user-plus{% endif %} fa-2x opacity-50"></i>
+                <a href="{{ url_for('admin.view_students') }}" class="btn btn-light border-0 shadow-sm px-4 fw-bold">
+                    <i class="fas fa-arrow-left me-2"></i>Back
+                </a>
             </div>
-            
+        </div>
+
+        <!-- 🧪 DATA ENTRY CARD -->
+        <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden p-0 mb-5">
             <div class="card-body p-5">
                 <form method="POST" class="row g-4">
-                    <div class="col-md-12 mb-2">
-                        <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Full Name</label>
-                        <div class="input-group border rounded-3 overflow-hidden">
-                            <span class="input-group-text bg-light border-0"><i class="fas fa-user text-muted"></i></span>
-                            <input type="text" name="name" class="form-control border-0 py-2 px-3" placeholder="e.g. Parth Parth" value="{{ student.name if student else '' }}" required>
-                        </div>
+                    <!-- Identity Section -->
+                    <div class="col-12 mb-2">
+                        <h6 class="text-uppercase small fw-bold text-primary letter-spacing-1">Student Details</h6>
+                        <hr class="mt-2 opacity-10">
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Enrollment Number</label>
-                        <div class="input-group border rounded-3 overflow-hidden">
-                            <span class="input-group-text bg-light border-0"><i class="fas fa-id-card text-muted"></i></span>
-                            <input type="text" name="enrollment_no" class="form-control border-0 py-2 px-3" placeholder="SPDA-202X-XXX" value="{{ student.enrollment_no if student else '' }}" {% if edit_mode %}readonly{% endif %} required>
-                        </div>
-                        {% if edit_mode %}<div class="extra-small text-muted mt-1 px-1">Enrollment number cannot be changed once registered.</div>{% endif %}
+                        <label class="form-label small fw-bold text-muted"><i
+                                class="fas fa-user me-2 text-primary opacity-50"></i>Full Name</label>
+                        <input type="text" name="name" class="form-control py-2 border-0 bg-light rounded-3"
+                            value="{{ student.name if student else (form_data.name if form_data else '') }}" required
+                            placeholder="e.g. John Doe">
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Email Address</label>
-                        <div class="input-group border rounded-3 overflow-hidden">
-                            <span class="input-group-text bg-light border-0"><i class="fas fa-envelope text-muted"></i></span>
-                            <input type="email" name="email" class="form-control border-0 py-2 px-3" placeholder="student@example.com" value="{{ student.email if student else '' }}" required>
-                        </div>
+                        <label class="form-label small fw-bold text-muted"><i
+                                class="fas fa-fingerprint me-2 text-primary opacity-50"></i>Enrollment Number</label>
+                        <input type="text" name="enrollment_no"
+                            class="form-control py-2 border-0 bg-light rounded-3 font-monospace"
+                            value="{{ student.enrollment_no if student else (form_data.enrollment_no if form_data else '') }}"
+                            required placeholder="e.g. SPDA2024001" 
+                            {% if edit_mode %}readonly style="cursor: not-allowed;"{% endif %}>
+                        {% if edit_mode %}
+                        <small class="text-muted extra-small mt-1 d-block"><i class="fas fa-lock me-1"></i>
+                            Enrollment number is fixed and cannot be edited.</small>
+                        {% endif %}
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Department</label>
-                        <div class="input-group border rounded-3 overflow-hidden">
-                            <span class="input-group-text bg-light border-0"><i class="fas fa-university text-muted"></i></span>
-                            <select name="department" class="form-select border-0 py-2 px-3" required>
-                                <option value="BCA" {% if student and student.department == 'BCA' %}selected{% endif %}>BCA (Bachelor of Computer Applications)</option>
-                                <option value="MCA" {% if student and student.department == 'MCA' %}selected{% endif %}>MCA (Master of Computer Applications)</option>
-                                <option value="B.TECH" {% if student and student.department == 'B.TECH' %}selected{% endif %}>B.TECH (Bachelor of Technology)</option>
-                                <option value="MBA" {% if student and student.department == 'MBA' %}selected{% endif %}>MBA (Master of Business Administration)</option>
-                            </select>
-                        </div>
+                        <label class="form-label small fw-bold text-muted"><i
+                                class="fas fa-envelope me-2 text-primary opacity-50"></i>Email</label>
+                        <input type="email" name="email" class="form-control py-2 border-0 bg-light rounded-3"
+                            value="{{ student.email if student else (form_data.email if form_data else '') }}" required
+                            placeholder="student@example.com">
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-sm">Semester</label>
-                        <div class="input-group border rounded-3 overflow-hidden">
-                            <span class="input-group-text bg-light border-0"><i class="fas fa-calendar-alt text-muted"></i></span>
-                            <select name="semester" class="form-select border-0 py-2 px-3" required>
-                                {% for i in range(1, 9) %}
-                                <option value="{{ i }}" {% if student and student.semester|string == i|string %}selected{% endif %}>Semester {{ i }}</option>
-                                {% endfor %}
-                            </select>
+                        <label class="form-label small fw-bold text-muted"><i
+                                class="fas fa-phone me-2 text-primary opacity-50"></i>Contact Number (India)</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-0 bg-light text-muted small">+91</span>
+                            <input type="text" name="contact_no"
+                                class="form-control py-2 border-0 bg-light rounded-end-3"
+                                value="{{ student.contact_no if student else (form_data.contact_no if form_data else '') }}"
+                                required placeholder="e.g. 9876543210" pattern="[6-9]{1}[0-9]{9}" maxlength="10"
+                                title="Must be a 10-digit Indian mobile number starting with 6, 7, 8, or 9">
                         </div>
+                        <small class="text-muted extra-small mt-1 d-block">10-digit mobile number required.</small>
                     </div>
 
-                    <div class="col-12 pt-4">
-                        <hr class="border-dashed opacity-25">
-                        <div class="d-flex justify-content-between align-items-center mt-4">
-                            <a href="{{ url_for('admin.view_students') }}" class="btn btn-light px-4 py-2 border rounded-pill fw-bold text-muted small">
-                                <i class="fas fa-arrow-left me-2"></i>Back to Records
-                            </a>
-                            <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill shadow-lg fw-bold">
-                                {% if edit_mode %}<i class="fas fa-save me-2"></i>Update Profile{% else %}<i class="fas fa-check-circle me-2"></i>Confirm Registration{% endif %}
+                    <!-- Academy Section -->
+                    <div class="col-12 mb-2 mt-4">
+                        <h6 class="text-uppercase small fw-bold text-primary letter-spacing-1">Department Information
+                        </h6>
+                        <hr class="mt-2 opacity-10">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold text-muted"><i
+                                class="fas fa-building me-2 text-primary opacity-50"></i>Department</label>
+                        <select name="department" class="form-select py-2 border-0 bg-light rounded-3" required>
+                            <option value="">Select Department</option>
+                            <option value="BCA" {% if (student and student.department=='BCA' ) or (form_data and
+                                form_data.department=='BCA' ) %}selected{% endif %}>BCA (Comp. Apps)</option>
+                            <option value="MCA" {% if (student and student.department=='MCA' ) or (form_data and
+                                form_data.department=='MCA' ) %}selected{% endif %}>MCA (Master Apps)</option>
+                            <option value="B.TECH" {% if (student and student.department=='B.TECH' ) or (form_data and
+                                form_data.department=='B.TECH' ) %}selected{% endif %}>B.TECH (Engineering)</option>
+                            <option value="MBA" {% if (student and student.department=='MBA' ) or (form_data and
+                                form_data.department=='MBA' ) %}selected{% endif %}>MBA (Mgmt)</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold text-muted"><i
+                                class="fas fa-layer-group me-2 text-primary opacity-50"></i>Semester</label>
+                        <select name="semester" class="form-select py-2 border-0 bg-light rounded-3" required>
+                            <option value="">Select Semester</option>
+                            {% for i in range(1, 9) %}
+                            <option value="{{ i }}" {% if (student and student.semester==i) or (form_data and
+                                form_data.semester==i|string) %}selected{% endif %}>Semester {{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-12 mt-5 text-end">
+                        <div class="d-flex gap-3 justify-content-end align-items-center">
+                            <span class="text-muted small"><i class="fas fa-info-circle me-1"></i>Enrollment number is fixed.</span>
+                            <button type="submit"
+                                class="btn btn-primary px-5 py-3 rounded-pill fw-bold shadow-sm transition-scale">
+                                <i class="fas fa-check-circle me-2"></i>{{ 'Update Student Profile' if edit_mode else
+                                'Save Student Profile' }}
                             </button>
                         </div>
                     </div>
@@ -82,16 +133,31 @@
 </div>
 
 <style>
-.border-dashed { border-style: dashed !important; }
-.letter-spacing-sm { letter-spacing: 0.1em; }
-.extra-small { font-size: 11px; }
-.form-control:focus, .form-select:focus {
-    box-shadow: none;
-    background-color: #fff !important;
-}
-.input-group:focus-within {
-    border-color: #6366f1 !important;
-    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
-}
+    .bg-primary-soft {
+        background-color: rgba(99, 102, 241, 0.05);
+    }
+
+    .letter-spacing-1 {
+        letter-spacing: 0.05rem;
+    }
+
+    .extra-small {
+        font-size: 0.75rem;
+    }
+
+    .italic {
+        font-style: italic;
+    }
+
+    .transition-scale:hover {
+        transform: scale(1.02);
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        background-color: #fff !important;
+        box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.1) !important;
+        border: none !important;
+    }
 </style>
 {% endblock %}

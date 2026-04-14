@@ -1,0 +1,80 @@
+{% extends "admin/layout.html" %}
+
+{% block page_title %}Manage Feedback #{{ feedback.id }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <!-- 🔙 BACK NAV -->
+        <div class="mb-4">
+            <a href="{{ url_for('admin.view_feedback') }}" class="btn btn-outline-secondary rounded-pill px-4 btn-sm">
+                <i class="fas fa-arrow-left me-2"></i>Back to Hub
+            </a>
+        </div>
+
+        <!-- 📑 FEEDBACK DETAIL CARD -->
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start mb-4">
+                    <div>
+                        <h4 class="fw-bold mb-1">{{ feedback.subject or 'No Subject' }}</h4>
+                        <p class="text-muted small mb-0">Submitted by: <span class="text-primary fw-bold">{{ feedback.student_name }}</span> ({{ feedback.enrollment_no }})</p>
+                    </div>
+                    <span class="badge rounded-pill px-3 py-2 
+                        {% if feedback.status == 'Pending' %}bg-warning text-dark
+                        {% elif feedback.status == 'Reviewed' %}bg-primary text-white
+                        {% else %}bg-success text-white{% endif %}">
+                        {{ feedback.status }}
+                    </span>
+                </div>
+
+                <div class="bg-light p-4 rounded-4 mb-4">
+                    <h6 class="fw-bold text-muted small text-uppercase mb-2">Original Message</h6>
+                    <p class="mb-0 text-dark">{{ feedback.message }}</p>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="x-small fw-bold text-muted text-uppercase d-block mb-1">Feedback Category</label>
+                        <div class="fw-bold text-dark">{{ feedback.type or 'General' }}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="x-small fw-bold text-muted text-uppercase d-block mb-1">Date Logged</label>
+                        <div class="fw-bold text-dark">{{ feedback.created_at.strftime('%d %b %Y | %I:%M %p') }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ⚙️ PROCESSING FORM -->
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-header bg-white border-bottom py-3 px-4">
+                <h5 class="fw-bold mb-0 text-primary">Institutional Action</h5>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('admin.update_feedback', feedback_id=feedback.id) }}" method="POST">
+                    <div class="mb-4">
+                        <label class="form-label fw-bold small text-muted text-uppercase">Operational Status</label>
+                        <select name="status" class="form-select border-0 bg-light rounded-3 py-3">
+                            <option value="Pending" {% if feedback.status == 'Pending' %}selected{% endif %}>Pending</option>
+                            <option value="Reviewed" {% if feedback.status == 'Reviewed' %}selected{% endif %}>Reviewed</option>
+                            <option value="Resolved" {% if feedback.status == 'Resolved' %}selected{% endif %}>Resolved</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-bold small text-muted text-uppercase">Administrative Response</label>
+                        <textarea name="admin_reply" class="form-control border-0 bg-light rounded-4 p-3" rows="6" placeholder="Draft your detailed response here...">{{ feedback.admin_reply }}</textarea>
+                        <div class="form-text mt-2 small">This message will be visible to the student in their panel instantly.</div>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary py-3 rounded-pill fw-bold shadow-sm">
+                            <i class="fas fa-check-circle me-2"></i>Commit Update & Notify Student
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

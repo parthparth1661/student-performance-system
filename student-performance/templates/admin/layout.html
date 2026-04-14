@@ -313,7 +313,14 @@
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>Faculty</span>
             </a>
+<<<<<<< HEAD
 
+=======
+            <a href="{{ url_for('admin.view_feedback') }}" class="nav-item {{ 'active' if 'feedback' in request.endpoint }}">
+                <i class="fas fa-comment-alt"></i>
+                <span>Feedback Hub</span>
+            </a>
+>>>>>>> student-panel
             
             <div style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
                 <a href="{{ url_for('admin.logout') }}" class="nav-item logout">

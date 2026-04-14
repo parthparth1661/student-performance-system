@@ -98,11 +98,18 @@ def init_db():
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     enrollment_no VARCHAR(20),
                     subject_id INT,
+<<<<<<< HEAD
                     internal_marks INT DEFAULT 0,
                     viva_marks INT DEFAULT 0,
                     external_marks INT DEFAULT 0,
                     total_marks INT DEFAULT 0,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+=======
+                    internal_marks INT,
+                    viva_marks INT,
+                    external_marks INT,
+                    total_marks INT,
+>>>>>>> student-panel
                     FOREIGN KEY (enrollment_no) REFERENCES students(enrollment_no) ON DELETE CASCADE,
                     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE
                 )
