@@ -79,7 +79,7 @@
                         <td class="text-center">
                             <div class="d-flex align-items-center gap-2 justify-content-center">
                                 <div class="progress flex-grow-1" style="height: 6px; min-width: 60px;">
-                                    <div class="progress-bar {% if row.percent >= 75 %}bg-success{% elif row.percent >= 60 %}bg-warning{% else %}bg-danger{% endif %}" style="width: {{ row.percent }}%"></div>
+                                    <div {{'style="width:' ~ row.percent ~ '%;"'|safe}} class="progress-bar {{'bg-success' if row.percent >= 75 else 'bg-warning' if row.percent >= 60 else 'bg-danger'}}" role="progressbar" aria-valuenow="{{row.percent}}" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <span class="fw-700 {% if row.percent >= 75 %}text-success{% elif row.percent >= 60 %}text-warning{% else %}text-danger{% endif %}">{{ row.percent }}%</span>
                             </div>
