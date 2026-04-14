@@ -1,258 +1,250 @@
 {% extends 'admin/layout.html' %}
 
+{% block page_title %}<h5 class="fw-bold mb-0 text-dark"><i class="bi bi-award me-2"></i>Marks Ledger</h5>{% endblock %}
+
 {% block content %}
-<!-- 🛰️ HEADER SECTOR -->
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h2 class="fw-bold mb-0 text-dark">Institutional Marks Registry</h2>
-        <p class="text-muted small">Comprehensive ledger of academic results and performance auditing.</p>
-    </div>
-    <div class="d-flex gap-3 align-items-center">
-        <!-- 📥 CSV BULK UPLOAD -->
-        <form action="/upload_marks_csv" method="POST" enctype="multipart/form-data" class="d-flex gap-2 align-items-center bg-white p-2 rounded-3 shadow-sm border">
-            <input type="file" name="file" accept=".csv" class="form-control form-control-sm border-0 bg-light" style="max-width: 180px;" required>
-            <button type="submit" class="btn btn-success btn-sm px-3 fw-bold rounded-2">
-                <i class="fas fa-file-csv me-1"></i>Upload
-            </button>
-        </form>
+<div class="container-fluid py-4">
+    <!-- 🚀 HEADER SECTOR -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="fw-bold mb-1 text-dark">Marks Registry</h4>
+            <p class="text-muted small mb-0">Monitor and audit academic results across all modules</p>
+        </div>
+        <div class="d-flex gap-3 align-items-center">
+            <!-- 📥 CSV BULK UPLOAD -->
+            <form action="/upload_marks_csv" method="POST" enctype="multipart/form-data" class="d-flex gap-2 align-items-center bg-white p-2 rounded-3 shadow-sm border">
+                <input type="file" name="file" accept=".csv" class="form-control form-control-sm border-0 bg-light" style="max-width: 180px;" required>
+                <button type="submit" class="btn btn-success btn-sm px-3 fw-bold rounded-2">
+                    <i class="bi bi-file-earmark-spreadsheet me-1"></i>Upload
+                </button>
+            </form>
 
-        <a href="{{ url_for('admin.add_marks') }}" class="btn btn-primary px-4 py-2 rounded-3 shadow-sm fw-bold">
-            <i class="fas fa-plus me-2"></i>Add Marks
-        </a>
-        <!-- 🗑️ CLEAR DATA -->
-        <a href="/clear_marks" class="btn btn-outline-danger px-4 py-2 rounded-3 shadow-sm fw-bold" onclick="return confirm('⚠️ SECURITY ALERT: This will permanently delete ALL Marks records. Continue?')">
-            <i class="fas fa-trash-alt me-2"></i>Clear All
-        </a>
-    </div>
-</div>
-
-<!-- 📊 KPI SUMMARY (MATCHING DESIGN SYSTEM) -->
-<div class="row g-4 mb-4">
-    <div class="col-md-4">
-        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
-            <div class="d-flex align-items-center">
-                <div class="bg-primary-soft text-primary rounded-3 me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
-                    <i class="fas fa-calculator fs-4"></i>
-                </div>
-                <div>
-                    <h6 class="text-muted small fw-bold text-uppercase mb-1">Avg Marks</h6>
-                    <h3 class="fw-bold mb-0">{{ "%.2f"|format(stats.avg_marks or 0) }}%</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
-            <div class="d-flex align-items-center">
-                <div class="bg-success-soft text-success rounded-3 me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
-                    <i class="fas fa-trophy fs-4"></i>
-                </div>
-                <div>
-                    <h6 class="text-muted small fw-bold text-uppercase mb-1">Top Score</h6>
-                    <h3 class="fw-bold mb-0">{{ stats.top_score or 0 }}</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
-            <div class="d-flex align-items-center">
-                <div class="bg-info-soft text-info rounded-3 me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
-                    <i class="fas fa-user-check fs-4"></i>
-                </div>
-                <div>
-                    <h6 class="text-muted small fw-bold text-uppercase mb-1">Pass Rate</h6>
-                    <h3 class="fw-bold mb-0">{{ stats.pass_count or 0 }} <small class="text-muted fs-6">/ {{ stats.total_entries or 0 }}</small></h3>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- 🔍 FILTER BAR (SaaS Style - MATCHING STUDENT PAGE) -->
-<div class="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-white">
-    <form method="GET" class="row g-3 align-items-end">
-        <div class="col-md-3">
-            <label class="form-label small fw-bold text-muted text-uppercase letter-spacing-sm">Search Enrollment</label>
-            <div class="input-group">
-                <span class="input-group-text bg-light border-0"><i class="fas fa-search text-muted"></i></span>
-                <input type="text" name="enrollment" class="form-control bg-light border-0 py-2" placeholder="ID or Number..." value="{{ filters.enrollment or '' }}">
-            </div>
-        </div>
-        <div class="col-md-2">
-            <label class="form-label small fw-bold text-muted text-uppercase letter-spacing-sm">Department</label>
-            <select name="department" class="form-select bg-light border-0 py-2">
-                <option value="All">All Filter</option>
-                <option value="BCA" {% if filters.department == 'BCA' %}selected{% endif %}>BCA</option>
-                <option value="MCA" {% if filters.department == 'MCA' %}selected{% endif %}>MCA</option>
-                <option value="B.TECH" {% if filters.department == 'B.TECH' %}selected{% endif %}>B.TECH</option>
-                <option value="MBA" {% if filters.department == 'MBA' %}selected{% endif %}>MBA</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <label class="form-label small fw-bold text-muted text-uppercase letter-spacing-sm">Semester</label>
-            <select name="semester" class="form-select bg-light border-0 py-2">
-                <option value="All">All Sem</option>
-                {% for i in range(1, 9) %}
-                <option value="{{ i }}" {% if filters.semester == i|string %}selected{% endif %}>Semester {{ i }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="col-md-3">
-            <label class="form-label small fw-bold text-muted text-uppercase letter-spacing-sm">Subject</label>
-            <select name="subject_id" class="form-select bg-light border-0 py-2">
-                <option value="All">All Subjects</option>
-                {% for sub in subjects %}
-                <option value="{{ sub.subject_id }}" {% if filters.subject_id == sub.subject_id|string %}selected{% endif %}>{{ sub.subject_name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="col-md-2 d-flex gap-2">
-            <button type="submit" class="btn btn-indigo px-4 py-2 rounded-3 fw-bold flex-grow-1">Apply Filters</button>
-            <a href="{{ url_for('admin.view_marks') }}" class="btn btn-light px-3 py-2 border rounded-3 text-muted"><i class="fas fa-sync-alt"></i></a>
-        </div>
-    </form>
-</div>
-
-<!-- 📊 MARKS LEDGER (MATCHING STUDENT TABLE STRUCTURE) -->
-<div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4 p-0 bg-white">
-    <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-            <thead class="bg-light border-bottom">
-                <tr class="text-muted small text-uppercase fw-bold text-center">
-                    <th class="ps-4 py-3 text-start">Student Name</th>
-                    <th class="py-3">Enrollment No</th>
-                    <th class="py-3">Internal</th>
-                    <th class="py-3">Viva</th>
-                    <th class="py-3">External</th>
-                    <th class="py-3">Total</th>
-                    <th class="py-3 text-end pe-4">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for m in marks_list %}
-                <tr class="marks-row text-center">
-                    <td class="ps-4 py-3 text-start">
-                        <div class="d-flex align-items-center">
-                            <div class="bg-primary-soft text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold me-3" style="width: 44px; height: 44px; font-size: 14px;">
-                                {{ m.student_name[:2]|upper }}
-                            </div>
-                            <div>
-                                <div class="fw-bold text-dark">{{ m.student_name }}</div>
-                                <div class="text-muted extra-small">{{ m.subject_name }} (Sem {{ m.semester }})</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-secondary fw-medium">{{ m.enrollment_no }}</td>
-                    <td class="fw-bold text-dark">{{ m.internal_marks }}</td>
-                    <td class="fw-bold text-dark">{{ m.viva_marks }}</td>
-                    <td class="fw-bold text-dark">{{ m.external_marks }}</td>
-                    <td>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <span class="fw-bold fs-5 {% if m.total_marks >= 40 %}text-primary{% else %}text-danger{% endif %} me-2">{{ m.total_marks }}</span>
-                            <span class="badge {% if m.total_marks >= 40 %}bg-success-soft text-success{% else %}bg-danger-soft text-danger{% endif %} border px-2 py-1 rounded-pill extra-small fw-bold">
-                                {{ 'PASS' if m.total_marks >= 40 else 'FAIL' }}
-                            </span>
-                        </div>
-                    </td>
-                    <td class="text-end pe-4">
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-light border p-2 rounded-3 shadow-sm" type="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-ellipsis-v text-muted px-1"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3">
-                                <li>
-                                    <a class="dropdown-item py-2" href="{{ url_for('admin.edit_marks', marks_id=m.id) }}">
-                                        <i class="fas fa-edit me-2 text-primary opacity-75"></i> Edit Score
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <a class="dropdown-item py-2 text-danger" href="{{ url_for('admin.delete_marks', marks_id=m.id) }}" onclick="return confirm('CRITICAL: Permanent deletion of marks record for {{ m.student_name }}?')">
-                                        <i class="fas fa-trash-alt me-2 opacity-75"></i> Remove Record
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="5" class="text-center py-5">
-                        <div class="py-5">
-                            <i class="fas fa-poll-h fa-4x text-light mb-3 d-block"></i>
-                            <h5 class="text-muted fw-bold">Academy Ledger Empty</h5>
-                            <p class="text-muted small">No performance data found for the Current filter selection.</p>
-                            <a href="{{ url_for('admin.view_marks') }}" class="btn btn-primary btn-sm px-4 rounded-pill mt-2">Reset Analytics</a>
-                        </div>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<!-- 📄 PAGINATION (MATCHING STUDENT PAGE) -->
-{% if total_pages > 1 %}
-<nav class="d-flex justify-content-between align-items-center mt-4">
-    <div class="text-muted small fw-medium">
-        Showing Page <span class="text-dark fw-bold">{{ page }}</span> of <span class="text-dark fw-bold">{{ total_pages }}</span>
-    </div>
-    <ul class="pagination pagination-sm mb-0 gap-1">
-        <li class="page-item {% if page == 1 %}disabled{% endif %}">
-            <a class="page-link rounded-3 border-0 bg-white shadow-sm p-2 px-3" href="{{ url_for('admin.view_marks', page=page-1, **filters) }}">
-                <i class="fas fa-chevron-left small"></i>
+            <a href="{{ url_for('admin.add_marks') }}" class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm transition-hover">
+                <i class="bi bi-plus-lg me-1"></i>Add Marks
             </a>
-        </li>
-        
-        {% for p in range(1, total_pages + 1) %}
-        {% if p == 1 or p == total_pages or (p >= page - 2 and p <= page + 2) %}
-        <li class="page-item {% if p == page %}active{% endif %}">
-            <a class="page-link rounded-3 border-0 shadow-sm p-2 px-3 {% if p == page %}bg-primary text-white{% else %}bg-white text-dark{% endif %}" href="{{ url_for('admin.view_marks', page=p, **filters) }}">{{ p }}</a>
-        </li>
-        {% elif p == page - 3 or p == page + 3 %}
-        <li class="page-item disabled"><span class="page-link border-0 bg-transparent text-muted px-2">...</span></li>
-        {% endif %}
-        {% endfor %}
-
-        <li class="page-item {% if page == total_pages %}disabled{% endif %}">
-            <a class="page-link rounded-3 border-0 bg-white shadow-sm p-2 px-3" href="{{ url_for('admin.view_marks', page=page+1, **filters) }}">
-                <i class="fas fa-chevron-right small"></i>
+            
+            <a href="/clear_marks" class="btn btn-outline-danger px-3 rounded-3 fw-bold transition-hover" onclick="return confirm('⚠️ SECURITY ALERT: This will permanently delete ALL Marks records. Continue?')">
+                <i class="bi bi-trash"></i>
             </a>
-        </li>
-    </ul>
-</nav>
-{% endif %}
+        </div>
+    </div>
+
+    <!-- 📊 KPI SCORECARD GRID -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-3 transition-hover">
+                <div class="card-body p-4 border-start border-primary border-4 rounded-3">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary-soft text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 48px; height: 48px;">
+                            <i class="bi bi-graph-up fs-5"></i>
+                        </div>
+                        <div>
+                            <div class="text-muted extra-small fw-bold text-uppercase ls-1">Average Performance</div>
+                            <div class="fs-4 fw-bold text-dark mt-1">{{ "%.2f"|format(stats.avg_marks or 0) }}%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-3 transition-hover">
+                <div class="card-body p-4 border-start border-success border-4 rounded-3">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-success-soft text-success rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 48px; height: 48px;">
+                            <i class="bi bi-trophy fs-5"></i>
+                        </div>
+                        <div>
+                            <div class="text-muted extra-small fw-bold text-uppercase ls-1">Elite Score</div>
+                            <div class="fs-4 fw-bold text-dark mt-1">{{ stats.top_score or 0 }} Points</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-3 transition-hover">
+                <div class="card-body p-4 border-start border-info border-4 rounded-3">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-info-soft text-info rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 48px; height: 48px;">
+                            <i class="bi bi-shield-check fs-5"></i>
+                        </div>
+                        <div>
+                            <div class="text-muted extra-small fw-bold text-uppercase ls-1">Pass Ratio</div>
+                            <div class="fs-4 fw-bold text-dark mt-1">{{ stats.pass_count or 0 }} / {{ stats.total_entries or 0 }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔍 SMART FILTER ENGINE -->
+    <div class="card border-0 shadow-sm rounded-3 mb-4">
+        <div class="card-body p-4">
+            <form method="GET" class="row g-3 align-items-end">
+                <div class="col-lg-3">
+                    <label class="form-label fw-bold text-uppercase small text-muted mb-2" style="letter-spacing: 0.05em;">Enrollment</label>
+                    <div class="input-group">
+                        <span class="input-group-text border-0 bg-light text-muted"><i class="bi bi-search"></i></span>
+                        <input type="text" name="enrollment" class="form-control border-0 bg-light rounded-end-3 py-2" placeholder="Search ID..." value="{{ filters.enrollment or '' }}">
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <label class="form-label fw-bold text-uppercase small text-muted mb-2" style="letter-spacing: 0.05em;">Unit</label>
+                    <select name="department" class="form-select border-0 bg-light rounded-3 py-2">
+                        <option value="All">All Filter</option>
+                        <option value="BCA" {% if filters.department == 'BCA' %}selected{% endif %}>BCA</option>
+                        <option value="MCA" {% if filters.department == 'MCA' %}selected{% endif %}>MCA</option>
+                        <option value="B.TECH" {% if filters.department == 'B.TECH' %}selected{% endif %}>B.TECH</option>
+                        <option value="MBA" {% if filters.department == 'MBA' %}selected{% endif %}>MBA</option>
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <label class="form-label fw-bold text-uppercase small text-muted mb-2" style="letter-spacing: 0.05em;">Semester</label>
+                    <select name="semester" class="form-select border-0 bg-light rounded-3 py-2">
+                        <option value="All">All Sem</option>
+                        {% for i in range(1, 9) %}
+                        <option value="{{ i }}" {% if filters.semester == i|string %}selected{% endif %}>Sem {{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-lg-3">
+                    <label class="form-label fw-bold text-uppercase small text-muted mb-2" style="letter-spacing: 0.05em;">Subject Module</label>
+                    <select name="subject_id" class="form-select border-0 bg-light rounded-3 py-2">
+                        <option value="All">All Subjects</option>
+                        {% for sub in subjects %}
+                        <option value="{{ sub.subject_id }}" {% if filters.subject_id == sub.subject_id|string %}selected{% endif %}>{{ sub.subject_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary w-100 rounded-3 fw-bold py-2 shadow-sm transition-hover">
+                            Apply Filter
+                        </button>
+                        <a href="{{ url_for('admin.view_marks') }}" class="btn btn-light px-3 py-2 border rounded-3 text-muted shadow-sm transition-hover">
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 📦 MARKS DATA MATRIX -->
+    <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle mb-0 text-center">
+                    <thead class="bg-light">
+                        <tr class="text-secondary small text-uppercase fw-bold text-center">
+                            <th class="ps-4 py-3 text-start">Student Profile</th>
+                            <th class="py-3">Enrollment</th>
+                            <th class="py-3">Internal</th>
+                            <th class="py-3">Viva</th>
+                            <th class="py-3">External</th>
+                            <th class="py-3">Aggregate</th>
+                            <th class="py-3 text-center pe-4">Manage Record</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for m in marks_list %}
+                        <tr>
+                            <td class="ps-4 py-3 text-start">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-primary-soft text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold me-3" style="width: 40px; height: 40px; font-size: 13px;">
+                                        {{ m.student_name[:2]|upper }}
+                                    </div>
+                                    <div>
+                                        <div class="fw-bold text-dark fs-6">{{ m.student_name }}</div>
+                                        <div class="text-muted extra-small">{{ m.subject_name }} (Sem {{ m.semester }})</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge bg-light border text-primary rounded-pill px-3 py-1 font-monospace fw-bold">
+                                    {{ m.enrollment_no }}
+                                </span>
+                            </td>
+                            <td class="fw-semibold text-dark">{{ m.internal_marks }}</td>
+                            <td class="fw-semibold text-dark">{{ m.viva_marks }}</td>
+                            <td class="fw-semibold text-dark">{{ m.external_marks }}</td>
+                            <td>
+                                <div class="d-flex align-items-center justify-content-center gap-3">
+                                    <span class="fw-bold fs-5 {% if m.total_marks >= 40 %}text-primary{% else %}text-danger{% endif %}">{{ m.total_marks }}</span>
+                                    <span class="badge {% if m.total_marks >= 40 %}bg-success-soft text-success{% else %}bg-danger-soft text-danger{% endif %} border px-3 py-1 rounded-pill extra-small fw-bold">
+                                        {{ 'PASS' if m.total_marks >= 40 else 'FAIL' }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="text-center pe-4">
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="{{ url_for('admin.edit_marks', marks_id=m.id) }}" class="btn btn-sm btn-outline-primary rounded-2 px-3 fw-bold">
+                                        <i class="bi bi-pencil me-1"></i>Edit
+                                    </a>
+                                    <a href="{{ url_for('admin.delete_marks', marks_id=m.id) }}" 
+                                       class="btn btn-sm btn-outline-danger rounded-2 px-3 fw-bold"
+                                       onclick="return confirm('CRITICAL: Permanent deletion of marks record for {{ m.student_name }}?')">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center py-5 text-muted">
+                                <i class="bi bi-clipboard-data fa-3x mb-3 opacity-25"></i>
+                                <h6 class="fw-bold">No Records Found</h6>
+                                <p class="small">The registry is empty for the current institutional filter selection.</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📄 PAGINATION MATRIX -->
+    {% if total_pages > 1 %}
+    <div class="d-flex justify-content-between align-items-center mt-4 px-2">
+        <div class="small text-muted fw-bold text-uppercase" style="letter-spacing: 0.05em; font-size: 10px;">
+            Registry Matrix <span class="text-dark">Page {{ page }}</span> of {{ total_pages }}
+        </div>
+        <nav>
+            <ul class="pagination pagination-sm mb-0 gap-2">
+                {% if page > 1 %}
+                <li class="page-item"><a class="page-link border-0 rounded-2 shadow-sm px-3 py-2 bg-white" href="{{ url_for('admin.view_marks', page=page-1, **filters) }}"><i class="bi bi-chevron-left text-primary"></i></a></li>
+                {% endif %}
+                
+                {% for p in range(1, total_pages + 1) %}
+                <li class="page-item {% if p == page %}active{% endif %}">
+                    <a class="page-link border-0 rounded-2 shadow-sm px-3 py-2 {% if p == page %}bg-primary text-white{% else %}bg-white text-dark{% endif %}" href="{{ url_for('admin.view_marks', page=p, **filters) }}">{{ p }}</a>
+                </li>
+                {% endfor %}
+
+                {% if page < total_pages %}
+                <li class="page-item"><a class="page-link border-0 rounded-2 shadow-sm px-3 py-2 bg-white" href="{{ url_for('admin.view_marks', page=page+1, **filters) }}"><i class="bi bi-chevron-right text-primary"></i></a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    {% endif %}
+</div>
 
 <style>
-.marks-row { transition: background 0.2s ease; }
-.marks-row:hover {
-    background-color: rgba(99, 102, 241, 0.03) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-th, td {
-    text-align: center;
-    padding: 10px !important;
-}
-.text-start {
-    text-align: left !important;
-}
-.text-end {
-    text-align: right !important;
-}
-.bg-primary-soft { background-color: rgba(99, 102, 241, 0.1); }
-.bg-success-soft { background-color: rgba(34, 197, 94, 0.1); }
-.bg-info-soft { background-color: rgba(6, 182, 212, 0.1); }
-.bg-danger-soft { background-color: rgba(239, 68, 68, 0.1); }
-.bg-indigo-soft { background-color: rgba(79, 70, 229, 0.1); }
-.text-indigo { color: #4f46e9; }
-.btn-indigo { background-color: #4f46e9; color: white; border: none; transition: transform 0.15s ease, background-color 0.2s ease; }
-.btn-indigo:hover { background-color: #4338ca; color: white; transform: scale(1.03); }
-.extra-small { font-size: 0.7rem; }
-.letter-spacing-sm { letter-spacing: 0.05rem; }
-.page-link { transition: transform 0.15s ease, background-color 0.2s ease; }
-.page-link:hover { background-color: #f1f5f9 !important; color: #4f46e9 !important; transform: scale(1.03); }
+    .bg-primary-soft { background-color: rgba(99, 102, 241, 0.1); }
+    .bg-success-soft { background-color: rgba(34, 197, 94, 0.1); }
+    .bg-info-soft { background-color: rgba(6, 182, 212, 0.1); }
+    .bg-danger-soft { background-color: rgba(239, 68, 68, 0.1); }
+    
+    .ls-1 { letter-spacing: 0.1em; }
+    .extra-small { font-size: 0.7rem; }
+    
+    .transition-hover { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    .transition-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1) !important; }
+    
+    .table-striped > tbody > tr:nth-of-type(odd) { --bs-table-accent-bg: rgba(0, 0, 0, 0.01); }
+    .page-link:hover { background-color: var(--primary-color) !important; color: white !important; }
 </style>
 {% endblock %}
