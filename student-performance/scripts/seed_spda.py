@@ -57,14 +57,15 @@ def seed_database():
         """, subjects_data)
         
         # 4️⃣ INSERT MARKS 📊
+        # Schema: enrollment_no, subject_id, internal, viva, external, total
         marks_data = [
-            ('101', 1, 'Mid', 75, 100),
-            ('102', 2, 'Mid', 65, 100),
-            ('103', 3, 'Mid', 85, 100)
+            ('101', 1, 25, 8, 42, 75),
+            ('102', 2, 20, 5, 40, 65),
+            ('103', 3, 28, 9, 48, 85)
         ]
         cursor.executemany("""
-            INSERT INTO marks (enrollment_no, subject_id, exam_type, marks_obtained, total_marks)
-            VALUES (%s, %s, %s, %s, %s)
+            INSERT INTO marks (enrollment_no, subject_id, internal_marks, viva_marks, external_marks, total_marks)
+            VALUES (%s, %s, %s, %s, %s, %s)
         """, marks_data)
         
         # 5️⃣ INSERT ATTENDANCE 📅
