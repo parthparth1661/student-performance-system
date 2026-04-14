@@ -65,16 +65,10 @@
                         </select>
                     </div>
 
-                    <!-- Faculty Section -->
-                    <div class="col-12 mb-2 mt-4">
-                        <h6 class="text-uppercase small fw-bold text-primary letter-spacing-1">Pedagogical Assignment</h6>
-                        <hr class="mt-2 opacity-10">
-                    </div>
-
-                    <div class="col-12">
-                        <label class="form-label small fw-bold text-muted"><i class="fas fa-user-tie me-2 text-primary opacity-50"></i>Assigned Faculty</label>
+                    <div class="col-12 mt-3">
+                        <label class="form-label small fw-bold text-muted"><i class="fas fa-user-tie me-2 text-primary opacity-50"></i>Assign Faculty</label>
                         <select name="faculty_id" class="form-select py-2 border-0 bg-light rounded-3">
-                            <option value="">Optionally assign a faculty member...</option>
+                            <option value="">Assign Faculty...</option>
                             {% for f in faculties %}
                             <option value="{{ f.faculty_id }}" {% if subject and subject.faculty_id == f.faculty_id %}selected{% endif %}>{{ f.faculty_name }} ({{ f.department }})</option>
                             {% endfor %}
