@@ -157,12 +157,14 @@ endblock %}
             <table class="table table-striped table-hover align-middle mb-0 text-center">
                 <thead class="bg-light">
                     <tr class="text-secondary extra-small text-uppercase fw-bold text-center">
-                        <th class="ps-4 py-3 text-start">Student Registry</th>
+                        <th class="ps-4 py-3 text-start">Student Name</th>
                         <th class="py-3">Enrollment</th>
                         <th class="py-3">Subject</th>
-                        <th class="py-3">Internal</th>
-                        <th class="py-3">External</th>
+                        <th class="py-3">Int. (30)</th>
+                        <th class="py-3">Viva (20)</th>
+                        <th class="py-3">Ext. (50)</th>
                         <th class="py-3">Total</th>
+                        <th class="py-3">Result</th>
                         <th class="py-3 text-center pe-4">Manage</th>
                     </tr>
                 </thead>
@@ -178,12 +180,15 @@ endblock %}
                                 }}</span>
                         </td>
                         <td class="small fw-semibold">{{ m.subject_name }}</td>
-                        <td class="fw-medium">{{ m.internal_marks }}</td>
-                        <td class="fw-medium">{{ m.external_marks }}</td>
+                        <td class="fw-medium text-muted small">{{ m.internal_marks }}</td>
+                        <td class="fw-medium text-muted small">{{ m.viva_marks }}</td>
+                        <td class="fw-medium text-muted small">{{ m.external_marks }}</td>
+                        <td class="fw-bold text-dark">{{ m.total_marks }}</td>
                         <td>
                             <span
-                                class="fw-bold fs-5 {% if m.total_marks >= 40 %}text-success{% else %}text-danger{% endif %}">{{
-                                m.total_marks }}</span>
+                                class="badge {% if m.result == 'Pass' %}bg-success{% else %}bg-danger{% endif %} rounded-pill px-3">
+                                {{ m.result or 'Fail' }}
+                            </span>
                         </td>
                         <td class="text-center pe-4">
                             <div class="d-flex justify-content-center gap-2">

@@ -775,15 +775,20 @@ def add_marks():
                 v_m = float(request.form.get('viva_marks', 0))
                 e_m = float(external_marks)
                 
-                # 🧱 STEP 2 — CALCULATE TOTAL (Internal + Viva + External)
-                total_marks = i_m + v_m + e_m
-
-                # 🧱 STEP 5 — VALIDATION (Standard 0-100 range)
-                if not (0 <= i_m <= 100) or not (0 <= v_m <= 100) or not (0 <= e_m <= 100):
-                    flash("Component marks must be between 0 and 100", "danger")
-                elif total_marks > 100:
-                    flash("Invalid marks: Total cannot exceed 100", "danger")
+                # 🧱 STEP 1 & 5 — VALIDATION (Standard Academic Limits)
+                if not (0 <= i_m <= 30):
+                    flash("Invalid Score: Internal marks cannot exceed 30.", "danger")
+                elif not (0 <= v_m <= 20):
+                    flash("Invalid Score: Viva marks cannot exceed 20.", "danger")
+                elif not (0 <= e_m <= 50):
+                    flash("Invalid Score: External marks cannot exceed 50.", "danger")
                 else:
+                    # 🧱 STEP 2 — TOTAL CALCULATION (30 + 20 + 50 = 100)
+                    total_marks = i_m + v_m + e_m
+                    
+                    # 🧱 STEP 3 — PASS / FAIL LOGIC
+                    # Rule: Total >= 40 AND External >= 20
+                    result = 'Pass' if (total_marks >= 40 and e_m >= 20) else 'Fail'
                     # 🛡️ PREVENT DUPLICATE ENTRY (Fixed for new schema)
                     cursor.execute("""
                         SELECT * FROM marks 
@@ -793,11 +798,11 @@ def add_marks():
                     if cursor.fetchone():
                         flash(f"Duplicate Entry Warning: Record already exists for Student {enrollment_no} in this subject.", "warning")
                     else:
-                        # 🧱 STEP 3 — INSERT QUERY
+                        # 🧱 STEP 4 — INSERT QUERY
                         cursor.execute("""
-                            INSERT INTO marks (enrollment_no, subject_id, internal_marks, viva_marks, external_marks, total_marks)
-                            VALUES (%s, %s, %s, %s, %s, %s)
-                        """, (enrollment_no, subject_id, i_m, v_m, e_m, total_marks))
+                            INSERT INTO marks (enrollment_no, subject_id, internal_marks, viva_marks, external_marks, total_marks, result)
+                            VALUES (%s, %s, %s, %s, %s, %s, %s)
+                        """, (enrollment_no, subject_id, i_m, v_m, e_m, total_marks, result))
                         
                         conn.commit()
                         flash(f"Record for {enrollment_no} registered successfully!", "success")
@@ -826,19 +831,22 @@ def edit_marks(marks_id):
             v_m = float(request.form.get('viva_marks', 0))
             e_m = float(request.form.get('external_marks', 0))
             
-            # 🧱 STEP 5 — VALIDATION (0-100)
-            if not (0 <= i_m <= 100) or not (0 <= v_m <= 100) or not (0 <= e_m <= 100):
-                flash("Validation Error: Marks must be within 0-100 range", "danger")
+            # 🧱 STEP 1 & 5 — VALIDATION (Standard Academic Limits)
+            if not (0 <= i_m <= 30) or not (0 <= v_m <= 20) or not (0 <= e_m <= 50):
+                flash("Validation Error: Component scores exceed limits (Int: 30, Viva: 20, Ext: 50)", "danger")
             else:
                 total_marks = i_m + v_m + e_m
+                # 🧱 STEP 3 — PASS / FAIL LOGIC
+                result = 'Pass' if (total_marks >= 40 and e_m >= 20) else 'Fail'
+                
                 if total_marks > 100:
                     flash("Invalid marks: Total cannot exceed 100", "danger")
                 else:
                     cursor.execute("""
                         UPDATE marks 
-                        SET internal_marks=%s, viva_marks=%s, external_marks=%s, total_marks=%s
+                        SET internal_marks=%s, viva_marks=%s, external_marks=%s, total_marks=%s, result=%s
                         WHERE id = %s
-                    """, (i_m, v_m, e_m, total_marks, marks_id))
+                    """, (i_m, v_m, e_m, total_marks, result, marks_id))
                     
                     conn.commit()
                     flash("Academic record updated successfully!", "success")

@@ -84,20 +84,20 @@
                                 <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-grid-3x3 me-2"></i>Academic Component Scores</h6>
                                 <div class="row g-3">
                                     <div class="col-md-4">
-                                        <label class="form-label fw-bold extra-small text-uppercase text-muted">Internal (0-100)</label>
-                                        <input type="number" name="internal_marks" id="internal_marks" step="1" min="0" max="100" 
+                                        <label class="form-label fw-bold extra-small text-uppercase text-muted">Internal (0-30)</label>
+                                        <input type="number" name="internal_marks" id="internal_marks" step="1" min="0" max="30" 
                                                class="form-control border-0 bg-white rounded-3 py-3 fw-bold text-primary" 
                                                placeholder="0" value="{{ mark.internal_marks if edit_mode else '0' }}" required>
                                     </div>
                                     <div class="col-md-4">
-                                        <label class="form-label fw-bold extra-small text-uppercase text-muted">Viva (0-100)</label>
-                                        <input type="number" name="viva_marks" id="viva_marks" step="1" min="0" max="100" 
+                                        <label class="form-label fw-bold extra-small text-uppercase text-muted">Viva (0-20)</label>
+                                        <input type="number" name="viva_marks" id="viva_marks" step="1" min="0" max="20" 
                                                class="form-control border-0 bg-white rounded-3 py-3 fw-bold text-primary" 
                                                placeholder="0" value="{{ mark.viva_marks if edit_mode else '0' }}" required>
                                     </div>
                                     <div class="col-md-4">
-                                        <label class="form-label fw-bold extra-small text-uppercase text-muted">External (0-100)</label>
-                                        <input type="number" name="external_marks" id="external_marks" step="1" min="0" max="100" 
+                                        <label class="form-label fw-bold extra-small text-uppercase text-muted">External (0-50)</label>
+                                        <input type="number" name="external_marks" id="external_marks" step="1" min="0" max="50" 
                                                class="form-control border-0 bg-white rounded-3 py-3 fw-bold text-primary" 
                                                placeholder="0" value="{{ mark.external_marks if edit_mode else '0' }}" required>
                                     </div>

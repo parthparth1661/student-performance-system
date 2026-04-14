@@ -104,6 +104,7 @@ def init_db():
                     viva_marks INT DEFAULT 0,
                     external_marks INT DEFAULT 0,
                     total_marks INT DEFAULT 0,
+                    result VARCHAR(10) DEFAULT 'Fail',
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     FOREIGN KEY (enrollment_no) REFERENCES students(enrollment_no) ON DELETE CASCADE,
                     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE
