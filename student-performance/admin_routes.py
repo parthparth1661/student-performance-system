@@ -653,25 +653,36 @@ def view_marks():
     
     cursor.execute(query, params)
     marks_list = cursor.fetchall()
-
-    # Post-process for display breakdown if template doesn't show it
+    
+    # Post-process for display
     for m in marks_list:
-        m['marks_obtained'] = m['total_marks']
-        m['status'] = 'PASS' if m['total_marks'] >= 40 else 'FAIL'
-        m['exam_type'] = f"I:{m['internal_marks']} V:{m['viva_marks']} E:{m['external_marks']}"
-        m['marks_id'] = m['id'] # Maintain compatibility with edit/delete links in template
+        m['marks_id'] = m['id']
 
     # Fetch subjects for filter dropdown
     cursor.execute("SELECT subject_id, subject_name FROM subjects ORDER BY subject_name")
     all_subjects = cursor.fetchall()
-    
+
+    # 📊 Calculate Subject-wise Averages for Chart
+    cursor.execute("""
+        SELECT sub.subject_name, AVG(m.total_marks) as avg_marks
+        FROM marks m
+        JOIN subjects sub ON m.subject_id = sub.subject_id
+        GROUP BY m.subject_id
+        ORDER BY avg_marks DESC
+    """)
+    subject_averages = cursor.fetchall()
+    chart_labels = [row['subject_name'] for row in subject_averages]
+    chart_values = [float(row['avg_marks']) for row in subject_averages]
+
     conn.close()
     return render_template('admin/view_marks.html', 
                           marks_list=marks_list, 
                           subjects=all_subjects,
                           stats=marks_stats,
+                          chart_data={'labels': chart_labels, 'values': chart_values},
                           page=page, 
                           total_pages=total_pages,
+                          total_records=total_records,
                           filters={
                               'enrollment': enrollment, 
                               'department': department,
@@ -679,6 +690,36 @@ def view_marks():
                               'subject_id': subject_id, 
                               'exam_type': exam_type
                           })
+
+@admin_bp.route('/get-subjects')
+def get_subjects_api():
+    department = request.args.get('department')
+    semester = request.args.get('semester')
+    
+    if not (department and semester):
+        return {"error": "Missing params"}, 400
+        
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT subject_id, subject_name FROM subjects WHERE department = %s AND semester = %s", (department, semester))
+    subjects = cursor.fetchall()
+    conn.close()
+    return {"subjects": subjects}
+
+@admin_bp.route('/get-students')
+def get_students_api():
+    department = request.args.get('department')
+    semester = request.args.get('semester')
+    
+    if not (department and semester):
+        return {"error": "Missing params"}, 400
+        
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT enrollment_no, name FROM students WHERE department = %s AND semester = %s", (department, semester))
+    students = cursor.fetchall()
+    conn.close()
+    return {"students": students}
 
 @admin_bp.route('/add_marks', methods=['GET', 'POST'])
 @admin_bp.route('/marks/add', methods=['GET', 'POST'])
@@ -731,19 +772,15 @@ def add_marks():
         else:
             try:
                 i_m = float(internal_marks)
-                v_m = float(viva_marks)
+                v_m = float(request.form.get('viva_marks', 0))
                 e_m = float(external_marks)
                 
-                # 🧱 STEP 2 — CALCULATE TOTAL (MAIN LOGIC)
+                # 🧱 STEP 2 — CALCULATE TOTAL (Internal + Viva + External)
                 total_marks = i_m + v_m + e_m
 
-                # 🧱 STEP 5 — VALIDATION (IMPORTANT)
-                if not (0 <= i_m <= 30):
-                    flash("Internal marks must be 0-30", "danger")
-                elif not (0 <= v_m <= 10):
-                    flash("Viva marks must be 0-10", "danger")
-                elif not (0 <= e_m <= 60):
-                    flash("External marks must be 0-60", "danger")
+                # 🧱 STEP 5 — VALIDATION (Standard 0-100 range)
+                if not (0 <= i_m <= 100) or not (0 <= v_m <= 100) or not (0 <= e_m <= 100):
+                    flash("Component marks must be between 0 and 100", "danger")
                 elif total_marks > 100:
                     flash("Invalid marks: Total cannot exceed 100", "danger")
                 else:
@@ -789,9 +826,9 @@ def edit_marks(marks_id):
             v_m = float(request.form.get('viva_marks', 0))
             e_m = float(request.form.get('external_marks', 0))
             
-            # 🧱 STEP 5 — VALIDATION (IMPORTANT)
-            if not (0 <= i_m <= 30 and 0 <= v_m <= 10 and 0 <= e_m <= 60):
-                flash("Validation Error: Component scores must be within valid range (Int: 30, Viva: 10, Ext: 60)", "danger")
+            # 🧱 STEP 5 — VALIDATION (0-100)
+            if not (0 <= i_m <= 100) or not (0 <= v_m <= 100) or not (0 <= e_m <= 100):
+                flash("Validation Error: Marks must be within 0-100 range", "danger")
             else:
                 total_marks = i_m + v_m + e_m
                 if total_marks > 100:

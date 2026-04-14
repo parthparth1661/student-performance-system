@@ -5,216 +5,221 @@
 {% block content %}
 <div class="container-fluid py-4">
     <div class="row justify-content-center">
-        <div class="col-lg-9">
+        <div class="col-lg-10">
             <!-- 🎨 HEADER SECTOR -->
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
-                    <h4 class="fw-bold mb-1 text-dark">{{ 'Modify Score Matrix' if edit_mode else 'New Academic Entry' }}</h4>
-                    <p class="text-muted small mb-0">{{ 'Update existing performance records' if edit_mode else 'Assign academic marks to student profiles' }}</p>
+                    <h4 class="fw-bold mb-1 text-dark">{{ 'Modify Score' if edit_mode else 'Add New Marks' }}</h4>
+                    <p class="text-muted small mb-0">Unified academic performance recording system</p>
                 </div>
                 <a href="{{ url_for('admin.view_marks') }}" class="btn btn-light border shadow-sm px-4 fw-bold rounded-3 transition-hover">
                     <i class="bi bi-arrow-left me-2"></i>Back to Ledger
                 </a>
             </div>
 
-            {% if not edit_mode %}
-            <!-- 📍 STEP 1: CONTEXT SELECTION -->
-            <div class="card border-0 shadow-sm rounded-3 mb-4 bg-white border-start border-primary border-5">
-                <div class="card-body p-4">
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="bg-primary-soft text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px;">
-                            <span class="fw-bold small">1</span>
-                        </div>
-                        <h6 class="fw-bold text-dark mb-0">Academic Context Selection</h6>
-                    </div>
-                    <form id="filterForm" method="GET" class="row g-3">
-                        <div class="col-md-5">
-                            <label class="form-label fw-bold text-uppercase small text-muted mb-2 ls-1">Department</label>
-                            <select name="department" class="form-select border-0 bg-light rounded-3 py-2 px-3" onchange="this.form.submit()" required>
-                                <option value="">Select Department</option>
-                                <option value="BCA" {% if selected_dept == 'BCA' %}selected{% endif %}>BCA (Computer Applications)</option>
-                                <option value="MCA" {% if selected_dept == 'MCA' %}selected{% endif %}>MCA (Master Applications)</option>
-                                <option value="B.TECH" {% if selected_dept == 'B.TECH' %}selected{% endif %}>B.TECH (Engineering)</option>
-                                <option value="MBA" {% if selected_dept == 'MBA' %}selected{% endif %}>MBA (Professional Management)</option>
-                            </select>
-                        </div>
-                        <div class="col-md-5">
-                            <label class="form-label fw-bold text-uppercase small text-muted mb-2 ls-1">Semester</label>
-                            <select name="semester" class="form-select border-0 bg-light rounded-3 py-2 px-3" onchange="this.form.submit()" required>
-                                <option value="">Select Semester</option>
-                                {% for i in range(1, 9) %}
-                                <option value="{{ i }}" {% if selected_sem == (i|string) %}selected{% endif %}>Semester {{ i }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col-md-2 d-flex align-items-end">
-                            <a href="{{ url_for('admin.add_marks') }}" class="btn btn-outline-secondary w-100 rounded-3 py-2 border-0 bg-light transition-hover" title="Reset Filters">
-                                <i class="bi bi-arrow-counterclockwise"></i>
-                            </a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            {% endif %}
-
-            {% if (selected_dept and selected_sem) or edit_mode %}
-            <!-- 🧪 STEP 2: PERFORMANCE ENTRY -->
+            <!-- 🧬 DYNAMIC PERFORMANCE FORM -->
             <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
                 <div class="card-body p-4 p-md-5">
-                    <div class="d-flex align-items-center mb-5">
-                        <div class="bg-primary-soft text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px;">
-                            <span class="fw-bold small">{{ 'Edit' if edit_mode else '2' }}</span>
-                        </div>
-                        <h6 class="fw-bold text-dark mb-0 font-outfit">{{ 'Modify Academic Performance Matrix' if edit_mode else 'Enter Student Performance Metrics' }}</h6>
-                    </div>
-
                     <form method="POST" id="markForm" class="row g-4">
-                        {% if not edit_mode %}
-                        <!-- Contextual Selection -->
-                        <div class="col-md-12">
-                            <label class="form-label fw-bold text-uppercase small text-muted mb-2 ls-1">Target Student</label>
-                            <select name="enrollment_no" class="form-select border-0 bg-light rounded-3 py-3 px-4 font-outfit" required>
-                                <option value="">Select student from {{ selected_dept }} Semester {{ selected_sem }}...</option>
-                                {% for s in students %}
-                                <option value="{{ s.enrollment_no }}">{{ s.enrollment_no }} — {{ s.name }}</option>
+                        
+                        <!-- STEP 1: CONTEXT SELECTION (Dept | Sem) -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Department</label>
+                            <select name="department" id="department" class="form-select border-0 bg-light rounded-3 py-3 px-4" required {% if edit_mode %}disabled{% endif %}>
+                                <option value="">Select Department</option>
+                                <option value="BCA" {% if selected_dept == 'BCA' or (mark and mark.department == 'BCA') %}selected{% endif %}>BCA (Computer Applications)</option>
+                                <option value="MCA" {% if selected_dept == 'MCA' or (mark and mark.department == 'MCA') %}selected{% endif %}>MCA (Master Applications)</option>
+                                <option value="B.TECH" {% if selected_dept == 'B.TECH' or (mark and mark.department == 'B.TECH') %}selected{% endif %}>B.TECH (Engineering)</option>
+                                <option value="MBA" {% if selected_dept == 'MBA' or (mark and mark.department == 'MBA') %}selected{% endif %}>MBA (Professional Management)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Semester</label>
+                            <select name="semester" id="semester" class="form-select border-0 bg-light rounded-3 py-3 px-4" required {% if edit_mode %}disabled{% endif %}>
+                                <option value="">Select Semester</option>
+                                {% for i in range(1, 9) %}
+                                <option value="{{ i }}" {% if (selected_sem == (i|string)) or (mark and mark.semester == i) %}selected{% endif %}>Semester {{ i }}</option>
                                 {% endfor %}
                             </select>
                         </div>
 
-                        <div class="col-md-12">
-                            <label class="form-label fw-bold text-uppercase small text-muted mb-2 ls-1">Academic Subject</label>
-                            <select name="subject_id" class="form-select border-0 bg-light rounded-3 py-3 px-4 font-outfit" required>
-                                <option value="">Select relevant subject module...</option>
-                                {% for sub in subjects %}
-                                <option value="{{ sub.subject_id }}">{{ sub.subject_name }}</option>
-                                {% endfor %}
-                            </select>
+                        <!-- STEP 2: TARGET IDENTITIES -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Student Registry</label>
+                            {% if edit_mode %}
+                                <input type="text" class="form-control border-0 bg-light rounded-3 py-3 px-4 fw-bold" value="{{ mark.student_name }} ({{ mark.enrollment_no }})" readonly>
+                                <input type="hidden" name="enrollment_no" value="{{ mark.enrollment_no }}">
+                            {% else %}
+                                <select name="enrollment_no" id="enrollment_no" class="form-select border-0 bg-light rounded-3 py-3 px-4" required>
+                                    <option value="">Awaiting context...</option>
+                                    {% if students %}
+                                        {% for s in students %}
+                                        <option value="{{ s.enrollment_no }}">{{ s.enrollment_no }} — {{ s.name }}</option>
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                            {% endif %}
                         </div>
-                        {% else %}
-                        <!-- Static Performance Header -->
-                        <div class="col-12 mb-2">
-                            <div class="p-4 bg-primary-soft rounded-3 border-start border-primary border-4 shadow-sm">
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Subject Module</label>
+                            {% if edit_mode %}
+                                <input type="text" class="form-control border-0 bg-light rounded-3 py-3 px-4 fw-bold" value="{{ mark.subject_name }}" readonly>
+                                <input type="hidden" name="subject_id" value="{{ mark.subject_id }}">
+                            {% else %}
+                                <select name="subject_id" id="subject_id" class="form-select border-0 bg-light rounded-3 py-3 px-4" required>
+                                    <option value="">Awaiting context...</option>
+                                    {% if subjects %}
+                                        {% for sub in subjects %}
+                                        <option value="{{ sub.subject_id }}">{{ sub.subject_name }}</option>
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                            {% endif %}
+                        </div>
+
+                        <!-- STEP 3: MARKS MATRIX (Int | Viva | Ext) -->
+                        <div class="col-12 mt-5">
+                            <div class="p-4 bg-primary-soft rounded-3 border-start border-primary border-4 mb-4">
+                                <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-grid-3x3 me-2"></i>Academic Component Scores</h6>
                                 <div class="row g-3">
                                     <div class="col-md-4">
-                                        <div class="extra-small fw-bold text-uppercase text-muted ls-1">Student</div>
-                                        <div class="fw-bold text-dark fs-6">{{ mark.student_name }}</div>
+                                        <label class="form-label fw-bold extra-small text-uppercase text-muted">Internal (0-100)</label>
+                                        <input type="number" name="internal_marks" id="internal_marks" step="1" min="0" max="100" 
+                                               class="form-control border-0 bg-white rounded-3 py-3 fw-bold text-primary" 
+                                               placeholder="0" value="{{ mark.internal_marks if edit_mode else '0' }}" required>
                                     </div>
-                                    <div class="col-md-4 text-md-center">
-                                        <div class="extra-small fw-bold text-uppercase text-muted ls-1">Enrollment</div>
-                                        <div class="badge bg-white border text-primary rounded-pill px-3 py-1 font-monospace fw-bold">{{ mark.enrollment_no }}</div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-bold extra-small text-uppercase text-muted">Viva (0-100)</label>
+                                        <input type="number" name="viva_marks" id="viva_marks" step="1" min="0" max="100" 
+                                               class="form-control border-0 bg-white rounded-3 py-3 fw-bold text-primary" 
+                                               placeholder="0" value="{{ mark.viva_marks if edit_mode else '0' }}" required>
                                     </div>
-                                    <div class="col-md-4 text-md-end">
-                                        <div class="extra-small fw-bold text-uppercase text-muted ls-1">Subject</div>
-                                        <div class="fw-bold text-dark fs-6">{{ mark.subject_name }}</div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-bold extra-small text-uppercase text-muted">External (0-100)</label>
+                                        <input type="number" name="external_marks" id="external_marks" step="1" min="0" max="100" 
+                                               class="form-control border-0 bg-white rounded-3 py-3 fw-bold text-primary" 
+                                               placeholder="0" value="{{ mark.external_marks if edit_mode else '0' }}" required>
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="enrollment_no" value="{{ mark.enrollment_no }}">
-                            <input type="hidden" name="subject_id" value="{{ mark.subject_id }}">
-                        </div>
-                        {% endif %}
-
-                        <!-- Component Matrix -->
-                        <div class="col-md-4">
-                            <label class="form-label fw-bold text-uppercase small text-muted mb-2 ls-1">Internal (Max 30)</label>
-                            <input type="number" name="internal_marks" id="internal_marks" step="1" min="0" max="30" 
-                                   class="form-control form-control-lg border-0 bg-light rounded-3 px-4 fw-bold text-primary" 
-                                   placeholder="0" value="{{ mark.internal_marks if edit_mode else '0' }}" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label fw-bold text-uppercase small text-muted mb-2 ls-1">Viva (Max 10)</label>
-                            <input type="number" name="viva_marks" id="viva_marks" step="1" min="0" max="10" 
-                                   class="form-control form-control-lg border-0 bg-light rounded-3 px-4 fw-bold text-primary" 
-                                   placeholder="0" value="{{ mark.viva_marks if edit_mode else '0' }}" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label fw-bold text-uppercase small text-muted mb-2 ls-1">External (Max 60)</label>
-                            <input type="number" name="external_marks" id="external_marks" step="1" min="0" max="60" 
-                                   class="form-control form-control-lg border-0 bg-light rounded-3 px-4 fw-bold text-primary" 
-                                   placeholder="0" value="{{ mark.external_marks if edit_mode else '0' }}" required>
                         </div>
 
-                        <!-- Aggregate Projection -->
-                        <div class="col-12 mt-5">
-                            <div class="bg-light p-4 rounded-3 d-flex justify-content-between align-items-center">
+                        <!-- 🧮 AUTOMATED CALCULATION -->
+                        <div class="col-12">
+                            <div class="bg-light p-4 rounded-3 d-flex justify-content-between align-items-center shadow-sm">
                                 <div>
                                     <h6 class="fw-bold mb-1 text-dark">Calculated Final Aggregate</h6>
-                                    <p class="extra-small text-muted mb-0"><i class="bi bi-shield-check me-1 text-success"></i>System validated sum of performance components (Max 100).</p>
+                                    <p class="extra-small text-muted mb-0">Real-time sum of Internal, Viva, and External components.</p>
                                 </div>
-                                <div class="text-end">
-                                    <div class="extra-small fw-bold text-uppercase text-muted ls-1 mb-1">Total Marks</div>
-                                    <input type="number" name="marks_obtained" id="marks_obtained" 
+                                <div class="text-center">
+                                    <input type="number" id="marks_obtained" 
                                            class="form-control form-control-lg border-0 bg-white shadow-sm text-center fw-bold text-primary rounded-3" 
-                                           style="width: 120px;" value="{{ mark.marks_obtained if edit_mode else '0' }}" readonly>
+                                           style="width: 140px; font-size: 1.5rem;" value="{{ mark.marks_obtained if edit_mode else '0' }}" readonly>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 🏁 ACTION CENTER -->
+                        <!-- 🏁 FINAL ACTIONS -->
                         <div class="col-12 mt-5 border-top pt-4">
                             <div class="d-flex justify-content-end gap-3">
-                                <a href="{{ url_for('admin.view_marks') }}" class="btn btn-light px-5 py-3 rounded-pill fw-bold text-muted transition-hover">Discard</a>
-                                <button type="submit" class="btn btn-primary px-5 py-3 rounded-pill fw-bold shadow-sm transition-hover">
-                                    <i class="bi bi-check-circle-fill me-2"></i>{{ 'Update Result Record' if edit_mode else 'Finalize Score Record' }}
+                                <a href="{{ url_for('admin.view_marks') }}" class="btn btn-light px-5 py-3 rounded-3 fw-bold text-muted transition-hover border">Discard</a>
+                                <button type="submit" class="btn btn-primary px-5 py-3 rounded-3 fw-bold shadow-sm transition-hover">
+                                    <i class="bi bi-save2-fill me-2"></i>{{ 'Commit Changes' if edit_mode else 'Establish Record' }}
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
-            {% else %}
-            <!-- 💡 ONBOARDING TIP -->
-            <div class="card border-0 shadow-sm rounded-3 p-5 bg-white text-center">
-                <div class="bg-primary-soft text-primary rounded-circle mx-auto mb-4 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
-                    <i class="bi bi-layer-forward fs-1"></i>
-                </div>
-                <h4 class="fw-bold text-dark">Ready to audit performace?</h4>
-                <p class="text-muted mb-4 mx-auto" style="max-width: 400px;">Select an institutional <b>Department</b> and <b>Semester</b> above to load student identities and subjects for result processing.</p>
-                <div class="d-flex justify-content-center gap-2">
-                    <span class="badge bg-light text-dark border px-3 py-2 rounded-pill small">1. Choose Filter</span>
-                    <span class="badge bg-light text-dark border px-3 py-2 rounded-pill small">2. Enter Scores</span>
-                    <span class="badge bg-light text-dark border px-3 py-2 rounded-pill small">3. System Total</span>
-                </div>
-            </div>
-            {% endif %}
         </div>
     </div>
 </div>
 
+<!-- 🧪 DYNAMIC INTERACTION LAYER -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    const internalInp = document.getElementById('internal_marks');
-    const vivaInp = document.getElementById('viva_marks');
-    const externalInp = document.getElementById('external_marks');
-    const marksObtainedInp = document.getElementById('marks_obtained');
+$(document).ready(function() {
+    const deptSel = $('#department');
+    const semSel = $('#semester');
+    const subSel = $('#subject_id');
+    const stuSel = $('#enrollment_no');
 
-    function calculateTotal() {
-        const i = parseFloat(internalInp.value) || 0;
-        const v = parseFloat(vivaInp.value) || 0;
-        const e = parseFloat(externalInp.value) || 0;
-        marksObtainedInp.value = i + v + e;
+    function fetchContextData() {
+        const dept = deptSel.val();
+        const sem = semSel.val();
+
+        if (dept && sem) {
+            // Loading states
+            subSel.html('<option value="">Fetching subjects...</option>').prop('disabled', true);
+            stuSel.html('<option value="">Fetching students...</option>').prop('disabled', true);
+
+            // Fetch Subjects
+            $.getJSON(`/admin/get-subjects?department=${dept}&semester=${sem}`, function(data) {
+                let options = '<option value="">Choose subject module...</option>';
+                if (data.subjects && data.subjects.length > 0) {
+                    data.subjects.forEach(sub => {
+                        options += `<option value="${sub.subject_id}">${sub.subject_name}</option>`;
+                    });
+                    subSel.html(options).prop('disabled', false);
+                } else {
+                    subSel.html('<option value="">No subjects found for this context</option>').prop('disabled', true);
+                }
+            });
+
+            // Fetch Students
+            $.getJSON(`/admin/get-students?department=${dept}&semester=${sem}`, function(data) {
+                let options = '<option value="">Select student...</option>';
+                if (data.students && data.students.length > 0) {
+                    data.students.forEach(s => {
+                        options += `<option value="${s.enrollment_no}">${s.enrollment_no} — ${s.name}</option>`;
+                    });
+                    stuSel.html(options).prop('disabled', false);
+                } else {
+                    stuSel.html('<option value="">No students found for this context</option>').prop('disabled', true);
+                }
+            });
+        }
     }
 
-    [internalInp, vivaInp, externalInp].forEach(inp => {
-        if(inp) {
-            inp.addEventListener('input', calculateTotal);
-        }
-    });
+    deptSel.on('change', fetchContextData);
+    semSel.on('change', fetchContextData);
 
-    // Initial calculation
-    calculateTotal();
+    // 🧮 CALCULATION ENGINE
+    const i = $('#internal_marks');
+    const v = $('#viva_marks');
+    const e = $('#external_marks');
+    const total = $('#marks_obtained');
+
+    function calculate() {
+        const sum = (parseFloat(i.val()) || 0) + (parseFloat(v.val()) || 0) + (parseFloat(e.val()) || 0);
+        total.val(sum);
+        if (sum > 100) {
+            total.addClass('text-danger border border-danger').removeClass('text-primary');
+        } else {
+            total.removeClass('text-danger border border-danger').addClass('text-primary');
+        }
+    }
+
+    [i, v, e].forEach(inp => inp.on('input', calculate));
+    calculate(); // Init
+});
 </script>
 
 <style>
-    .bg-primary-soft { background-color: rgba(99, 102, 241, 0.1); }
-    .ls-1 { letter-spacing: 0.1em; }
+    .bg-primary-soft { background-color: rgba(99, 102, 241, 0.08); }
+    .ls-1 { letter-spacing: 0.08em; }
     .extra-small { font-size: 0.75rem; }
     .transition-hover { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
     .transition-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1) !important; }
-    .form-control-lg, .form-select-lg { font-size: 1rem; }
-    .form-control:focus, .form-select:focus {
-        background-color: #ffffff !important;
-        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1) !important;
-        border: none !important;
+    
+    .form-select, .form-control {
+        transition: all 0.2s ease;
+    }
+    .form-select:focus, .form-control:focus {
+        background-color: #fff !important;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15) !important;
     }
 </style>
 {% endblock %}
