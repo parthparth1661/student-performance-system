@@ -1,136 +1,109 @@
 {% extends 'admin/layout.html' %}
 
-{% block page_title %}<h5 class="fw-bold mb-0 text-dark"><i class="bi bi-calendar-check me-2"></i>Attendance Module</h5>{% endblock %}
+{% block page_title %}<h4 class="fw-bold mb-0">Attendance Module</h4>{% endblock %}
 
 {% block content %}
 <div class="container-fluid py-4">
-    <!-- 🚀 HEADER SECTOR -->
+    <!-- 🏁 1. HEADER SECTOR -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h4 class="fw-bold mb-1 text-dark">Attendance Registry</h4>
-            <p class="text-muted small mb-0">Unified management system for institutional compliance tracking</p>
-        </div>
-        <div class="d-flex gap-3 align-items-center">
+        <h4 class="fw-bold mb-0 text-dark">Attendance Module</h4>
+        <div class="d-flex gap-2">
             <a href="{{ url_for('admin.bulk_attendance') }}" class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm transition-hover">
                 <i class="bi bi-people-fill me-2"></i>Bulk Entry
             </a>
-
-            <form action="/upload_attendance_csv" method="POST" enctype="multipart/form-data" class="d-flex gap-2 align-items-center bg-white p-2 rounded-3 shadow-sm border">
-                <input type="file" name="file" accept=".csv" class="form-control form-control-sm border-0 bg-light" style="max-width: 180px;" required>
-                <button type="submit" class="btn btn-success btn-sm px-3 fw-bold rounded-2">
-                    <i class="bi bi-file-earmark-spreadsheet me-1"></i>Upload CSV
-                </button>
-            </form>
-            
-            <a href="{{ url_for('admin.attendance_report') }}" class="btn btn-outline-primary px-3 rounded-3 fw-bold transition-hover bg-white me-2">
+            <a href="{{ url_for('admin.attendance_report') }}" class="btn btn-outline-primary px-3 rounded-3 fw-bold transition-hover bg-white shadow-sm border">
                 <i class="bi bi-graph-up-arrow me-1"></i>Analytics Report
             </a>
-
-            <a href="/clear_attendance" class="btn btn-outline-danger px-3 rounded-3 fw-bold transition-hover" onclick="return confirm('⚠️ SECURITY ALERT: This will permanently delete ALL Attendance records. Continue?')">
-                <i class="bi bi-trash"></i>
+            <a href="{{ url_for('admin.clear_attendance') }}" class="btn btn-danger px-3 rounded-3 fw-bold shadow-sm transition-hover ms-2"
+               onclick="return confirm('⚠️ SECURITY ALERT: Are you sure you want to delete ALL attendance records?\n\nThis action cannot be undone. All institutional presence data will be wiped.')">
+                <i class="bi bi-trash me-1"></i>Clear All Attendance
             </a>
         </div>
     </div>
 
-    <!-- 🔍 1. FILTER ENGINE (TOP) -->
-    <div class="card border-0 shadow-sm rounded-3 mb-4">
-        <div class="card-body p-4">
-            <form method="GET" class="row g-3 align-items-end">
-                <div class="col-lg-3">
-                    <label class="form-label fw-bold extra-small text-uppercase text-muted mb-2 ls-1">Search Identifier</label>
-                    <div class="input-group">
-                        <span class="input-group-text border-0 bg-light text-muted"><i class="bi bi-search"></i></span>
-                        <input type="text" name="enrollment" class="form-control border-0 bg-light rounded-end-3 py-2" placeholder="Student Name or ID..." value="{{ filters.enrollment or '' }}">
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <label class="form-label fw-bold extra-small text-uppercase text-muted mb-2 ls-1">Department</label>
-                    <select name="department" class="form-select border-0 bg-light rounded-3 py-2">
-                        <option value="All">All Filter</option>
-                        <option value="BCA" {% if filters.department == 'BCA' %}selected{% endif %}>BCA</option>
-                        <option value="MCA" {% if filters.department == 'MCA' %}selected{% endif %}>MCA</option>
-                        <option value="B.TECH" {% if filters.department == 'B.TECH' %}selected{% endif %}>B.TECH</option>
-                        <option value="MBA" {% if filters.department == 'MBA' %}selected{% endif %}>MBA</option>
-                    </select>
-                </div>
-                <div class="col-lg-2">
-                    <label class="form-label fw-bold extra-small text-uppercase text-muted mb-2 ls-1">Semester</label>
-                    <select name="semester" class="form-select border-0 bg-light rounded-3 py-2">
-                        <option value="All">All Sem</option>
-                        {% for i in range(1, 9) %}
-                        <option value="{{ i }}" {% if filters.semester == i|string %}selected{% endif %}>Semester {{ i }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-lg-2">
-                    <label class="form-label fw-bold extra-small text-uppercase text-muted mb-2 ls-1">Presence</label>
-                    <select name="status" class="form-select border-0 bg-light rounded-3 py-2">
-                        <option value="All">Any Status</option>
-                        <option value="Present" {% if filters.status == 'Present' %}selected{% endif %}>Present</option>
-                        <option value="Absent" {% if filters.status == 'Absent' %}selected{% endif %}>Absent</option>
-                    </select>
-                </div>
-                <div class="col-lg-2">
-                    <label class="form-label fw-bold extra-small text-uppercase text-muted mb-2 ls-1">Reference Date</label>
-                    <input type="date" name="date" class="form-control border-0 bg-light rounded-3 py-2" value="{{ filters.date or '' }}">
-                </div>
-                <div class="col-lg-1 d-flex gap-1 justify-content-end">
-                    <button type="submit" class="btn btn-primary w-100 rounded-3 py-2 shadow-sm transition-hover">
-                        <i class="bi bi-funnel"></i>
-                    </button>
-                    <a href="{{ url_for('admin.view_attendance') }}" class="btn btn-light rounded-3 py-2 border shadow-sm transition-hover px-3">
-                        <i class="bi bi-arrow-clockwise"></i>
-                    </a>
-                </div>
-            </form>
-        </div>
+    <!-- 🔍 2. FILTERS SECTION -->
+    <div class="card shadow-sm border-0 rounded-3 mb-4 p-3">
+        <form method="GET" class="row g-3 align-items-end">
+            <div class="col-md-3">
+                <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Department</label>
+                <select name="department" class="form-select border-0 bg-light rounded-3 py-2">
+                    <option value="All">All Departments</option>
+                    <option value="BCA" {% if filters.department == 'BCA' %}selected{% endif %}>BCA</option>
+                    <option value="MCA" {% if filters.department == 'MCA' %}selected{% endif %}>MCA</option>
+                    <option value="B.TECH" {% if filters.department == 'B.TECH' %}selected{% endif %}>B.TECH</option>
+                    <option value="MBA" {% if filters.department == 'MBA' %}selected{% endif %}>MBA</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Semester</label>
+                <select name="semester" class="form-select border-0 bg-light rounded-3 py-2">
+                    <option value="All">All Semesters</option>
+                    {% for i in range(1, 9) %}
+                    <option value="{{ i }}" {% if filters.semester == i|string %}selected{% endif %}>Semester {{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Subject</label>
+                <select name="subject_id" class="form-select border-0 bg-light rounded-3 py-2">
+                    <option value="All">All Subjects Module</option>
+                    {% for sub in subjects %}
+                    <option value="{{ sub.subject_id }}" {% if filters.subject_id == sub.subject_id|string %}selected{% endif %}>{{ sub.subject_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Date / Month</label>
+                <input type="date" name="date" class="form-control border-0 bg-light rounded-3 py-2" value="{{ filters.date or '' }}">
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary w-100 rounded-3 py-2 shadow-sm transition-hover">
+                    <i class="bi bi-funnel"></i>
+                </button>
+            </div>
+        </form>
     </div>
 
-    <!-- 📊 2. SUMMARY SCORECARDS -->
+    <!-- 📊 3. SUMMARY CARDS -->
     <div class="row g-3 mb-4">
         <div class="col-md-3">
-            <div class="card border-0 shadow-sm rounded-3 transition-hover h-100">
-                <div class="card-body p-4 border-start border-primary border-4 rounded-3 d-flex flex-column justify-content-between">
-                    <div class="extra-small fw-bold text-uppercase text-muted ls-1">Sessions Count</div>
-                    <div class="fs-4 fw-bold text-dark mt-1">{{ stats.total_classes or 0 }}</div>
-                    <div class="small text-muted">Total Records</div>
-                </div>
+            <div class="card shadow-sm border-0 rounded-3 p-3 transition-hover h-100 border-start border-primary border-4">
+                <div class="extra-small fw-bold text-uppercase text-muted ls-1 mb-1">Total Students</div>
+                <div class="fs-4 fw-bold text-dark">{{ stats.total_classes or 0 }}</div>
+                <div class="small text-muted mt-1">Identified Registry</div>
             </div>
         </div>
-        <div class="col-md-3 text-success">
-            <div class="card border-0 shadow-sm rounded-3 transition-hover h-100">
-                <div class="card-body p-4 border-start border-success border-4 rounded-3 d-flex flex-column justify-content-between">
-                    <div class="extra-small fw-bold text-uppercase text-muted ls-1">Present Log</div>
-                    <div class="fs-4 fw-bold text-dark mt-1">{{ stats.present_count or 0 }}</div>
-                    <div class="small text-muted">Successful Attendance</div>
-                </div>
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-3 p-3 transition-hover h-100 border-start border-success border-4">
+                <div class="extra-small fw-bold text-uppercase text-muted ls-1 mb-1 text-success">Present Today</div>
+                <div class="fs-4 fw-bold text-dark">{{ stats.present_count or 0 }}</div>
+                <div class="small text-muted mt-1">Confirmed Presence</div>
             </div>
         </div>
-        <div class="col-md-3 text-danger">
-            <div class="card border-0 shadow-sm rounded-3 transition-hover h-100">
-                <div class="card-body p-4 border-start border-danger border-4 rounded-3 d-flex flex-column justify-content-between">
-                    <div class="extra-small fw-bold text-uppercase text-muted ls-1">Absent Log</div>
-                    <div class="fs-4 fw-bold text-dark mt-1">{{ stats.absent_count or 0 }}</div>
-                    <div class="small text-muted">Missed Engagements</div>
-                </div>
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-3 p-3 transition-hover h-100 border-start border-danger border-4">
+                <div class="extra-small fw-bold text-uppercase text-muted ls-1 mb-1 text-danger">Absent Today</div>
+                <div class="fs-4 fw-bold text-dark">{{ stats.absent_count or 0 }}</div>
+                <div class="small text-muted mt-1">Compliance Gaps</div>
             </div>
         </div>
-        <div class="col-md-3 text-info">
-            <div class="card border-0 shadow-sm rounded-3 transition-hover h-100">
-                <div class="card-body p-4 border-start border-info border-4 rounded-3 d-flex flex-column justify-content-between">
-                    <div class="extra-small fw-bold text-uppercase text-muted ls-1">Engagement Rate</div>
-                    <div class="fs-4 fw-bold text-dark mt-1">{{ stats.percent or 0 }}%</div>
-                    <div class="small text-muted">Ratio Analysis</div>
-                </div>
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-3 p-3 transition-hover h-100 border-start border-info border-4">
+                <div class="extra-small fw-bold text-uppercase text-muted ls-1 mb-1 text-info">Attendance %</div>
+                <div class="fs-4 fw-bold text-dark">{{ stats.percent or 0 }}%</div>
+                <div class="small text-muted mt-1">Performance Ratio</div>
             </div>
         </div>
     </div>
 
-    <!-- ✍️ 3. ATTENDANCE ENTRY FORM -->
-    <div class="card border-0 shadow-sm rounded-3 mb-4 overflow-hidden border-top border-primary border-4">
+    <!-- ✍️ 4. ATTENDANCE ENTRY PANEL -->
+    <div class="card shadow-sm border-0 rounded-3 mb-4 overflow-hidden border-top border-primary border-4">
         <div class="card-body p-4">
-            <form action="{{ url_for('admin.add_attendance') }}" method="POST" class="row g-3 align-items-end" id="attendanceEntryForm">
-                <!-- ROW 1: CONTEXT & IDENTITY -->
+            <h5 class="fw-bold mb-2 text-dark">Immediate Attendance Logging</h5>
+            <p class="text-muted mb-4">Record attendance for selected department, semester, subject and date</p>
+            
+            <form action="{{ url_for('admin.add_attendance') }}" method="POST" class="row g-3 mb-3 align-items-end" id="attendanceEntryForm">
+                <!-- GRID ROW 1: DEPT | SEM | STUDENT -->
                 <div class="col-md-3">
                     <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Department</label>
                     <select id="entry_dept" class="form-select border-0 bg-light rounded-3 py-2" required>
@@ -151,31 +124,31 @@
                     </select>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Student Name (Identify)</label>
+                    <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Student Name</label>
                     <select name="enrollment_no" id="entry_student" class="form-select border-0 bg-light rounded-3 py-2" required disabled>
                         <option value="">Awaiting context...</option>
                     </select>
                 </div>
 
-                <!-- ROW 2: SUBJECT & LOGS -->
+                <!-- GRID ROW 2: SUBJECT | DATE | STATUS -->
                 <div class="col-md-5">
-                    <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Subject Module</label>
+                    <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Subject</label>
                     <select name="subject_id" id="entry_subject" class="form-select border-0 bg-light rounded-3 py-2" required disabled>
                         <option value="">Awaiting context...</option>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Registry Date</label>
+                    <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Date</label>
                     <input type="date" name="date" class="form-control border-0 bg-light rounded-3 py-2" value="{{ (datetime.now()).strftime('%Y-%m-%d') }}" required>
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Status Outcome</label>
+                    <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Status</label>
                     <div class="d-flex gap-2">
                         <input type="radio" class="btn-check" name="status" id="statusP" value="Present" autocomplete="off" checked>
-                        <label class="btn btn-outline-success border-0 bg-light-success w-100 rounded-3 py-2 fw-bold" for="statusP">Present</label>
+                        <label class="btn btn-success w-100 rounded-3 py-2 fw-bold" for="statusP">Present</label>
 
                         <input type="radio" class="btn-check" name="status" id="statusA" value="Absent" autocomplete="off">
-                        <label class="btn btn-outline-danger border-0 bg-light-danger w-100 rounded-3 py-2 fw-bold" for="statusA">Absent</label>
+                        <label class="btn btn-outline-danger w-100 rounded-3 py-2 fw-bold" for="statusA">Absent</label>
                     </div>
                 </div>
                 <div class="col-md-1">
@@ -187,44 +160,42 @@
         </div>
     </div>
 
-    <!-- 📋 4. ATTENDANCE TABLE -->
-    <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+    <!-- 📋 5. ATTENDANCE TABLE -->
+    <div class="card shadow-sm border-0 rounded-3 overflow-hidden border-top border-primary border-4">
+        <div class="card-header bg-white py-3 px-4 border-0">
+            <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-table me-2 text-primary"></i>Attendance Registry Matrix</h6>
+        </div>
         <div class="table-responsive">
             <table class="table table-striped table-hover align-middle mb-0 text-center">
                 <thead class="bg-light">
                     <tr class="text-secondary extra-small text-uppercase fw-bold">
-                        <th class="ps-4 py-3 text-start">Student Identifier</th>
-                        <th class="py-3">Module Subject</th>
-                        <th class="py-3">Recording Date</th>
-                        <th class="py-3">Compliance</th>
-                        <th class="py-3 text-center pe-4">Manage</th>
+                        <th class="ps-4 py-3 text-start">Student Name</th>
+                        <th class="py-3">Enrollment No</th>
+                        <th class="py-3">Subject</th>
+                        <th class="py-3">Date</th>
+                        <th class="py-3">Status</th>
+                        <th class="py-3 text-center pe-4">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for a in attendance_list %}
-                    <tr class="{% if a.enrollment_no in low_att_ids %}bg-danger-subtle-soft{% endif %}">
+                    <tr>
                         <td class="ps-4 py-3 text-start">
                             <div class="fw-bold text-dark fs-6">{{ a.student_name }}</div>
-                            <div class="text-muted extra-small">{{ a.enrollment_no }}</div>
-                        </td>
-                        <td>
-                            <div class="small fw-semibold text-dark">{{ a.subject_name }}</div>
                             <div class="text-muted extra-small">{{ a.department }} | Sem {{ a.semester }}</div>
                         </td>
                         <td>
-                            <span class="badge bg-light border text-dark px-3 py-2 rounded-2 fw-medium">
-                                <i class="bi bi-calendar-event me-2 text-muted"></i>{{ a.date }}
-                            </span>
+                            <span class="badge bg-light border text-primary rounded-pill px-3 py-2">{{ a.enrollment_no }}</span>
                         </td>
-                        <td class="text-center">
+                        <td class="small fw-semibold">{{ a.subject_name }}</td>
+                        <td>
+                            <div class="small text-muted fw-bold"><i class="bi bi-calendar3 me-1"></i> {{ a.date }}</div>
+                        </td>
+                        <td>
                             {% if a.status == 'Present' %}
-                                <span class="badge bg-success-soft text-success rounded-pill px-3 py-2 border border-success-subtle fw-bold">
-                                    <i class="bi bi-patch-check-fill me-1"></i>Present
-                                </span>
+                                <span class="badge bg-success rounded-pill px-3 py-2 fw-bold"><i class="bi bi-check-circle me-1"></i>Present</span>
                             {% else %}
-                                <span class="badge bg-danger-soft text-danger rounded-pill px-3 py-2 border border-danger-subtle fw-bold">
-                                    <i class="bi bi-x-circle-fill me-1"></i>Absent
-                                </span>
+                                <span class="badge bg-danger rounded-pill px-3 py-2 fw-bold"><i class="bi bi-x-circle me-1"></i>Absent</span>
                             {% endif %}
                         </td>
                         <td class="text-center pe-4">
@@ -233,16 +204,16 @@
                                     <i class="bi bi-pencil me-1"></i>Edit
                                 </a>
                                 <a href="{{ url_for('admin.delete_attendance', attendance_id=a.attendance_id) }}" 
-                                    class="btn btn-sm btn-outline-danger rounded-2 px-3 fw-bold"
-                                    onclick="return confirm('⚠️ Secure Warning: Permanently remove this attendance record?')">
-                                    <i class="bi bi-trash"></i>
+                                   class="btn btn-sm btn-outline-danger rounded-2 px-3 fw-bold"
+                                   onclick="return confirm('Are you sure you want to delete this attendance record?')">
+                                    <i class="bi bi-trash me-1"></i>Delete
                                 </a>
                             </div>
                         </td>
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="5" class="text-center py-5 text-muted small">No performance records matches the current selection matrix.</td>
+                        <td colspan="6" class="text-center py-5 text-muted small">No performance records identified for the current filter criteria.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -250,10 +221,10 @@
         </div>
     </div>
 
-    <!-- 📄 PAGINATION MATRIX -->
+    <!-- 📄 PAGINATION -->
     {% if total_pages > 1 %}
     <div class="d-flex justify-content-between align-items-center mt-4">
-        <div class="small text-muted fw-bold text-uppercase ls-1">Record Set {{ page }} / {{ total_pages }}</div>
+        <div class="small text-muted fw-bold text-uppercase ls-1">Record Page {{ page }} of {{ total_pages }}</div>
         <nav>
             <ul class="pagination pagination-sm mb-0 gap-2">
                 {% if page > 1 %}
@@ -274,24 +245,11 @@
     .extra-small { font-size: 0.75rem; }
     .transition-hover { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
     .transition-hover:hover { transform: translateY(-3px); box-shadow: 0 12px 24px -6px rgba(0,0,0,0.1) !important; }
-    
-    .bg-success-soft { background-color: rgba(25, 135, 84, 0.08); }
-    .bg-danger-soft { background-color: rgba(220, 53, 69, 0.08); }
-    .bg-light-success:hover { background-color: rgba(25, 135, 84, 0.1) !important; }
-    .bg-light-danger:hover { background-color: rgba(220, 53, 69, 0.1) !important; }
-    .btn-check:checked + .btn-outline-success { background-color: #198754 !important; color: white !important; }
-    .btn-check:checked + .btn-outline-danger { background-color: #dc3545 !important; color: white !important; }
-    
-    .bg-danger-subtle-soft { background-color: rgba(220, 53, 69, 0.02); }
+    .form-select, .form-control { border-radius: 8px; }
 </style>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('[data-width]').forEach(el => {
-            el.style.width = el.getAttribute('data-width');
-        });
-    });
-
     $(document).ready(function() {
         const deptSel = $('#entry_dept');
         const semSel = $('#entry_sem');

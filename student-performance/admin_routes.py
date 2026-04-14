@@ -7,6 +7,7 @@ from datetime import date, datetime
 import os
 import math
 import smtplib
+import re
 from email.mime.text import MIMEText
 
 admin_bp = Blueprint('admin', __name__)
@@ -486,21 +487,31 @@ def add_faculty():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     
-    # Fetch subjects for mapping
-    cursor.execute("SELECT subject_id, subject_name, department FROM subjects")
-    subjects = cursor.fetchall()
+    # Smart Initial Fetch: Only fetch subjects for the selected department
+    subjects = []
+    # If it's a validation retry, we might have a department in the form
+    active_dept = request.form.get('department')
+    if active_dept and active_dept != "":
+        cursor.execute("SELECT subject_id, subject_name, department FROM subjects WHERE department = %s", (active_dept,))
+        subjects = cursor.fetchall()
     
     if request.method == 'POST':
         name = request.form['faculty_name']
         email = request.form['email']
         department = request.form['department']
-        subject_id = request.form.get('subject_id') # Individual mapping
+        contact_no = request.form['contact_no']
+        subject_id = request.form.get('subject_id')
         
+        # 🔒 STRICT INDIAN MOBILE VALIDATION
+        if not re.match(r'^[6-9][0-9]{9}$', contact_no):
+            flash("Validation Failed: Please enter a valid 10-digit Indian contact number starting with 6-9.", "danger")
+            return redirect(request.url)
+            
         try:
             cursor.execute("""
-                INSERT INTO faculty (faculty_name, email, department)
-                VALUES (%s, %s, %s)
-            """, (name, email, department))
+                INSERT INTO faculty (faculty_name, email, department, contact_no)
+                VALUES (%s, %s, %s, %s)
+            """, (name, email, department, contact_no))
             new_faculty_id = cursor.lastrowid
             
             # Map the subject if selected
@@ -521,22 +532,32 @@ def edit_faculty(faculty_id):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     
-    # Fetch subjects for mapping
-    cursor.execute("SELECT subject_id, subject_name, department FROM subjects")
+    # Smart Initial Fetch: Fetch subjects for this faculty's current department
+    cursor.execute("SELECT department FROM faculty WHERE faculty_id = %s", (faculty_id,))
+    f_rec = cursor.fetchone()
+    current_dept = f_rec['department'] if f_rec else None
+    
+    cursor.execute("SELECT subject_id, subject_name, department FROM subjects WHERE department = %s", (current_dept,))
     subjects = cursor.fetchall()
     
     if request.method == 'POST':
         name = request.form['faculty_name']
         email = request.form['email']
         department = request.form['department']
+        contact_no = request.form['contact_no']
         subject_id = request.form.get('subject_id')
         
+        # 🔒 STRICT INDIAN MOBILE VALIDATION
+        if not re.match(r'^[6-9][0-9]{9}$', contact_no):
+            flash("Validation Failed: Please enter a valid 10-digit Indian contact number starting with 6-9.", "danger")
+            return redirect(request.url)
+            
         try:
             cursor.execute("""
                 UPDATE faculty 
-                SET faculty_name=%s, email=%s, department=%s
+                SET faculty_name=%s, email=%s, department=%s, contact_no=%s
                 WHERE faculty_id=%s
-            """, (name, email, department, faculty_id))
+            """, (name, email, department, contact_no, faculty_id))
             
             # Reset previous mapping if we want to ensure only one mapping or just add
             if subject_id:
@@ -706,7 +727,17 @@ def get_subjects_api():
     conn.close()
     return {"subjects": subjects}
 
-@admin_bp.route('/get-students')
+@admin_bp.route('/get-subjects-by-department')
+def get_subjects_by_department():
+    department = request.args.get('department')
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM subjects WHERE department = %s", (department,))
+    subjects = cursor.fetchall()
+    conn.close()
+    return jsonify(subjects)
+
+@admin_bp.route('/get-students-api')
 def get_students_api():
     department = request.args.get('department')
     semester = request.args.get('semester')
@@ -1228,12 +1259,77 @@ def delete_attendance(attendance_id):
     try:
         cursor.execute("DELETE FROM attendance WHERE attendance_id = %s", (attendance_id,))
         conn.commit()
-        flash("Attendance record permanently deleted.", "success")
+        flash("Attendance record deleted successfully", "success")
     except Exception as e:
         flash(f"Deletion failed: {e}", "danger")
     finally:
         conn.close()
     return redirect(url_for('admin.view_attendance'))
+@admin_bp.route('/clear-attendance')
+def clear_attendance():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("TRUNCATE TABLE attendance")
+        conn.commit()
+        conn.close()
+        flash("All attendance records have been deleted successfully", "success")
+    except Exception as e:
+        flash(f"System Error: Could not clear attendance registry ({e})", "danger")
+    return redirect(url_for('admin.view_attendance'))
+
+@admin_bp.route('/clear-subjects')
+def clear_subjects():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("TRUNCATE TABLE subjects")
+        conn.commit()
+        conn.close()
+        flash("All subject records have been deleted successfully", "success")
+    except Exception as e:
+        flash(f"System Error: Could not clear subject registry ({e})", "danger")
+    return redirect(url_for('admin.view_subjects'))
+
+@admin_bp.route('/clear-students')
+def clear_students():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("TRUNCATE TABLE students")
+        conn.commit()
+        conn.close()
+        flash("All student records have been deleted successfully", "success")
+    except Exception as e:
+        flash(f"System Error: Could not clear student registry ({e})", "danger")
+    return redirect(url_for('admin.view_students'))
+
+@admin_bp.route('/clear-marks')
+def clear_marks():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("TRUNCATE TABLE marks")
+        conn.commit()
+        conn.close()
+        flash("All marks records have been deleted successfully", "success")
+    except Exception as e:
+        flash(f"System Error: Could not clear marks registry ({e})", "danger")
+    return redirect(url_for('admin.view_marks'))
+
+@admin_bp.route('/clear-faculty')
+def clear_faculty():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("TRUNCATE TABLE faculty")
+        conn.commit()
+        conn.close()
+        flash("All faculty records have been deleted successfully", "success")
+    except Exception as e:
+        flash(f"System Error: Could not clear faculty registry ({e})", "danger")
+    return redirect(url_for('admin.view_faculty'))
+
 # --- 🛰️ BULK & SYSTEM ROUTES ---
 
 @admin_bp.route('/bulk-upload', methods=['GET', 'POST'])
@@ -1575,7 +1671,10 @@ def change_password():
 @admin_bp.route('/feedback')
 def view_feedback():
     filters = {
-        'type': request.args.get('type', 'All'),
+        'department': request.args.get('department', 'All'),
+        'semester': request.args.get('semester', 'All'),
+        'subject': request.args.get('subject', 'All'),
+        'faculty': request.args.get('faculty', 'All'),
         'status': request.args.get('status', 'All')
     }
     
@@ -1590,9 +1689,18 @@ def view_feedback():
     """
     params = []
     
-    if filters['type'] != 'All':
-        query += " AND f.type = %s"
-        params.append(filters['type'])
+    if filters['department'] != 'All':
+        query += " AND (s.department = %s OR f.department = %s)"
+        params.extend([filters['department'], filters['department']])
+    if filters['semester'] != 'All':
+        query += " AND s.semester = %s"
+        params.append(filters['semester'])
+    if filters['subject'] != 'All':
+        query += " AND f.subject = %s"
+        params.append(filters['subject'])
+    if filters['faculty'] != 'All':
+        query += " AND f.faculty_name = %s"
+        params.append(filters['faculty'])
     if filters['status'] != 'All':
         query += " AND f.status = %s"
         params.append(filters['status'])
@@ -1602,18 +1710,69 @@ def view_feedback():
     cursor.execute(query, params)
     feedback_data = cursor.fetchall()
     
-    # Simple summary stats
-    cursor.execute("SELECT COUNT(*) as total FROM feedback")
-    total = cursor.fetchone()['total']
-    cursor.execute("SELECT COUNT(*) as pending FROM feedback WHERE status = 'Pending'")
-    pending = cursor.fetchone()['pending']
+    # 📊 ADVANCED ANALYTICAL SUMMARY
+    stats = {
+        'total': len(feedback_data),
+        'avg_rating': 0,
+        'positive_pct': 0,
+        'negative_pct': 0,
+        'pending': 0
+    }
+    
+    if stats['total'] > 0:
+        ratings = [f['rating'] for f in feedback_data if f['rating'] is not None]
+        if ratings:
+            stats['avg_rating'] = round(sum(ratings) / len(ratings), 1)
+            positive_count = len([r for r in ratings if r >= 4])
+            negative_count = len([r for r in ratings if r <= 2])
+            stats['positive_pct'] = round((positive_count / len(ratings)) * 100)
+            stats['negative_pct'] = round((negative_count / len(ratings)) * 100)
+        
+        stats['pending'] = len([f for f in feedback_data if f['status'] == 'Pending'])
+
+    # 📈 ANALYTICAL CHART DATA (Subject-wise & Faculty-wise)
+    subject_stats = {}
+    faculty_stats = {}
+    
+    for f in feedback_data:
+        if f['rating'] is not None:
+            # Subject Aggregation
+            s_name = f['subject']
+            if s_name not in subject_stats:
+                subject_stats[s_name] = []
+            subject_stats[s_name].append(f['rating'])
+            
+            # Faculty Aggregation
+            fac_name = f['faculty_name'] if f['faculty_name'] else 'Unassigned'
+            if fac_name not in faculty_stats:
+                faculty_stats[fac_name] = []
+            faculty_stats[fac_name].append(f['rating'])
+            
+    # Calculate averages for charts
+    chart_data = {
+        'subject_labels': list(subject_stats.keys()),
+        'subject_values': [round(sum(v)/len(v), 1) for v in subject_stats.values()],
+        'faculty_labels': list(faculty_stats.keys()),
+        'faculty_values': [round(sum(v)/len(v), 1) for v in faculty_stats.values()]
+    }
+
+    # Fetch drop-down data for filters
+    cursor.execute("SELECT DISTINCT department FROM students")
+    depts = [r['department'] for r in cursor.fetchall()]
+    cursor.execute("SELECT DISTINCT subject_name FROM subjects")
+    subjects = [r['subject_name'] for r in cursor.fetchall()]
+    cursor.execute("SELECT DISTINCT faculty_name FROM faculty")
+    faculty_list = [r['faculty_name'] for r in cursor.fetchall()]
     
     conn.close()
     return render_template('admin/view_feedback.html', 
                            feedback=feedback_data, 
                            filters=filters,
-                           total=total,
-                           pending=pending)
+                           stats=stats,
+                           chart_data=chart_data,
+                           departments=depts,
+                           subjects=subjects,
+                           faculty_list=faculty_list)
 
 @admin_bp.route('/feedback/manage/<int:feedback_id>')
 def manage_feedback(feedback_id):

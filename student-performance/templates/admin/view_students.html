@@ -40,10 +40,11 @@ endblock %}
                 <i class="bi bi-person-plus-fill me-2"></i>Add Student
             </a>
 
-            <a href="/clear_students" class="btn btn-outline-danger px-3 rounded-3 fw-bold transition-hover"
-                onclick="return confirm('⚠️ SECURITY ALERT: This will permanently delete ALL Students, Marks, and Attendance records. This action is irreversible. Continue?')">
-                <i class="bi bi-trash"></i>
+            <a href="{{ url_for('admin.clear_students') }}" class="btn btn-danger px-4 rounded-3 fw-bold shadow-sm transition-hover ms-2"
+               onclick="return confirm('⚠️ SECURITY ALERT: Are you sure you want to delete ALL students?\n\nThis action cannot be undone. All institutional student records and related audit trails will be wiped.')">
+                <i class="bi bi-trash me-1"></i>Clear All Students
             </a>
+
         </div>
     </div>
 

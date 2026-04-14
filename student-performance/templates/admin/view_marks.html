@@ -26,9 +26,9 @@ endblock %}
                 <i class="bi bi-plus-lg me-1"></i>Add Marks
             </a>
 
-            <a href="/clear_marks" class="btn btn-outline-danger px-3 rounded-3 fw-bold transition-hover"
-                onclick="return confirm('⚠️ SECURITY ALERT: This will permanently delete ALL Marks records. Continue?')">
-                <i class="bi bi-trash"></i>
+            <a href="{{ url_for('admin.clear_marks') }}" class="btn btn-danger px-4 rounded-3 fw-bold shadow-sm transition-hover ms-2"
+               onclick="return confirm('⚠️ SECURITY ALERT: Are you sure you want to delete ALL marks records?\n\nThis action cannot be undone. All institutional academic performance data will be wiped.')">
+                <i class="bi bi-trash me-1"></i>Clear All Marks
             </a>
         </div>
     </div>
