@@ -3,7 +3,7 @@ from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
 from db import get_db_connection
 from analysis import get_dashboard_stats, generate_dashboard_charts, get_performance_overview
-from datetime import date
+from datetime import date, datetime
 import os
 import math
 import smtplib
@@ -991,15 +991,20 @@ def view_attendance():
     cursor.execute("SELECT subject_id, subject_name FROM subjects ORDER BY subject_name")
     all_subjects = cursor.fetchall()
     
+    cursor.execute("SELECT enrollment_no, name FROM students ORDER BY enrollment_no")
+    all_students = cursor.fetchall()
+    
     conn.close()
     return render_template('admin/view_attendance.html', 
                           attendance_list=attendance_list, 
                           subjects=all_subjects,
+                          students=all_students,
                           stats=att_stats,
                           low_att_count=low_att_count,
                           low_att_ids=low_att_ids,
                           page=page, 
                           total_pages=total_pages,
+                          datetime=datetime,
                           filters={
                               'enrollment': enrollment, 
                               'department': department,
@@ -1007,6 +1012,128 @@ def view_attendance():
                               'subject_id': subject_id,
                               'status': status_filter,
                               'date': date_filter
+                          })
+
+@admin_bp.route('/attendance/report')
+def attendance_report():
+    department = request.args.get('department', 'BCA')
+    semester = request.args.get('semester', '1')
+    subject_id = request.args.get('subject_id')
+    month_val = request.args.get('month', datetime.now().month, type=int)
+    year_val = request.args.get('year', datetime.now().year, type=int)
+
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    # 1. Fetch Subjects for Filter
+    cursor.execute("SELECT subject_id, subject_name FROM subjects WHERE department = %s AND semester = %s", (department, semester))
+    subjects = cursor.fetchall()
+
+    if not subject_id and subjects:
+        subject_id = subjects[0]['subject_id']
+
+    report_data = []
+    stats = {'total_lectures': 0, 'avg_pct': 0, 'low_att': 0}
+
+    if subject_id:
+        # 2. Advanced Aggregation Query
+        query = """
+            SELECT 
+                s.name, s.enrollment_no,
+                COUNT(a.attendance_id) as total_lectures,
+                SUM(CASE WHEN a.status = 'Present' THEN 1 ELSE 0 END) as present_count,
+                SUM(CASE WHEN a.status = 'Absent' THEN 1 ELSE 0 END) as absent_count,
+                GROUP_CONCAT(CASE WHEN a.status = 'Absent' THEN DATE_FORMAT(a.date, '%d %b') END ORDER BY a.date ASC SEPARATOR ', ') as absent_dates
+            FROM students s
+            JOIN attendance a ON s.enrollment_no = a.enrollment_no
+            WHERE a.subject_id = %s AND MONTH(a.date) = %s AND YEAR(a.date) = %s
+            GROUP BY s.enrollment_no
+        """
+        cursor.execute(query, (subject_id, month_val, year_val))
+        report_data = cursor.fetchall()
+
+        # 3. Calculate Report-wide Stats
+        if report_data:
+            total_lectures_set = set(r['total_lectures'] for r in report_data)
+            stats['total_lectures'] = max(total_lectures_set) if total_lectures_set else 0
+            
+            total_pct = 0
+            for r in report_data:
+                r['pct'] = round((r['present_count'] / r['total_lectures'] * 100), 1) if r['total_lectures'] > 0 else 0
+                total_pct += r['pct']
+                if r['pct'] < 75:
+                    stats['low_att'] += 1
+            stats['avg_pct'] = round(total_pct / len(report_data), 1)
+
+    conn.close()
+    return render_template('admin/attendance_report.html', 
+                          report=report_data, 
+                          subjects=subjects, 
+                          stats=stats,
+                          datetime=datetime,
+                          filters={
+                              'department': department,
+                              'semester': semester,
+                              'subject_id': int(subject_id) if subject_id else None,
+                              'month': month_val,
+                              'year': year_val
+                          })
+
+@admin_bp.route('/attendance/bulk', methods=['GET', 'POST'])
+def bulk_attendance():
+    department = request.args.get('department', 'BCA')
+    semester = request.args.get('semester', '1')
+    subject_id = request.args.get('subject_id')
+    att_date = request.args.get('date', date.today().strftime('%Y-%m-%d'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    # 1. Fetch Subjects for Context
+    cursor.execute("SELECT subject_id, subject_name FROM subjects WHERE department = %s AND semester = %s", (department, semester))
+    subjects = cursor.fetchall()
+    
+    if not subject_id and subjects:
+        subject_id = subjects[0]['subject_id']
+
+    # 2. Fetch Students for Context
+    cursor.execute("SELECT enrollment_no, name FROM students WHERE department = %s AND semester = %s ORDER BY enrollment_no", (department, semester))
+    students = cursor.fetchall()
+
+    if request.method == 'POST':
+        subject_id = request.form.get('subject_id')
+        att_date = request.form.get('date')
+        
+        if not subject_id or not att_date:
+            flash("Context Error: Subject and Date must be identified.", "danger")
+        else:
+            success_count = 0
+            for s in students:
+                status = request.form.get(f"status_{s['enrollment_no']}")
+                if status:
+                    # 🛡️ Duplicate Check
+                    cursor.execute("SELECT * FROM attendance WHERE enrollment_no=%s AND subject_id=%s AND date=%s", (s['enrollment_no'], subject_id, att_date))
+                    if not cursor.fetchone():
+                        cursor.execute("INSERT INTO attendance (enrollment_no, subject_id, date, status) VALUES (%s, %s, %s, %s)", 
+                                       (s['enrollment_no'], subject_id, att_date, status))
+                        success_count += 1
+            
+            conn.commit()
+            if success_count > 0:
+                flash(f"Success: {success_count} attendance records synchronized successfully!", "success")
+            else:
+                flash("Information: No new records were added (Records may already exist).", "info")
+            return redirect(url_for('admin.view_attendance'))
+
+    conn.close()
+    return render_template('admin/bulk_attendance.html', 
+                          students=students, 
+                          subjects=subjects, 
+                          today=att_date,
+                          filters={
+                              'department': department,
+                              'semester': semester,
+                              'subject_id': int(subject_id) if subject_id else None
                           })
 
 @admin_bp.route('/add_attendance', methods=['GET', 'POST'])

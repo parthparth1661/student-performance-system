@@ -1,0 +1,202 @@
+{% extends 'admin/layout.html' %}
+
+{% block page_title %}<h5 class="fw-bold mb-0 text-dark"><i class="bi bi-graph-up-arrow me-2"></i>Attendance Analytics</h5>{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- 🚀 HEADER SECTOR -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="fw-bold mb-1 text-dark">Subject Performance Report</h4>
+            <p class="text-muted small mb-0">Detailed monthly auditing of subject-wise attendance metrics</p>
+        </div>
+        <div class="d-flex gap-2">
+            <button onclick="window.print()" class="btn btn-outline-secondary px-4 rounded-3 fw-bold transition-hover bg-white">
+                <i class="bi bi-printer me-2"></i>Print Registry
+            </button>
+            <a href="{{ url_for('admin.view_attendance') }}" class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm transition-hover">
+                <i class="bi bi-arrow-left me-2"></i>Back to Module
+            </a>
+        </div>
+    </div>
+
+    <!-- 🔍 1. ANALYTICAL FILTERS -->
+    <div class="card border-0 shadow-sm rounded-3 mb-4">
+        <div class="card-body p-4">
+            <form method="GET" class="row g-3 align-items-end">
+                <div class="col-lg-2">
+                    <label class="form-label fw-bold extra-small text-uppercase text-muted mb-2 ls-1">Unit</label>
+                    <select name="department" class="form-select border-0 bg-light rounded-3 py-2" onchange="this.form.submit()">
+                        <option value="BCA" {% if filters.department == 'BCA' %}selected{% endif %}>BCA</option>
+                        <option value="MCA" {% if filters.department == 'MCA' %}selected{% endif %}>MCA</option>
+                        <option value="B.TECH" {% if filters.department == 'B.TECH' %}selected{% endif %}>B.TECH</option>
+                        <option value="MBA" {% if filters.department == 'MBA' %}selected{% endif %}>MBA</option>
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <label class="form-label fw-bold extra-small text-uppercase text-muted mb-2 ls-1">Semester</label>
+                    <select name="semester" class="form-select border-0 bg-light rounded-3 py-2" onchange="this.form.submit()">
+                        {% for i in range(1, 9) %}
+                        <option value="{{ i }}" {% if filters.semester == i|string %}selected{% endif %}>Semester {{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-lg-3">
+                    <label class="form-label fw-bold extra-small text-uppercase text-muted mb-2 ls-1">Subject Module</label>
+                    <select name="subject_id" class="form-select border-0 bg-light rounded-3 py-2" required>
+                        <option value="">Select subject...</option>
+                        {% for sub in subjects %}
+                        <option value="{{ sub.subject_id }}" {% if filters.subject_id == sub.subject_id %}selected{% endif %}>{{ sub.subject_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <label class="form-label fw-bold extra-small text-uppercase text-muted mb-2 ls-1">Fiscal Month</label>
+                    <select name="month" class="form-select border-0 bg-light rounded-3 py-2">
+                        {% for m in range(1, 13) %}
+                        <option value="{{ m }}" {% if filters.month == m %}selected{% endif %}>{{ (datetime(2023, m, 1)).strftime('%B') }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-lg-1">
+                    <label class="form-label fw-bold extra-small text-uppercase text-muted mb-2 ls-1">Year</label>
+                    <select name="year" class="form-select border-0 bg-light rounded-3 py-2">
+                        {% for y in range(2024, 2028) %}
+                        <option value="{{ y }}" {% if filters.year == y %}selected{% endif %}>{{ y }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary w-100 rounded-3 py-2 fw-bold shadow-sm transition-hover">
+                        Generate Report
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if report %}
+    <!-- 📊 2. ANALYTICAL SCORECARDS -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-3 h-100">
+                <div class="card-body p-4 border-start border-primary border-4 rounded-3">
+                    <div class="extra-small fw-bold text-uppercase text-muted ls-1">Operational Lectures</div>
+                    <div class="fs-4 fw-bold text-dark mt-1">{{ stats.total_lectures }} Sessions</div>
+                    <div class="small text-muted">Total conducted this month</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-3 h-100">
+                <div class="card-body p-4 border-start border-info border-4 rounded-3">
+                    <div class="extra-small fw-bold text-uppercase text-muted ls-1">Avg Compliance</div>
+                    <div class="fs-4 fw-bold text-dark mt-1">{{ stats.avg_pct }}%</div>
+                    <div class="small text-muted">Overall average participation</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-3 h-100">
+                <div class="card-body p-4 border-start border-danger border-4 rounded-3">
+                    <div class="extra-small fw-bold text-uppercase text-muted ls-1">Risk Registry</div>
+                    <div class="fs-4 fw-bold text-dark mt-1">{{ stats.low_att }} Students</div>
+                    <div class="small text-danger fw-bold">Under 75% threshold</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📋 3. AGGREGATED REPORT MATRIX -->
+    <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle mb-0">
+                <thead class="bg-light">
+                    <tr class="text-secondary extra-small text-uppercase fw-bold text-center">
+                        <th class="ps-4 py-3 text-start">Student Identity</th>
+                        <th class="py-3">Sessions</th>
+                        <th class="py-3 text-success">Present</th>
+                        <th class="py-3 text-danger">Absent</th>
+                        <th class="py-3">Percentage</th>
+                        <th class="pe-4 py-3 text-start">Absent Session Dates</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in report %}
+                    <tr class="text-center">
+                        <td class="ps-4 py-3 text-start">
+                            <div class="fw-bold text-dark fs-6">{{ r.name }}</div>
+                            <div class="text-muted extra-small">{{ r.enrollment_no }}</div>
+                        </td>
+                        <td class="fw-bold text-dark">{{ r.total_lectures }}</td>
+                        <td class="text-success fw-bold">{{ r.present_count }}</td>
+                        <td class="text-danger fw-bold">{{ r.absent_count }}</td>
+                        <td>
+                            <div class="d-flex align-items-center justify-content-center gap-2">
+                                <span class="fw-bold {% if r.pct >= 75 %}text-success{% else %}text-danger{% endif %}">{{ r.pct }}%</span>
+                                <div class="progress w-50" style="height: 6px;">
+                                    <div class="progress-bar {% if r.pct >= 75 %}bg-success{% else %}bg-danger{% endif %}" data-width="{{ r.pct }}%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="pe-4 py-3 text-start">
+                            {% if r.absent_dates %}
+                                <div class="text-muted small" style="max-width: 300px;">
+                                    <i class="bi bi-clock-history me-1 opacity-50"></i>{{ r.absent_dates }}
+                                </div>
+                            {% else %}
+                                <span class="badge bg-success-soft text-success rounded-pill px-3">Perfect Compliance</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% else %}
+        {% if filters.subject_id %}
+        <div class="card border-0 shadow-sm rounded-3 p-5 text-center mt-4">
+            <div class="bg-light-soft rounded-circle mx-auto mb-4 d-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+                <i class="bi bi-calendar-x text-muted fs-1"></i>
+            </div>
+            <h5 class="fw-bold text-dark">No Data Found for this Period</h5>
+            <p class="text-muted mx-auto" style="max-width: 400px;">No attendance records were registered for the selected subject and month. Please adjust your filters to view institutional records.</p>
+        </div>
+        {% else %}
+        <div class="card border-0 shadow-sm rounded-3 p-5 text-center mt-4">
+            <div class="bg-primary-soft text-primary rounded-circle mx-auto mb-4 d-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+                <i class="bi bi-shield-check fs-1"></i>
+            </div>
+            <h5 class="fw-bold text-dark">Ready to Analyze</h5>
+            <p class="text-muted mx-auto" style="max-width: 400px;">Select a subject and month from the filters above to generate the institutional attendance report.</p>
+        </div>
+        {% endif %}
+    {% endif %}
+</div>
+
+<style>
+    .ls-1 { letter-spacing: 0.1em; }
+    .extra-small { font-size: 0.75rem; }
+    .transition-hover { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    .transition-hover:hover { transform: translateY(-3px); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1) !important; }
+    .bg-success-soft { background-color: rgba(25, 135, 84, 0.08); }
+    .bg-primary-soft { background-color: rgba(99, 102, 241, 0.1); }
+    .bg-light-soft { background-color: #f8f9fa; }
+    
+    @media print {
+        .navbar, .btn, .card-body form { display: none !important; }
+        .card { box-shadow: none !important; border: 1px solid #eee !important; }
+        .container-fluid { padding: 0 !important; }
+    }
+</style>
+
+<script>
+    // 🧠 SMART UI: Apply dynamic widths to bypass CSS linting issues
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('[data-width]').forEach(el => {
+            el.style.width = el.getAttribute('data-width');
+        });
+    });
+</script>
+{% endblock %}
