@@ -473,192 +473,79 @@ def clear_attendance():
 
 
 
-@app.route('/export_students_csv')
-def export_students_csv():
-    from flask import session, redirect, url_for, Response, request
-    if not session.get('admin_logged_in'):
-        return redirect(url_for('admin.login'))
-        
-    import csv
-    import io
-    from datetime import datetime
-    from db import get_db_connection
-    from analysis import get_performance_overview
-
-    filters = {
-        'department': request.args.get('department'),
-        'semester': request.args.get('semester'),
-        'search': request.args.get('search'),
-        'attendance': request.args.get('attendance'),
-        'subject': request.args.get('subject')
-    }
-
-    data, _ = get_performance_overview(filters, limit=1000)
-    
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    
-    conn.commit()
-    conn.close()
-
-    output = io.StringIO()
-    writer = csv.writer(output)
-    writer.writerow(['Enrollment No', 'Name', 'Department', 'Semester', 'Subject', 'Marks Obtained', 'Attendance %', 'Status'])
-    
-    for row in data:
-        status = 'PASS' if row['marks_obtained'] >= 40 else 'FAIL'
-        writer.writerow([
-            row['enrollment_no'], 
-            row['name'], 
-            row['department'], 
-            row['semester'], 
-            row['subject_name'], 
-            round(row['marks_obtained'], 2), 
-            round(row['attendance_percentage'], 2),
-            status
-        ])
-
-    return Response(output.getvalue(), mimetype='text/csv',
-                    headers={"Content-Disposition": f"attachment;filename=SPDA_Report_{datetime.now().strftime('%Y%m%d')}.csv"})
-
 @app.route('/export_students_pdf')
 def export_students_pdf():
-    from flask import session, redirect, url_for, send_file, request
+    from flask import session, redirect, url_for, request, render_template, make_response
     if not session.get('admin_logged_in'):
         return redirect(url_for('admin.login'))
         
-    from reportlab.lib.pagesizes import letter
-    from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Image, PageBreak
-    from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-    from reportlab.lib import colors
-    from reportlab.lib.units import inch
-    import io
+    import pdfkit
     import os
     from datetime import datetime
-    from db import get_db_connection
-    from analysis import get_dashboard_stats, get_performance_overview, generate_dashboard_charts
+    from analysis import get_dashboard_stats, get_performance_overview
 
+    # --- 🧱 STEP 1: SETUP PDFKIT ---
+    # User-specified path for wkhtmltopdf
+    wkhtml_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+    config = pdfkit.configuration(wkhtmltopdf=wkhtml_path)
+
+    # --- 🧱 STEP 2: CAPTURE FILTERS ---
     filters = {
         'department': request.args.get('department'),
         'semester': request.args.get('semester'),
+        'subject': request.args.get('subject'),
+        'subject_id': request.args.get('subject_id'),
         'search': request.args.get('search'),
         'attendance': request.args.get('attendance'),
-        'subject': request.args.get('subject')
+        'date': request.args.get('date')
     }
 
-    # Gather Data
+    # --- 🧱 STEP 3: GATHER DATA ---
     stats = get_dashboard_stats(filters)
-    data, _ = get_performance_overview(filters, limit=50) # Limit for PDF readability
-    generate_dashboard_charts(filters) # Refresh chart images with filters
-
-    conn = get_db_connection()
-    cursor = conn.cursor()
+    data, _ = get_performance_overview(filters, limit=500) 
     
-    conn.commit()
-    conn.close()
+    # --- 🧱 STEP 4: RENDER & CONVERT ---
+    rendered = render_template('admin/report.html', 
+                             data=data, 
+                             stats=stats, 
+                             filters=filters,
+                             current_date=datetime.now().strftime('%d %b %Y'))
 
-    buffer = io.BytesIO()
-    doc = SimpleDocTemplate(buffer, pagesize=letter, rightMargin=30, leftMargin=30, topMargin=30, bottomMargin=30)
-    elements = []
-    styles = getSampleStyleSheet()
-    
-    # 📄 1. HEADER
-    header_style = ParagraphStyle('HeaderStyle', parent=styles['Normal'], fontSize=10, textColor=colors.grey)
-    elements.append(Paragraph("System: SPDA Admin Panel", header_style))
-    elements.append(Paragraph(f"Generated Date: {datetime.now().strftime('%Y-%m-%d %H:%M')}", header_style))
-    elements.append(Spacer(1, 0.2*inch))
-    
-    title_style = ParagraphStyle('TitleStyle', parent=styles['Title'], fontSize=22, spaceAfter=10, textColor=colors.HexColor('#1e293b'))
-    elements.append(Paragraph("Student Performance Report", title_style))
-    
-    filter_text = f"Filters: Dept={filters['department'] or 'All'} | Sem={filters['semester'] or 'All'} | Sub={filters['subject'] or 'All'}"
-    elements.append(Paragraph(filter_text, styles['Normal']))
-    elements.append(Spacer(1, 0.3*inch))
+    try:
+        # Generate PDF from HTML string (returns bytes)
+        options = {
+            'page-size': 'Letter',
+            'margin-top': '0.75in',
+            'margin-right': '0.75in',
+            'margin-bottom': '0.75in',
+            'margin-left': '0.75in',
+            'encoding': "UTF-8",
+            'no-outline': None
+        }
+        pdf_bytes = pdfkit.from_string(rendered, False, configuration=config, options=options)
 
-    # 📊 2. SUMMARY SECTION
-    summary_data = [
-        ['Metric', 'Value'],
-        ['Total Population', str(stats['total_students'])],
-        ['Institutional Avg Marks', f"{stats['avg_marks']}%"],
-        ['Global Attendance Rate', f"{stats['attendance_percentage']}%"],
-        ['Performance Leader', stats['top_performer']]
-    ]
-    summary_table = Table(summary_data, colWidths=[2.5*inch, 3*inch])
-    summary_table.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#6366f1')),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('GRID', (0, 0), (-1, -1), 1, colors.lightgrey),
-        ('PADDING', (0, 0), (-1, -1), 10),
-    ]))
-    elements.append(Paragraph("Executive Summary", styles['Heading2']))
-    elements.append(summary_table)
-    elements.append(Spacer(1, 0.4*inch))
-
-    # 📈 3. CHARTS
-    elements.append(Paragraph("Visual Performance Analytics", styles['Heading2']))
-    chart_files = ['subject_avg.png', 'attendance_pie.png']
-    for chart in chart_files:
-        chart_path = os.path.join(os.path.dirname(__file__), 'static', 'charts', chart)
-        if os.path.exists(chart_path):
-            img = Image(chart_path, width=4.5*inch, height=2.8*inch)
-            elements.append(img)
-            elements.append(Spacer(1, 0.2*inch))
-    
-    elements.append(PageBreak())
-
-    # 📋 4. MAIN DATA TABLE
-    elements.append(Paragraph("Detailed Performance Matrix", styles['Heading2']))
-    table_headers = ['Enrollment', 'Student Name', 'Subject', 'Marks', 'Attn %', 'Status']
-    table_rows = [table_headers]
-    
-    alerts_low_marks = []
-    alerts_low_attn = []
-
-    for row in data:
-        status = 'PASS' if row['marks_obtained'] >= 40 else 'FAIL'
-        table_rows.append([
-            row['enrollment_no'],
-            row['name'][:15] + ('..' if len(row['name']) > 15 else ''),
-            row['subject_name'][:12],
-            f"{round(row['marks_obtained'],1)}",
-            f"{round(row['attendance_percentage'],1)}%",
-            status
-        ])
+        # --- 🧱 STEP 5: SAVE ON SERVER (ARCHIVE) ---
+        report_filename = f"SPDA_Report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
+        server_path = os.path.join('static', 'reports', report_filename)
         
-        if row['marks_obtained'] < 40: alerts_low_marks.append(row['name'])
-        if row['attendance_percentage'] < 75: alerts_low_attn.append(row['name'])
+        # Ensure directory exists (last-second check)
+        if not os.path.exists('static/reports'):
+            os.makedirs('static/reports')
+            
+        with open(server_path, 'wb') as f:
+            f.write(pdf_bytes)
 
-    perf_table = Table(table_rows, colWidths=[1*inch, 1.8*inch, 1.5*inch, 0.8*inch, 0.8*inch, 0.8*inch])
-    perf_table.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#475569')),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('FONTSIZE', (0, 0), (-1, -1), 9),
-        ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
-        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.whitesmoke, colors.white])
-    ]))
-    elements.append(perf_table)
-    elements.append(Spacer(1, 0.4*inch))
+        # --- 🧱 STEP 6: SEND TO BROWSER (DOWNLOAD) ---
+        response = make_response(pdf_bytes)
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = f'attachment; filename={report_filename}'
+        return response
 
-    # ⚠️ 5. ALERT SECTION
-    if alerts_low_marks or alerts_low_attn:
-        elements.append(Paragraph("Critical Performance Alerts", styles['Heading2']))
-        if alerts_low_marks:
-            elements.append(Paragraph(f"⚠️ Students at Risk (Marks < 40): {', '.join(list(set(alerts_low_marks))[:5])}", styles['Normal']))
-        if alerts_low_attn:
-            elements.append(Paragraph(f"📉 Attendance Defaulters (< 75%): {', '.join(list(set(alerts_low_attn))[:5])}", styles['Normal']))
-        elements.append(Spacer(1, 0.4*inch))
-
-    # 🧱 6. FOOTER
-    footer_style = ParagraphStyle('FooterStyle', parent=styles['Normal'], fontSize=8, textColor=colors.grey, alignment=1)
-    elements.append(Spacer(1, 1*inch))
-    elements.append(Paragraph("Generated by SPDA Admin Panel - Institutional Performance Division", footer_style))
-
-    doc.build(elements)
-    buffer.seek(0)
-    return send_file(buffer, as_attachment=True, download_name=f"SPDA_Executive_Report_{datetime.now().strftime('%M%S')}.pdf", mimetype='application/pdf')
+    except Exception as e:
+        # Fallback error message if wkhtmltopdf is not found or fails
+        from flask import flash
+        flash(f"PDF Generation Error: {str(e)}. Please ensure wkhtmltopdf is installed at {wkhtml_path}", "danger")
+        return redirect(url_for('admin.dashboard'))
 
 
 if __name__ == '__main__':

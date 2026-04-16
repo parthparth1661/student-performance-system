@@ -124,18 +124,20 @@ def init_db():
                 )
             """)
 
-            # 7. Feedback Table
+            # 7. Feedback Table (Updated for Rating & Professional Mapping)
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS feedback (
-                    id INT AUTO_INCREMENT PRIMARY KEY,
-                    enrollment_no VARCHAR(50),
+                    feedback_id INT AUTO_INCREMENT PRIMARY KEY,
+                    student_id VARCHAR(50),
+                    student_name VARCHAR(100),
+                    department VARCHAR(50),
+                    semester INT,
                     subject VARCHAR(255),
-                    message TEXT,
-                    type VARCHAR(50),
-                    status VARCHAR(50),
+                    faculty VARCHAR(100),
+                    rating INT DEFAULT 5,
+                    comment TEXT,
                     admin_reply TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    FOREIGN KEY (enrollment_no) REFERENCES students(enrollment_no) ON DELETE CASCADE
+                    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             """)
             

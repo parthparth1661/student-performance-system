@@ -33,6 +33,9 @@ def build_dashboard_conditions(filters={}):
     search = filters.get('search')
     attendance_filter = filters.get('attendance')
 
+    date_filter = filters.get('date')
+    subject_id = filters.get('subject_id')
+
     if department:
         conditions.append("s.department = %s")
         values.append(department)
@@ -45,6 +48,14 @@ def build_dashboard_conditions(filters={}):
         # Join subjects to allow subject_name filtering
         conditions.append("sub.subject_name = %s")
         values.append(subject)
+
+    if subject_id:
+        conditions.append("sub.subject_id = %s")
+        values.append(subject_id)
+
+    if date_filter:
+        conditions.append("a.date = %s")
+        values.append(date_filter)
 
     if search:
         conditions.append("(s.name LIKE %s OR s.enrollment_no LIKE %s)")

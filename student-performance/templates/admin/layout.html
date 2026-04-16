@@ -306,10 +306,7 @@
                 <i class="fas fa-user-check"></i>
                 <span>Attendance Hub</span>
             </a>
-            <a href="{{ url_for('admin.reports_marks') }}" class="nav-item {{ 'active' if request.endpoint and request.endpoint.startswith('admin.reports_') }}">
-                <i class="fas fa-file-invoice"></i>
-                <span>Report Center</span>
-            </a>
+            <!-- Report Center Link Removed -->
             <a href="{{ url_for('admin.view_faculty') }}" class="nav-item {{ 'active' if request.endpoint and request.endpoint.startswith('admin.view_faculty') }}">
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>Faculty</span>

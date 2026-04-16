@@ -20,13 +20,9 @@ endblock %}
             <div class="bg-white p-2 px-3 rounded-3 shadow-sm border d-flex align-items-center gap-3">
                 <span class="small fw-bold text-uppercase text-muted"
                     style="font-size: 10px; letter-spacing: 0.05em;">Quick Export</span>
-                <a href="/export_students_csv?{{ request.query_string.decode() }}"
-                    class="btn btn-sm btn-outline-success border-0 rounded-2 fw-bold">
-                    <i class="bi bi-filetype-csv me-1"></i>CSV
-                </a>
                 <a href="/export_students_pdf?{{ request.query_string.decode() }}"
                     class="btn btn-sm btn-outline-danger border-0 rounded-2 fw-bold">
-                    <i class="bi bi-file-pdf me-1"></i>PDF
+                    <i class="bi bi-file-pdf me-1"></i>PDF REPORT
                 </a>
             </div>
         </div>
