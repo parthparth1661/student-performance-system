@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, session
+from flask import Flask, redirect, url_for, session, request
 from admin_routes import admin_bp
 from student_routes import student_bp
 from db import init_db
@@ -23,10 +23,14 @@ init_db()
 app.register_blueprint(admin_bp, url_prefix='/admin')
 app.register_blueprint(student_bp)
 
+@app.before_request
+def clear_session_on_start():
+    # Force session clearance only when accessing the root 'home' entry point
+    if request.endpoint == 'home':
+        session.clear()
+
 @app.route('/')
 def home():
-    if session.get('admin_logged_in'):
-        return redirect('/admin/dashboard')
     return redirect('/admin/login')
 
 def send_otp(email, otp):
