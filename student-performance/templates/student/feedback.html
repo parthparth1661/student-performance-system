@@ -7,11 +7,14 @@
 <style>
     .form-card { border: none; border-radius: var(--radius-lg); background: white; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
     .history-card { border: none; border-radius: var(--radius-lg); background: white; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    .status-badge { font-size: 11px; padding: 6px 12px; border-radius: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; }
-    .bg-pending { background-color: #fef3c7; color: #92400e; }
-    .bg-reviewed { background-color: #dcfce7; color: #166534; }
-    .bg-resolved { background-color: #dbeafe; color: #1e40af; }
     .reply-box { background: #f8fafc; border-left: 4px solid var(--primary); padding: 16px; border-radius: 0 12px 12px 0; margin-top: 12px; }
+    .rating-input { display: flex; flex-direction: row-reverse; gap: 5px; margin-bottom: 20px; justify-content: flex-end; }
+    .rating-input label { cursor: pointer; font-size: 24px; color: #cbd5e1; transition: color 0.2s; }
+    .rating-input input { display: none; }
+    .rating-input input:checked ~ label,
+    .rating-input label:hover,
+    .rating-input label:hover ~ label { color: #f59e0b; }
+    .star-rating { color: #f59e0b; }
 </style>
 {% endblock %}
 
@@ -20,33 +23,49 @@
     <!-- 📝 SUBMISSION FORM -->
     <div class="col-lg-5">
         <div class="form-card">
-            <h6 class="fw-700 mb-4 text-dark text-uppercase x-small tracking-wider">New Submission</h6>
+            <h6 class="fw-700 mb-4 text-dark text-uppercase x-small tracking-wider">Submit Feedback</h6>
             <form action="{{ url_for('student.feedback') }}" method="POST">
                 <!-- Subject -->
-                <div class="mb-4">
-                    <label class="form-label fw-600 text-muted x-small text-uppercase">Subject Title</label>
-                    <input type="text" name="subject" class="form-control border-0 bg-light rounded-3 py-2 px-3" placeholder="Summary of your concern" required>
-                </div>
-
-                <!-- Type -->
-                <div class="mb-4">
-                    <label class="form-label fw-600 text-muted x-small text-uppercase">Category</label>
-                    <select name="type" class="form-select border-0 bg-light rounded-3 py-2 px-3">
-                        <option value="General Feedback">General Feedback</option>
-                        <option value="Suggestion">Suggestion</option>
-                        <option value="Complaint">Complaint</option>
-                        <option value="Issue Report">Issue Report</option>
+                <div class="mb-3">
+                    <label class="form-label fw-600 text-muted x-small text-uppercase">Subject</label>
+                    <select name="subject" class="form-select border-0 bg-light rounded-3 py-2 px-3" required>
+                        <option value="" disabled selected>Select Subject</option>
+                        {% for sub in subjects %}
+                        <option value="{{ sub }}">{{ sub }}</option>
+                        {% endfor %}
                     </select>
                 </div>
 
-                <!-- Message -->
+                <!-- Faculty -->
+                <div class="mb-3">
+                    <label class="form-label fw-600 text-muted x-small text-uppercase">Faculty</label>
+                    <select name="faculty" class="form-select border-0 bg-light rounded-3 py-2 px-3" required>
+                        <option value="" disabled selected>Select Faculty</option>
+                        {% for fac in faculties %}
+                        <option value="{{ fac }}">{{ fac }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Rating -->
+                <div class="mb-3">
+                    <label class="form-label fw-600 text-muted x-small text-uppercase">Rating</label>
+                    <div class="rating-input">
+                        {% for i in range(5, 0, -1) %}
+                        <input type="radio" name="rating" id="star{{ i }}" value="{{ i }}" required>
+                        <label for="star{{ i }}"><i class="bi bi-star-fill"></i></label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Comment -->
                 <div class="mb-4">
-                    <label class="form-label fw-600 text-muted x-small text-uppercase">Detailed Report</label>
-                    <textarea name="message" class="form-control border-0 bg-light rounded-3 py-2 px-3" rows="5" placeholder="Provide technical or pedagogical details..." required></textarea>
+                    <label class="form-label fw-600 text-muted x-small text-uppercase">Your Comment</label>
+                    <textarea name="comment" class="form-control border-0 bg-light rounded-3 py-2 px-3" rows="4" placeholder="Share your experience..." required></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-700 shadow-sm transition-all hover-lift">
-                    Commit Feedback
+                    Submit Feedback
                 </button>
             </form>
         </div>
@@ -55,41 +74,44 @@
     <!-- 📜 HISTORY VIEW -->
     <div class="col-lg-7">
         <div class="history-card h-100">
-            <div class="p-4 border-bottom bg-white">
-                <h6 class="fw-700 mb-0">Submission History</h6>
+            <div class="p-4 border-bottom bg-white d-flex justify-content-between align-items-center">
+                <h6 class="fw-700 mb-0">My Feedback History</h6>
             </div>
             <div class="p-0">
                 <div class="accordion accordion-flush" id="feedbackAccordion">
                     {% for f in history %}
                     <div class="accordion-item border-bottom">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed px-4 py-3 bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#f-{{ f.id }}">
+                            <button class="accordion-button collapsed px-4 py-3 bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#f-{{ f.feedback_id }}">
                                 <div class="w-100 me-3">
                                     <div class="d-flex justify-content-between align-items-center mb-1">
                                         <span class="fw-700 text-dark small">{{ f.subject }}</span>
-                                        <span class="status-badge bg-{{ f.status|lower }}">{{ f.status }}</span>
+                                        <div class="star-rating small">
+                                            {% for i in range(f.rating) %}<i class="bi bi-star-fill"></i>{% endfor %}
+                                            {% for i in range(5 - f.rating) %}<i class="bi bi-star text-muted opacity-25"></i>{% endfor %}
+                                        </div>
                                     </div>
                                     <div class="d-flex justify-content-between text-muted x-small">
-                                        <span>{{ f.type }}</span>
-                                        <span>{{ f.created_at.strftime('%d %b %Y') }}</span>
+                                        <span>{{ f.faculty }}</span>
+                                        <span>{{ f.date.strftime('%d %b %Y') }}</span>
                                     </div>
                                 </div>
                             </button>
                         </h2>
-                        <div id="f-{{ f.id }}" class="accordion-collapse collapse" data-bs-parent="#feedbackAccordion">
+                        <div id="f-{{ f.feedback_id }}" class="accordion-collapse collapse" data-bs-parent="#feedbackAccordion">
                             <div class="accordion-body px-4 py-4 bg-light bg-opacity-50">
-                                <p class="mb-0 text-muted small lh-lg text-dark">{{ f.message }}</p>
+                                <p class="mb-0 text-dark small lh-base">{{ f.comment }}</p>
                                 
-                                {% if f.admin_reply %}
-                                <div class="reply-box">
-                                    <h6 class="fw-700 x-small mb-2 text-primary text-uppercase">Department Response:</h6>
-                                    <p class="mb-0 small text-dark lh-base">{{ f.admin_reply }}</p>
+                                <div class="mt-3">
+                                    <h6 class="fw-700 x-small mb-2 text-primary text-uppercase">Admin Reply:</h6>
+                                    {% if f.admin_reply %}
+                                    <div class="reply-box">
+                                        <p class="mb-0 small text-dark lh-base">{{ f.admin_reply }}</p>
+                                    </div>
+                                    {% else %}
+                                    <p class="mb-0 small text-muted italic">"No reply yet"</p>
+                                    {% endif %}
                                 </div>
-                                {% else %}
-                                <div class="mt-3 text-muted x-small italic fw-500">
-                                    <i class="bi bi-hourglass-split me-1 text-primary"></i> Under formal institutional review
-                                </div>
-                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -105,4 +127,3 @@
     </div>
 </div>
 {% endblock %}
-

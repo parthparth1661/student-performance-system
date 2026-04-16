@@ -1670,134 +1670,18 @@ def change_password():
 # --- 💬 INSTITUTIONAL FEEDBACK MODULE ---
 @admin_bp.route('/feedback')
 def view_feedback():
-    filters = {
-        'department': request.args.get('department', 'All'),
-        'semester': request.args.get('semester', 'All'),
-        'subject': request.args.get('subject', 'All'),
-        'faculty': request.args.get('faculty', 'All'),
-        'status': request.args.get('status', 'All')
-    }
-    
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     
-    query = """
-        SELECT f.*, s.name as student_name 
-        FROM feedback f 
-        JOIN students s ON f.enrollment_no = s.enrollment_no 
-        WHERE 1=1
-    """
-    params = []
-    
-    if filters['department'] != 'All':
-        query += " AND (s.department = %s OR f.department = %s)"
-        params.extend([filters['department'], filters['department']])
-    if filters['semester'] != 'All':
-        query += " AND s.semester = %s"
-        params.append(filters['semester'])
-    if filters['subject'] != 'All':
-        query += " AND f.subject = %s"
-        params.append(filters['subject'])
-    if filters['faculty'] != 'All':
-        query += " AND f.faculty_name = %s"
-        params.append(filters['faculty'])
-    if filters['status'] != 'All':
-        query += " AND f.status = %s"
-        params.append(filters['status'])
-        
-    query += " ORDER BY f.created_at DESC"
-    
-    cursor.execute(query, params)
+    # Simple query matching standardized structure
+    cursor.execute("SELECT * FROM feedback ORDER BY date DESC")
     feedback_data = cursor.fetchall()
-    
-    # 📊 ADVANCED ANALYTICAL SUMMARY
-    stats = {
-        'total': len(feedback_data),
-        'avg_rating': 0,
-        'positive_pct': 0,
-        'negative_pct': 0,
-        'pending': 0
-    }
-    
-    if stats['total'] > 0:
-        ratings = [f['rating'] for f in feedback_data if f['rating'] is not None]
-        if ratings:
-            stats['avg_rating'] = round(sum(ratings) / len(ratings), 1)
-            positive_count = len([r for r in ratings if r >= 4])
-            negative_count = len([r for r in ratings if r <= 2])
-            stats['positive_pct'] = round((positive_count / len(ratings)) * 100)
-            stats['negative_pct'] = round((negative_count / len(ratings)) * 100)
-        
-        stats['pending'] = len([f for f in feedback_data if f['status'] == 'Pending'])
-
-    # 📈 ANALYTICAL CHART DATA (Subject-wise & Faculty-wise)
-    subject_stats = {}
-    faculty_stats = {}
-    
-    for f in feedback_data:
-        if f['rating'] is not None:
-            # Subject Aggregation
-            s_name = f['subject']
-            if s_name not in subject_stats:
-                subject_stats[s_name] = []
-            subject_stats[s_name].append(f['rating'])
-            
-            # Faculty Aggregation
-            fac_name = f['faculty_name'] if f['faculty_name'] else 'Unassigned'
-            if fac_name not in faculty_stats:
-                faculty_stats[fac_name] = []
-            faculty_stats[fac_name].append(f['rating'])
-            
-    # Calculate averages for charts
-    chart_data = {
-        'subject_labels': list(subject_stats.keys()),
-        'subject_values': [round(sum(v)/len(v), 1) for v in subject_stats.values()],
-        'faculty_labels': list(faculty_stats.keys()),
-        'faculty_values': [round(sum(v)/len(v), 1) for v in faculty_stats.values()]
-    }
-
-    # Fetch drop-down data for filters
-    cursor.execute("SELECT DISTINCT department FROM students")
-    depts = [r['department'] for r in cursor.fetchall()]
-    cursor.execute("SELECT DISTINCT subject_name FROM subjects")
-    subjects = [r['subject_name'] for r in cursor.fetchall()]
-    cursor.execute("SELECT DISTINCT faculty_name FROM faculty")
-    faculty_list = [r['faculty_name'] for r in cursor.fetchall()]
-    
-    conn.close()
-    return render_template('admin/view_feedback.html', 
-                           feedback=feedback_data, 
-                           filters=filters,
-                           stats=stats,
-                           chart_data=chart_data,
-                           departments=depts,
-                           subjects=subjects,
-                           faculty_list=faculty_list)
-
-@admin_bp.route('/feedback/manage/<int:feedback_id>')
-def manage_feedback(feedback_id):
-    conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
-    
-    query = """
-        SELECT f.*, s.name as student_name, s.email as student_email, s.department, s.semester 
-        FROM feedback f 
-        JOIN students s ON f.enrollment_no = s.enrollment_no 
-        WHERE f.id = %s
-    """
-    cursor.execute(query, (feedback_id,))
-    feedback = cursor.fetchone()
     conn.close()
     
-    if not feedback:
-        flash("Feedback record not found.", "danger")
-        return redirect(url_for('admin.view_feedback'))
-        
-    return render_template('admin/view_feedback_detail.html', feedback=feedback)
+    return render_template('admin/view_feedback.html', feedback=feedback_data)
 
-@admin_bp.route('/feedback/update/<int:feedback_id>', methods=['POST'])
-def update_feedback(feedback_id):
-    status = request.form.get('status')
+@admin_bp.route('/feedback/reply/<int:feedback_id>', methods=['POST'])
+def reply_feedback(feedback_id):
     reply = request.form.get('admin_reply')
     
     conn = get_db_connection()
@@ -1805,11 +1689,11 @@ def update_feedback(feedback_id):
     try:
         cursor.execute("""
             UPDATE feedback 
-            SET status = %s, admin_reply = %s 
-            WHERE id = %s
-        """, (status, reply, feedback_id))
+            SET admin_reply = %s 
+            WHERE feedback_id = %s
+        """, (reply, feedback_id))
         conn.commit()
-        flash("Feedback successfully reviewed and updated.", "success")
+        flash("Reply submitted successfully.", "success")
     except Exception as e:
         flash(f"Update failed: {e}", "danger")
     finally:
@@ -1822,9 +1706,9 @@ def delete_feedback(feedback_id):
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
-        cursor.execute("DELETE FROM feedback WHERE id = %s", (feedback_id,))
+        cursor.execute("DELETE FROM feedback WHERE feedback_id = %s", (feedback_id,))
         conn.commit()
-        flash("Institutional feedback record purged.", "success")
+        flash("Feedback record deleted.", "success")
     except Exception as e:
         flash(f"Deletion failed: {e}", "danger")
     finally:
