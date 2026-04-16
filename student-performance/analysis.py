@@ -782,13 +782,13 @@ def get_attendance_summary():
 
 # --- Legacy Student-Specific Report Functions (Used by Admin) ---
 
-def fetch_student_by_roll(roll_no):
+def fetch_student_by_enrollment(enrollment_no):
     conn = get_db_connection()
     if not conn:
         return None
     try:
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM students WHERE roll_no = %s", (roll_no,))
+        cursor.execute("SELECT * FROM students WHERE enrollment_no = %s", (enrollment_no,))
         student = cursor.fetchone()
         cursor.close()
         conn.close()
