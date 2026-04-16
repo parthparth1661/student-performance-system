@@ -29,12 +29,11 @@
                         <th class="fw-bold py-3" style="width: 12%;">Student</th>
                         <th class="fw-bold" style="width: 10%;">Dept & Sem</th>
                         <th class="fw-bold" style="width: 12%;">Subject</th>
-                        <th class="fw-bold" style="width: 12%;">Faculty</th>
-                        <th class="fw-bold" style="width: 8%;">Rating</th>
-                        <th class="fw-bold" style="width: 15%;">Comment</th>
-                        <th class="fw-bold" style="width: 15%;">Admin Reply</th>
+                        <th class="fw-bold" style="width: 15%;">Faculty</th>
+                        <th class="fw-bold" style="width: 18%;">Comment</th>
+                        <th class="fw-bold" style="width: 18%;">Admin Reply</th>
                         <th class="fw-bold" style="width: 8%;">Date</th>
-                        <th class="fw-bold" style="width: 8%;">Actions</th>
+                        <th class="fw-bold" style="width: 7%;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,12 +49,6 @@
                         </td>
                         <td class="fw-semibold text-primary text-truncate">{{ f.subject }}</td>
                         <td class="text-muted small text-truncate">{{ f.faculty }}</td>
-                        <td>
-                            <div class="text-warning small text-nowrap">
-                                {% for i in range(f.rating) %}⭐{% endfor %}
-                                {% for i in range(5 - f.rating) %}<span class="opacity-25">⭐</span>{% endfor %}
-                            </div>
-                        </td>
                         <td>
                             <div class="small text-dark" style="word-break: break-word; white-space: normal;">
                                 {{ f.comment }}

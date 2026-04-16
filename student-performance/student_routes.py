@@ -180,20 +180,25 @@ def feedback():
 
     if request.method == 'POST':
         subject = request.form.get('subject')
-        message = request.form.get('message')
-        f_type = request.form.get('type')
+        comment = request.form.get('message')
+        faculty = request.form.get('faculty', 'General')
         
-        if message and subject:
-            cursor.execute("""
-                INSERT INTO feedback (enrollment_no, subject, message, type) 
-                VALUES (%s, %s, %s, %s)
-            """, (enrollment_no, subject, message, f_type))
-            conn.commit()
-            flash("Feedback submitted successfully. Institutional tracking ID assigned.", "success")
-            return redirect(url_for('student.feedback'))
+        if comment and subject:
+            # Fetch student details for record redundancy
+            cursor.execute("SELECT name, department, semester FROM students WHERE enrollment_no = %s", (enrollment_no,))
+            student = cursor.fetchone()
+            
+            if student:
+                cursor.execute("""
+                    INSERT INTO feedback (student_id, student_name, department, semester, subject, faculty, comment) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s)
+                """, (enrollment_no, student['name'], student['department'], student['semester'], subject, faculty, comment))
+                conn.commit()
+                flash("Institutional feedback submitted successfully.", "success")
+                return redirect(url_for('student.feedback'))
     
     # Fetch history for the logged-in student ONLY
-    cursor.execute("SELECT * FROM feedback WHERE enrollment_no = %s ORDER BY created_at DESC", (enrollment_no,))
+    cursor.execute("SELECT * FROM feedback WHERE student_id = %s ORDER BY date DESC", (enrollment_no,))
     history = cursor.fetchall()
     
     student_info = analysis.get_student_details(enrollment_no)
