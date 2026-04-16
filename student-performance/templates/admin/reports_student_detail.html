@@ -1,0 +1,92 @@
+{% extends 'admin/layout.html' %}
+
+{% block page_title %}Academic Identity Audit{% endblock %}
+
+{% block content %}
+<div class="row g-4 mb-4">
+    <!-- 👤 IDENTITY PANEL -->
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm p-4 text-center bg-white h-100">
+            <div class="bg-primary bg-opacity-10 text-primary p-4 rounded-circle d-inline-block mb-3 mx-auto" style="width: 100px; height: 100px; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-id-badge fs-1"></i>
+            </div>
+            <h4 class="fw-800 mb-1">{{ student.name }}</h4>
+            <p class="text-muted small mb-3">Academic Identity Verified</p>
+            <div class="badge bg-light text-primary fw-700 px-3 py-2 rounded-pill border mb-4">
+                {{ student.department }} • SEM {{ student.semester }}
+            </div>
+            
+            <hr class="opacity-10 mb-4">
+            
+            <div class="row g-3 text-start">
+                <div class="col-12">
+                    <label class="extra-small fw-bold text-uppercase text-muted d-block mb-1">Enrollment ID</label>
+                    <p class="fw-bold m-0 font-monospace">{{ student.enrollment_no }}</p>
+                </div>
+                <div class="col-12">
+                    <label class="extra-small fw-bold text-uppercase text-muted d-block mb-1">Global Aggregate</label>
+                    <p class="fw-bold m-0 text-primary fs-4">{{ summary.avg_marks }}%</p>
+                </div>
+                <div class="col-12">
+                    <label class="extra-small fw-bold text-uppercase text-muted d-block mb-1">Engagement Density</label>
+                    <p class="fw-bold m-0 {% if attendance.percent >= 75 %}text-success{% else %}text-danger{% endif %}">{{ attendance.percent }}%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📊 ACADEMIC LEDGER -->
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm bg-white h-100">
+            <div class="card-header bg-white border-bottom p-4 d-flex justify-content-between align-items-center">
+                <h6 class="fw-bold m-0">Subject-wise Performance Ledger</h6>
+                <div class="badge bg-primary-subtle text-primary border rounded-pill px-3">{{ marks|length }} Subjects Handled</div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th class="ps-4">Academic Core</th>
+                                <th class="text-center">Int.</th>
+                                <th class="text-center">Viva</th>
+                                <th class="text-center">Ext.</th>
+                                <th class="text-center">Total</th>
+                                <th class="pe-4 text-center">Outcome</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in marks %}
+                            <tr>
+                                <td class="ps-4 fw-600">{{ row.subject }}</td>
+                                <td class="text-center">{{ row.internal }}</td>
+                                <td class="text-center">{{ row.viva }}</td>
+                                <td class="text-center">{{ row.external }}</td>
+                                <td class="text-center fw-bold">{{ row.total }}</td>
+                                <td class="pe-4 text-center">
+                                    {% if row.total >= 40 %}
+                                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3">Qualified</span>
+                                    {% else %}
+                                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-3">Probation</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="text-center py-5 text-muted">No academic records available for this identity.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex gap-2 justify-content-end">
+    <a href="{{ url_for('admin.reports_marks') }}" class="btn btn-light rounded-pill px-4 fw-bold shadow-sm">
+        <i class="fas fa-arrow-left me-2"></i>Return to Ledger
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,237 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+<div class="row mb-4 align-items-center">
+    <div class="col-md-12">
+        <a href="{{ url_for('admin.view_students') }}" class="btn btn-link text-decoration-none p-0 mb-3 text-muted small fw-bold">
+            <i class="fas fa-arrow-left me-1"></i> Back to Student Directory
+        </a>
+    </div>
+    <div class="col-lg-8">
+        <div class="d-flex align-items-center">
+            <div class="bg-primary-soft text-primary rounded-circle d-flex align-items-center justify-content-center me-4 shadow-sm fw-bold" style="width: 72px; height: 72px; font-size: 1.5rem;">
+                {{ student.name[:2]|upper }}
+            </div>
+            <div>
+                <h2 class="fw-bold mb-1 text-dark">{{ student.name }}</h2>
+                <div class="d-flex flex-wrap gap-3 text-muted small fw-medium">
+                    <span><i class="fas fa-id-badge me-1 text-primary opacity-75"></i> {{ student.enrollment_no }}</span>
+                    <span><i class="fas fa-university me-1 text-primary opacity-75"></i> {{ student.department }} (Sem {{ student.semester }})</span>
+                    <span><i class="fas fa-envelope me-1 text-primary opacity-75"></i> {{ student.email }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+        <div class="d-flex gap-2 justify-content-lg-end">
+            <a href="{{ url_for('admin.download_student_report', enrollment_no=student.enrollment_no) }}" class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm">
+                <i class="fas fa-file-pdf me-2"></i>Download PDF
+            </a>
+            <a href="mailto:{{ student.email }}" class="btn btn-light border px-4 rounded-3 fw-bold shadow-sm">
+                <i class="fas fa-envelope me-2"></i>Email
+            </a>
+            <a href="{{ url_for('admin.edit_student', enrollment_no=student.enrollment_no) }}" class="btn btn-light border px-4 rounded-3 fw-bold shadow-sm">
+                <i class="fas fa-edit me-2"></i>Edit
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- 📈 ANALYTICAL CHARTS SECTION -->
+<div class="row g-4 mb-5">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white shadow-hover">
+            <h6 class="fw-bold mb-4 text-dark d-flex align-items-center">
+                <span class="bg-primary-soft text-primary p-2 rounded-3 me-3"><i class="fas fa-chart-bar"></i></span>
+                Academic Performance Breakdown
+            </h6>
+            <div class="chart-container overflow-hidden rounded-3">
+                <img src="{{ url_for('static', filename='charts/student_' ~ student.enrollment_no ~ '_bar.png') }}" class="img-fluid w-100" alt="Marks Chart">
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white shadow-hover">
+            <h6 class="fw-bold mb-4 text-dark d-flex align-items-center">
+                <span class="bg-indigo-soft text-indigo p-2 rounded-3 me-3"><i class="fas fa-chart-pie"></i></span>
+                Attendance Distribution
+            </h6>
+            <div class="chart-container overflow-hidden rounded-3 d-flex align-items-center justify-content-center" style="min-height: 250px;">
+                <img src="{{ url_for('static', filename='charts/student_' ~ student.enrollment_no ~ '_pie.png') }}" class="img-fluid" alt="Attendance Chart">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 📊 SUMMARY CARDS -->
+<div class="row g-4 mb-5">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm rounded-4 p-4 text-center h-100 bg-white border-bottom border-primary border-4 shadow-hover">
+            <p class="text-muted small fw-bold text-uppercase mb-2">Academic Avg</p>
+            <h2 class="fw-bold text-dark mb-0">{{ summary.avg_marks }}%</h2>
+            <div class="progress mt-3 rounded-pill" style="height: 6px;">
+                <div class="progress-bar {% if summary.avg_marks < 40 %}bg-danger{% elif summary.avg_marks < 75 %}bg-warning{% else %}bg-success{% endif %} dynamic-p-bar" data-width="{{ summary.avg_marks }}"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm rounded-4 p-4 text-center h-100 bg-white border-bottom border-info border-4 shadow-hover">
+            <p class="text-muted small fw-bold text-uppercase mb-2">Attendance %</p>
+            <h2 class="fw-bold {% if attendance.percent < 75 %}text-danger{% else %}text-dark{% endif %} mb-0">{{ attendance.percent }}%</h2>
+            <p class="mb-0 extra-small mt-2 {% if attendance.percent < 75 %}text-danger fw-bold{% else %}text-muted{% endif %}">
+                {% if attendance.percent < 75 %}<i class="fas fa-exclamation-triangle me-1"></i> Critical Shortage{% else %}Requirement Met{% endif %}
+            </p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm rounded-4 p-4 text-center h-100 bg-white border-bottom border-success border-4 shadow-hover">
+            <p class="text-muted small fw-bold text-uppercase mb-2">Total Papers</p>
+            <h2 class="fw-bold text-dark mb-0">{{ marks_list|length }}</h2>
+            <p class="mb-0 extra-small mt-2 text-muted">Across {{ student.department }} Sem {{ student.semester }}</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm rounded-4 p-4 text-center h-100 bg-white border-bottom border-warning border-4 shadow-hover">
+            <p class="text-muted small fw-bold text-uppercase mb-2">Final Outcome</p>
+            <div class="mt-1">
+                {% if summary.overall_result == 'PASS' %}
+                <span class="badge bg-success-soft text-success rounded-pill px-3 py-2 fw-bold fs-6">PASS</span>
+                {% else %}
+                <span class="badge bg-danger-soft text-danger rounded-pill px-3 py-2 fw-bold fs-6">FAIL</span>
+                {% endif %}
+            </div>
+            <p class="mb-0 extra-small mt-3 text-muted">Provisional Database Status</p>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <!-- 📚 MARKS TABLE -->
+    <div class="col-lg-12">
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100 bg-white shadow-hover">
+            <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+                <h6 class="mb-0 fw-bold text-dark"><i class="fas fa-tasks me-2 text-primary"></i>Detailed Subject Assessment Ledger</h6>
+                <div class="d-flex gap-2">
+                    <span class="badge bg-light border text-muted">Total Marks: {{ summary.total_marks }}</span>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr class="text-muted extra-small text-uppercase fw-bold">
+                            <th class="ps-4 py-3">Academic Subject</th>
+                            <th class="py-3 text-center">Assessed Breakdown (I/E/P)</th>
+                            <th class="py-3 text-center">Aggregate Score</th>
+                            <th class="py-3 text-center pe-4">Verdict</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in marks_list %}
+                        <tr class="{% if item.total >= 80 %}bg-success-fade{% elif item.status == 'FAIL' %}bg-danger-fade{% endif %}">
+                            <td class="ps-4">
+                                <span class="fw-bold text-dark">{{ item.subject }}</span>
+                            </td>
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center gap-1 extra-small">
+                                    <span class="badge bg-light text-muted border px-2 py-1">Int: {{ item.internal }}</span>
+                                    <span class="badge bg-light text-muted border px-2 py-1">Ext: {{ item.external }}</span>
+                                    <span class="badge bg-light text-muted border px-2 py-1">Prac: {{ item.practical }}</span>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <span class="fw-bold {% if item.total >= 80 %}text-success{% elif item.status == 'FAIL' %}text-danger{% else %}text-primary{% endif %}">{{ item.total }} <span class="text-muted small fw-normal">/ 100</span></span>
+                            </td>
+                            <td class="text-center pe-4">
+                                {% if item.status == 'PASS' %}
+                                <span class="badge bg-success-soft text-success rounded-pill px-3 py-1 fw-bold extra-small">CLEARED</span>
+                                {% else %}
+                                <span class="badge bg-danger-soft text-danger rounded-pill px-3 py-1 fw-bold extra-small">FAILED</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="4" class="text-center py-5 text-muted small">No academic records located for this enrollment.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 📅 ATTENDANCE SECTION -->
+<div class="row g-4 mb-5">
+    <div class="col-lg-12">
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white">
+            <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+                <h6 class="mb-0 fw-bold text-dark"><i class="fas fa-calendar-check me-2 text-info"></i>Detailed Attendance Ledger (Recent History)</h6>
+                <div class="d-flex gap-3 extra-small">
+                    <span class="text-muted fw-bold">TOTAL: <span class="text-dark">{{ attendance.total }}</span></span>
+                    <span class="text-success fw-bold">PRESENT: <span class="text-dark">{{ attendance.present }}</span></span>
+                    <span class="text-danger fw-bold">ABSENT: <span class="text-dark">{{ attendance.absent }}</span></span>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr class="text-muted extra-small text-uppercase fw-bold">
+                            <th class="ps-4 py-3">Session Date</th>
+                            <th class="py-3">Academic Subject</th>
+                            <th class="py-3 text-center">Attendance Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in detailed_attendance %}
+                        <tr>
+                            <td class="ps-4 fw-medium text-dark">{{ record.date.strftime('%d %B, %Y') }}</td>
+                            <td class="text-secondary small">{{ record.subject_name }}</td>
+                            <td class="text-center">
+                                {% if record.status == 'Present' %}
+                                <span class="badge bg-success text-white px-3 rounded-pill fw-bold">PRESENT</span>
+                                {% else %}
+                                <span class="badge bg-danger text-white px-3 rounded-pill fw-bold">ABSENT</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="3" class="text-center py-4 text-muted small">No attendance history records initialized.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.bg-primary-soft { background-color: rgba(99, 102, 241, 0.1); }
+.bg-success-soft { background-color: rgba(16, 185, 129, 0.1); }
+.bg-danger-soft { background-color: rgba(239, 68, 68, 0.1); }
+.bg-indigo-soft { background-color: rgba(79, 70, 229, 0.1); }
+.bg-success-fade { background-color: rgba(16, 185, 129, 0.03); }
+.bg-danger-fade { background-color: rgba(239, 68, 68, 0.03); }
+.extra-small { font-size: 0.75rem; }
+.text-indigo { color: #4f46e9; }
+.shadow-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.shadow-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+}
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const pbars = document.querySelectorAll('.dynamic-p-bar');
+        pbars.forEach(bar => {
+            const width = bar.getAttribute('data-width');
+            if (width) bar.style.width = width + '%';
+        });
+    });
+</script>
+{% endblock %}

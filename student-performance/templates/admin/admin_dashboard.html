@@ -1,411 +1,412 @@
 {% extends 'admin/layout.html' %}
 
-{% block content %}
-<div class="row mb-4 align-items-center">
-    <div class="col-md-6">
-        <h2 class="h3 mb-0">Admin Dashboard</h2>
-        <p class="text-muted small mb-0">Filtered Analytics & Performance Overview</p>
-    </div>
-</div>
+{% block page_title %}<h5 class="fw-bold mb-0 text-dark"><i class="bi bi-speedometer2 me-2"></i>Admin Dashboard</h5>{%
+endblock %}
 
-<!-- Filter Bar -->
-<div class="card border-0 shadow-sm mb-4 sticky-top" style="top: 1rem; z-index: 1020;">
-    <div class="card-body p-3">
-        <form action="{{ url_for('admin.dashboard') }}" method="GET" class="row g-2 align-items-end">
-            <div class="col-md-3">
-                <label class="small fw-bold text-uppercase text-muted mb-1">Department</label>
-                <select name="department" class="form-select form-select-sm border-light bg-light rounded-pill px-3">
-                    <option value="All">All Departments</option>
-                    <option value="BCA" {{ 'selected' if filters.get('department')=='BCA' }}>BCA</option>
-                    <option value="MCA" {{ 'selected' if filters.get('department')=='MCA' }}>MCA</option>
-                    <option value="B.TECH" {{ 'selected' if filters.get('department')=='B.TECH' }}>B.TECH</option>
-                    <option value="M.TECH" {{ 'selected' if filters.get('department')=='M.TECH' }}>M.TECH</option>
-                    <option value="MBA" {{ 'selected' if filters.get('department')=='MBA' }}>MBA</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label class="small fw-bold text-uppercase text-muted mb-1">Semester</label>
-                <select name="semester" class="form-select form-select-sm border-light bg-light rounded-pill px-3">
-                    <option value="All">All Semesters</option>
-                    {% for i in range(1, 9) %}
-                    <option value="{{ i }}" {{ 'selected' if filters.get('semester')==i|string }}>Semester {{ i }}
-                    </option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label class="small fw-bold text-uppercase text-muted mb-1">Exam Type</label>
-                <select name="exam_type" class="form-select form-select-sm border-light bg-light rounded-pill px-3">
-                    <option value="All">All Exams</option>
-                    <option value="Internal" {{ 'selected' if filters.get('exam_type')=='Internal' }}>Internal</option>
-                    <option value="External" {{ 'selected' if filters.get('exam_type')=='External' }}>External</option>
-                    <option value="Practical" {{ 'selected' if filters.get('exam_type')=='Practical' }}>Practical
-                    </option>
-                </select>
-            </div>
-            <div class="col-md-3 d-flex gap-2">
-                <button type="submit" class="btn btn-primary btn-sm flex-grow-1 rounded-pill py-2 shadow-sm fw-bold">
-                    <i class="fas fa-filter me-2"></i>Apply
-                </button>
-                <a href="{{ url_for('admin.export_excel', department=filters.get('department', 'All'), semester=filters.get('semester', 'All')) }}"
-                    class="btn btn-success btn-sm flex-grow-1 rounded-pill py-2 shadow-sm fw-bold">
-                    <i class="fas fa-file-excel me-2"></i>Export
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- 🚀 HEADER SECTOR -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="fw-bold mb-1 text-dark">System Overview</h4>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 small">
+                    <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-muted">Dashboard</a></li>
+                    <li class="breadcrumb-item active text-primary fw-semibold" aria-current="page">Admin Control</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="d-flex gap-2">
+            <div class="bg-white p-2 px-3 rounded-3 shadow-sm border d-flex align-items-center gap-3">
+                <span class="small fw-bold text-uppercase text-muted"
+                    style="font-size: 10px; letter-spacing: 0.05em;">Quick Export</span>
+                <a href="/export_students_csv?{{ request.query_string.decode() }}"
+                    class="btn btn-sm btn-outline-success border-0 rounded-2 fw-bold">
+                    <i class="bi bi-filetype-csv me-1"></i>CSV
+                </a>
+                <a href="/export_students_pdf?{{ request.query_string.decode() }}"
+                    class="btn btn-sm btn-outline-danger border-0 rounded-2 fw-bold">
+                    <i class="bi bi-file-pdf me-1"></i>PDF
                 </a>
             </div>
-        </form>
+        </div>
     </div>
-</div>
 
-<!-- Stats Cards -->
-<div class="row mb-2">
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card stat-card bg-gradient-primary border-0">
-            <div class="card-body p-4">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <p class="mb-0 text-white-50 small fw-medium text-uppercase">Total Students</p>
-                        <h4 class="mb-0 text-white h2 fw-bold text-white">{{ stats.total_students }}</h4>
+    <!-- 🔍 SMART FILTER ENGINE -->
+    <div class="card border-0 shadow-sm rounded-3 mb-4">
+        <div class="card-body p-4">
+            <form method="GET" class="row g-3 align-items-end">
+                <div class="col-md">
+                    <label class="form-label fw-bold text-uppercase small text-muted mb-2"
+                        style="letter-spacing: 0.05em;">Department</label>
+                    <select name="department" class="form-select border-0 bg-light rounded-3 py-2">
+                        <option value="">All Department</option>
+                        <option value="BCA" {{ 'selected' if filters.department=='BCA' }}>BCA</option>
+                        <option value="MCA" {{ 'selected' if filters.department=='MCA' }}>MCA</option>
+                        <option value="B.TECH" {{ 'selected' if filters.department=='B.TECH' }}>B.TECH</option>
+                        <option value="MBA" {{ 'selected' if filters.department=='MBA' }}>MBA</option>
+                    </select>
+                </div>
+                <div class="col-md">
+                    <label class="form-label fw-bold text-uppercase small text-muted mb-2"
+                        style="letter-spacing: 0.05em;">Semester</label>
+                    <select name="semester" class="form-select border-0 bg-light rounded-3 py-2">
+                        <option value="">All Semesters</option>
+                        {% for i in range(1, 9) %}
+                        <option value="{{ i }}" {{ 'selected' if filters.semester==i|string }}>Semester {{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md">
+                    <label class="form-label fw-bold text-uppercase small text-muted mb-2"
+                        style="letter-spacing: 0.05em;">Subject</label>
+                    <select name="subject" class="form-select border-0 bg-light rounded-3 py-2">
+                        <option value="">All Subjects</option>
+                        {% for sub_name in subjects %}
+                        <option value="{{ sub_name }}" {{ 'selected' if filters.subject==sub_name }}>{{ sub_name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label fw-bold text-uppercase small text-muted mb-2"
+                        style="letter-spacing: 0.05em;">Search</label>
+                    <div class="input-group">
+                        <span class="input-group-text border-0 bg-light text-muted"><i class="bi bi-search"></i></span>
+                        <input type="text" name="search" class="form-control border-0 bg-light rounded-end-3 py-2"
+                            placeholder="Identity or Name..." value="{{ filters.search or '' }}">
                     </div>
                 </div>
-                <i class="fas fa-users bg-icon text-white"></i>
+                <div class="col-md-auto">
+                    <div class="d-flex gap-2">
+                        <button type="submit"
+                            class="btn btn-primary px-4 py-2 rounded-3 fw-bold shadow-sm transition-hover">
+                            <i class="bi bi-filter me-2"></i>Apply
+                        </button>
+                        {% if filters.department or filters.semester or filters.subject or filters.search or
+                        filters.attendance %}
+                        <a href="{{ url_for('admin.dashboard') }}"
+                            class="btn btn-light px-3 py-2 border rounded-3 text-muted shadow-sm transition-hover">
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 📊 KPI SCORECARD GRID -->
+    <div class="row g-3 mb-4">
+        <!-- Card 1: Students -->
+        <div class="col-lg-2 col-md-4">
+            <div class="card border-0 shadow-sm rounded-3 h-100 transition-hover">
+                <div class="card-body p-4 text-center">
+                    <div class="bg-primary-soft text-primary rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
+                        style="width: 48px; height: 48px;">
+                        <i class="bi bi-people fs-5"></i>
+                    </div>
+                    <div class="text-muted small fw-bold text-uppercase ls-1">Students</div>
+                    <div class="fs-3 fw-bold text-dark mt-1">{{ stats.total_students }}</div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 2: Subjects -->
+        <div class="col-lg-2 col-md-4">
+            <div class="card border-0 shadow-sm rounded-3 h-100 transition-hover">
+                <div class="card-body p-4 text-center">
+                    <div class="bg-purple-soft text-purple rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
+                        style="width: 48px; height: 48px;">
+                        <i class="bi bi-book fs-5"></i>
+                    </div>
+                    <div class="text-muted small fw-bold text-uppercase ls-1">Subjects</div>
+                    <div class="fs-3 fw-bold text-dark mt-1">{{ stats.total_subjects }}</div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 3: Avg Marks -->
+        <div class="col-lg-2 col-md-4">
+            <div class="card border-0 shadow-sm rounded-3 h-100 transition-hover">
+                <div class="card-body p-4 text-center">
+                    <div class="bg-success-soft text-success rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
+                        style="width: 48px; height: 48px;">
+                        <i class="bi bi-award fs-5"></i>
+                    </div>
+                    <div class="text-muted small fw-bold text-uppercase ls-1">Avg Marks</div>
+                    <div class="fs-3 fw-bold text-dark mt-1">{{ stats.avg_marks }}%</div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 4: Attendance -->
+        <div class="col-lg-2 col-md-4">
+            <div class="card border-0 shadow-sm rounded-3 h-100 transition-hover">
+                <div class="card-body p-4 text-center">
+                    <div class="bg-indigo-soft text-indigo rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
+                        style="width: 48px; height: 48px;">
+                        <i class="bi bi-calendar-check fs-5"></i>
+                    </div>
+                    <div class="text-muted small fw-bold text-uppercase ls-1">Attendance</div>
+                    <div class="fs-3 fw-bold text-dark mt-1">{{ stats.attendance_percentage }}%</div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 5: Low Attendance (Risk) -->
+        <div class="col-lg-2 col-md-4">
+            <div class="card border-0 shadow-sm rounded-3 h-100 transition-hover">
+                <div class="card-body p-4 text-center">
+                    <div class="bg-danger-soft text-danger rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
+                        style="width: 48px; height: 48px;">
+                        <i class="bi bi-exclamation-triangle fs-5"></i>
+                    </div>
+                    <div class="text-muted small fw-bold text-uppercase ls-1">At Risk</div>
+                    <div class="fs-3 fw-bold text-dark mt-1">{{ stats.low_attendance_count }}</div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 6: Top Performer -->
+        <div class="col-lg-2 col-md-4">
+            <div class="card border-0 shadow-sm rounded-3 h-100 transition-hover">
+                <div class="card-body p-4 text-center">
+                    <div class="bg-warning-soft text-warning rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
+                        style="width: 48px; height: 48px;">
+                        <i class="bi bi-trophy fs-5"></i>
+                    </div>
+                    <div class="text-muted small fw-bold text-uppercase ls-1" title="{{ stats.top_performer }}">Top
+                        Index</div>
+                    <div class="text-dark fw-bold mt-1 text-truncate" style="font-size: 0.9rem;">{{ stats.top_performer
+                        }}</div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card stat-card bg-gradient-info border-0">
-            <div class="card-body p-4">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <p class="mb-0 text-white-50 small fw-medium text-uppercase">Marks Records</p>
-                        <h4 class="mb-0 text-white h2 fw-bold text-white">{{ stats.total_marks }}</h4>
-                    </div>
+    <!-- 📉 ANALYTICAL VISUALIZATIONS -->
+    <div class="row g-4 mb-4">
+        <!-- Row 1 Chairs -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-3 h-100">
+                <div class="card-header bg-white border-0 py-3 px-4 d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold mb-0 text-dark">Subject Performance Trend</h6>
+                    <span class="badge bg-light text-primary rounded-pill px-3 py-2 small">Analytical Data</span>
                 </div>
-                <i class="fas fa-clipboard-list bg-icon text-white"></i>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card stat-card bg-gradient-success border-0">
-            <div class="card-body p-4">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <p class="mb-0 text-white-50 small fw-medium text-uppercase">Passed Students</p>
-                        <h4 class="mb-0 text-white h2 fw-bold text-white">{{ stats.pass_count }}</h4>
-                    </div>
-                </div>
-                <i class="fas fa-check-circle bg-icon text-white"></i>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card stat-card bg-gradient-danger border-0">
-            <div class="card-body p-4">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <p class="mb-0 text-white-50 small fw-medium text-uppercase">Failed Students</p>
-                        <h4 class="mb-0 text-white h2 fw-bold text-white">{{ stats.fail_count }}</h4>
-                    </div>
-                </div>
-                <i class="fas fa-exclamation-triangle bg-icon text-white"></i>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card stat-card bg-gradient-dark border-0"
-            style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
-            <div class="card-body p-4">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <p class="mb-0 text-white-50 small fw-medium text-uppercase">Avg Attendance</p>
-                        <h4 class="mb-0 text-white h2 fw-bold text-white">{{ stats.avg_attendance }}%</h4>
-                    </div>
-                </div>
-                <i class="fas fa-calendar-check bg-icon text-white"></i>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card stat-card bg-gradient-warning border-0">
-            <div class="card-body p-4">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <p class="mb-0 text-white-50 small fw-medium text-uppercase">Low Attendance</p>
-                        <h4 class="mb-0 text-white h2 fw-bold text-white">{{ stats.low_att_count }}</h4>
-                    </div>
-                </div>
-                <i class="fas fa-user-clock bg-icon text-white"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Charts Row -->
-<div class="row">
-    <div class="col-xl-4 col-lg-6">
-        <div class="card border-0 shadow-sm mb-4 h-100">
-            <div class="card-header bg-white d-flex align-items-center justify-content-between">
-                <h6 class="mb-0 text-primary fw-bold">Performance Average</h6>
-            </div>
-            <div class="card-body d-flex align-items-center justify-content-center">
-                <div class="text-center w-100">
-                    {% if stats.total_marks > 0 %}
-                    <img src="{{ url_for('static', filename='charts/admin_subject_avg.png', v=range(1, 99999)|random) }}"
-                        alt="Subject Chart" class="chart-card-img img-fluid">
+                <div class="card-body px-4 pb-4">
+                    {% if charts.subject_avg %}
+                    <img src="{{ url_for('static', filename='charts/subject_avg.png') }}?v={{ range(1, 999) | random }}"
+                        class="img-fluid rounded-3" alt="Subject Marks">
                     {% else %}
-                    <div class="py-5 text-center">
-                        <i class="fas fa-chart-bar fa-3x text-light mb-3"></i>
-                        <p class="text-muted">No data available</p>
+                    <div class="text-center py-5 text-muted small">Insufficient subject data for visualization.</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-3 h-100">
+                <div class="card-header bg-white border-0 py-3 px-4 d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold mb-0 text-dark">Attendance Distribution</h6>
+                    <i class="bi bi-pie-chart text-muted"></i>
+                </div>
+                <div class="card-body px-4 pb-4 text-center">
+                    {% if charts.attendance_pie %}
+                    <img src="{{ url_for('static', filename='charts/attendance_pie.png') }}?v={{ range(1, 999) | random }}"
+                        class="img-fluid rounded-3" alt="Attendance Pie" style="max-height: 300px;">
+                    {% else %}
+                    <div class="text-center py-5 text-muted small">No attendance records found for current filters.
                     </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2 Charts -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-3 h-100">
+                <div class="card-header bg-white border-0 py-3 px-4">
+                    <h6 class="fw-bold mb-0 text-dark">Pedagogical Component Metrics</h6>
+                </div>
+                <div class="card-body px-4 pb-4">
+                    {% if charts.performance_trend %}
+                    <img src="{{ url_for('static', filename='charts/performance_trend.png') }}?v={{ range(1, 999) | random }}"
+                        class="img-fluid rounded-3" alt="Performance Trend">
+                    {% else %}
+                    <div class="text-center py-5 text-muted small">No performance trends available.</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-3 h-100">
+                <div class="card-header bg-white border-0 py-3 px-4">
+                    <h6 class="fw-bold mb-0 text-dark">Top Performer Lead Matrix</h6>
+                </div>
+                <div class="card-body px-4 pb-4">
+                    {% if charts.top_students %}
+                    <img src="{{ url_for('static', filename='charts/top_students.png') }}?v={{ range(1, 999) | random }}"
+                        class="img-fluid rounded-3" alt="Top Students">
+                    {% else %}
+                    <div class="text-center py-5 text-muted small">No leaderboard data generated.</div>
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-xl-4 col-lg-6">
-        <div class="card border-0 shadow-sm mb-4 h-100">
-            <div class="card-header bg-white d-flex align-items-center justify-content-between">
-                <h6 class="mb-0 text-primary fw-bold">Overall Pass/Fail Ratio</h6>
-            </div>
-            <div class="card-body d-flex align-items-center justify-content-center">
-                <div class="text-center w-100">
-                    {% if stats.total_marks > 0 %}
-                    <img src="{{ url_for('static', filename='charts/admin_pass_fail.png', v=range(1, 99999)|random) }}"
-                        alt="Pass/Fail Chart" class="chart-card-img img-fluid">
-                    {% else %}
-                    <div class="py-5 text-center">
-                        <i class="fas fa-chart-pie fa-3x text-light mb-3"></i>
-                        <p class="text-muted">No data available</p>
+    <!-- 📋 INSIGHT TABLES -->
+    <div class="row g-4">
+        <!-- Table 1: Leaderboard -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-header bg-white border-0 py-3 px-4">
+                    <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-trophy me-2 text-warning"></i>Leaderboard Top 5
+                    </h6>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-light">
+                                <tr class="text-secondary small text-uppercase fw-bold ls-1">
+                                    <th class="ps-4">Rank</th>
+                                    <th>Student</th>
+                                    <th class="text-center pe-4">Index Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for s in top_students %}
+                                <tr>
+                                    <td class="ps-4">
+                                        <span
+                                            class="badge {% if loop.index == 1 %}bg-warning{% elif loop.index == 2 %}bg-secondary{% else %}bg-light text-dark{% endif %} rounded-pill px-3">
+                                            #{{ loop.index }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="fw-bold text-dark">{{ s.name }}</div>
+                                    </td>
+                                    <td class="text-center pe-4">
+                                        <div
+                                            class="bg-success-soft text-success rounded-pill fw-bold small px-3 py-1 d-inline-block">
+                                            {{ s.avg_marks|round(1) }}%
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="3" class="text-center py-4 text-muted small">No leaderboard data found.
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
-                    {% endif %}
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-xl-4 col-lg-12">
-        <div class="card border-0 shadow-sm mb-4 h-100">
-            <div class="card-header bg-white d-flex align-items-center justify-content-between">
-                <h6 class="mb-0 text-primary fw-bold">Marks Distribution</h6>
-            </div>
-            <div class="card-body d-flex align-items-center justify-content-center">
-                <div class="text-center w-100">
-                    {% if stats.total_marks > 0 %}
-                    <img src="{{ url_for('static', filename='charts/admin_distribution.png', v=range(1, 99999)|random) }}"
-                        alt="Distribution Chart" class="chart-card-img img-fluid">
-                    {% else %}
-                    <div class="py-5 text-center">
-                        <i class="fas fa-chart-line fa-3x text-light mb-3"></i>
-                        <p class="text-muted">No data available</p>
+        <!-- Table 2: Performance Risks -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-header bg-white border-0 py-3 px-4">
+                    <h6 class="fw-bold mb-1 text-dark"><i
+                            class="bi bi-shield-exclamation me-2 text-danger"></i>Performance Risk Alerts</h6>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive" style="max-height: 250px; overflow-y: auto;">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-light sticky-top">
+                                <tr class="text-secondary small text-uppercase fw-bold ls-1">
+                                    <th class="ps-4">At-Risk Student</th>
+                                    <th class="text-center pe-4">Alert Trigger</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for s in low_students %}
+                                <tr>
+                                    <td class="ps-4">
+                                        <div class="fw-semibold text-dark">{{ s.name }}</div>
+                                    </td>
+                                    <td class="text-center pe-4">
+                                        <span
+                                            class="badge bg-danger-soft text-danger rounded-pill px-3 py-1 fw-bold extra-small">
+                                            {{ s.reason }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="2" class="text-center py-4 text-muted small">Minimal risk detected.
+                                        Healthy records.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
-                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <!-- Top Students -->
-    <div class="col-lg-6 mb-4">
-        <div class="card border-0 shadow-sm h-100">
-            <div class="card-header bg-white d-flex align-items-center">
-                <i class="fas fa-trophy text-warning me-2"></i>
-                <h6 class="mb-0 fw-bold">Top 5 Performers (Highest Avg)</h6>
-            </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Enrollment No</th>
-                                <th>Name</th>
-                                <th class="text-end">Avg Marks</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for student in stats.top_students %}
-                            <tr>
-                                <td class="fw-bold">{{ student.roll_no }}</td>
-                                <td>{{ student.name }}</td>
-                                <td class="text-end">
-                                    <span class="badge bg-success bg-opacity-10 text-success fw-bold">{{
-                                        student.avg_marks|round(1) }}</span>
-                                </td>
-                            </tr>
-                            {% else %}
-                            <tr>
-                                <td colspan="3" class="text-center py-4">No data available</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+<style>
+    .bg-primary-soft {
+        background-color: rgba(99, 102, 241, 0.1);
+    }
 
-    <!-- Weak Performers -->
-    <div class="col-lg-6 mb-4">
-        <div class="card border-0 shadow-sm h-100">
-            <div class="card-header bg-white d-flex align-items-center">
-                <i class="fas fa-exclamation-circle text-danger me-2"></i>
-                <h6 class="mb-0 fw-bold">Weak 5 Performers (Lowest Avg)</h6>
-            </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Enrollment No</th>
-                                <th>Name</th>
-                                <th class="text-end">Avg Marks</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for student in stats.weak_students %}
-                            <tr>
-                                <td class="fw-bold">{{ student.roll_no }}</td>
-                                <td>{{ student.name }}</td>
-                                <td class="text-end">
-                                    <span class="badge bg-danger bg-opacity-10 text-danger fw-bold">{{
-                                        student.avg_marks|round(1) }}</span>
-                                </td>
-                            </tr>
-                            {% else %}
-                            <tr>
-                                <td colspan="3" class="text-center py-4">No data available</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    .bg-purple-soft {
+        background-color: rgba(168, 85, 247, 0.1);
+    }
 
-<!-- Performance Alerts Section -->
-<div class="row mb-4">
-    <div class="col-md-6 mb-4">
-        <div class="card border-0 shadow-sm border-start border-warning border-4">
-            <div class="card-header bg-white d-flex align-items-center justify-content-between">
-                <div class="d-flex align-items-center">
-                    <i class="fas fa-clock text-warning me-2"></i>
-                    <h6 class="mb-0 fw-bold">Low Attendance Alerts (< 75%)</h6>
-                </div>
-                <span class="badge bg-warning text-dark">{{ low_attendance|length }} Students</span>
-            </div>
-            <div class="card-body p-0">
-                <div class="table-responsive" style="max-height: 300px;">
-                    <table class="table table-sm table-hover align-middle mb-0">
-                        <thead class="bg-light sticky-top">
-                            <tr>
-                                <th class="ps-3">Roll No</th>
-                                <th>Name</th>
-                                <th>Dept</th>
-                                <th class="text-center">Attendance %</th>
-                                <th class="text-end pe-3">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for s in low_attendance %}
-                            <tr>
-                                <td class="ps-3 fw-bold">{{ s.roll_no }}</td>
-                                <td>{{ s.name }}</td>
-                                <td class="small">{{ s.department }}</td>
-                                <td class="text-center">
-                                    <span class="badge bg-warning bg-opacity-10 text-dark fw-bold">{{ s.percentage
-                                        }}%</span>
-                                </td>
-                                <td class="text-end pe-3">
-                                    <a href="{{ url_for('admin.student_report_view', roll_no=s.roll_no) }}"
-                                        class="btn btn-sm btn-outline-warning rounded-pill">Detail</a>
-                                </td>
-                            </tr>
-                            {% else %}
-                            <tr>
-                                <td colspan="5" class="text-center py-4 text-muted small">No low attendance students
-                                    found.</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+    .bg-success-soft {
+        background-color: rgba(34, 197, 94, 0.1);
+    }
 
-    <div class="col-md-6 mb-4">
-        <div class="card border-0 shadow-sm border-start border-danger border-4">
-            <div class="card-header bg-white d-flex align-items-center justify-content-between">
-                <div class="d-flex align-items-center">
-                    <i class="fas fa-book-dead text-danger me-2"></i>
-                    <h6 class="mb-0 fw-bold">External Failures Alert (Marks < 35)</h6>
-                </div>
-                <span class="badge bg-danger text-white">{{ weak_students_alert|length }} Students</span>
-            </div>
-            <div class="card-body p-0">
-                <div class="table-responsive" style="max-height: 300px;">
-                    <table class="table table-sm table-hover align-middle mb-0">
-                        <thead class="bg-light sticky-top">
-                            <tr>
-                                <th class="ps-3">Roll No</th>
-                                <th>Name</th>
-                                <th class="text-center">Failed Subjects</th>
-                                <th class="text-end pe-3">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for s in weak_students_alert %}
-                            <tr>
-                                <td class="ps-3 fw-bold">{{ s.roll_no }}</td>
-                                <td>{{ s.name }}</td>
-                                <td class="text-center">
-                                    <span class="badge bg-danger rounded-pill">{{ s.fail_count }}</span>
-                                </td>
-                                <td class="text-end pe-3">
-                                    <a href="{{ url_for('admin.student_report_view', roll_no=s.roll_no) }}"
-                                        class="btn btn-sm btn-outline-danger rounded-pill">Detail</a>
-                                </td>
-                            </tr>
-                            {% else %}
-                            <tr>
-                                <td colspan="4" class="text-center py-4 text-muted small">No external failures found.
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    .bg-indigo-soft {
+        background-color: rgba(79, 70, 229, 0.1);
+    }
 
-<!-- Danger Zone -->
-<div class="row">
-    <div class="col-12 mb-4">
-        <div class="card border-danger shadow-sm" style="border-width: 2px; border-style: dashed;">
-            <div class="card-body p-4">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div>
-                        <h5 class="text-danger fw-bold mb-1"><i class="fas fa-biohazard me-2"></i>Danger Zone</h5>
-                        <p class="text-muted small mb-0">Permanently delete all students, marks, and attendance data.
-                            This action cannot be reversed.</p>
-                    </div>
-                    <a href="{{ url_for('admin.reset_data') }}"
-                        class="btn btn-danger px-4 rounded-pill fw-bold shadow-sm">
-                        <i class="fas fa-trash-alt me-2"></i>Reset System Data
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    .bg-danger-soft {
+        background-color: rgba(239, 68, 68, 0.1);
+    }
+
+    .bg-warning-soft {
+        background-color: rgba(245, 158, 11, 0.1);
+    }
+
+    .text-purple {
+        color: #a855f7;
+    }
+
+    .text-indigo {
+        color: #4f46e5;
+    }
+
+    .ls-1 {
+        letter-spacing: 0.1em;
+    }
+
+    .extra-small {
+        font-size: 0.7rem;
+    }
+
+    .transition-hover {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .transition-hover:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        content: "•";
+        color: #cbd5e1;
+    }
+
+    .table thead th {
+        border: none;
+        font-size: 10px;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(0, 0, 0, 0.01);
+    }
+</style>
 {% endblock %}

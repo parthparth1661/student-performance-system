@@ -1,0 +1,94 @@
+{% extends 'admin/layout.html' %}
+
+{% block page_title %}<h5 class="fw-bold mb-0 text-dark"><i class="bi bi-book me-2"></i>Subject Module</h5>{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- 🎨 HEADER SECTOR -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h4 class="fw-bold mb-1 text-dark">{{ 'Modify Subject Details' if edit_mode else 'Add New Subject' }}</h4>
+                    <p class="text-muted small mb-0">{{ 'Update institutional curriculum mappings' if edit_mode else 'Define a new academic course in the system' }}</p>
+                </div>
+                <a href="{{ url_for('admin.view_subjects') }}" class="btn btn-light border shadow-sm px-4 fw-bold rounded-3 transition-hover">
+                    <i class="bi bi-arrow-left me-2"></i>Back to Registry
+                </a>
+            </div>
+
+            <!-- 🧪 DATA ENTRY CARD -->
+            <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+                <div class="card-body p-4 p-md-5">
+                    <form method="POST" class="row g-4">
+                        <!-- Group 1: Subject Identity -->
+                        <div class="col-12">
+                            <label class="form-label fw-bold text-uppercase small text-muted mb-2" style="letter-spacing: 0.05em;">Subject Identity</label>
+                            <input type="text" name="subject_name" class="form-control form-control-lg border-0 bg-light rounded-3 px-4" 
+                                   value="{{ subject.subject_name if subject else '' }}" required 
+                                   placeholder="Enter Subject Name (e.g. Artificial Intelligence)">
+                        </div>
+
+                        <!-- Group 2: Academic Allocation -->
+                        <div class="col-md-8">
+                            <label class="form-label fw-bold text-uppercase small text-muted mb-2" style="letter-spacing: 0.05em;">Department</label>
+                            <select name="department" class="form-select form-select-lg border-0 bg-light rounded-3 px-4" required>
+                                <option value="">Select Department</option>
+                                <option value="BCA" {% if subject and subject.department == 'BCA' %}selected{% endif %}>BCA (Computer Science)</option>
+                                <option value="MCA" {% if subject and subject.department == 'MCA' %}selected{% endif %}>MCA (Master of Apps)</option>
+                                <option value="B.TECH" {% if subject and subject.department == 'B.TECH' %}selected{% endif %}>B.TECH (Engineering)</option>
+                                <option value="MBA" {% if subject and subject.department == 'MBA' %}selected{% endif %}>MBA (Management)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold text-uppercase small text-muted mb-2" style="letter-spacing: 0.05em;">Semester</label>
+                            <select name="semester" class="form-select form-select-lg border-0 bg-light rounded-3 px-4" required>
+                                <option value="">Sem</option>
+                                {% for i in range(1, 9) %}
+                                <option value="{{ i }}" {% if subject and subject.semester == i %}selected{% endif %}>Semester {{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Group 3: Faculty Assignment -->
+                        <div class="col-12 mt-5">
+                            <label class="form-label fw-bold text-uppercase small text-muted mb-2" style="letter-spacing: 0.05em;">Assign Faculty</label>
+                            <div class="input-group">
+                                <span class="input-group-text border-0 bg-light px-4"><i class="bi bi-person-badge text-primary"></i></span>
+                                <select name="faculty_id" class="form-select form-select-lg border-0 bg-light rounded-end-3 px-4">
+                                    <option value="">Choose a Faculty Member...</option>
+                                    {% for f in faculties %}
+                                    <option value="{{ f.faculty_id }}" {% if subject and subject.faculty_id == f.faculty_id %}selected{% endif %}>{{ f.faculty_name }} ({{ f.department }})</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 🏁 ACTION FOOTER -->
+                        <div class="col-12 mt-5 border-top pt-4">
+                            <div class="d-flex justify-content-end gap-3">
+                                <a href="{{ url_for('admin.view_subjects') }}" class="btn btn-light px-5 py-3 rounded-pill fw-bold text-muted transition-hover">Cancel</a>
+                                <button type="submit" class="btn btn-primary px-5 py-3 rounded-pill fw-bold shadow-sm transition-hover">
+                                    <i class="bi bi-check-circle me-2"></i>{{ 'Update Subject Record' if edit_mode else 'Register New Subject' }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .transition-hover { transition: all 0.2s ease-in-out; }
+    .transition-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1) !important; }
+    .form-control-lg, .form-select-lg { font-size: 1rem; }
+    .form-control:focus, .form-select:focus {
+        background-color: #ffffff !important;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1) !important;
+        border: none !important;
+    }
+</style>
+{% endblock %}

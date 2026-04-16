@@ -1,0 +1,153 @@
+{% extends 'admin/layout.html' %}
+
+{% block page_title %}{{ 'Edit Faculty' if edit_mode else 'Add New Faculty' }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <!-- 🛰️ NAVIGATION HUB -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="{{ url_for('admin.view_faculty') }}" class="btn btn-light border rounded-3 px-3 shadow-sm">
+                <i class="fas fa-arrow-left me-2"></i>Faculty Registry
+            </a>
+            <h5 class="fw-bold mb-0 text-dark">{{ 'Modify Faculty Profile' if edit_mode else 'New Personnel Entry' }}</h5>
+        </div>
+
+        <!-- 🧪 PERSONNEL MASTER FORM -->
+        <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
+            <form method="POST">
+                <div class="row g-4">
+                    <!-- Faculty Name -->
+                    <div class="col-12">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Full Instructor Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-0 bg-light text-muted"><i class="fas fa-user-tie"></i></span>
+                            <input type="text" name="faculty_name" class="form-control border-0 bg-light rounded-2 py-3" 
+                                   placeholder="e.g. Dr. Robert Miller" value="{{ faculty.faculty_name if edit_mode else '' }}" required>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="col-12">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Institutional Email</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-0 bg-light text-muted"><i class="fas fa-envelope"></i></span>
+                            <input type="email" name="email" class="form-control border-0 bg-light rounded-2 py-3" 
+                                   placeholder="robert.m@university.edu" value="{{ faculty.email if edit_mode else '' }}" required>
+                        </div>
+                    </div>
+
+                    <!-- Contact Number -->
+                    <div class="col-12">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Institutional Contact</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-0 bg-light text-muted"><i class="fas fa-phone"></i></span>
+                            <input type="text" name="contact_no" class="form-control border-0 bg-light rounded-2 py-3" 
+                                   placeholder="e.g. 9876543210" value="{{ faculty.contact_no if edit_mode else '' }}" 
+                                   maxlength="10" pattern="[6-9]{1}[0-9]{9}" 
+                                   title="Enter valid 10-digit Indian mobile number starting with 6-9" required>
+                        </div>
+                    </div>
+
+                    <!-- Department -->
+                    <div class="col-12">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Departmental Host</label>
+                        <select name="department" id="department" class="form-select border-0 bg-light rounded-2 py-3" required>
+                            <option value="">Select Dept Area...</option>
+                            <option value="BCA" {{ 'selected' if edit_mode and faculty.department == 'BCA' }}>BCA</option>
+                            <option value="MCA" {{ 'selected' if edit_mode and faculty.department == 'MCA' }}>MCA</option>
+                            <option value="B.TECH" {{ 'selected' if edit_mode and faculty.department == 'B.TECH' }}>B.TECH</option>
+                            <option value="M.TECH" {{ 'selected' if edit_mode and faculty.department == 'M.TECH' }}>M.TECH</option>
+                            <option value="MBA" {{ 'selected' if edit_mode and faculty.department == 'MBA' }}>MBA</option>
+                        </select>
+                    </div>
+
+                    <!-- Dynamic Subject Mapping -->
+                    <div class="col-12">
+                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Primary Subject Mapping (Optional)</label>
+                        <select name="subject_id" id="subject" class="form-select border-0 bg-light rounded-2 py-3" {{ 'disabled' if not edit_mode and not subjects }}>
+                            <option value="">-- No Primary Assignment --</option>
+                            {% for sub in subjects %}
+                            <option value="{{ sub.subject_id }}" {{ 'selected' if sub.subject_id == current_subject_id }}>
+                                [{{ sub.department }}] {{ sub.subject_name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <p class="extra-small text-muted mt-2 ps-1" id="subject-hint">
+                            {% if not subjects and not edit_mode %}
+                                Please select a department first to load subject assignments.
+                            {% else %}
+                                Mapping a subject here will automatically update the institutional curriculum catalog.
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 🏁 ACTION CENTER -->
+                <div class="mt-5 border-top pt-4 text-end">
+                    <button type="reset" class="btn btn-light px-4 py-2 rounded-3 fw-bold me-2">Reset</button>
+                    <button type="submit" class="btn btn-primary px-5 py-2 rounded-3 fw-bold shadow-sm">
+                        <i class="fas fa-save me-2"></i>{{ 'Modify Personnel' if edit_mode else 'Hire Faculty' }}
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 💡 HINT BOX -->
+        <div class="mt-4 bg-indigo-soft p-3 rounded-4 border border-primary border-opacity-10 d-flex align-items-center">
+            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px; flex-shrink: 0;">
+                <i class="fas fa-link extra-small"></i>
+            </div>
+            <p class="extra-small text-dark mb-0 fw-medium">
+                Faculty mappings are bidirectional. Deleting an instructor will release their subjects for new assignments.
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+.bg-indigo-soft { background-color: rgba(99, 102, 241, 0.08); }
+.extra-small { font-size: 0.75rem; }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#department').on('change', function() {
+        let dept = $(this).val();
+        let subjectDropdown = $('#subject');
+        let hint = $('#subject-hint');
+
+        if (!dept) {
+            subjectDropdown.empty().append('<option value="">-- No Primary Assignment --</option>').prop('disabled', true);
+            hint.text('Please select a department first to load subject assignments.');
+            return;
+        }
+
+        subjectDropdown.prop('disabled', true).empty().append('<option value="">Loading institutional curriculum...</option>');
+
+        fetch(`/admin/get-subjects-by-department?department=${dept}`)
+            .then(res => res.json())
+            .then(data => {
+                subjectDropdown.empty().append('<option value="">-- No Primary Assignment --</option>');
+                
+                if (data.length === 0) {
+                    hint.text('No subjects identified for this department registry.');
+                } else {
+                    hint.text('Mapping a subject here will automatically update the institutional curriculum catalog.');
+                    data.forEach(sub => {
+                        subjectDropdown.append(
+                            `<option value="${sub.subject_id}">${sub.subject_name}</option>`
+                        );
+                    });
+                }
+                subjectDropdown.prop('disabled', false);
+            })
+            .catch(err => {
+                console.error('Curriculum Fetch Error:', err);
+                subjectDropdown.empty().append('<option value="">Error loading subjects</option>');
+            });
+    });
+});
+</script>
+{% endblock %}

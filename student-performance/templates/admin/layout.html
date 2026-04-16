@@ -1,185 +1,393 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Student Performance Analysis</title>
-    <!-- Bootstrap CSS -->
+    <title>Admin Dashboard | SPDA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sidebar-width: 240px;
+            --sidebar-bg: #111827;
+            --page-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --primary-color: #6366f1;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --spacing-base: 20px;
+            --nav-hover: rgba(0,0,0,0.03);
+            --transition-speed: 0.3s;
+        }
+
+        /* 🌙 DARK MODE OVERRIDES */
+        body.dark {
+            --page-bg: #0f172a;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --nav-hover: rgba(255,255,255,0.05);
+        }
+
+        body.dark .bg-light, body.dark .card-header {
+            background-color: #1a2233 !important;
+            color: #f1f5f9 !important;
+        }
+
+        body.dark .table, body.dark .modal-content {
+            background-color: var(--card-bg) !important;
+            color: var(--text-main) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        body.dark .text-muted, body.dark .text-secondary {
+            color: #94a3b8 !important;
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--page-bg);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
+            animation: fadeInPage 0.5s ease-out;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+
+        /* 🧩 SIDEBAR (FIXED LEFT) */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            color: #ffffff;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            padding: var(--spacing-base);
+            z-index: 1000;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar-brand {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-brand i {
+            color: var(--primary-color);
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-item i {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+            opacity: 0.8;
+            transition: transform 0.25s ease;
+        }
+
+        .nav-item:hover {
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-item:hover i {
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
+        .nav-item.active {
+            color: #ffffff;
+            background-color: var(--primary-color);
+            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.25);
+        }
+
+        .nav-item.active i {
+            opacity: 1;
+        }
+
+        .nav-item.logout {
+            color: #f87171;
+            opacity: 0.9;
+        }
+
+        .nav-item.logout:hover {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
+
+        /* 🏁 MAIN CONTENT WRAPPER */
+        .main-wrapper {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* 🛰️ TOP NAVBAR */
+        .navbar {
+            height: 72px;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--spacing-base);
+            position: sticky;
+            top: 0;
+            z-index: 900;
+            transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+        }
+
+        .navbar-left .page-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .btn-icon {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--nav-hover);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .btn-icon:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        .admin-avatar {
+            width: 38px;
+            height: 38px;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 0 1px var(--border-color);
+        }
+
+        /* 🧊 CONTENT AREA */
+        .content-area {
+            padding: var(--spacing-base);
+            flex: 1;
+        }
+
+        /* 📊 UNIVERSAL UI ANIMATIONS */
+        /* 🚀 GLOBAL DESIGN SYSTEM CONSISTENCY */
+        .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1) !important; }
+        
+        .btn { padding: 8px 18px; border-radius: 8px; font-weight: 600; font-size: 13px; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; border: 1px solid transparent; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn:hover { transform: translateY(-2px); }
+        .btn-sm { padding: 6px 12px; border-radius: 6px; font-size: 12px; }
+        .btn-primary { background-color: var(--primary-color); color: white; border: none; }
+        .btn-primary:hover { background-color: #4f46e5; color: white; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2); }
+        
+        .form-label-custom { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 8px; }
+        .form-control-custom { background-color: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px; padding: 10px 14px; font-size: 14px; transition: all 0.2s; width: 100%; }
+        .form-control-custom:focus { background-color: #ffffff; border-color: var(--primary-color); outline: none; box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1); }
+        
+        /* 📊 DATA TABLE REFINEMENT */
+        .table thead th { background: #f8fafc; color: var(--text-muted); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 14px 24px !important; border-bottom: 1px solid var(--border-color); }
+        .table tbody td { padding: 16px 24px !important; vertical-align: middle; border-bottom: 1px solid #f1f5f9; }
+        tr { transition: background 0.2s ease; }
+        tr:hover { background: rgba(0,0,0,0.02) !important; }
+        
+        /* ✨ UTILITY OVERLAYS */
+        .bg-primary-soft { background-color: rgba(99, 102, 241, 0.1) !important; color: var(--primary-color) !important; }
+        .bg-success-soft { background-color: rgba(16, 185, 129, 0.1) !important; color: #10b981 !important; }
+        .bg-danger-soft { background-color: rgba(239, 68, 68, 0.1) !important; color: #ef4444 !important; }
+        .bg-warning-soft { background-color: rgba(245, 158, 11, 0.1) !important; color: #f59e0b !important; }
+        .bg-indigo-soft { background-color: rgba(79, 70, 229, 0.1) !important; color: #4f46e9 !important; }
+        
+        .transition-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .transition-hover:hover { transform: translateY(-3px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1) !important; }
+        
+        .extra-small { font-size: 11px; }
+        .btn-indigo { background-color: var(--primary-color); color: white; }
+        .btn-indigo:hover { background-color: #4f46e5; color: white; }
+
+        .alert { animation: slideInRight 0.4s ease-out; }
+        @keyframes slideInRight {
+            from { transform: translateX(20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
 </head>
+<body class="theme-transition">
 
-<body>
+    <!-- 🧩 SIDEBAR -->
+    <aside class="sidebar">
+        <a href="{{ url_for('admin.dashboard') }}" class="sidebar-brand">
+            <i class="fas fa-graduation-cap"></i>
+            <span>SPDA Admin</span>
+        </a>
 
-    <div id="wrapper">
-        <!-- Sidebar -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h4><i class="fas fa-graduation-cap me-2 text-primary"></i>SPDA Admin</h4>
-                <button type="button" id="sidebarCollapseMobile" class="btn d-md-none text-white">
-                    <i class="fas fa-times"></i>
-                </button>
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('admin.dashboard') }}" class="nav-item {{ 'active' if request.endpoint == 'admin.dashboard' }}">
+                <i class="fas fa-th-large"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="{{ url_for('admin.view_students') }}" class="nav-item {{ 'active' if request.endpoint and request.endpoint.startswith('admin.view_student') }}">
+                <i class="fas fa-user-graduate"></i>
+                <span>Students</span>
+            </a>
+            <a href="{{ url_for('admin.view_subjects') }}" class="nav-item {{ 'active' if request.endpoint and request.endpoint.startswith('admin.view_subject') }}">
+                <i class="fas fa-book-open"></i>
+                <span>Subjects</span>
+            </a>
+            <a href="{{ url_for('admin.view_marks') }}" class="nav-item {{ 'active' if request.endpoint == 'admin.view_marks' }}">
+                <i class="fas fa-poll"></i>
+                <span>Academic Marks</span>
+            </a>
+            <a href="{{ url_for('admin.view_attendance') }}" class="nav-item {{ 'active' if request.endpoint == 'admin.view_attendance' }}">
+                <i class="fas fa-user-check"></i>
+                <span>Attendance Hub</span>
+            </a>
+            <a href="{{ url_for('admin.reports_marks') }}" class="nav-item {{ 'active' if request.endpoint and request.endpoint.startswith('admin.reports_') }}">
+                <i class="fas fa-file-invoice"></i>
+                <span>Report Center</span>
+            </a>
+            <a href="{{ url_for('admin.view_faculty') }}" class="nav-item {{ 'active' if request.endpoint and request.endpoint.startswith('admin.view_faculty') }}">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>Faculty</span>
+            </a>
+
+            <a href="{{ url_for('admin.view_feedback') }}" class="nav-item {{ 'active' if 'feedback' in (request.endpoint or '') }}">
+                <i class="fas fa-comment-alt"></i>
+                <span>Feedback Hub</span>
+            </a>
+
+            <div style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
+                <a href="{{ url_for('admin.logout') }}" class="nav-item logout">
+                    <i class="fas fa-power-off"></i>
+                    <span>Logout</span>
+                </a>
             </div>
-
-            <ul class="list-unstyled components">
-                <div class="sidebar-section-title">Main</div>
-                <li class="{{ 'active' if request.endpoint == 'admin.dashboard' }}">
-                    <a href="{{ url_for('admin.dashboard') }}">
-                        <i class="fas fa-th-large"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-
-                <div class="sidebar-section-title">Management</div>
-                <li
-                    class="{{ 'active' if request.endpoint == 'admin.view_students' or request.endpoint == 'admin.add_student' }}">
-                    <a href="{{ url_for('admin.view_students') }}">
-                        <i class="fas fa-user-graduate"></i>
-                        <span>Students</span>
-                    </a>
-                </li>
-                <li
-                    class="{{ 'active' if request.endpoint == 'admin.view_marks' or request.endpoint == 'admin.add_marks' }}">
-                    <a href="{{ url_for('admin.view_marks') }}">
-                        <i class="fas fa-file-invoice"></i>
-                        <span>Marks Records</span>
-                    </a>
-                </li>
-
-                <div class="sidebar-section-title">Reports & Data</div>
-                <li class="{{ 'active' if 'student_report' in request.endpoint }}">
-                    <a href="{{ url_for('admin.student_report_search') }}">
-                        <i class="fas fa-chart-pie"></i>
-                        <span>Performance Reports</span>
-                    </a>
-                </li>
-                <li class="{{ 'active' if request.endpoint == 'admin.upload_csv' }}">
-                    <a href="{{ url_for('admin.upload_csv') }}">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <span>Bulk Upload</span>
-                    </a>
-                </li>
-
-                <div class="sidebar-section-title">Attendance</div>
-                <li class="{{ 'active' if request.endpoint == 'admin.mark_attendance' }}">
-                    <a href="{{ url_for('admin.mark_attendance') }}">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>Mark Attendance</span>
-                    </a>
-                </li>
-                <li class="{{ 'active' if request.endpoint == 'admin.upload_attendance' }}">
-                    <a href="{{ url_for('admin.upload_attendance') }}">
-                        <i class="fas fa-file-csv"></i>
-                        <span>Upload Attendance</span>
-                    </a>
-                </li>
-                <li class="{{ 'active' if request.endpoint == 'admin.view_attendance' }}">
-                    <a href="{{ url_for('admin.view_attendance') }}">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>View Attendance</span>
-                    </a>
-                </li>
-                <li class="{{ 'active' if request.endpoint == 'admin.attendance_summary' }}">
-                    <a href="{{ url_for('admin.attendance_summary') }}">
-                        <i class="fas fa-file-contract"></i>
-                        <span>Attendance Summary</span>
-                    </a>
-                </li>
-
-                <div class="sidebar-section-title">System</div>
-                <li class="{{ 'active' if request.endpoint == 'admin.academic_calendar' }}">
-                    <a href="{{ url_for('admin.academic_calendar') }}">
-                        <i class="fas fa-calendar-week"></i>
-                        <span>Academic Calendar</span>
-                    </a>
-                </li>
-                <li class="{{ 'active' if request.endpoint == 'admin.reset_data' }}">
-                    <a href="{{ url_for('admin.reset_data') }}" class="text-danger">
-                        <i class="fas fa-sync-alt text-danger"></i>
-                        <span class="text-danger">Reset All Data</span>
-                    </a>
-                </li>
-            </ul>
         </nav>
+    </aside>
 
-        <!-- Page Content -->
-        <div id="content">
-            <!-- Top Navbar -->
-            <nav class="navbar navbar-expand-lg top-navbar">
-                <div class="container-fluid">
-                    <button type="button" id="sidebarCollapse" class="btn btn-light me-3">
-                        <i class="fas fa-align-left"></i>
-                    </button>
-
-
-                    <div class="ms-auto d-flex align-items-center">
-                        <div class="dropdown">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
-                                data-bs-toggle="dropdown">
-                                <img src="https://ui-avatars.com/api/?name={{ session.get('admin_username', 'Admin') }}&background=4F46E5&color=fff"
-                                    alt="Profile" class="rounded-circle me-2" width="35">
-                                <span class="d-none d-md-inline fw-medium">{{ session.get('admin_username', 'Super
-                                    Admin') }}</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-3">
-                                <li><a class="dropdown-item" href="{{ url_for('admin.profile') }}"><i
-                                            class="fas fa-user me-2"></i>Profile</a></li>
-                                <li><a class="dropdown-item" href="{{ url_for('admin.change_password') }}"><i
-                                            class="fas fa-key me-2"></i>Change Password</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="{{ url_for('admin.logout') }}"><i
-                                            class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
-            <div class="container-fluid px-4 fade-in">
-                <!-- Flash Messages -->
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                {% for category, message in messages %}
-                <div class="alert alert-{{ category if category != 'danger' else 'danger' }} alert-dismissible fade show rounded-4 border-0 shadow-sm mb-4"
-                    role="alert">
-                    <i class="fas fa-{{ 'check-circle' if category == 'success' else 'exclamation-circle' }} me-2"></i>
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                {% endfor %}
-                {% endif %}
-                {% endwith %}
-
-                {% block content %}{% endblock %}
+    <!-- 🏁 MAIN WRAPPER -->
+    <div class="main-wrapper">
+        <!-- 🛰️ NAVBAR -->
+        <header class="navbar">
+            <div class="navbar-left">
+                <div class="page-title">{% block page_title %}Dashboard{% endblock %}</div>
             </div>
-        </div>
+            
+            <div class="navbar-right">
+                <a href="{{ url_for('admin.profile') }}" class="btn-icon" title="Admin Profile">
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- 🧊 CONTENT AREA -->
+        <main class="content-area">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ 'danger' if category == 'error' else category }} border-0 shadow-sm rounded-3 mb-4 small fw-bold" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% block content %}{% endblock %}
+        </main>
     </div>
 
-    <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Sidebar Toggle Script -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const sidebar = document.getElementById('sidebar');
-            const content = document.getElementById('content');
-            const sidebarCollapse = document.getElementById('sidebarCollapse');
-            const sidebarCollapseMobile = document.getElementById('sidebarCollapseMobile');
+        // 🌓 THEME ENGINE
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
 
-            function toggleSidebar() {
-                sidebar.classList.toggle('active');
-                content.classList.toggle('active');
+        // Check for saved theme
+        const savedTheme = localStorage.getItem('spda-theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            const isDark = body.classList.contains('dark');
+            
+            // Save preference
+            localStorage.setItem('spda-theme', isDark ? 'dark' : 'light');
+            
+            // Toggle icon
+            if (isDark) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
             }
-
-            sidebarCollapse.addEventListener('click', toggleSidebar);
-            sidebarCollapseMobile.addEventListener('click', toggleSidebar);
         });
     </script>
 </body>
-
 </html>

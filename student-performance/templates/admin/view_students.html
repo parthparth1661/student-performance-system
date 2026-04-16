@@ -1,118 +1,241 @@
 {% extends 'admin/layout.html' %}
 
+{% block page_title %}<h5 class="fw-bold mb-0 text-dark"><i class="bi bi-people me-2"></i>Student Management</h5>{%
+endblock %}
+
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h2 class="h3 mb-1">Student Management</h2>
-        <p class="text-muted small mb-0">Manage and filter your student records easily.</p>
-    </div>
-    <a href="{{ url_for('admin.add_student') }}" class="btn btn-primary d-inline-flex align-items-center">
-        <i class="fas fa-plus me-2"></i> Add New Student
-    </a>
-</div>
-
-<!-- Search & Filter Box -->
-<div class="card border-0 shadow-sm mb-4">
-    <div class="card-body p-4">
-        <form method="GET" action="{{ url_for('admin.view_students') }}" class="row g-3">
-            <div class="col-md-3">
-                <label class="form-label">Enrollment No</label>
-                <input type="text" name="roll_no" class="form-control" placeholder="Search Enrollment No..."
-                    value="{{ filters.get('roll_no', '') }}">
-            </div>
-            <div class="col-md-3">
-                <label class="form-label">Name</label>
-                <input type="text" name="name" class="form-control" placeholder="Search Name..."
-                    value="{{ filters.get('name', '') }}">
-            </div>
-            <div class="col-md-2">
-                <label class="form-label">Department</label>
-                <select name="department" class="form-select text-muted">
-                    <option value="">All Depts</option>
-                    {% for dept in ['BCA', 'MCA', 'B.TECH', 'M.TECH', 'MBA'] %}
-                    <option value="{{ dept }}" {{ 'selected' if filters.get('department')==dept }}>{{ dept }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-2">
-                <label class="form-label">Semester</label>
-                <select name="semester" class="form-select text-muted">
-                    <option value="">All Sem</option>
-                    {% for sem in semesters %}
-                    <option value="{{ sem }}" {{ 'selected' if filters.get('semester')==sem|string }}>{{ sem }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-2 d-flex align-items-end">
-                <button type="submit" class="btn btn-primary w-100">
-                    <i class="fas fa-search me-2"></i>Filter
+<div class="container-fluid py-4">
+    <!-- 🚀 HEADER SECTOR -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="fw-bold mb-1 text-dark">Student Directory</h4>
+            <p class="text-muted small mb-0">Manage institutional student records and profiles</p>
+        </div>
+        <div class="d-flex gap-3 align-items-center">
+            <!-- 📥 CSV BULK UPLOAD -->
+            <form action="/upload_students_csv" method="POST" enctype="multipart/form-data"
+                class="d-flex gap-2 align-items-center bg-white p-2 rounded-3 shadow-sm border">
+                <input type="file" name="file" accept=".csv" class="form-control form-control-sm border-0 bg-light"
+                    style="max-width: 180px;" required>
+                <button type="submit" class="btn btn-success btn-sm px-3 fw-bold rounded-2">
+                    <i class="bi bi-file-earmark-spreadsheet me-1"></i>Upload
                 </button>
-            </div>
-        </form>
-    </div>
-</div>
+            </form>
 
-<!-- Students Table -->
-<div class="card border-0 shadow-sm">
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-                <thead>
-                    <tr>
-                        <th class="ps-4">Enrollment No</th>
-                        <th>Student Name</th>
-                        <th>Email Address</th>
-                        <th>Department</th>
-                        <th>Semester</th>
-                        <th class="text-end pe-4">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for student in students %}
-                    <tr>
-                        <td class="ps-4 fw-bold text-primary">{{ student.roll_no }}</td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="https://ui-avatars.com/api/?name={{ student.name }}&background=random"
-                                    class="rounded-circle me-3" width="30" height="30">
-                                <span>{{ student.name }}</span>
-                            </div>
-                        </td>
-                        <td class="text-muted">{{ student.email }}</td>
-                        <td>
-                            <span class="badge bg-light text-secondary border">{{ student.department }}</span>
-                        </td>
-                        <td>
-                            <span class="badge bg-indigo bg-opacity-10 text-primary border-primary border-opacity-25"
-                                style="background-color: rgba(79, 70, 229, 0.1); color: #4F46E5;">Sem {{
-                                student.semester }}</span>
-                        </td>
-                        <td class="text-end pe-4">
-                            <div class="d-flex justify-content-end gap-2">
-                                <a href="{{ url_for('admin.edit_student', id=student.student_id) }}"
-                                    class="btn btn-sm btn-light text-primary" title="Edit">
-                                    <i class="fas fa-pen"></i>
-                                </a>
-                                <a href="{{ url_for('admin.delete_student', id=student.student_id) }}"
-                                    class="btn btn-sm btn-light text-danger"
-                                    onclick="return confirm('Are you sure you want to delete this student?')"
-                                    title="Delete">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    {% else %}
-                    <tr>
-                        <td colspan="6" class="text-center py-5 text-muted">
-                            <i class="fas fa-user-slash fa-3x mb-3 opacity-25"></i>
-                            <p class="mb-0">No student records found matching your filters.</p>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div class="dropdown">
+                <button class="btn btn-light border px-4 rounded-3 shadow-sm fw-bold dropdown-toggle transition-hover"
+                    type="button" data-bs-toggle="dropdown">
+                    <i class="bi bi-download me-2"></i>Export
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3">
+                    <li><a class="dropdown-item py-2" href="/export_students_csv"><i
+                                class="bi bi-filetype-csv me-2 text-success"></i>CSV Format</a></li>
+                    <li><a class="dropdown-item py-2" href="/export_students_pdf"><i
+                                class="bi bi-file-pdf me-2 text-danger"></i>PDF Report</a></li>
+                </ul>
+            </div>
+
+            <a href="{{ url_for('admin.add_student') }}"
+                class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm transition-hover">
+                <i class="bi bi-person-plus-fill me-2"></i>Add Student
+            </a>
+
+            <a href="{{ url_for('admin.clear_students') }}" class="btn btn-danger px-4 rounded-3 fw-bold shadow-sm transition-hover ms-2"
+               onclick="return confirm('⚠️ SECURITY ALERT: Are you sure you want to delete ALL students?\n\nThis action cannot be undone. All institutional student records and related audit trails will be wiped.')">
+                <i class="bi bi-trash me-1"></i>Clear All Students
+            </a>
+
         </div>
     </div>
+
+    <!-- 🔍 SMART FILTER ENGINE -->
+    <div class="card border-0 shadow-sm rounded-3 mb-4">
+        <div class="card-body p-4">
+            <form method="GET" class="row g-3 align-items-end">
+                <div class="col-lg-4">
+                    <label class="form-label fw-bold text-uppercase small text-muted mb-2"
+                        style="letter-spacing: 0.05em;">Quick Search</label>
+                    <div class="input-group">
+                        <span class="input-group-text border-0 bg-light text-muted"><i class="bi bi-search"></i></span>
+                        <input type="text" name="search" class="form-control border-0 bg-light rounded-end-3 py-2"
+                            placeholder="Name or Enrollment No..." value="{{ filters.search or '' }}">
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <label class="form-label fw-bold text-uppercase small text-muted mb-2"
+                        style="letter-spacing: 0.05em;">Department</label>
+                    <select name="department" class="form-select border-0 bg-light rounded-3 py-2">
+                        <option value="">All Departments</option>
+                        <option value="BCA" {% if filters.department=='BCA' %}selected{% endif %}>BCA</option>
+                        <option value="MCA" {% if filters.department=='MCA' %}selected{% endif %}>MCA</option>
+                        <option value="B.TECH" {% if filters.department=='B.TECH' %}selected{% endif %}>B.TECH</option>
+                        <option value="MBA" {% if filters.department=='MBA' %}selected{% endif %}>MBA</option>
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <label class="form-label fw-bold text-uppercase small text-muted mb-2"
+                        style="letter-spacing: 0.05em;">Semester</label>
+                    <select name="semester" class="form-select border-0 bg-light rounded-3 py-2">
+                        <option value="">Select Sem</option>
+                        {% for i in range(1, 9) %}
+                        <option value="{{ i }}" {% if filters.semester==i|string %}selected{% endif %}>Semester {{ i }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-lg-3">
+                    <div class="d-flex gap-2">
+                        <button type="submit"
+                            class="btn btn-primary w-100 rounded-3 fw-bold py-2 shadow-sm transition-hover">
+                            <i class="bi bi-funnel me-2"></i>Filter
+                        </button>
+                        <a href="{{ url_for('admin.view_students') }}"
+                            class="btn btn-light px-3 py-2 border rounded-3 text-muted shadow-sm transition-hover">
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 📦 STUDENT DATA MATRIX -->
+    <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr class="text-secondary small text-uppercase fw-bold">
+                            <th class="ps-4 py-3">Student Name</th>
+                            <th class="py-3">Enrollment No</th>
+                            <th class="py-3">Department</th>
+                            <th class="py-3">Contact No</th>
+                            <th class="py-3 text-center pe-4">Manage Student</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                        <tr>
+                            <td class="ps-4 py-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-primary-soft text-primary rounded-circle d-flex align-items-center justify-content-center me-3"
+                                        style="width: 40px; height: 40px;">
+                                        <span class="fw-bold">{{ student.name[:1]|upper }}</span>
+                                    </div>
+                                    <div>
+                                        <div class="fw-bold text-dark fs-6">{{ student.name }}</div>
+                                        <div class="text-muted extra-small">{{ student.email }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span
+                                    class="badge bg-light border text-primary rounded-pill px-3 py-1 font-monospace fw-bold">
+                                    {{ student.enrollment_no }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="d-flex flex-column">
+                                    <span class="fw-bold text-dark">{{ student.department }}</span>
+                                    <span class="text-muted extra-small">Semester {{ student.semester }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="small fw-semibold text-dark"><i
+                                        class="bi bi-telephone me-2 text-muted"></i>{{ student.contact_no or 'N/A'
+                                    }}</span>
+                            </td>
+                            <td class="text-center pe-4">
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="{{ url_for('admin.edit_student', enrollment_no=student.enrollment_no) }}"
+                                        class="btn btn-sm btn-outline-primary rounded-2 px-3 fw-bold">
+                                        <i class="bi bi-pencil"></i> Edit
+                                    </a>
+                                    <a href="{{ url_for('admin.reports_student_detail', enrollment_no=student.enrollment_no) }}"
+                                        class="btn btn-sm btn-outline-info rounded-2 px-3 fw-bold">
+                                        <i class="bi bi-graph-up"></i> Info
+                                    </a>
+                                    <a href="{{ url_for('admin.delete_student', enrollment_no=student.enrollment_no) }}"
+                                        class="btn btn-sm btn-outline-danger rounded-2 px-3 fw-bold"
+                                        onclick="return confirm('Permanent removal of student {{ student.name }}?')">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center py-5 text-muted">
+                                <i class="bi bi-people fa-3x mb-3 opacity-25"></i>
+                                <h6 class="fw-bold">No Students Registered</h6>
+                                <p class="small">Matching records could not be found in the current directory.</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📄 PAGINATION MATRIX -->
+    {% if total_pages > 1 %}
+    <div class="d-flex justify-content-between align-items-center mt-4 px-2">
+        <div class="small text-muted fw-bold text-uppercase" style="letter-spacing: 0.05em; font-size: 10px;">
+            Records <span class="text-dark">{{ (page-1)*10 + 1 }}</span> - <span class="text-dark">{{ [page*10,
+                total_students]|min }}</span>
+        </div>
+        <nav>
+            <ul class="pagination pagination-sm mb-0 gap-2">
+                {% if page > 1 %}
+                <li class="page-item"><a class="page-link border-0 rounded-2 shadow-sm px-3 py-2 bg-white"
+                        href="{{ url_for('admin.view_students', page=page-1, **filters) }}"><i
+                            class="bi bi-chevron-left text-primary"></i></a></li>
+                {% endif %}
+
+                {% for p in range(1, total_pages + 1) %}
+                <li class="page-item {% if p == page %}active{% endif %}">
+                    <a class="page-link border-0 rounded-2 shadow-sm px-3 py-2 {% if p == page %}bg-primary text-white{% else %}bg-white text-dark{% endif %}"
+                        href="{{ url_for('admin.view_students', page=p, **filters) }}">{{ p }}</a>
+                </li>
+                {% endfor %}
+
+                {% if page < total_pages %} <li class="page-item"><a
+                        class="page-link border-0 rounded-2 shadow-sm px-3 py-2 bg-white"
+                        href="{{ url_for('admin.view_students', page=page+1, **filters) }}"><i
+                            class="bi bi-chevron-right text-primary"></i></a></li>
+                    {% endif %}
+            </ul>
+        </nav>
+    </div>
+    {% endif %}
 </div>
+
+<style>
+    .bg-primary-soft {
+        background-color: rgba(99, 102, 241, 0.1);
+    }
+
+    .transition-hover {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .transition-hover:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .extra-small {
+        font-size: 0.75rem;
+    }
+
+    .table-striped>tbody>tr:nth-of-type(odd) {
+        --bs-table-accent-bg: rgba(0, 0, 0, 0.02);
+    }
+
+    .page-link:hover {
+        background-color: var(--primary-color) !important;
+        color: white !important;
+    }
+</style>
 {% endblock %}

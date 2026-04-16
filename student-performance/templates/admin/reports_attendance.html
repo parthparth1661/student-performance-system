@@ -1,0 +1,103 @@
+{% extends 'admin/layout.html' %}
+
+{% block page_title %}Institutional Attendance Audit{% endblock %}
+
+{% block content %}
+<!-- 📦 REPORT CONTROL CENTER -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h5 class="fw-bold m-0"><i class="fas fa-calendar-check me-2 text-primary"></i>Engagement Matrix</h5>
+            <div class="btn-group">
+                <a href="{{ url_for('admin.reports_marks') }}" class="btn btn-outline-primary">Marks Report</a>
+                <a href="{{ url_for('admin.reports_attendance') }}" class="btn btn-primary active">Attendance Report</a>
+            </div>
+        </div>
+        
+        <form method="GET" class="row g-3">
+            <div class="col-md-4">
+                <select name="department" class="form-select bg-light border-0">
+                    <option value="All">All Departments</option>
+                    {% for dept in departments %}
+                    <option value="{{ dept }}" {% if filters.department == dept %}selected{% endif %}>{{ dept }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select name="semester" class="form-select bg-light border-0">
+                    <option value="All">All Semesters</option>
+                    {% for i in range(1, 9) %}
+                    <option value="{{ i }}" {% if filters.semester == i|string %}selected{% endif %}>Sem {{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input type="text" name="search" class="form-control bg-light border-0" placeholder="Name / Enrollment..." value="{{ filters.search }}">
+            </div>
+            <div class="col-md-2 d-flex gap-2">
+                <button type="submit" class="btn btn-primary w-100 fw-bold">Apply</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 📊 DATA LEDGER -->
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-white border-bottom p-4 d-flex justify-content-between align-items-center">
+        <h6 class="fw-bold m-0">Institutional Engagement Distribution</h6>
+        <div class="d-flex gap-2">
+            <a href="{{ url_for('admin.reports_export', type='csv', report_type='attendance') }}" class="btn btn-sm btn-success fw-bold">
+                <i class="fas fa-file-csv me-1"></i> Export CSV
+            </a>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light">
+                    <tr>
+                        <th class="ps-4">Student Identity</th>
+                        <th>Department</th>
+                        <th class="text-center">Academic Phase</th>
+                        <th class="text-center">Total Sessions</th>
+                        <th class="text-center">Present Units</th>
+                        <th class="text-center">Engagement (%)</th>
+                        <th class="pe-4 text-end">Identity Profile</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                    <tr>
+                        <td class="ps-4">
+                            <div class="fw-600">{{ row.name }}</div>
+                            <div class="extra-small text-muted font-monospace">{{ row.enrollment_no }}</div>
+                        </td>
+                        <td>{{ row.department }}</td>
+                        <td class="text-center">Sem {{ row.semester }}</td>
+                        <td class="text-center">{{ row.total_classes }}</td>
+                        <td class="text-center text-success fw-bold">{{ row.present_count }}</td>
+                        <td class="text-center">
+                            <div class="d-flex align-items-center gap-2 justify-content-center">
+                                <div class="progress flex-grow-1" style="height: 6px; min-width: 60px;">
+                                    <div {{'style="width:' ~ row.percent ~ '%;"'|safe}} class="progress-bar {{'bg-success' if row.percent >= 75 else 'bg-warning' if row.percent >= 60 else 'bg-danger'}}" role="progressbar" aria-valuenow="{{row.percent}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <span class="fw-700 {% if row.percent >= 75 %}text-success{% elif row.percent >= 60 %}text-warning{% else %}text-danger{% endif %}">{{ row.percent }}%</span>
+                            </div>
+                        </td>
+                        <td class="pe-4 text-end">
+                            <a href="{{ url_for('admin.reports_student_detail', enrollment_no=row.enrollment_no) }}" class="btn btn-sm btn-light border p-1 px-2">
+                                <i class="fas fa-id-card text-primary me-2"></i>Profile
+                            </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center py-5 text-muted">No attendance data found for current filters.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

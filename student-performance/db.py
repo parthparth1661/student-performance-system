@@ -3,89 +3,164 @@ from mysql.connector import Error
 
 def get_db_connection():
     try:
+        # 1️⃣ Check Database Connection 🎯
         connection = mysql.connector.connect(
-            host='localhost',
-            user='root',
-            password='',  # Default XAMPP password is empty
-            database='student_performance_db'
+            host="localhost",
+            user="root",
+            password="",
+            database="SPDA"
         )
+        
+        # 2️⃣ Verify Active Database 🕵️‍♂️
+        cursor = connection.cursor()
+        cursor.execute("SELECT DATABASE()")
+        db_info = cursor.fetchone()
+        
+        # 4️⃣ Add Safety Check (IMPORTANT 🔥)
+        db = db_info[0]
+        if db.upper() != "SPDA":
+            cursor.close()
+            connection.close()
+            raise Exception("Wrong database connected!")
+            
+        cursor.close()
         return connection
     except Error as e:
-        print(f"Error connecting to MySQL: {e}")
+        print(f"Error connecting to SPDA MySQL: {e}")
         return None
 
 def init_db():
     try:
-        # Connect without database to create it if it doesn't exist
+        # Connect to create database if not exists
         connection = mysql.connector.connect(
             host='localhost',
             user='root',
             password=''
         )
         cursor = connection.cursor()
-        cursor.execute("CREATE DATABASE IF NOT EXISTS student_performance_db")
+        cursor.execute("CREATE DATABASE IF NOT EXISTS SPDA")
         cursor.close()
         connection.close()
 
-        # Connect to the database to create tables
+        # Connect to SPDA and create standardized tables
         connection = get_db_connection()
         if connection:
             cursor = connection.cursor()
             
-            # Create students table
+            # 1. Admin Table
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS admin (
+                    admin_id INT AUTO_INCREMENT PRIMARY KEY,
+                    name VARCHAR(100),
+                    email VARCHAR(100) UNIQUE NOT NULL,
+                    password VARCHAR(255) NOT NULL
+                )
+            """)
+            
+            # 2. Students Table
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS students (
-                    student_id INT AUTO_INCREMENT PRIMARY KEY,
-                    roll_no VARCHAR(20) UNIQUE NOT NULL,
+                    enrollment_no VARCHAR(20) PRIMARY KEY,
                     name VARCHAR(100) NOT NULL,
                     email VARCHAR(150) UNIQUE NOT NULL,
                     department VARCHAR(50),
-                    semester INT
+                    semester INT,
+                    password_hash VARCHAR(255),
+                    is_password_changed BOOLEAN DEFAULT FALSE,
+                    profile_pic VARCHAR(255) DEFAULT 'default.png'
                 )
             """)
             
-            # Create marks table
+            # 3. Faculty Table
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS faculty (
+                    faculty_id INT AUTO_INCREMENT PRIMARY KEY,
+                    faculty_name VARCHAR(100) NOT NULL,
+                    email VARCHAR(150) UNIQUE NOT NULL,
+                    department VARCHAR(50),
+                    password_hash VARCHAR(255)
+                )
+            """)
+            
+            # 4. Subjects Table
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS subjects (
+                    subject_id INT AUTO_INCREMENT PRIMARY KEY,
+                    subject_name VARCHAR(100) NOT NULL,
+                    department VARCHAR(50),
+                    semester INT,
+                    faculty_id INT,
+                    FOREIGN KEY (faculty_id) REFERENCES faculty(faculty_id) ON DELETE SET NULL
+                )
+            """)
+            
+            # 5. Marks Table (Redesigned 🚀)
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS marks (
-                    marks_id INT AUTO_INCREMENT PRIMARY KEY,
-                    student_id INT NOT NULL,
-                    subject VARCHAR(50) NOT NULL,
-                    marks INT NOT NULL,
-                    exam_type VARCHAR(20),
-                    exam_date DATE,
-                    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    enrollment_no VARCHAR(20),
+                    subject_id INT,
+                    internal_marks INT DEFAULT 0,
+                    viva_marks INT DEFAULT 0,
+                    external_marks INT DEFAULT 0,
+                    total_marks INT DEFAULT 0,
+                    result VARCHAR(10) DEFAULT 'Fail',
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (enrollment_no) REFERENCES students(enrollment_no) ON DELETE CASCADE,
+                    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE
                 )
             """)
             
-            # Create attendance table
+            # 6. Attendance Table
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS attendance (
                     attendance_id INT AUTO_INCREMENT PRIMARY KEY,
-                    student_id INT NOT NULL,
-                    attendance_date DATE NOT NULL,
-                    status VARCHAR(10) NOT NULL,
-                    remarks VARCHAR(200),
-                    UNIQUE(student_id, attendance_date),
-                    FOREIGN KEY(student_id) REFERENCES students(student_id) ON DELETE CASCADE
+                    enrollment_no VARCHAR(20),
+                    subject_id INT,
+                    date DATE,
+                    status VARCHAR(20),
+                    FOREIGN KEY (enrollment_no) REFERENCES students(enrollment_no) ON DELETE CASCADE,
+                    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE
                 )
             """)
 
-            # Create admins table
+            # 7. Feedback Table
             cursor.execute("""
-                CREATE TABLE IF NOT EXISTS admins (
-                    admin_id INT AUTO_INCREMENT PRIMARY KEY,
-                    username VARCHAR(50) UNIQUE NOT NULL,
-                    password_hash VARCHAR(255) NOT NULL,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                CREATE TABLE IF NOT EXISTS feedback (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    enrollment_no VARCHAR(50),
+                    subject VARCHAR(255),
+                    message TEXT,
+                    type VARCHAR(50),
+                    status VARCHAR(50),
+                    admin_reply TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (enrollment_no) REFERENCES students(enrollment_no) ON DELETE CASCADE
                 )
             """)
             
             connection.commit()
+            
+            # 🚀 START: SUPER ADMIN SENTINEL
+            cursor.execute("SELECT COUNT(*) as count FROM admin")
+            if cursor.fetchone()[0] == 0:
+                from werkzeug.security import generate_password_hash
+                default_email = 'admin@spda.com'
+                default_pass = 'Admin@123'
+                hashed_pass = generate_password_hash(default_pass)
+                
+                cursor.execute("""
+                    INSERT INTO admin (email, password) 
+                    VALUES (%s, %s)
+                """, (default_email, hashed_pass))
+                connection.commit()
+                print(f"✨ Super Admin initialized: {default_email} / {default_pass}")
+            
             cursor.close()
             connection.close()
-            print("Database initialized successfully.")
-    except Error as e:
-        print(f"Error initializing database: {e}")
+            print("SPDA Database and merged standardized tables initialized.")
+    except Exception as e:
+        print(f"Error initializing SPDA database: {e}")
 
 if __name__ == "__main__":
     init_db()
