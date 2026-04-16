@@ -1244,72 +1244,31 @@ def change_password():
 # --- 💬 6. FEEDBACK MODULE ---
 @admin_bp.route('/feedback')
 def view_feedback():
-    f_type = request.args.get('type')
-    status = request.args.get('status')
-    
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     
-    query = """
-        SELECT f.*, s.name as student_name 
-        FROM feedback f 
-        LEFT JOIN students s ON f.enrollment_no = s.enrollment_no 
-        WHERE 1=1
-    """
-    params = []
-    
-    if f_type and f_type != 'All':
-        query += " AND f.type = %s"
-        params.append(f_type)
-    
-    if status and status != 'All':
-        query += " AND f.status = %s"
-        params.append(status)
-        
-    query += " ORDER BY f.created_at DESC"
-    
-    cursor.execute(query, params)
+    # 🎯 Match centralized schema structure
+    cursor.execute("""
+        SELECT * FROM feedback 
+        ORDER BY date DESC
+    """)
     feedback_list = cursor.fetchall()
     
-    # Statistics
+    # Simple Status Statistics
     cursor.execute("SELECT COUNT(*) as total FROM feedback")
-    total_feedback = cursor.fetchone()['total']
+    total_feedback = cursor.fetchone()['total'] or 0
     
-    cursor.execute("SELECT COUNT(*) as pending FROM feedback WHERE status = 'Pending'")
-    pending_count = cursor.fetchone()['pending']
+    cursor.execute("SELECT COUNT(*) as pending FROM feedback WHERE admin_reply IS NULL")
+    pending_count = cursor.fetchone()['pending'] or 0
     
     conn.close()
     return render_template('admin/view_feedback.html', 
                          feedback=feedback_list, 
                          total=total_feedback,
-                         pending=pending_count,
-                         filters={'type': f_type, 'status': status})
+                         pending=pending_count)
 
-@admin_bp.route('/feedback/manage/<int:feedback_id>')
-def manage_feedback(feedback_id):
-    conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
-    
-    # Fetch feedback with student details
-    query = """
-        SELECT f.*, s.name as student_name 
-        FROM feedback f 
-        LEFT JOIN students s ON f.enrollment_no = s.enrollment_no 
-        WHERE f.id = %s
-    """
-    cursor.execute(query, (feedback_id,))
-    feedback = cursor.fetchone()
-    conn.close()
-    
-    if not feedback:
-        flash("Feedback record not found.", "danger")
-        return redirect(url_for('admin.view_feedback'))
-        
-    return render_template('admin/view_feedback_detail.html', feedback=feedback)
-
-@admin_bp.route('/feedback/update/<int:feedback_id>', methods=['POST'])
-def update_feedback(feedback_id):
-    status = request.form.get('status')
+@admin_bp.route('/feedback/reply/<int:feedback_id>', methods=['POST'])
+def reply_feedback(feedback_id):
     reply = request.form.get('admin_reply')
     
     conn = get_db_connection()
@@ -1317,11 +1276,11 @@ def update_feedback(feedback_id):
     try:
         cursor.execute("""
             UPDATE feedback 
-            SET status = %s, admin_reply = %s 
-            WHERE id = %s
-        """, (status, reply, feedback_id))
+            SET admin_reply = %s 
+            WHERE feedback_id = %s
+        """, (reply, feedback_id))
         conn.commit()
-        flash("Feedback successfully reviewed and updated.", "success")
+        flash("Institutional feedback response successfully recorded.", "success")
     except Exception as e:
         flash(f"Update Failure: {e}", "danger")
     finally:
@@ -1333,9 +1292,12 @@ def delete_feedback(feedback_id):
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
-        cursor.execute("DELETE FROM feedback WHERE id = %s", (feedback_id,))
+        cursor.execute("""
+            DELETE FROM feedback 
+            WHERE feedback_id = %s
+        """, (feedback_id,))
         conn.commit()
-        flash("Institutional feedback record purged.", "success")
+        flash("Institutional feedback record purged successfully.", "success")
     except Exception as e:
         flash(f"Purge Error: {e}", "danger")
     finally:

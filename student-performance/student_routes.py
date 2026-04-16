@@ -74,10 +74,9 @@ def dashboard():
     # Fetch Feedback Status Counts
     cursor.execute("""
         SELECT 
-            COUNT(CASE WHEN status='Pending' THEN 1 END) as pending,
-            COUNT(CASE WHEN status='Reviewed' THEN 1 END) as reviewed,
-            COUNT(CASE WHEN status='Resolved' THEN 1 END) as resolved
-        FROM feedback WHERE enrollment_no = %s
+            COUNT(CASE WHEN admin_reply IS NULL THEN 1 END) as pending,
+            COUNT(CASE WHEN admin_reply IS NOT NULL THEN 1 END) as resolved
+        FROM feedback WHERE student_id = %s
     """, (enrollment_no,))
     fb_stats = cursor.fetchone()
     
