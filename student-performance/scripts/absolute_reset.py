@@ -84,12 +84,14 @@ def absolute_reset():
         print("Creating table: marks...")
         cursor.execute("""
             CREATE TABLE marks (
-                marks_id INT AUTO_INCREMENT PRIMARY KEY,
+                id INT AUTO_INCREMENT PRIMARY KEY,
                 enrollment_no VARCHAR(20),
                 subject_id INT,
-                exam_type VARCHAR(50),
-                marks_obtained INT,
-                total_marks INT DEFAULT 100,
+                internal_marks INT DEFAULT 0,
+                viva_marks INT DEFAULT 0,
+                external_marks INT DEFAULT 0,
+                total_marks INT DEFAULT 0,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (enrollment_no) REFERENCES students(enrollment_no) ON DELETE CASCADE,
                 FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE
             )

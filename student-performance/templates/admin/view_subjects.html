@@ -1,154 +1,203 @@
 {% extends 'admin/layout.html' %}
 
-{% block page_title %}Subject Management{% endblock %}
+{% block page_title %}<h5 class="fw-bold mb-0 text-dark"><i class="bi bi-book me-2"></i>Subject Management</h5>{%
+endblock %}
 
 {% block content %}
-<!-- 🛰️ HEADER SECTOR -->
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h4 class="fw-bold mb-0 text-dark"><i class="fas fa-book me-2 text-primary"></i>Subject Module</h4>
-        <p class="text-muted small mb-0">Manage subjects and academic structure</p>
-    </div>
-    <a href="{{ url_for('admin.add_subject') }}" class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm">
-        <i class="fas fa-plus me-2"></i>Add New Subject
-    </a>
-</div>
+<div class="container-fluid py-4">
+    <!-- 🚀 HEADER SECTOR -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="fw-bold mb-0 text-dark">Subject module</h4>
+            <p class="text-muted small mb-0">Manage subject records efficiently</p>
+        </div>
+        <div class="d-flex gap-3 align-items-center">
+            <!-- 📥 CSV BULK UPLOAD -->
+            <form action="/upload_subjects_csv" method="POST" enctype="multipart/form-data"
+                class="d-flex gap-2 align-items-center bg-white p-2 rounded-3 shadow-sm border">
+                <input type="file" name="file" accept=".csv" class="form-control form-control-sm border-0 bg-light"
+                    style="max-width: 180px;" required>
+                <button type="submit" class="btn btn-success btn-sm px-3 fw-bold rounded-2">
+                    <i class="bi bi-file-earmark-spreadsheet me-1"></i>Upload
+                </button>
+            </form>
 
-<!-- 🔍 SMART FILTER ENGINE -->
-<div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
-    <form method="GET" action="{{ url_for('admin.view_subjects') }}" class="row g-3">
-        <div class="col-md-3">
-            <label class="form-label extra-small fw-bold text-uppercase text-muted">Department</label>
-            <select name="department" class="form-select border-0 bg-light rounded-3">
-                <option value="All">All Departments</option>
-                <option value="BCA" {% if filters.department == 'BCA' %}selected{% endif %}>BCA</option>
-                <option value="MCA" {% if filters.department == 'MCA' %}selected{% endif %}>MCA</option>
-                <option value="B.TECH" {% if filters.department == 'B.TECH' %}selected{% endif %}>B.TECH</option>
-                <option value="M.TECH" {% if filters.department == 'M.TECH' %}selected{% endif %}>M.TECH</option>
-                <option value="MBA" {% if filters.department == 'MBA' %}selected{% endif %}>MBA</option>
-            </select>
+            <a href="{{ url_for('admin.add_subject') }}"
+                class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm transition-hover">
+                <i class="bi bi-plus-lg me-1"></i>Add Subject
+            </a>
+
+            <a href="{{ url_for('admin.clear_subjects') }}" class="btn btn-danger px-4 rounded-3 fw-bold shadow-sm transition-hover ms-2"
+               onclick="return confirm('⚠️ SECURITY ALERT: Are you sure you want to delete ALL subject records?\n\nThis action cannot be undone. All institutional course data will be wiped.')">
+                <i class="bi bi-trash me-1"></i>Clear All Subjects
+            </a>
         </div>
-        <div class="col-md-3">
-            <label class="form-label extra-small fw-bold text-uppercase text-muted">Semester</label>
-            <select name="semester" class="form-select border-0 bg-light rounded-3">
-                <option value="All">All Semesters</option>
-                {% for i in range(1, 9) %}
-                <option value="{{ i }}" {% if filters.semester == i|string %}selected{% endif %}>Semester {{ i }}</option>
-                {% endfor %}
-            </select>
+    </div>
+
+    <!-- 🔍 SMART FILTER ENGINE -->
+    <div class="card border-0 shadow-sm rounded-3 mb-4">
+        <div class="card-body p-4">
+            <form method="GET" action="{{ url_for('admin.view_subjects') }}" class="row g-3 align-items-end">
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold small text-muted">Department</label>
+                    <select name="department" class="form-select border-0 bg-light rounded-3 py-2">
+                        <option value="All">All Departments</option>
+                        <option value="BCA" {% if filters.department=='BCA' %}selected{% endif %}>BCA</option>
+                        <option value="MCA" {% if filters.department=='MCA' %}selected{% endif %}>MCA</option>
+                        <option value="B.TECH" {% if filters.department=='B.TECH' %}selected{% endif %}>B.TECH</option>
+                        <option value="M.TECH" {% if filters.department=='M.TECH' %}selected{% endif %}>M.TECH</option>
+                        <option value="MBA" {% if filters.department=='MBA' %}selected{% endif %}>MBA</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label fw-semibold small text-muted">Semester</label>
+                    <select name="semester" class="form-select border-0 bg-light rounded-3 py-2">
+                        <option value="All">All Semesters</option>
+                        {% for i in range(1, 9) %}
+                        <option value="{{ i }}" {% if filters.semester==i|string %}selected{% endif %}>Semester {{ i }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label class="form-label fw-semibold small text-muted">Search Subject</label>
+                    <div class="input-group">
+                        <span class="input-group-text border-0 bg-light text-muted"><i class="bi bi-search"></i></span>
+                        <input type="text" name="search" class="form-control border-0 bg-light rounded-end-3 py-2"
+                            placeholder="Search Subject Name..." value="{{ filters.search or '' }}">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit"
+                        class="btn btn-primary w-100 rounded-3 fw-bold py-2 shadow-sm transition-hover">
+                        Apply Filters
+                    </button>
+                </div>
+            </form>
         </div>
-        <div class="col-md-4">
-            <label class="form-label extra-small fw-bold text-uppercase text-muted">Search Subject</label>
-            <div class="input-group">
-                <span class="input-group-text border-0 bg-light text-muted"><i class="fas fa-search"></i></span>
-                <input type="text" name="search" class="form-control border-0 bg-light" placeholder="Title/ID Code..." value="{{ filters.search or '' }}">
+    </div>
+
+    <!-- 📦 SUBJECT DATA MATRIX -->
+    <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr class="text-secondary small text-uppercase fw-bold">
+                            <th class="ps-4 py-3">Subject Name</th>
+                            <th class="py-3">Department</th>
+                            <th class="py-3 text-center">Semester</th>
+                            <th class="py-3">Assigned Faculty</th>
+                            <th class="py-3 text-center pe-4">Manage Subject</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for subject in subjects %}
+                        <tr>
+                            <td class="ps-4 py-3">
+                                <span class="fw-bold text-dark">{{ subject.subject_name }}</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-light border text-dark rounded-pill px-3 py-1 fw-semibold">
+                                    {{ subject.department }}
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <span class="fw-semibold text-muted">Semester {{ subject.semester }}</span>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-primary-soft text-primary rounded-circle d-flex align-items-center justify-content-center me-2"
+                                        style="width: 32px; height: 32px;">
+                                        <i class="bi bi-person-badge small"></i>
+                                    </div>
+                                    <span class="small fw-medium">{{ subject.faculty_name or 'Not Assigned' }}</span>
+                                </div>
+                            </td>
+                            <td class="text-center pe-4">
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="{{ url_for('admin.edit_subject', subject_id=subject.subject_id) }}"
+                                        class="btn btn-sm btn-outline-primary rounded-2 px-3 fw-bold">
+                                        <i class="bi bi-pencil me-1"></i>Edit
+                                    </a>
+                                    <a href="{{ url_for('admin.delete_subject', subject_id=subject.subject_id) }}"
+                                        class="btn btn-sm btn-outline-danger rounded-2 px-3 fw-bold"
+                                        onclick="return confirm('Archive {{ subject.subject_name }} from catalogue?')">
+                                        <i class="bi bi-trash me-1"></i>Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center py-5">
+                                <div class="py-4 text-muted">
+                                    <i class="bi bi-book fa-3x mb-3 opacity-25"></i>
+                                    <h6 class="fw-bold">Academic Catalogue Empty</h6>
+                                    <p class="small">No subjects found matching your current filter criteria.</p>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="col-md-2 d-flex align-items-end">
-            <button type="submit" class="btn btn-primary w-100 rounded-3 fw-bold">Apply Filter</button>
+    </div>
+
+    <!-- 📄 PAGINATION SECTOR -->
+    {% if total_pages > 1 %}
+    <div class="d-flex justify-content-between align-items-center mt-4 px-2">
+        <div class="small text-muted fw-bold text-uppercase" style="letter-spacing: 0.05em; font-size: 10px;">
+            Showing Page <span class="text-dark">{{ page }}</span> of {{ total_pages }}
         </div>
-    </form>
-</div>
+        <nav>
+            <ul class="pagination pagination-sm mb-0 gap-2">
+                {% if page > 1 %}
+                <li class="page-item"><a class="page-link border-0 rounded-2 shadow-sm px-3 py-2 bg-white"
+                        href="{{ url_for('admin.view_subjects', page=page-1, **filters) }}"><i
+                            class="bi bi-chevron-left text-primary"></i></a></li>
+                {% endif %}
 
-<!-- 📦 SUBJECT DATA MATRIX -->
-<div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white">
-    <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-            <thead class="bg-light">
-                <tr class="text-muted extra-small text-uppercase fw-bold">
-                    <th class="ps-4 py-3">Subject Name</th>
-                    <th class="py-3">Department</th>
-                    <th class="py-3">Semester</th>
-                    <th class="py-3 text-center">Credits</th>
-                    <th class="py-3">Assigned Faculty</th>
-                    <th class="py-3 text-center pe-4">Manage Subject</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for subject in subjects %}
-                <tr>
-                    <td class="ps-4">
-                        <div class="d-flex align-items-center">
-                            <div class="bg-indigo-soft text-primary rounded-3 d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <div>
-                                <div class="fw-bold text-dark">{{ subject.subject_name }}</div>
-                                <div class="extra-small text-muted">ID: <span class="fw-bold text-primary">{{ subject.subject_code }}</span></div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <span class="badge bg-light border text-dark rounded-pill px-3 py-2 fw-bold" style="font-size: 0.7rem;">
-                            {{ subject.department }}
-                        </span>
-                    </td>
-                    <td>
-                        <span class="fw-bold text-muted small">Sem {{ subject.semester }}</span>
-                    </td>
-                    <td class="text-center">
-                        <span class="badge bg-indigo-soft text-primary rounded-pill px-3 py-1 fw-bold">{{ subject.credits }} CR</span>
-                    </td>
-                    <td class="small fw-medium text-dark">
-                        <i class="fas fa-user-tie me-2 text-primary opacity-50"></i>{{ subject.faculty_name or 'Not Assigned' }}
-                    </td>
-                    <td class="text-center pe-4">
-                        <div class="dropdown">
-                            <button class="btn btn-light btn-sm rounded-3 border-0 shadow-sm" data-bs-toggle="dropdown">
-                                <i class="fas fa-ellipsis-v text-muted"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-3 small">
-                                <li><a class="dropdown-item py-2" href="{{ url_for('admin.edit_subject', subject_id=subject.subject_id) }}"><i class="fas fa-edit me-2 text-primary"></i>Modify Details</a></li>
-                                <li><hr class="dropdown-divider opacity-50"></li>
-                                <li><a class="dropdown-item py-2 text-danger" href="{{ url_for('admin.delete_subject', subject_id=subject.subject_id) }}" onclick="return confirm('Archive {{ subject.subject_name }} from catalogue?')"><i class="fas fa-trash-alt me-2"></i>Remove Subject</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="5" class="text-center py-5">
-                        <div class="py-4">
-                            <i class="fas fa-book-open fa-3x mb-3 text-muted opacity-25"></i>
-                            <h6 class="text-muted fw-bold">Academic Catalogue Empty</h6>
-                            <p class="extra-small text-muted">No subjects found matching your current filter criteria.</p>
-                        </div>
-                    </td>
-                </tr>
+                {% for p in range(1, total_pages + 1) %}
+                <li class="page-item {% if p == page %}active{% endif %}">
+                    <a class="page-link border-0 rounded-2 shadow-sm px-3 py-2 {% if p == page %}bg-primary text-white{% else %}bg-white text-dark{% endif %}"
+                        href="{{ url_for('admin.view_subjects', page=p, **filters) }}">{{ p }}</a>
+                </li>
                 {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
 
-<!-- 📄 PAGINATION SECTOR -->
-{% if total_pages > 1 %}
-<div class="d-flex justify-content-between align-items-center mt-4 px-2">
-    <div class="extra-small text-muted fw-medium">
-        Showing Page <span class="text-dark">{{ page }}</span> of {{ total_pages }}
+                {% if page < total_pages %} <li class="page-item"><a
+                        class="page-link border-0 rounded-2 shadow-sm px-3 py-2 bg-white"
+                        href="{{ url_for('admin.view_subjects', page=page+1, **filters) }}"><i
+                            class="bi bi-chevron-right text-primary"></i></a></li>
+                    {% endif %}
+            </ul>
+        </nav>
     </div>
-    <nav>
-        <ul class="pagination pagination-sm mb-0 gap-2">
-            {% if page > 1 %}
-            <li class="page-item"><a class="page-link border-0 rounded-3 shadow-sm px-3" href="{{ url_for('admin.view_subjects', page=page-1, **filters) }}"><i class="fas fa-chevron-left"></i></a></li>
-            {% endif %}
-            
-            {% for p in range(1, total_pages + 1) %}
-            <li class="page-item {% if p == page %}active{% endif %}">
-                <a class="page-link border-0 rounded-3 shadow-sm px-3" href="{{ url_for('admin.view_subjects', page=p, **filters) }}">{{ p }}</a>
-            </li>
-            {% endfor %}
-
-            {% if page < total_pages %}
-            <li class="page-item"><a class="page-link border-0 rounded-3 shadow-sm px-3" href="{{ url_for('admin.view_subjects', page=page+1, **filters) }}"><i class="fas fa-chevron-right"></i></a></li>
-            {% endif %}
-        </ul>
-    </nav>
+    {% endif %}
 </div>
-{% endif %}
 
 <style>
-.bg-indigo-soft { background-color: rgba(99, 102, 241, 0.1); }
-.extra-small { font-size: 0.75rem; }
+    .bg-primary-soft {
+        background-color: rgba(99, 102, 241, 0.1);
+    }
+
+    .transition-hover {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .transition-hover:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .page-link:hover {
+        background-color: var(--primary-color) !important;
+        color: white !important;
+    }
+
+    .table-striped>tbody>tr:nth-of-type(odd) {
+        --bs-table-accent-bg: rgba(0, 0, 0, 0.02);
+    }
 </style>
 {% endblock %}

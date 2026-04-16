@@ -1,121 +1,94 @@
 {% extends 'admin/layout.html' %}
 
-{% block page_title %}<h5 class="mb-0 fw-semibold">Subject Management</h5>{% endblock %}
+{% block page_title %}<h5 class="fw-bold mb-0 text-dark"><i class="bi bi-book me-2"></i>Subject Module</h5>{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-lg-8">
-        <!-- 🎨 HEADER SECTOR -->
-        <div class="card border-0 shadow-sm rounded-4 mb-4 bg-white overflow-hidden">
-            <div class="card-body p-4 d-flex align-items-center justify-content-between bg-indigo-soft">
-                <div class="d-flex align-items-center">
-                    <div class="bg-primary text-white p-3 rounded-3 shadow-sm me-4">
-                        <i class="fas fa-book-open fs-3"></i>
-                    </div>
-                    <div>
-                        <h4 class="fw-bold m-0 text-dark">{{ 'Update Subject Details' if edit_mode else 'New Subject Entry' }}</h4>
-                        <p class="text-muted small m-0">{{ 'Synchronize course data with central catalogue' if edit_mode else 'Establish a new academic subject in the institutional database' }}</p>
-                    </div>
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- 🎨 HEADER SECTOR -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h4 class="fw-bold mb-1 text-dark">{{ 'Modify Subject Details' if edit_mode else 'Add New Subject' }}</h4>
+                    <p class="text-muted small mb-0">{{ 'Update institutional curriculum mappings' if edit_mode else 'Define a new academic course in the system' }}</p>
                 </div>
-                <a href="{{ url_for('admin.view_subjects') }}" class="btn btn-light border-0 shadow-sm px-4 fw-bold">
-                    <i class="fas fa-arrow-left me-2"></i>Back
+                <a href="{{ url_for('admin.view_subjects') }}" class="btn btn-light border shadow-sm px-4 fw-bold rounded-3 transition-hover">
+                    <i class="bi bi-arrow-left me-2"></i>Back to Registry
                 </a>
             </div>
-        </div>
 
-        <!-- 🧪 DATA ENTRY CARD -->
-        <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden p-0 mb-5">
-            <div class="card-body p-5">
-                <form method="POST" class="row g-4">
-                    <!-- Identity Section -->
-                    <div class="col-12 mb-2">
-                        <h6 class="text-uppercase small fw-bold text-primary letter-spacing-1">Subject Identity</h6>
-                        <hr class="mt-2 opacity-10">
-                    </div>
-                    
-                    <div class="col-md-8">
-                        <label class="form-label small fw-bold text-muted"><i class="fas fa-heading me-2 text-primary opacity-50"></i>Subject Name</label>
-                        <input type="text" name="subject_name" class="form-control py-2 border-0 bg-light rounded-3" value="{{ subject.subject_name if subject else '' }}" required placeholder="e.g. Data Structures and Algorithms">
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <label class="form-label small fw-bold text-muted"><i class="fas fa-hashtag me-2 text-primary opacity-50"></i>Subject Code</label>
-                        <input type="text" name="subject_code" class="form-control py-2 border-0 bg-light rounded-3 font-monospace" value="{{ subject.subject_code if subject else '' }}" required placeholder="e.g. CS101" style="text-transform: uppercase;">
-                        <small class="text-muted extra-small mt-1 d-block">Must be a unique course ID.</small>
-                    </div>
-
-                    <!-- Allocation Section -->
-                    <div class="col-12 mb-2 mt-4">
-                        <h6 class="text-uppercase small fw-bold text-primary letter-spacing-1">Academic Allocation</h6>
-                        <hr class="mt-2 opacity-10">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label small fw-bold text-muted"><i class="fas fa-building me-2 text-primary opacity-50"></i>Department</label>
-                        <select name="department" class="form-select py-2 border-0 bg-light rounded-3" required>
-                            <option value="">Select Department</option>
-                            <option value="BCA" {% if subject and subject.department == 'BCA' %}selected{% endif %}>BCA (Comp. Apps)</option>
-                            <option value="MCA" {% if subject and subject.department == 'MCA' %}selected{% endif %}>MCA (Master Apps)</option>
-                            <option value="B.TECH" {% if subject and subject.department == 'B.TECH' %}selected{% endif %}>B.TECH (Engineering)</option>
-                            <option value="MBA" {% if subject and subject.department == 'MBA' %}selected{% endif %}>MBA (Mgmt)</option>
-                        </select>
-                    </div>
-                    
-                    <div class="col-md-3">
-                        <label class="form-label small fw-bold text-muted"><i class="fas fa-layer-group me-2 text-primary opacity-50"></i>Semester</label>
-                        <select name="semester" class="form-select py-2 border-0 bg-light rounded-3" required>
-                            <option value="">Sem</option>
-                            {% for i in range(1, 9) %}
-                            <option value="{{ i }}" {% if subject and subject.semester == i %}selected{% endif %}>Sem {{ i }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="col-md-3">
-                        <label class="form-label small fw-bold text-muted"><i class="fas fa-graduation-cap me-2 text-primary opacity-50"></i>Credits</label>
-                        <input type="number" name="credits" class="form-control py-2 border-0 bg-light rounded-3" value="{{ subject.credits if subject else 0 }}" min="0" max="10">
-                    </div>
-
-                    <!-- Faculty Section -->
-                    <div class="col-12 mb-2 mt-4">
-                        <h6 class="text-uppercase small fw-bold text-primary letter-spacing-1">Pedagogical Assignment</h6>
-                        <hr class="mt-2 opacity-10">
-                    </div>
-
-                    <div class="col-12">
-                        <label class="form-label small fw-bold text-muted"><i class="fas fa-user-tie me-2 text-primary opacity-50"></i>Assigned Faculty</label>
-                        <select name="faculty_id" class="form-select py-2 border-0 bg-light rounded-3">
-                            <option value="">Optionally assign a faculty member...</option>
-                            {% for f in faculties %}
-                            <option value="{{ f.faculty_id }}" {% if subject and subject.faculty_id == f.faculty_id %}selected{% endif %}>{{ f.faculty_name }} ({{ f.department }})</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="col-12 mt-5 text-end">
-                        <div class="d-flex gap-3 justify-content-end align-items-center">
-                            <span class="text-muted small italic">System will validate code uniqueness.</span>
-                            <button type="submit" class="btn btn-primary px-5 py-3 rounded-pill fw-bold shadow-sm transition-scale">
-                                <i class="fas fa-check-circle me-2"></i>{{ 'Update Subject' if edit_mode else 'Establish Subject' }}
-                            </button>
+            <!-- 🧪 DATA ENTRY CARD -->
+            <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+                <div class="card-body p-4 p-md-5">
+                    <form method="POST" class="row g-4">
+                        <!-- Group 1: Subject Identity -->
+                        <div class="col-12">
+                            <label class="form-label fw-bold text-uppercase small text-muted mb-2" style="letter-spacing: 0.05em;">Subject Identity</label>
+                            <input type="text" name="subject_name" class="form-control form-control-lg border-0 bg-light rounded-3 px-4" 
+                                   value="{{ subject.subject_name if subject else '' }}" required 
+                                   placeholder="Enter Subject Name (e.g. Artificial Intelligence)">
                         </div>
-                    </div>
-                </form>
+
+                        <!-- Group 2: Academic Allocation -->
+                        <div class="col-md-8">
+                            <label class="form-label fw-bold text-uppercase small text-muted mb-2" style="letter-spacing: 0.05em;">Department</label>
+                            <select name="department" class="form-select form-select-lg border-0 bg-light rounded-3 px-4" required>
+                                <option value="">Select Department</option>
+                                <option value="BCA" {% if subject and subject.department == 'BCA' %}selected{% endif %}>BCA (Computer Science)</option>
+                                <option value="MCA" {% if subject and subject.department == 'MCA' %}selected{% endif %}>MCA (Master of Apps)</option>
+                                <option value="B.TECH" {% if subject and subject.department == 'B.TECH' %}selected{% endif %}>B.TECH (Engineering)</option>
+                                <option value="MBA" {% if subject and subject.department == 'MBA' %}selected{% endif %}>MBA (Management)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold text-uppercase small text-muted mb-2" style="letter-spacing: 0.05em;">Semester</label>
+                            <select name="semester" class="form-select form-select-lg border-0 bg-light rounded-3 px-4" required>
+                                <option value="">Sem</option>
+                                {% for i in range(1, 9) %}
+                                <option value="{{ i }}" {% if subject and subject.semester == i %}selected{% endif %}>Semester {{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Group 3: Faculty Assignment -->
+                        <div class="col-12 mt-5">
+                            <label class="form-label fw-bold text-uppercase small text-muted mb-2" style="letter-spacing: 0.05em;">Assign Faculty</label>
+                            <div class="input-group">
+                                <span class="input-group-text border-0 bg-light px-4"><i class="bi bi-person-badge text-primary"></i></span>
+                                <select name="faculty_id" class="form-select form-select-lg border-0 bg-light rounded-end-3 px-4">
+                                    <option value="">Choose a Faculty Member...</option>
+                                    {% for f in faculties %}
+                                    <option value="{{ f.faculty_id }}" {% if subject and subject.faculty_id == f.faculty_id %}selected{% endif %}>{{ f.faculty_name }} ({{ f.department }})</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 🏁 ACTION FOOTER -->
+                        <div class="col-12 mt-5 border-top pt-4">
+                            <div class="d-flex justify-content-end gap-3">
+                                <a href="{{ url_for('admin.view_subjects') }}" class="btn btn-light px-5 py-3 rounded-pill fw-bold text-muted transition-hover">Cancel</a>
+                                <button type="submit" class="btn btn-primary px-5 py-3 rounded-pill fw-bold shadow-sm transition-hover">
+                                    <i class="bi bi-check-circle me-2"></i>{{ 'Update Subject Record' if edit_mode else 'Register New Subject' }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <style>
-.bg-indigo-soft { background-color: rgba(99, 102, 241, 0.05); }
-.letter-spacing-1 { letter-spacing: 0.05rem; }
-.extra-small { font-size: 0.75rem; }
-.italic { font-style: italic; }
-.transition-scale:hover { transform: scale(1.02); }
-.form-control:focus, .form-select:focus {
-    background-color: #fff !important;
-    box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.1) !important;
-    border: none !important;
-}
+    .transition-hover { transition: all 0.2s ease-in-out; }
+    .transition-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1) !important; }
+    .form-control-lg, .form-select-lg { font-size: 1rem; }
+    .form-control:focus, .form-select:focus {
+        background-color: #ffffff !important;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1) !important;
+        border: none !important;
+    }
 </style>
 {% endblock %}

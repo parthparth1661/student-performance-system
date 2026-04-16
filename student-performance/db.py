@@ -15,7 +15,6 @@ def get_db_connection():
         cursor = connection.cursor()
         cursor.execute("SELECT DATABASE()")
         db_info = cursor.fetchone()
-        print(f"Active Database: {db_info}")
         
         # 4️⃣ Add Safety Check (IMPORTANT 🔥)
         db = db_info[0]
@@ -52,6 +51,7 @@ def init_db():
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS admin (
                     admin_id INT AUTO_INCREMENT PRIMARY KEY,
+                    name VARCHAR(100),
                     email VARCHAR(100) UNIQUE NOT NULL,
                     password VARCHAR(255) NOT NULL
                 )
@@ -66,7 +66,8 @@ def init_db():
                     department VARCHAR(50),
                     semester INT,
                     password_hash VARCHAR(255),
-                    is_password_changed BOOLEAN DEFAULT FALSE
+                    is_password_changed BOOLEAN DEFAULT FALSE,
+                    profile_pic VARCHAR(255) DEFAULT 'default.png'
                 )
             """)
             
@@ -76,7 +77,8 @@ def init_db():
                     faculty_id INT AUTO_INCREMENT PRIMARY KEY,
                     faculty_name VARCHAR(100) NOT NULL,
                     email VARCHAR(150) UNIQUE NOT NULL,
-                    department VARCHAR(50)
+                    department VARCHAR(50),
+                    password_hash VARCHAR(255)
                 )
             """)
             
@@ -92,16 +94,18 @@ def init_db():
                 )
             """)
             
-            # 5. Marks Table
+            # 5. Marks Table (Redesigned 🚀)
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS marks (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     enrollment_no VARCHAR(20),
                     subject_id INT,
-                    internal_marks INT,
-                    viva_marks INT,
-                    external_marks INT,
-                    total_marks INT,
+                    internal_marks INT DEFAULT 0,
+                    viva_marks INT DEFAULT 0,
+                    external_marks INT DEFAULT 0,
+                    total_marks INT DEFAULT 0,
+                    result VARCHAR(10) DEFAULT 'Fail',
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     FOREIGN KEY (enrollment_no) REFERENCES students(enrollment_no) ON DELETE CASCADE,
                     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE
                 )
@@ -119,10 +123,25 @@ def init_db():
                     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE
                 )
             """)
+
+            # 7. Feedback Table
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS feedback (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    enrollment_no VARCHAR(50),
+                    subject VARCHAR(255),
+                    message TEXT,
+                    type VARCHAR(50),
+                    status VARCHAR(50),
+                    admin_reply TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (enrollment_no) REFERENCES students(enrollment_no) ON DELETE CASCADE
+                )
+            """)
             
             connection.commit()
             
-            # 🚀 START: SUPER ADMIN SENTINEL (FIRST RUN EXPERIENCE)
+            # 🚀 START: SUPER ADMIN SENTINEL
             cursor.execute("SELECT COUNT(*) as count FROM admin")
             if cursor.fetchone()[0] == 0:
                 from werkzeug.security import generate_password_hash
@@ -136,11 +155,10 @@ def init_db():
                 """, (default_email, hashed_pass))
                 connection.commit()
                 print(f"✨ Super Admin initialized: {default_email} / {default_pass}")
-            # 🚀 END: SUPER ADMIN SENTINEL
             
             cursor.close()
             connection.close()
-            print("SPDA Database and standardized tables initialized.")
+            print("SPDA Database and merged standardized tables initialized.")
     except Exception as e:
         print(f"Error initializing SPDA database: {e}")
 

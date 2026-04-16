@@ -1,172 +1,241 @@
 {% extends 'admin/layout.html' %}
 
-{% block page_title %}<h5 class="mb-0 fw-semibold">Student Management</h5>{% endblock %}
+{% block page_title %}<h5 class="fw-bold mb-0 text-dark"><i class="bi bi-people me-2"></i>Student Management</h5>{%
+endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4 p-1">
-    <div>
-        <h3 class="fw-bold m-0 text-dark"><i class="fas fa-users-cog me-2 text-primary"></i>Student Module</h3>
-        <p class="text-muted small m-0">Manage student records efficiently</p>
-    </div>
-    <a href="{{ url_for('admin.add_student') }}" class="btn btn-primary px-4 py-2 fw-bold rounded-pill shadow-sm transition-scale">
-        <i class="fas fa-plus-circle me-2"></i>Add Academic Profile
-    </a>
-</div>
+<div class="container-fluid py-4">
+    <!-- 🚀 HEADER SECTOR -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="fw-bold mb-1 text-dark">Student Directory</h4>
+            <p class="text-muted small mb-0">Manage institutional student records and profiles</p>
+        </div>
+        <div class="d-flex gap-3 align-items-center">
+            <!-- 📥 CSV BULK UPLOAD -->
+            <form action="/upload_students_csv" method="POST" enctype="multipart/form-data"
+                class="d-flex gap-2 align-items-center bg-white p-2 rounded-3 shadow-sm border">
+                <input type="file" name="file" accept=".csv" class="form-control form-control-sm border-0 bg-light"
+                    style="max-width: 180px;" required>
+                <button type="submit" class="btn btn-success btn-sm px-3 fw-bold rounded-2">
+                    <i class="bi bi-file-earmark-spreadsheet me-1"></i>Upload
+                </button>
+            </form>
 
-<!-- 🔍 SOPHISTICATED SEARCH & FILTER HUB -->
-<div class="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-white">
-    <form method="GET" class="row g-3 align-items-end">
-        <div class="col-lg-4 col-md-6">
-            <label class="form-label small fw-bold text-muted text-uppercase letter-spacing-1">Identity Search</label>
-            <div class="input-group bg-light rounded-3 overflow-hidden border-0">
-                <span class="input-group-text bg-transparent border-0"><i class="fas fa-search text-muted"></i></span>
-                <input type="text" name="search" class="form-control border-0 bg-transparent py-2" placeholder="Search by name or enrollment..." value="{{ filters.search or '' }}">
+            <div class="dropdown">
+                <button class="btn btn-light border px-4 rounded-3 shadow-sm fw-bold dropdown-toggle transition-hover"
+                    type="button" data-bs-toggle="dropdown">
+                    <i class="bi bi-download me-2"></i>Export
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3">
+                    <li><a class="dropdown-item py-2" href="/export_students_csv"><i
+                                class="bi bi-filetype-csv me-2 text-success"></i>CSV Format</a></li>
+                    <li><a class="dropdown-item py-2" href="/export_students_pdf"><i
+                                class="bi bi-file-pdf me-2 text-danger"></i>PDF Report</a></li>
+                </ul>
+            </div>
+
+            <a href="{{ url_for('admin.add_student') }}"
+                class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm transition-hover">
+                <i class="bi bi-person-plus-fill me-2"></i>Add Student
+            </a>
+
+            <a href="{{ url_for('admin.clear_students') }}" class="btn btn-danger px-4 rounded-3 fw-bold shadow-sm transition-hover ms-2"
+               onclick="return confirm('⚠️ SECURITY ALERT: Are you sure you want to delete ALL students?\n\nThis action cannot be undone. All institutional student records and related audit trails will be wiped.')">
+                <i class="bi bi-trash me-1"></i>Clear All Students
+            </a>
+
+        </div>
+    </div>
+
+    <!-- 🔍 SMART FILTER ENGINE -->
+    <div class="card border-0 shadow-sm rounded-3 mb-4">
+        <div class="card-body p-4">
+            <form method="GET" class="row g-3 align-items-end">
+                <div class="col-lg-4">
+                    <label class="form-label fw-bold text-uppercase small text-muted mb-2"
+                        style="letter-spacing: 0.05em;">Quick Search</label>
+                    <div class="input-group">
+                        <span class="input-group-text border-0 bg-light text-muted"><i class="bi bi-search"></i></span>
+                        <input type="text" name="search" class="form-control border-0 bg-light rounded-end-3 py-2"
+                            placeholder="Name or Enrollment No..." value="{{ filters.search or '' }}">
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <label class="form-label fw-bold text-uppercase small text-muted mb-2"
+                        style="letter-spacing: 0.05em;">Department</label>
+                    <select name="department" class="form-select border-0 bg-light rounded-3 py-2">
+                        <option value="">All Departments</option>
+                        <option value="BCA" {% if filters.department=='BCA' %}selected{% endif %}>BCA</option>
+                        <option value="MCA" {% if filters.department=='MCA' %}selected{% endif %}>MCA</option>
+                        <option value="B.TECH" {% if filters.department=='B.TECH' %}selected{% endif %}>B.TECH</option>
+                        <option value="MBA" {% if filters.department=='MBA' %}selected{% endif %}>MBA</option>
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <label class="form-label fw-bold text-uppercase small text-muted mb-2"
+                        style="letter-spacing: 0.05em;">Semester</label>
+                    <select name="semester" class="form-select border-0 bg-light rounded-3 py-2">
+                        <option value="">Select Sem</option>
+                        {% for i in range(1, 9) %}
+                        <option value="{{ i }}" {% if filters.semester==i|string %}selected{% endif %}>Semester {{ i }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-lg-3">
+                    <div class="d-flex gap-2">
+                        <button type="submit"
+                            class="btn btn-primary w-100 rounded-3 fw-bold py-2 shadow-sm transition-hover">
+                            <i class="bi bi-funnel me-2"></i>Filter
+                        </button>
+                        <a href="{{ url_for('admin.view_students') }}"
+                            class="btn btn-light px-3 py-2 border rounded-3 text-muted shadow-sm transition-hover">
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 📦 STUDENT DATA MATRIX -->
+    <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr class="text-secondary small text-uppercase fw-bold">
+                            <th class="ps-4 py-3">Student Name</th>
+                            <th class="py-3">Enrollment No</th>
+                            <th class="py-3">Department</th>
+                            <th class="py-3">Contact No</th>
+                            <th class="py-3 text-center pe-4">Manage Student</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                        <tr>
+                            <td class="ps-4 py-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-primary-soft text-primary rounded-circle d-flex align-items-center justify-content-center me-3"
+                                        style="width: 40px; height: 40px;">
+                                        <span class="fw-bold">{{ student.name[:1]|upper }}</span>
+                                    </div>
+                                    <div>
+                                        <div class="fw-bold text-dark fs-6">{{ student.name }}</div>
+                                        <div class="text-muted extra-small">{{ student.email }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span
+                                    class="badge bg-light border text-primary rounded-pill px-3 py-1 font-monospace fw-bold">
+                                    {{ student.enrollment_no }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="d-flex flex-column">
+                                    <span class="fw-bold text-dark">{{ student.department }}</span>
+                                    <span class="text-muted extra-small">Semester {{ student.semester }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="small fw-semibold text-dark"><i
+                                        class="bi bi-telephone me-2 text-muted"></i>{{ student.contact_no or 'N/A'
+                                    }}</span>
+                            </td>
+                            <td class="text-center pe-4">
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="{{ url_for('admin.edit_student', enrollment_no=student.enrollment_no) }}"
+                                        class="btn btn-sm btn-outline-primary rounded-2 px-3 fw-bold">
+                                        <i class="bi bi-pencil"></i> Edit
+                                    </a>
+                                    <a href="{{ url_for('admin.reports_student_detail', enrollment_no=student.enrollment_no) }}"
+                                        class="btn btn-sm btn-outline-info rounded-2 px-3 fw-bold">
+                                        <i class="bi bi-graph-up"></i> Info
+                                    </a>
+                                    <a href="{{ url_for('admin.delete_student', enrollment_no=student.enrollment_no) }}"
+                                        class="btn btn-sm btn-outline-danger rounded-2 px-3 fw-bold"
+                                        onclick="return confirm('Permanent removal of student {{ student.name }}?')">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center py-5 text-muted">
+                                <i class="bi bi-people fa-3x mb-3 opacity-25"></i>
+                                <h6 class="fw-bold">No Students Registered</h6>
+                                <p class="small">Matching records could not be found in the current directory.</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="col-lg-2 col-md-6">
-            <label class="form-label small fw-bold text-muted text-uppercase letter-spacing-1">Academic Department</label>
-            <select name="department" class="form-select bg-light border-0 py-2 rounded-3">
-                <option value="">All Departments</option>
-                <option value="BCA" {% if filters.department == 'BCA' %}selected{% endif %}>BCA</option>
-                <option value="MCA" {% if filters.department == 'MCA' %}selected{% endif %}>MCA</option>
-                <option value="B.TECH" {% if filters.department == 'B.TECH' %}selected{% endif %}>B.TECH</option>
-                <option value="MBA" {% if filters.department == 'MBA' %}selected{% endif %}>MBA</option>
-            </select>
-        </div>
-        <div class="col-lg-2 col-md-6">
-            <label class="form-label small fw-bold text-muted text-uppercase letter-spacing-1">Semester</label>
-            <select name="semester" class="form-select bg-light border-0 py-2 rounded-3">
-                <option value="">All Semesters</option>
-                {% for i in range(1, 9) %}
-                <option value="{{ i }}" {% if filters.semester == i|string %}selected{% endif %}>Semester {{ i }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="col-lg-4 d-flex gap-2">
-            <button type="submit" class="btn btn-dark px-4 py-2 rounded-3 fw-bold flex-grow-1 shadow-sm">
-                <i class="fas fa-filter me-2"></i>Apply Analytics
-            </button>
-            <a href="{{ url_for('admin.view_students') }}" class="btn btn-light px-3 py-2 border rounded-3 text-muted shadow-sm"><i class="fas fa-sync-alt"></i></a>
-        </div>
-    </form>
-</div>
-
-<!-- 📦 DATABASE LEDGER -->
-<div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden p-0 mb-4">
-    <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-            <thead class="bg-light-soft border-bottom">
-                <tr class="text-muted small text-uppercase fw-bold letter-spacing-1">
-                    <th class="ps-4 py-3">Student Name</th>
-                    <th class="py-3">Enrollment No</th>
-                    <th class="py-3">Department</th>
-                    <th class="py-3">Contact No</th>
-                    <th class="pe-4 text-end">Manage Student</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for student in students %}
-                <tr class="student-entry">
-                    <td class="ps-4 py-3">
-                        <div class="d-flex align-items-center">
-                            <div class="bg-primary bg-opacity-10 text-primary p-2 rounded-circle shadow-sm me-3" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
-                                <i class="fas fa-user-graduate"></i>
-                            </div>
-                            <div>
-                                <div class="fw-bold text-dark fs-6">{{ student.name }}</div>
-                                <div class="text-muted extra-small"><i class="fas fa-envelope me-1 opacity-50"></i>{{ student.email }}</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="font-monospace fw-bold text-primary small bg-light-soft px-2 py-1 rounded inline-block">
-                        {{ student.enrollment_no }}
-                    </td>
-                    <td>
-                        <div class="d-flex flex-column">
-                            <span class="badge bg-primary-soft text-primary border-0 px-3 py-2 rounded-pill fw-bold mb-1" style="width: fit-content; font-size: 0.65rem;">
-                                {{ student.department }}
-                            </span>
-                            <span class="text-secondary extra-small fw-semibold ps-1"><i class="fas fa-layer-group me-1 opacity-50"></i>Semester {{ student.semester }}</span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="bg-success-soft text-success p-2 rounded-circle me-3" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 10px;">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <span class="text-dark fw-bold small">{{ student.contact_no or 'N/A' }}</span>
-                        </div>
-                    </td>
-                    <td class="pe-4 text-end">
-                        <div class="d-flex justify-content-end gap-2">
-                            <a href="{{ url_for('admin.edit_student', enrollment_no=student.enrollment_no) }}" class="btn btn-sm btn-white border shadow-xs px-3 rounded-3 fw-bold text-primary transition-scale">
-                                <i class="fas fa-edit me-1"></i>Edit
-                            </a>
-                            <a href="{{ url_for('admin.delete_student', enrollment_no=student.enrollment_no) }}" class="btn btn-sm btn-white border shadow-xs px-3 rounded-3 fw-bold text-danger transition-scale" onclick="return confirm('Are you sure you want to delete this student? This action cannot be undone.')">
-                                <i class="fas fa-trash-alt me-2"></i>Delete
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="5" class="text-center py-5">
-                        <div class="py-5">
-                            <i class="fas fa-user-slash fs-1 text-light mb-3 d-block"></i>
-                            <h5 class="text-muted fw-bold">Registry Silent</h5>
-                            <p class="text-muted small">No academic identities match your current ingestion filters.</p>
-                            <a href="{{ url_for('admin.view_students') }}" class="btn btn-primary btn-sm px-4 rounded-pill mt-3 shadow-sm">Reset Analytics</a>
-                        </div>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
     </div>
-</div>
 
-<!-- 📄 PAGINATION MATRIX -->
-{% if total_pages > 1 %}
-<nav class="d-flex justify-content-between align-items-center mt-4 px-1">
-    <div class="text-muted extra-small fw-bold">
-        Viewing Records <span class="text-dark fw-black">{{ (page-1)*10 + 1 }}</span> to 
-        <span class="text-dark fw-black">{{ [page*10, students|length + (page-1)*10]|min }}</span>
+    <!-- 📄 PAGINATION MATRIX -->
+    {% if total_pages > 1 %}
+    <div class="d-flex justify-content-between align-items-center mt-4 px-2">
+        <div class="small text-muted fw-bold text-uppercase" style="letter-spacing: 0.05em; font-size: 10px;">
+            Records <span class="text-dark">{{ (page-1)*10 + 1 }}</span> - <span class="text-dark">{{ [page*10,
+                total_students]|min }}</span>
+        </div>
+        <nav>
+            <ul class="pagination pagination-sm mb-0 gap-2">
+                {% if page > 1 %}
+                <li class="page-item"><a class="page-link border-0 rounded-2 shadow-sm px-3 py-2 bg-white"
+                        href="{{ url_for('admin.view_students', page=page-1, **filters) }}"><i
+                            class="bi bi-chevron-left text-primary"></i></a></li>
+                {% endif %}
+
+                {% for p in range(1, total_pages + 1) %}
+                <li class="page-item {% if p == page %}active{% endif %}">
+                    <a class="page-link border-0 rounded-2 shadow-sm px-3 py-2 {% if p == page %}bg-primary text-white{% else %}bg-white text-dark{% endif %}"
+                        href="{{ url_for('admin.view_students', page=p, **filters) }}">{{ p }}</a>
+                </li>
+                {% endfor %}
+
+                {% if page < total_pages %} <li class="page-item"><a
+                        class="page-link border-0 rounded-2 shadow-sm px-3 py-2 bg-white"
+                        href="{{ url_for('admin.view_students', page=page+1, **filters) }}"><i
+                            class="bi bi-chevron-right text-primary"></i></a></li>
+                    {% endif %}
+            </ul>
+        </nav>
     </div>
-    <ul class="pagination pagination-sm mb-0 gap-2">
-        <li class="page-item {% if page == 1 %}disabled{% endif %}">
-            <a class="page-link border-0 shadow-sm rounded-3 py-2 px-3" href="{{ url_for('admin.view_students', page=page-1, **filters) }}">
-                <i class="fas fa-chevron-left small"></i>
-            </a>
-        </li>
-        {% for p in range(1, total_pages + 1) %}
-        {% if p == 1 or p == total_pages or (p >= page - 2 and p <= page + 2) %}
-        <li class="page-item {% if p == page %}active{% endif %}">
-            <a class="page-link border-0 shadow-sm rounded-3 py-2 px-3 {% if p == page %}bg-primary text-white{% else %}bg-white text-dark{% endif %}" href="{{ url_for('admin.view_students', page=p, **filters) }}">{{ p }}</a>
-        </li>
-        {% elif p == page - 3 or p == page + 3 %}
-        <li class="page-item disabled"><span class="page-link border-0 bg-transparent px-2">...</span></li>
-        {% endif %}
-        {% endfor %}
-        <li class="page-item {% if page == total_pages %}disabled{% endif %}">
-            <a class="page-link border-0 shadow-sm rounded-3 py-2 px-3" href="{{ url_for('admin.view_students', page=page+1, **filters) }}">
-                <i class="fas fa-chevron-right small"></i>
-            </a>
-        </li>
-    </ul>
-</nav>
-{% endif %}
+    {% endif %}
+</div>
 
 <style>
-.bg-light-soft { background-color: #f8f9fc; }
-.bg-primary-soft { background-color: rgba(99, 102, 241, 0.1); }
-.bg-success-soft { background-color: rgba(16, 185, 129, 0.1); }
-.extra-small { font-size: 0.7rem; }
-.letter-spacing-1 { letter-spacing: 0.05rem; }
-.transition-scale { transition: transform 0.2s ease; }
-.transition-scale:hover { transform: translateY(-2px); }
-.shadow-xs { box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-.student-entry:hover { background-color: #fdfdfd !important; }
-.page-link:hover { background-color: #f1f5f9 !important; }
-.btn-white { background: #fff; }
+    .bg-primary-soft {
+        background-color: rgba(99, 102, 241, 0.1);
+    }
+
+    .transition-hover {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .transition-hover:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .extra-small {
+        font-size: 0.75rem;
+    }
+
+    .table-striped>tbody>tr:nth-of-type(odd) {
+        --bs-table-accent-bg: rgba(0, 0, 0, 0.02);
+    }
+
+    .page-link:hover {
+        background-color: var(--primary-color) !important;
+        color: white !important;
+    }
 </style>
 {% endblock %}
