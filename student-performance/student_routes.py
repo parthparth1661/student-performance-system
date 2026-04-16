@@ -71,12 +71,11 @@ def dashboard():
     """, (enrollment_no,))
     attn_data = cursor.fetchone()
     perf_summary['attendance_percentage'] = round(attn_data['attendance'] or 0, 2)
-    # Fetch Feedback Analytics (Simplified)
+    # Fetch Feedback Status Counts
     cursor.execute("""
         SELECT 
-            COUNT(*) as total,
             COUNT(CASE WHEN admin_reply IS NULL THEN 1 END) as pending,
-            COUNT(CASE WHEN admin_reply IS NOT NULL THEN 1 END) as replied
+            COUNT(CASE WHEN admin_reply IS NOT NULL THEN 1 END) as resolved
         FROM feedback WHERE student_id = %s
     """, (enrollment_no,))
     fb_stats = cursor.fetchone()
@@ -180,48 +179,31 @@ def feedback():
     cursor = conn.cursor(dictionary=True)
 
     if request.method == 'POST':
-        student_name = session.get('student_name')
-        department = session.get('student_dept')
-        semester = request.form.get('semester') # This should probably be in session too, but can be passed from form
         subject = request.form.get('subject')
-        faculty = request.form.get('faculty')
-        rating = request.form.get('rating')
-        comment = request.form.get('comment')
+        comment = request.form.get('message')
+        faculty = request.form.get('faculty', 'General')
         
-        # If semester not in session, try to get from student info
-        if not semester:
-             cursor.execute("SELECT semester FROM students WHERE enrollment_no = %s", (enrollment_no,))
-             row = cursor.fetchone()
-             semester = row['semester'] if row else 0
-
         if comment and subject:
-            cursor.execute("""
-                INSERT INTO feedback (student_id, student_name, department, semester, subject, faculty, rating, comment) 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-            """, (enrollment_no, student_name, department, semester, subject, faculty, rating, comment))
-            conn.commit()
-            flash("Feedback submitted successfully.", "success")
-            return redirect(url_for('student.feedback'))
+            # Fetch student details for record redundancy
+            cursor.execute("SELECT name, department, semester FROM students WHERE enrollment_no = %s", (enrollment_no,))
+            student = cursor.fetchone()
+            
+            if student:
+                cursor.execute("""
+                    INSERT INTO feedback (student_id, student_name, department, semester, subject, faculty, comment) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s)
+                """, (enrollment_no, student['name'], student['department'], student['semester'], subject, faculty, comment))
+                conn.commit()
+                flash("Institutional feedback submitted successfully.", "success")
+                return redirect(url_for('student.feedback'))
     
     # Fetch history for the logged-in student ONLY
     cursor.execute("SELECT * FROM feedback WHERE student_id = %s ORDER BY date DESC", (enrollment_no,))
     history = cursor.fetchall()
     
     student_info = analysis.get_student_details(enrollment_no)
-    
-    # Get subjects and faculties for the dropdowns
-    cursor.execute("SELECT subject_name FROM subjects WHERE department = %s AND semester = %s", (student_info['department'], student_info['semester']))
-    available_subjects = [r['subject_name'] for r in cursor.fetchall()]
-    
-    cursor.execute("SELECT faculty_name FROM faculty WHERE department = %s", (student_info['department'],))
-    available_faculties = [r['faculty_name'] for r in cursor.fetchall()]
-    
     conn.close()
-    return render_template('student/feedback.html', 
-                          student=student_info, 
-                          history=history, 
-                          subjects=available_subjects,
-                          faculties=available_faculties)
+    return render_template('student/feedback.html', student=student_info, history=history)
 
 # 🚪 SESSION TERMINATION: LOGOUT
 @student_bp.route('/logout')

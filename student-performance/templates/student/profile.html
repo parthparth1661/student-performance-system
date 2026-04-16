@@ -4,73 +4,99 @@
 {% block page_title %}Academic Identity{% endblock %}
 
 {% block content %}
-<div class="row g-4">
-    <!-- 🏢 INSTITUTIONAL CARD -->
-    <div class="col-lg-4">
-        <div class="card border-0 shadow-sm p-4 text-center bg-white h-100">
-            <div class="bg-primary bg-opacity-10 text-primary p-4 rounded-circle d-inline-block mb-3 mx-auto" style="width: 100px; height: 100px; display: flex; align-items: center; justify-content: center;">
-                <i class="bi bi-person-circle fs-1"></i>
-            </div>
-            <h4 class="fw-800 mb-1">{{ student.name }}</h4>
-            <p class="text-muted small mb-3">Institutional Identity Verified</p>
-            <div class="badge bg-light text-primary fw-700 px-3 py-2 rounded-pill border">
-                {{ student.department }} • SEM {{ student.semester }}
-            </div>
-        </div>
+<div class="container-fluid">
+    <!-- 🏁 STEP 1 — HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold mb-0">My Profile</h4>
     </div>
 
-    <!-- 🆔 IDENTITY DETAILS -->
-    <div class="col-lg-8">
-        <div class="card border-0 shadow-sm p-4 bg-white h-100">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h6 class="fw-700 mb-0">Demographic Audit</h6>
-                <button class="btn btn-primary btn-sm rounded-pill px-4 fw-600 shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#editForm">
-                    <i class="bi bi-pencil-square me-2"></i>Edit Profile
-                </button>
+    <!-- 🏁 STEP 2 — PROFILE CARD 👤 (TOP SECTION) -->
+    <div class="card shadow-sm border-0 rounded-3 mb-4 p-5 text-center bg-white transition-hover">
+        <div class="mx-auto mb-3 position-relative" style="width: 120px; height: 120px;">
+            <div class="bg-indigo-light text-indigo rounded-circle w-100 h-100 d-flex align-items-center justify-content-center border border-3 border-light shadow-sm">
+                <i class="bi bi-person-circle fs-1"></i>
             </div>
+            <div class="position-absolute bottom-0 end-0 bg-success border border-white border-2 rounded-circle shadow-sm" style="width: 25px; height: 25px;" title="Active Identity"></div>
+        </div>
+        <h4 class="fw-bold mb-1 text-dark">{{ student.name }}</h4>
+        <p class="text-muted fw-medium mb-0">{{ student.department }} • {{ student.semester }} Semester</p>
+    </div>
 
-            <!-- VIEW MODE -->
-            <div class="row g-4 mb-4">
-                <div class="col-md-6">
-                    <label class="x-small fw-700 text-uppercase text-muted d-block mb-1">Full Signature</label>
-                    <p class="fw-600 mb-0">{{ student.name }}</p>
-                </div>
-                <div class="col-md-6">
-                    <label class="x-small fw-700 text-uppercase text-muted d-block mb-1">Enrollment Signature</label>
-                    <p class="fw-600 mb-0 font-monospace">{{ student.enrollment_no }}</p>
-                </div>
-                <div class="col-md-6">
-                    <label class="x-small fw-700 text-uppercase text-muted d-block mb-1">Electronic Mail</label>
-                    <p class="fw-600 mb-0">{{ student.email }}</p>
-                </div>
-                <div class="col-md-6">
-                    <label class="x-small fw-700 text-uppercase text-muted d-block mb-1">Telecommunications</label>
-                    <p class="fw-600 mb-0">{{ student.phone or 'Not Provided' }}</p>
-                </div>
+    <!-- 🏁 STEP 3 — STUDENT DETAILS SECTION 📋 -->
+    <div class="card shadow-sm border-0 rounded-3 p-4 bg-white mb-5 transition-hover">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h6 class="fw-bold mb-0 text-indigo text-uppercase x-small tracking-wider">Authentication Details</h6>
+            <button class="btn btn-indigo-outline btn-sm rounded-pill px-4 fw-bold shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#editProfileForm">
+                <i class="bi bi-pencil-square me-2"></i>Edit Details
+            </button>
+        </div>
+
+        <!-- VIEW MODE -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-6 col-lg-4">
+                <label class="text-muted small fw-bold text-uppercase x-small mb-1 d-block">Enrollment Number</label>
+                <div class="fw-semibold text-dark p-3 bg-light rounded-3">{{ student.enrollment_no }}</div>
             </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="text-muted small fw-bold text-uppercase x-small mb-1 d-block">Institutional Email</label>
+                <div class="fw-semibold text-dark p-3 bg-light rounded-3">{{ student.email }}</div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="text-muted small fw-bold text-uppercase x-small mb-1 d-block">Contact Identifier</label>
+                <div class="fw-semibold text-dark p-3 bg-light rounded-3">{{ student.phone or 'No Registry found' }}</div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="text-muted small fw-bold text-uppercase x-small mb-1 d-block">Academic Department</label>
+                <div class="fw-semibold text-dark p-3 bg-light rounded-3">{{ student.department }}</div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="text-muted small fw-bold text-uppercase x-small mb-1 d-block">Assigned Semester</label>
+                <div class="fw-semibold text-dark p-3 bg-light rounded-3">Semester {{ student.semester }}</div>
+            </div>
+        </div>
 
-            <!-- EDIT MODE (COLLAPSIBLE) -->
-            <div class="collapse" id="editForm">
-                <hr class="my-4 opacity-5">
-                <h6 class="fw-700 mb-3 text-primary">Synchronise Contact Identifiers</h6>
-                <form action="{{ url_for('student.profile') }}" method="POST">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label x-small fw-700 text-uppercase">Email Address</label>
-                            <input type="email" name="email" class="form-control rounded-3" value="{{ student.email }}" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label x-small fw-700 text-uppercase">Phone Number</label>
-                            <input type="text" name="phone" class="form-control rounded-3" value="{{ student.phone or '' }}" placeholder="+1 234 567 890">
-                        </div>
-                        <div class="col-12 mt-4">
-                            <button type="submit" class="btn btn-dark rounded-pill px-4 fw-700">Audit Update</button>
-                            <button type="button" class="btn btn-light rounded-pill px-4 ms-2" data-bs-toggle="collapse" data-bs-target="#editForm">Cancel</button>
+        <!-- 🏁 STEP 4 — EDIT MODE (EXISTING) -->
+        <div class="collapse" id="editProfileForm">
+            <hr class="my-5 opacity-5">
+            <div class="d-flex align-items-center gap-2 mb-4">
+                <div class="bg-indigo p-2 rounded-circle text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                    <i class="bi bi-gear-fill small"></i>
+                </div>
+                <h6 class="fw-bold mb-0 text-dark">Propagate Identity Updates</h6>
+            </div>
+            <form action="{{ url_for('student.profile') }}" method="POST">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label class="form-label text-muted x-small fw-bold text-uppercase">Email Endpoint</label>
+                        <input type="email" name="email" class="form-control bg-light border-0 p-3 rounded-3" value="{{ student.email }}" required shadow-sm>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label text-muted x-small fw-bold text-uppercase">Mobile Contact</label>
+                        <input type="text" name="phone" class="form-control bg-light border-0 p-3 rounded-3" value="{{ student.phone or '' }}" placeholder="Enter mobile number" shadow-sm>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="btn btn-indigo rounded-pill px-5 py-2 fw-bold shadow-sm">Commit Changes</button>
+                            <button type="button" class="btn btn-light rounded-pill px-5 py-2 fw-bold text-muted" data-bs-toggle="collapse" data-bs-target="#editProfileForm">Abort</button>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+<style>
+    .bg-indigo-light { background-color: #EEF2FF; }
+    .text-indigo { color: #4F46E5; }
+    .bg-indigo { background: #4F46E5; }
+    .btn-indigo { background: #4F46E5; color: white; transition: all 0.2s; }
+    .btn-indigo:hover { background: #4338CA; color: white; transform: translateY(-1px); }
+    .btn-indigo-outline { border: 2px solid #4F46E5; color: #4F46E5; transition: all 0.2s; }
+    .btn-indigo-outline:hover { background: #4F46E5; color: white; transform: translateY(-1px); }
+    .x-small { font-size: 0.65rem; letter-spacing: 0.08em; }
+    .transition-hover { transition: all 0.2s ease; }
+    .transition-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.06) !important; }
+    .tracking-wider { letter-spacing: 1px; }
+</style>
 {% endblock %}

@@ -3,127 +3,130 @@
 {% block title %}Institutional Feedback{% endblock %}
 {% block page_title %}Feedback Repository{% endblock %}
 
-{% block extra_css %}
-<style>
-    .form-card { border: none; border-radius: var(--radius-lg); background: white; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    .history-card { border: none; border-radius: var(--radius-lg); background: white; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    .reply-box { background: #f8fafc; border-left: 4px solid var(--primary); padding: 16px; border-radius: 0 12px 12px 0; margin-top: 12px; }
-    .rating-input { display: flex; flex-direction: row-reverse; gap: 5px; margin-bottom: 20px; justify-content: flex-end; }
-    .rating-input label { cursor: pointer; font-size: 24px; color: #cbd5e1; transition: color 0.2s; }
-    .rating-input input { display: none; }
-    .rating-input input:checked ~ label,
-    .rating-input label:hover,
-    .rating-input label:hover ~ label { color: #f59e0b; }
-    .star-rating { color: #f59e0b; }
-</style>
-{% endblock %}
-
 {% block content %}
-<div class="row g-4">
-    <!-- 📝 SUBMISSION FORM -->
-    <div class="col-lg-5">
-        <div class="form-card">
-            <h6 class="fw-700 mb-4 text-dark text-uppercase x-small tracking-wider">Submit Feedback</h6>
-            <form action="{{ url_for('student.feedback') }}" method="POST">
-                <!-- Subject -->
-                <div class="mb-3">
-                    <label class="form-label fw-600 text-muted x-small text-uppercase">Subject</label>
-                    <select name="subject" class="form-select border-0 bg-light rounded-3 py-2 px-3" required>
-                        <option value="" disabled selected>Select Subject</option>
-                        {% for sub in subjects %}
-                        <option value="{{ sub }}">{{ sub }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-
-                <!-- Faculty -->
-                <div class="mb-3">
-                    <label class="form-label fw-600 text-muted x-small text-uppercase">Faculty</label>
-                    <select name="faculty" class="form-select border-0 bg-light rounded-3 py-2 px-3" required>
-                        <option value="" disabled selected>Select Faculty</option>
-                        {% for fac in faculties %}
-                        <option value="{{ fac }}">{{ fac }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-
-                <!-- Rating -->
-                <div class="mb-3">
-                    <label class="form-label fw-600 text-muted x-small text-uppercase">Rating</label>
-                    <div class="rating-input">
-                        {% for i in range(5, 0, -1) %}
-                        <input type="radio" name="rating" id="star{{ i }}" value="{{ i }}" required>
-                        <label for="star{{ i }}"><i class="bi bi-star-fill"></i></label>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <!-- Comment -->
-                <div class="mb-4">
-                    <label class="form-label fw-600 text-muted x-small text-uppercase">Your Comment</label>
-                    <textarea name="comment" class="form-control border-0 bg-light rounded-3 py-2 px-3" rows="4" placeholder="Share your experience..." required></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-700 shadow-sm transition-all hover-lift">
-                    Submit Feedback
-                </button>
-            </form>
-        </div>
+<div class="container-fluid">
+    <!-- 🏁 HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold mb-0">Feedback Repository</h4>
     </div>
 
-    <!-- 📜 HISTORY VIEW -->
-    <div class="col-lg-7">
-        <div class="history-card h-100">
-            <div class="p-4 border-bottom bg-white d-flex justify-content-between align-items-center">
-                <h6 class="fw-700 mb-0">My Feedback History</h6>
+    <div class="row g-4">
+        <!-- 🏁 SUBMISSION FORM (LEFT) -->
+        <div class="col-lg-5">
+            <div class="card shadow-sm border-0 rounded-3 bg-white p-4 h-100">
+                <div class="d-flex align-items-center gap-2 mb-4">
+                    <div class="bg-indigo-light p-2 rounded-circle text-indigo">
+                        <i class="bi bi-pencil-square"></i>
+                    </div>
+                    <h6 class="fw-bold mb-0">New Submission</h6>
+                </div>
+
+                <form action="{{ url_for('student.feedback') }}" method="POST">
+                    <!-- Subject Title -->
+                    <div class="mb-4">
+                        <label class="form-label text-muted x-small fw-bold text-uppercase">Subject Title</label>
+                        <input type="text" name="subject" class="form-control bg-light border-0 p-3 rounded-3 shadow-sm" placeholder="Summary of your feedback" required>
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <!-- Faculty Selector -->
+                        <div class="col-md-12">
+                            <label class="form-label text-muted x-small fw-bold text-uppercase">Faculty / Dept</label>
+                            <input type="text" name="faculty" class="form-control bg-light border-0 p-3 rounded-3 shadow-sm" placeholder="Faculty name" required>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Report -->
+                    <div class="mb-4">
+                        <label class="form-label text-muted x-small fw-bold text-uppercase">Detailed Report</label>
+                        <textarea name="message" class="form-control bg-light border-0 p-3 rounded-3 shadow-sm" rows="5" placeholder="Provide technical or pedagogical details..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-indigo w-100 py-3 rounded-pill fw-bold shadow-sm mt-2">
+                        Commit Feedback
+                    </button>
+                </form>
             </div>
-            <div class="p-0">
-                <div class="accordion accordion-flush" id="feedbackAccordion">
-                    {% for f in history %}
-                    <div class="accordion-item border-bottom">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed px-4 py-3 bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#f-{{ f.feedback_id }}">
-                                <div class="w-100 me-3">
-                                    <div class="d-flex justify-content-between align-items-center mb-1">
-                                        <span class="fw-700 text-dark small">{{ f.subject }}</span>
-                                        <div class="star-rating small">
-                                            {% for i in range(f.rating) %}<i class="bi bi-star-fill"></i>{% endfor %}
-                                            {% for i in range(5 - f.rating) %}<i class="bi bi-star text-muted opacity-25"></i>{% endfor %}
+        </div>
+
+        <!-- 🏁 HISTORY LEDGER (RIGHT) -->
+        <div class="col-lg-7">
+            <div class="card shadow-sm border-0 rounded-3 bg-white h-100 overflow-hidden">
+                <div class="card-header bg-white border-bottom p-4">
+                    <h6 class="fw-bold mb-0">Submission History</h6>
+                </div>
+                <div class="card-body p-0">
+                    <div class="accordion accordion-flush" id="feedbackAccordion">
+                        {% for f in history %}
+                        <div class="accordion-item border-bottom">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed px-4 py-3 bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#f-{{ f.feedback_id }}">
+                                    <div class="w-100 me-3">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span class="fw-bold text-dark">{{ f.subject }}</span>
+                                            {% if f.admin_reply %}
+                                            <span class="badge bg-success bg-opacity-10 text-success rounded-pill x-small px-3">Resolved</span>
+                                            {% else %}
+                                            <span class="badge bg-warning bg-opacity-10 text-warning rounded-pill x-small px-3">Pending</span>
+                                            {% endif %}
+                                        </div>
+                                        <div class="d-flex justify-content-between text-muted x-small">
+                                            <span><i class="bi bi-person-badge me-1"></i> {{ f.faculty }}</span>
+                                            <span><i class="bi bi-calendar3 me-1"></i> {{ f.date.strftime('%d %b %Y') }}</span>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-between text-muted x-small">
-                                        <span>{{ f.faculty }}</span>
-                                        <span>{{ f.date.strftime('%d %b %Y') }}</span>
+                                </button>
+                            </h2>
+                            <div id="f-{{ f.feedback_id }}" class="accordion-collapse collapse" data-bs-parent="#feedbackAccordion">
+                                <div class="accordion-body px-4 py-4 bg-light bg-opacity-50">
+                                    <div class="mb-3">
+                                        <label class="text-muted x-small fw-bold text-uppercase d-block mb-1">My Comment</label>
+                                        <p class="mb-0 text-dark small lh-lg bg-white p-3 rounded-3 shadow-sm border-start border-3 border-indigo">{{ f.comment }}</p>
                                     </div>
-                                </div>
-                            </button>
-                        </h2>
-                        <div id="f-{{ f.feedback_id }}" class="accordion-collapse collapse" data-bs-parent="#feedbackAccordion">
-                            <div class="accordion-body px-4 py-4 bg-light bg-opacity-50">
-                                <p class="mb-0 text-dark small lh-base">{{ f.comment }}</p>
-                                
-                                <div class="mt-3">
-                                    <h6 class="fw-700 x-small mb-2 text-primary text-uppercase">Admin Reply:</h6>
+                                    
                                     {% if f.admin_reply %}
-                                    <div class="reply-box">
-                                        <p class="mb-0 small text-dark lh-base">{{ f.admin_reply }}</p>
+                                    <div class="mt-4">
+                                        <label class="text-indigo x-small fw-bold text-uppercase d-block mb-1">Institutional Response</label>
+                                        <div class="p-3 bg-indigo-light text-dark rounded-3 border-start border-3 border-indigo shadow-sm">
+                                            <p class="mb-0 small lh-base fw-medium">{{ f.admin_reply }}</p>
+                                        </div>
                                     </div>
                                     {% else %}
-                                    <p class="mb-0 small text-muted italic">"No reply yet"</p>
+                                    <div class="mt-3 p-3 rounded-3 bg-white border x-small italic text-muted d-flex align-items-center gap-2">
+                                        <i class="bi bi-hourglass-split text-warning fs-6"></i> Under formal institutional review
+                                    </div>
                                     {% endif %}
                                 </div>
                             </div>
                         </div>
+                        {% else %}
+                        <div class="p-5 text-center text-muted">
+                            <i class="bi bi-archive-fill fs-1 opacity-10 d-block mb-3"></i>
+                            <p class="fw-medium">No submission history detected.</p>
+                        </div>
+                        {% endfor %}
                     </div>
-                    {% else %}
-                    <div class="p-5 text-center text-muted">
-                        <i class="bi bi-archive fs-1 opacity-10 d-block mb-3"></i>
-                        No submission history detected.
-                    </div>
-                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .bg-indigo-light { background-color: #EEF2FF; }
+    .text-indigo { color: #4F46E5; }
+    .bg-indigo { background: #4F46E5; }
+    .btn-indigo { background: #4F46E5; color: white; transition: all 0.2s; }
+    .btn-indigo:hover { background: #4338CA; color: white; transform: translateY(-1px); }
+    .x-small { font-size: 0.65rem; letter-spacing: 0.05em; }
+    .accordion-button:not(.collapsed) {
+        background-color: #f8fafc;
+        color: #4F46E5;
+        box-shadow: none;
+    }
+    .accordion-button::after {
+        filter: grayscale(1) invert(0);
+    }
+    .italic { font-style: italic; }
+</style>
 {% endblock %}
