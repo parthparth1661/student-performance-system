@@ -140,10 +140,7 @@ endblock %}
                                         class="btn btn-sm btn-outline-primary rounded-2 px-3 fw-bold">
                                         <i class="bi bi-pencil"></i> Edit
                                     </a>
-                                    <a href="{{ url_for('admin.reports_student_detail', enrollment_no=student.enrollment_no) }}"
-                                        class="btn btn-sm btn-outline-info rounded-2 px-3 fw-bold">
-                                        <i class="bi bi-graph-up"></i> Info
-                                    </a>
+                                    <!-- Info button removed as part of Report Center decommissioning -->
                                     <a href="{{ url_for('admin.delete_student', enrollment_no=student.enrollment_no) }}"
                                         class="btn btn-sm btn-outline-danger rounded-2 px-3 fw-bold"
                                         onclick="return confirm('Permanent removal of student {{ student.name }}?')">

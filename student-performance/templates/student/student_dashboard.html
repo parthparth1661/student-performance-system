@@ -1,77 +1,194 @@
 {% extends "student/layout.html" %}
 
-{% block title %}Smart Dashboard{% endblock %}
+{% block title %}Dashboard{% endblock %}
 {% block page_title %}Operational Intelligence{% endblock %}
 
 {% block content %}
-<!-- 🏆 PERFORMANCE SUMMARY (TOP ROW) -->
-<div class="row g-4 mb-4">
-    <!-- Grade Point Average -->
-    <div class="col-md-4">
-        <div class="card border-0 shadow-sm p-4 h-100 bg-white">
-            <div class="d-flex justify-content-between align-items-start mb-3">
-                <div class="bg-primary bg-opacity-10 text-primary p-3 rounded-4">
-                    <i class="bi bi-graph-up-arrow fs-4"></i>
+<div class="container-fluid">
+    <!-- 🏁 STEP 1 — HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold mb-0 text-dark">Dashboard</h4>
+    </div>
+
+    <!-- 🏁 STEP 2 — WELCOME SECTION 👋 -->
+    <div class="card shadow-sm border-0 rounded-3 mb-4 p-4 bg-white">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <div class="bg-indigo-light p-3 rounded-circle">
+                    <i class="bi bi-person-circle fs-3 text-indigo"></i>
                 </div>
-                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-2 small">Score</span>
             </div>
-            <h6 class="text-muted x-small fw-700 text-uppercase mb-1">Pedagogical Index</h6>
-            <h3 class="fw-700 mb-0">{{ summary.avg_marks }}%</h3>
+            <div class="col">
+                <h5 class="fw-bold mb-1">Welcome back, {{ student.name }}!</h5>
+                <p class="text-muted mb-0">Here’s a snapshot of your institutional progress and academic Standing.</p>
+            </div>
         </div>
     </div>
 
-    <!-- Feedback Tracking -->
-    <div class="col-md-4">
-        <div class="card border-0 shadow-sm p-4 h-100 bg-white">
-            <div class="d-flex justify-content-between align-items-start mb-3">
-                <div class="bg-info bg-opacity-10 text-info p-3 rounded-4">
-                    <i class="bi bi-chat-dots fs-4"></i>
+    <!-- 🏁 STEP 3 — SUMMARY CARDS 📊 -->
+    <div class="row g-3 mb-4">
+        <!-- Attendance -->
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-3 p-4 bg-white dashboard-card h-100">
+                <div class="text-muted small fw-bold text-uppercase mb-2">Institutional Attendance</div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <h3 class="fw-bold mb-0 text-dark">{{ summary.attendance_percentage }}%</h3>
+                    <div class="text-indigo bg-light p-2 rounded-3">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
                 </div>
-                <div class="d-flex gap-1">
-                    <span class="badge bg-warning text-white rounded-circle" style="width:18px;height:18px;padding:2px;font-size:10px;">{{ fb_stats.pending }}</span>
-                </div>
+                <div class="mt-2 text-muted x-small">Overall Presence Record</div>
             </div>
-            <h6 class="text-muted x-small fw-700 text-uppercase mb-1">Feedback Status</h6>
-            <h3 class="fw-700 mb-0 h5">{{ fb_stats.resolved }} Resolved</h3>
+        </div>
+        <!-- Average Marks -->
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-3 p-4 bg-white dashboard-card h-100">
+                <div class="text-muted small fw-bold text-uppercase mb-2">Academic Index</div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <h3 class="fw-bold mb-0 text-dark">{{ summary.avg_marks }}%</h3>
+                    <div class="text-success bg-light p-2 rounded-3">
+                        <i class="bi bi-award"></i>
+                    </div>
+                </div>
+                <div class="mt-2 text-muted x-small">Cumulative Performance Average</div>
+            </div>
+        </div>
+        <!-- Total Subjects -->
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-3 p-4 bg-white dashboard-card h-100">
+                <div class="text-muted small fw-bold text-uppercase mb-2">Subject Load</div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <h3 class="fw-bold mb-0 text-dark">{{ subjects|length }}</h3>
+                    <div class="text-primary bg-light p-2 rounded-3">
+                        <i class="bi bi-book"></i>
+                    </div>
+                </div>
+                <div class="mt-2 text-muted x-small">Active Academic Modules</div>
+            </div>
+        </div>
+        <!-- Feedback Submitted -->
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-3 p-4 bg-white dashboard-card h-100">
+                <div class="text-muted small fw-bold text-uppercase mb-2">Feedback Status</div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <h3 class="fw-bold mb-0 text-dark">{{ fb_stats.resolved }}</h3>
+                    <div class="text-warning bg-light p-2 rounded-3">
+                        <i class="bi bi-chat-dots"></i>
+                    </div>
+                </div>
+                <div class="mt-2 text-muted x-small">{{ fb_stats.pending }} Pending Responses</div>
+            </div>
         </div>
     </div>
 
-    <!-- Academic Status -->
-    <div class="col-md-4">
-        <div class="card border-0 shadow-sm p-4 h-100 bg-white">
-            <div class="d-flex justify-content-between align-items-start mb-3">
-                <div class="bg-purple bg-opacity-10 text-purple p-3 rounded-4">
-                    <i class="bi bi-trophy fs-4"></i>
+    <div class="row g-4 mb-4">
+        <!-- 🏁 STEP 4 — PERFORMANCE SECTION 📈 -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 rounded-3 bg-white h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h6 class="fw-bold mb-0">Subject Performance Index</h6>
+                        <span class="badge bg-light text-indigo">Comparative Analysis</span>
+                    </div>
+                    <div style="height: 350px;">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
                 </div>
             </div>
-            <h6 class="text-muted x-small fw-700 text-uppercase mb-1">Institutional Rating</h6>
-            {% set avg = summary.avg_marks|float %}
-            {% if avg >= 75 %}
-                <h3 class="fw-700 mb-0 text-primary">EXCELLENT</h3>
-            {% elif avg >= 50 %}
-                <h3 class="fw-700 mb-0 text-info">STABLE</h3>
-            {% else %}
-                <h3 class="fw-700 mb-0 text-danger">CRITICAL</h3>
-            {% endif %}
+        </div>
+
+        <!-- 🏁 STEP 5 — RECENT ACTIVITY / PROFILE SNIPPET 📋 -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0 rounded-3 bg-white h-100">
+                <div class="card-body p-4">
+                    <h6 class="fw-bold mb-4">Academic Passport</h6>
+                    <div class="d-flex flex-column gap-3">
+                        <div class="p-3 bg-light rounded-3">
+                            <label class="text-muted x-small text-uppercase fw-bold d-block mb-1">Department</label>
+                            <span class="fw-semibold">{{ student.department }}</span>
+                        </div>
+                        <div class="p-3 bg-light rounded-3">
+                            <label class="text-muted x-small text-uppercase fw-bold d-block mb-1">Current Semester</label>
+                            <span class="fw-semibold">Semester {{ student.semester }}</span>
+                        </div>
+                        <div class="p-3 bg-light rounded-3">
+                            <label class="text-muted x-small text-uppercase fw-bold d-block mb-1">Identity ID</label>
+                            <span class="fw-semibold text-primary">{{ student.student_id or student.enrollment_no }}</span>
+                        </div>
+                        <div class="mt-3">
+                            <a href="{{ url_for('student.performance') }}" class="btn btn-indigo w-100 fw-bold rounded-pill">View Full Ledger</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RECENT ACTIVITY TABLE -->
+    <div class="card shadow-sm border-0 rounded-3 bg-white mb-4 overflow-hidden">
+        <div class="card-header bg-white border-0 p-4 pb-0">
+            <h6 class="fw-bold mb-0">Recent Academic Performance</h6>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr class="text-muted x-small text-uppercase">
+                            <th class="ps-4">Subject Molecule</th>
+                            <th class="text-center">Internal</th>
+                            <th class="text-center">Viva</th>
+                            <th class="text-center">External</th>
+                            <th class="text-center">Cumulative</th>
+                            <th class="pe-4 text-center">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in marks_list[:5] %}
+                        <tr>
+                            <td class="ps-4 fw-bold text-indigo">{{ item.subject }}</td>
+                            <td class="text-center">{{ item.internal_marks }}</td>
+                            <td class="text-center">{{ item.viva_marks }}</td>
+                            <td class="text-center">{{ item.external_marks }}</td>
+                            <td class="text-center fw-bold">{{ item.total }}</td>
+                            <td class="pe-4 text-center">
+                                {% if item.total >= 40 %}
+                                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">Cleared</span>
+                                {% else %}
+                                <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3">Retake</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="row g-4 mb-4">
-    <!-- 📊 PERFORMANCE VISUALIZATION -->
-    <div class="col-lg-12">
-        <div class="card border-0 shadow-sm bg-white p-4 h-100">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h6 class="fw-700 mb-0 text-dark uppercase x-small">Comparative Performance Analysis</h6>
-                <div class="badge bg-light text-muted fw-600 x-small px-3 py-2 rounded-pill">Subject-wise Correlation</div>
-            </div>
-            <div style="height: 350px;">
-                <canvas id="performanceChart"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
-
+<style>
+    .bg-indigo-light { background-color: #EEF2FF; }
+    .text-indigo { color: #4F46E5; }
+    .btn-indigo { 
+        background-color: #4F46E5; 
+        color: white; 
+        transition: all 0.2s ease;
+    }
+    .btn-indigo:hover { 
+        background-color: #4338CA; 
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    }
+    .dashboard-card {
+        transition: all 0.2s ease;
+    }
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05) !important;
+    }
+    .x-small { font-size: 0.75rem; letter-spacing: 0.05em; }
+</style>
 {% endblock %}
 
 {% block extra_js %}
@@ -88,8 +205,8 @@
             datasets: [{
                 label: 'Performance Index',
                 data: chartData,
-                backgroundColor: 'rgba(99, 102, 241, 0.8)',
-                borderColor: '#6366f1',
+                backgroundColor: 'rgba(79, 70, 229, 0.8)',
+                borderColor: '#4F46E5',
                 borderWidth: 0,
                 borderRadius: 8,
                 barThickness: 32
