@@ -1,25 +1,37 @@
+"""
+SPDA Student Intelligence Portal
+------------------------------------
+Orchestrates the student-facing experience including academic performance 
+visualization, attendance monitoring, and institutional feedback submission.
+"""
+
+import os
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from werkzeug.security import generate_password_hash, check_password_hash
 from db import get_db_connection
-from werkzeug.security import check_password_hash, generate_password_hash
 import analysis
 
 student_bp = Blueprint('student', __name__, url_prefix='/student')
 
-# 🛡️ BRIDGE SECURITY: PROTECT ALL STUDENT ROUTES
+# BRIDGE SECURITY: PROTECT ALL STUDENT ROUTES
 @student_bp.before_request
 def student_auth_guard():
-    # Public routes that don't need authentication
+    """Ensures all student-facing routes are protected by institutional identity verification."""
     public_endpoints = ['student.login', 'static']
     if request.endpoint in public_endpoints:
         return
     
-    # Check session
     if 'student_id' not in session:
         return redirect(url_for('student.login'))
 
-# 🔑 AUTHENTICATION UNIT: LOGIN
+# --- 1. IDENTITY & ACCESS CONTROL ---
+
 @student_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    """
+    Handles student authentication via institutional enrollment credentials.
+    Enforces mandatory password rotation for newly provisioned accounts.
+    """
     if 'student_id' in session:
         return redirect(url_for('student.dashboard'))
         
@@ -32,46 +44,56 @@ def login():
         cursor.execute("SELECT * FROM students WHERE enrollment_no = %s", (enrollment_no,))
         student = cursor.fetchone()
         conn.close()
-        
+
         if student and check_password_hash(student['password_hash'], password):
-            # Establish secure session
             session['student_id'] = student['enrollment_no']
             session['student_name'] = student['name']
             session['student_dept'] = student['department']
-            session['is_password_changed'] = bool(student['is_password_changed'])
             
-            # 🔄 FORCED ROTATION: Redirect if using default password
+            # Security Protocol: Enforce password change if account is using default enrollment as password
             if not student['is_password_changed']:
-                flash("Initial access detected. Security protocol requires password rotation.", "warning")
+                flash("Security Alert: Initial identity detected. Please update your password.", "warning")
                 return redirect(url_for('student.change_password'))
                 
+            flash(f"Access Granted: Welcome {student['name']}.", "success")
             return redirect(url_for('student.dashboard'))
         else:
-            flash("Invalid institutional credentials. Please verify your identity.", "danger")
+            flash("Authentication Failed: Invalid enrollment number or password.", "danger")
             
     return render_template('student/login.html')
 
-# 📊 ANALYTICAL HUB: DASHBOARD
+@student_bp.route('/logout')
+def logout():
+    """Terminates institutional session and clears security tokens."""
+    session.clear()
+    flash("Session terminated successfully.", "info")
+    return redirect(url_for('student.login'))
+
+
+# --- 2. ACADEMIC INTELLIGENCE NEXUS ---
+
 @student_bp.route('/dashboard')
 def dashboard():
+    """
+    Student Command Center.
+    Visualizes private performance trends, attendance status, and academic KPIs.
+    """
     enrollment_no = session['student_id']
     
     # Fetch performance data via enrollment-locked analysis
     student_info = analysis.get_student_details(enrollment_no)
-    marks_data = analysis.get_student_marks(enrollment_no) 
-    perf_summary = analysis.calculate_student_summary(enrollment_no)
+    marks_data = analysis.get_student_marks(enrollment_no)
     
-    # Calculate Attendance Percentage for the UI
-    conn = analysis.get_db_connection()
+    # Calculate Attendance Percentage
+    conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     cursor.execute("""
-        SELECT 
-            (COUNT(CASE WHEN status='Present' THEN 1 END) * 100.0 / NULLIF(COUNT(*), 0)) as attendance
+        SELECT COALESCE(COUNT(CASE WHEN status='Present' THEN 1 END) * 100.0 / NULLIF(COUNT(*), 0), 0) as attendance
         FROM attendance WHERE enrollment_no = %s
     """, (enrollment_no,))
     attn_data = cursor.fetchone()
-    perf_summary['attendance_percentage'] = round(attn_data['attendance'] or 0, 2)
-    # Fetch Feedback Status Counts
+    
+    # Fetch Feedback Status
     cursor.execute("""
         SELECT 
             COUNT(CASE WHEN admin_reply IS NULL THEN 1 END) as pending,
@@ -79,52 +101,82 @@ def dashboard():
         FROM feedback WHERE student_id = %s
     """, (enrollment_no,))
     fb_stats = cursor.fetchone()
-    
-    # Fetch Latest Notices (REMOVED)
-    
-    # Fetch Recent Activity (REMOVED)
-    
     conn.close()
     
     return render_template('student/student_dashboard.html', 
                            student=student_info, 
                            marks_list=marks_data, 
-                           summary=perf_summary,
+                           attendance_pct=round(attn_data['attendance'] or 0, 1),
                            fb_stats=fb_stats,
                            subjects=[m['subject'] for m in marks_data],
                            marks=[m['total'] for m in marks_data])
 
-# 📈 ACADEMIC TRACKING: PERFORMANCE
 @student_bp.route('/performance')
 def performance():
+    """Extended academic ledger: High-density breakdown of component-wise outcomes."""
     enrollment_no = session['student_id']
     student_info = analysis.get_student_details(enrollment_no)
     marks_data = analysis.get_student_marks(enrollment_no)
-    perf_summary = analysis.calculate_student_summary(enrollment_no)
-    
-    # Advanced logic for highlights
-    highest_sub = max(marks_data, key=lambda x: x['total']) if marks_data else None
-    lowest_sub = min(marks_data, key=lambda x: x['total']) if marks_data else None
-    total_marks_sum = sum(m['total'] for m in marks_data)
     
     return render_template('student/performance.html', 
                            student=student_info, 
-                           marks_list=marks_data, 
-                           summary=perf_summary,
-                           highlights={'highest': highest_sub, 'lowest': lowest_sub, 'total_sum': total_marks_sum},
-                           subjects=[m['subject'] for m in marks_data],
-                           marks=[m['total'] for m in marks_data])
+                           marks_list=marks_data)
 
-# 🔐 SECURITY PROTOCOL: CHANGE PASSWORD
+
+# --- 3. INSTITUTIONAL FEEDBACK ---
+
+@student_bp.route('/feedback', methods=['GET', 'POST'])
+def feedback():
+    """Institutional Feedback Channel: Allows students to contribute pedagogical insights."""
+    enrollment_no = session['student_id']
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    if request.method == 'POST':
+        subject = request.form.get('subject')
+        comment = request.form.get('message')
+        faculty = request.form.get('faculty', 'General')
+        rating = request.form.get('rating', 5)
+        
+        if comment and subject:
+            cursor.execute("SELECT name, department, semester FROM students WHERE enrollment_no = %s", (enrollment_no,))
+            student = cursor.fetchone()
+            
+            if student:
+                cursor.execute("""
+                    INSERT INTO feedback (student_id, student_name, department, semester, subject, faculty, rating, comment) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                """, (enrollment_no, student['name'], student['department'], student['semester'], subject, faculty, rating, comment))
+                conn.commit()
+                flash("Contribution Received: Thank you for your institutional feedback.", "success")
+                return redirect(url_for('student.feedback'))
+    
+    cursor.execute("SELECT * FROM feedback WHERE student_id = %s ORDER BY date DESC", (enrollment_no,))
+    history = cursor.fetchall()
+    
+    cursor.execute("SELECT * FROM subjects")
+    all_subjects = cursor.fetchall()
+    
+    student_info = analysis.get_student_details(enrollment_no)
+    conn.close()
+    return render_template('student/feedback.html', 
+                           student=student_info, 
+                           history=history, 
+                           subjects=all_subjects)
+
+
+# --- 4. SECURITY PROTOCOL ---
+
 @student_bp.route('/change_password', methods=['GET', 'POST'])
 def change_password():
+    """Private Security Module: Enables autonomous credential rotation."""
     if request.method == 'POST':
         current_password = request.form.get('current_password')
         new_password = request.form.get('new_password')
         confirm_password = request.form.get('confirm_password')
         
         if new_password != confirm_password:
-            flash("New credentials do not match.", "danger")
+            flash("Security Alert: Passwords do not match.", "danger")
             return redirect(url_for('student.change_password'))
             
         conn = get_db_connection()
@@ -141,73 +193,10 @@ def change_password():
             """, (new_hash, session['student_id']))
             conn.commit()
             conn.close()
-            flash("Identity credentials secured. Protocol complete.", "success")
+            flash("Identity Profile Hardened: New credentials active.", "success")
             return redirect(url_for('student.dashboard'))
         else:
             conn.close()
-            flash("Identity verification failed. Current credentials incorrect.", "danger")
+            flash("Authorization Denied: Current credentials incorrect.", "danger")
             
     return render_template('student/change_password.html')
-
-# 👤 IDENTITY SECTOR: PROFILE MANAGEMENT
-@student_bp.route('/profile', methods=['GET', 'POST'])
-def profile():
-    enrollment_no = session['student_id']
-    conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
-    
-    if request.method == 'POST':
-        email = request.form.get('email')
-        phone = request.form.get('phone')
-        
-        cursor.execute("UPDATE students SET email=%s, phone=%s WHERE enrollment_no=%s", 
-                       (email, phone, enrollment_no))
-        conn.commit()
-        flash("Identity record synchronized successfully.", "success")
-        return redirect(url_for('student.profile'))
-        
-    cursor.execute("SELECT * FROM students WHERE enrollment_no = %s", (enrollment_no,))
-    student_info = cursor.fetchone()
-    conn.close()
-    return render_template('student/profile.html', student=student_info)
-
-# 💬 COMMUNICATION: FEEDBACK
-@student_bp.route('/feedback', methods=['GET', 'POST'])
-def feedback():
-    enrollment_no = session['student_id']
-    conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
-
-    if request.method == 'POST':
-        subject = request.form.get('subject')
-        comment = request.form.get('message')
-        faculty = request.form.get('faculty', 'General')
-        
-        if comment and subject:
-            # Fetch student details for record redundancy
-            cursor.execute("SELECT name, department, semester FROM students WHERE enrollment_no = %s", (enrollment_no,))
-            student = cursor.fetchone()
-            
-            if student:
-                cursor.execute("""
-                    INSERT INTO feedback (student_id, student_name, department, semester, subject, faculty, comment) 
-                    VALUES (%s, %s, %s, %s, %s, %s, %s)
-                """, (enrollment_no, student['name'], student['department'], student['semester'], subject, faculty, comment))
-                conn.commit()
-                flash("Institutional feedback submitted successfully.", "success")
-                return redirect(url_for('student.feedback'))
-    
-    # Fetch history for the logged-in student ONLY
-    cursor.execute("SELECT * FROM feedback WHERE student_id = %s ORDER BY date DESC", (enrollment_no,))
-    history = cursor.fetchall()
-    
-    student_info = analysis.get_student_details(enrollment_no)
-    conn.close()
-    return render_template('student/feedback.html', student=student_info, history=history)
-
-# 🚪 SESSION TERMINATION: LOGOUT
-@student_bp.route('/logout')
-def logout():
-    session.clear()
-    flash("Session terminated successfully.", "info")
-    return redirect(url_for('student.login'))

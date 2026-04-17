@@ -13,7 +13,6 @@
                 <option value="BCA" {% if filters.department == 'BCA' %}selected{% endif %}>BCA</option>
                 <option value="MCA" {% if filters.department == 'MCA' %}selected{% endif %}>MCA</option>
                 <option value="B.TECH" {% if filters.department == 'B.TECH' %}selected{% endif %}>B.TECH</option>
-                <option value="M.TECH" {% if filters.department == 'M.TECH' %}selected{% endif %}>M.TECH</option>
                 <option value="MBA" {% if filters.department == 'MBA' %}selected{% endif %}>MBA</option>
             </select>
         </div>
@@ -43,7 +42,7 @@
     </form>
 </div>
 
-<!-- 🧠 INTELLIGENT INSIGHTS HUB (NEW 🔥) -->
+<!-- 🧠 INTELLIGENT INSIGHTS HUB -->
 <div class="row g-4 mb-5">
     <div class="col-12">
         <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden transition-hover">
@@ -69,7 +68,7 @@
                             <h4 class="fw-bold mb-1 {% if data.insights.avg_marks > 75 %}text-success{% elif data.insights.avg_marks >= 50 %}text-warning{% else %}text-danger{% endif %}">{{ data.insights.avg_marks }}%</h4>
                             <p class="text-dark fw-semibold mb-2">"{{ data.insights.performance_label }}"</p>
                             <div class="progress rounded-pill" style="height: 6px; background: rgba(0,0,0,0.05);">
-                                <div class="progress-bar rounded-pill {% if data.insights.avg_marks > 75 %}bg-success{% elif data.insights.avg_marks >= 50 %}bg-warning{% else %}bg-danger{% endif %}" data-width="{{ data.insights.avg_marks }}%"></div>
+                                <div class="progress-bar rounded-pill {% if data.insights.avg_marks > 75 %}bg-success{% elif data.insights.avg_marks >= 50 %}bg-warning{% else %}bg-danger{% endif %} dynamic-p-bar" data-width="{{ data.insights.avg_marks }}"></div>
                             </div>
                         </div>
                     </div>
@@ -131,7 +130,7 @@
                             </div>
                             {% if data.insights.pass_percent %}
                             <h5 class="fw-bold text-success mb-1">{{ data.insights.pass_percent }}% Pass Rate</h5>
-                            <p class="small text-muted mb-0"><span class="fw-bold text-dark">{{ 100 - data.insights.pass_percent }}%</span> of student population requires immediate mentorship.</p>
+                            <p class="small text-muted mb-0"><span class="fw-bold text-dark">{{ 100 - (data.insights.pass_percent|float) }}%</span> of student population requires immediate mentorship.</p>
                             {% else %}
                             <p class="text-muted m-0">Awaiting result data</p>
                             {% endif %}
@@ -177,8 +176,8 @@
                 <span class="bg-primary-soft text-primary p-2 rounded-3 me-3"><i class="fas fa-university"></i></span>
                 Department-level Performance Benchmarking
             </h6>
-            <div class="chart-container text-center">
-                <img src="{{ url_for('static', filename='charts/report_dept.png') }}?v={{ range(1, 1000) | random }}" class="img-fluid rounded-3" alt="Department Chart">
+            <div class="chart-container" style="height: 350px;">
+                <canvas id="deptPerfChart"></canvas>
             </div>
         </div>
     </div>
@@ -190,8 +189,8 @@
                 <span class="bg-indigo-soft text-indigo p-2 rounded-3 me-3"><i class="fas fa-chart-line"></i></span>
                 Academic Growth Curve (Semester Trend)
             </h6>
-            <div class="chart-container">
-                <img src="{{ url_for('static', filename='charts/report_sem.png') }}?v={{ range(1, 1000) | random }}" class="img-fluid rounded-3" alt="Semester Chart">
+            <div class="chart-container" style="height: 300px;">
+                <canvas id="semTrendChart"></canvas>
             </div>
         </div>
     </div>
@@ -203,8 +202,8 @@
                 <span class="bg-success-soft text-success p-2 rounded-3 me-3"><i class="fas fa-list-check"></i></span>
                 Core Curriculum Strength Distribution
             </h6>
-            <div class="chart-container">
-                <img src="{{ url_for('static', filename='charts/report_sub.png') }}?v={{ range(1, 1000) | random }}" class="img-fluid rounded-3" alt="Subject Chart">
+            <div class="chart-container" style="height: 300px;">
+                <canvas id="subStrengthChart"></canvas>
             </div>
         </div>
     </div>
@@ -216,8 +215,8 @@
                 <span class="bg-danger-soft text-danger p-2 rounded-3 me-3"><i class="fas fa-bullseye"></i></span>
                 Institutional Success Velocity (Pass/Fail)
             </h6>
-            <div class="chart-container text-center">
-                <img src="{{ url_for('static', filename='charts/report_pf.png') }}?v={{ range(1, 1000) | random }}" class="img-fluid rounded-3" style="max-height: 350px;" alt="Result Chart">
+            <div class="chart-container" style="height: 300px;">
+                <canvas id="passFailChart"></canvas>
             </div>
         </div>
     </div>
@@ -226,10 +225,10 @@
         <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100">
             <h6 class="fw-bold mb-4 text-dark d-flex align-items-center">
                 <span class="bg-warning-soft text-warning p-2 rounded-3 me-3"><i class="fas fa-user-check"></i></span>
-                Campus Engagement & Attendance Density
+                Campus Engagement Distribution
             </h6>
-            <div class="chart-container text-center">
-                <img src="{{ url_for('static', filename='charts/report_att.png') }}?v={{ range(1, 1000) | random }}" class="img-fluid rounded-3" style="max-height: 350px;" alt="Attendance Chart">
+            <div class="chart-container" style="height: 300px;">
+                <canvas id="attDistChart"></canvas>
             </div>
         </div>
     </div>
@@ -247,21 +246,93 @@
 .extra-small { font-size: 0.75rem; }
 .transition-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .transition-hover:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important; }
-
-/* 🧠 Insight Card Styles */
 .insight-card { border: 1px solid rgba(0,0,0,0.05); transition: all 0.3s ease; }
 .insight-icon { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
 .insight-success { background: #f0fdf4; border-color: #bcf0da; }
 .insight-warning { background: #fffbeb; border-color: #fde68a; }
 .insight-danger { background: #fef2f2; border-color: #fecaca; }
-.bg-primary-soft { background: rgba(99, 102, 241, 0.1); }
 </style>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // 🧠 SMART UI: Apply dynamic widths to bypass CSS linting issues
     document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('[data-width]').forEach(el => {
-            el.style.width = el.getAttribute('data-width');
+        document.querySelectorAll('.dynamic-p-bar').forEach(el => {
+            el.style.width = el.getAttribute('data-width') + '%';
+        });
+
+        const reportData = JSON.parse('{{ data | tojson | safe }}');
+
+        // 1. Dept Performance
+        new Chart(document.getElementById('deptPerfChart'), {
+            type: 'bar',
+            data: {
+                labels: reportData.dept_perf.map(r => r.department),
+                datasets: [{
+                    label: 'Avg Marks',
+                    data: reportData.dept_perf.map(r => r.avg_marks),
+                    backgroundColor: 'rgba(99, 102, 241, 0.7)',
+                    borderRadius: 10
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+
+        // 2. Semester Trend
+        new Chart(document.getElementById('semTrendChart'), {
+            type: 'line',
+            data: {
+                labels: reportData.sem_perf.map(r => 'Sem ' + r.semester),
+                datasets: [{
+                    label: 'Academic Growth',
+                    data: reportData.sem_perf.map(r => r.avg_marks),
+                    borderColor: '#6366f1',
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)'
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+
+        // 3. Subject Strength
+        new Chart(document.getElementById('subStrengthChart'), {
+            type: 'bar',
+            data: {
+                labels: reportData.sub_perf.map(r => r.subject_name).slice(0, 10),
+                datasets: [{
+                    label: 'Avg Marks',
+                    data: reportData.sub_perf.map(r => r.avg_marks).slice(0, 10),
+                    backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                    borderRadius: 5
+                }]
+            },
+            options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false }
+        });
+
+        // 4. Pass/Fail
+        new Chart(document.getElementById('passFailChart'), {
+            type: 'doughnut',
+            data: {
+                labels: reportData.pass_fail.map(r => r.status),
+                datasets: [{
+                    data: reportData.pass_fail.map(r => r.count),
+                    backgroundColor: ['#ef4444', '#10b981']
+                }]
+            },
+            options: { cutout: '65%', responsive: true, maintainAspectRatio: false }
+        });
+
+        // 5. Attendance
+        new Chart(document.getElementById('attDistChart'), {
+            type: 'pie',
+            data: {
+                labels: reportData.att_dist.map(r => r.status),
+                datasets: [{
+                    data: reportData.att_dist.map(r => r.count),
+                    backgroundColor: ['#ef4444', '#10b981']
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
         });
     });
 </script>

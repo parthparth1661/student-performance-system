@@ -1,9 +1,19 @@
+"""
+🗄️ SPDA Persistence & Schema Management
+----------------------------------------
+Handles institutional database connectivity, schema initialization, 
+and standardized table architecture for student performance tracking.
+"""
+
 import mysql.connector
 from mysql.connector import Error
 
 def get_db_connection():
+    """
+    Establishes a high-fidelity connection to the institutional MySQL database.
+    Includes active database verification and safety gates.
+    """
     try:
-        # 1️⃣ Check Database Connection 🎯
         connection = mysql.connector.connect(
             host="localhost",
             user="root",
@@ -11,27 +21,31 @@ def get_db_connection():
             database="SPDA"
         )
         
-        # 2️⃣ Verify Active Database 🕵️‍♂️
+        # Verify active database context
         cursor = connection.cursor()
         cursor.execute("SELECT DATABASE()")
         db_info = cursor.fetchone()
         
-        # 4️⃣ Add Safety Check (IMPORTANT 🔥)
+        # Security Guard: Ensure we are operating within the correct institutional schema
         db = db_info[0]
         if db.upper() != "SPDA":
             cursor.close()
             connection.close()
-            raise Exception("Wrong database connected!")
+            raise Exception("Security Alert: Unauthorized database context detected!")
             
         cursor.close()
         return connection
     except Error as e:
-        print(f"Error connecting to SPDA MySQL: {e}")
+        print(f"Connection Failure: {e}")
         return None
 
 def init_db():
+    """
+    Initializes the institutional database and enforces the standardized table architecture.
+    Synchronizes existing records with current schema requirements.
+    """
     try:
-        # Connect to create database if not exists
+        # Create database container if not existing
         connection = mysql.connector.connect(
             host='localhost',
             user='root',
@@ -42,12 +56,12 @@ def init_db():
         cursor.close()
         connection.close()
 
-        # Connect to SPDA and create standardized tables
+        # Connect to SPDA schema and initialize table architecture
         connection = get_db_connection()
         if connection:
             cursor = connection.cursor()
             
-            # 1. Admin Table
+            # --- 1. Administrative Nexus ---
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS admin (
                     admin_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -57,7 +71,7 @@ def init_db():
                 )
             """)
             
-            # 2. Students Table
+            # --- 2. Student Registry ---
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS students (
                     enrollment_no VARCHAR(20) PRIMARY KEY,
@@ -71,7 +85,7 @@ def init_db():
                 )
             """)
             
-            # 3. Faculty Table
+            # --- 3. Faculty Directory ---
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS faculty (
                     faculty_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -83,7 +97,7 @@ def init_db():
                 )
             """)
             
-            # 4. Subjects Table
+            # --- 4. Curriculum & Subjects ---
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS subjects (
                     subject_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -95,7 +109,7 @@ def init_db():
                 )
             """)
             
-            # 5. Marks Table (Redesigned 🚀)
+            # --- 5. Academic Performance Ledger (Hardened) ---
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS marks (
                     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -108,11 +122,12 @@ def init_db():
                     result VARCHAR(10) DEFAULT 'Fail',
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     FOREIGN KEY (enrollment_no) REFERENCES students(enrollment_no) ON DELETE CASCADE,
-                    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE
+                    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE,
+                    UNIQUE KEY unique_student_subject (enrollment_no, subject_id)
                 )
             """)
             
-            # 6. Attendance Table
+            # --- 6. Global Attendance Log ---
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS attendance (
                     attendance_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -125,7 +140,7 @@ def init_db():
                 )
             """)
 
-            # 7. Feedback Table (Updated for Rating & Professional Mapping)
+            # --- 7. Institutional Feedback Hub ---
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS feedback (
                     feedback_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -144,7 +159,8 @@ def init_db():
             
             connection.commit()
             
-            # 🚀 START: SUPER ADMIN SENTINEL
+            # --- 🚀 SUPER ADMIN SENTINEL ---
+            # Automatically provision the system administrator if the registry is empty
             cursor.execute("SELECT COUNT(*) as count FROM admin")
             if cursor.fetchone()[0] == 0:
                 from werkzeug.security import generate_password_hash
@@ -157,13 +173,13 @@ def init_db():
                     VALUES (%s, %s)
                 """, (default_email, hashed_pass))
                 connection.commit()
-                print(f"✨ Super Admin initialized: {default_email} / {default_pass}")
+                print(f"Super Admin initialized: {default_email}")
             
             cursor.close()
             connection.close()
-            print("SPDA Database and merged standardized tables initialized.")
+            print("Institutional Protocol: Database synchronized and tables initialized.")
     except Exception as e:
-        print(f"Error initializing SPDA database: {e}")
+        print(f"Schema Error: {e}")
 
 if __name__ == "__main__":
     init_db()

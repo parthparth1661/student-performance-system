@@ -1,11 +1,10 @@
--- 🎯 Student Performance Data Analysis System (SPDA) - Standardized Schema
--- Optimized for Flask + MySQL + Student Panel Integration
+-- 🎯 Student Performance Data Analysis System (SPDA) - Unified Schema
+-- Final Normalized Version (Matches implementation logic)
 
--- 1️⃣ Database Strategy
 CREATE DATABASE IF NOT EXISTS SPDA;
 USE SPDA;
 
--- 2️⃣ Admin Identity Module
+-- 👤 Administrative Nexus
 CREATE TABLE IF NOT EXISTS admin (
     admin_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100),
@@ -13,7 +12,7 @@ CREATE TABLE IF NOT EXISTS admin (
     password VARCHAR(255) NOT NULL
 );
 
--- 3️⃣ Student Registry Module
+-- 🧑🎓 Student Registry 
 CREATE TABLE IF NOT EXISTS students (
     enrollment_no VARCHAR(20) PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -27,15 +26,16 @@ CREATE TABLE IF NOT EXISTS students (
     profile_pic VARCHAR(255) DEFAULT 'default.png'
 );
 
--- 4️⃣ Faculty & Curriculum Module
+-- 🧑🏫 Faculty Hub
 CREATE TABLE IF NOT EXISTS faculty (
     faculty_id INT AUTO_INCREMENT PRIMARY KEY,
     faculty_name VARCHAR(100) NOT NULL,
     email VARCHAR(150) UNIQUE NOT NULL,
     department VARCHAR(50),
-    password_hash VARCHAR(255)
+    contact_no VARCHAR(20)
 );
 
+-- 📚 Curriculum Modules
 CREATE TABLE IF NOT EXISTS subjects (
     subject_id INT AUTO_INCREMENT PRIMARY KEY,
     subject_name VARCHAR(100) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS subjects (
     FOREIGN KEY (faculty_id) REFERENCES faculty(faculty_id) ON DELETE SET NULL
 );
 
--- 5️⃣ Academic Performance Module
+-- 📊 Academic Performance Ledger
 CREATE TABLE IF NOT EXISTS marks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     enrollment_no VARCHAR(20),
@@ -56,10 +56,11 @@ CREATE TABLE IF NOT EXISTS marks (
     total_marks INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (enrollment_no) REFERENCES students(enrollment_no) ON DELETE CASCADE,
-    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE
+    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE,
+    UNIQUE KEY unique_student_subject (enrollment_no, subject_id)
 );
 
--- 6️⃣ Institutional Attendance Module
+-- 📅 Global Attendance Registry
 CREATE TABLE IF NOT EXISTS attendance (
     attendance_id INT AUTO_INCREMENT PRIMARY KEY,
     enrollment_no VARCHAR(20),
@@ -70,15 +71,18 @@ CREATE TABLE IF NOT EXISTS attendance (
     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE
 );
 
--- 7️⃣ Student Engagement Module (Feedback Hub)
+-- 💬 Institutional Feedback Channel
 CREATE TABLE IF NOT EXISTS feedback (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    enrollment_no VARCHAR(50),
+    feedback_id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id VARCHAR(50),
+    student_name VARCHAR(100),
+    department VARCHAR(50),
+    semester INT,
     subject VARCHAR(255),
-    message TEXT,
-    type VARCHAR(50),
-    status VARCHAR(50),
+    faculty VARCHAR(100),
+    comment TEXT,
     admin_reply TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (enrollment_no) REFERENCES students(enrollment_no) ON DELETE CASCADE
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    rating INT DEFAULT 5,
+    FOREIGN KEY (student_id) REFERENCES students(enrollment_no) ON DELETE CASCADE
 );

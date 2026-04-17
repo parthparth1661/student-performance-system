@@ -39,12 +39,14 @@
 </div>
 
 <!-- 📊 PERFORMANCE BENCHMARKING CHART -->
-<div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4 text-center">
-    <h6 class="fw-bold mb-4 text-dark text-start d-flex align-items-center">
+<div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
+    <h6 class="fw-bold mb-4 text-dark d-flex align-items-center">
         <span class="bg-primary-soft text-primary p-2 rounded-3 me-3"><i class="fas fa-medal"></i></span>
         Faculty Efficiency Index (Global Benchmarking)
     </h6>
-    <img src="{{ url_for('static', filename='charts/faculty_benchmarking.png') }}?v={{ range(1, 1000) | random }}" class="img-fluid rounded-4 shadow-sm border" alt="Benchmarking Chart">
+    <div style="height: 350px;">
+        <canvas id="facultyBenchmarkingChart"></canvas>
+    </div>
 </div>
 
 <!-- 📦 ANALYSIS DATA MATRIX -->
@@ -125,12 +127,44 @@
 .extra-small { font-size: 0.75rem; }
 </style>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const bars = document.querySelectorAll('.progress-bar[data-width]');
         bars.forEach(bar => {
             const width = bar.getAttribute('data-width');
             bar.style.width = width + '%';
+        });
+
+        // Chart.js implementation
+        const ctx = document.getElementById('facultyBenchmarkingChart').getContext('2d');
+        const facultyData = JSON.parse('{{ analytics | tojson | safe }}');
+        
+        const labels = facultyData.map(f => f.faculty_name);
+        const data = facultyData.map(f => f.pass_percentage);
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Efficiency Score (%)',
+                    data: data,
+                    backgroundColor: 'rgba(99, 102, 241, 0.7)',
+                    borderColor: '#6366f1',
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, max: 100, grid: { color: 'rgba(0,0,0,0.05)' } },
+                    x: { grid: { display: false } }
+                }
+            }
         });
     });
 </script>

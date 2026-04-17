@@ -146,9 +146,9 @@
                         {% for item in marks_list[:5] %}
                         <tr>
                             <td class="ps-4 fw-bold text-indigo">{{ item.subject }}</td>
-                            <td class="text-center">{{ item.internal_marks }}</td>
-                            <td class="text-center">{{ item.viva_marks }}</td>
-                            <td class="text-center">{{ item.external_marks }}</td>
+                            <td class="text-center">{{ item.internal }}</td>
+                            <td class="text-center">{{ item.viva }}</td>
+                            <td class="text-center">{{ item.external }}</td>
                             <td class="text-center fw-bold">{{ item.total }}</td>
                             <td class="pe-4 text-center">
                                 {% if item.total >= 40 %}
