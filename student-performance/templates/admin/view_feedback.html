@@ -1,93 +1,159 @@
 {% extends "admin/layout.html" %}
 
-{% block page_title %}<h4 class="fw-bold mb-0">Feedback Management</h4>{% endblock %}
+{% block page_title %}
+<div class="d-flex align-items-center gap-3">
+    <div class="bg-primary p-2 rounded-3 text-white shadow-sm">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+    <h4 class="fw-bold mb-0">Engagement Repository</h4>
+</div>
+{% endblock %}
 
 {% block content %}
-<div class="container-fluid px-3 py-4" style="overflow-x: hidden;">
-    <!-- 📊 ANALYTICS OVERVIEW (SIMPLE) -->
-    <div class="row g-4 mb-4">
+<!-- 💠 GOOGLE FONTS INTEGRATION -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<div class="container-fluid px-4 py-4 feedback-module-root">
+    <!-- 📊 PERFORMANCE METRICS -->
+    <div class="row g-4 mb-5">
         <div class="col-md-3">
-            <div class="card border-0 shadow-sm p-4 rounded-4 bg-primary text-white h-100">
-                <h6 class="text-white-50 small fw-bold text-uppercase">Total Feedback</h6>
-                <h2 class="fw-bold mb-0 text-white">{{ total }}</h2>
+            <div class="card border-0 shadow-sm p-4 rounded-4 bg-white dashboard-kpi overflow-hidden position-relative">
+                <div class="position-relative z-1">
+                    <h6 class="text-muted small fw-bold text-uppercase ls-1">Accumulated Feed</h6>
+                    <h2 class="fw-bold mb-0 text-dark">{{ total }}</h2>
+                </div>
+                <div class="kpi-icon-bg"><i class="fas fa-inbox"></i></div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card border-0 shadow-sm p-4 rounded-4 bg-warning text-dark h-100">
-                <h6 class="text-dark opacity-50 small fw-bold text-uppercase">Pending Reply</h6>
-                <h2 class="fw-bold mb-0">{{ pending }}</h2>
+            <div class="card border-0 shadow-sm p-4 rounded-4 bg-white dashboard-kpi overflow-hidden position-relative">
+                <div class="position-relative z-1">
+                    <h6 class="text-warning small fw-bold text-uppercase ls-1">Awaiting Intel</h6>
+                    <h2 class="fw-bold mb-0 text-dark">{{ pending }}</h2>
+                </div>
+                <div class="kpi-icon-bg text-warning opacity-10"><i class="fas fa-clock"></i></div>
             </div>
         </div>
     </div>
 
-    <!-- 📋 FEEDBACK REPOSITORY -->
-    <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
-        <div class="card-body p-0">
-            <table class="table table-hover align-middle mb-0" style="table-layout: fixed; width: 100%;">
-                <thead class="bg-light">
-                    <tr class="text-secondary text-uppercase x-small text-center">
-                        <th class="fw-bold py-3" style="width: 12%;">Student</th>
-                        <th class="fw-bold" style="width: 10%;">Dept & Sem</th>
-                        <th class="fw-bold" style="width: 12%;">Subject</th>
-                        <th class="fw-bold" style="width: 15%;">Faculty</th>
-                        <th class="fw-bold" style="width: 18%;">Comment</th>
-                        <th class="fw-bold" style="width: 18%;">Admin Reply</th>
-                        <th class="fw-bold" style="width: 8%;">Date</th>
-                        <th class="fw-bold" style="width: 7%;">Actions</th>
+    <!-- 🔍 INTELLIGENT SEARCH & FILTER HUB -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4 filter-container">
+        <div class="card-body p-4">
+            <form method="GET" class="row g-3 align-items-end">
+                <div class="col-xl-3 col-lg-4">
+                    <label class="form-label text-muted x-small fw-bold text-uppercase ls-1">Global Identifier</label>
+                    <div class="input-group search-group">
+                        <span class="input-group-text border-0 bg-light text-muted"><i class="fas fa-search"></i></span>
+                        <input type="text" name="search" class="form-control border-0 bg-light rounded-end-3" 
+                               placeholder="Scan student or subject..." value="{{ filters.search }}">
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-4">
+                    <label class="form-label text-muted x-small fw-bold text-uppercase ls-1">Entity focus</label>
+                    <select name="student_id" class="form-select border-0 bg-light rounded-3 shadow-none custom-select">
+                        <option value="All">All Personnel</option>
+                        {% for s in students %}
+                        <option value="{{ s.student_id }}" {% if filters.student_id == s.student_id %}selected{% endif %}>{{ s.student_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-xl-2 col-lg-4">
+                    <label class="form-label text-muted x-small fw-bold text-uppercase ls-1">Vector Type</label>
+                    <select name="feedback_type" class="form-select border-0 bg-light rounded-3 shadow-none custom-select">
+                        <option value="All">Entire Scope</option>
+                        <option value="Suggestion" {% if filters.feedback_type == 'Suggestion' %}selected{% endif %}>Suggestion</option>
+                        <option value="Issue" {% if filters.feedback_type == 'Issue' %}selected{% endif %}>Technical Issue</option>
+                        <option value="Complaint" {% if filters.feedback_type == 'Complaint' %}selected{% endif %}>Complaint</option>
+                    </select>
+                </div>
+                <div class="col-xl-2 col-lg-6">
+                    <label class="form-label text-muted x-small fw-bold text-uppercase ls-1">Sync Status</label>
+                    <select name="status" class="form-select border-0 bg-light rounded-3 shadow-none custom-select">
+                        <option value="All">All Matrices</option>
+                        <option value="Pending" {% if filters.status == 'Pending' %}selected{% endif %}>Pending</option>
+                        <option value="Replied" {% if filters.status == 'Replied' %}selected{% endif %}>Replied</option>
+                    </select>
+                </div>
+                <div class="col-xl-3 col-lg-6 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary w-100 rounded-3 fw-bold py-2 shadow-sm filter-btn">
+                        Execute Filter
+                    </button>
+                    <a href="{{ url_for('admin.view_feedback') }}" class="btn btn-light border-0 bg-light rounded-3 px-3 py-2 text-muted reset-btn">
+                        <i class="fas fa-sync-alt"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 📋 INTERACTIVE FEEDBACK LEDGER -->
+    <div class="card shadow-sm border-0 rounded-4 overflow-hidden ledger-card">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 custom-table">
+                <thead class="ledger-head">
+                    <tr class="text-secondary extra-small text-uppercase fw-bold text-center">
+                        <th class="ps-4 py-4 text-start font-poppins">Origin Personnel</th>
+                        <th class="font-poppins">Vector</th>
+                        <th class="font-poppins">Subject</th>
+                        <th class="font-poppins text-start" style="width: 30%;">Communication Thread</th>
+                        <th class="font-poppins">Status</th>
+                        <th class="font-poppins">Timestamp</th>
+                        <th class="pe-4 text-center font-poppins">Resolve</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="ledger-body">
                     {% for f in feedback %}
-                    <tr class="text-center">
-                        <td>
-                            <div class="fw-bold text-dark text-truncate">{{ f.student_name }}</div>
-                            <div class="text-muted extra-small">{{ f.student_id }}</div>
-                        </td>
-                        <td class="small">
-                            <div class="fw-semibold">{{ f.department }}</div>
-                            <div class="text-muted x-small">Sem {{ f.semester }}</div>
-                        </td>
-                        <td class="fw-semibold text-primary text-truncate">{{ f.subject }}</td>
-                        <td class="text-muted small text-truncate">{{ f.faculty }}</td>
-                        <td>
-                            <div class="small text-dark" style="word-break: break-word; white-space: normal;">
-                                {{ f.comment }}
-                            </div>
+                    <tr class="text-center ledger-row">
+                        <td class="ps-4 text-start">
+                            <div class="fw-bold text-dark fs-6">{{ f.student_name }}</div>
+                            <div class="text-muted extra-small fw-medium">{{ f.department }} • Sem {{ f.semester }}</div>
                         </td>
                         <td>
-                            <div class="small" style="word-break: break-word; white-space: normal;">
-                                {% if f.admin_reply %}
-                                <span class="text-success fw-semibold">
-                                  {{ f.admin_reply }}
-                                </span>
-                                {% else %}
-                                <span class="text-muted italic">No reply yet</span>
-                                {% endif %}
-                            </div>
+                            <span class="badge status-badge {% if f.feedback_type == 'Complaint' %}bg-danger-soft text-danger{% elif f.feedback_type == 'Issue' %}bg-warning-soft text-warning{% else %}bg-info-soft text-info{% endif %} rounded-pill">
+                                {{ f.feedback_type }}
+                            </span>
                         </td>
-                        <td class="text-muted small">
+                        <td class="fw-semibold text-primary small module-name">{{ f.subject }}</td>
+                        <td class="text-start thread-col">
+                            <div class="small fw-bold text-dark mb-1">STU: <span class="text-muted fw-normal">{{ f.comment }}</span></div>
+                            {% if f.admin_reply %}
+                            <div class="extra-small text-success fw-bold"><i class="fas fa-check-circle me-1"></i> ADM: <span class="text-dark fw-normal opacity-75">{{ f.admin_reply }}</span></div>
+                            {% else %}
+                            <div class="extra-small text-muted italic-text opacity-50"><i class="fas fa-hourglass-start me-1"></i> Institutional review required...</div>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if f.status == 'Replied' or f.admin_reply %}
+                            <span class="badge bg-success-soft text-success rounded-pill px-3 py-1 extra-small fw-bold">Replied</span>
+                            {% else %}
+                            <span class="badge bg-warning-soft text-warning rounded-pill px-3 py-1 extra-small fw-bold">Pending</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-muted small timestamp-cell">
                             {{ f.date.strftime('%d %b %y') }}
                         </td>
-                        <td>
+                        <td class="pe-4 text-center">
                             <div class="d-flex justify-content-center gap-2">
-                                <button class="btn btn-sm btn-outline-primary px-2" 
+                                <button class="btn btn-sm btn-primary-soft rounded-3 px-3 shadow-none action-btn" 
                                         data-id="{{ f.feedback_id }}"
                                         data-reply="{{ f.admin_reply or '' }}"
                                         onclick="openReplyModal(this)">
-                                    <i class="fas fa-reply"></i>
+                                    <i class="fas fa-reply-all"></i>
                                 </button>
                                 <a href="{{ url_for('admin.delete_feedback', feedback_id=f.feedback_id) }}" 
-                                   class="btn btn-sm btn-outline-danger px-2"
-                                   onclick="return confirm('⚠️ Delete record?')">
-                                    <i class="fas fa-trash"></i>
+                                   class="btn btn-sm btn-danger-soft rounded-3 px-3 shadow-none action-btn"
+                                   onclick="return confirm('⚠️ CRITICAL: Permanently purge this feedback record?')">
+                                    <i class="fas fa-trash-alt"></i>
                                 </a>
                             </div>
                         </td>
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="9" class="text-center py-5 text-muted">
-                            No feedback records found.
+                        <td colspan="7" class="text-center py-5 text-muted empty-ledger">
+                            <div class="empty-state-icon mb-3"><i class="fas fa-folder-open fa-3x"></i></div>
+                            <h6 class="fw-bold">Ledger is empty</h6>
+                            <p class="extra-small">No feedback records match the current filter scope.</p>
                         </td>
                     </tr>
                     {% endfor %}
@@ -97,22 +163,27 @@
     </div>
 </div>
 
-<!-- 🟦 REPLY MODAL -->
+<!-- 🟦 INSTITUTIONAL RESOLUTION MODAL -->
 <div class="modal fade" id="replyModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg rounded-4">
-            <div class="modal-header border-bottom py-3">
-                <h5 class="modal-title fw-bold">Feedback Response</h5>
+        <div class="modal-content border-0 shadow-2xl rounded-4">
+            <div class="modal-header border-0 p-4 pb-0">
+                <h5 class="modal-title fw-bold text-dark d-flex align-items-center gap-2">
+                    <i class="fas fa-pen-nib text-primary"></i>
+                    Formal Resolution
+                </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="replyForm" method="POST">
+            <!-- Action set dynamically via JS -->
+            <form id="replyForm" method="POST" action="">
                 <div class="modal-body p-4">
-                    <label class="form-label text-muted small text-uppercase fw-bold mb-2">Compose Reply</label>
-                    <textarea name="admin_reply" id="modal_reply_text" class="form-control border-0 bg-light" rows="4" placeholder="Enter response..." required></textarea>
+                    <label class="form-label text-muted x-small fw-bold text-uppercase ls-2 mb-3">Compose Response</label>
+                    <textarea name="admin_reply" id="modal_reply_text" class="form-control border-0 bg-light p-3 rounded-4 shadow-none reply-textarea" 
+                              rows="6" placeholder="Draft the institutional resolution..." required></textarea>
                 </div>
                 <div class="modal-footer border-0 p-4 pt-0">
-                    <button type="button" class="btn btn-light px-4 fw-bold rounded-pill" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary px-4 fw-bold rounded-pill">Send Reply</button>
+                    <button type="button" class="btn btn-light px-4 fw-bold rounded-pill text-muted extra-small" data-bs-dismiss="modal">DISCARD</button>
+                    <button type="submit" class="btn btn-primary px-4 fw-bold rounded-pill extra-small shadow-soft">COMMIT RESPONSE</button>
                 </div>
             </form>
         </div>
@@ -120,24 +191,167 @@
 </div>
 
 <script>
-const replyModal = new bootstrap.Modal(document.getElementById('replyModal'));
+let bsrModal;
+
+document.addEventListener('DOMContentLoaded', function() {
+    bsrModal = new bootstrap.Modal(document.getElementById('replyModal'));
+});
 
 function openReplyModal(btn) {
-    const feedbackId = btn.getAttribute('data-id');
-    const existingReply = btn.getAttribute('data-reply');
-    const form = document.getElementById('replyForm');
-    form.action = `/admin/feedback/reply/${feedbackId}`;
-    document.getElementById('modal_reply_text').value = existingReply;
-    replyModal.show();
+    try {
+        const feedbackId = btn.getAttribute('data-id');
+        const existingReply = btn.getAttribute('data-reply');
+        const form = document.getElementById('replyForm');
+        
+        if (!feedbackId) {
+            console.error("Institutional Error: Feedback ID missing from interaction element.");
+            return;
+        }
+
+        // 🔗 Construct deterministic resolution URL
+        form.action = "{{ url_for('admin.view_feedback') }}/reply/" + feedbackId;
+        
+        document.getElementById('modal_reply_text').value = existingReply;
+        
+        if (bsrModal) {
+            bsrModal.show();
+        } else {
+            // Fallback initialization
+            const fallbackModal = new bootstrap.Modal(document.getElementById('replyModal'));
+            fallbackModal.show();
+        }
+    } catch (err) {
+        console.error("Interaction Protocol Failure:", err);
+        alert("System Interaction Error: Please refresh the institutional dashboard.");
+    }
 }
 </script>
 
 <style>
-    .x-small { font-size: 0.65rem; letter-spacing: 0.05em; }
-    .extra-small { font-size: 0.7rem; }
-    .italic { font-style: italic; }
-    .table thead th { border-bottom: 2px solid #f8f9fa; }
-    .btn-sm { font-size: 0.75rem; }
-    th, td { vertical-align: middle !important; }
+    :root {
+        --primary-color: #4F46E5;
+        --primary-soft: rgba(79, 70, 229, 0.08);
+        --danger-soft: rgba(239, 68, 68, 0.08);
+        --warning-soft: rgba(245, 158, 11, 0.08);
+        --info-soft: rgba(6, 182, 212, 0.08);
+        --success-soft: rgba(16, 185, 129, 0.08);
+    }
+
+    .feedback-module-root {
+        font-family: 'Poppins', sans-serif !important;
+        background-color: #f8fafc;
+        min-height: 100vh;
+    }
+
+    .ls-1 { letter-spacing: 0.05em; }
+    .ls-2 { letter-spacing: 0.15em; }
+    .x-small { font-size: 0.65rem; }
+    .extra-small { font-size: 0.75rem; }
+    .italic-text { font-style: italic; }
+    .font-poppins { font-family: 'Poppins', sans-serif; }
+
+    /* KPI CARDS */
+    .dashboard-kpi {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.02) !important;
+    }
+    .dashboard-kpi:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.05) !important;
+    }
+    .kpi-icon-bg {
+        position: absolute;
+        right: -10px;
+        bottom: -20px;
+        font-size: 5rem;
+        opacity: 0.02;
+        transform: rotate(-15deg);
+    }
+
+    /* FILTERS */
+    .filter-container {
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.03) !important;
+    }
+    .search-group .input-group-text, 
+    .search-group .form-control,
+    .custom-select {
+        height: 48px;
+        transition: all 0.2s ease;
+    }
+    .form-control:focus, .form-select:focus {
+        background-color: #ffffff !important;
+        box-shadow: 0 0 0 4px var(--primary-soft) !important;
+    }
+
+    /* TABLE */
+    .ledger-card {
+        border: 1px solid rgba(0,0,0,0.03) !important;
+    }
+    .ledger-head {
+        background-color: #ffffff;
+        border-bottom: 2px solid #f1f5f9;
+    }
+    .ledger-row {
+        transition: background-color 0.2s ease;
+    }
+    .ledger-row:hover {
+        background-color: #f8fafc !important;
+    }
+    .ledger-row td {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #f1f5f9;
+    }
+    .custom-table tbody tr:nth-child(even) {
+        background-color: rgba(248, 250, 252, 0.4);
+    }
+
+    /* BADGES */
+    .status-badge {
+        padding: 6px 14px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        font-size: 0.7rem;
+    }
+    .bg-danger-soft { background-color: var(--danger-soft); }
+    .bg-warning-soft { background-color: var(--warning-soft); }
+    .bg-info-soft { background-color: var(--info-soft); }
+    .bg-success-soft { background-color: var(--success-soft); }
+    .btn-primary-soft { background-color: var(--primary-soft); color: var(--primary-color); }
+    .btn-danger-soft { background-color: var(--danger-soft); color: #dc2626; }
+
+    /* ACTION BUTTONS */
+    .action-btn {
+        transition: all 0.2s ease;
+    }
+    .action-btn:hover {
+        transform: scale(1.1);
+    }
+
+    /* MODAL */
+    .shadow-2xl {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    .reply-textarea {
+        resize: none;
+        transition: all 0.3s ease;
+    }
+    .shadow-soft {
+        box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.39);
+    }
+    
+    .filter-btn {
+        transition: all 0.3s ease;
+    }
+    .filter-btn:hover {
+        filter: brightness(1.1);
+        transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+        .ledger-row td { padding: 15px 10px; }
+        .thread-col { width: 250px !important; }
+    }
 </style>
 {% endblock %}

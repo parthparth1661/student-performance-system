@@ -77,9 +77,10 @@ CREATE TABLE IF NOT EXISTS feedback (
     department VARCHAR(50),
     semester INT,
     subject VARCHAR(255),
-    faculty VARCHAR(100),
+    feedback_type VARCHAR(50) DEFAULT 'Suggestion',
     comment TEXT,
     admin_reply TEXT,
+    status VARCHAR(20) DEFAULT 'Pending',
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     rating INT DEFAULT 5,
     FOREIGN KEY (student_id) REFERENCES students(enrollment_no) ON DELETE CASCADE

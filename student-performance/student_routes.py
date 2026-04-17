@@ -180,19 +180,19 @@ def feedback():
 
     if request.method == 'POST':
         subject = request.form.get('subject')
-        comment = request.form.get('message')
-        faculty = request.form.get('faculty', 'General')
+        feedback_type = request.form.get('feedback_type')
+        message = request.form.get('message')
         
-        if comment and subject:
+        if message and feedback_type:
             # Fetch student details for record redundancy
             cursor.execute("SELECT name, department, semester FROM students WHERE enrollment_no = %s", (enrollment_no,))
             student = cursor.fetchone()
             
             if student:
                 cursor.execute("""
-                    INSERT INTO feedback (student_id, student_name, department, semester, subject, faculty, comment) 
-                    VALUES (%s, %s, %s, %s, %s, %s, %s)
-                """, (enrollment_no, student['name'], student['department'], student['semester'], subject, faculty, comment))
+                    INSERT INTO feedback (student_id, student_name, department, semester, subject, feedback_type, comment, status) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, 'Pending')
+                """, (enrollment_no, student['name'], student['department'], student['semester'], subject, feedback_type, message))
                 conn.commit()
                 flash("Institutional feedback submitted successfully.", "success")
                 return redirect(url_for('student.feedback'))
@@ -201,9 +201,13 @@ def feedback():
     cursor.execute("SELECT * FROM feedback WHERE student_id = %s ORDER BY date DESC", (enrollment_no,))
     history = cursor.fetchall()
     
+    # Fetch student's subjects for the dropdown
+    cursor.execute("SELECT subject_name FROM subjects WHERE department = (SELECT department FROM students WHERE enrollment_no = %s) AND semester = (SELECT semester FROM students WHERE enrollment_no = %s)", (enrollment_no, enrollment_no))
+    subjects = [r['subject_name'] for r in cursor.fetchall()]
+    
     student_info = analysis.get_student_details(enrollment_no)
     conn.close()
-    return render_template('student/feedback.html', student=student_info, history=history)
+    return render_template('student/feedback.html', student=student_info, history=history, subjects=subjects)
 
 # 🚪 SESSION TERMINATION: LOGOUT
 @student_bp.route('/logout')

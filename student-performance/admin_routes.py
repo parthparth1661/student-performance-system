@@ -1570,45 +1570,80 @@ def change_password():
 # --- 💬 6. FEEDBACK MODULE ---
 @admin_bp.route('/feedback')
 def view_feedback():
+    student_id = request.args.get('student_id', 'All')
+    f_type = request.args.get('feedback_type', 'All')
+    status = request.args.get('status', 'All')
+    search = request.args.get('search', '')
+
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     
-    # 🎯 Match centralized schema structure
-    cursor.execute("""
-        SELECT * FROM feedback 
-        ORDER BY date DESC
-    """)
+    query = "SELECT * FROM feedback WHERE 1=1"
+    params = []
+
+    if student_id != 'All':
+        query += " AND student_id = %s"
+        params.append(student_id)
+    
+    if f_type != 'All':
+        query += " AND feedback_type = %s"
+        params.append(f_type)
+        
+    if status != 'All':
+        query += " AND status = %s"
+        params.append(status)
+        
+    if search:
+        query += " AND (student_name LIKE %s OR comment LIKE %s OR subject LIKE %s)"
+        params.extend([f"%{search}%", f"%{search}%", f"%{search}%"])
+
+    query += " ORDER BY date DESC"
+    cursor.execute(query, params)
     feedback_list = cursor.fetchall()
     
-    # Simple Status Statistics
+    # Summary stats
     cursor.execute("SELECT COUNT(*) as total FROM feedback")
     total_feedback = cursor.fetchone()['total'] or 0
-    
-    cursor.execute("SELECT COUNT(*) as pending FROM feedback WHERE admin_reply IS NULL")
+    cursor.execute("SELECT COUNT(*) as pending FROM feedback WHERE status = 'Pending'")
     pending_count = cursor.fetchone()['pending'] or 0
     
+    # For filter dropdown
+    cursor.execute("SELECT DISTINCT student_id, student_name FROM feedback")
+    students = cursor.fetchall()
+
     conn.close()
     return render_template('admin/view_feedback.html', 
                          feedback=feedback_list, 
                          total=total_feedback,
-                         pending=pending_count)
+                         pending=pending_count,
+                         students=students,
+                         filters={'student_id': student_id, 'feedback_type': f_type, 'status': status, 'search': search})
 
 @admin_bp.route('/feedback/reply/<int:feedback_id>', methods=['POST'])
 def reply_feedback(feedback_id):
     reply = request.form.get('admin_reply')
     
+    # 🕵️ Institutional Debug Audit
+    print(f"DEBUG: Processing resolution for Feedback ID {feedback_id}")
+    print(f"DEBUG: Response Content: {reply}")
+
+    if not reply:
+        flash("Operational Error: Response content cannot be empty.", "warning")
+        return redirect(url_for('admin.view_feedback'))
+
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
         cursor.execute("""
             UPDATE feedback 
-            SET admin_reply = %s 
+            SET admin_reply = %s, status = 'Replied'
             WHERE feedback_id = %s
         """, (reply, feedback_id))
         conn.commit()
         flash("Institutional feedback response successfully recorded.", "success")
     except Exception as e:
-        flash(f"Update Failure: {e}", "danger")
+        print(f"CRITICAL: Database Update Failure: {e}")
+        flash(f"System Error: Resolution could not be persisted. ({e})", "danger")
     finally:
         conn.close()
     return redirect(url_for('admin.view_feedback'))
