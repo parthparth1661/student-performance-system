@@ -3,7 +3,7 @@ import os
 import math
 import csv
 from io import StringIO
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session, make_response
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session, make_response, jsonify
 from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
 from db import get_db_connection
@@ -342,27 +342,20 @@ def add_subject():
     
     if request.method == 'POST':
         subject_name = request.form['subject_name']
-        subject_code = request.form['subject_code'].strip().upper()
         department = request.form['department']
         semester = request.form['semester']
-        credits = request.form.get('credits', 0)
         faculty_id = request.form.get('faculty_id')
         
         try:
-            # Check Uniqueness for Code
-            cursor.execute("SELECT subject_id FROM subjects WHERE subject_code = %s", (subject_code,))
-            if cursor.fetchone():
-                flash(f"ID Conflict: Subject code '{subject_code}' is already registered.", "warning")
-            else:
-                cursor.execute("""
-                    INSERT INTO subjects (subject_name, subject_code, department, semester, credits, faculty_id)
-                    VALUES (%s, %s, %s, %s, %s, %s)
-                """, (subject_name, subject_code, department, semester, credits, faculty_id))
-                conn.commit()
-                flash("Success: Academic subject established in catalogue.", "success")
-                return redirect(url_for('admin.view_subjects'))
+            cursor.execute("""
+                INSERT INTO subjects (subject_name, department, semester, faculty_id)
+                VALUES (%s, %s, %s, %s)
+            """, (subject_name, department, semester, faculty_id))
+            conn.commit()
+            flash("Institution Protocol: New subject successfully registered.", "success")
+            return redirect(url_for('admin.view_subjects'))
         except Exception as e:
-            flash(f"System Error: {e}", "danger")
+            flash(f"Synchronization Error: {e}", "danger")
     
     conn.close()
     return render_template('admin/add_subject.html', faculties=faculties)
@@ -376,26 +369,19 @@ def edit_subject(subject_id):
     
     if request.method == 'POST':
         subject_name = request.form['subject_name']
-        subject_code = request.form['subject_code'].strip().upper()
         department = request.form['department']
         semester = request.form['semester']
-        credits = request.form.get('credits', 0)
         faculty_id = request.form.get('faculty_id')
         
         try:
-            # Check Uniqueness for Code if changed
-            cursor.execute("SELECT subject_id FROM subjects WHERE subject_code = %s AND subject_id != %s", (subject_code, subject_id))
-            if cursor.fetchone():
-                flash(f"ID Conflict: Subject code '{subject_code}' is already assigned to another course.", "warning")
-            else:
-                cursor.execute("""
-                    UPDATE subjects 
-                    SET subject_name=%s, subject_code=%s, department=%s, semester=%s, credits=%s, faculty_id=%s
-                    WHERE subject_id=%s
-                """, (subject_name, subject_code, department, semester, credits, faculty_id, subject_id))
-                conn.commit()
-                flash("Profile Synchronized: Course details updated successfully.", "success")
-                return redirect(url_for('admin.view_subjects'))
+            cursor.execute("""
+                UPDATE subjects 
+                SET subject_name=%s, department=%s, semester=%s, faculty_id=%s
+                WHERE subject_id=%s
+            """, (subject_name, department, semester, faculty_id, subject_id))
+            conn.commit()
+            flash("Profile Synchronized: Course details updated successfully.", "success")
+            return redirect(url_for('admin.view_subjects'))
         except Exception as e:
             flash(f"Update Protocol Error: {e}", "danger")
             
@@ -487,79 +473,53 @@ def add_faculty():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     
-    # Fetch subjects for mapping
-    cursor.execute("SELECT subject_id, subject_name, department FROM subjects")
-    subjects = cursor.fetchall()
-    
     if request.method == 'POST':
         name = request.form['faculty_name']
         email = request.form['email']
         department = request.form['department']
-        subject_id = request.form.get('subject_id') # Individual mapping
+        contact_no = request.form.get('contact_no')
         
         try:
             cursor.execute("""
-                INSERT INTO faculty (faculty_name, email, department)
-                VALUES (%s, %s, %s)
-            """, (name, email, department))
-            new_faculty_id = cursor.lastrowid
-            
-            # Map the subject if selected
-            if subject_id:
-                cursor.execute("UPDATE subjects SET faculty_id = %s WHERE subject_id = %s", (new_faculty_id, subject_id))
-            
+                INSERT INTO faculty (faculty_name, email, department, contact_no)
+                VALUES (%s, %s, %s, %s)
+            """, (name, email, department, contact_no))
             conn.commit()
-            flash("Faculty added and subject mapped successfully!", "success")
+            flash("Faculty added successfully!", "success")
             return redirect(url_for('admin.view_faculty'))
         except Exception as e:
             flash(f"Error: {e}", "danger")
     
     conn.close()
-    return render_template('admin/add_faculty.html', subjects=subjects)
+    return render_template('admin/add_faculty.html')
 
 @admin_bp.route('/faculty/edit/<int:faculty_id>', methods=['GET', 'POST'])
 def edit_faculty(faculty_id):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     
-    # Fetch subjects for mapping
-    cursor.execute("SELECT subject_id, subject_name, department FROM subjects")
-    subjects = cursor.fetchall()
-    
     if request.method == 'POST':
         name = request.form['faculty_name']
         email = request.form['email']
         department = request.form['department']
-        subject_id = request.form.get('subject_id')
+        contact_no = request.form.get('contact_no')
         
         try:
             cursor.execute("""
                 UPDATE faculty 
-                SET faculty_name=%s, email=%s, department=%s
+                SET faculty_name=%s, email=%s, department=%s, contact_no=%s
                 WHERE faculty_id=%s
-            """, (name, email, department, faculty_id))
-            
-            # Reset previous mapping if we want to ensure only one mapping or just add
-            if subject_id:
-                # Update the selected subject to this faculty
-                cursor.execute("UPDATE subjects SET faculty_id = %s WHERE subject_id = %s", (faculty_id, subject_id))
-            
+            """, (name, email, department, contact_no, faculty_id))
             conn.commit()
-            flash("Faculty details and subject mapping updated!", "success")
+            flash("Faculty details updated successfully!", "success")
             return redirect(url_for('admin.view_faculty'))
         except Exception as e:
             flash(f"Error: {e}", "danger")
             
     cursor.execute("SELECT * FROM faculty WHERE faculty_id = %s", (faculty_id,))
     f_data = cursor.fetchone()
-    
-    # Get currently mapped subject ID (assuming primary)
-    cursor.execute("SELECT subject_id FROM subjects WHERE faculty_id = %s LIMIT 1", (faculty_id,))
-    mapped_sub = cursor.fetchone()
-    current_subject_id = mapped_sub['subject_id'] if mapped_sub else None
-    
     conn.close()
-    return render_template('admin/add_faculty.html', faculty=f_data, subjects=subjects, current_subject_id=current_subject_id, edit_mode=True)
+    return render_template('admin/add_faculty.html', faculty=f_data, edit_mode=True)
 
 @admin_bp.route('/faculty/analytics')
 def faculty_analytics():
@@ -637,7 +597,7 @@ def view_marks():
             COUNT(*) as total_entries,
             AVG(total_marks) as avg_marks,
             MAX(total_marks) as top_score,
-            SUM(CASE WHEN external_marks >= 21 THEN 1 ELSE 0 END) as pass_count
+            SUM(CASE WHEN total_marks >= 40 THEN 1 ELSE 0 END) as pass_count
         FROM ({query}) as filtered_marks
     """
     cursor.execute(stats_query, params)
@@ -1509,6 +1469,33 @@ def delete_feedback(feedback_id):
     finally:
         conn.close()
     return redirect(url_for('admin.view_feedback'))
+
+# --- 🧪 7. ASYNC API ENDPOINTS ---
+@admin_bp.route('/get-students')
+def get_students():
+    dept = request.args.get('department')
+    sem = request.args.get('semester')
+    
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT enrollment_no, name FROM students WHERE department = %s AND semester = %s ORDER BY name", (dept, sem))
+    students = cursor.fetchall()
+    conn.close()
+    
+    return jsonify({'students': students})
+
+@admin_bp.route('/get-subjects')
+def get_subjects():
+    dept = request.args.get('department')
+    sem = request.args.get('semester')
+    
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT subject_id, subject_name FROM subjects WHERE department = %s AND semester = %s ORDER BY subject_name", (dept, sem))
+    subjects = cursor.fetchall()
+    conn.close()
+    
+    return jsonify({'subjects': subjects})
 
 
 

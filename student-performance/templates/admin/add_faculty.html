@@ -60,27 +60,6 @@
                             <option value="M.TECH" {{ 'selected' if edit_mode and faculty.department == 'M.TECH' }}>M.TECH</option>
                             <option value="MBA" {{ 'selected' if edit_mode and faculty.department == 'MBA' }}>MBA</option>
                         </select>
-                    </div>
-
-                    <!-- Dynamic Subject Mapping -->
-                    <div class="col-12">
-                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Primary Subject Mapping (Optional)</label>
-                        <select name="subject_id" id="subject" class="form-select border-0 bg-light rounded-2 py-3" {{ 'disabled' if not edit_mode and not subjects }}>
-                            <option value="">-- No Primary Assignment --</option>
-                            {% for sub in subjects %}
-                            <option value="{{ sub.subject_id }}" {{ 'selected' if sub.subject_id == current_subject_id }}>
-                                [{{ sub.department }}] {{ sub.subject_name }}
-                            </option>
-                            {% endfor %}
-                        </select>
-                        <p class="extra-small text-muted mt-2 ps-1" id="subject-hint">
-                            {% if not subjects and not edit_mode %}
-                                Please select a department first to load subject assignments.
-                            {% else %}
-                                Mapping a subject here will automatically update the institutional curriculum catalog.
-                            {% endif %}
-                        </p>
-                    </div>
                 </div>
 
                 <!-- 🏁 ACTION CENTER -->
@@ -96,10 +75,10 @@
         <!-- 💡 HINT BOX -->
         <div class="mt-4 bg-indigo-soft p-3 rounded-4 border border-primary border-opacity-10 d-flex align-items-center">
             <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px; flex-shrink: 0;">
-                <i class="fas fa-link extra-small"></i>
+                <i class="fas fa-info-circle extra-small"></i>
             </div>
             <p class="extra-small text-dark mb-0 fw-medium">
-                Faculty mappings are bidirectional. Deleting an instructor will release their subjects for new assignments.
+                Faculty profiles are stored in the institutional registry. Ensure institutional email is unique for each instructor.
             </p>
         </div>
     </div>
@@ -109,45 +88,4 @@
 .bg-indigo-soft { background-color: rgba(99, 102, 241, 0.08); }
 .extra-small { font-size: 0.75rem; }
 </style>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('#department').on('change', function() {
-        let dept = $(this).val();
-        let subjectDropdown = $('#subject');
-        let hint = $('#subject-hint');
-
-        if (!dept) {
-            subjectDropdown.empty().append('<option value="">-- No Primary Assignment --</option>').prop('disabled', true);
-            hint.text('Please select a department first to load subject assignments.');
-            return;
-        }
-
-        subjectDropdown.prop('disabled', true).empty().append('<option value="">Loading institutional curriculum...</option>');
-
-        fetch(`/admin/get-subjects-by-department?department=${dept}`)
-            .then(res => res.json())
-            .then(data => {
-                subjectDropdown.empty().append('<option value="">-- No Primary Assignment --</option>');
-                
-                if (data.length === 0) {
-                    hint.text('No subjects identified for this department registry.');
-                } else {
-                    hint.text('Mapping a subject here will automatically update the institutional curriculum catalog.');
-                    data.forEach(sub => {
-                        subjectDropdown.append(
-                            `<option value="${sub.subject_id}">${sub.subject_name}</option>`
-                        );
-                    });
-                }
-                subjectDropdown.prop('disabled', false);
-            })
-            .catch(err => {
-                console.error('Curriculum Fetch Error:', err);
-                subjectDropdown.empty().append('<option value="">Error loading subjects</option>');
-            });
-    });
-});
-</script>
 {% endblock %}

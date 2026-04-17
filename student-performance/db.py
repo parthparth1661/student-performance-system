@@ -78,6 +78,7 @@ def init_db():
                     faculty_name VARCHAR(100) NOT NULL,
                     email VARCHAR(150) UNIQUE NOT NULL,
                     department VARCHAR(50),
+                    contact_no VARCHAR(15),
                     password_hash VARCHAR(255)
                 )
             """)

@@ -185,9 +185,8 @@ endblock %}
                         <td class="fw-medium text-muted small">{{ m.external_marks }}</td>
                         <td class="fw-bold text-dark">{{ m.total_marks }}</td>
                         <td>
-                            <span
-                                class="badge {% if m.result == 'Pass' %}bg-success{% else %}bg-danger{% endif %} rounded-pill px-3">
-                                {{ m.result or 'Fail' }}
+                            <span class="badge {% if m.total_marks >= 40 %}bg-success{% else %}bg-danger{% endif %} rounded-pill px-3">
+                                {% if m.total_marks >= 40 %}Pass{% else %}Fail{% endif %}
                             </span>
                         </td>
                         <td class="text-center pe-4">
