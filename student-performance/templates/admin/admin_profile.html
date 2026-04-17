@@ -1,82 +1,112 @@
 {% extends 'admin/layout.html' %}
 
-{% block page_title %}Admin Control Profile{% endblock %}
+{% block page_title %}Administrator Profile{% endblock %}
 
 {% block content %}
-<div class="row g-4">
-    <!-- 👤 1️⃣ PROFILE INFO CARD (Read-only) -->
-    <div class="col-lg-4">
-        <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden transition-hover h-100">
-            <div class="card-body p-4 text-center">
-                <div class="admin-avatar mx-auto mb-3 shadow-sm" style="width: 80px; height: 80px; font-size: 2rem;">
-                    {{ admin.name[0]|upper if admin.name else 'A' }}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+            <!-- 🛡️ PIXEL PERFECT ADMIN CARD -->
+            <div class="card border-0 shadow-lg rounded-4 bg-white overflow-hidden" style="animation: fadeIn 0.6s ease-out;">
+                <!-- Modern Top Bar -->
+                <div class="p-4 text-center border-bottom bg-light">
+                    <div class="admin-avatar mx-auto mb-3 shadow" style="width: 100px; height: 100px; font-size: 2.5rem; border: 4px solid #fff;">
+                        {{ (admin.username if admin.username else admin.email or 'A')[0] | upper }}
+                    </div>
+                    <h4 class="fw-bold text-dark mb-0 ls-1">{{ admin.username if admin.username else admin.email }}</h4>
+                    <span class="badge bg-primary-soft text-primary rounded-pill px-3 py-1 mt-2 extra-small fw-bold">MASTER ACCOUNT</span>
                 </div>
-                <h5 class="fw-bold text-dark mb-1">{{ admin.name }}</h5>
-                <p class="text-muted small mb-3">{{ admin.email }}</p>
-                <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 border border-primary-subtle">
-                    <i class="fas fa-user-shield me-2"></i>System Administrator
-                </span>
-                
-                <hr class="my-4 opacity-50">
-                
-                <div class="text-start">
-                    <label class="extra-small fw-bold text-uppercase text-muted d-block mb-1">Account Role</label>
-                    <p class="small fw-semibold text-dark mb-3">Institutional Administrator</p>
-                    
-                    <label class="extra-small fw-bold text-uppercase text-muted d-block mb-1">System Status</label>
-                    <p class="small fw-semibold text-success mb-0"><i class="fas fa-check-circle me-1"></i>Active & Verified</p>
+
+                <div class="card-body p-4 p-md-5">
+                    <div class="row g-4">
+                        <!-- Admin ID Field -->
+                        <div class="col-12">
+                            <div class="d-flex align-items-center p-3 rounded-3 bg-light border-start border-4 border-primary shadow-sm">
+                                <div class="icon-box me-3"><i class="fas fa-fingerprint text-primary fs-4"></i></div>
+                                <div>
+                                    <label class="extra-small fw-bold text-uppercase text-muted d-block mb-1">Identity UID</label>
+                                    <span class="fw-bold text-dark fs-5">{{ admin.admin_id }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Username Field -->
+                        <div class="col-12">
+                            <div class="d-flex align-items-center p-3 rounded-3 bg-light border-start border-4 border-primary shadow-sm">
+                                <div class="icon-box me-3"><i class="fas fa-user-circle text-primary fs-4"></i></div>
+                                <div class="w-100">
+                                    <label class="extra-small fw-bold text-uppercase text-muted d-block mb-1">Authenticated Username</label>
+                                    <span class="fw-bold text-dark fs-6">{{ admin.username if admin.username else admin.email }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Password Field (Masked) -->
+                        <div class="col-12">
+                            <div class="d-flex align-items-center p-3 rounded-3 bg-light border-start border-4 border-secondary shadow-sm">
+                                <div class="icon-box me-3"><i class="fas fa-shield-alt text-secondary fs-4"></i></div>
+                                <div>
+                                    <label class="extra-small fw-bold text-uppercase text-muted d-block mb-1">Security Key Control</label>
+                                    <span class="text-muted fw-bold fs-6">********</span>
+                                </div>
+                                <div class="ms-auto">
+                                    <i class="fas fa-lock text-muted opacity-50"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Role & Status (Side by Side) -->
+                        <div class="col-sm-6">
+                            <div class="p-3 rounded-3 bg-light border-start border-4 border-indigo shadow-sm h-100">
+                                <label class="extra-small fw-bold text-uppercase text-muted d-block mb-1">System Role</label>
+                                <span class="fw-bold text-dark">Administrator</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-3 rounded-3 bg-light border-start border-4 border-success shadow-sm h-100">
+                                <label class="extra-small fw-bold text-uppercase text-muted d-block mb-1">Account Status</label>
+                                <span class="badge bg-success-soft text-success rounded-pill fw-bold">Active</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Functional CTA Action Buttons -->
+                    <div class="row g-3 mt-5">
+                        <div class="col-6">
+                            <a href="{{ url_for('admin.profile') }}" class="btn btn-primary w-100 py-3 rounded-3 shadow-sm fw-bold transition-hover">
+                                <i class="fas fa-sync-alt me-2"></i>View Profile
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a href="#security-anchor" class="btn btn-outline-dark w-100 py-3 rounded-3 fw-bold transition-hover">
+                                <i class="fas fa-key me-2"></i>Change Password
+                            </a>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <a href="{{ url_for('admin.logout') }}" class="btn btn-danger w-100 py-3 rounded-3 fw-bold shadow-sm transition-hover">
+                                <i class="fas fa-sign-out-alt me-2"></i>Exit Secure Session
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- ✏️ 2️⃣ EDIT PROFILE FORM -->
-    <div class="col-lg-8">
-        <div class="card border-0 shadow-sm rounded-4 bg-white mb-4 transition-hover">
-            <div class="card-header bg-white border-0 px-4 py-3 border-bottom">
-                <h6 class="fw-bold m-0"><i class="fas fa-user-edit me-2 text-primary"></i>Modify Identity Details</h6>
-            </div>
-            <div class="card-body p-4">
-                <form action="{{ url_for('admin.update_profile') }}" method="POST" class="row g-3">
-                    <div class="col-md-6">
-                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Full Name</label>
-                        <input type="text" name="name" class="form-control border-0 bg-light rounded-3 py-2" value="{{ admin.name }}" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Email Address</label>
-                        <input type="email" name="email" class="form-control border-0 bg-light rounded-3 py-2" value="{{ admin.email }}" required>
-                    </div>
-                    <div class="col-12 text-end">
-                        <button type="submit" class="btn btn-primary rounded-3 fw-bold px-4 py-2 shadow-sm">
-                            <i class="fas fa-save me-2"></i>Update Identity
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- 🔐 3️⃣ CHANGE PASSWORD CARD -->
-        <div class="card border-0 shadow-sm rounded-4 bg-white transition-hover">
-            <div class="card-header bg-white border-0 px-4 py-3 border-bottom">
-                <h6 class="fw-bold m-0"><i class="fas fa-shield-alt me-2 text-danger"></i>Security & Credentials</h6>
-            </div>
-            <div class="card-body p-4">
+            <!-- 🔒 CHANGE PASSWORD ANCHOR SECTION -->
+            <div id="security-anchor" class="mt-5 p-4 bg-white shadow-sm rounded-4 border border-light">
+                <h6 class="fw-bold mb-4 text-dark"><i class="fas fa-user-lock me-2 text-danger"></i>Update Access Credentials</h6>
                 <form action="{{ url_for('admin.change_password') }}" method="POST" class="row g-3">
                     <div class="col-12">
-                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Current Verification Password</label>
-                        <input type="password" name="current_password" class="form-control border-0 bg-light rounded-3 py-2" placeholder="••••••••" required>
+                        <input type="password" name="current_password" class="form-control border-0 bg-light rounded-3 py-3" placeholder="Enter Current Security Pass" required>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label extra-small fw-bold text-uppercase text-muted">New Security Password</label>
-                        <input type="password" name="new_password" class="form-control border-0 bg-light rounded-3 py-2" placeholder="••••••••" required>
+                        <input type="password" name="new_password" class="form-control border-0 bg-light rounded-3 py-3" placeholder="New Security Key" required>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label extra-small fw-bold text-uppercase text-muted">Confirm New Password</label>
-                        <input type="password" name="confirm_password" class="form-control border-0 bg-light rounded-3 py-2" placeholder="••••••••" required>
+                        <input type="password" name="confirm_password" class="form-control border-0 bg-light rounded-3 py-3" placeholder="Verify Security Key" required>
                     </div>
-                    <div class="col-12 text-end">
-                        <button type="submit" class="btn btn-dark rounded-3 fw-bold px-4 py-2 shadow-sm">
-                            <i class="fas fa-key me-2"></i>Update Security Credentials
+                    <div class="col-12 pt-2">
+                        <button type="submit" class="btn btn-indigo w-100 py-3 rounded-3 fw-bold shadow-sm transition-hover">
+                            Authorize & Commit Changes
                         </button>
                     </div>
                 </form>
@@ -86,10 +116,18 @@
 </div>
 
 <style>
-.bg-primary-subtle { background: rgba(99, 102, 241, 0.1); }
-.extra-small { font-size: 0.75rem; }
-.transition-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.transition-hover:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.08) !important; }
-.form-control:focus { background: white !important; border: 1px solid #6366f1 !important; box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .ls-1 { letter-spacing: 0.5px; }
+    .extra-small { font-size: 11px; letter-spacing: 0.05em; }
+    .bg-primary-soft { background: rgba(99, 102, 241, 0.1); }
+    .bg-success-soft { background: rgba(16, 185, 129, 0.1); }
+    .border-indigo { border-color: #6366f1 !important; }
+    .transition-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .transition-hover:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important; }
+    .form-control:focus { background: #fff !important; border: 1px solid #6366f1 !important; box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1); }
+    .ls-1 { letter-spacing: 0.05em; }
+    .icon-box { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 12px; }
+    
+    html { scroll-behavior: smooth; }
 </style>
 {% endblock %}
