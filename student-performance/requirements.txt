@@ -1,6 +1,5 @@
 flask
 mysql-connector-python
 pandas
-matplotlib
 werkzeug
 openpyxl

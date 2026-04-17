@@ -7,7 +7,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
 from db import get_db_connection
-from analysis import get_dashboard_stats, generate_dashboard_charts, get_performance_overview, get_dashboard_chart_data
+from analysis import get_dashboard_stats, get_performance_overview, get_dashboard_chart_data
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -70,10 +70,9 @@ def dashboard():
     limit = 10
     offset = (page - 1) * limit
 
-    # 📊 🧬 STEP 2: GENERATE ANALYTICS & CHARTS
+    # 📊 🧬 STEP 2: GENERATE ANALYTICS
     stats = get_dashboard_stats(filters)
     chart_data = get_dashboard_chart_data(filters)
-    # chart_paths = generate_dashboard_charts(filters) # Legacy static charts
     
     # 📋 🧬 STEP 3: FETCH NEW ANALYTICS WITH FILTERS
     from analysis import build_dashboard_conditions
