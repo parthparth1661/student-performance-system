@@ -45,8 +45,7 @@ def build_dashboard_conditions(filters={}):
         values.append(semester)
 
     if subject:
-        # Join subjects to allow subject_name filtering
-        conditions.append("sub.subject_name = %s")
+        conditions.append("LOWER(sub.subject_name) = LOWER(%s)")
         values.append(subject)
 
     if subject_id:
@@ -95,8 +94,14 @@ def get_dashboard_stats(filters={}):
         # 🎯 1. GET CENTRALIZED CONDITIONS
         where_clause, values = build_dashboard_conditions(filters)
 
-        # 🥇 TOTAL STUDENTS
-        cursor.execute(f"SELECT COUNT(*) as count FROM students s {where_clause}", values)
+        # 🥇 TOTAL STUDENTS (Join-Aware)
+        cursor.execute(f"""
+            SELECT COUNT(DISTINCT s.enrollment_no) as count 
+            FROM students s
+            LEFT JOIN marks m ON s.enrollment_no = m.enrollment_no
+            LEFT JOIN subjects sub ON m.subject_id = sub.subject_id
+            {where_clause}
+        """, values)
         total_students = cursor.fetchone()['count'] or 0
         
         # 🥈 TOTAL SUBJECTS (Context-Aware Calculation)
@@ -157,7 +162,8 @@ def get_dashboard_stats(filters={}):
         cursor.execute(f"""
             SELECT COUNT(DISTINCT s.enrollment_no) as count
             FROM students s
-            LEFT JOIN subjects sub ON 1=1
+            LEFT JOIN marks m ON s.enrollment_no = m.enrollment_no
+            LEFT JOIN subjects sub ON m.subject_id = sub.subject_id
             {risk_base}
             AND s.enrollment_no IN (
                 SELECT enrollment_no FROM attendance 
@@ -1746,5 +1752,94 @@ def get_single_faculty_detail(faculty_id):
     except Exception as e:
         print(f"Error in single faculty detail: {e}")
         return None
+    finally:
+        conn.close()
+
+def get_dashboard_chart_data(filters={}):
+    """Fetches high-density analytical payloads for Chart.js interactive visualizations."""
+    conn = get_db_connection()
+    if not conn: return {}
+    
+    try:
+        cursor = conn.cursor(dictionary=True)
+        where_clause, values = build_dashboard_conditions(filters)
+        
+        analytics = {
+            'subject_avg': {'labels': [], 'values': []},
+            'attendance_dist': {'labels': ['Present', 'Absent'], 'values': [0, 0]},
+            'performance_trend': {'labels': [], 'values': []},
+            'results_dist': {'labels': ['Pass', 'Fail'], 'values': [0, 0]}
+        }
+
+        # 1. Subject-wise average
+        query = f"""
+            SELECT sub.subject_name, AVG(m.total_marks) as avg_marks
+            FROM marks m
+            JOIN subjects sub ON m.subject_id = sub.subject_id
+            JOIN students s ON s.enrollment_no = m.enrollment_no
+            {where_clause}
+            GROUP BY sub.subject_name
+            ORDER BY sub.subject_name ASC
+        """
+        cursor.execute(query, values)
+        data = cursor.fetchall()
+        analytics['subject_avg']['labels'] = [r['subject_name'] for r in data]
+        analytics['subject_avg']['values'] = [float(r['avg_marks']) for r in data]
+
+        # 2. Results distribution
+        query = f"""
+            SELECT 
+                SUM(CASE WHEN m.total_marks >= 40 THEN 1 ELSE 0 END) as pass_count,
+                SUM(CASE WHEN m.total_marks < 40 THEN 1 ELSE 0 END) as fail_count
+            FROM marks m
+            JOIN students s ON m.enrollment_no = s.enrollment_no
+            JOIN subjects sub ON m.subject_id = sub.subject_id
+            {where_clause}
+        """
+        cursor.execute(query, values)
+        data = cursor.fetchone()
+        if data:
+            analytics['results_dist']['values'] = [int(data['pass_count'] or 0), int(data['fail_count'] or 0)]
+
+        # 3. Attendance distribution
+        query = f"""
+            SELECT 
+                SUM(CASE WHEN a.status = 'Present' THEN 1 ELSE 0 END) as present,
+                SUM(CASE WHEN a.status = 'Absent' THEN 1 ELSE 0 END) as absent
+            FROM attendance a
+            JOIN students s ON a.enrollment_no = s.enrollment_no
+            LEFT JOIN subjects sub ON a.subject_id = sub.subject_id
+            {where_clause}
+        """
+        cursor.execute(query, values)
+        data = cursor.fetchone()
+        if data:
+            analytics['attendance_dist']['values'] = [int(data['present'] or 0), int(data['absent'] or 0)]
+
+        # 4. Performance Trend (Exam Components: Internal -> Viva -> External)
+        query = f"""
+            SELECT 
+                AVG(m.internal_marks) as Internal,
+                AVG(m.viva_marks) as Viva,
+                AVG(m.external_marks) as External
+            FROM marks m
+            JOIN students s ON m.enrollment_no = s.enrollment_no
+            JOIN subjects sub ON m.subject_id = sub.subject_id
+            {where_clause}
+        """
+        cursor.execute(query, values)
+        data = cursor.fetchone()
+        if data:
+            analytics['performance_trend']['labels'] = ['Unit Tests', 'Mid Term', 'Semester Final']
+            analytics['performance_trend']['values'] = [
+                float(data['Internal'] or 0),
+                float(data['Viva'] or 0),
+                float(data['External'] or 0)
+            ]
+
+        return analytics
+    except Exception as e:
+        print(f"Analytics Data Error: {e}")
+        return {}
     finally:
         conn.close()

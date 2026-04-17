@@ -8,6 +8,14 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h4 class="fw-bold mb-0 text-dark">Attendance Module</h4>
         <div class="d-flex gap-2">
+            <!-- 📂 CSV BULK UPLOAD -->
+            <form action="{{ url_for('admin.upload_attendance_csv') }}" method="POST" enctype="multipart/form-data" class="d-flex gap-2 align-items-center bg-white p-2 rounded-3 shadow-sm border border-success border-opacity-25 me-2">
+                <input type="file" name="file" accept=".csv" class="form-control form-control-sm border-0 bg-light" style="max-width: 180px;" required>
+                <button type="submit" class="btn btn-success btn-sm px-3 fw-bold rounded-2">
+                    <i class="bi bi-file-earmark-arrow-up me-1"></i>Upload CSV
+                </button>
+            </form>
+
             <a href="{{ url_for('admin.bulk_attendance') }}" class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm transition-hover">
                 <i class="bi bi-people-fill me-2"></i>Bulk Entry
             </a>

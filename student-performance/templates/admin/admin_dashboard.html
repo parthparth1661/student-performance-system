@@ -35,7 +35,7 @@ endblock %}
                 <div class="col-md">
                     <label class="form-label fw-bold text-uppercase small text-muted mb-2"
                         style="letter-spacing: 0.05em;">Department</label>
-                    <select name="department" class="form-select border-0 bg-light rounded-3 py-2">
+                    <select name="department" id="filter-department" class="form-select border-0 bg-light rounded-3 py-2">
                         <option value="">All Department</option>
                         <option value="BCA" {{ 'selected' if filters.department=='BCA' }}>BCA</option>
                         <option value="MCA" {{ 'selected' if filters.department=='MCA' }}>MCA</option>
@@ -46,7 +46,7 @@ endblock %}
                 <div class="col-md">
                     <label class="form-label fw-bold text-uppercase small text-muted mb-2"
                         style="letter-spacing: 0.05em;">Semester</label>
-                    <select name="semester" class="form-select border-0 bg-light rounded-3 py-2">
+                    <select name="semester" id="filter-semester" class="form-select border-0 bg-light rounded-3 py-2">
                         <option value="">All Semesters</option>
                         {% for i in range(1, 9) %}
                         <option value="{{ i }}" {{ 'selected' if filters.semester==i|string }}>Semester {{ i }}</option>
@@ -56,7 +56,7 @@ endblock %}
                 <div class="col-md">
                     <label class="form-label fw-bold text-uppercase small text-muted mb-2"
                         style="letter-spacing: 0.05em;">Subject</label>
-                    <select name="subject" class="form-select border-0 bg-light rounded-3 py-2">
+                    <select name="subject" id="filter-subject" class="form-select border-0 bg-light rounded-3 py-2">
                         <option value="">All Subjects</option>
                         {% for sub_name in subjects %}
                         <option value="{{ sub_name }}" {{ 'selected' if filters.subject==sub_name }}>{{ sub_name }}
@@ -103,7 +103,7 @@ endblock %}
                         <i class="bi bi-people fs-5"></i>
                     </div>
                     <div class="text-muted small fw-bold text-uppercase ls-1">Students</div>
-                    <div class="fs-3 fw-bold text-dark mt-1">{{ stats.total_students }}</div>
+                    <div class="fs-3 fw-bold text-dark mt-1" id="kpi-students">{{ stats.total_students }}</div>
                 </div>
             </div>
         </div>
@@ -116,7 +116,7 @@ endblock %}
                         <i class="bi bi-book fs-5"></i>
                     </div>
                     <div class="text-muted small fw-bold text-uppercase ls-1">Subjects</div>
-                    <div class="fs-3 fw-bold text-dark mt-1">{{ stats.total_subjects }}</div>
+                    <div class="fs-3 fw-bold text-dark mt-1" id="kpi-subjects">{{ stats.total_subjects }}</div>
                 </div>
             </div>
         </div>
@@ -129,7 +129,7 @@ endblock %}
                         <i class="bi bi-award fs-5"></i>
                     </div>
                     <div class="text-muted small fw-bold text-uppercase ls-1">Avg Marks</div>
-                    <div class="fs-3 fw-bold text-dark mt-1">{{ stats.avg_marks }}%</div>
+                    <div class="fs-3 fw-bold text-dark mt-1" id="kpi-avg">{{ stats.avg_marks }}%</div>
                 </div>
             </div>
         </div>
@@ -142,7 +142,7 @@ endblock %}
                         <i class="bi bi-calendar-check fs-5"></i>
                     </div>
                     <div class="text-muted small fw-bold text-uppercase ls-1">Attendance</div>
-                    <div class="fs-3 fw-bold text-dark mt-1">{{ stats.attendance_percentage }}%</div>
+                    <div class="fs-3 fw-bold text-dark mt-1" id="kpi-attendance">{{ stats.attendance_percentage }}%</div>
                 </div>
             </div>
         </div>
@@ -155,7 +155,7 @@ endblock %}
                         <i class="bi bi-exclamation-triangle fs-5"></i>
                     </div>
                     <div class="text-muted small fw-bold text-uppercase ls-1">At Risk</div>
-                    <div class="fs-3 fw-bold text-dark mt-1">{{ stats.low_attendance_count }}</div>
+                    <div class="fs-3 fw-bold text-dark mt-1" id="kpi-risk">{{ stats.low_attendance_count }}</div>
                 </div>
             </div>
         </div>
@@ -169,8 +169,7 @@ endblock %}
                     </div>
                     <div class="text-muted small fw-bold text-uppercase ls-1" title="{{ stats.top_performer }}">Top
                         Index</div>
-                    <div class="text-dark fw-bold mt-1 text-truncate" style="font-size: 0.9rem;">{{ stats.top_performer
-                        }}</div>
+                    <div class="text-dark fw-bold mt-1 text-truncate" id="kpi-top" style="font-size: 0.9rem;">{{ stats.top_performer }}</div>
                 </div>
             </div>
         </div>
@@ -185,13 +184,8 @@ endblock %}
                     <h6 class="fw-bold mb-0 text-dark">Subject Performance Trend</h6>
                     <span class="badge bg-light text-primary rounded-pill px-3 py-2 small">Analytical Data</span>
                 </div>
-                <div class="card-body px-4 pb-4">
-                    {% if charts.subject_avg %}
-                    <img src="{{ url_for('static', filename='charts/subject_avg.png') }}?v={{ range(1, 999) | random }}"
-                        class="img-fluid rounded-3" alt="Subject Marks">
-                    {% else %}
-                    <div class="text-center py-5 text-muted small">Insufficient subject data for visualization.</div>
-                    {% endif %}
+                <div class="card-body px-4 pb-4" style="height: 300px;">
+                    <canvas id="subjectAvgChart"></canvas>
                 </div>
             </div>
         </div>
@@ -201,14 +195,8 @@ endblock %}
                     <h6 class="fw-bold mb-0 text-dark">Attendance Distribution</h6>
                     <i class="bi bi-pie-chart text-muted"></i>
                 </div>
-                <div class="card-body px-4 pb-4 text-center">
-                    {% if charts.attendance_pie %}
-                    <img src="{{ url_for('static', filename='charts/attendance_pie.png') }}?v={{ range(1, 999) | random }}"
-                        class="img-fluid rounded-3" alt="Attendance Pie" style="max-height: 300px;">
-                    {% else %}
-                    <div class="text-center py-5 text-muted small">No attendance records found for current filters.
-                    </div>
-                    {% endif %}
+                <div class="card-body px-4 pb-4 text-center" style="height: 300px;">
+                    <canvas id="attendanceDistChart"></canvas>
                 </div>
             </div>
         </div>
@@ -219,13 +207,8 @@ endblock %}
                 <div class="card-header bg-white border-0 py-3 px-4">
                     <h6 class="fw-bold mb-0 text-dark">Pedagogical Component Metrics</h6>
                 </div>
-                <div class="card-body px-4 pb-4">
-                    {% if charts.performance_trend %}
-                    <img src="{{ url_for('static', filename='charts/performance_trend.png') }}?v={{ range(1, 999) | random }}"
-                        class="img-fluid rounded-3" alt="Performance Trend">
-                    {% else %}
-                    <div class="text-center py-5 text-muted small">No performance trends available.</div>
-                    {% endif %}
+                <div class="card-body px-4 pb-4" style="height: 300px;">
+                    <canvas id="performanceTrendChart"></canvas>
                 </div>
             </div>
         </div>
@@ -234,13 +217,8 @@ endblock %}
                 <div class="card-header bg-white border-0 py-3 px-4">
                     <h6 class="fw-bold mb-0 text-dark">Top Performer Lead Matrix</h6>
                 </div>
-                <div class="card-body px-4 pb-4">
-                    {% if charts.top_students %}
-                    <img src="{{ url_for('static', filename='charts/top_students.png') }}?v={{ range(1, 999) | random }}"
-                        class="img-fluid rounded-3" alt="Top Students">
-                    {% else %}
-                    <div class="text-center py-5 text-muted small">No leaderboard data generated.</div>
-                    {% endif %}
+                <div class="card-body px-4 pb-4" style="height: 300px;">
+                    <canvas id="resultsDistChart"></canvas>
                 </div>
             </div>
         </div>
@@ -265,8 +243,8 @@ endblock %}
                                     <th class="text-center pe-4">Index Score</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {% for s in top_students %}
+                            <tbody id="leaderboard-body">
+{% for s in top_students %}
                                 <tr>
                                     <td class="ps-4">
                                         <span
@@ -405,4 +383,196 @@ endblock %}
         background-color: rgba(0, 0, 0, 0.01);
     }
 </style>
+
+<!-- 📊 CHART.JS INTEGRATION -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let charts = {};
+
+    function initCharts(data) {
+        // Destroy existing charts if any
+        Object.values(charts).forEach(c => c.destroy());
+        charts = {};
+
+        // 1. Subject-wise Average Marks
+        charts.subjectAvg = new Chart(document.getElementById('subjectAvgChart'), {
+            type: 'bar',
+            data: {
+                labels: data.subject_avg.labels.length > 0 ? data.subject_avg.labels : ['No Data'],
+                datasets: [{
+                    label: 'Average Score (%)',
+                    data: data.subject_avg.values.length > 0 ? data.subject_avg.values : [0],
+                    backgroundColor: 'rgba(99, 102, 241, 0.75)',
+                    borderColor: '#4f46e5',
+                    borderWidth: 2,
+                    borderRadius: 12
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, max: 100, grid: { borderDash: [5, 5] } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // 2. Attendance Distribution
+        charts.attendanceDist = new Chart(document.getElementById('attendanceDistChart'), {
+            type: 'doughnut',
+            data: {
+                labels: data.attendance_dist.labels,
+                datasets: [{
+                    data: data.attendance_dist.values,
+                    backgroundColor: ['#10b981', '#ef4444'],
+                    hoverOffset: 20
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: { position: 'bottom', labels: { usePointStyle: true, padding: 25 } }
+                }
+            }
+        });
+
+        // 3. Chronological Performance Trend
+        charts.performanceTrend = new Chart(document.getElementById('performanceTrendChart'), {
+            type: 'line',
+            data: {
+                labels: data.performance_trend.labels.length > 0 ? data.performance_trend.labels : ['Awaiting Records'],
+                datasets: [{
+                    label: 'Performance Mean',
+                    data: data.performance_trend.values.length > 0 ? data.performance_trend.values : [0],
+                    borderColor: '#8b5cf6',
+                    backgroundColor: 'rgba(139, 92, 246, 0.08)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, max: 100 },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // 4. Results Distribution
+        charts.resultsDist = new Chart(document.getElementById('resultsDistChart'), {
+            type: 'pie',
+            data: {
+                labels: data.results_dist.labels,
+                datasets: [{
+                    data: data.results_dist.values,
+                    backgroundColor: ['#22c55e', '#f43f5e'],
+                    borderColor: '#ffffff',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { usePointStyle: true, padding: 25 } }
+                }
+            }
+        });
+    }
+
+    function refreshDashboard() {
+        const formData = new FormData(filterForm);
+        const filters = Object.fromEntries(formData.entries());
+        const queryParams = new URLSearchParams(filters).toString();
+        
+        console.log("Fetching new data for filters:", filters);
+
+        fetch(`/admin/dashboard/api/stats?${queryParams}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log("Received data:", data);
+                // Update KPIs with high-clarity empty states
+                const displayVal = (val, suffix = '') => (val === 0 || val === '0' || !val || val === 'N/A') ? '<span class="text-muted small">No Data</span>' : val + suffix;
+
+                document.getElementById('kpi-students').innerHTML = displayVal(data.stats.total_students);
+                document.getElementById('kpi-subjects').innerHTML = displayVal(data.stats.total_subjects);
+                document.getElementById('kpi-avg').innerHTML = displayVal(data.stats.avg_marks, '%');
+                document.getElementById('kpi-attendance').innerHTML = displayVal(data.stats.attendance_percentage, '%');
+                document.getElementById('kpi-risk').innerHTML = displayVal(data.stats.low_attendance_count);
+                document.getElementById('kpi-top').innerHTML = displayVal(data.stats.top_performer);
+
+                // 2. Refresh Tables
+                updateLeaderboard(data.top_students);
+                updateRiskAlerts(data.low_students);
+
+                // 3. Refresh Charts
+                initCharts(data.chart_data);
+                
+                // Update URL without reload
+                const newUrl = `${window.location.pathname}?${queryParams}`;
+                window.history.replaceState({path: newUrl}, '', newUrl);
+            })
+            .catch(err => console.error("Dashboard Sync Error:", err));
+    }
+
+    function updateLeaderboard(students) {
+        const body = document.getElementById('leaderboard-body');
+        if (!students.length) {
+            body.innerHTML = '<tr><td colspan="3" class="text-center py-4 text-muted small">No leaderboard data found.</td></tr>';
+            return;
+        }
+        body.innerHTML = students.map((s, i) => `
+            <tr>
+                <td class="ps-4">
+                    <span class="badge ${i==0?'bg-warning':i==1?'bg-secondary':'bg-light text-dark'} rounded-pill px-3">#${i+1}</span>
+                </td>
+                <td><div class="fw-bold text-dark">${s.name}</div></td>
+                <td class="text-center pe-4">
+                    <div class="bg-success-soft text-success rounded-pill fw-bold small px-3 py-1 d-inline-block">${parseFloat(s.avg_marks).toFixed(1)}%</div>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    function updateRiskAlerts(students) {
+        const body = document.getElementById('risk-alerts-body');
+        if (!students.length) {
+            body.innerHTML = '<tr><td colspan="2" class="text-center py-4 text-muted small">Minimal risk detected. Healthy records.</td></tr>';
+            return;
+        }
+        body.innerHTML = students.map(s => `
+            <tr>
+                <td class="ps-4"><div class="fw-semibold text-dark">${s.name}</div></td>
+                <td class="text-center pe-4">
+                    <span class="badge bg-danger-soft text-danger rounded-pill px-3 py-1 fw-bold extra-small">${s.reason}</span>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    // Handle Form submission
+    const filterForm = document.querySelector('form');
+    filterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        refreshDashboard();
+    });
+
+    // Add immediate change listeners
+    ['filter-department', 'filter-semester', 'filter-subject'].forEach(id => {
+        document.getElementById(id).addEventListener('change', refreshDashboard);
+    });
+
+    // Initialize with direct boot data
+    const initialData = JSON.parse('{{ chart_data | tojson | safe }}');
+    initCharts(initialData);
+});
+</script>
 {% endblock %}

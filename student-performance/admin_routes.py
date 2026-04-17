@@ -7,7 +7,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
 from db import get_db_connection
-from analysis import get_dashboard_stats, generate_dashboard_charts, get_performance_overview
+from analysis import get_dashboard_stats, generate_dashboard_charts, get_performance_overview, get_dashboard_chart_data
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -72,44 +72,51 @@ def dashboard():
 
     # 📊 🧬 STEP 2: GENERATE ANALYTICS & CHARTS
     stats = get_dashboard_stats(filters)
-    chart_paths = generate_dashboard_charts(filters)
+    chart_data = get_dashboard_chart_data(filters)
+    # chart_paths = generate_dashboard_charts(filters) # Legacy static charts
     
-    # 📋 🧬 STEP 3: FETCH NEW ANALYTICS (TOP PERFORMERS & ALERTS)
+    # 📋 🧬 STEP 3: FETCH NEW ANALYTICS WITH FILTERS
+    from analysis import build_dashboard_conditions
+    where_clause, values = build_dashboard_conditions(filters)
+    
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     
-    # 1. Top Performers
-    cursor.execute("""
+    # 1. Top Performers (Filtered)
+    cursor.execute(f"""
         SELECT s.name, AVG(m.total_marks) as avg_marks
         FROM students s
         JOIN marks m ON s.enrollment_no = m.enrollment_no
-        GROUP BY s.enrollment_no
+        JOIN subjects sub ON m.subject_id = sub.subject_id
+        {where_clause}
+        GROUP BY s.enrollment_no, s.name
         ORDER BY avg_marks DESC
         LIMIT 5
-    """)
+    """, values)
     top_students = cursor.fetchall()
 
-    # 2. Low Performance Alerts (Combined)
-    # Total Marks < 40
-    cursor.execute("""
+    # 2. Risk Alerts (Filtered)
+    cursor.execute(f"""
         SELECT DISTINCT s.name, 'Critical Score' as reason
         FROM students s
         JOIN marks m ON s.enrollment_no = m.enrollment_no
-        WHERE m.total_marks < 40
-    """)
+        JOIN subjects sub ON m.subject_id = sub.subject_id
+        {where_clause} AND m.total_marks < 40
+    """, values)
     low_marks = cursor.fetchall()
 
-    # Attendance < 75%
-    cursor.execute("""
+    cursor.execute(f"""
         SELECT s.name, 'Low Attendance' as reason
         FROM attendance a
         JOIN students s ON a.enrollment_no = s.enrollment_no
-        GROUP BY s.enrollment_no
-        HAVING (SUM(CASE WHEN status='Present' THEN 1 ELSE 0 END)*100.0/COUNT(*)) < 75
-    """)
+        LEFT JOIN subjects sub ON a.subject_id = sub.subject_id
+        {where_clause}
+        GROUP BY s.enrollment_no, s.name
+        HAVING (SUM(CASE WHEN a.status='Present' THEN 1 ELSE 0 END)*100.0/NULLIF(COUNT(*), 0)) < 75
+    """, values)
     low_attendance = cursor.fetchall()
     
-    # Merge and deduplicate alerts (preferring showing both if applicable, but keep it simple)
+    # Merge and deduplicate alerts
     alerts_dict = {}
     for entry in low_marks:
         alerts_dict[entry['name']] = "Critical Marks"
@@ -121,7 +128,7 @@ def dashboard():
     
     low_students = [{'name': name, 'reason': reason} for name, reason in alerts_dict.items()]
 
-    # Fetch all subjects for the filter dropdown
+    # Subjects for dropdown
     cursor.execute("SELECT DISTINCT subject_name FROM subjects ORDER BY subject_name ASC")
     all_subjects = [r['subject_name'] for r in cursor.fetchall()]
     cursor.close()
@@ -130,11 +137,83 @@ def dashboard():
     return render_template('admin/admin_dashboard.html', 
                          stats=stats, 
                          filters=filters, 
-                         charts=chart_paths,
+                         chart_data=chart_data,
                          top_students=top_students,
                          low_students=low_students,
-                         subjects=all_subjects,
-                         today_date=date.today().strftime('%d %b %Y'))
+                         subjects=all_subjects)
+
+@admin_bp.route('/dashboard/api/stats')
+def dashboard_api_stats():
+    """API Endpoint for dynamic dashboard updates without page reloads"""
+    filters = {
+        'department': request.args.get('department'),
+        'semester': request.args.get('semester'),
+        'search': request.args.get('search'),
+        'subject': request.args.get('subject')
+    }
+    
+    # 📈 Get Core Stats & Charts
+    stats = get_dashboard_stats(filters)
+    chart_data = get_dashboard_chart_data(filters)
+    
+    # 📋 Get Filtered Leaderboard & Risks
+    from analysis import build_dashboard_conditions
+    where_clause, values = build_dashboard_conditions(filters)
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    # Leaderboard
+    cursor.execute(f"""
+        SELECT s.name, AVG(m.total_marks) as avg_marks
+        FROM students s
+        JOIN marks m ON s.enrollment_no = m.enrollment_no
+        JOIN subjects sub ON m.subject_id = sub.subject_id
+        {where_clause}
+        GROUP BY s.enrollment_no, s.name
+        ORDER BY avg_marks DESC
+        LIMIT 5
+    """, values)
+    top_students = cursor.fetchall()
+
+    # Risk alerts
+    cursor.execute(f"""
+        SELECT DISTINCT s.name, 'Critical Score' as reason
+        FROM students s
+        JOIN marks m ON s.enrollment_no = m.enrollment_no
+        JOIN subjects sub ON m.subject_id = sub.subject_id
+        {where_clause} AND m.total_marks < 40
+    """, values)
+    low_marks = cursor.fetchall()
+
+    cursor.execute(f"""
+        SELECT s.name, 'Low Attendance' as reason
+        FROM attendance a
+        JOIN students s ON a.enrollment_no = s.enrollment_no
+        LEFT JOIN subjects sub ON a.subject_id = sub.subject_id
+        {where_clause}
+        GROUP BY s.enrollment_no, s.name
+        HAVING (SUM(CASE WHEN a.status='Present' THEN 1 ELSE 0 END)*100.0/NULLIF(COUNT(*), 0)) < 75
+    """, values)
+    low_attendance = cursor.fetchall()
+    
+    # Merge alerts
+    alerts_dict = {}
+    for entry in low_marks: alerts_dict[entry['name']] = "Critical Marks"
+    for entry in low_attendance:
+        if entry['name'] in alerts_dict: alerts_dict[entry['name']] += " & Attendance"
+        else: alerts_dict[entry['name']] = "Low Attendance"
+    
+    low_students = [{'name': name, 'reason': reason} for name, reason in alerts_dict.items()]
+    
+    cursor.close()
+    conn.close()
+
+    return jsonify({
+        'stats': stats,
+        'chart_data': chart_data,
+        'top_students': top_students,
+        'low_students': low_students
+    })
 
 # --- 🧑🎓 1. STUDENTS MODULE ---
 @admin_bp.route('/students')
@@ -933,6 +1012,91 @@ def attendance_report():
                               'month': month_val,
                               'year': year_val
                           })
+
+@admin_bp.route('/attendance/upload-csv', methods=['POST'])
+def upload_attendance_csv():
+    if 'file' not in request.files:
+        flash("System Protocol Alert: No file detected in the buffer.", "danger")
+        return redirect(url_for('admin.view_attendance'))
+    
+    file = request.files['file']
+    if file.filename == '':
+        flash("Registry Error: No file selected for synchronization.", "danger")
+        return redirect(url_for('admin.view_attendance'))
+
+    if not file.filename.endswith('.csv'):
+        flash("Buffer Violation: Only CSV files are allowed for institutional uploads.", "warning")
+        return redirect(url_for('admin.view_attendance'))
+
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        
+        # 🧪 Cache subjects for name-to-ID mapping to avoid excessive queries
+        cursor.execute("SELECT subject_id, LOWER(subject_name) as lower_name FROM subjects")
+        subjects_map = {row['lower_name'].strip(): row['subject_id'] for row in cursor.fetchall()}
+
+        # 🧪 Cache students for verification
+        cursor.execute("SELECT enrollment_no FROM students")
+        students_set = {row['enrollment_no'] for row in cursor.fetchall()}
+
+        from io import StringIO
+        import csv
+        stream = StringIO(file.stream.read().decode("UTF8"), newline=None)
+        reader = csv.DictReader(stream)
+        
+        success_count = 0
+        error_count = 0
+        duplicate_count = 0
+
+        for row in reader:
+            # Flexible mapping for student_id/enrollment_no and subject_id/subject_name
+            enrollment_no = (row.get('student_id') or row.get('enrollment_no', '')).strip()
+            subject_val = (row.get('subject_name') or row.get('subject_id', '')).strip()
+            att_date = (row.get('date', '')).strip()
+            status = (row.get('status', '')).strip()
+
+            if not enrollment_no or not subject_val or not att_date or not status:
+                error_count += 1
+                continue
+
+            # Resolve Subject ID if name was provided
+            target_sub_id = None
+            if str(subject_val).isdigit():
+                target_sub_id = int(subject_val)
+            else:
+                target_sub_id = subjects_map.get(str(subject_val).strip().lower())
+
+            # Validate Student and Subject existence
+            if not target_sub_id or enrollment_no not in students_set:
+                error_count += 1
+                continue
+
+            # Prevent Duplicates
+            cursor.execute("SELECT attendance_id FROM attendance WHERE enrollment_no = %s AND subject_id = %s AND date = %s", 
+                         (enrollment_no, target_sub_id, att_date))
+            if cursor.fetchone():
+                duplicate_count += 1
+                continue
+
+            cursor.execute("""
+                INSERT INTO attendance (enrollment_no, subject_id, date, status)
+                VALUES (%s, %s, %s, %s)
+            """, (enrollment_no, target_sub_id, att_date, status))
+            success_count += 1
+
+        conn.commit()
+        conn.close()
+
+        if success_count > 0:
+            flash(f"Synchronization Successful: {success_count} records established. ({error_count} errors, {duplicate_count} duplicates skipped)", "success")
+        else:
+            flash(f"Synchronization Failed: No valid records were identified. ({error_count} errors, {duplicate_count} duplicates)", "warning")
+            
+    except Exception as e:
+        flash(f"Central Database synchronization failure: {str(e)}", "danger")
+
+    return redirect(url_for('admin.view_attendance'))
 
 @admin_bp.route('/attendance/bulk', methods=['GET', 'POST'])
 def bulk_attendance():
