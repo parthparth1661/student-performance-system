@@ -7,7 +7,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
 from db import get_db_connection
-from analysis import get_dashboard_stats, get_dashboard_chart_data, process_csv, get_faculty_analytics, get_report_data
+from analysis import get_dashboard_stats, get_performance_overview, get_dashboard_chart_data
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -37,9 +37,7 @@ def login():
             if admin and check_password_hash(admin['password'], password):
                 session['admin_logged_in'] = True
                 session['admin_email'] = admin['email']
-                session['admin_id'] = admin['admin_id']
-                session['admin_name'] = 'System Admin'
-                flash(f"Institutional Synchronization Successful. Welcome back.", "success")
+                flash(f"Welcome back, Administrator!", "success")
                 return redirect(url_for('admin.dashboard'))
             else:
                 flash("Invalid email or password.", "danger")
@@ -59,7 +57,7 @@ def logout():
 @admin_bp.route('/')
 @admin_bp.route('/dashboard')
 def dashboard():
-    # STEP 1: GET FILTER VALUES
+    # 🎯 🧠 STEP 1: GET FILTER VALUES
     filters = {
         'department': request.args.get('department'),
         'semester': request.args.get('semester'),
@@ -72,11 +70,11 @@ def dashboard():
     limit = 10
     offset = (page - 1) * limit
 
-    # STEP 2: GENERATE ANALYTICS
+    # 📊 🧬 STEP 2: GENERATE ANALYTICS
     stats = get_dashboard_stats(filters)
     chart_data = get_dashboard_chart_data(filters)
     
-    # STEP 3: FETCH NEW ANALYTICS WITH FILTERS
+    # 📋 🧬 STEP 3: FETCH NEW ANALYTICS WITH FILTERS
     from analysis import build_dashboard_conditions
     where_clause, values = build_dashboard_conditions(filters)
     
@@ -153,11 +151,11 @@ def dashboard_api_stats():
         'subject': request.args.get('subject')
     }
     
-    # Get Core Stats & Charts
+    # 📈 Get Core Stats & Charts
     stats = get_dashboard_stats(filters)
     chart_data = get_dashboard_chart_data(filters)
     
-    # Get Filtered Leaderboard & Risks
+    # 📋 Get Filtered Leaderboard & Risks
     from analysis import build_dashboard_conditions
     where_clause, values = build_dashboard_conditions(filters)
     conn = get_db_connection()
@@ -216,7 +214,7 @@ def dashboard_api_stats():
         'low_students': low_students
     })
 
-# --- 1. STUDENTS MODULE ---
+# --- 🧑🎓 1. STUDENTS MODULE ---
 @admin_bp.route('/students')
 def view_students():
     department = request.args.get('department')
@@ -361,7 +359,7 @@ def delete_student(enrollment_no):
 
 
 
-# --- 2. SUBJECTS MODULE ---
+# --- 📚 2. SUBJECTS MODULE ---
 @admin_bp.route('/subjects')
 def view_subjects():
     department = request.args.get('department')
@@ -498,7 +496,7 @@ def delete_faculty(faculty_id):
         conn.close()
     return redirect(url_for('admin.view_faculty'))
 
-# --- 3. FACULTY MODULE ---
+# --- 👨‍🏫 3. FACULTY MODULE ---
 @admin_bp.route('/faculty')
 def view_faculty():
     department = request.args.get('department')
@@ -624,7 +622,7 @@ def faculty_profile_view(faculty_id):
                           profile=data['profile'], 
                           subjects=data['subjects'])
 
-# --- 4. MARKS MODULE ---
+# --- 📊 4. MARKS MODULE ---
 @admin_bp.route('/marks')
 def view_marks():
     enrollment = request.args.get('enrollment')
@@ -828,7 +826,7 @@ def delete_marks(marks_id):
         conn.close()
     return redirect(url_for('admin.view_marks'))
 
-# --- 5. ATTENDANCE MODULE ---
+# --- 🛰️ 5. ATTENDANCE MODULE ---
 @admin_bp.route('/attendance')
 def view_attendance():
     enrollment = request.args.get('enrollment')
@@ -1507,7 +1505,7 @@ def clear_faculty():
 
 
 
-# --- ADMIN PROFILE MODULE ---
+# --- 👤 ADMIN PROFILE MODULE ---
 @admin_bp.route('/profile')
 def profile():
     if 'admin_id' not in session:
@@ -1569,7 +1567,7 @@ def change_password():
     conn.close()
     return redirect(url_for('admin.profile'))
 
-# --- 6. FEEDBACK MODULE ---
+# --- 💬 6. FEEDBACK MODULE ---
 @admin_bp.route('/feedback')
 def view_feedback():
     conn = get_db_connection()
@@ -1632,7 +1630,7 @@ def delete_feedback(feedback_id):
         conn.close()
     return redirect(url_for('admin.view_feedback'))
 
-# --- 7. ASYNC API ENDPOINTS ---
+# --- 🧪 7. ASYNC API ENDPOINTS ---
 @admin_bp.route('/get-students')
 def get_students():
     dept = request.args.get('department')
@@ -1648,10 +1646,6 @@ def get_students():
 
 @admin_bp.route('/get-subjects')
 def get_subjects():
-    """
-    Utility: Returns curriculum subjects mapped to specific pedagogical contexts (Dept/Sem).
-    Essential for dynamic form synchronization.
-    """
     dept = request.args.get('department')
     sem = request.args.get('semester')
     

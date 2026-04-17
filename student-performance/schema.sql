@@ -21,7 +21,6 @@ CREATE TABLE IF NOT EXISTS students (
     semester INT,
     password_hash VARCHAR(255),
     is_password_changed BOOLEAN DEFAULT FALSE,
-    phone VARCHAR(20),
     contact_no VARCHAR(15),
     profile_pic VARCHAR(255) DEFAULT 'default.png'
 );
@@ -54,7 +53,6 @@ CREATE TABLE IF NOT EXISTS marks (
     viva_marks INT DEFAULT 0,
     external_marks INT DEFAULT 0,
     total_marks INT DEFAULT 0,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (enrollment_no) REFERENCES students(enrollment_no) ON DELETE CASCADE,
     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE,
     UNIQUE KEY unique_student_subject (enrollment_no, subject_id)
