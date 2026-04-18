@@ -80,10 +80,21 @@ def dashboard():
     """, (enrollment_no,))
     fb_stats = cursor.fetchone()
     
-    # Fetch Latest Notices (REMOVED)
+    # 🛰️ SUBJECT-WISE ATTENDANCE ANALYSIS
+    cursor.execute("""
+        SELECT sub.subject_name,
+               COALESCE((SUM(CASE WHEN a.status='Present' THEN 1 ELSE 0 END) * 100.0 / NULLIF(COUNT(a.attendance_id), 0)), 0) as attendance_pct
+        FROM subjects sub
+        LEFT JOIN attendance a ON sub.subject_id = a.subject_id AND a.enrollment_no = %s
+        WHERE sub.department = (SELECT department FROM students WHERE enrollment_no = %s)
+          AND sub.semester = (SELECT semester FROM students WHERE enrollment_no = %s)
+        GROUP BY sub.subject_id, sub.subject_name
+    """, (enrollment_no, enrollment_no, enrollment_no))
+    attn_subjects = cursor.fetchall()
     
-    # Fetch Recent Activity (REMOVED)
-    
+    attn_labels = [r['subject_name'] for r in attn_subjects]
+    attn_values = [round(float(r['attendance_pct']), 1) for r in attn_subjects]
+
     conn.close()
     
     return render_template('student/student_dashboard.html', 
@@ -92,7 +103,9 @@ def dashboard():
                            summary=perf_summary,
                            fb_stats=fb_stats,
                            subjects=[m['subject'] for m in marks_data],
-                           marks=[m['total'] for m in marks_data])
+                           marks=[m['total'] for m in marks_data],
+                           attn_labels=attn_labels,
+                           attn_values=attn_values)
 
 # 📈 ACADEMIC TRACKING: PERFORMANCE
 @student_bp.route('/performance')
