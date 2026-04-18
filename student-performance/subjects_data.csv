@@ -1,0 +1,43 @@
+subject_name,department,semester,faculty_name
+Programming in C,BCA,1,Prof. Sunitha Nair
+Mathematics-I,BCA,1,Prof. Vikram Singh
+Communication Skills,BCA,1,Dr. Kavita Rao
+Data Structures,BCA,2,Prof. Anil Joshi
+Mathematics-II,BCA,2,Prof. Rahul Sharma
+Organization Behavior,BCA,2,Prof. Manish Pandey
+DBMS,BCA,3,Prof. Sunitha Nair
+Java Programming,BCA,3,Prof. Vikram Singh
+Operating Systems,BCA,3,Dr. Kavita Rao
+Web Development,BCA,4,Prof. Anil Joshi
+Computer Networks,BCA,4,Prof. Rahul Sharma
+Software Engineering,BCA,4,Prof. Manish Pandey
+Python Programming,BCA,5,Prof. Sunitha Nair
+Mobile App Dev,BCA,5,Prof. Vikram Singh
+Cyber Security,BCA,5,Dr. Kavita Rao
+Machine Learning,BCA,6,Prof. Anil Joshi
+Cloud Computing,BCA,6,Prof. Rahul Sharma
+Major Project,BCA,6,Prof. Manish Pandey
+Advanced Java,MCA,1,Dr. Rajesh Kumar
+OS & Linux,MCA,1,Dr. Priya Verma
+Discrete Math,MCA,1,Prof. Suresh Menon
+Data Science,MCA,2,Dr. Meera Reddy
+AI,MCA,2,Dr. Rajesh Kumar
+Design & Analysis of Algorithms,MCA,2,Dr. Priya Verma
+Cloud Computing,MCA,3,Prof. Suresh Menon
+Big Data,MCA,3,Dr. Meera Reddy
+Soft Computing,MCA,3,Dr. Rajesh Kumar
+Full Stack Development,MCA,4,Dr. Priya Verma
+Deep Learning,MCA,4,Prof. Suresh Menon
+Seminar,MCA,4,Dr. Meera Reddy
+Marketing Management,MBA,1,Dr. Amit Shah
+Micro Economics,MBA,1,Dr. Neha Gupta
+Business Communication,MBA,1,Prof. Sanjay Patel
+Financial Accounting,MBA,2,Dr. Swati Mishra
+HR Management,MBA,2,Dr. Anjali Desai
+Organizational Behavior,MBA,2,Dr. Amit Shah
+Business Analytics,MBA,3,Dr. Neha Gupta
+Strategic Management,MBA,3,Prof. Sanjay Patel
+Consumer Behavior,MBA,3,Dr. Swati Mishra
+Entrepreneurship,MBA,4,Dr. Anjali Desai
+International Business,MBA,4,Dr. Amit Shah
+Supply Chain Management,MBA,4,Dr. Neha Gupta

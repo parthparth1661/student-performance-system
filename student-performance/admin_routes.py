@@ -1610,9 +1610,89 @@ def upload_faculty_csv():
         except Exception as e:
             flash(f"System Error: {str(e)}", "danger")
     else:
-        flash("Invalid protocol. Please upload a standard .csv manifest.", "danger")
+        return redirect(url_for('admin.view_faculty'))
+
+
+@admin_bp.route('/upload_subject_csv', methods=['POST'])
+def upload_subject_csv():
+    if 'file' not in request.files:
+        flash("No file part", "danger")
+        return redirect(url_for('admin.view_subjects'))
+    
+    file = request.files['file']
+    if file.filename == '':
+        flash("No selected file", "danger")
+        return redirect(url_for('admin.view_subjects'))
+
+    if file and file.filename.endswith('.csv'):
+        try:
+            content = file.stream.read().decode("utf-8")
+            stream = StringIO(content)
+            csv_reader = csv.DictReader(stream)
+            
+            # Normalize headers
+            csv_reader.fieldnames = [f.strip().lower() for f in csv_reader.fieldnames]
+            
+            conn = get_db_connection()
+            cursor = conn.cursor(dictionary=True)
+            
+            # 🧪 Fetch all faculty for quick mapping
+            cursor.execute("SELECT faculty_id, faculty_name FROM faculty")
+            faculty_map = {row['faculty_name'].strip().lower(): row['faculty_id'] for row in cursor.fetchall()}
+            
+            success_count = 0
+            error_count = 0
+            
+            for row in csv_reader:
+                s_name = (row.get('subject_name') or row.get('name', '')).strip()
+                dept = row.get('department', '').strip()
+                sem = row.get('semester', '').strip()
+                f_name = row.get('faculty_name', '').strip()
+                
+                if not all([s_name, dept, sem]):
+                    error_count += 1
+                    continue
+                
+                # Resolve faculty_id
+                f_id = faculty_map.get(f_name.lower()) if f_name else None
+                
+                try:
+                    # Prevent strict duplicates
+                    cursor.execute("""
+                        SELECT subject_id FROM subjects 
+                        WHERE subject_name = %s AND department = %s AND semester = %s
+                    """, (s_name, dept, sem))
+                    
+                    if cursor.fetchone():
+                        # Update faculty if subject exists
+                        cursor.execute("""
+                            UPDATE subjects SET faculty_id = %s 
+                            WHERE subject_name = %s AND department = %s AND semester = %s
+                        """, (f_id, s_name, dept, sem))
+                    else:
+                        cursor.execute("""
+                            INSERT INTO subjects (subject_name, department, semester, faculty_id)
+                            VALUES (%s, %s, %s, %s)
+                        """, (s_name, dept, sem, f_id))
+                    success_count += 1
+                except Exception as db_err:
+                    print(f"DB Error: {db_err}")
+                    error_count += 1
+            
+            conn.commit()
+            conn.close()
+            
+            if success_count > 0:
+                flash(f"Course Catalogue Updated: {success_count} subjects successfully synchronized.", "success")
+            if error_count > 0:
+                flash(f"{error_count} entries were skipped due to format inconsistencies.", "warning")
+                
+        except Exception as e:
+            flash(f"System Error: {str(e)}", "danger")
+    else:
+        flash("Invalid protocol. Please upload a standard .csv academic manifest.", "danger")
         
-    return redirect(url_for('admin.view_faculty'))
+    return redirect(url_for('admin.view_subjects'))
 # --- 👤 ADMIN PROFILE MODULE ---
 @admin_bp.route('/profile')
 def profile():
