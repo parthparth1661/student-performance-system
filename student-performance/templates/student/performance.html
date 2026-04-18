@@ -70,12 +70,36 @@
         </div>
     </div>
 
-    <!-- 📊 VISUAL ANALYTICS -->
-    <div class="card shadow-sm border-0 rounded-3 bg-white mb-4">
-        <div class="card-body p-4">
-            <h6 class="fw-bold mb-4">Subject Performance Analysis</h6>
-            <div style="height: 350px;">
-                <canvas id="performanceChart"></canvas>
+    <!-- 📊 VISUAL ANALYTICS UNIT -->
+    <div class="row g-4 mb-4">
+        <!-- Subject Performance Section -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 rounded-3 bg-white h-100">
+                <div class="card-body p-4">
+                    <h6 class="fw-bold mb-4">Academic Performance Scale</h6>
+                    <div style="height: 350px;">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attendance Overview Section -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 rounded-3 bg-white h-100">
+                <div class="card-body p-4">
+                    <h6 class="fw-bold mb-4">Attendance Presence Overview</h6>
+                    {% if attn_values|length > 0 %}
+                    <div style="height: 350px;">
+                        <canvas id="attendanceChart"></canvas>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="bi bi-calendar-x fs-1 text-muted opacity-25"></i>
+                        <p class="text-muted mt-2">No attendance data available</p>
+                    </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
@@ -122,6 +146,13 @@
             </div>
         </div>
     </div>
+    <!-- 🏁 STEP 4 — HIDDEN DATA UNIT (Ensures IDE Logic Validation) -->
+    <div id="performanceDataHub" style="display: none;"
+         data-perf-labels='{{ subjects|tojson|safe }}'
+         data-perf-values='{{ marks|tojson|safe }}'
+         data-attn-labels='{{ attn_labels|tojson|safe }}'
+         data-attn-values='{{ attn_values|tojson|safe }}'>
+    </div>
 </div>
 
 <style>
@@ -139,44 +170,74 @@
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const ctx = document.getElementById('performanceChart').getContext('2d');
-    const chartLabels = JSON.parse('{{ subjects|tojson|safe }}');
-    const chartData = JSON.parse('{{ marks|tojson|safe }}');
+    document.addEventListener('DOMContentLoaded', function() {
+        const hub = document.getElementById('performanceDataHub');
+        if (!hub) return;
 
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: chartLabels,
-            datasets: [{
-                label: 'Score Index',
-                data: chartData,
-                backgroundColor: 'rgba(79, 70, 229, 0.8)',
-                borderColor: '#4F46E5',
-                borderWidth: 0,
-                borderRadius: 8,
-                barThickness: 32
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100,
-                    border: { display: false },
-                    grid: { color: '#f1f5f9' },
-                    ticks: { font: { family: 'Poppins', size: 11, weight: '500' } }
+        // --- 📈 PERFORMANCE CHART ---
+        const perfCtxEl = document.getElementById('performanceChart');
+        if (perfCtxEl) {
+            const perfCtx = perfCtxEl.getContext('2d');
+            const perfLabels = JSON.parse(hub.dataset.perfLabels || '[]');
+            const perfValues = JSON.parse(hub.dataset.perfValues || '[]');
+
+            new Chart(perfCtx, {
+                type: 'bar',
+                data: {
+                    labels: perfLabels,
+                    datasets: [{
+                        label: 'Score %',
+                        data: perfValues,
+                        backgroundColor: 'rgba(79, 70, 229, 0.8)',
+                        borderColor: '#4F46E5',
+                        borderWidth: 0,
+                        borderRadius: 8,
+                        barThickness: 24
+                    }]
                 },
-                x: {
-                    border: { display: false },
-                    grid: { display: false },
-                    ticks: { font: { family: 'Poppins', size: 10, weight: '600' } }
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, max: 100, ticks: { font: { family: 'Poppins', size: 11 } } },
+                        x: { ticks: { font: { family: 'Poppins', size: 10, weight: '600' } } }
+                    }
                 }
-            }
+            });
+        }
+
+        // --- 📊 ATTENDANCE CHART ---
+        const attnCtxEl = document.getElementById('attendanceChart');
+        if (attnCtxEl) {
+            const attnCtx = attnCtxEl.getContext('2d');
+            const attnLabels = JSON.parse(hub.dataset.attnLabels || '[]');
+            const attnValues = JSON.parse(hub.dataset.attnValues || '[]');
+
+            new Chart(attnCtx, {
+                type: 'line',
+                data: {
+                    labels: attnLabels,
+                    datasets: [{
+                        label: 'Attendance %',
+                        data: attnValues,
+                        backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                        borderColor: '#22C55E',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, max: 100, ticks: { font: { family: 'Poppins', size: 11 } } },
+                        x: { ticks: { font: { family: 'Poppins', size: 10, weight: '600' } } }
+                    }
+                }
+            });
         }
     });
 </script>

@@ -114,6 +114,24 @@ def performance():
     student_info = analysis.get_student_details(enrollment_no)
     marks_data = analysis.get_student_marks(enrollment_no)
     perf_summary = analysis.calculate_student_summary(enrollment_no)
+
+    # 🛰️ SUBJECT-WISE ATTENDANCE ANALYSIS
+    conn = analysis.get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("""
+        SELECT sub.subject_name,
+               COALESCE((SUM(CASE WHEN a.status='Present' THEN 1 ELSE 0 END) * 100.0 / NULLIF(COUNT(a.attendance_id), 0)), 0) as attendance_pct
+        FROM subjects sub
+        LEFT JOIN attendance a ON sub.subject_id = a.subject_id AND a.enrollment_no = %s
+        WHERE sub.department = (SELECT department FROM students WHERE enrollment_no = %s)
+          AND sub.semester = (SELECT semester FROM students WHERE enrollment_no = %s)
+        GROUP BY sub.subject_id, sub.subject_name
+    """, (enrollment_no, enrollment_no, enrollment_no))
+    attn_subjects = cursor.fetchall()
+    
+    attn_labels = [r['subject_name'] for r in attn_subjects]
+    attn_values = [round(float(r['attendance_pct']), 1) for r in attn_subjects]
+    conn.close()
     
     # Advanced logic for highlights
     highest_sub = max(marks_data, key=lambda x: x['total']) if marks_data else None
@@ -126,7 +144,9 @@ def performance():
                            summary=perf_summary,
                            highlights={'highest': highest_sub, 'lowest': lowest_sub, 'total_sum': total_marks_sum},
                            subjects=[m['subject'] for m in marks_data],
-                           marks=[m['total'] for m in marks_data])
+                           marks=[m['total'] for m in marks_data],
+                           attn_labels=attn_labels,
+                           attn_values=attn_values)
 
 # 🔐 SECURITY PROTOCOL: CHANGE PASSWORD
 @student_bp.route('/change_password', methods=['GET', 'POST'])
