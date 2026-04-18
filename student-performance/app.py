@@ -22,8 +22,16 @@ app.register_blueprint(student_bp)
 
 @app.route('/')
 def home():
-    """System entry point: Redirects to administrative nexus"""
-    return redirect('/admin/login')
+    """System Entry Point: Strictly enforce fresh authentication"""
+    session.clear() 
+    return redirect(url_for('admin.login'))
+
+@app.route('/logout')
+def logout():
+    """Global Session Termination"""
+    session.clear()
+    return redirect(url_for('admin.login'))
+
 
 # --- 🔐 PASSWORD RECOVERY UNIT (NON-OTP VERSION) ---
 
@@ -62,7 +70,7 @@ def reset_password():
             conn.commit()
             session.clear()
             flash("Security Credentials updated successfully. Please re-authenticate.", "success")
-            return redirect('/admin/login')
+            return redirect(url_for('admin.login'))
         except Exception as e:
             flash(f"System Error: Could not update credentials ({e})", "danger")
         finally:

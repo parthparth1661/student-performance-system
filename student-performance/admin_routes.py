@@ -16,13 +16,12 @@ admin_bp = Blueprint('admin', __name__)
 def check_admin_login():
     if request.endpoint in ['admin.login', 'admin.logout', 'admin.static']: 
         return
-    if not session.get('admin_logged_in'):
+    if not session.get('admin_id'):
         return redirect(url_for('admin.login'))
 
 @admin_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    if session.get('admin_logged_in'):
-        return redirect(url_for('admin.dashboard'))
+    print("Session:", session)
     if request.method == 'POST':
         email = request.form.get('email') or request.form.get('username') # Handle both for compatibility
         password = request.form.get('password')
@@ -35,8 +34,9 @@ def login():
             cursor.execute("SELECT * FROM admin WHERE email = %s", (email,))
             admin = cursor.fetchone()
             if admin and check_password_hash(admin['password'], password):
-                session['admin_logged_in'] = True
+                session['admin_id'] = admin['admin_id']
                 session['admin_email'] = admin['email']
+                session['admin_logged_in'] = True
                 flash(f"Welcome back, Administrator!", "success")
                 return redirect(url_for('admin.dashboard'))
             else:
@@ -57,6 +57,12 @@ def logout():
 @admin_bp.route('/')
 @admin_bp.route('/dashboard')
 def dashboard():
+    print("Session:", session)
+    # 🛡️ STRICT SESSION PROTECTION
+    if 'admin_id' not in session:
+        return redirect(url_for('admin.login'))
+
+
     # 🎯 🧠 STEP 1: GET FILTER VALUES
     filters = {
         'department': request.args.get('department'),
