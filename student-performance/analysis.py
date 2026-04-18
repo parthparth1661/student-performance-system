@@ -317,12 +317,18 @@ def process_csv(file_path):
         if all(x in cols for x in ['enrollment_no', 'name', 'email', 'department', 'semester']):
             from werkzeug.security import generate_password_hash
             for _, row in df.iterrows():
+                # Extract contact_no with flexible support for common variations
+                contact = str(row.get('contact_no') or row.get('phone') or row.get('contact') or '').strip()
+                
                 pw_hash = generate_password_hash(str(row['enrollment_no']))
                 cursor.execute("""
-                    INSERT INTO students (enrollment_no, name, email, department, semester, password_hash)
-                    VALUES (%s, %s, %s, %s, %s, %s)
-                    ON DUPLICATE KEY UPDATE name=VALUES(name), email=VALUES(email)
-                """, (row['enrollment_no'], row['name'], row['email'], row['department'], row['semester'], pw_hash))
+                    INSERT INTO students (enrollment_no, name, email, department, semester, contact_no, password_hash)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s)
+                    ON DUPLICATE KEY UPDATE 
+                        name=VALUES(name), 
+                        email=VALUES(email),
+                        contact_no=VALUES(contact_no)
+                """, (row['enrollment_no'], row['name'], row['email'], row['department'], row['semester'], contact, pw_hash))
                 success_count += 1
         elif all(x in cols for x in ['enrollment_no', 'subject_id', 'date', 'status']):
             for _, row in df.iterrows():

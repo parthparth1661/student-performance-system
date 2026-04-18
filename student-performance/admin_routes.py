@@ -21,7 +21,14 @@ def check_admin_login():
 
 @admin_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    # 🕵️ DEBUG: MONITOR SESSION STATE
     print("Session:", session)
+    
+    # ❌ IF ADMIN_ID EXISTS IN GET REQUEST -> CLEAR IT (FORCE LOGIN)
+    if request.method == 'GET' and 'admin_id' in session:
+        session.clear()
+        print("Stale session cleared. Forcing re-authentication.")
+
     if request.method == 'POST':
         email = request.form.get('email') or request.form.get('username') # Handle both for compatibility
         password = request.form.get('password')
@@ -1449,7 +1456,9 @@ def clear_attendance():
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
+        cursor.execute("SET FOREIGN_KEY_CHECKS = 0")
         cursor.execute("TRUNCATE TABLE attendance")
+        cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
         conn.commit()
         conn.close()
         flash("All attendance records have been deleted successfully", "success")
@@ -1462,7 +1471,9 @@ def clear_subjects():
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
+        cursor.execute("SET FOREIGN_KEY_CHECKS = 0")
         cursor.execute("TRUNCATE TABLE subjects")
+        cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
         conn.commit()
         conn.close()
         flash("All subject records have been deleted successfully", "success")
@@ -1475,7 +1486,9 @@ def clear_students():
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
+        cursor.execute("SET FOREIGN_KEY_CHECKS = 0")
         cursor.execute("TRUNCATE TABLE students")
+        cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
         conn.commit()
         conn.close()
         flash("All student records have been deleted successfully", "success")
@@ -1488,7 +1501,9 @@ def clear_marks():
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
+        cursor.execute("SET FOREIGN_KEY_CHECKS = 0")
         cursor.execute("TRUNCATE TABLE marks")
+        cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
         conn.commit()
         conn.close()
         flash("All marks records have been deleted successfully", "success")
@@ -1501,7 +1516,9 @@ def clear_faculty():
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
+        cursor.execute("SET FOREIGN_KEY_CHECKS = 0")
         cursor.execute("TRUNCATE TABLE faculty")
+        cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
         conn.commit()
         conn.close()
         flash("All faculty records have been deleted successfully", "success")
