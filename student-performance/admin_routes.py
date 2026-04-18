@@ -1061,40 +1061,56 @@ def upload_attendance_csv():
         duplicate_count = 0
 
         for row in reader:
-            # Flexible mapping for student_id/enrollment_no and subject_id/subject_name
-            enrollment_no = (row.get('student_id') or row.get('enrollment_no', '')).strip()
-            subject_val = (row.get('subject_name') or row.get('subject_id', '')).strip()
-            att_date = (row.get('date', '')).strip()
-            status = (row.get('status', '')).strip()
+            try:
+                # Flexible mapping for student_id/enrollment_no and subject_id/subject_name
+                enrollment_no = (row.get('student_id') or row.get('enrollment_no', '')).strip()
+                subject_val = (row.get('subject_name') or row.get('subject_id', '')).strip()
+                att_date = (row.get('date', date.today().strftime('%Y-%m-%d'))).strip()
+                status = (row.get('status') or row.get('attendance', '')).strip()
 
-            if not enrollment_no or not subject_val or not att_date or not status:
+                # Handle attendance_percentage as a status fallback
+                att_pct = row.get('attendance_percentage')
+                if not status and att_pct:
+                    status = 'Present' if float(att_pct) > 0 else 'Absent'
+
+                if not enrollment_no or not subject_val:
+                    print(f"DEBUG: Missing mandatory fields in row: {row}")
+                    error_count += 1
+                    continue
+
+                # Resolve Subject ID if name was provided
+                target_sub_id = None
+                if str(subject_val).isdigit():
+                    target_sub_id = int(subject_val)
+                else:
+                    target_sub_id = subjects_map.get(str(subject_val).strip().lower())
+
+                # Validate Student and Subject existence
+                if not target_sub_id:
+                    print(f"DEBUG: Subject mismatch for '{subject_val}' in row: {row}")
+                    error_count += 1
+                    continue
+                
+                if enrollment_no not in students_set:
+                    print(f"DEBUG: Student mismatch for '{enrollment_no}' in row: {row}")
+                    error_count += 1
+                    continue
+
+                # Prevent Duplicates
+                cursor.execute("SELECT attendance_id FROM attendance WHERE enrollment_no = %s AND subject_id = %s AND date = %s", 
+                             (enrollment_no, target_sub_id, att_date))
+                if cursor.fetchone():
+                    duplicate_count += 1
+                    continue
+
+                cursor.execute("""
+                    INSERT INTO attendance (enrollment_no, subject_id, date, status)
+                    VALUES (%s, %s, %s, %s)
+                """, (enrollment_no, target_sub_id, att_date, status or 'Present'))
+                success_count += 1
+            except Exception as row_err:
+                print(f"DEBUG: Row processing error: {row_err} | Row: {row}")
                 error_count += 1
-                continue
-
-            # Resolve Subject ID if name was provided
-            target_sub_id = None
-            if str(subject_val).isdigit():
-                target_sub_id = int(subject_val)
-            else:
-                target_sub_id = subjects_map.get(str(subject_val).strip().lower())
-
-            # Validate Student and Subject existence
-            if not target_sub_id or enrollment_no not in students_set:
-                error_count += 1
-                continue
-
-            # Prevent Duplicates
-            cursor.execute("SELECT attendance_id FROM attendance WHERE enrollment_no = %s AND subject_id = %s AND date = %s", 
-                         (enrollment_no, target_sub_id, att_date))
-            if cursor.fetchone():
-                duplicate_count += 1
-                continue
-
-            cursor.execute("""
-                INSERT INTO attendance (enrollment_no, subject_id, date, status)
-                VALUES (%s, %s, %s, %s)
-            """, (enrollment_no, target_sub_id, att_date, status))
-            success_count += 1
 
         conn.commit()
         conn.close()
