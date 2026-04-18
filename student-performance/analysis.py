@@ -310,7 +310,7 @@ def process_csv(file_path):
         conn = get_db_connection()
         if not conn: return False, "DB Connection Failed"
         
-        cursor = conn.cursor()
+        cursor = conn.cursor(dictionary=True)
         success_count = 0
         
         # Determine CSV Type by columns
@@ -337,6 +337,37 @@ def process_csv(file_path):
                     VALUES (%s, %s, %s, %s)
                 """, (row['enrollment_no'], row['subject_id'], row['date'], row['status']))
                 success_count += 1
+        elif all(x in cols for x in ['enrollment_no', 'subject_name', 'internal_marks', 'viva_marks', 'external_marks']):
+            # 🧪 Resolve Subject Names to IDs for seamless integration
+            cursor.execute("SELECT subject_id, LOWER(subject_name) as name, department FROM subjects")
+            subject_lookup = {(row['name'].strip(), row['department']): row['subject_id'] for row in cursor.fetchall()}
+            
+            # Fetch student departments for accurate subject matching
+            cursor.execute("SELECT enrollment_no, department FROM students")
+            student_dept_map = {row['enrollment_no']: row['department'] for row in cursor.fetchall()}
+
+            for _, row in df.iterrows():
+                e_no = str(row['enrollment_no']).strip()
+                s_name = str(row['subject_name']).strip().lower()
+                dept = student_dept_map.get(e_no)
+                
+                s_id = subject_lookup.get((s_name, dept))
+                if s_id:
+                    i = int(row.get('internal_marks', 0))
+                    v = int(row.get('viva_marks', 0))
+                    e = int(row.get('external_marks', 0))
+                    total = i + v + e
+                    cursor.execute("""
+                        INSERT INTO marks (enrollment_no, subject_id, internal_marks, viva_marks, external_marks, total_marks)
+                        VALUES (%s, %s, %s, %s, %s, %s)
+                        ON DUPLICATE KEY UPDATE 
+                            internal_marks=VALUES(internal_marks), 
+                            viva_marks=VALUES(viva_marks), 
+                            external_marks=VALUES(external_marks), 
+                            total_marks=VALUES(total_marks)
+                    """, (e_no, s_id, i, v, e, total))
+                    success_count += 1
+
         elif all(x in cols for x in ['enrollment_no', 'subject_id', 'internal', 'viva', 'external']):
             for _, row in df.iterrows():
                 i, v, e = int(row['internal']), int(row['viva']), int(row['external'])
