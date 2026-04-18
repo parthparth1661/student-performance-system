@@ -1527,7 +1527,92 @@ def clear_faculty():
     return redirect(url_for('admin.view_faculty'))
 
 
+@admin_bp.route('/upload_faculty_csv', methods=['POST'])
+def upload_faculty_csv():
+    if 'file' not in request.files:
+        flash("No file part", "danger")
+        return redirect(url_for('admin.view_faculty'))
+    
+    file = request.files['file']
+    if file.filename == '':
+        flash("No selected file", "danger")
+        return redirect(url_for('admin.view_faculty'))
 
+    if file and file.filename.endswith('.csv'):
+        try:
+            # Read file content safely
+            content = file.stream.read().decode("utf-8")
+            stream = StringIO(content)
+            csv_reader = csv.DictReader(stream)
+            
+            # Normalize headers
+            csv_reader.fieldnames = [f.strip().lower() for f in csv_reader.fieldnames]
+            
+            # Validation requirements
+            required_cols = ['name', 'email', 'contact_no', 'department']
+            actual_cols = csv_reader.fieldnames
+            
+            # Check if headers match (fallback to faculty_name if name is missing)
+            if 'faculty_name' in actual_cols and 'name' not in actual_cols:
+                name_col = 'faculty_name'
+            else:
+                name_col = 'name'
+
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            
+            success_count = 0
+            error_count = 0
+            
+            for row in csv_reader:
+                name = row.get(name_col, '').strip()
+                email = row.get('email', '').strip()
+                contact = row.get('contact_no', '').strip()
+                dept = row.get('department', '').strip()
+                
+                # 🛡️ VALIDATION
+                if not all([name, email, dept]):
+                    error_count += 1
+                    continue
+                
+                # Basic email validation
+                if '@' not in email or '.' not in email:
+                    error_count += 1
+                    continue
+                    
+                # Contact number validation (10 digits)
+                if len(contact) != 10 or not contact.isdigit():
+                    error_count += 1
+                    continue
+
+                try:
+                    cursor.execute("""
+                        INSERT INTO faculty (faculty_name, email, contact_no, department)
+                        VALUES (%s, %s, %s, %s)
+                        ON DUPLICATE KEY UPDATE 
+                            faculty_name=VALUES(faculty_name),
+                            department=VALUES(department),
+                            contact_no=VALUES(contact_no)
+                    """, (name, email, contact, dept))
+                    success_count += 1
+                except Exception as db_err:
+                    print(f"DB Insert Error: {db_err}")
+                    error_count += 1
+            
+            conn.commit()
+            conn.close()
+            
+            if success_count > 0:
+                flash(f"CSV uploaded successfully. {success_count} records synchronized.", "success")
+            if error_count > 0:
+                flash(f"{error_count} records skipped due to validation or format errors.", "warning")
+                
+        except Exception as e:
+            flash(f"System Error: {str(e)}", "danger")
+    else:
+        flash("Invalid protocol. Please upload a standard .csv manifest.", "danger")
+        
+    return redirect(url_for('admin.view_faculty'))
 # --- 👤 ADMIN PROFILE MODULE ---
 @admin_bp.route('/profile')
 def profile():
