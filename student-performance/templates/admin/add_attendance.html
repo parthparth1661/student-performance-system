@@ -1,6 +1,7 @@
 {% extends 'admin/layout.html' %}
 
-{% block page_title %}<h5 class="fw-bold mb-0 text-dark"><i class="bi bi-calendar-check me-2"></i>Attendance Module</h5>{% endblock %}
+{% block page_title %}<h5 class="fw-bold mb-0 text-dark"><i class="bi bi-calendar-check me-2"></i>Attendance Module</h5>
+{% endblock %}
 
 {% block content %}
 <div class="container-fluid py-4">
@@ -9,10 +10,12 @@
             <!-- 🎨 HEADER SECTOR -->
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
-                    <h4 class="fw-bold mb-1 text-dark">{{ 'Modify Attendance' if edit_mode else 'New Attendance Registry' }}</h4>
+                    <h4 class="fw-bold mb-1 text-dark">{{ 'Modify Attendance' if edit_mode else 'New Attendance
+                        Registry' }}</h4>
                     <p class="text-muted small mb-0">Record student presence and institutional compliance</p>
                 </div>
-                <a href="{{ url_for('admin.view_attendance') }}" class="btn btn-light border shadow-sm px-4 fw-bold rounded-3 transition-hover">
+                <a href="{{ url_for('admin.view_attendance') }}"
+                    class="btn btn-light border shadow-sm px-4 fw-bold rounded-3 transition-hover">
                     <i class="bi bi-arrow-left me-2"></i>Back to Ledger
                 </a>
             </div>
@@ -23,8 +26,10 @@
                     <form method="POST" class="row g-4">
                         {% if not edit_mode %}
                         <div class="col-md-12">
-                            <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Student Identifier</label>
-                            <select name="enrollment_no" class="form-select border-0 bg-light rounded-3 py-3 px-4" required>
+                            <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Student
+                                Identifier</label>
+                            <select name="enrollment_no" class="form-select border-0 bg-light rounded-3 py-3 px-4"
+                                required>
                                 <option value="">Select student from registry...</option>
                                 {% for s in students %}
                                 <option value="{{ s.enrollment_no }}">{{ s.enrollment_no }} — {{ s.name }}</option>
@@ -33,8 +38,10 @@
                         </div>
 
                         <div class="col-md-12">
-                            <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Subject Knowledge Module</label>
-                            <select name="subject_id" class="form-select border-0 bg-light rounded-3 py-3 px-4" required>
+                            <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Subject
+                                Knowledge Module</label>
+                            <select name="subject_id" class="form-select border-0 bg-light rounded-3 py-3 px-4"
+                                required>
                                 <option value="">Choose module subject...</option>
                                 {% for sub in subjects %}
                                 <option value="{{ sub.subject_id }}">{{ sub.subject_name }}</option>
@@ -43,8 +50,10 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Registry Date</label>
-                            <input type="date" name="date" class="form-control border-0 bg-light rounded-3 py-3 px-4" value="{{ today }}" required>
+                            <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Registry
+                                Date</label>
+                            <input type="date" name="date" class="form-control border-0 bg-light rounded-3 py-3 px-4"
+                                value="{{ today }}" required>
                         </div>
                         {% else %}
                         <div class="col-12 mb-2">
@@ -56,7 +65,8 @@
                                         <div class="small text-muted">{{ record.enrollment_no }}</div>
                                     </div>
                                     <div class="col-md-6 text-md-end">
-                                        <div class="extra-small fw-bold text-uppercase text-muted ls-1">Module & Date</div>
+                                        <div class="extra-small fw-bold text-uppercase text-muted ls-1">Module & Date
+                                        </div>
                                         <div class="fw-bold text-dark fs-6">{{ record.subject_name }}</div>
                                         <div class="small text-muted">{{ record.date }}</div>
                                     </div>
@@ -66,17 +76,24 @@
                         {% endif %}
 
                         <div class="col-md-6">
-                            <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Compliance Status</label>
+                            <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Compliance
+                                Status</label>
                             <div class="d-flex gap-3">
                                 <div class="w-100">
-                                    <input type="radio" class="btn-check" name="status" id="statusP" value="Present" autocomplete="off" {% if (edit_mode and record.status == 'Present') or not edit_mode %}checked{% endif %}>
-                                    <label class="btn btn-outline-success border-2 w-100 rounded-3 py-3 fw-bold" for="statusP">
+                                    <input type="radio" class="btn-check" name="status" id="statusP" value="Present"
+                                        autocomplete="off" {% if (edit_mode and record.status=='Present' ) or not
+                                        edit_mode %}checked{% endif %}>
+                                    <label class="btn btn-outline-success border-2 w-100 rounded-3 py-3 fw-bold"
+                                        for="statusP">
                                         <i class="bi bi-patch-check-fill me-2"></i>Present
                                     </label>
                                 </div>
                                 <div class="w-100">
-                                    <input type="radio" class="btn-check" name="status" id="statusA" value="Absent" autocomplete="off" {% if edit_mode and record.status == 'Absent' %}checked{% endif %}>
-                                    <label class="btn btn-outline-danger border-2 w-100 rounded-3 py-3 fw-bold" for="statusA">
+                                    <input type="radio" class="btn-check" name="status" id="statusA" value="Absent"
+                                        autocomplete="off" {% if edit_mode and record.status=='Absent' %}checked{% endif
+                                        %}>
+                                    <label class="btn btn-outline-danger border-2 w-100 rounded-3 py-3 fw-bold"
+                                        for="statusA">
                                         <i class="bi bi-x-circle-fill me-2"></i>Absent
                                     </label>
                                 </div>
@@ -85,9 +102,12 @@
 
                         <div class="col-12 mt-5 border-top pt-4">
                             <div class="d-flex justify-content-end gap-3">
-                                <a href="{{ url_for('admin.view_attendance') }}" class="btn btn-light px-5 py-3 rounded-3 fw-bold text-muted border transition-hover">Discard</a>
-                                <button type="submit" class="btn btn-primary px-5 py-3 rounded-3 fw-bold shadow-sm transition-hover">
-                                    <i class="bi bi-check2-circle me-2"></i>{{ 'Update Registry' if edit_mode else 'Record Attendance' }}
+                                <a href="{{ url_for('admin.view_attendance') }}"
+                                    class="btn btn-light px-5 py-3 rounded-3 fw-bold text-muted border transition-hover">Discard</a>
+                                <button type="submit"
+                                    class="btn btn-primary px-5 py-3 rounded-3 fw-bold shadow-sm transition-hover">
+                                    <i class="bi bi-check2-circle me-2"></i>{{ 'Update Registry' if edit_mode else
+                                    'Record Attendance' }}
                                 </button>
                             </div>
                         </div>
@@ -99,13 +119,37 @@
 </div>
 
 <style>
-    .bg-primary-soft { background-color: rgba(99, 102, 241, 0.08); }
-    .ls-1 { letter-spacing: 0.1em; }
-    .extra-small { font-size: 0.75rem; }
-    .transition-hover { transition: all 0.2s ease-in-out; }
-    .transition-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 15px rgba(0,0,0,0.1) !important; }
-    
-    .btn-check:checked + .btn-outline-success { background-color: #198754; color: white; border-color: #198754; }
-    .btn-check:checked + .btn-outline-danger { background-color: #dc3545; color: white; border-color: #dc3545; }
+    .bg-primary-soft {
+        background-color: rgba(99, 102, 241, 0.08);
+    }
+
+    .ls-1 {
+        letter-spacing: 0.1em;
+    }
+
+    .extra-small {
+        font-size: 0.75rem;
+    }
+
+    .transition-hover {
+        transition: all 0.2s ease-in-out;
+    }
+
+    .transition-hover:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .btn-check:checked+.btn-outline-success {
+        background-color: #198754;
+        color: white;
+        border-color: #198754;
+    }
+
+    .btn-check:checked+.btn-outline-danger {
+        background-color: #dc3545;
+        color: white;
+        border-color: #dc3545;
+    }
 </style>
 {% endblock %}

@@ -1,0 +1,13 @@
+enrollment_no,name,department,semester,subject_name,marks_obtained,attendance_percentage
+BCA-101,Aarav Sharma,BCA,1,Programming in C,85.0000,66.66667
+BCA-101,Aarav Sharma,BCA,1,Mathematics-I,75.0000,100.00000
+BCA-101,Aarav Sharma,BCA,1,Communication Skills,86.0000,0.00000
+BCA-101,Aarav Sharma,BCA,1,Data Structures,82.0000,100.00000
+BCA-101,Aarav Sharma,BCA,1,Mathematics-II,77.0000,0.00000
+BCA-101,Aarav Sharma,BCA,1,Organization Behavior,87.0000,0.00000
+BCA-102,Aditi Verma,BCA,1,Programming in C,95.0000,66.66667
+BCA-102,Aditi Verma,BCA,1,Mathematics-I,82.0000,100.00000
+BCA-102,Aditi Verma,BCA,1,Communication Skills,87.0000,0.00000
+BCA-103,Advait Gupta,BCA,1,Programming in C,74.0000,0.00000
+BCA-103,Advait Gupta,BCA,1,Mathematics-I,66.0000,0.00000
+BCA-103,Advait Gupta,BCA,1,Communication Skills,76.0000,0.00000
