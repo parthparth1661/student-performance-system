@@ -332,80 +332,115 @@ def process_csv(file_path):
         
         cursor = conn.cursor(dictionary=True)
         success_count = 0
+        error_count = 0
+        batch_size = 1000
         
         # Determine CSV Type by columns
         if all(x in cols for x in ['enrollment_no', 'name', 'email', 'department', 'semester']):
             from werkzeug.security import generate_password_hash
             for _, row in df.iterrows():
-                # Extract contact_no with flexible support for common variations
-                contact = str(row.get('contact_no') or row.get('phone') or row.get('contact') or '').strip()
-                
-                pw_hash = generate_password_hash(str(row['enrollment_no']))
-                cursor.execute("""
-                    INSERT INTO students (enrollment_no, name, email, department, semester, contact_no, password_hash)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s)
-                    ON DUPLICATE KEY UPDATE 
-                        name=VALUES(name), 
-                        email=VALUES(email),
-                        contact_no=VALUES(contact_no)
-                """, (row['enrollment_no'], row['name'], row['email'], row['department'], row['semester'], contact, pw_hash))
-                success_count += 1
+                try:
+                    contact = str(row.get('contact_no') or row.get('phone') or row.get('contact') or '').strip()
+                    pw_hash = generate_password_hash(str(row['enrollment_no']))
+                    cursor.execute("""
+                        INSERT INTO students (enrollment_no, name, email, department, semester, contact_no, password_hash)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s)
+                        ON DUPLICATE KEY UPDATE 
+                            name=VALUES(name), 
+                            email=VALUES(email),
+                            contact_no=VALUES(contact_no)
+                    """, (row['enrollment_no'], row['name'], row['email'], row['department'], row['semester'], contact, pw_hash))
+                    success_count += 1
+                    if success_count % batch_size == 0: conn.commit()
+                except Exception: error_count += 1
+
+        elif all(x in cols for x in ['faculty_name', 'email', 'department']):
+            for _, row in df.iterrows():
+                try:
+                    cursor.execute("""
+                        INSERT INTO faculty (faculty_name, email, department, contact_no)
+                        VALUES (%s, %s, %s, %s)
+                        ON DUPLICATE KEY UPDATE 
+                            faculty_name=VALUES(faculty_name),
+                            department=VALUES(department),
+                            contact_no=VALUES(contact_no)
+                    """, (row['faculty_name'], row['email'], row['department'], row.get('contact_no', '')))
+                    success_count += 1
+                    if success_count % batch_size == 0: conn.commit()
+                except Exception: error_count += 1
+
+        elif all(x in cols for x in ['subject_name', 'department', 'semester', 'faculty_name']):
+            cursor.execute("SELECT faculty_id, LOWER(faculty_name) as name FROM faculty")
+            faculty_lookup = {row['name'].strip(): row['faculty_id'] for row in cursor.fetchall()}
+            for _, row in df.iterrows():
+                try:
+                    f_name = str(row['faculty_name']).strip().lower()
+                    f_id = faculty_lookup.get(f_name)
+                    cursor.execute("""
+                        INSERT INTO subjects (subject_name, department, semester, faculty_id)
+                        VALUES (%s, %s, %s, %s)
+                    """, (row['subject_name'], row['department'], row['semester'], f_id))
+                    success_count += 1
+                    if success_count % batch_size == 0: conn.commit()
+                except Exception: error_count += 1
+
         elif all(x in cols for x in ['enrollment_no', 'subject_id', 'date', 'status']):
             for _, row in df.iterrows():
-                cursor.execute("""
-                    INSERT INTO attendance (enrollment_no, subject_id, date, status)
-                    VALUES (%s, %s, %s, %s)
-                """, (row['enrollment_no'], row['subject_id'], row['date'], row['status']))
-                success_count += 1
+                try:
+                    cursor.execute("""
+                        INSERT INTO attendance (enrollment_no, subject_id, date, status)
+                        VALUES (%s, %s, %s, %s)
+                    """, (row['enrollment_no'], row['subject_id'], row['date'], row['status']))
+                    success_count += 1
+                    if success_count % batch_size == 0: conn.commit()
+                except Exception: error_count += 1
+
         elif all(x in cols for x in ['enrollment_no', 'subject_name', 'internal_marks', 'viva_marks', 'external_marks']):
-            # 🧪 Resolve Subject Names to IDs for seamless integration
             cursor.execute("SELECT subject_id, LOWER(subject_name) as name, department FROM subjects")
             subject_lookup = {(row['name'].strip(), row['department']): row['subject_id'] for row in cursor.fetchall()}
-            
-            # Fetch student departments for accurate subject matching
             cursor.execute("SELECT enrollment_no, department FROM students")
             student_dept_map = {row['enrollment_no']: row['department'] for row in cursor.fetchall()}
 
             for _, row in df.iterrows():
-                e_no = str(row['enrollment_no']).strip()
-                s_name = str(row['subject_name']).strip().lower()
-                dept = student_dept_map.get(e_no)
-                
-                s_id = subject_lookup.get((s_name, dept))
-                if s_id:
-                    i = int(row.get('internal_marks', 0))
-                    v = int(row.get('viva_marks', 0))
-                    e = int(row.get('external_marks', 0))
-                    total = i + v + e
-                    cursor.execute("""
-                        INSERT INTO marks (enrollment_no, subject_id, internal_marks, viva_marks, external_marks, total_marks)
-                        VALUES (%s, %s, %s, %s, %s, %s)
-                        ON DUPLICATE KEY UPDATE 
-                            internal_marks=VALUES(internal_marks), 
-                            viva_marks=VALUES(viva_marks), 
-                            external_marks=VALUES(external_marks), 
-                            total_marks=VALUES(total_marks)
-                    """, (e_no, s_id, i, v, e, total))
-                    success_count += 1
+                try:
+                    e_no = str(row['enrollment_no']).strip()
+                    s_name = str(row['subject_name']).strip().lower()
+                    dept = student_dept_map.get(e_no)
+                    s_id = subject_lookup.get((s_name, dept))
+                    if s_id:
+                        i, v, e = int(row.get('internal_marks', 0)), int(row.get('viva_marks', 0)), int(row.get('external_marks', 0))
+                        cursor.execute("""
+                            INSERT INTO marks (enrollment_no, subject_id, internal_marks, viva_marks, external_marks, total_marks)
+                            VALUES (%s, %s, %s, %s, %s, %s)
+                            ON DUPLICATE KEY UPDATE internal_marks=VALUES(internal_marks), viva_marks=VALUES(viva_marks), 
+                                                 external_marks=VALUES(external_marks), total_marks=VALUES(total_marks)
+                        """, (e_no, s_id, i, v, e, i+v+e))
+                        success_count += 1
+                        if success_count % batch_size == 0: conn.commit()
+                    else: error_count += 1
+                except Exception: error_count += 1
 
         elif all(x in cols for x in ['enrollment_no', 'subject_id', 'internal', 'viva', 'external']):
             for _, row in df.iterrows():
-                i, v, e = int(row['internal']), int(row['viva']), int(row['external'])
-                total = i + v + e
-                cursor.execute("""
-                    INSERT INTO marks (enrollment_no, subject_id, internal_marks, viva_marks, external_marks, total_marks)
-                    VALUES (%s, %s, %s, %s, %s, %s)
-                    ON DUPLICATE KEY UPDATE internal_marks=VALUES(internal_marks), viva_marks=VALUES(viva_marks), 
-                                         external_marks=VALUES(external_marks), total_marks=VALUES(total_marks)
-                """, (row['enrollment_no'], row['subject_id'], i, v, e, total))
-                success_count += 1
+                try:
+                    i, v, e = int(row['internal']), int(row['viva']), int(row['external'])
+                    cursor.execute("""
+                        INSERT INTO marks (enrollment_no, subject_id, internal_marks, viva_marks, external_marks, total_marks)
+                        VALUES (%s, %s, %s, %s, %s, %s)
+                        ON DUPLICATE KEY UPDATE internal_marks=VALUES(internal_marks), viva_marks=VALUES(viva_marks), 
+                                             external_marks=VALUES(external_marks), total_marks=VALUES(total_marks)
+                    """, (row['enrollment_no'], row['subject_id'], i, v, e, i+v+e))
+                    success_count += 1
+                    if success_count % batch_size == 0: conn.commit()
+                except Exception: error_count += 1
         else:
             return False, "Unrecognized Header Format"
 
         conn.commit()
         conn.close()
-        return True, f"Successfully processed {success_count} records."
+        return True, f"Successfully processed {success_count} records. ({error_count} errors)"
     except Exception as e:
+        if 'conn' in locals() and conn: conn.rollback()
         return False, str(e)
 
 def export_admin_excel(dept, sem, sub, search, att):

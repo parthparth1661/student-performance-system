@@ -1039,90 +1039,23 @@ def upload_attendance_csv():
         flash("Buffer Violation: Only CSV files are allowed for institutional uploads.", "warning")
         return redirect(url_for('admin.view_attendance'))
 
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor(dictionary=True)
-        
-        # 🧪 Cache subjects for name-to-ID mapping to avoid excessive queries
-        cursor.execute("SELECT subject_id, LOWER(subject_name) as lower_name FROM subjects")
-        subjects_map = {row['lower_name'].strip(): row['subject_id'] for row in cursor.fetchall()}
-
-        # 🧪 Cache students for verification
-        cursor.execute("SELECT enrollment_no FROM students")
-        students_set = {row['enrollment_no'] for row in cursor.fetchall()}
-
-        from io import StringIO
-        import csv
-        stream = StringIO(file.stream.read().decode("UTF8"), newline=None)
-        reader = csv.DictReader(stream)
-        
-        success_count = 0
-        error_count = 0
-        duplicate_count = 0
-
-        for row in reader:
-            try:
-                # Flexible mapping for student_id/enrollment_no and subject_id/subject_name
-                enrollment_no = (row.get('student_id') or row.get('enrollment_no', '')).strip()
-                subject_val = (row.get('subject_name') or row.get('subject_id', '')).strip()
-                att_date = (row.get('date', date.today().strftime('%Y-%m-%d'))).strip()
-                status = (row.get('status') or row.get('attendance', '')).strip()
-
-                # Handle attendance_percentage as a status fallback
-                att_pct = row.get('attendance_percentage')
-                if not status and att_pct:
-                    status = 'Present' if float(att_pct) > 0 else 'Absent'
-
-                if not enrollment_no or not subject_val:
-                    print(f"DEBUG: Missing mandatory fields in row: {row}")
-                    error_count += 1
-                    continue
-
-                # Resolve Subject ID if name was provided
-                target_sub_id = None
-                if str(subject_val).isdigit():
-                    target_sub_id = int(subject_val)
-                else:
-                    target_sub_id = subjects_map.get(str(subject_val).strip().lower())
-
-                # Validate Student and Subject existence
-                if not target_sub_id:
-                    print(f"DEBUG: Subject mismatch for '{subject_val}' in row: {row}")
-                    error_count += 1
-                    continue
-                
-                if enrollment_no not in students_set:
-                    print(f"DEBUG: Student mismatch for '{enrollment_no}' in row: {row}")
-                    error_count += 1
-                    continue
-
-                # Prevent Duplicates
-                cursor.execute("SELECT attendance_id FROM attendance WHERE enrollment_no = %s AND subject_id = %s AND date = %s", 
-                             (enrollment_no, target_sub_id, att_date))
-                if cursor.fetchone():
-                    duplicate_count += 1
-                    continue
-
-                cursor.execute("""
-                    INSERT INTO attendance (enrollment_no, subject_id, date, status)
-                    VALUES (%s, %s, %s, %s)
-                """, (enrollment_no, target_sub_id, att_date, status or 'Present'))
-                success_count += 1
-            except Exception as row_err:
-                print(f"DEBUG: Row processing error: {row_err} | Row: {row}")
-                error_count += 1
-
-        conn.commit()
-        conn.close()
-
-        if success_count > 0:
-            flash(f"Synchronization Successful: {success_count} records established. ({error_count} errors, {duplicate_count} duplicates skipped)", "success")
-        else:
-            flash(f"Synchronization Failed: No valid records were identified. ({error_count} errors, {duplicate_count} duplicates)", "warning")
+    if file and file.filename.endswith('.csv'):
+        try:
+            file_path = os.path.join('static', 'uploads', file.filename)
+            if not os.path.exists('static/uploads'):
+                os.makedirs('static/uploads')
+            file.save(file_path)
             
-    except Exception as e:
-        flash(f"Central Database synchronization failure: {str(e)}", "danger")
-
+            from analysis import process_csv
+            success, message = process_csv(file_path)
+            
+            if success:
+                flash(message, "success")
+            else:
+                flash(message, "danger")
+        except Exception as e:
+            flash(f"System Error: {str(e)}", "danger")
+    
     return redirect(url_for('admin.view_attendance'))
 
 @admin_bp.route('/attendance/bulk', methods=['GET', 'POST'])
@@ -1627,6 +1560,8 @@ def upload_faculty_csv():
             flash(f"System Error: {str(e)}", "danger")
     else:
         return redirect(url_for('admin.view_faculty'))
+    
+    return redirect(url_for('admin.view_faculty'))
 
 
 @admin_bp.route('/upload_subject_csv', methods=['POST'])

@@ -1,0 +1,13 @@
+faculty_id,faculty_name,email,contact_no,department
+1,Dr. Isha Reddy,dr.isha.reddy@university.edu,8288011680,BCA
+2,Asst. Prof. Aavya Jain,asst.prof.aavya.jain@university.edu,8222086175,BCA
+3,Dr. Akash Kapoor,dr.akash.kapoor@university.edu,9905771010,BCA
+4,Dr. Meera Sharma,dr.meera.sharma@university.edu,9722202631,MCA
+5,Dr. Zoya Kapoor,dr.zoya.kapoor@university.edu,7484560462,MCA
+6,Asst. Prof. Isha Pandey,asst.prof.isha.pandey@university.edu,7383835976,MCA
+7,Asst. Prof. Diya Kapoor,asst.prof.diya.kapoor@university.edu,8644998825,BBA
+8,Dr. Arjun Chaudhary,dr.arjun.chaudhary@university.edu,7219367612,BBA
+9,Asst. Prof. Chaitanya Patel,asst.prof.chaitanya.patel@university.edu,8963240765,BBA
+10,Dr. Zoya Verma,dr.zoya.verma@university.edu,8652943082,MBA
+11,Dr. Krishna Sharma,dr.krishna.sharma@university.edu,9809770157,MBA
+12,Dr. Siddharth Gupta,dr.siddharth.gupta@university.edu,9913078842,MBA

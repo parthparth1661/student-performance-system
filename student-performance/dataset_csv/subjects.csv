@@ -1,0 +1,81 @@
+subject_id,subject_name,department,semester,faculty_name
+1,BCA Sem 1 - Subject 1,BCA,1,Dr. Isha Reddy
+2,BCA Sem 1 - Subject 2,BCA,1,Asst. Prof. Aavya Jain
+3,BCA Sem 1 - Subject 3,BCA,1,Dr. Isha Reddy
+4,BCA Sem 1 - Subject 4,BCA,1,Dr. Isha Reddy
+5,BCA Sem 2 - Subject 1,BCA,2,Dr. Akash Kapoor
+6,BCA Sem 2 - Subject 2,BCA,2,Asst. Prof. Aavya Jain
+7,BCA Sem 2 - Subject 3,BCA,2,Asst. Prof. Aavya Jain
+8,BCA Sem 2 - Subject 4,BCA,2,Dr. Akash Kapoor
+9,BCA Sem 3 - Subject 1,BCA,3,Asst. Prof. Aavya Jain
+10,BCA Sem 3 - Subject 2,BCA,3,Asst. Prof. Aavya Jain
+11,BCA Sem 3 - Subject 3,BCA,3,Dr. Akash Kapoor
+12,BCA Sem 3 - Subject 4,BCA,3,Asst. Prof. Aavya Jain
+13,BCA Sem 4 - Subject 1,BCA,4,Asst. Prof. Aavya Jain
+14,BCA Sem 4 - Subject 2,BCA,4,Asst. Prof. Aavya Jain
+15,BCA Sem 4 - Subject 3,BCA,4,Asst. Prof. Aavya Jain
+16,BCA Sem 4 - Subject 4,BCA,4,Asst. Prof. Aavya Jain
+17,BCA Sem 5 - Subject 1,BCA,5,Asst. Prof. Aavya Jain
+18,BCA Sem 5 - Subject 2,BCA,5,Dr. Isha Reddy
+19,BCA Sem 5 - Subject 3,BCA,5,Dr. Isha Reddy
+20,BCA Sem 5 - Subject 4,BCA,5,Asst. Prof. Aavya Jain
+21,BCA Sem 6 - Subject 1,BCA,6,Asst. Prof. Aavya Jain
+22,BCA Sem 6 - Subject 2,BCA,6,Dr. Isha Reddy
+23,BCA Sem 6 - Subject 3,BCA,6,Dr. Akash Kapoor
+24,BCA Sem 6 - Subject 4,BCA,6,Dr. Isha Reddy
+25,MCA Sem 1 - Subject 1,MCA,1,Dr. Meera Sharma
+26,MCA Sem 1 - Subject 2,MCA,1,Asst. Prof. Isha Pandey
+27,MCA Sem 1 - Subject 3,MCA,1,Asst. Prof. Isha Pandey
+28,MCA Sem 1 - Subject 4,MCA,1,Dr. Zoya Kapoor
+29,MCA Sem 2 - Subject 1,MCA,2,Dr. Zoya Kapoor
+30,MCA Sem 2 - Subject 2,MCA,2,Dr. Meera Sharma
+31,MCA Sem 2 - Subject 3,MCA,2,Dr. Zoya Kapoor
+32,MCA Sem 2 - Subject 4,MCA,2,Dr. Zoya Kapoor
+33,MCA Sem 3 - Subject 1,MCA,3,Asst. Prof. Isha Pandey
+34,MCA Sem 3 - Subject 2,MCA,3,Dr. Meera Sharma
+35,MCA Sem 3 - Subject 3,MCA,3,Dr. Zoya Kapoor
+36,MCA Sem 3 - Subject 4,MCA,3,Dr. Meera Sharma
+37,MCA Sem 4 - Subject 1,MCA,4,Dr. Zoya Kapoor
+38,MCA Sem 4 - Subject 2,MCA,4,Dr. Zoya Kapoor
+39,MCA Sem 4 - Subject 3,MCA,4,Dr. Meera Sharma
+40,MCA Sem 4 - Subject 4,MCA,4,Dr. Zoya Kapoor
+41,BBA Sem 1 - Subject 1,BBA,1,Asst. Prof. Chaitanya Patel
+42,BBA Sem 1 - Subject 2,BBA,1,Dr. Arjun Chaudhary
+43,BBA Sem 1 - Subject 3,BBA,1,Asst. Prof. Chaitanya Patel
+44,BBA Sem 1 - Subject 4,BBA,1,Asst. Prof. Diya Kapoor
+45,BBA Sem 2 - Subject 1,BBA,2,Dr. Arjun Chaudhary
+46,BBA Sem 2 - Subject 2,BBA,2,Dr. Arjun Chaudhary
+47,BBA Sem 2 - Subject 3,BBA,2,Asst. Prof. Diya Kapoor
+48,BBA Sem 2 - Subject 4,BBA,2,Asst. Prof. Chaitanya Patel
+49,BBA Sem 3 - Subject 1,BBA,3,Asst. Prof. Diya Kapoor
+50,BBA Sem 3 - Subject 2,BBA,3,Dr. Arjun Chaudhary
+51,BBA Sem 3 - Subject 3,BBA,3,Asst. Prof. Chaitanya Patel
+52,BBA Sem 3 - Subject 4,BBA,3,Asst. Prof. Diya Kapoor
+53,BBA Sem 4 - Subject 1,BBA,4,Dr. Arjun Chaudhary
+54,BBA Sem 4 - Subject 2,BBA,4,Asst. Prof. Chaitanya Patel
+55,BBA Sem 4 - Subject 3,BBA,4,Dr. Arjun Chaudhary
+56,BBA Sem 4 - Subject 4,BBA,4,Asst. Prof. Chaitanya Patel
+57,BBA Sem 5 - Subject 1,BBA,5,Asst. Prof. Diya Kapoor
+58,BBA Sem 5 - Subject 2,BBA,5,Asst. Prof. Diya Kapoor
+59,BBA Sem 5 - Subject 3,BBA,5,Dr. Arjun Chaudhary
+60,BBA Sem 5 - Subject 4,BBA,5,Asst. Prof. Chaitanya Patel
+61,BBA Sem 6 - Subject 1,BBA,6,Dr. Arjun Chaudhary
+62,BBA Sem 6 - Subject 2,BBA,6,Dr. Arjun Chaudhary
+63,BBA Sem 6 - Subject 3,BBA,6,Asst. Prof. Diya Kapoor
+64,BBA Sem 6 - Subject 4,BBA,6,Asst. Prof. Diya Kapoor
+65,MBA Sem 1 - Subject 1,MBA,1,Dr. Siddharth Gupta
+66,MBA Sem 1 - Subject 2,MBA,1,Dr. Krishna Sharma
+67,MBA Sem 1 - Subject 3,MBA,1,Dr. Krishna Sharma
+68,MBA Sem 1 - Subject 4,MBA,1,Dr. Siddharth Gupta
+69,MBA Sem 2 - Subject 1,MBA,2,Dr. Krishna Sharma
+70,MBA Sem 2 - Subject 2,MBA,2,Dr. Krishna Sharma
+71,MBA Sem 2 - Subject 3,MBA,2,Dr. Siddharth Gupta
+72,MBA Sem 2 - Subject 4,MBA,2,Dr. Krishna Sharma
+73,MBA Sem 3 - Subject 1,MBA,3,Dr. Krishna Sharma
+74,MBA Sem 3 - Subject 2,MBA,3,Dr. Krishna Sharma
+75,MBA Sem 3 - Subject 3,MBA,3,Dr. Krishna Sharma
+76,MBA Sem 3 - Subject 4,MBA,3,Dr. Siddharth Gupta
+77,MBA Sem 4 - Subject 1,MBA,4,Dr. Krishna Sharma
+78,MBA Sem 4 - Subject 2,MBA,4,Dr. Siddharth Gupta
+79,MBA Sem 4 - Subject 3,MBA,4,Dr. Siddharth Gupta
+80,MBA Sem 4 - Subject 4,MBA,4,Dr. Krishna Sharma
