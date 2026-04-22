@@ -290,6 +290,26 @@ def get_dashboard_chart_data(filters={}):
                 float(data['External'] or 0)
             ]
 
+        # 5. Monthly Attendance Comparison (New Line Chart Data)
+        query = f"""
+            SELECT 
+                MONTH(a.date) as month_num,
+                MONTHNAME(a.date) as month_name,
+                COUNT(CASE WHEN a.status = 'Present' THEN 1 END) * 100.0 / COUNT(*) as attendance_percentage
+            FROM attendance a
+            JOIN students s ON a.enrollment_no = s.enrollment_no
+            LEFT JOIN subjects sub ON a.subject_id = sub.subject_id
+            {where_clause}
+            GROUP BY MONTH(a.date), MONTHNAME(a.date)
+            ORDER BY MONTH(a.date)
+        """
+        cursor.execute(query, values)
+        data = cursor.fetchall()
+        analytics['monthly_attendance'] = {
+            'labels': [r['month_name'][:3] for r in data] if data else [],
+            'values': [round(float(r['attendance_percentage']), 1) for r in data] if data else []
+        }
+
         cursor.close()
         conn.close()
         return analytics

@@ -224,6 +224,21 @@ endblock %}
         </div>
     </div>
 
+    <!-- 📈 NEW ANALYTICAL VISUALIZATION -->
+    <div class="row g-4 mb-4">
+        <div class="col-lg-12">
+            <div class="card border-0 shadow-sm rounded-3 h-100">
+                <div class="card-header bg-white border-0 py-3 px-4 d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold mb-0 text-dark">Monthly Attendance Comparison</h6>
+                    <i class="bi bi-graph-up text-primary"></i>
+                </div>
+                <div class="card-body px-4 pb-4" style="height: 350px;">
+                    <canvas id="monthlyAttendanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 📋 INSIGHT TABLES -->
     <div class="row g-4">
         <!-- Table 1: Leaderboard -->
@@ -483,6 +498,50 @@ document.addEventListener('DOMContentLoaded', function() {
                 maintainAspectRatio: false,
                 plugins: {
                     legend: { position: 'bottom', labels: { usePointStyle: true, padding: 25 } }
+                }
+            }
+        });
+
+        // 5. Monthly Attendance Comparison (Line Chart)
+        charts.monthlyAttendance = new Chart(document.getElementById('monthlyAttendanceChart'), {
+            type: 'line',
+            data: {
+                labels: data.monthly_attendance.labels.length > 0 ? data.monthly_attendance.labels : ['No Data'],
+                datasets: [{
+                    label: 'Attendance %',
+                    data: data.monthly_attendance.values.length > 0 ? data.monthly_attendance.values : [0],
+                    borderColor: '#0ea5e9',
+                    backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                    pointBackgroundColor: '#0ea5e9',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `Attendance: ${context.parsed.y}%`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: { callback: value => value + '%' },
+                        grid: { borderDash: [5, 5] }
+                    },
+                    x: { grid: { display: false } }
                 }
             }
         });
