@@ -5,7 +5,7 @@
     <div class="bg-primary p-2 rounded-3 text-white shadow-sm">
         <i class="fas fa-comment-dots"></i>
     </div>
-    <h4 class="fw-bold mb-0">Engagement Repository</h4>
+    <h4 class="fw-bold mb-0">Feedback List</h4>
 </div>
 {% endblock %}
 
@@ -19,7 +19,7 @@
         <div class="col-md-3">
             <div class="card border-0 shadow-sm p-4 rounded-4 bg-white dashboard-kpi overflow-hidden position-relative">
                 <div class="position-relative z-1">
-                    <h6 class="text-muted small fw-bold text-uppercase ls-1">Accumulated Feed</h6>
+                    <h6 class="text-muted small fw-bold text-uppercase ls-1">Total Feedback</h6>
                     <h2 class="fw-bold mb-0 text-dark">{{ total }}</h2>
                 </div>
                 <div class="kpi-icon-bg"><i class="fas fa-inbox"></i></div>
@@ -28,7 +28,7 @@
         <div class="col-md-3">
             <div class="card border-0 shadow-sm p-4 rounded-4 bg-white dashboard-kpi overflow-hidden position-relative">
                 <div class="position-relative z-1">
-                    <h6 class="text-warning small fw-bold text-uppercase ls-1">Awaiting Intel</h6>
+                    <h6 class="text-warning small fw-bold text-uppercase ls-1">Pending Feedback</h6>
                     <h2 class="fw-bold mb-0 text-dark">{{ pending }}</h2>
                 </div>
                 <div class="kpi-icon-bg text-warning opacity-10"><i class="fas fa-clock"></i></div>
@@ -40,43 +40,26 @@
     <div class="card border-0 shadow-sm rounded-4 mb-4 filter-container">
         <div class="card-body p-4">
             <form method="GET" class="row g-3 align-items-end">
-                <div class="col-xl-3 col-lg-4">
-                    <label class="form-label text-muted x-small fw-bold text-uppercase ls-1">Global Identifier</label>
-                    <div class="input-group search-group">
-                        <span class="input-group-text border-0 bg-light text-muted"><i class="fas fa-search"></i></span>
-                        <input type="text" name="search" class="form-control border-0 bg-light rounded-end-3" 
-                               placeholder="Scan student or subject..." value="{{ filters.search }}">
-                    </div>
-                </div>
-                <div class="col-xl-2 col-lg-4">
-                    <label class="form-label text-muted x-small fw-bold text-uppercase ls-1">Entity focus</label>
-                    <select name="student_id" class="form-select border-0 bg-light rounded-3 shadow-none custom-select">
-                        <option value="All">All Personnel</option>
-                        {% for s in students %}
-                        <option value="{{ s.student_id }}" {% if filters.student_id == s.student_id %}selected{% endif %}>{{ s.student_name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-xl-2 col-lg-4">
-                    <label class="form-label text-muted x-small fw-bold text-uppercase ls-1">Vector Type</label>
+                <div class="col-xl-4 col-lg-4">
+                    <label class="form-label text-muted x-small fw-bold text-uppercase ls-1">Feedback Type</label>
                     <select name="feedback_type" class="form-select border-0 bg-light rounded-3 shadow-none custom-select">
-                        <option value="All">Entire Scope</option>
+                        <option value="All">All Feedback</option>
                         <option value="Suggestion" {% if filters.feedback_type == 'Suggestion' %}selected{% endif %}>Suggestion</option>
                         <option value="Issue" {% if filters.feedback_type == 'Issue' %}selected{% endif %}>Technical Issue</option>
                         <option value="Complaint" {% if filters.feedback_type == 'Complaint' %}selected{% endif %}>Complaint</option>
                     </select>
                 </div>
-                <div class="col-xl-2 col-lg-6">
-                    <label class="form-label text-muted x-small fw-bold text-uppercase ls-1">Sync Status</label>
+                <div class="col-xl-4 col-lg-4">
+                    <label class="form-label text-muted x-small fw-bold text-uppercase ls-1">Status</label>
                     <select name="status" class="form-select border-0 bg-light rounded-3 shadow-none custom-select">
                         <option value="All">All Matrices</option>
                         <option value="Pending" {% if filters.status == 'Pending' %}selected{% endif %}>Pending</option>
                         <option value="Replied" {% if filters.status == 'Replied' %}selected{% endif %}>Replied</option>
                     </select>
                 </div>
-                <div class="col-xl-3 col-lg-6 d-flex gap-2">
+                <div class="col-xl-4 col-lg-4 d-flex gap-2">
                     <button type="submit" class="btn btn-primary w-100 rounded-3 fw-bold py-2 shadow-sm filter-btn">
-                        Execute Filter
+                        Apply Filter
                     </button>
                     <a href="{{ url_for('admin.view_feedback') }}" class="btn btn-light border-0 bg-light rounded-3 px-3 py-2 text-muted reset-btn">
                         <i class="fas fa-sync-alt"></i>
@@ -92,13 +75,13 @@
             <table class="table table-hover align-middle mb-0 custom-table">
                 <thead class="ledger-head">
                     <tr class="text-secondary extra-small text-uppercase fw-bold text-center">
-                        <th class="ps-4 py-4 text-start font-poppins">Origin Personnel</th>
-                        <th class="font-poppins">Vector</th>
+                        <th class="ps-4 py-4 text-start font-poppins">Student Name</th>
+                        <th class="font-poppins">Type</th>
                         <th class="font-poppins">Subject</th>
-                        <th class="font-poppins text-start" style="width: 30%;">Communication Thread</th>
+                        <th class="font-poppins text-start" style="width: 30%;">Message</th>
                         <th class="font-poppins">Status</th>
-                        <th class="font-poppins">Timestamp</th>
-                        <th class="pe-4 text-center font-poppins">Resolve</th>
+                        <th class="font-poppins">Date</th>
+                        <th class="pe-4 text-center font-poppins">Reply</th>
                     </tr>
                 </thead>
                 <tbody class="ledger-body">
@@ -170,20 +153,20 @@
             <div class="modal-header border-0 p-4 pb-0">
                 <h5 class="modal-title fw-bold text-dark d-flex align-items-center gap-2">
                     <i class="fas fa-pen-nib text-primary"></i>
-                    Formal Resolution
+                    Reply Feedback
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!-- Action set dynamically via JS -->
             <form id="replyForm" method="POST" action="">
                 <div class="modal-body p-4">
-                    <label class="form-label text-muted x-small fw-bold text-uppercase ls-2 mb-3">Compose Response</label>
+                    <label class="form-label text-muted x-small fw-bold text-uppercase ls-2 mb-3">Compose Reply</label>
                     <textarea name="admin_reply" id="modal_reply_text" class="form-control border-0 bg-light p-3 rounded-4 shadow-none reply-textarea" 
-                              rows="6" placeholder="Draft the institutional resolution..." required></textarea>
+                              rows="6" placeholder="Draft the reply..." required></textarea>
                 </div>
                 <div class="modal-footer border-0 p-4 pt-0">
                     <button type="button" class="btn btn-light px-4 fw-bold rounded-pill text-muted extra-small" data-bs-dismiss="modal">DISCARD</button>
-                    <button type="submit" class="btn btn-primary px-4 fw-bold rounded-pill extra-small shadow-soft">COMMIT RESPONSE</button>
+                    <button type="submit" class="btn btn-primary px-4 fw-bold rounded-pill extra-small shadow-soft">REPLY</button>
                 </div>
             </form>
         </div>

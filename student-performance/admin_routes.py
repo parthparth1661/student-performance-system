@@ -544,7 +544,7 @@ def view_faculty():
     count_query = f"SELECT COUNT(*) as count FROM ({query}) as sub_query"
     cursor.execute(count_query, params)
     total_records = cursor.fetchone()['count']
-    total_pages = math.ceil(total_records / limit)
+    total_pages = math.ceil(total_records / limit) if total_records > 0 else 1
 
     query += " LIMIT %s OFFSET %s"
     params.extend([limit, offset])
@@ -1774,10 +1774,8 @@ def change_password():
 # --- 💬 6. FEEDBACK MODULE ---
 @admin_bp.route('/feedback')
 def view_feedback():
-    student_id = request.args.get('student_id', 'All')
     f_type = request.args.get('feedback_type', 'All')
     status = request.args.get('status', 'All')
-    search = request.args.get('search', '')
 
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
@@ -1785,10 +1783,6 @@ def view_feedback():
     query = "SELECT * FROM feedback WHERE 1=1"
     params = []
 
-    if student_id != 'All':
-        query += " AND student_id = %s"
-        params.append(student_id)
-    
     if f_type != 'All':
         query += " AND feedback_type = %s"
         params.append(f_type)
@@ -1796,10 +1790,6 @@ def view_feedback():
     if status != 'All':
         query += " AND status = %s"
         params.append(status)
-        
-    if search:
-        query += " AND (student_name LIKE %s OR comment LIKE %s OR subject LIKE %s)"
-        params.extend([f"%{search}%", f"%{search}%", f"%{search}%"])
 
     query += " ORDER BY date DESC"
     cursor.execute(query, params)
@@ -1821,7 +1811,7 @@ def view_feedback():
                          total=total_feedback,
                          pending=pending_count,
                          students=students,
-                         filters={'student_id': student_id, 'feedback_type': f_type, 'status': status, 'search': search})
+                         filters={'feedback_type': f_type, 'status': status})
 
 @admin_bp.route('/feedback/reply/<int:feedback_id>', methods=['POST'])
 def reply_feedback(feedback_id):
