@@ -1,12 +1,12 @@
 {% extends 'admin/layout.html' %}
 
-{% block page_title %}Faculty Pedagogical Analytics{% endblock %}
+{% block page_title %}Faculty Performance{% endblock %}
 
 {% block content %}
 <!-- 🛰️ HEADER SECTOR -->
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h2 class="fw-bold mb-0 text-dark">Institutional Faculty Performance</h2>
+        <h2 class="fw-bold mb-0 text-dark">Faculty Performance</h2>
         <p class="text-muted small">Analyze teaching efficacy based on real-world student academic outcomes.</p>
     </div>
     <div class="d-flex gap-2">
@@ -20,7 +20,7 @@
 <div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
     <form method="GET" action="{{ url_for('admin.faculty_analytics') }}" class="row g-3">
         <div class="col-md-9">
-            <label class="form-label extra-small fw-bold text-uppercase text-muted">Filter by Departmental Distribution</label>
+            <label class="form-label extra-small fw-bold text-uppercase text-muted">Filter by Department</label>
             <select name="department" class="form-select border-0 bg-light rounded-3 py-2">
                 <option value="All">All Institutional Departments</option>
                 <option value="BCA" {% if filters.department == 'BCA' %}selected{% endif %}>BCA</option>
@@ -32,7 +32,7 @@
         </div>
         <div class="col-md-3 d-flex align-items-end">
             <button type="submit" class="btn btn-primary w-100 rounded-3 fw-bold py-2">
-                <i class="fas fa-chart-line me-2"></i>Run Benchmarking
+                <i class="fas fa-chart-line me-2"></i>Show Results
             </button>
         </div>
     </form>
@@ -42,7 +42,7 @@
 <div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
     <h6 class="fw-bold mb-4 text-dark d-flex align-items-center">
         <span class="bg-primary-soft text-primary p-2 rounded-3 me-3"><i class="fas fa-medal"></i></span>
-        Faculty Efficiency Index (Global Benchmarking)
+        Faculty Performance (Success Rate)
     </h6>
     <div style="height: 350px;">
         <canvas id="facultyBenchmarkingChart"></canvas>
@@ -52,18 +52,18 @@
 <!-- 📦 ANALYSIS DATA MATRIX -->
 <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white">
     <div class="px-4 py-3 border-bottom d-flex justify-content-between align-items-center">
-        <h6 class="fw-bold m-0 text-dark">Pedagogical Efficiency Ledger</h6>
+        <h6 class="fw-bold m-0 text-dark">Faculty Performance List</h6>
         <span class="badge bg-light text-dark border px-3 py-2 rounded-pill small">Top Performing Instructors</span>
     </div>
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
             <thead class="bg-light">
                 <tr class="text-muted extra-small text-uppercase fw-bold">
-                    <th class="ps-4 py-3">Instructor Name</th>
-                    <th class="py-3">Primary Subject(s)</th>
-                    <th class="py-3">Avg Marks Gained</th>
-                    <th class="py-3">Success Matrix (Pass %)</th>
-                    <th class="py-3">Efficiency Status</th>
+                    <th class="ps-4 py-3">Faculty Name</th>
+                    <th class="py-3">Subjects</th>
+                    <th class="py-3">Average Marks</th>
+                    <th class="py-3">Pass %</th>
+                    <th class="py-3">Status</th>
                     <th class="py-3 text-center pe-4">Details</th>
                 </tr>
             </thead>
@@ -148,7 +148,7 @@
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Efficiency Score (%)',
+                    label: 'Success Rate (%)',
                     data: data,
                     backgroundColor: 'rgba(99, 102, 241, 0.7)',
                     borderColor: '#6366f1',

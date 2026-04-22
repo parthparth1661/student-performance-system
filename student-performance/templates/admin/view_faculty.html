@@ -13,8 +13,10 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <!-- Bulk Upload Form -->
         <div class="bg-white p-3 rounded-3 shadow-sm border">
-            <form action="{{ url_for('admin.upload_faculty_csv') }}" method="POST" enctype="multipart/form-data" class="d-flex gap-2">
-                <input type="file" name="file" accept=".csv" class="form-control form-control-sm border-0 bg-light" style="max-width: 250px;" required>
+            <form action="{{ url_for('admin.upload_faculty_csv') }}" method="POST" enctype="multipart/form-data"
+                class="d-flex gap-2">
+                <input type="file" name="file" accept=".csv" class="form-control form-control-sm border-0 bg-light"
+                    style="max-width: 250px;" required>
                 <button type="submit" class="btn btn-success btn-sm px-4 fw-bold rounded-2">
                     <i class="bi bi-file-earmark-spreadsheet me-1"></i>Upload CSV
                 </button>
@@ -22,11 +24,13 @@
         </div>
 
         <div class="d-flex gap-2">
-            <a href="{{ url_for('admin.add_faculty') }}" class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm transition-hover">
+            <a href="{{ url_for('admin.add_faculty') }}"
+                class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm transition-hover">
                 <i class="bi bi-person-plus me-1"></i> Add Faculty
             </a>
-            <a href="{{ url_for('admin.clear_faculty') }}" class="btn btn-danger px-4 rounded-3 fw-bold shadow-sm transition-hover"
-               onclick="return confirm('⚠️ SECURITY ALERT: Are you sure you want to delete ALL faculty records?\n\nThis action cannot be undone.')">
+            <a href="{{ url_for('admin.clear_faculty') }}"
+                class="btn btn-danger px-4 rounded-3 fw-bold shadow-sm transition-hover"
+                onclick="return confirm('⚠️ SECURITY ALERT: Are you sure you want to delete ALL faculty records?\n\nThis action cannot be undone.')">
                 <i class="bi bi-trash me-1"></i> Clear All Faculty
             </a>
         </div>
@@ -40,21 +44,22 @@
                     <label class="form-label small fw-bold text-secondary">Department</label>
                     <select name="department" class="form-select shadow-none border-light bg-light rounded-2">
                         <option value="">All Departments</option>
-                        <option value="BCA" {% if filters.department == 'BCA' %}selected{% endif %}>BCA</option>
-                        <option value="MCA" {% if filters.department == 'MCA' %}selected{% endif %}>MCA</option>
-                        <option value="MBA" {% if filters.department == 'MBA' %}selected{% endif %}>MBA</option>
+                        <option value="BCA" {% if filters.department=='BCA' %}selected{% endif %}>BCA</option>
+                        <option value="MCA" {% if filters.department=='MCA' %}selected{% endif %}>MCA</option>
+                        <option value="MBA" {% if filters.department=='MBA' %}selected{% endif %}>MBA</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label small fw-bold text-secondary">Search Name</label>
-                    <input type="text" name="search" class="form-control shadow-none border-light bg-light rounded-2" placeholder="Name or Email..." value="{{ filters.search or '' }}">
+                    <input type="text" name="search" class="form-control shadow-none border-light bg-light rounded-2"
+                        placeholder="Name or Email..." value="{{ filters.search or '' }}">
                 </div>
                 <div class="col-md-4 d-flex gap-2">
                     <button type="submit" class="btn btn-primary w-100 fw-bold rounded-2">
                         <i class="bi bi-filter me-1"></i> Filter
                     </button>
                     <a href="{{ url_for('admin.view_faculty') }}" class="btn btn-light w-100 fw-bold rounded-2 border">
-                        <i class="bi bi-arrow-clockwise me-1"></i> Reset
+                        <i class="bi bi-arrow-clockwise me-1"></i>
                     </a>
                 </div>
             </form>
@@ -80,7 +85,8 @@
                         <tr>
                             <td class="ps-4 py-3 text-start">
                                 <div class="d-flex align-items-center">
-                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 fw-bold" style="width: 38px; height: 38px; font-size: 14px;">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 fw-bold"
+                                        style="width: 38px; height: 38px; font-size: 14px;">
                                         {{ f.faculty_name[:1]|upper }}
                                     </div>
                                     <div class="fw-bold text-dark fs-6">{{ f.faculty_name }}</div>
@@ -92,21 +98,25 @@
                                     {{ f.department }}
                                 </span>
                             </td>
-                            <td><span class="fw-semibold text-dark small"><i class="bi bi-telephone text-muted me-1"></i> {{ f.contact_no or 'N/A' }}</span></td>
+                            <td><span class="fw-semibold text-dark small"><i
+                                        class="bi bi-telephone text-muted me-1"></i> {{ f.contact_no or 'N/A' }}</span>
+                            </td>
                             <td class="pe-4 text-end">
-                                <a href="{{ url_for('admin.edit_faculty', faculty_id=f.faculty_id) }}" class="btn btn-sm btn-outline-primary rounded-2 px-3 fw-bold me-2">
+                                <a href="{{ url_for('admin.edit_faculty', faculty_id=f.faculty_id) }}"
+                                    class="btn btn-sm btn-outline-primary rounded-2 px-3 fw-bold me-2">
                                     <i class="bi bi-pencil me-1"></i>Edit
                                 </a>
-                                <a href="{{ url_for('admin.delete_faculty', faculty_id=f.faculty_id) }}" 
-                                   class="btn btn-sm btn-outline-danger rounded-2 px-3 fw-bold"
-                                   onclick="return confirm('Are you sure you want to delete this faculty record?')">
+                                <a href="{{ url_for('admin.delete_faculty', faculty_id=f.faculty_id) }}"
+                                    class="btn btn-sm btn-outline-danger rounded-2 px-3 fw-bold"
+                                    onclick="return confirm('Are you sure you want to delete this faculty record?')">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </td>
                         </tr>
                         {% else %}
                         <tr>
-                            <td colspan="5" class="py-5 text-muted small">No faculty records identified in the institutional registry.</td>
+                            <td colspan="5" class="py-5 text-muted small">No faculty records identified in the
+                                institutional registry.</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -122,12 +132,18 @@
         <nav>
             <ul class="pagination pagination-sm mb-0 gap-2">
                 {% if page > 1 %}
-                <li class="page-item"><a class="page-link border-0 rounded-3 shadow-sm px-3 py-2 bg-white" href="{{ url_for('admin.view_faculty', page=page-1, department=filters.department, search=filters.search) }}"><i class="bi bi-chevron-left text-primary"></i></a></li>
+                <li class="page-item"><a class="page-link border-0 rounded-3 shadow-sm px-3 py-2 bg-white"
+                        href="{{ url_for('admin.view_faculty', page=page-1, department=filters.department, search=filters.search) }}"><i
+                            class="bi bi-chevron-left text-primary"></i></a></li>
                 {% endif %}
-                <li class="page-item active"><span class="page-link border-0 rounded-3 shadow-sm px-3 py-2 bg-primary text-white">{{ page }}</span></li>
-                {% if page < total_pages %}
-                <li class="page-item"><a class="page-link border-0 rounded-3 shadow-sm px-3 py-2 bg-white" href="{{ url_for('admin.view_faculty', page=page+1, department=filters.department, search=filters.search) }}"><i class="bi bi-chevron-right text-primary"></i></a></li>
-                {% endif %}
+                <li class="page-item active"><span
+                        class="page-link border-0 rounded-3 shadow-sm px-3 py-2 bg-primary text-white">{{ page }}</span>
+                </li>
+                {% if page < total_pages %} <li class="page-item"><a
+                        class="page-link border-0 rounded-3 shadow-sm px-3 py-2 bg-white"
+                        href="{{ url_for('admin.view_faculty', page=page+1, department=filters.department, search=filters.search) }}"><i
+                            class="bi bi-chevron-right text-primary"></i></a></li>
+                    {% endif %}
             </ul>
         </nav>
     </div>
@@ -135,9 +151,21 @@
 </div>
 
 <style>
-    .ls-1 { letter-spacing: 0.1em; }
-    .extra-small { font-size: 0.75rem; }
-    .transition-hover { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
-    .transition-hover:hover { transform: translateY(-3px); box-shadow: 0 12px 24px -6px rgba(0,0,0,0.1) !important; }
+    .ls-1 {
+        letter-spacing: 0.1em;
+    }
+
+    .extra-small {
+        font-size: 0.75rem;
+    }
+
+    .transition-hover {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .transition-hover:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.1) !important;
+    }
 </style>
 {% endblock %}

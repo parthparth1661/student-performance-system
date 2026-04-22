@@ -168,7 +168,7 @@ endblock %}
                         <i class="bi bi-trophy fs-5"></i>
                     </div>
                     <div class="text-muted small fw-bold text-uppercase ls-1" title="{{ stats.top_performer }}">Top
-                        Index</div>
+                        Student</div>
                     <div class="text-dark fw-bold mt-1 text-truncate" id="kpi-top" style="font-size: 0.9rem;">{{ stats.top_performer }}</div>
                 </div>
             </div>
@@ -181,7 +181,7 @@ endblock %}
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm rounded-3 h-100">
                 <div class="card-header bg-white border-0 py-3 px-4 d-flex justify-content-between align-items-center">
-                    <h6 class="fw-bold mb-0 text-dark">Subject Performance Trend</h6>
+                    <h6 class="fw-bold mb-0 text-dark">Marks by Subject</h6>
                     <span class="badge bg-light text-primary rounded-pill px-3 py-2 small">Analytical Data</span>
                 </div>
                 <div class="card-body px-4 pb-4" style="height: 300px;">
@@ -192,7 +192,7 @@ endblock %}
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm rounded-3 h-100">
                 <div class="card-header bg-white border-0 py-3 px-4 d-flex justify-content-between align-items-center">
-                    <h6 class="fw-bold mb-0 text-dark">Attendance Distribution</h6>
+                    <h6 class="fw-bold mb-0 text-dark">Attendance Overview</h6>
                     <i class="bi bi-pie-chart text-muted"></i>
                 </div>
                 <div class="card-body px-4 pb-4 text-center" style="height: 300px;">
@@ -205,7 +205,7 @@ endblock %}
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm rounded-3 h-100">
                 <div class="card-header bg-white border-0 py-3 px-4">
-                    <h6 class="fw-bold mb-0 text-dark">Pedagogical Component Metrics</h6>
+                    <h6 class="fw-bold mb-0 text-dark">Performance Comparison</h6>
                 </div>
                 <div class="card-body px-4 pb-4" style="height: 300px;">
                     <canvas id="performanceTrendChart"></canvas>
@@ -215,7 +215,7 @@ endblock %}
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm rounded-3 h-100">
                 <div class="card-header bg-white border-0 py-3 px-4">
-                    <h6 class="fw-bold mb-0 text-dark">Top Performer Lead Matrix</h6>
+                    <h6 class="fw-bold mb-0 text-dark">Result Overview</h6>
                 </div>
                 <div class="card-body px-4 pb-4" style="height: 300px;">
                     <canvas id="resultsDistChart"></canvas>
@@ -230,7 +230,7 @@ endblock %}
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm rounded-3">
                 <div class="card-header bg-white border-0 py-3 px-4">
-                    <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-trophy me-2 text-warning"></i>Leaderboard Top 5
+                    <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-trophy me-2 text-warning"></i>Top Students
                     </h6>
                 </div>
                 <div class="card-body p-0">
@@ -280,7 +280,7 @@ endblock %}
             <div class="card border-0 shadow-sm rounded-3">
                 <div class="card-header bg-white border-0 py-3 px-4">
                     <h6 class="fw-bold mb-1 text-dark"><i
-                            class="bi bi-shield-exclamation me-2 text-danger"></i>Performance Risk Alerts</h6>
+                            class="bi bi-shield-exclamation me-2 text-danger"></i>Low Performance Students</h6>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive" style="max-height: 250px; overflow-y: auto;">
@@ -401,7 +401,7 @@ document.addEventListener('DOMContentLoaded', function() {
             data: {
                 labels: data.subject_avg.labels.length > 0 ? data.subject_avg.labels : ['No Data'],
                 datasets: [{
-                    label: 'Average Score (%)',
+                    label: 'Average Marks (%)',
                     data: data.subject_avg.values.length > 0 ? data.subject_avg.values : [0],
                     backgroundColor: 'rgba(99, 102, 241, 0.75)',
                     borderColor: '#4f46e5',
@@ -447,7 +447,7 @@ document.addEventListener('DOMContentLoaded', function() {
             data: {
                 labels: data.performance_trend.labels.length > 0 ? data.performance_trend.labels : ['Awaiting Records'],
                 datasets: [{
-                    label: 'Performance Mean',
+                    label: 'Average Marks',
                     data: data.performance_trend.values.length > 0 ? data.performance_trend.values : [0],
                     borderColor: '#8b5cf6',
                     backgroundColor: 'rgba(139, 92, 246, 0.08)',
