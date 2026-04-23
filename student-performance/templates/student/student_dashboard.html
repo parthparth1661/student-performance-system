@@ -11,7 +11,7 @@
     </div>
 
     <!-- 🏁 STEP 2 — WELCOME SECTION 👋 -->
-    <div class="card shadow-sm border-0 rounded-3 mb-4 p-4 bg-white">
+    <div class="card shadow-sm border-0 rounded-3 mb-4 p-4 bg-white text-dark">
         <div class="row align-items-center">
             <div class="col-auto">
                 <div class="bg-indigo-light p-3 rounded-circle">
@@ -20,7 +20,7 @@
             </div>
             <div class="col">
                 <h5 class="fw-bold mb-1">Welcome back, {{ student.name }}!</h5>
-                <p class="text-muted mb-0">Here’s a snapshot of your institutional progress and academic Standing.</p>
+                <p class="text-muted mb-0">Here’s a snapshot of your institutional progress and academic standing.</p>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
                         <i class="bi bi-calendar-check"></i>
                     </div>
                 </div>
-                <div class="mt-2 text-muted x-small">Attendance Overview</div>
+                <div class="mt-2 text-muted x-small">Overall Presence</div>
             </div>
         </div>
         <!-- Average Marks -->
@@ -58,7 +58,7 @@
             <div class="card shadow-sm border-0 rounded-3 p-4 bg-white dashboard-card h-100">
                 <div class="text-muted small fw-bold text-uppercase mb-2">Subjects</div>
                 <div class="d-flex align-items-center justify-content-between">
-                    <h3 class="fw-bold mb-0 text-dark">{{ subjects|length }}</h3>
+                    <h3 class="fw-bold mb-0 text-dark">{{ marks_list|length }}</h3>
                     <div class="text-primary bg-light p-2 rounded-3">
                         <i class="bi bi-book"></i>
                     </div>
@@ -81,121 +81,139 @@
         </div>
     </div>
 
+    <!-- 📉 ANALYTICAL VISUALIZATIONS (REPLICATED FROM ADMIN) -->
     <div class="row g-4 mb-4">
-        <!-- 🏁 STEP 4 — PERFORMANCE SECTION 📈 -->
+        <!-- Row 1 Charts -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-3 h-100 bg-white">
+                <div class="card-header bg-white border-0 py-3 px-4 d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold mb-0 text-dark">Marks by Subject</h6>
+                    <span class="badge bg-light text-primary rounded-pill px-3 py-2 small">Academic Record</span>
+                </div>
+                <div class="card-body px-4 pb-4" style="height: 300px;">
+                    <canvas id="subjectAvgChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-3 h-100 bg-white">
+                <div class="card-header bg-white border-0 py-3 px-4 d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold mb-0 text-dark">Attendance Overview</h6>
+                    <i class="bi bi-pie-chart text-muted"></i>
+                </div>
+                <div class="card-body px-4 pb-4 text-center" style="height: 300px;">
+                    <canvas id="attendanceDistChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2 Charts -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-3 h-100 bg-white">
+                <div class="card-header bg-white border-0 py-3 px-4">
+                    <h6 class="fw-bold mb-0 text-dark">Performance Comparison</h6>
+                </div>
+                <div class="card-body px-4 pb-4" style="height: 300px;">
+                    <canvas id="performanceTrendChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-3 h-100 bg-white">
+                <div class="card-header bg-white border-0 py-3 px-4">
+                    <h6 class="fw-bold mb-0 text-dark">Result Overview</h6>
+                </div>
+                <div class="card-body px-4 pb-4" style="height: 300px;">
+                    <canvas id="resultsDistChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 3 Chart -->
+        <div class="col-lg-12">
+            <div class="card border-0 shadow-sm rounded-3 h-100 bg-white">
+                <div class="card-header bg-white border-0 py-3 px-4 d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold mb-0 text-dark">Monthly Attendance Comparison</h6>
+                    <i class="bi bi-graph-up text-primary"></i>
+                </div>
+                <div class="card-body px-4 pb-4" style="height: 350px;">
+                    <canvas id="monthlyAttendanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📋 INSIGHT TABLES / PROFILE -->
+    <div class="row g-4 mb-4">
+        <!-- Recent Marks Table -->
         <div class="col-lg-8">
-            <div class="card shadow-sm border-0 rounded-3 bg-white h-100">
-                <div class="card-body p-4">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h6 class="fw-bold mb-0">Student Performance</h6>
-                        <span class="badge bg-light text-indigo">Performance Chart</span>
-                    </div>
-                    <div style="height: 350px;">
-                        <canvas id="performanceChart"></canvas>
+            <div class="card border-0 shadow-sm rounded-3 bg-white mb-0 h-100 overflow-hidden">
+                <div class="card-header bg-white border-0 py-3 px-4">
+                    <h6 class="fw-bold mb-0 text-dark">Recent Academic Ledger</h6>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-light">
+                                <tr class="text-secondary small text-uppercase fw-bold ls-1">
+                                    <th class="ps-4">Subject</th>
+                                    <th class="text-center">Internal</th>
+                                    <th class="text-center">Viva</th>
+                                    <th class="text-center">External</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="pe-4 text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in marks_list[:5] %}
+                                <tr>
+                                    <td class="ps-4 fw-bold text-indigo">{{ item.subject }}</td>
+                                    <td class="text-center">{{ item.internal }}</td>
+                                    <td class="text-center">{{ item.viva }}</td>
+                                    <td class="text-center">{{ item.external }}</td>
+                                    <td class="text-center fw-bold">{{ item.total }}</td>
+                                    <td class="pe-4 text-center">
+                                        {% if item.total >= 40 %}
+                                        <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">Cleared</span>
+                                        {% else %}
+                                        <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3">Retake</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 🏁 STEP 5 — RECENT ACTIVITY / PROFILE SNIPPET 📋 -->
+        <!-- Identity Profile Snippet -->
         <div class="col-lg-4">
-            <div class="card shadow-sm border-0 rounded-3 bg-white h-100">
+            <div class="card border-0 shadow-sm rounded-3 bg-white h-100">
                 <div class="card-body p-4">
-                    <h6 class="fw-bold mb-4">Student Profile</h6>
+                    <h6 class="fw-bold mb-4 text-dark">Academic Identity</h6>
                     <div class="d-flex flex-column gap-3">
                         <div class="p-3 bg-light rounded-3">
                             <label class="text-muted x-small text-uppercase fw-bold d-block mb-1">Department</label>
-                            <span class="fw-semibold">{{ student.department }}</span>
+                            <span class="fw-semibold text-dark">{{ student.department }}</span>
                         </div>
                         <div class="p-3 bg-light rounded-3">
                             <label class="text-muted x-small text-uppercase fw-bold d-block mb-1">Current Semester</label>
-                            <span class="fw-semibold">Semester {{ student.semester }}</span>
+                            <span class="fw-semibold text-dark">Semester {{ student.semester }}</span>
                         </div>
                         <div class="p-3 bg-light rounded-3">
-                            <label class="text-muted x-small text-uppercase fw-bold d-block mb-1">Student ID</label>
-                            <span class="fw-semibold text-primary">{{ student.student_id or student.enrollment_no }}</span>
+                            <label class="text-muted x-small text-uppercase fw-bold d-block mb-1">Enrollment No</label>
+                            <span class="fw-semibold text-primary">{{ student.enrollment_no }}</span>
                         </div>
                         <div class="mt-3">
-                            <a href="{{ url_for('student.performance') }}" class="btn btn-indigo w-100 fw-bold rounded-pill">View Full Ledger</a>
+                            <a href="{{ url_for('student.performance') }}" class="btn btn-indigo w-100 fw-bold rounded-pill py-2">View Full Ledger</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- 🏁 STEP 5.5 — ATTENDANCE OVERVIEW CHART 📊 -->
-    <div class="row g-4 mb-4">
-        <div class="col-lg-12">
-            <div class="card shadow-sm border-0 rounded-3 bg-white h-100">
-                <div class="card-body p-4">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h6 class="fw-bold mb-0">Attendance Overview</h6>
-                        <span class="badge bg-light text-success">Attendance by Subject</span>
-                    </div>
-                    {% if attn_values|length > 0 %}
-                    <div style="height: 300px;">
-                        <canvas id="attendanceChart"></canvas>
-                    </div>
-                    {% else %}
-                    <div class="text-center py-5">
-                        <i class="bi bi-calendar-x fs-1 text-muted opacity-25"></i>
-                        <p class="text-muted mt-2">No attendance data available</p>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- RECENT ACTIVITY TABLE -->
-    <div class="card shadow-sm border-0 rounded-3 bg-white mb-4 overflow-hidden">
-        <div class="card-header bg-white border-0 p-4 pb-0">
-            <h6 class="fw-bold mb-0">Recent Marks</h6>
-        </div>
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                    <thead class="bg-light">
-                        <tr class="text-muted x-small text-uppercase">
-                            <th class="ps-4">Subject Name</th>
-                            <th class="text-center">Internal</th>
-                            <th class="text-center">Viva</th>
-                            <th class="text-center">External</th>
-                            <th class="text-center">Total</th>
-                            <th class="pe-4 text-center">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in marks_list[:5] %}
-                        <tr>
-                            <td class="ps-4 fw-bold text-indigo">{{ item.subject }}</td>
-                            <td class="text-center">{{ item.internal }}</td>
-                            <td class="text-center">{{ item.viva }}</td>
-                            <td class="text-center">{{ item.external }}</td>
-                            <td class="text-center fw-bold">{{ item.total }}</td>
-                            <td class="pe-4 text-center">
-                                {% if item.total >= 40 %}
-                                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">Cleared</span>
-                                {% else %}
-                                <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3">Retake</span>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- 🏁 STEP 6 — HIDDEN DATA FOR CHARTS (Fixes IDE Errors) -->
-<div id="chartDataContainer" style="display: none;"
-     data-perf-labels='{{ subjects|tojson|safe }}'
-     data-perf-values='{{ marks|tojson|safe }}'
-     data-attn-labels='{{ attn_labels|tojson|safe }}'
-     data-attn-values='{{ attn_values|tojson|safe }}'>
 </div>
 
 <style>
@@ -212,108 +230,167 @@
         transform: translateY(-1px);
         box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
     }
-    .dashboard-card {
-        transition: all 0.2s ease;
-    }
+    .dashboard-card { transition: all 0.2s ease; }
     .dashboard-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 20px rgba(0,0,0,0.05) !important;
     }
     .x-small { font-size: 0.75rem; letter-spacing: 0.05em; }
+    .ls-1 { letter-spacing: 0.1em; }
 </style>
 {% endblock %}
 
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const container = document.getElementById('chartDataContainer');
-        if (!container) return;
+document.addEventListener('DOMContentLoaded', function() {
+    const initialData = JSON.parse('{{ chart_data | tojson | safe }}');
+    let charts = {};
 
-        // --- 📈 PERFORMANCE CHART ---
-        const perfCtxEl = document.getElementById('performanceChart');
-        if (perfCtxEl) {
-            const perfCtx = perfCtxEl.getContext('2d');
-            const perfLabels = JSON.parse(container.dataset.perfLabels || '[]');
-            const perfValues = JSON.parse(container.dataset.perfValues || '[]');
+    function initCharts(data) {
+        // Destroy existing charts if any
+        Object.values(charts).forEach(c => c.destroy());
+        charts = {};
 
-            new Chart(perfCtx, {
-                type: 'bar',
-                data: {
-                    labels: perfLabels,
-                    datasets: [{
-                        label: 'Marks',
-                        data: perfValues,
-                        backgroundColor: 'rgba(79, 70, 229, 0.8)',
-                        borderColor: '#4F46E5',
-                        borderWidth: 0,
-                        borderRadius: 8,
-                        barThickness: 32
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100,
-                            ticks: { font: { family: 'Poppins', size: 11 } }
-                        },
-                        x: { ticks: { font: { family: 'Poppins', size: 10, weight: '600' } } }
-                    }
+        // 1. Subject-wise Marks
+        charts.subjectAvg = new Chart(document.getElementById('subjectAvgChart'), {
+            type: 'bar',
+            data: {
+                labels: data.subject_avg.labels.length > 0 ? data.subject_avg.labels : ['No Data'],
+                datasets: [{
+                    label: 'Marks Obtained',
+                    data: data.subject_avg.values.length > 0 ? data.subject_avg.values : [0],
+                    backgroundColor: 'rgba(99, 102, 241, 0.75)',
+                    borderColor: '#4f46e5',
+                    borderWidth: 2,
+                    borderRadius: 12
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, max: 100, grid: { borderDash: [5, 5] } },
+                    x: { grid: { display: false } }
                 }
-            });
-        }
+            }
+        });
 
-        // --- 📊 ATTENDANCE CHART ---
-        const attnCtxEl = document.getElementById('attendanceChart');
-        if (attnCtxEl) {
-            const attnCtx = attnCtxEl.getContext('2d');
-            const attnLabels = JSON.parse(container.dataset.attnLabels || '[]');
-            const attnValues = JSON.parse(container.dataset.attnValues || '[]');
+        // 2. Attendance Distribution
+        charts.attendanceDist = new Chart(document.getElementById('attendanceDistChart'), {
+            type: 'doughnut',
+            data: {
+                labels: data.attendance_dist.labels,
+                datasets: [{
+                    data: data.attendance_dist.values,
+                    backgroundColor: ['#10b981', '#ef4444'],
+                    hoverOffset: 20
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: { position: 'bottom', labels: { usePointStyle: true, padding: 25 } }
+                }
+            }
+        });
 
-            if (attnValues.length > 0) {
-                new Chart(attnCtx, {
-                    type: 'line',
-                    data: {
-                        labels: attnLabels,
-                        datasets: [{
-                            label: 'Attendance Rate',
-                            data: attnValues,
-                            backgroundColor: 'rgba(34, 197, 94, 0.1)',
-                            borderColor: '#22C55E',
-                            borderWidth: 3,
-                            tension: 0.4,
-                            pointBackgroundColor: '#22C55E',
-                            pointRadius: 4,
-                            fill: true
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) { return `Presence: ${context.parsed.y}%`; }
-                                }
+        // 3. Performance Breakdown (Exam Components)
+        charts.performanceTrend = new Chart(document.getElementById('performanceTrendChart'), {
+            type: 'line',
+            data: {
+                labels: data.performance_trend.labels.length > 0 ? data.performance_trend.labels : ['Awaiting Records'],
+                datasets: [{
+                    label: 'Average Score',
+                    data: data.performance_trend.values.length > 0 ? data.performance_trend.values : [0],
+                    borderColor: '#8b5cf6',
+                    backgroundColor: 'rgba(139, 92, 246, 0.08)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, max: 100 },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // 4. Results Distribution (Pass/Fail Status)
+        charts.resultsDist = new Chart(document.getElementById('resultsDistChart'), {
+            type: 'pie',
+            data: {
+                labels: data.results_dist.labels,
+                datasets: [{
+                    data: data.results_dist.values,
+                    backgroundColor: ['#22c55e', '#f43f5e'],
+                    borderColor: '#ffffff',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { usePointStyle: true, padding: 25 } }
+                }
+            }
+        });
+
+        // 5. Monthly Attendance Trend
+        charts.monthlyAttendance = new Chart(document.getElementById('monthlyAttendanceChart'), {
+            type: 'line',
+            data: {
+                labels: data.monthly_attendance.labels.length > 0 ? data.monthly_attendance.labels : ['No Data'],
+                datasets: [{
+                    label: 'Attendance %',
+                    data: data.monthly_attendance.values.length > 0 ? data.monthly_attendance.values : [0],
+                    borderColor: '#0ea5e9',
+                    backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                    pointBackgroundColor: '#0ea5e9',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `Attendance: ${context.parsed.y}%`;
                             }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                max: 100,
-                                ticks: { font: { family: 'Poppins', size: 11 } }
-                            },
-                            x: { ticks: { font: { family: 'Poppins', size: 10, weight: '600' } } }
                         }
                     }
-                });
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: { callback: value => value + '%' },
+                        grid: { borderDash: [5, 5] }
+                    },
+                    x: { grid: { display: false } }
+                }
             }
-        }
-    });
+        });
+    }
+
+    // Initialize with direct boot data
+    initCharts(initialData);
+});
 </script>
 {% endblock %}

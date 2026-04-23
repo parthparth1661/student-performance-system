@@ -46,7 +46,9 @@
                 Marks Overview
             </h6>
             <div class="chart-container overflow-hidden rounded-3" style="height: 300px;">
-                <canvas id="studentMarksChart"></canvas>
+                <canvas id="studentMarksChart" 
+                    data-labels='{{ marks_list|map(attribute="subject")|list|tojson|safe }}'
+                    data-values='{{ marks_list|map(attribute="total")|list|tojson|safe }}'></canvas>
             </div>
         </div>
     </div>
@@ -57,7 +59,9 @@
                 Attendance Overview
             </h6>
             <div class="chart-container overflow-hidden rounded-3 d-flex align-items-center justify-content-center" style="height: 300px;">
-                <canvas id="studentAttendanceChart"></canvas>
+                <canvas id="studentAttendanceChart"
+                    data-present="{{ attendance.present }}"
+                    data-absent="{{ attendance.absent }}"></canvas>
             </div>
         </div>
     </div>
@@ -66,7 +70,7 @@
 <!-- 📊 SUMMARY CARDS -->
 <div class="row g-4 mb-5">
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm rounded-4 p-4 text-center h-100 bg-white border-bottom border-primary border-4 shadow-hover">
+        <div class="card border-0 shadow-sm rounded-4 p-4 text-center h-100 bg-white shadow-hover">
             <p class="text-muted small fw-bold text-uppercase mb-2">Average Marks</p>
             <h2 class="fw-bold text-dark mb-0">{{ summary.avg_marks }}%</h2>
             <div class="progress mt-3 rounded-pill" style="height: 6px;">
@@ -75,7 +79,7 @@
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm rounded-4 p-4 text-center h-100 bg-white border-bottom border-info border-4 shadow-hover">
+        <div class="card border-0 shadow-sm rounded-4 p-4 text-center h-100 bg-white shadow-hover">
             <p class="text-muted small fw-bold text-uppercase mb-2">Attendance Rate</p>
             <h2 class="fw-bold {% if attendance.percent < 75 %}text-danger{% else %}text-dark{% endif %} mb-0">{{ attendance.percent }}%</h2>
             <p class="mb-0 extra-small mt-2 {% if attendance.percent < 75 %}text-danger fw-bold{% else %}text-muted{% endif %}">
@@ -84,14 +88,14 @@
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm rounded-4 p-4 text-center h-100 bg-white border-bottom border-success border-4 shadow-hover">
+        <div class="card border-0 shadow-sm rounded-4 p-4 text-center h-100 bg-white shadow-hover">
             <p class="text-muted small fw-bold text-uppercase mb-2">Total Subjects</p>
             <h2 class="fw-bold text-dark mb-0">{{ marks_list|length }}</h2>
             <p class="mb-0 extra-small mt-2 text-muted">Across {{ student.department }} Sem {{ student.semester }}</p>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm rounded-4 p-4 text-center h-100 bg-white border-bottom border-warning border-4 shadow-hover">
+        <div class="card border-0 shadow-sm rounded-4 p-4 text-center h-100 bg-white shadow-hover">
             <p class="text-muted small fw-bold text-uppercase mb-2">Final Outcome</p>
             <div class="mt-1">
                 {% if summary.overall_result == 'PASS' %}
@@ -109,7 +113,7 @@
     <!-- 📚 MARKS TABLE -->
     <div class="col-lg-12">
         <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100 bg-white shadow-hover">
-            <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
                 <h6 class="mb-0 fw-bold text-dark"><i class="fas fa-tasks me-2 text-primary"></i>Marks List</h6>
                 <div class="d-flex gap-2">
                     <span class="badge bg-light border text-muted">Total Marks: {{ summary.total_marks }}</span>
@@ -165,7 +169,7 @@
 <div class="row g-4 mb-5">
     <div class="col-lg-12">
         <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white">
-            <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
                 <h6 class="mb-0 fw-bold text-dark"><i class="fas fa-calendar-check me-2 text-info"></i>Attendance History</h6>
                 <div class="d-flex gap-3 extra-small">
                     <span class="text-muted fw-bold">TOTAL: <span class="text-dark">{{ attendance.total }}</span></span>
@@ -236,11 +240,15 @@
         });
 
         // 1. Marks Chart
+        const marksCanvas = document.getElementById('studentMarksChart');
+        const marksLabels = JSON.parse(marksCanvas.dataset.labels || '[]');
+        const marksValues = JSON.parse(marksCanvas.dataset.values || '[]');
+
         const marksData = {
-            labels: [{% for item in marks_list %}'{{ item.subject }}',{% endfor %}],
+            labels: marksLabels,
             datasets: [{
                 label: 'Marks',
-                data: [{% for item in marks_list %}{{ item.total }},{% endfor %}],
+                data: marksValues,
                 backgroundColor: 'rgba(99, 102, 241, 0.6)',
                 borderColor: '#4f46e5',
                 borderWidth: 2,
@@ -248,7 +256,7 @@
             }]
         };
 
-        new Chart(document.getElementById('studentMarksChart'), {
+        new Chart(marksCanvas, {
             type: 'bar',
             data: marksData,
             options: {
@@ -263,12 +271,16 @@
         });
 
         // 2. Attendance Chart
-        new Chart(document.getElementById('studentAttendanceChart'), {
+        const attendanceCanvas = document.getElementById('studentAttendanceChart');
+        const present = parseInt(attendanceCanvas.dataset.present || '0');
+        const absent = parseInt(attendanceCanvas.dataset.absent || '0');
+
+        new Chart(attendanceCanvas, {
             type: 'pie',
             data: {
                 labels: ['Present', 'Absent'],
                 datasets: [{
-                    data: [{{ attendance.present }}, {{ attendance.absent }}],
+                    data: [present, absent],
                     backgroundColor: ['#10b981', '#ef4444']
                 }]
             },

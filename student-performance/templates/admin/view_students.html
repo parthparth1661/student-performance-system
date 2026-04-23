@@ -8,8 +8,8 @@ endblock %}
     <!-- 🚀 HEADER SECTOR -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="fw-bold mb-1 text-dark">Student Directory</h4>
-            <p class="text-muted small mb-0">Manage institutional student records and profiles</p>
+            <h4 class="fw-bold mb-0 text-dark">Student module</h4>
+            <p class="text-muted small mb-0">Manage student records efficiently</p>
         </div>
         <div class="d-flex gap-3 align-items-center">
             <!-- 📥 CSV BULK UPLOAD -->
@@ -41,18 +41,8 @@ endblock %}
     <div class="card border-0 shadow-sm rounded-3 mb-4">
         <div class="card-body p-4">
             <form method="GET" class="row g-3 align-items-end">
-                <div class="col-lg-4">
-                    <label class="form-label fw-bold text-uppercase small text-muted mb-2"
-                        style="letter-spacing: 0.05em;">Quick Search</label>
-                    <div class="input-group">
-                        <span class="input-group-text border-0 bg-light text-muted"><i class="bi bi-search"></i></span>
-                        <input type="text" name="search" class="form-control border-0 bg-light rounded-end-3 py-2"
-                            placeholder="Name or Enrollment No..." value="{{ filters.search or '' }}">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <label class="form-label fw-bold text-uppercase small text-muted mb-2"
-                        style="letter-spacing: 0.05em;">Department</label>
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold small text-muted">Department</label>
                     <select name="department" class="form-select border-0 bg-light rounded-3 py-2">
                         <option value="">All Departments</option>
                         <option value="BCA" {% if filters.department=='BCA' %}selected{% endif %}>BCA</option>
@@ -61,9 +51,8 @@ endblock %}
                         <option value="MBA" {% if filters.department=='MBA' %}selected{% endif %}>MBA</option>
                     </select>
                 </div>
-                <div class="col-lg-2">
-                    <label class="form-label fw-bold text-uppercase small text-muted mb-2"
-                        style="letter-spacing: 0.05em;">Semester</label>
+                <div class="col-md-2">
+                    <label class="form-label fw-semibold small text-muted">Semester</label>
                     <select name="semester" class="form-select border-0 bg-light rounded-3 py-2">
                         <option value="">Select Sem</option>
                         {% for i in range(1, 9) %}
@@ -72,17 +61,19 @@ endblock %}
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col-lg-3">
-                    <div class="d-flex gap-2">
-                        <button type="submit"
-                            class="btn btn-primary w-100 rounded-3 fw-bold py-2 shadow-sm transition-hover">
-                            <i class="bi bi-funnel me-2"></i>Filter
-                        </button>
-                        <a href="{{ url_for('admin.view_students') }}"
-                            class="btn btn-light px-3 py-2 border rounded-3 text-muted shadow-sm transition-hover">
-                            <i class="bi bi-arrow-clockwise"></i>
-                        </a>
+                <div class="col-md-5">
+                    <label class="form-label fw-semibold small text-muted">Quick Search</label>
+                    <div class="input-group">
+                        <span class="input-group-text border-0 bg-light text-muted"><i class="bi bi-search"></i></span>
+                        <input type="text" name="search" class="form-control border-0 bg-light rounded-end-3 py-2"
+                            placeholder="Name or Enrollment No..." value="{{ filters.search or '' }}">
                     </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit"
+                        class="btn btn-primary w-100 rounded-3 fw-bold py-2 shadow-sm transition-hover">
+                        Apply Filters
+                    </button>
                 </div>
             </form>
         </div>

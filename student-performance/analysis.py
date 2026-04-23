@@ -24,6 +24,11 @@ def build_dashboard_conditions(filters={}):
     search = filters.get('search')
     attendance_filter = filters.get('attendance')
     subject_id = filters.get('subject_id')
+    enrollment_no = filters.get('enrollment_no')
+
+    if enrollment_no:
+        conditions.append("s.enrollment_no = %s")
+        values.append(enrollment_no)
 
     if department:
         conditions.append("s.department = %s")

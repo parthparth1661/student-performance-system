@@ -95,6 +95,9 @@ def dashboard():
     attn_labels = [r['subject_name'] for r in attn_subjects]
     attn_values = [round(float(r['attendance_pct']), 1) for r in attn_subjects]
 
+    # 📈 ANALYTICAL SYNC: GET ADMIN-STYLE CHART DATA (LOCKED TO STUDENT)
+    chart_data = analysis.get_dashboard_chart_data({'enrollment_no': enrollment_no})
+
     conn.close()
     
     return render_template('student/student_dashboard.html', 
@@ -105,7 +108,21 @@ def dashboard():
                            subjects=[m['subject'] for m in marks_data],
                            marks=[m['total'] for m in marks_data],
                            attn_labels=attn_labels,
-                           attn_values=attn_values)
+                           attn_values=attn_values,
+                           chart_data=chart_data)
+
+@student_bp.route('/api/stats')
+def student_api_stats():
+    """Secure API endpoint for student dashboard analytics"""
+    enrollment_no = session.get('student_id')
+    if not enrollment_no:
+        return {"error": "Unauthorized"}, 401
+    
+    # Force enrollment_no filter to ensure data privacy
+    filters = {'enrollment_no': enrollment_no}
+    chart_data = analysis.get_dashboard_chart_data(filters)
+    
+    return {"chart_data": chart_data}
 
 # 📈 ACADEMIC TRACKING: PERFORMANCE
 @student_bp.route('/performance')
@@ -138,6 +155,9 @@ def performance():
     lowest_sub = min(marks_data, key=lambda x: x['total']) if marks_data else None
     total_marks_sum = sum(m['total'] for m in marks_data)
     
+    # 📈 ANALYTICAL SYNC: GET ADMIN-STYLE CHART DATA (LOCKED TO STUDENT)
+    chart_data = analysis.get_dashboard_chart_data({'enrollment_no': enrollment_no})
+
     return render_template('student/performance.html', 
                            student=student_info, 
                            marks_list=marks_data, 
@@ -146,7 +166,8 @@ def performance():
                            subjects=[m['subject'] for m in marks_data],
                            marks=[m['total'] for m in marks_data],
                            attn_labels=attn_labels,
-                           attn_values=attn_values)
+                           attn_values=attn_values,
+                           chart_data=chart_data)
 
 # 🔐 SECURITY PROTOCOL: CHANGE PASSWORD
 @student_bp.route('/change_password', methods=['GET', 'POST'])
