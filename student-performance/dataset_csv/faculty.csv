@@ -1,13 +1,10 @@
-faculty_id,faculty_name,email,contact_no,department
-1,Dr. Isha Reddy,dr.isha.reddy@university.edu,8288011680,BCA
-2,Asst. Prof. Aavya Jain,asst.prof.aavya.jain@university.edu,8222086175,BCA
-3,Dr. Akash Kapoor,dr.akash.kapoor@university.edu,9905771010,BCA
-4,Dr. Meera Sharma,dr.meera.sharma@university.edu,9722202631,MCA
-5,Dr. Zoya Kapoor,dr.zoya.kapoor@university.edu,7484560462,MCA
-6,Asst. Prof. Isha Pandey,asst.prof.isha.pandey@university.edu,7383835976,MCA
-7,Asst. Prof. Diya Kapoor,asst.prof.diya.kapoor@university.edu,8644998825,BBA
-8,Dr. Arjun Chaudhary,dr.arjun.chaudhary@university.edu,7219367612,BBA
-9,Asst. Prof. Chaitanya Patel,asst.prof.chaitanya.patel@university.edu,8963240765,BBA
-10,Dr. Zoya Verma,dr.zoya.verma@university.edu,8652943082,MBA
-11,Dr. Krishna Sharma,dr.krishna.sharma@university.edu,9809770157,MBA
-12,Dr. Siddharth Gupta,dr.siddharth.gupta@university.edu,9913078842,MBA
+faculty_id,faculty_name,email,department,contact_no
+1,Prof. Sanjay Singh,prof.sanjay.singh.1@university.edu,BCA,7422410260
+2,Dr. Anjali Patel,dr.anjali.patel.2@university.edu,BCA,8957500008
+3,Dr. Anjali Desai,dr.anjali.desai.3@university.edu,BCA,7247212726
+4,Dr. Suresh Singh,dr.suresh.singh.4@university.edu,BCA,7075936954
+5,Prof. Rajesh Mehta,prof.rajesh.mehta.5@university.edu,MCA,8835120586
+6,Dr. Geeta Mehta,dr.geeta.mehta.6@university.edu,MCA,7385932511
+7,Prof. Kiran Kumar,prof.kiran.kumar.7@university.edu,MCA,7199621645
+8,Dr. Ramesh Rao,dr.ramesh.rao.8@university.edu,MCA,7850101780
+9,Prof. Geeta Gupta,prof.geeta.gupta.9@university.edu,MCA,8702139134

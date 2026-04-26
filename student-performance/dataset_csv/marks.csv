@@ -1,2401 +1,1201 @@
-enrollment_no,subject_name,faculty_name,internal_marks,viva_marks,external_marks,semester
-EN20240001,BCA Sem 1 - Subject 1,Dr. Isha Reddy,17,5,35,1
-EN20240001,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,21,7,43,1
-EN20240001,BCA Sem 1 - Subject 3,Dr. Isha Reddy,17,5,35,1
-EN20240001,BCA Sem 1 - Subject 4,Dr. Isha Reddy,22,7,46,1
-EN20240002,BCA Sem 1 - Subject 1,Dr. Isha Reddy,16,5,33,1
-EN20240002,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,16,5,35,1
-EN20240002,BCA Sem 1 - Subject 3,Dr. Isha Reddy,17,5,36,1
-EN20240002,BCA Sem 1 - Subject 4,Dr. Isha Reddy,19,6,39,1
-EN20240003,BCA Sem 1 - Subject 1,Dr. Isha Reddy,20,6,43,1
-EN20240003,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,20,6,43,1
-EN20240003,BCA Sem 1 - Subject 3,Dr. Isha Reddy,20,6,43,1
-EN20240003,BCA Sem 1 - Subject 4,Dr. Isha Reddy,18,6,36,1
-EN20240004,BCA Sem 1 - Subject 1,Dr. Isha Reddy,17,5,36,1
-EN20240004,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,21,7,44,1
-EN20240004,BCA Sem 1 - Subject 3,Dr. Isha Reddy,21,7,44,1
-EN20240004,BCA Sem 1 - Subject 4,Dr. Isha Reddy,17,5,35,1
-EN20240005,BCA Sem 1 - Subject 1,Dr. Isha Reddy,21,7,44,1
-EN20240005,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,15,5,33,1
-EN20240005,BCA Sem 1 - Subject 3,Dr. Isha Reddy,16,5,34,1
-EN20240005,BCA Sem 1 - Subject 4,Dr. Isha Reddy,19,6,40,1
-EN20240006,BCA Sem 1 - Subject 1,Dr. Isha Reddy,17,5,36,1
-EN20240006,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,15,5,33,1
-EN20240006,BCA Sem 1 - Subject 3,Dr. Isha Reddy,19,6,41,1
-EN20240006,BCA Sem 1 - Subject 4,Dr. Isha Reddy,21,7,44,1
-EN20240007,BCA Sem 1 - Subject 1,Dr. Isha Reddy,15,5,31,1
-EN20240007,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,15,5,32,1
-EN20240007,BCA Sem 1 - Subject 3,Dr. Isha Reddy,18,6,36,1
-EN20240007,BCA Sem 1 - Subject 4,Dr. Isha Reddy,18,6,39,1
-EN20240008,BCA Sem 1 - Subject 1,Dr. Isha Reddy,16,5,33,1
-EN20240008,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,18,6,38,1
-EN20240008,BCA Sem 1 - Subject 3,Dr. Isha Reddy,15,5,32,1
-EN20240008,BCA Sem 1 - Subject 4,Dr. Isha Reddy,19,6,41,1
-EN20240009,BCA Sem 1 - Subject 1,Dr. Isha Reddy,9,3,19,1
-EN20240009,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,11,3,23,1
-EN20240009,BCA Sem 1 - Subject 3,Dr. Isha Reddy,9,3,20,1
-EN20240009,BCA Sem 1 - Subject 4,Dr. Isha Reddy,7,2,17,1
-EN20240010,BCA Sem 1 - Subject 1,Dr. Isha Reddy,27,9,56,1
-EN20240010,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,27,9,55,1
-EN20240010,BCA Sem 1 - Subject 3,Dr. Isha Reddy,27,9,56,1
-EN20240010,BCA Sem 1 - Subject 4,Dr. Isha Reddy,28,9,57,1
-EN20240011,BCA Sem 1 - Subject 1,Dr. Isha Reddy,15,5,32,1
-EN20240011,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,15,5,33,1
-EN20240011,BCA Sem 1 - Subject 3,Dr. Isha Reddy,18,6,36,1
-EN20240011,BCA Sem 1 - Subject 4,Dr. Isha Reddy,18,6,36,1
-EN20240012,BCA Sem 1 - Subject 1,Dr. Isha Reddy,21,7,42,1
-EN20240012,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,20,6,41,1
-EN20240012,BCA Sem 1 - Subject 3,Dr. Isha Reddy,16,5,34,1
-EN20240012,BCA Sem 1 - Subject 4,Dr. Isha Reddy,21,7,42,1
-EN20240013,BCA Sem 1 - Subject 1,Dr. Isha Reddy,17,5,37,1
-EN20240013,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,21,7,45,1
-EN20240013,BCA Sem 1 - Subject 3,Dr. Isha Reddy,20,6,42,1
-EN20240013,BCA Sem 1 - Subject 4,Dr. Isha Reddy,20,6,43,1
-EN20240014,BCA Sem 1 - Subject 1,Dr. Isha Reddy,28,9,57,1
-EN20240014,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,27,9,55,1
-EN20240014,BCA Sem 1 - Subject 3,Dr. Isha Reddy,27,9,54,1
-EN20240014,BCA Sem 1 - Subject 4,Dr. Isha Reddy,27,9,54,1
-EN20240015,BCA Sem 1 - Subject 1,Dr. Isha Reddy,16,5,35,1
-EN20240015,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,20,6,41,1
-EN20240015,BCA Sem 1 - Subject 3,Dr. Isha Reddy,22,7,45,1
-EN20240015,BCA Sem 1 - Subject 4,Dr. Isha Reddy,20,6,43,1
-EN20240016,BCA Sem 1 - Subject 1,Dr. Isha Reddy,20,6,43,1
-EN20240016,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,19,6,41,1
-EN20240016,BCA Sem 1 - Subject 3,Dr. Isha Reddy,15,5,32,1
-EN20240016,BCA Sem 1 - Subject 4,Dr. Isha Reddy,21,7,44,1
-EN20240017,BCA Sem 1 - Subject 1,Dr. Isha Reddy,16,5,35,1
-EN20240017,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,15,5,33,1
-EN20240017,BCA Sem 1 - Subject 3,Dr. Isha Reddy,19,6,41,1
-EN20240017,BCA Sem 1 - Subject 4,Dr. Isha Reddy,20,6,41,1
-EN20240018,BCA Sem 1 - Subject 1,Dr. Isha Reddy,28,9,57,1
-EN20240018,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,27,9,57,1
-EN20240018,BCA Sem 1 - Subject 3,Dr. Isha Reddy,27,9,56,1
-EN20240018,BCA Sem 1 - Subject 4,Dr. Isha Reddy,28,9,58,1
-EN20240019,BCA Sem 1 - Subject 1,Dr. Isha Reddy,20,6,42,1
-EN20240019,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,19,6,39,1
-EN20240019,BCA Sem 1 - Subject 3,Dr. Isha Reddy,19,6,40,1
-EN20240019,BCA Sem 1 - Subject 4,Dr. Isha Reddy,22,7,45,1
-EN20240020,BCA Sem 1 - Subject 1,Dr. Isha Reddy,16,5,33,1
-EN20240020,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,16,5,33,1
-EN20240020,BCA Sem 1 - Subject 3,Dr. Isha Reddy,21,7,42,1
-EN20240020,BCA Sem 1 - Subject 4,Dr. Isha Reddy,17,5,35,1
-EN20240021,BCA Sem 1 - Subject 1,Dr. Isha Reddy,21,7,43,1
-EN20240021,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,21,7,44,1
-EN20240021,BCA Sem 1 - Subject 3,Dr. Isha Reddy,20,6,43,1
-EN20240021,BCA Sem 1 - Subject 4,Dr. Isha Reddy,21,7,43,1
-EN20240022,BCA Sem 1 - Subject 1,Dr. Isha Reddy,20,6,43,1
-EN20240022,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,21,7,43,1
-EN20240022,BCA Sem 1 - Subject 3,Dr. Isha Reddy,16,5,35,1
-EN20240022,BCA Sem 1 - Subject 4,Dr. Isha Reddy,21,7,43,1
-EN20240023,BCA Sem 1 - Subject 1,Dr. Isha Reddy,15,5,30,1
-EN20240023,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,22,7,45,1
-EN20240023,BCA Sem 1 - Subject 3,Dr. Isha Reddy,19,6,40,1
-EN20240023,BCA Sem 1 - Subject 4,Dr. Isha Reddy,22,7,45,1
-EN20240024,BCA Sem 1 - Subject 1,Dr. Isha Reddy,6,2,14,1
-EN20240024,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,6,2,14,1
-EN20240024,BCA Sem 1 - Subject 3,Dr. Isha Reddy,5,1,12,1
-EN20240024,BCA Sem 1 - Subject 4,Dr. Isha Reddy,10,3,21,1
-EN20240025,BCA Sem 1 - Subject 1,Dr. Isha Reddy,7,2,17,1
-EN20240025,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,4,1,11,1
-EN20240025,BCA Sem 1 - Subject 3,Dr. Isha Reddy,4,1,11,1
-EN20240025,BCA Sem 1 - Subject 4,Dr. Isha Reddy,9,3,18,1
-EN20240026,BCA Sem 1 - Subject 1,Dr. Isha Reddy,15,5,30,1
-EN20240026,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,19,6,40,1
-EN20240026,BCA Sem 1 - Subject 3,Dr. Isha Reddy,19,6,39,1
-EN20240026,BCA Sem 1 - Subject 4,Dr. Isha Reddy,15,5,32,1
-EN20240027,BCA Sem 1 - Subject 1,Dr. Isha Reddy,10,3,22,1
-EN20240027,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,9,3,18,1
-EN20240027,BCA Sem 1 - Subject 3,Dr. Isha Reddy,11,3,24,1
-EN20240027,BCA Sem 1 - Subject 4,Dr. Isha Reddy,8,2,17,1
-EN20240028,BCA Sem 1 - Subject 1,Dr. Isha Reddy,27,9,54,1
-EN20240028,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,25,8,53,1
-EN20240028,BCA Sem 1 - Subject 3,Dr. Isha Reddy,25,8,52,1
-EN20240028,BCA Sem 1 - Subject 4,Dr. Isha Reddy,26,8,55,1
-EN20240029,BCA Sem 1 - Subject 1,Dr. Isha Reddy,18,6,36,1
-EN20240029,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,17,5,36,1
-EN20240029,BCA Sem 1 - Subject 3,Dr. Isha Reddy,20,6,41,1
-EN20240029,BCA Sem 1 - Subject 4,Dr. Isha Reddy,17,5,35,1
-EN20240030,BCA Sem 1 - Subject 1,Dr. Isha Reddy,15,5,31,1
-EN20240030,BCA Sem 1 - Subject 2,Asst. Prof. Aavya Jain,20,6,42,1
-EN20240030,BCA Sem 1 - Subject 3,Dr. Isha Reddy,17,5,37,1
-EN20240030,BCA Sem 1 - Subject 4,Dr. Isha Reddy,18,6,36,1
-EN20240031,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,22,7,46,2
-EN20240031,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,22,7,45,2
-EN20240031,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,22,7,45,2
-EN20240031,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,15,5,31,2
-EN20240032,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,22,7,46,2
-EN20240032,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,21,7,42,2
-EN20240032,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,22,7,46,2
-EN20240032,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,18,6,38,2
-EN20240033,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,6,2,12,2
-EN20240033,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,6,2,12,2
-EN20240033,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,6,2,14,2
-EN20240033,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,5,1,12,2
-EN20240034,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,27,9,56,2
-EN20240034,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,26,8,53,2
-EN20240034,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,25,8,52,2
-EN20240034,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,27,9,57,2
-EN20240035,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,21,7,43,2
-EN20240035,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,15,5,31,2
-EN20240035,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,15,5,30,2
-EN20240035,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,22,7,45,2
-EN20240036,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,17,5,37,2
-EN20240036,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,18,6,36,2
-EN20240036,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,18,6,39,2
-EN20240036,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,16,5,33,2
-EN20240037,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,22,7,45,2
-EN20240037,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,17,5,37,2
-EN20240037,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,16,5,33,2
-EN20240037,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,17,5,37,2
-EN20240038,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,15,5,32,2
-EN20240038,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,17,5,37,2
-EN20240038,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,19,6,41,2
-EN20240038,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,20,6,42,2
-EN20240039,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,10,3,21,2
-EN20240039,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,4,1,11,2
-EN20240039,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,7,2,15,2
-EN20240039,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,9,3,19,2
-EN20240040,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,21,7,45,2
-EN20240040,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,17,5,36,2
-EN20240040,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,17,5,35,2
-EN20240040,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,17,5,35,2
-EN20240041,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,15,5,32,2
-EN20240041,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,17,5,36,2
-EN20240041,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,17,5,37,2
-EN20240041,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,20,6,43,2
-EN20240042,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,15,5,30,2
-EN20240042,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,15,5,31,2
-EN20240042,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,20,6,42,2
-EN20240042,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,16,5,34,2
-EN20240043,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,15,5,30,2
-EN20240043,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,19,6,41,2
-EN20240043,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,21,7,44,2
-EN20240043,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,21,7,42,2
-EN20240044,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,19,6,39,2
-EN20240044,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,17,5,37,2
-EN20240044,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,18,6,38,2
-EN20240044,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,22,7,46,2
-EN20240045,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,27,9,56,2
-EN20240045,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,28,9,58,2
-EN20240045,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,26,8,54,2
-EN20240045,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,25,8,53,2
-EN20240046,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,15,5,32,2
-EN20240046,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,17,5,36,2
-EN20240046,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,15,5,33,2
-EN20240046,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,18,6,39,2
-EN20240047,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,15,5,32,2
-EN20240047,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,17,5,36,2
-EN20240047,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,17,5,36,2
-EN20240047,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,17,5,36,2
-EN20240048,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,18,6,37,2
-EN20240048,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,21,7,42,2
-EN20240048,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,15,5,31,2
-EN20240048,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,19,6,39,2
-EN20240049,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,19,6,40,2
-EN20240049,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,20,6,41,2
-EN20240049,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,20,6,42,2
-EN20240049,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,20,6,41,2
-EN20240050,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,15,5,33,2
-EN20240050,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,19,6,41,2
-EN20240050,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,16,5,35,2
-EN20240050,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,21,7,45,2
-EN20240051,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,21,7,43,2
-EN20240051,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,16,5,35,2
-EN20240051,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,16,5,35,2
-EN20240051,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,16,5,34,2
-EN20240052,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,27,9,57,2
-EN20240052,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,28,9,57,2
-EN20240052,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,27,9,54,2
-EN20240052,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,26,8,53,2
-EN20240053,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,18,6,36,2
-EN20240053,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,17,5,36,2
-EN20240053,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,21,7,44,2
-EN20240053,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,22,7,45,2
-EN20240054,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,6,2,15,2
-EN20240054,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,10,3,21,2
-EN20240054,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,7,2,15,2
-EN20240054,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,8,2,17,2
-EN20240055,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,15,5,31,2
-EN20240055,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,16,5,33,2
-EN20240055,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,20,6,41,2
-EN20240055,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,19,6,40,2
-EN20240056,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,6,2,14,2
-EN20240056,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,8,2,18,2
-EN20240056,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,10,3,23,2
-EN20240056,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,10,3,21,2
-EN20240057,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,21,7,45,2
-EN20240057,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,15,5,31,2
-EN20240057,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,21,7,43,2
-EN20240057,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,20,6,41,2
-EN20240058,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,6,2,14,2
-EN20240058,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,7,2,16,2
-EN20240058,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,6,2,15,2
-EN20240058,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,8,2,18,2
-EN20240059,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,15,5,30,2
-EN20240059,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,18,6,39,2
-EN20240059,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,20,6,41,2
-EN20240059,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,16,5,34,2
-EN20240060,BCA Sem 2 - Subject 1,Dr. Akash Kapoor,15,5,30,2
-EN20240060,BCA Sem 2 - Subject 2,Asst. Prof. Aavya Jain,19,6,39,2
-EN20240060,BCA Sem 2 - Subject 3,Asst. Prof. Aavya Jain,20,6,41,2
-EN20240060,BCA Sem 2 - Subject 4,Dr. Akash Kapoor,16,5,35,2
-EN20240061,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,21,7,43,3
-EN20240061,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,15,5,31,3
-EN20240061,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,22,7,46,3
-EN20240061,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,21,7,42,3
-EN20240062,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,19,6,41,3
-EN20240062,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,18,6,38,3
-EN20240062,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,20,6,43,3
-EN20240062,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,15,5,32,3
-EN20240063,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,18,6,39,3
-EN20240063,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,18,6,38,3
-EN20240063,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,15,5,33,3
-EN20240063,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,18,6,38,3
-EN20240064,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,20,6,43,3
-EN20240064,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,22,7,45,3
-EN20240064,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,20,6,43,3
-EN20240064,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,19,6,41,3
-EN20240065,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,11,3,23,3
-EN20240065,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,6,2,14,3
-EN20240065,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,8,2,18,3
-EN20240065,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,10,3,21,3
-EN20240066,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,15,5,31,3
-EN20240066,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,19,6,40,3
-EN20240066,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,16,5,34,3
-EN20240066,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,15,5,32,3
-EN20240067,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,18,6,38,3
-EN20240067,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,15,5,32,3
-EN20240067,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,19,6,41,3
-EN20240067,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,16,5,35,3
-EN20240068,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,19,6,39,3
-EN20240068,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,16,5,33,3
-EN20240068,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,22,7,46,3
-EN20240068,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,20,6,42,3
-EN20240069,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,16,5,33,3
-EN20240069,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,20,6,42,3
-EN20240069,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,18,6,37,3
-EN20240069,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,16,5,33,3
-EN20240070,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,18,6,36,3
-EN20240070,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,15,5,30,3
-EN20240070,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,21,7,42,3
-EN20240070,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,18,6,38,3
-EN20240071,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,18,6,38,3
-EN20240071,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,21,7,45,3
-EN20240071,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,19,6,39,3
-EN20240071,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,16,5,33,3
-EN20240072,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,19,6,39,3
-EN20240072,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,21,7,44,3
-EN20240072,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,18,6,39,3
-EN20240072,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,20,6,43,3
-EN20240073,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,21,7,43,3
-EN20240073,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,15,5,32,3
-EN20240073,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,17,5,37,3
-EN20240073,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,17,5,36,3
-EN20240074,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,28,9,58,3
-EN20240074,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,25,8,52,3
-EN20240074,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,27,9,56,3
-EN20240074,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,27,9,57,3
-EN20240075,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,7,2,17,3
-EN20240075,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,11,3,24,3
-EN20240075,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,5,1,12,3
-EN20240075,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,4,1,10,3
-EN20240076,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,17,5,37,3
-EN20240076,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,20,6,42,3
-EN20240076,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,21,7,44,3
-EN20240076,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,18,6,38,3
-EN20240077,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,25,8,52,3
-EN20240077,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,25,8,53,3
-EN20240077,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,28,9,57,3
-EN20240077,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,27,9,56,3
-EN20240078,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,7,2,15,3
-EN20240078,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,5,1,11,3
-EN20240078,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,11,3,23,3
-EN20240078,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,5,1,13,3
-EN20240079,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,21,7,45,3
-EN20240079,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,20,6,42,3
-EN20240079,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,16,5,35,3
-EN20240079,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,20,6,42,3
-EN20240080,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,16,5,33,3
-EN20240080,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,19,6,40,3
-EN20240080,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,17,5,37,3
-EN20240080,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,22,7,46,3
-EN20240081,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,20,6,42,3
-EN20240081,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,16,5,34,3
-EN20240081,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,19,6,39,3
-EN20240081,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,20,6,41,3
-EN20240082,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,20,6,41,3
-EN20240082,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,17,5,37,3
-EN20240082,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,16,5,33,3
-EN20240082,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,17,5,37,3
-EN20240083,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,27,9,54,3
-EN20240083,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,27,9,57,3
-EN20240083,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,26,8,53,3
-EN20240083,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,26,8,55,3
-EN20240084,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,28,9,57,3
-EN20240084,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,26,8,53,3
-EN20240084,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,27,9,56,3
-EN20240084,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,28,9,57,3
-EN20240085,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,15,5,31,3
-EN20240085,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,17,5,35,3
-EN20240085,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,16,5,34,3
-EN20240085,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,18,6,37,3
-EN20240086,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,17,5,37,3
-EN20240086,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,21,7,44,3
-EN20240086,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,19,6,39,3
-EN20240086,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,17,5,35,3
-EN20240087,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,10,3,22,3
-EN20240087,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,4,1,11,3
-EN20240087,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,8,2,17,3
-EN20240087,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,9,3,21,3
-EN20240088,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,21,7,44,3
-EN20240088,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,16,5,35,3
-EN20240088,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,15,5,32,3
-EN20240088,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,17,5,35,3
-EN20240089,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,10,3,22,3
-EN20240089,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,6,2,12,3
-EN20240089,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,6,2,14,3
-EN20240089,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,10,3,22,3
-EN20240090,BCA Sem 3 - Subject 1,Asst. Prof. Aavya Jain,15,5,32,3
-EN20240090,BCA Sem 3 - Subject 2,Asst. Prof. Aavya Jain,19,6,39,3
-EN20240090,BCA Sem 3 - Subject 3,Dr. Akash Kapoor,18,6,39,3
-EN20240090,BCA Sem 3 - Subject 4,Asst. Prof. Aavya Jain,18,6,38,3
-EN20240091,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,15,5,33,4
-EN20240091,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,15,5,33,4
-EN20240091,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,21,7,43,4
-EN20240091,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,21,7,43,4
-EN20240092,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,21,7,44,4
-EN20240092,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,15,5,30,4
-EN20240092,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,16,5,34,4
-EN20240092,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,15,5,31,4
-EN20240093,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,21,7,44,4
-EN20240093,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,20,6,41,4
-EN20240093,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,15,5,30,4
-EN20240093,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,15,5,33,4
-EN20240094,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,17,5,37,4
-EN20240094,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,19,6,39,4
-EN20240094,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,22,7,45,4
-EN20240094,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,15,5,31,4
-EN20240095,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,26,8,54,4
-EN20240095,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,28,9,57,4
-EN20240095,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,25,8,53,4
-EN20240095,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,27,9,56,4
-EN20240096,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,20,6,41,4
-EN20240096,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,17,5,36,4
-EN20240096,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,21,7,43,4
-EN20240096,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,19,6,40,4
-EN20240097,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,8,2,18,4
-EN20240097,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,6,2,13,4
-EN20240097,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,9,3,19,4
-EN20240097,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,9,3,18,4
-EN20240098,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,7,2,16,4
-EN20240098,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,11,3,23,4
-EN20240098,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,6,2,12,4
-EN20240098,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,7,2,15,4
-EN20240099,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,18,6,38,4
-EN20240099,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,22,7,46,4
-EN20240099,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,18,6,37,4
-EN20240099,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,22,7,46,4
-EN20240100,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,6,2,12,4
-EN20240100,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,10,3,21,4
-EN20240100,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,6,2,14,4
-EN20240100,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,6,2,15,4
-EN20240101,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,16,5,34,4
-EN20240101,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,18,6,38,4
-EN20240101,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,16,5,33,4
-EN20240101,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,21,7,44,4
-EN20240102,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,15,5,33,4
-EN20240102,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,17,5,35,4
-EN20240102,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,20,6,42,4
-EN20240102,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,17,5,36,4
-EN20240103,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,18,6,38,4
-EN20240103,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,17,5,35,4
-EN20240103,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,20,6,43,4
-EN20240103,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,18,6,37,4
-EN20240104,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,15,5,31,4
-EN20240104,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,15,5,33,4
-EN20240104,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,21,7,43,4
-EN20240104,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,18,6,37,4
-EN20240105,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,20,6,41,4
-EN20240105,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,19,6,41,4
-EN20240105,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,21,7,45,4
-EN20240105,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,20,6,41,4
-EN20240106,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,15,5,31,4
-EN20240106,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,20,6,43,4
-EN20240106,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,20,6,41,4
-EN20240106,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,15,5,33,4
-EN20240107,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,25,8,53,4
-EN20240107,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,27,9,55,4
-EN20240107,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,25,8,52,4
-EN20240107,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,27,9,57,4
-EN20240108,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,18,6,36,4
-EN20240108,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,18,6,37,4
-EN20240108,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,20,6,41,4
-EN20240108,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,15,5,30,4
-EN20240109,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,17,5,36,4
-EN20240109,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,16,5,35,4
-EN20240109,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,19,6,39,4
-EN20240109,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,21,7,44,4
-EN20240110,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,20,6,41,4
-EN20240110,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,16,5,34,4
-EN20240110,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,21,7,45,4
-EN20240110,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,20,6,41,4
-EN20240111,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,27,9,57,4
-EN20240111,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,25,8,52,4
-EN20240111,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,27,9,54,4
-EN20240111,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,25,8,52,4
-EN20240112,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,19,6,40,4
-EN20240112,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,18,6,39,4
-EN20240112,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,21,7,42,4
-EN20240112,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,16,5,34,4
-EN20240113,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,19,6,39,4
-EN20240113,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,22,7,46,4
-EN20240113,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,18,6,36,4
-EN20240113,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,16,5,34,4
-EN20240114,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,26,8,54,4
-EN20240114,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,26,8,54,4
-EN20240114,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,26,8,53,4
-EN20240114,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,27,9,57,4
-EN20240115,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,19,6,41,4
-EN20240115,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,15,5,32,4
-EN20240115,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,16,5,33,4
-EN20240115,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,18,6,39,4
-EN20240116,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,22,7,45,4
-EN20240116,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,16,5,35,4
-EN20240116,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,15,5,32,4
-EN20240116,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,21,7,44,4
-EN20240117,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,20,6,41,4
-EN20240117,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,20,6,42,4
-EN20240117,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,22,7,45,4
-EN20240117,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,21,7,42,4
-EN20240118,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,18,6,38,4
-EN20240118,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,18,6,39,4
-EN20240118,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,16,5,35,4
-EN20240118,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,15,5,31,4
-EN20240119,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,26,8,55,4
-EN20240119,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,28,9,58,4
-EN20240119,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,28,9,57,4
-EN20240119,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,26,8,54,4
-EN20240120,BCA Sem 4 - Subject 1,Asst. Prof. Aavya Jain,9,3,18,4
-EN20240120,BCA Sem 4 - Subject 2,Asst. Prof. Aavya Jain,10,3,23,4
-EN20240120,BCA Sem 4 - Subject 3,Asst. Prof. Aavya Jain,5,1,11,4
-EN20240120,BCA Sem 4 - Subject 4,Asst. Prof. Aavya Jain,11,3,24,4
-EN20240121,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,5,1,13,5
-EN20240121,BCA Sem 5 - Subject 2,Dr. Isha Reddy,5,1,12,5
-EN20240121,BCA Sem 5 - Subject 3,Dr. Isha Reddy,7,2,17,5
-EN20240121,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,10,3,23,5
-EN20240122,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,6,2,15,5
-EN20240122,BCA Sem 5 - Subject 2,Dr. Isha Reddy,11,3,24,5
-EN20240122,BCA Sem 5 - Subject 3,Dr. Isha Reddy,4,1,10,5
-EN20240122,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,5,1,13,5
-EN20240123,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,19,6,39,5
-EN20240123,BCA Sem 5 - Subject 2,Dr. Isha Reddy,19,6,39,5
-EN20240123,BCA Sem 5 - Subject 3,Dr. Isha Reddy,16,5,35,5
-EN20240123,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,19,6,41,5
-EN20240124,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,22,7,46,5
-EN20240124,BCA Sem 5 - Subject 2,Dr. Isha Reddy,20,6,43,5
-EN20240124,BCA Sem 5 - Subject 3,Dr. Isha Reddy,16,5,33,5
-EN20240124,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,19,6,41,5
-EN20240125,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,22,7,45,5
-EN20240125,BCA Sem 5 - Subject 2,Dr. Isha Reddy,16,5,34,5
-EN20240125,BCA Sem 5 - Subject 3,Dr. Isha Reddy,22,7,45,5
-EN20240125,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,20,6,43,5
-EN20240126,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,27,9,55,5
-EN20240126,BCA Sem 5 - Subject 2,Dr. Isha Reddy,25,8,53,5
-EN20240126,BCA Sem 5 - Subject 3,Dr. Isha Reddy,28,9,58,5
-EN20240126,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,25,8,53,5
-EN20240127,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,11,3,23,5
-EN20240127,BCA Sem 5 - Subject 2,Dr. Isha Reddy,11,3,24,5
-EN20240127,BCA Sem 5 - Subject 3,Dr. Isha Reddy,6,2,13,5
-EN20240127,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,8,2,19,5
-EN20240128,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,18,6,39,5
-EN20240128,BCA Sem 5 - Subject 2,Dr. Isha Reddy,15,5,32,5
-EN20240128,BCA Sem 5 - Subject 3,Dr. Isha Reddy,15,5,32,5
-EN20240128,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,17,5,36,5
-EN20240129,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,28,9,58,5
-EN20240129,BCA Sem 5 - Subject 2,Dr. Isha Reddy,28,9,58,5
-EN20240129,BCA Sem 5 - Subject 3,Dr. Isha Reddy,28,9,57,5
-EN20240129,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,27,9,57,5
-EN20240130,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,19,6,40,5
-EN20240130,BCA Sem 5 - Subject 2,Dr. Isha Reddy,20,6,42,5
-EN20240130,BCA Sem 5 - Subject 3,Dr. Isha Reddy,15,5,30,5
-EN20240130,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,18,6,36,5
-EN20240131,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,16,5,33,5
-EN20240131,BCA Sem 5 - Subject 2,Dr. Isha Reddy,22,7,46,5
-EN20240131,BCA Sem 5 - Subject 3,Dr. Isha Reddy,22,7,46,5
-EN20240131,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,19,6,40,5
-EN20240132,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,17,5,37,5
-EN20240132,BCA Sem 5 - Subject 2,Dr. Isha Reddy,15,5,31,5
-EN20240132,BCA Sem 5 - Subject 3,Dr. Isha Reddy,16,5,34,5
-EN20240132,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,21,7,44,5
-EN20240133,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,18,6,39,5
-EN20240133,BCA Sem 5 - Subject 2,Dr. Isha Reddy,19,6,41,5
-EN20240133,BCA Sem 5 - Subject 3,Dr. Isha Reddy,18,6,37,5
-EN20240133,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,15,5,30,5
-EN20240134,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,20,6,43,5
-EN20240134,BCA Sem 5 - Subject 2,Dr. Isha Reddy,17,5,37,5
-EN20240134,BCA Sem 5 - Subject 3,Dr. Isha Reddy,16,5,34,5
-EN20240134,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,17,5,37,5
-EN20240135,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,4,1,11,5
-EN20240135,BCA Sem 5 - Subject 2,Dr. Isha Reddy,8,2,19,5
-EN20240135,BCA Sem 5 - Subject 3,Dr. Isha Reddy,9,3,20,5
-EN20240135,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,6,2,15,5
-EN20240136,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,19,6,39,5
-EN20240136,BCA Sem 5 - Subject 2,Dr. Isha Reddy,18,6,38,5
-EN20240136,BCA Sem 5 - Subject 3,Dr. Isha Reddy,16,5,35,5
-EN20240136,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,17,5,36,5
-EN20240137,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,18,6,36,5
-EN20240137,BCA Sem 5 - Subject 2,Dr. Isha Reddy,21,7,42,5
-EN20240137,BCA Sem 5 - Subject 3,Dr. Isha Reddy,19,6,39,5
-EN20240137,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,20,6,42,5
-EN20240138,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,16,5,34,5
-EN20240138,BCA Sem 5 - Subject 2,Dr. Isha Reddy,15,5,31,5
-EN20240138,BCA Sem 5 - Subject 3,Dr. Isha Reddy,17,5,37,5
-EN20240138,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,18,6,39,5
-EN20240139,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,28,9,57,5
-EN20240139,BCA Sem 5 - Subject 2,Dr. Isha Reddy,26,8,54,5
-EN20240139,BCA Sem 5 - Subject 3,Dr. Isha Reddy,27,9,55,5
-EN20240139,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,27,9,56,5
-EN20240140,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,9,3,19,5
-EN20240140,BCA Sem 5 - Subject 2,Dr. Isha Reddy,9,3,20,5
-EN20240140,BCA Sem 5 - Subject 3,Dr. Isha Reddy,7,2,16,5
-EN20240140,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,10,3,22,5
-EN20240141,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,17,5,37,5
-EN20240141,BCA Sem 5 - Subject 2,Dr. Isha Reddy,20,6,42,5
-EN20240141,BCA Sem 5 - Subject 3,Dr. Isha Reddy,15,5,32,5
-EN20240141,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,17,5,36,5
-EN20240142,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,15,5,32,5
-EN20240142,BCA Sem 5 - Subject 2,Dr. Isha Reddy,18,6,36,5
-EN20240142,BCA Sem 5 - Subject 3,Dr. Isha Reddy,18,6,36,5
-EN20240142,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,17,5,36,5
-EN20240143,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,21,7,42,5
-EN20240143,BCA Sem 5 - Subject 2,Dr. Isha Reddy,16,5,34,5
-EN20240143,BCA Sem 5 - Subject 3,Dr. Isha Reddy,19,6,39,5
-EN20240143,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,21,7,44,5
-EN20240144,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,20,6,43,5
-EN20240144,BCA Sem 5 - Subject 2,Dr. Isha Reddy,19,6,41,5
-EN20240144,BCA Sem 5 - Subject 3,Dr. Isha Reddy,16,5,35,5
-EN20240144,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,15,5,30,5
-EN20240145,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,22,7,46,5
-EN20240145,BCA Sem 5 - Subject 2,Dr. Isha Reddy,15,5,32,5
-EN20240145,BCA Sem 5 - Subject 3,Dr. Isha Reddy,15,5,32,5
-EN20240145,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,19,6,39,5
-EN20240146,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,25,8,52,5
-EN20240146,BCA Sem 5 - Subject 2,Dr. Isha Reddy,27,9,57,5
-EN20240146,BCA Sem 5 - Subject 3,Dr. Isha Reddy,27,9,55,5
-EN20240146,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,27,9,56,5
-EN20240147,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,17,5,35,5
-EN20240147,BCA Sem 5 - Subject 2,Dr. Isha Reddy,20,6,43,5
-EN20240147,BCA Sem 5 - Subject 3,Dr. Isha Reddy,15,5,32,5
-EN20240147,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,20,6,41,5
-EN20240148,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,21,7,44,5
-EN20240148,BCA Sem 5 - Subject 2,Dr. Isha Reddy,15,5,33,5
-EN20240148,BCA Sem 5 - Subject 3,Dr. Isha Reddy,18,6,39,5
-EN20240148,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,19,6,41,5
-EN20240149,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,28,9,57,5
-EN20240149,BCA Sem 5 - Subject 2,Dr. Isha Reddy,26,8,55,5
-EN20240149,BCA Sem 5 - Subject 3,Dr. Isha Reddy,27,9,57,5
-EN20240149,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,25,8,52,5
-EN20240150,BCA Sem 5 - Subject 1,Asst. Prof. Aavya Jain,18,6,37,5
-EN20240150,BCA Sem 5 - Subject 2,Dr. Isha Reddy,20,6,43,5
-EN20240150,BCA Sem 5 - Subject 3,Dr. Isha Reddy,22,7,46,5
-EN20240150,BCA Sem 5 - Subject 4,Asst. Prof. Aavya Jain,21,7,43,5
-EN20240151,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,20,6,43,6
-EN20240151,BCA Sem 6 - Subject 2,Dr. Isha Reddy,18,6,36,6
-EN20240151,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,22,7,46,6
-EN20240151,BCA Sem 6 - Subject 4,Dr. Isha Reddy,21,7,43,6
-EN20240152,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,21,7,43,6
-EN20240152,BCA Sem 6 - Subject 2,Dr. Isha Reddy,18,6,38,6
-EN20240152,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,18,6,38,6
-EN20240152,BCA Sem 6 - Subject 4,Dr. Isha Reddy,20,6,42,6
-EN20240153,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,22,7,45,6
-EN20240153,BCA Sem 6 - Subject 2,Dr. Isha Reddy,16,5,33,6
-EN20240153,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,16,5,33,6
-EN20240153,BCA Sem 6 - Subject 4,Dr. Isha Reddy,19,6,41,6
-EN20240154,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,22,7,45,6
-EN20240154,BCA Sem 6 - Subject 2,Dr. Isha Reddy,21,7,42,6
-EN20240154,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,21,7,42,6
-EN20240154,BCA Sem 6 - Subject 4,Dr. Isha Reddy,15,5,31,6
-EN20240155,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,16,5,34,6
-EN20240155,BCA Sem 6 - Subject 2,Dr. Isha Reddy,22,7,45,6
-EN20240155,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,21,7,42,6
-EN20240155,BCA Sem 6 - Subject 4,Dr. Isha Reddy,21,7,45,6
-EN20240156,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,20,6,43,6
-EN20240156,BCA Sem 6 - Subject 2,Dr. Isha Reddy,17,5,35,6
-EN20240156,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,17,5,37,6
-EN20240156,BCA Sem 6 - Subject 4,Dr. Isha Reddy,19,6,41,6
-EN20240157,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,15,5,31,6
-EN20240157,BCA Sem 6 - Subject 2,Dr. Isha Reddy,17,5,36,6
-EN20240157,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,21,7,45,6
-EN20240157,BCA Sem 6 - Subject 4,Dr. Isha Reddy,18,6,36,6
-EN20240158,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,21,7,42,6
-EN20240158,BCA Sem 6 - Subject 2,Dr. Isha Reddy,19,6,41,6
-EN20240158,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,15,5,33,6
-EN20240158,BCA Sem 6 - Subject 4,Dr. Isha Reddy,16,5,35,6
-EN20240159,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,20,6,42,6
-EN20240159,BCA Sem 6 - Subject 2,Dr. Isha Reddy,20,6,42,6
-EN20240159,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,15,5,31,6
-EN20240159,BCA Sem 6 - Subject 4,Dr. Isha Reddy,15,5,31,6
-EN20240160,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,17,5,37,6
-EN20240160,BCA Sem 6 - Subject 2,Dr. Isha Reddy,15,5,30,6
-EN20240160,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,19,6,39,6
-EN20240160,BCA Sem 6 - Subject 4,Dr. Isha Reddy,20,6,42,6
-EN20240161,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,15,5,33,6
-EN20240161,BCA Sem 6 - Subject 2,Dr. Isha Reddy,22,7,45,6
-EN20240161,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,21,7,42,6
-EN20240161,BCA Sem 6 - Subject 4,Dr. Isha Reddy,19,6,40,6
-EN20240162,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,26,8,53,6
-EN20240162,BCA Sem 6 - Subject 2,Dr. Isha Reddy,27,9,55,6
-EN20240162,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,27,9,54,6
-EN20240162,BCA Sem 6 - Subject 4,Dr. Isha Reddy,26,8,54,6
-EN20240163,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,5,1,13,6
-EN20240163,BCA Sem 6 - Subject 2,Dr. Isha Reddy,11,3,23,6
-EN20240163,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,6,2,14,6
-EN20240163,BCA Sem 6 - Subject 4,Dr. Isha Reddy,9,3,19,6
-EN20240164,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,18,6,37,6
-EN20240164,BCA Sem 6 - Subject 2,Dr. Isha Reddy,18,6,38,6
-EN20240164,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,22,7,46,6
-EN20240164,BCA Sem 6 - Subject 4,Dr. Isha Reddy,21,7,42,6
-EN20240165,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,16,5,33,6
-EN20240165,BCA Sem 6 - Subject 2,Dr. Isha Reddy,21,7,44,6
-EN20240165,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,20,6,41,6
-EN20240165,BCA Sem 6 - Subject 4,Dr. Isha Reddy,15,5,30,6
-EN20240166,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,21,7,45,6
-EN20240166,BCA Sem 6 - Subject 2,Dr. Isha Reddy,15,5,31,6
-EN20240166,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,16,5,34,6
-EN20240166,BCA Sem 6 - Subject 4,Dr. Isha Reddy,21,7,43,6
-EN20240167,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,9,3,19,6
-EN20240167,BCA Sem 6 - Subject 2,Dr. Isha Reddy,10,3,22,6
-EN20240167,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,7,2,17,6
-EN20240167,BCA Sem 6 - Subject 4,Dr. Isha Reddy,7,2,17,6
-EN20240168,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,16,5,35,6
-EN20240168,BCA Sem 6 - Subject 2,Dr. Isha Reddy,17,5,37,6
-EN20240168,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,17,5,37,6
-EN20240168,BCA Sem 6 - Subject 4,Dr. Isha Reddy,18,6,38,6
-EN20240169,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,18,6,39,6
-EN20240169,BCA Sem 6 - Subject 2,Dr. Isha Reddy,15,5,30,6
-EN20240169,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,17,5,35,6
-EN20240169,BCA Sem 6 - Subject 4,Dr. Isha Reddy,17,5,36,6
-EN20240170,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,21,7,43,6
-EN20240170,BCA Sem 6 - Subject 2,Dr. Isha Reddy,21,7,45,6
-EN20240170,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,19,6,39,6
-EN20240170,BCA Sem 6 - Subject 4,Dr. Isha Reddy,15,5,30,6
-EN20240171,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,27,9,54,6
-EN20240171,BCA Sem 6 - Subject 2,Dr. Isha Reddy,25,8,53,6
-EN20240171,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,28,9,57,6
-EN20240171,BCA Sem 6 - Subject 4,Dr. Isha Reddy,25,8,53,6
-EN20240172,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,16,5,35,6
-EN20240172,BCA Sem 6 - Subject 2,Dr. Isha Reddy,19,6,39,6
-EN20240172,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,18,6,39,6
-EN20240172,BCA Sem 6 - Subject 4,Dr. Isha Reddy,18,6,36,6
-EN20240173,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,18,6,39,6
-EN20240173,BCA Sem 6 - Subject 2,Dr. Isha Reddy,20,6,43,6
-EN20240173,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,19,6,40,6
-EN20240173,BCA Sem 6 - Subject 4,Dr. Isha Reddy,15,5,30,6
-EN20240174,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,22,7,46,6
-EN20240174,BCA Sem 6 - Subject 2,Dr. Isha Reddy,20,6,42,6
-EN20240174,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,15,5,32,6
-EN20240174,BCA Sem 6 - Subject 4,Dr. Isha Reddy,15,5,33,6
-EN20240175,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,18,6,37,6
-EN20240175,BCA Sem 6 - Subject 2,Dr. Isha Reddy,20,6,43,6
-EN20240175,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,21,7,44,6
-EN20240175,BCA Sem 6 - Subject 4,Dr. Isha Reddy,20,6,41,6
-EN20240176,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,27,9,55,6
-EN20240176,BCA Sem 6 - Subject 2,Dr. Isha Reddy,25,8,52,6
-EN20240176,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,27,9,56,6
-EN20240176,BCA Sem 6 - Subject 4,Dr. Isha Reddy,26,8,54,6
-EN20240177,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,15,5,33,6
-EN20240177,BCA Sem 6 - Subject 2,Dr. Isha Reddy,19,6,40,6
-EN20240177,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,21,7,45,6
-EN20240177,BCA Sem 6 - Subject 4,Dr. Isha Reddy,17,5,36,6
-EN20240178,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,20,6,43,6
-EN20240178,BCA Sem 6 - Subject 2,Dr. Isha Reddy,15,5,30,6
-EN20240178,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,17,5,35,6
-EN20240178,BCA Sem 6 - Subject 4,Dr. Isha Reddy,18,6,39,6
-EN20240179,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,20,6,43,6
-EN20240179,BCA Sem 6 - Subject 2,Dr. Isha Reddy,20,6,41,6
-EN20240179,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,15,5,31,6
-EN20240179,BCA Sem 6 - Subject 4,Dr. Isha Reddy,19,6,39,6
-EN20240180,BCA Sem 6 - Subject 1,Asst. Prof. Aavya Jain,6,2,14,6
-EN20240180,BCA Sem 6 - Subject 2,Dr. Isha Reddy,6,2,15,6
-EN20240180,BCA Sem 6 - Subject 3,Dr. Akash Kapoor,7,2,16,6
-EN20240180,BCA Sem 6 - Subject 4,Dr. Isha Reddy,9,3,18,6
-EN20240181,MCA Sem 1 - Subject 1,Dr. Meera Sharma,16,5,34,1
-EN20240181,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,16,5,33,1
-EN20240181,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,19,6,40,1
-EN20240181,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,20,6,42,1
-EN20240182,MCA Sem 1 - Subject 1,Dr. Meera Sharma,27,9,55,1
-EN20240182,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,28,9,58,1
-EN20240182,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,25,8,53,1
-EN20240182,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,25,8,52,1
-EN20240183,MCA Sem 1 - Subject 1,Dr. Meera Sharma,16,5,34,1
-EN20240183,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,15,5,33,1
-EN20240183,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,17,5,37,1
-EN20240183,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,17,5,35,1
-EN20240184,MCA Sem 1 - Subject 1,Dr. Meera Sharma,17,5,35,1
-EN20240184,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,17,5,36,1
-EN20240184,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,18,6,39,1
-EN20240184,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,18,6,37,1
-EN20240185,MCA Sem 1 - Subject 1,Dr. Meera Sharma,15,5,30,1
-EN20240185,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,18,6,39,1
-EN20240185,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,22,7,45,1
-EN20240185,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,22,7,46,1
-EN20240186,MCA Sem 1 - Subject 1,Dr. Meera Sharma,15,5,32,1
-EN20240186,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,20,6,42,1
-EN20240186,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,21,7,45,1
-EN20240186,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,19,6,40,1
-EN20240187,MCA Sem 1 - Subject 1,Dr. Meera Sharma,21,7,42,1
-EN20240187,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,19,6,40,1
-EN20240187,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,16,5,35,1
-EN20240187,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,19,6,41,1
-EN20240188,MCA Sem 1 - Subject 1,Dr. Meera Sharma,18,6,39,1
-EN20240188,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,19,6,41,1
-EN20240188,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,18,6,37,1
-EN20240188,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,17,5,35,1
-EN20240189,MCA Sem 1 - Subject 1,Dr. Meera Sharma,15,5,32,1
-EN20240189,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,15,5,32,1
-EN20240189,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,17,5,35,1
-EN20240189,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,18,6,39,1
-EN20240190,MCA Sem 1 - Subject 1,Dr. Meera Sharma,8,2,19,1
-EN20240190,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,6,2,12,1
-EN20240190,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,8,2,18,1
-EN20240190,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,9,3,20,1
-EN20240191,MCA Sem 1 - Subject 1,Dr. Meera Sharma,28,9,58,1
-EN20240191,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,26,8,53,1
-EN20240191,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,28,9,58,1
-EN20240191,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,27,9,57,1
-EN20240192,MCA Sem 1 - Subject 1,Dr. Meera Sharma,4,1,10,1
-EN20240192,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,8,2,17,1
-EN20240192,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,6,2,14,1
-EN20240192,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,6,2,15,1
-EN20240193,MCA Sem 1 - Subject 1,Dr. Meera Sharma,16,5,34,1
-EN20240193,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,17,5,37,1
-EN20240193,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,18,6,38,1
-EN20240193,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,22,7,46,1
-EN20240194,MCA Sem 1 - Subject 1,Dr. Meera Sharma,19,6,41,1
-EN20240194,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,21,7,45,1
-EN20240194,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,21,7,44,1
-EN20240194,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,18,6,38,1
-EN20240195,MCA Sem 1 - Subject 1,Dr. Meera Sharma,16,5,34,1
-EN20240195,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,21,7,44,1
-EN20240195,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,20,6,41,1
-EN20240195,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,17,5,36,1
-EN20240196,MCA Sem 1 - Subject 1,Dr. Meera Sharma,15,5,31,1
-EN20240196,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,16,5,33,1
-EN20240196,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,19,6,39,1
-EN20240196,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,21,7,43,1
-EN20240197,MCA Sem 1 - Subject 1,Dr. Meera Sharma,4,1,10,1
-EN20240197,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,8,2,19,1
-EN20240197,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,11,3,23,1
-EN20240197,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,9,3,20,1
-EN20240198,MCA Sem 1 - Subject 1,Dr. Meera Sharma,21,7,45,1
-EN20240198,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,15,5,30,1
-EN20240198,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,17,5,35,1
-EN20240198,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,21,7,45,1
-EN20240199,MCA Sem 1 - Subject 1,Dr. Meera Sharma,15,5,32,1
-EN20240199,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,18,6,38,1
-EN20240199,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,22,7,46,1
-EN20240199,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,18,6,38,1
-EN20240200,MCA Sem 1 - Subject 1,Dr. Meera Sharma,26,8,53,1
-EN20240200,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,28,9,58,1
-EN20240200,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,26,8,53,1
-EN20240200,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,26,8,55,1
-EN20240201,MCA Sem 1 - Subject 1,Dr. Meera Sharma,15,5,33,1
-EN20240201,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,18,6,39,1
-EN20240201,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,20,6,43,1
-EN20240201,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,20,6,42,1
-EN20240202,MCA Sem 1 - Subject 1,Dr. Meera Sharma,6,2,14,1
-EN20240202,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,5,1,12,1
-EN20240202,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,5,1,11,1
-EN20240202,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,5,1,12,1
-EN20240203,MCA Sem 1 - Subject 1,Dr. Meera Sharma,21,7,43,1
-EN20240203,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,16,5,33,1
-EN20240203,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,19,6,41,1
-EN20240203,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,16,5,34,1
-EN20240204,MCA Sem 1 - Subject 1,Dr. Meera Sharma,20,6,42,1
-EN20240204,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,19,6,39,1
-EN20240204,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,16,5,34,1
-EN20240204,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,15,5,32,1
-EN20240205,MCA Sem 1 - Subject 1,Dr. Meera Sharma,20,6,41,1
-EN20240205,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,21,7,42,1
-EN20240205,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,17,5,37,1
-EN20240205,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,17,5,36,1
-EN20240206,MCA Sem 1 - Subject 1,Dr. Meera Sharma,18,6,39,1
-EN20240206,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,20,6,41,1
-EN20240206,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,17,5,35,1
-EN20240206,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,18,6,38,1
-EN20240207,MCA Sem 1 - Subject 1,Dr. Meera Sharma,17,5,37,1
-EN20240207,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,17,5,35,1
-EN20240207,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,17,5,36,1
-EN20240207,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,19,6,39,1
-EN20240208,MCA Sem 1 - Subject 1,Dr. Meera Sharma,18,6,37,1
-EN20240208,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,19,6,41,1
-EN20240208,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,17,5,36,1
-EN20240208,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,21,7,43,1
-EN20240209,MCA Sem 1 - Subject 1,Dr. Meera Sharma,27,9,57,1
-EN20240209,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,28,9,57,1
-EN20240209,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,25,8,52,1
-EN20240209,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,25,8,53,1
-EN20240210,MCA Sem 1 - Subject 1,Dr. Meera Sharma,18,6,37,1
-EN20240210,MCA Sem 1 - Subject 2,Asst. Prof. Isha Pandey,17,5,36,1
-EN20240210,MCA Sem 1 - Subject 3,Asst. Prof. Isha Pandey,21,7,45,1
-EN20240210,MCA Sem 1 - Subject 4,Dr. Zoya Kapoor,22,7,46,1
-EN20240211,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,19,6,41,2
-EN20240211,MCA Sem 2 - Subject 2,Dr. Meera Sharma,22,7,45,2
-EN20240211,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,16,5,35,2
-EN20240211,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,22,7,45,2
-EN20240212,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,26,8,53,2
-EN20240212,MCA Sem 2 - Subject 2,Dr. Meera Sharma,26,8,53,2
-EN20240212,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,25,8,52,2
-EN20240212,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,25,8,52,2
-EN20240213,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,21,7,44,2
-EN20240213,MCA Sem 2 - Subject 2,Dr. Meera Sharma,18,6,39,2
-EN20240213,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,20,6,43,2
-EN20240213,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,21,7,45,2
-EN20240214,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,19,6,39,2
-EN20240214,MCA Sem 2 - Subject 2,Dr. Meera Sharma,19,6,39,2
-EN20240214,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,16,5,33,2
-EN20240214,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,15,5,30,2
-EN20240215,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,17,5,37,2
-EN20240215,MCA Sem 2 - Subject 2,Dr. Meera Sharma,17,5,37,2
-EN20240215,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,15,5,30,2
-EN20240215,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,20,6,42,2
-EN20240216,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,15,5,32,2
-EN20240216,MCA Sem 2 - Subject 2,Dr. Meera Sharma,19,6,39,2
-EN20240216,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,20,6,42,2
-EN20240216,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,21,7,42,2
-EN20240217,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,20,6,42,2
-EN20240217,MCA Sem 2 - Subject 2,Dr. Meera Sharma,17,5,37,2
-EN20240217,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,20,6,41,2
-EN20240217,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,21,7,45,2
-EN20240218,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,27,9,56,2
-EN20240218,MCA Sem 2 - Subject 2,Dr. Meera Sharma,25,8,53,2
-EN20240218,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,27,9,57,2
-EN20240218,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,27,9,54,2
-EN20240219,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,21,7,45,2
-EN20240219,MCA Sem 2 - Subject 2,Dr. Meera Sharma,20,6,42,2
-EN20240219,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,18,6,37,2
-EN20240219,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,21,7,42,2
-EN20240220,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,20,6,41,2
-EN20240220,MCA Sem 2 - Subject 2,Dr. Meera Sharma,16,5,33,2
-EN20240220,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,20,6,41,2
-EN20240220,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,19,6,41,2
-EN20240221,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,22,7,46,2
-EN20240221,MCA Sem 2 - Subject 2,Dr. Meera Sharma,22,7,45,2
-EN20240221,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,17,5,36,2
-EN20240221,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,21,7,43,2
-EN20240222,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,16,5,35,2
-EN20240222,MCA Sem 2 - Subject 2,Dr. Meera Sharma,22,7,46,2
-EN20240222,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,18,6,39,2
-EN20240222,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,20,6,42,2
-EN20240223,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,15,5,33,2
-EN20240223,MCA Sem 2 - Subject 2,Dr. Meera Sharma,19,6,40,2
-EN20240223,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,20,6,41,2
-EN20240223,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,20,6,41,2
-EN20240224,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,8,2,19,2
-EN20240224,MCA Sem 2 - Subject 2,Dr. Meera Sharma,4,1,10,2
-EN20240224,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,5,1,13,2
-EN20240224,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,4,1,11,2
-EN20240225,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,19,6,41,2
-EN20240225,MCA Sem 2 - Subject 2,Dr. Meera Sharma,21,7,45,2
-EN20240225,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,20,6,42,2
-EN20240225,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,21,7,45,2
-EN20240226,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,28,9,58,2
-EN20240226,MCA Sem 2 - Subject 2,Dr. Meera Sharma,25,8,53,2
-EN20240226,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,27,9,55,2
-EN20240226,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,25,8,53,2
-EN20240227,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,15,5,33,2
-EN20240227,MCA Sem 2 - Subject 2,Dr. Meera Sharma,18,6,36,2
-EN20240227,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,21,7,45,2
-EN20240227,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,16,5,35,2
-EN20240228,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,25,8,52,2
-EN20240228,MCA Sem 2 - Subject 2,Dr. Meera Sharma,28,9,58,2
-EN20240228,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,25,8,52,2
-EN20240228,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,27,9,55,2
-EN20240229,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,18,6,36,2
-EN20240229,MCA Sem 2 - Subject 2,Dr. Meera Sharma,22,7,45,2
-EN20240229,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,19,6,41,2
-EN20240229,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,18,6,38,2
-EN20240230,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,15,5,32,2
-EN20240230,MCA Sem 2 - Subject 2,Dr. Meera Sharma,17,5,37,2
-EN20240230,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,21,7,43,2
-EN20240230,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,16,5,33,2
-EN20240231,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,21,7,44,2
-EN20240231,MCA Sem 2 - Subject 2,Dr. Meera Sharma,16,5,33,2
-EN20240231,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,17,5,37,2
-EN20240231,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,22,7,45,2
-EN20240232,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,17,5,35,2
-EN20240232,MCA Sem 2 - Subject 2,Dr. Meera Sharma,20,6,41,2
-EN20240232,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,15,5,33,2
-EN20240232,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,16,5,35,2
-EN20240233,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,15,5,32,2
-EN20240233,MCA Sem 2 - Subject 2,Dr. Meera Sharma,18,6,39,2
-EN20240233,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,16,5,33,2
-EN20240233,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,19,6,39,2
-EN20240234,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,9,3,18,2
-EN20240234,MCA Sem 2 - Subject 2,Dr. Meera Sharma,7,2,17,2
-EN20240234,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,6,2,13,2
-EN20240234,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,5,1,12,2
-EN20240235,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,7,2,15,2
-EN20240235,MCA Sem 2 - Subject 2,Dr. Meera Sharma,10,3,23,2
-EN20240235,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,5,1,11,2
-EN20240235,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,6,2,14,2
-EN20240236,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,18,6,36,2
-EN20240236,MCA Sem 2 - Subject 2,Dr. Meera Sharma,19,6,40,2
-EN20240236,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,15,5,31,2
-EN20240236,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,16,5,34,2
-EN20240237,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,28,9,58,2
-EN20240237,MCA Sem 2 - Subject 2,Dr. Meera Sharma,28,9,58,2
-EN20240237,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,27,9,57,2
-EN20240237,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,27,9,56,2
-EN20240238,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,19,6,40,2
-EN20240238,MCA Sem 2 - Subject 2,Dr. Meera Sharma,16,5,33,2
-EN20240238,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,21,7,44,2
-EN20240238,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,15,5,32,2
-EN20240239,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,20,6,43,2
-EN20240239,MCA Sem 2 - Subject 2,Dr. Meera Sharma,18,6,38,2
-EN20240239,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,19,6,39,2
-EN20240239,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,17,5,35,2
-EN20240240,MCA Sem 2 - Subject 1,Dr. Zoya Kapoor,17,5,35,2
-EN20240240,MCA Sem 2 - Subject 2,Dr. Meera Sharma,16,5,34,2
-EN20240240,MCA Sem 2 - Subject 3,Dr. Zoya Kapoor,15,5,32,2
-EN20240240,MCA Sem 2 - Subject 4,Dr. Zoya Kapoor,20,6,43,2
-EN20240241,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,19,6,40,3
-EN20240241,MCA Sem 3 - Subject 2,Dr. Meera Sharma,22,7,46,3
-EN20240241,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,17,5,35,3
-EN20240241,MCA Sem 3 - Subject 4,Dr. Meera Sharma,21,7,44,3
-EN20240242,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,16,5,33,3
-EN20240242,MCA Sem 3 - Subject 2,Dr. Meera Sharma,19,6,40,3
-EN20240242,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,19,6,41,3
-EN20240242,MCA Sem 3 - Subject 4,Dr. Meera Sharma,18,6,36,3
-EN20240243,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,16,5,35,3
-EN20240243,MCA Sem 3 - Subject 2,Dr. Meera Sharma,15,5,31,3
-EN20240243,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,18,6,38,3
-EN20240243,MCA Sem 3 - Subject 4,Dr. Meera Sharma,17,5,37,3
-EN20240244,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,17,5,35,3
-EN20240244,MCA Sem 3 - Subject 2,Dr. Meera Sharma,19,6,40,3
-EN20240244,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,18,6,36,3
-EN20240244,MCA Sem 3 - Subject 4,Dr. Meera Sharma,21,7,43,3
-EN20240245,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,21,7,45,3
-EN20240245,MCA Sem 3 - Subject 2,Dr. Meera Sharma,17,5,36,3
-EN20240245,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,17,5,36,3
-EN20240245,MCA Sem 3 - Subject 4,Dr. Meera Sharma,19,6,41,3
-EN20240246,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,27,9,57,3
-EN20240246,MCA Sem 3 - Subject 2,Dr. Meera Sharma,25,8,52,3
-EN20240246,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,28,9,58,3
-EN20240246,MCA Sem 3 - Subject 4,Dr. Meera Sharma,25,8,52,3
-EN20240247,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,20,6,41,3
-EN20240247,MCA Sem 3 - Subject 2,Dr. Meera Sharma,15,5,32,3
-EN20240247,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,17,5,35,3
-EN20240247,MCA Sem 3 - Subject 4,Dr. Meera Sharma,18,6,36,3
-EN20240248,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,18,6,38,3
-EN20240248,MCA Sem 3 - Subject 2,Dr. Meera Sharma,16,5,34,3
-EN20240248,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,18,6,36,3
-EN20240248,MCA Sem 3 - Subject 4,Dr. Meera Sharma,18,6,39,3
-EN20240249,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,20,6,43,3
-EN20240249,MCA Sem 3 - Subject 2,Dr. Meera Sharma,20,6,42,3
-EN20240249,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,20,6,42,3
-EN20240249,MCA Sem 3 - Subject 4,Dr. Meera Sharma,18,6,37,3
-EN20240250,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,25,8,52,3
-EN20240250,MCA Sem 3 - Subject 2,Dr. Meera Sharma,27,9,55,3
-EN20240250,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,25,8,53,3
-EN20240250,MCA Sem 3 - Subject 4,Dr. Meera Sharma,27,9,57,3
-EN20240251,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,17,5,37,3
-EN20240251,MCA Sem 3 - Subject 2,Dr. Meera Sharma,18,6,39,3
-EN20240251,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,17,5,36,3
-EN20240251,MCA Sem 3 - Subject 4,Dr. Meera Sharma,22,7,45,3
-EN20240252,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,15,5,30,3
-EN20240252,MCA Sem 3 - Subject 2,Dr. Meera Sharma,19,6,39,3
-EN20240252,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,15,5,31,3
-EN20240252,MCA Sem 3 - Subject 4,Dr. Meera Sharma,18,6,38,3
-EN20240253,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,21,7,43,3
-EN20240253,MCA Sem 3 - Subject 2,Dr. Meera Sharma,20,6,43,3
-EN20240253,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,20,6,41,3
-EN20240253,MCA Sem 3 - Subject 4,Dr. Meera Sharma,15,5,33,3
-EN20240254,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,18,6,36,3
-EN20240254,MCA Sem 3 - Subject 2,Dr. Meera Sharma,21,7,43,3
-EN20240254,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,20,6,41,3
-EN20240254,MCA Sem 3 - Subject 4,Dr. Meera Sharma,22,7,45,3
-EN20240255,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,17,5,35,3
-EN20240255,MCA Sem 3 - Subject 2,Dr. Meera Sharma,17,5,35,3
-EN20240255,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,18,6,39,3
-EN20240255,MCA Sem 3 - Subject 4,Dr. Meera Sharma,18,6,38,3
-EN20240256,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,22,7,46,3
-EN20240256,MCA Sem 3 - Subject 2,Dr. Meera Sharma,16,5,35,3
-EN20240256,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,18,6,38,3
-EN20240256,MCA Sem 3 - Subject 4,Dr. Meera Sharma,21,7,45,3
-EN20240257,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,17,5,37,3
-EN20240257,MCA Sem 3 - Subject 2,Dr. Meera Sharma,18,6,39,3
-EN20240257,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,15,5,32,3
-EN20240257,MCA Sem 3 - Subject 4,Dr. Meera Sharma,16,5,35,3
-EN20240258,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,19,6,39,3
-EN20240258,MCA Sem 3 - Subject 2,Dr. Meera Sharma,22,7,45,3
-EN20240258,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,21,7,43,3
-EN20240258,MCA Sem 3 - Subject 4,Dr. Meera Sharma,18,6,37,3
-EN20240259,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,19,6,41,3
-EN20240259,MCA Sem 3 - Subject 2,Dr. Meera Sharma,19,6,40,3
-EN20240259,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,18,6,37,3
-EN20240259,MCA Sem 3 - Subject 4,Dr. Meera Sharma,20,6,42,3
-EN20240260,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,22,7,46,3
-EN20240260,MCA Sem 3 - Subject 2,Dr. Meera Sharma,18,6,38,3
-EN20240260,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,16,5,34,3
-EN20240260,MCA Sem 3 - Subject 4,Dr. Meera Sharma,20,6,43,3
-EN20240261,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,22,7,45,3
-EN20240261,MCA Sem 3 - Subject 2,Dr. Meera Sharma,19,6,40,3
-EN20240261,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,18,6,37,3
-EN20240261,MCA Sem 3 - Subject 4,Dr. Meera Sharma,21,7,44,3
-EN20240262,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,15,5,31,3
-EN20240262,MCA Sem 3 - Subject 2,Dr. Meera Sharma,20,6,42,3
-EN20240262,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,15,5,30,3
-EN20240262,MCA Sem 3 - Subject 4,Dr. Meera Sharma,16,5,35,3
-EN20240263,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,10,3,22,3
-EN20240263,MCA Sem 3 - Subject 2,Dr. Meera Sharma,8,2,19,3
-EN20240263,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,6,2,15,3
-EN20240263,MCA Sem 3 - Subject 4,Dr. Meera Sharma,6,2,12,3
-EN20240264,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,28,9,57,3
-EN20240264,MCA Sem 3 - Subject 2,Dr. Meera Sharma,28,9,58,3
-EN20240264,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,26,8,55,3
-EN20240264,MCA Sem 3 - Subject 4,Dr. Meera Sharma,25,8,52,3
-EN20240265,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,9,3,18,3
-EN20240265,MCA Sem 3 - Subject 2,Dr. Meera Sharma,7,2,15,3
-EN20240265,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,9,3,20,3
-EN20240265,MCA Sem 3 - Subject 4,Dr. Meera Sharma,8,2,17,3
-EN20240266,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,16,5,33,3
-EN20240266,MCA Sem 3 - Subject 2,Dr. Meera Sharma,15,5,31,3
-EN20240266,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,21,7,45,3
-EN20240266,MCA Sem 3 - Subject 4,Dr. Meera Sharma,15,5,32,3
-EN20240267,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,22,7,46,3
-EN20240267,MCA Sem 3 - Subject 2,Dr. Meera Sharma,20,6,42,3
-EN20240267,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,16,5,34,3
-EN20240267,MCA Sem 3 - Subject 4,Dr. Meera Sharma,20,6,41,3
-EN20240268,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,5,1,12,3
-EN20240268,MCA Sem 3 - Subject 2,Dr. Meera Sharma,10,3,21,3
-EN20240268,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,6,2,14,3
-EN20240268,MCA Sem 3 - Subject 4,Dr. Meera Sharma,6,2,14,3
-EN20240269,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,20,6,41,3
-EN20240269,MCA Sem 3 - Subject 2,Dr. Meera Sharma,17,5,36,3
-EN20240269,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,16,5,34,3
-EN20240269,MCA Sem 3 - Subject 4,Dr. Meera Sharma,22,7,46,3
-EN20240270,MCA Sem 3 - Subject 1,Asst. Prof. Isha Pandey,16,5,35,3
-EN20240270,MCA Sem 3 - Subject 2,Dr. Meera Sharma,18,6,36,3
-EN20240270,MCA Sem 3 - Subject 3,Dr. Zoya Kapoor,18,6,39,3
-EN20240270,MCA Sem 3 - Subject 4,Dr. Meera Sharma,18,6,38,3
-EN20240271,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,21,7,45,4
-EN20240271,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,15,5,31,4
-EN20240271,MCA Sem 4 - Subject 3,Dr. Meera Sharma,20,6,41,4
-EN20240271,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,21,7,45,4
-EN20240272,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,26,8,54,4
-EN20240272,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,25,8,53,4
-EN20240272,MCA Sem 4 - Subject 3,Dr. Meera Sharma,25,8,52,4
-EN20240272,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,26,8,54,4
-EN20240273,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,18,6,39,4
-EN20240273,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,21,7,42,4
-EN20240273,MCA Sem 4 - Subject 3,Dr. Meera Sharma,16,5,33,4
-EN20240273,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,19,6,40,4
-EN20240274,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,15,5,30,4
-EN20240274,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,17,5,37,4
-EN20240274,MCA Sem 4 - Subject 3,Dr. Meera Sharma,15,5,31,4
-EN20240274,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,19,6,39,4
-EN20240275,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,6,2,15,4
-EN20240275,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,6,2,14,4
-EN20240275,MCA Sem 4 - Subject 3,Dr. Meera Sharma,9,3,21,4
-EN20240275,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,10,3,22,4
-EN20240276,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,28,9,57,4
-EN20240276,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,26,8,55,4
-EN20240276,MCA Sem 4 - Subject 3,Dr. Meera Sharma,26,8,53,4
-EN20240276,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,28,9,57,4
-EN20240277,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,8,2,19,4
-EN20240277,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,9,3,18,4
-EN20240277,MCA Sem 4 - Subject 3,Dr. Meera Sharma,7,2,15,4
-EN20240277,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,6,2,13,4
-EN20240278,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,6,2,15,4
-EN20240278,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,4,1,11,4
-EN20240278,MCA Sem 4 - Subject 3,Dr. Meera Sharma,5,1,11,4
-EN20240278,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,8,2,19,4
-EN20240279,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,16,5,33,4
-EN20240279,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,22,7,46,4
-EN20240279,MCA Sem 4 - Subject 3,Dr. Meera Sharma,15,5,32,4
-EN20240279,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,19,6,40,4
-EN20240280,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,7,2,17,4
-EN20240280,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,10,3,22,4
-EN20240280,MCA Sem 4 - Subject 3,Dr. Meera Sharma,8,2,18,4
-EN20240280,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,9,3,19,4
-EN20240281,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,15,5,31,4
-EN20240281,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,20,6,41,4
-EN20240281,MCA Sem 4 - Subject 3,Dr. Meera Sharma,19,6,40,4
-EN20240281,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,16,5,33,4
-EN20240282,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,15,5,30,4
-EN20240282,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,19,6,40,4
-EN20240282,MCA Sem 4 - Subject 3,Dr. Meera Sharma,15,5,30,4
-EN20240282,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,21,7,44,4
-EN20240283,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,19,6,39,4
-EN20240283,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,15,5,33,4
-EN20240283,MCA Sem 4 - Subject 3,Dr. Meera Sharma,17,5,37,4
-EN20240283,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,15,5,31,4
-EN20240284,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,17,5,36,4
-EN20240284,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,21,7,45,4
-EN20240284,MCA Sem 4 - Subject 3,Dr. Meera Sharma,18,6,38,4
-EN20240284,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,18,6,37,4
-EN20240285,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,15,5,31,4
-EN20240285,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,16,5,35,4
-EN20240285,MCA Sem 4 - Subject 3,Dr. Meera Sharma,15,5,30,4
-EN20240285,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,15,5,32,4
-EN20240286,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,17,5,36,4
-EN20240286,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,15,5,31,4
-EN20240286,MCA Sem 4 - Subject 3,Dr. Meera Sharma,21,7,44,4
-EN20240286,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,20,6,43,4
-EN20240287,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,20,6,42,4
-EN20240287,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,21,7,42,4
-EN20240287,MCA Sem 4 - Subject 3,Dr. Meera Sharma,16,5,33,4
-EN20240287,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,20,6,41,4
-EN20240288,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,17,5,36,4
-EN20240288,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,18,6,36,4
-EN20240288,MCA Sem 4 - Subject 3,Dr. Meera Sharma,19,6,41,4
-EN20240288,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,22,7,46,4
-EN20240289,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,16,5,35,4
-EN20240289,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,16,5,35,4
-EN20240289,MCA Sem 4 - Subject 3,Dr. Meera Sharma,18,6,39,4
-EN20240289,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,19,6,40,4
-EN20240290,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,21,7,43,4
-EN20240290,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,16,5,33,4
-EN20240290,MCA Sem 4 - Subject 3,Dr. Meera Sharma,15,5,33,4
-EN20240290,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,15,5,32,4
-EN20240291,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,15,5,31,4
-EN20240291,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,18,6,39,4
-EN20240291,MCA Sem 4 - Subject 3,Dr. Meera Sharma,17,5,36,4
-EN20240291,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,21,7,43,4
-EN20240292,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,21,7,43,4
-EN20240292,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,15,5,33,4
-EN20240292,MCA Sem 4 - Subject 3,Dr. Meera Sharma,21,7,42,4
-EN20240292,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,15,5,33,4
-EN20240293,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,20,6,42,4
-EN20240293,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,21,7,45,4
-EN20240293,MCA Sem 4 - Subject 3,Dr. Meera Sharma,21,7,43,4
-EN20240293,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,21,7,43,4
-EN20240294,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,18,6,38,4
-EN20240294,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,21,7,45,4
-EN20240294,MCA Sem 4 - Subject 3,Dr. Meera Sharma,19,6,40,4
-EN20240294,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,18,6,39,4
-EN20240295,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,21,7,43,4
-EN20240295,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,15,5,32,4
-EN20240295,MCA Sem 4 - Subject 3,Dr. Meera Sharma,19,6,40,4
-EN20240295,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,20,6,42,4
-EN20240296,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,19,6,41,4
-EN20240296,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,21,7,43,4
-EN20240296,MCA Sem 4 - Subject 3,Dr. Meera Sharma,17,5,35,4
-EN20240296,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,17,5,37,4
-EN20240297,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,26,8,53,4
-EN20240297,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,25,8,52,4
-EN20240297,MCA Sem 4 - Subject 3,Dr. Meera Sharma,27,9,54,4
-EN20240297,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,26,8,53,4
-EN20240298,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,16,5,34,4
-EN20240298,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,15,5,32,4
-EN20240298,MCA Sem 4 - Subject 3,Dr. Meera Sharma,16,5,33,4
-EN20240298,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,15,5,31,4
-EN20240299,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,17,5,37,4
-EN20240299,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,21,7,45,4
-EN20240299,MCA Sem 4 - Subject 3,Dr. Meera Sharma,17,5,35,4
-EN20240299,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,18,6,39,4
-EN20240300,MCA Sem 4 - Subject 1,Dr. Zoya Kapoor,19,6,40,4
-EN20240300,MCA Sem 4 - Subject 2,Dr. Zoya Kapoor,15,5,33,4
-EN20240300,MCA Sem 4 - Subject 3,Dr. Meera Sharma,20,6,41,4
-EN20240300,MCA Sem 4 - Subject 4,Dr. Zoya Kapoor,18,6,38,4
-EN20240301,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,17,5,37,1
-EN20240301,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,19,6,40,1
-EN20240301,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,15,5,33,1
-EN20240301,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,21,7,42,1
-EN20240302,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,20,6,43,1
-EN20240302,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,17,5,35,1
-EN20240302,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,17,5,35,1
-EN20240302,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,15,5,30,1
-EN20240303,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,22,7,45,1
-EN20240303,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,18,6,39,1
-EN20240303,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,16,5,35,1
-EN20240303,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,18,6,39,1
-EN20240304,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,15,5,32,1
-EN20240304,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,18,6,38,1
-EN20240304,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,15,5,33,1
-EN20240304,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,17,5,36,1
-EN20240305,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,21,7,45,1
-EN20240305,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,17,5,37,1
-EN20240305,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,15,5,31,1
-EN20240305,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,17,5,36,1
-EN20240306,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,20,6,43,1
-EN20240306,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,15,5,31,1
-EN20240306,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,15,5,32,1
-EN20240306,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,15,5,30,1
-EN20240307,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,17,5,36,1
-EN20240307,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,18,6,37,1
-EN20240307,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,17,5,36,1
-EN20240307,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,17,5,37,1
-EN20240308,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,21,7,43,1
-EN20240308,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,18,6,38,1
-EN20240308,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,15,5,31,1
-EN20240308,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,19,6,41,1
-EN20240309,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,22,7,45,1
-EN20240309,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,18,6,38,1
-EN20240309,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,15,5,32,1
-EN20240309,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,21,7,43,1
-EN20240310,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,16,5,34,1
-EN20240310,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,20,6,43,1
-EN20240310,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,21,7,43,1
-EN20240310,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,17,5,36,1
-EN20240311,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,17,5,37,1
-EN20240311,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,15,5,31,1
-EN20240311,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,19,6,41,1
-EN20240311,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,16,5,35,1
-EN20240312,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,20,6,42,1
-EN20240312,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,16,5,35,1
-EN20240312,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,19,6,40,1
-EN20240312,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,17,5,36,1
-EN20240313,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,5,1,12,1
-EN20240313,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,8,2,19,1
-EN20240313,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,10,3,21,1
-EN20240313,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,4,1,11,1
-EN20240314,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,27,9,54,1
-EN20240314,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,27,9,56,1
-EN20240314,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,27,9,56,1
-EN20240314,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,25,8,53,1
-EN20240315,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,21,7,45,1
-EN20240315,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,19,6,39,1
-EN20240315,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,15,5,30,1
-EN20240315,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,20,6,42,1
-EN20240316,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,21,7,45,1
-EN20240316,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,19,6,41,1
-EN20240316,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,19,6,41,1
-EN20240316,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,18,6,38,1
-EN20240317,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,21,7,45,1
-EN20240317,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,15,5,33,1
-EN20240317,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,19,6,39,1
-EN20240317,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,20,6,42,1
-EN20240318,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,10,3,21,1
-EN20240318,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,4,1,10,1
-EN20240318,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,5,1,11,1
-EN20240318,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,5,1,12,1
-EN20240319,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,20,6,41,1
-EN20240319,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,20,6,42,1
-EN20240319,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,19,6,39,1
-EN20240319,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,20,6,41,1
-EN20240320,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,18,6,39,1
-EN20240320,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,15,5,31,1
-EN20240320,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,21,7,45,1
-EN20240320,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,19,6,39,1
-EN20240321,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,20,6,41,1
-EN20240321,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,16,5,34,1
-EN20240321,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,22,7,46,1
-EN20240321,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,21,7,45,1
-EN20240322,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,27,9,57,1
-EN20240322,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,25,8,52,1
-EN20240322,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,27,9,57,1
-EN20240322,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,28,9,58,1
-EN20240323,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,9,3,18,1
-EN20240323,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,7,2,15,1
-EN20240323,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,6,2,13,1
-EN20240323,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,4,1,10,1
-EN20240324,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,25,8,52,1
-EN20240324,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,25,8,53,1
-EN20240324,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,25,8,53,1
-EN20240324,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,26,8,53,1
-EN20240325,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,10,3,21,1
-EN20240325,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,7,2,17,1
-EN20240325,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,5,1,13,1
-EN20240325,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,9,3,18,1
-EN20240326,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,17,5,36,1
-EN20240326,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,18,6,36,1
-EN20240326,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,21,7,44,1
-EN20240326,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,22,7,45,1
-EN20240327,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,17,5,35,1
-EN20240327,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,16,5,34,1
-EN20240327,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,22,7,46,1
-EN20240327,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,18,6,39,1
-EN20240328,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,15,5,33,1
-EN20240328,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,15,5,31,1
-EN20240328,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,20,6,41,1
-EN20240328,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,16,5,35,1
-EN20240329,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,16,5,34,1
-EN20240329,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,21,7,43,1
-EN20240329,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,21,7,42,1
-EN20240329,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,21,7,42,1
-EN20240330,BBA Sem 1 - Subject 1,Asst. Prof. Chaitanya Patel,28,9,57,1
-EN20240330,BBA Sem 1 - Subject 2,Dr. Arjun Chaudhary,25,8,52,1
-EN20240330,BBA Sem 1 - Subject 3,Asst. Prof. Chaitanya Patel,26,8,53,1
-EN20240330,BBA Sem 1 - Subject 4,Asst. Prof. Diya Kapoor,28,9,58,1
-EN20240331,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,25,8,53,2
-EN20240331,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,27,9,56,2
-EN20240331,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,26,8,55,2
-EN20240331,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,25,8,53,2
-EN20240332,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,20,6,43,2
-EN20240332,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,17,5,36,2
-EN20240332,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,21,7,45,2
-EN20240332,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,16,5,35,2
-EN20240333,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,19,6,41,2
-EN20240333,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,22,7,46,2
-EN20240333,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,21,7,43,2
-EN20240333,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,16,5,33,2
-EN20240334,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,19,6,39,2
-EN20240334,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,21,7,42,2
-EN20240334,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,18,6,38,2
-EN20240334,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,21,7,44,2
-EN20240335,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,15,5,30,2
-EN20240335,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,22,7,45,2
-EN20240335,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,15,5,31,2
-EN20240335,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,20,6,42,2
-EN20240336,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,26,8,54,2
-EN20240336,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,25,8,52,2
-EN20240336,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,25,8,52,2
-EN20240336,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,25,8,52,2
-EN20240337,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,21,7,45,2
-EN20240337,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,18,6,39,2
-EN20240337,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,18,6,36,2
-EN20240337,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,18,6,36,2
-EN20240338,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,20,6,43,2
-EN20240338,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,17,5,35,2
-EN20240338,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,15,5,32,2
-EN20240338,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,15,5,30,2
-EN20240339,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,19,6,39,2
-EN20240339,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,19,6,39,2
-EN20240339,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,18,6,38,2
-EN20240339,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,16,5,33,2
-EN20240340,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,17,5,36,2
-EN20240340,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,17,5,35,2
-EN20240340,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,17,5,36,2
-EN20240340,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,20,6,43,2
-EN20240341,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,17,5,37,2
-EN20240341,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,18,6,38,2
-EN20240341,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,15,5,30,2
-EN20240341,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,21,7,45,2
-EN20240342,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,4,1,11,2
-EN20240342,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,9,3,19,2
-EN20240342,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,9,3,18,2
-EN20240342,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,5,1,11,2
-EN20240343,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,9,3,21,2
-EN20240343,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,8,2,18,2
-EN20240343,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,4,1,11,2
-EN20240343,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,10,3,23,2
-EN20240344,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,15,5,30,2
-EN20240344,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,16,5,33,2
-EN20240344,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,19,6,39,2
-EN20240344,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,15,5,32,2
-EN20240345,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,21,7,42,2
-EN20240345,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,20,6,43,2
-EN20240345,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,21,7,44,2
-EN20240345,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,17,5,35,2
-EN20240346,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,21,7,42,2
-EN20240346,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,18,6,36,2
-EN20240346,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,15,5,31,2
-EN20240346,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,19,6,40,2
-EN20240347,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,17,5,37,2
-EN20240347,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,20,6,41,2
-EN20240347,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,18,6,37,2
-EN20240347,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,17,5,36,2
-EN20240348,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,17,5,36,2
-EN20240348,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,17,5,35,2
-EN20240348,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,20,6,43,2
-EN20240348,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,16,5,33,2
-EN20240349,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,16,5,35,2
-EN20240349,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,21,7,43,2
-EN20240349,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,16,5,33,2
-EN20240349,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,15,5,30,2
-EN20240350,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,19,6,41,2
-EN20240350,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,16,5,34,2
-EN20240350,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,20,6,42,2
-EN20240350,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,16,5,34,2
-EN20240351,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,20,6,41,2
-EN20240351,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,20,6,42,2
-EN20240351,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,19,6,41,2
-EN20240351,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,16,5,34,2
-EN20240352,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,20,6,42,2
-EN20240352,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,17,5,35,2
-EN20240352,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,17,5,37,2
-EN20240352,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,15,5,31,2
-EN20240353,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,19,6,41,2
-EN20240353,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,19,6,41,2
-EN20240353,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,17,5,35,2
-EN20240353,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,19,6,41,2
-EN20240354,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,8,2,18,2
-EN20240354,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,11,3,23,2
-EN20240354,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,4,1,10,2
-EN20240354,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,8,2,18,2
-EN20240355,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,17,5,36,2
-EN20240355,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,19,6,39,2
-EN20240355,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,15,5,32,2
-EN20240355,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,19,6,39,2
-EN20240356,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,26,8,55,2
-EN20240356,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,25,8,53,2
-EN20240356,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,26,8,54,2
-EN20240356,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,28,9,57,2
-EN20240357,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,21,7,42,2
-EN20240357,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,15,5,32,2
-EN20240357,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,21,7,44,2
-EN20240357,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,15,5,31,2
-EN20240358,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,25,8,53,2
-EN20240358,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,27,9,57,2
-EN20240358,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,26,8,55,2
-EN20240358,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,28,9,58,2
-EN20240359,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,8,2,17,2
-EN20240359,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,10,3,22,2
-EN20240359,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,7,2,16,2
-EN20240359,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,11,3,23,2
-EN20240360,BBA Sem 2 - Subject 1,Dr. Arjun Chaudhary,21,7,44,2
-EN20240360,BBA Sem 2 - Subject 2,Dr. Arjun Chaudhary,16,5,33,2
-EN20240360,BBA Sem 2 - Subject 3,Asst. Prof. Diya Kapoor,19,6,40,2
-EN20240360,BBA Sem 2 - Subject 4,Asst. Prof. Chaitanya Patel,17,5,37,2
-EN20240361,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,16,5,33,3
-EN20240361,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,21,7,43,3
-EN20240361,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,16,5,34,3
-EN20240361,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,22,7,46,3
-EN20240362,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,21,7,44,3
-EN20240362,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,15,5,33,3
-EN20240362,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,17,5,35,3
-EN20240362,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,15,5,30,3
-EN20240363,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,19,6,40,3
-EN20240363,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,21,7,44,3
-EN20240363,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,19,6,40,3
-EN20240363,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,15,5,33,3
-EN20240364,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,21,7,42,3
-EN20240364,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,19,6,39,3
-EN20240364,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,21,7,42,3
-EN20240364,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,15,5,30,3
-EN20240365,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,18,6,39,3
-EN20240365,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,19,6,40,3
-EN20240365,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,22,7,46,3
-EN20240365,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,20,6,42,3
-EN20240366,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,27,9,55,3
-EN20240366,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,26,8,53,3
-EN20240366,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,26,8,53,3
-EN20240366,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,25,8,53,3
-EN20240367,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,17,5,35,3
-EN20240367,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,17,5,36,3
-EN20240367,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,20,6,43,3
-EN20240367,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,16,5,33,3
-EN20240368,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,22,7,46,3
-EN20240368,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,21,7,43,3
-EN20240368,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,19,6,39,3
-EN20240368,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,17,5,36,3
-EN20240369,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,27,9,55,3
-EN20240369,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,28,9,58,3
-EN20240369,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,27,9,54,3
-EN20240369,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,27,9,57,3
-EN20240370,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,15,5,30,3
-EN20240370,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,18,6,38,3
-EN20240370,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,22,7,46,3
-EN20240370,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,21,7,43,3
-EN20240371,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,18,6,36,3
-EN20240371,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,16,5,33,3
-EN20240371,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,18,6,37,3
-EN20240371,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,20,6,42,3
-EN20240372,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,18,6,38,3
-EN20240372,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,18,6,36,3
-EN20240372,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,15,5,31,3
-EN20240372,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,15,5,33,3
-EN20240373,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,5,1,12,3
-EN20240373,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,10,3,23,3
-EN20240373,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,9,3,19,3
-EN20240373,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,7,2,15,3
-EN20240374,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,21,7,43,3
-EN20240374,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,18,6,38,3
-EN20240374,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,21,7,43,3
-EN20240374,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,15,5,30,3
-EN20240375,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,8,2,18,3
-EN20240375,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,8,2,19,3
-EN20240375,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,7,2,16,3
-EN20240375,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,6,2,14,3
-EN20240376,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,4,1,11,3
-EN20240376,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,8,2,17,3
-EN20240376,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,11,3,23,3
-EN20240376,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,6,2,13,3
-EN20240377,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,15,5,33,3
-EN20240377,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,21,7,42,3
-EN20240377,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,15,5,32,3
-EN20240377,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,16,5,35,3
-EN20240378,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,19,6,41,3
-EN20240378,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,18,6,39,3
-EN20240378,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,19,6,39,3
-EN20240378,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,17,5,36,3
-EN20240379,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,17,5,37,3
-EN20240379,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,18,6,38,3
-EN20240379,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,18,6,38,3
-EN20240379,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,18,6,38,3
-EN20240380,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,25,8,52,3
-EN20240380,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,28,9,57,3
-EN20240380,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,26,8,55,3
-EN20240380,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,25,8,53,3
-EN20240381,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,22,7,45,3
-EN20240381,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,18,6,39,3
-EN20240381,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,17,5,35,3
-EN20240381,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,17,5,37,3
-EN20240382,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,19,6,39,3
-EN20240382,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,20,6,42,3
-EN20240382,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,21,7,42,3
-EN20240382,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,18,6,36,3
-EN20240383,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,16,5,33,3
-EN20240383,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,15,5,33,3
-EN20240383,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,16,5,35,3
-EN20240383,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,16,5,33,3
-EN20240384,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,19,6,41,3
-EN20240384,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,18,6,39,3
-EN20240384,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,21,7,45,3
-EN20240384,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,16,5,34,3
-EN20240385,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,18,6,36,3
-EN20240385,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,21,7,43,3
-EN20240385,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,17,5,36,3
-EN20240385,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,19,6,40,3
-EN20240386,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,16,5,35,3
-EN20240386,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,21,7,43,3
-EN20240386,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,17,5,36,3
-EN20240386,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,21,7,42,3
-EN20240387,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,25,8,53,3
-EN20240387,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,27,9,55,3
-EN20240387,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,28,9,58,3
-EN20240387,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,27,9,56,3
-EN20240388,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,19,6,40,3
-EN20240388,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,19,6,41,3
-EN20240388,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,18,6,38,3
-EN20240388,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,19,6,39,3
-EN20240389,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,20,6,41,3
-EN20240389,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,16,5,33,3
-EN20240389,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,17,5,36,3
-EN20240389,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,20,6,41,3
-EN20240390,BBA Sem 3 - Subject 1,Asst. Prof. Diya Kapoor,21,7,42,3
-EN20240390,BBA Sem 3 - Subject 2,Dr. Arjun Chaudhary,20,6,41,3
-EN20240390,BBA Sem 3 - Subject 3,Asst. Prof. Chaitanya Patel,19,6,40,3
-EN20240390,BBA Sem 3 - Subject 4,Asst. Prof. Diya Kapoor,15,5,32,3
-EN20240391,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,21,7,44,4
-EN20240391,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,22,7,45,4
-EN20240391,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,22,7,45,4
-EN20240391,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,22,7,46,4
-EN20240392,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,17,5,36,4
-EN20240392,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,21,7,45,4
-EN20240392,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,19,6,40,4
-EN20240392,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,18,6,37,4
-EN20240393,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,18,6,36,4
-EN20240393,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,22,7,45,4
-EN20240393,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,15,5,31,4
-EN20240393,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,20,6,43,4
-EN20240394,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,22,7,46,4
-EN20240394,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,22,7,45,4
-EN20240394,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,22,7,46,4
-EN20240394,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,16,5,34,4
-EN20240395,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,21,7,44,4
-EN20240395,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,18,6,37,4
-EN20240395,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,22,7,46,4
-EN20240395,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,15,5,32,4
-EN20240396,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,21,7,42,4
-EN20240396,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,22,7,46,4
-EN20240396,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,21,7,45,4
-EN20240396,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,20,6,41,4
-EN20240397,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,9,3,20,4
-EN20240397,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,5,1,11,4
-EN20240397,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,6,2,12,4
-EN20240397,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,5,1,11,4
-EN20240398,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,27,9,55,4
-EN20240398,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,25,8,53,4
-EN20240398,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,26,8,53,4
-EN20240398,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,28,9,57,4
-EN20240399,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,21,7,42,4
-EN20240399,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,21,7,42,4
-EN20240399,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,16,5,33,4
-EN20240399,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,19,6,39,4
-EN20240400,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,25,8,53,4
-EN20240400,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,28,9,57,4
-EN20240400,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,27,9,54,4
-EN20240400,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,27,9,55,4
-EN20240401,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,26,8,53,4
-EN20240401,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,26,8,54,4
-EN20240401,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,28,9,58,4
-EN20240401,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,26,8,54,4
-EN20240402,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,15,5,30,4
-EN20240402,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,19,6,39,4
-EN20240402,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,18,6,37,4
-EN20240402,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,22,7,45,4
-EN20240403,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,21,7,43,4
-EN20240403,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,20,6,41,4
-EN20240403,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,18,6,36,4
-EN20240403,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,20,6,41,4
-EN20240404,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,9,3,19,4
-EN20240404,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,9,3,21,4
-EN20240404,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,8,2,19,4
-EN20240404,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,9,3,18,4
-EN20240405,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,19,6,40,4
-EN20240405,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,17,5,36,4
-EN20240405,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,21,7,44,4
-EN20240405,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,22,7,46,4
-EN20240406,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,21,7,44,4
-EN20240406,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,22,7,45,4
-EN20240406,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,17,5,37,4
-EN20240406,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,22,7,46,4
-EN20240407,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,25,8,52,4
-EN20240407,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,27,9,57,4
-EN20240407,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,27,9,57,4
-EN20240407,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,25,8,52,4
-EN20240408,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,22,7,45,4
-EN20240408,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,15,5,33,4
-EN20240408,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,21,7,45,4
-EN20240408,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,21,7,42,4
-EN20240409,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,18,6,37,4
-EN20240409,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,15,5,31,4
-EN20240409,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,17,5,36,4
-EN20240409,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,20,6,41,4
-EN20240410,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,21,7,44,4
-EN20240410,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,16,5,35,4
-EN20240410,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,20,6,41,4
-EN20240410,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,17,5,37,4
-EN20240411,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,22,7,46,4
-EN20240411,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,19,6,41,4
-EN20240411,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,20,6,41,4
-EN20240411,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,18,6,38,4
-EN20240412,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,18,6,36,4
-EN20240412,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,20,6,42,4
-EN20240412,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,15,5,32,4
-EN20240412,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,16,5,34,4
-EN20240413,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,16,5,34,4
-EN20240413,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,17,5,35,4
-EN20240413,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,20,6,42,4
-EN20240413,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,22,7,45,4
-EN20240414,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,18,6,39,4
-EN20240414,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,21,7,45,4
-EN20240414,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,19,6,41,4
-EN20240414,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,18,6,36,4
-EN20240415,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,26,8,55,4
-EN20240415,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,27,9,57,4
-EN20240415,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,26,8,54,4
-EN20240415,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,27,9,56,4
-EN20240416,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,4,1,11,4
-EN20240416,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,9,3,21,4
-EN20240416,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,6,2,12,4
-EN20240416,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,9,3,19,4
-EN20240417,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,15,5,31,4
-EN20240417,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,22,7,46,4
-EN20240417,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,21,7,44,4
-EN20240417,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,18,6,37,4
-EN20240418,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,19,6,40,4
-EN20240418,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,21,7,45,4
-EN20240418,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,21,7,45,4
-EN20240418,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,16,5,34,4
-EN20240419,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,20,6,43,4
-EN20240419,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,19,6,41,4
-EN20240419,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,22,7,45,4
-EN20240419,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,18,6,37,4
-EN20240420,BBA Sem 4 - Subject 1,Dr. Arjun Chaudhary,15,5,30,4
-EN20240420,BBA Sem 4 - Subject 2,Asst. Prof. Chaitanya Patel,21,7,42,4
-EN20240420,BBA Sem 4 - Subject 3,Dr. Arjun Chaudhary,19,6,40,4
-EN20240420,BBA Sem 4 - Subject 4,Asst. Prof. Chaitanya Patel,16,5,33,4
-EN20240421,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,17,5,35,5
-EN20240421,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,21,7,43,5
-EN20240421,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,18,6,39,5
-EN20240421,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,15,5,31,5
-EN20240422,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,16,5,34,5
-EN20240422,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,19,6,39,5
-EN20240422,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,20,6,42,5
-EN20240422,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,21,7,45,5
-EN20240423,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,21,7,42,5
-EN20240423,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,19,6,39,5
-EN20240423,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,19,6,41,5
-EN20240423,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,17,5,37,5
-EN20240424,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,28,9,57,5
-EN20240424,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,27,9,54,5
-EN20240424,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,25,8,52,5
-EN20240424,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,28,9,58,5
-EN20240425,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,21,7,43,5
-EN20240425,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,15,5,32,5
-EN20240425,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,21,7,42,5
-EN20240425,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,18,6,39,5
-EN20240426,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,16,5,35,5
-EN20240426,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,20,6,43,5
-EN20240426,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,21,7,44,5
-EN20240426,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,18,6,39,5
-EN20240427,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,26,8,55,5
-EN20240427,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,27,9,55,5
-EN20240427,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,25,8,52,5
-EN20240427,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,26,8,53,5
-EN20240428,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,15,5,31,5
-EN20240428,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,15,5,30,5
-EN20240428,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,21,7,42,5
-EN20240428,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,19,6,39,5
-EN20240429,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,15,5,32,5
-EN20240429,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,15,5,30,5
-EN20240429,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,15,5,30,5
-EN20240429,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,16,5,35,5
-EN20240430,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,15,5,31,5
-EN20240430,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,20,6,41,5
-EN20240430,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,17,5,35,5
-EN20240430,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,19,6,41,5
-EN20240431,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,5,1,13,5
-EN20240431,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,8,2,17,5
-EN20240431,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,9,3,20,5
-EN20240431,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,11,3,23,5
-EN20240432,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,21,7,42,5
-EN20240432,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,16,5,34,5
-EN20240432,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,21,7,43,5
-EN20240432,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,19,6,41,5
-EN20240433,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,18,6,37,5
-EN20240433,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,19,6,40,5
-EN20240433,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,21,7,43,5
-EN20240433,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,20,6,42,5
-EN20240434,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,20,6,42,5
-EN20240434,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,16,5,33,5
-EN20240434,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,18,6,38,5
-EN20240434,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,15,5,33,5
-EN20240435,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,19,6,39,5
-EN20240435,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,21,7,45,5
-EN20240435,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,17,5,37,5
-EN20240435,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,17,5,36,5
-EN20240436,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,17,5,35,5
-EN20240436,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,18,6,36,5
-EN20240436,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,18,6,38,5
-EN20240436,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,20,6,42,5
-EN20240437,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,27,9,55,5
-EN20240437,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,27,9,57,5
-EN20240437,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,28,9,58,5
-EN20240437,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,25,8,53,5
-EN20240438,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,26,8,53,5
-EN20240438,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,26,8,53,5
-EN20240438,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,25,8,53,5
-EN20240438,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,28,9,58,5
-EN20240439,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,16,5,35,5
-EN20240439,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,21,7,42,5
-EN20240439,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,15,5,32,5
-EN20240439,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,20,6,42,5
-EN20240440,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,22,7,45,5
-EN20240440,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,15,5,30,5
-EN20240440,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,18,6,37,5
-EN20240440,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,20,6,43,5
-EN20240441,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,15,5,31,5
-EN20240441,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,21,7,45,5
-EN20240441,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,19,6,41,5
-EN20240441,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,15,5,33,5
-EN20240442,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,5,1,12,5
-EN20240442,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,9,3,21,5
-EN20240442,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,6,2,15,5
-EN20240442,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,7,2,16,5
-EN20240443,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,18,6,38,5
-EN20240443,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,17,5,37,5
-EN20240443,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,21,7,44,5
-EN20240443,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,15,5,31,5
-EN20240444,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,20,6,43,5
-EN20240444,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,17,5,37,5
-EN20240444,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,15,5,33,5
-EN20240444,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,21,7,43,5
-EN20240445,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,28,9,57,5
-EN20240445,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,28,9,57,5
-EN20240445,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,27,9,54,5
-EN20240445,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,25,8,53,5
-EN20240446,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,11,3,23,5
-EN20240446,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,4,1,10,5
-EN20240446,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,6,2,13,5
-EN20240446,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,8,2,19,5
-EN20240447,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,20,6,42,5
-EN20240447,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,21,7,44,5
-EN20240447,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,20,6,41,5
-EN20240447,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,15,5,33,5
-EN20240448,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,19,6,39,5
-EN20240448,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,17,5,35,5
-EN20240448,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,16,5,33,5
-EN20240448,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,17,5,37,5
-EN20240449,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,21,7,42,5
-EN20240449,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,18,6,38,5
-EN20240449,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,21,7,44,5
-EN20240449,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,22,7,45,5
-EN20240450,BBA Sem 5 - Subject 1,Asst. Prof. Diya Kapoor,17,5,35,5
-EN20240450,BBA Sem 5 - Subject 2,Asst. Prof. Diya Kapoor,21,7,45,5
-EN20240450,BBA Sem 5 - Subject 3,Dr. Arjun Chaudhary,20,6,41,5
-EN20240450,BBA Sem 5 - Subject 4,Asst. Prof. Chaitanya Patel,21,7,44,5
-EN20240451,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,21,7,45,6
-EN20240451,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,15,5,32,6
-EN20240451,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,20,6,43,6
-EN20240451,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,18,6,39,6
-EN20240452,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,17,5,36,6
-EN20240452,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,15,5,32,6
-EN20240452,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,16,5,34,6
-EN20240452,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,22,7,46,6
-EN20240453,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,21,7,45,6
-EN20240453,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,17,5,37,6
-EN20240453,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,15,5,33,6
-EN20240453,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,18,6,36,6
-EN20240454,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,15,5,33,6
-EN20240454,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,21,7,45,6
-EN20240454,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,17,5,36,6
-EN20240454,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,16,5,34,6
-EN20240455,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,28,9,58,6
-EN20240455,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,26,8,54,6
-EN20240455,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,27,9,55,6
-EN20240455,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,27,9,54,6
-EN20240456,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,10,3,23,6
-EN20240456,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,6,2,12,6
-EN20240456,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,10,3,23,6
-EN20240456,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,8,2,18,6
-EN20240457,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,27,9,55,6
-EN20240457,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,28,9,57,6
-EN20240457,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,26,8,54,6
-EN20240457,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,25,8,52,6
-EN20240458,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,21,7,45,6
-EN20240458,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,18,6,36,6
-EN20240458,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,18,6,39,6
-EN20240458,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,18,6,36,6
-EN20240459,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,19,6,41,6
-EN20240459,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,19,6,39,6
-EN20240459,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,21,7,43,6
-EN20240459,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,21,7,42,6
-EN20240460,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,21,7,42,6
-EN20240460,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,15,5,30,6
-EN20240460,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,22,7,45,6
-EN20240460,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,18,6,38,6
-EN20240461,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,27,9,56,6
-EN20240461,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,26,8,55,6
-EN20240461,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,27,9,54,6
-EN20240461,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,25,8,53,6
-EN20240462,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,16,5,33,6
-EN20240462,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,21,7,44,6
-EN20240462,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,16,5,33,6
-EN20240462,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,16,5,33,6
-EN20240463,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,21,7,45,6
-EN20240463,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,18,6,39,6
-EN20240463,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,19,6,40,6
-EN20240463,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,15,5,32,6
-EN20240464,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,15,5,33,6
-EN20240464,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,22,7,46,6
-EN20240464,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,21,7,44,6
-EN20240464,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,17,5,35,6
-EN20240465,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,27,9,57,6
-EN20240465,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,27,9,56,6
-EN20240465,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,27,9,56,6
-EN20240465,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,28,9,58,6
-EN20240466,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,20,6,43,6
-EN20240466,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,15,5,30,6
-EN20240466,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,18,6,36,6
-EN20240466,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,15,5,30,6
-EN20240467,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,15,5,31,6
-EN20240467,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,21,7,43,6
-EN20240467,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,21,7,43,6
-EN20240467,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,22,7,46,6
-EN20240468,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,16,5,33,6
-EN20240468,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,19,6,40,6
-EN20240468,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,20,6,43,6
-EN20240468,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,17,5,36,6
-EN20240469,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,22,7,45,6
-EN20240469,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,15,5,33,6
-EN20240469,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,22,7,45,6
-EN20240469,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,20,6,41,6
-EN20240470,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,21,7,42,6
-EN20240470,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,19,6,39,6
-EN20240470,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,19,6,39,6
-EN20240470,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,22,7,45,6
-EN20240471,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,15,5,33,6
-EN20240471,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,16,5,35,6
-EN20240471,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,18,6,38,6
-EN20240471,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,17,5,37,6
-EN20240472,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,20,6,42,6
-EN20240472,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,19,6,41,6
-EN20240472,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,15,5,33,6
-EN20240472,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,21,7,42,6
-EN20240473,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,11,3,24,6
-EN20240473,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,10,3,23,6
-EN20240473,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,6,2,15,6
-EN20240473,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,8,2,19,6
-EN20240474,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,16,5,34,6
-EN20240474,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,21,7,43,6
-EN20240474,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,15,5,30,6
-EN20240474,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,22,7,46,6
-EN20240475,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,15,5,30,6
-EN20240475,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,17,5,36,6
-EN20240475,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,19,6,41,6
-EN20240475,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,21,7,44,6
-EN20240476,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,25,8,53,6
-EN20240476,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,25,8,52,6
-EN20240476,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,25,8,52,6
-EN20240476,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,27,9,57,6
-EN20240477,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,15,5,33,6
-EN20240477,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,20,6,42,6
-EN20240477,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,18,6,36,6
-EN20240477,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,19,6,39,6
-EN20240478,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,18,6,37,6
-EN20240478,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,21,7,44,6
-EN20240478,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,17,5,37,6
-EN20240478,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,19,6,41,6
-EN20240479,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,6,2,12,6
-EN20240479,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,11,3,23,6
-EN20240479,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,5,1,11,6
-EN20240479,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,4,1,11,6
-EN20240480,BBA Sem 6 - Subject 1,Dr. Arjun Chaudhary,15,5,30,6
-EN20240480,BBA Sem 6 - Subject 2,Dr. Arjun Chaudhary,17,5,35,6
-EN20240480,BBA Sem 6 - Subject 3,Asst. Prof. Diya Kapoor,21,7,45,6
-EN20240480,BBA Sem 6 - Subject 4,Asst. Prof. Diya Kapoor,16,5,34,6
-EN20240481,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,18,6,37,1
-EN20240481,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,16,5,33,1
-EN20240481,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,21,7,42,1
-EN20240481,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,20,6,42,1
-EN20240482,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,16,5,35,1
-EN20240482,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,19,6,40,1
-EN20240482,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,21,7,43,1
-EN20240482,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,20,6,41,1
-EN20240483,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,27,9,56,1
-EN20240483,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,28,9,58,1
-EN20240483,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,25,8,52,1
-EN20240483,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,27,9,55,1
-EN20240484,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,7,2,17,1
-EN20240484,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,10,3,21,1
-EN20240484,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,9,3,20,1
-EN20240484,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,5,1,11,1
-EN20240485,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,28,9,58,1
-EN20240485,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,25,8,52,1
-EN20240485,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,25,8,53,1
-EN20240485,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,27,9,57,1
-EN20240486,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,19,6,41,1
-EN20240486,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,16,5,34,1
-EN20240486,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,19,6,39,1
-EN20240486,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,15,5,30,1
-EN20240487,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,16,5,34,1
-EN20240487,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,16,5,33,1
-EN20240487,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,19,6,41,1
-EN20240487,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,19,6,40,1
-EN20240488,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,17,5,37,1
-EN20240488,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,17,5,37,1
-EN20240488,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,16,5,35,1
-EN20240488,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,21,7,44,1
-EN20240489,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,21,7,44,1
-EN20240489,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,18,6,39,1
-EN20240489,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,15,5,33,1
-EN20240489,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,22,7,45,1
-EN20240490,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,17,5,37,1
-EN20240490,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,19,6,40,1
-EN20240490,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,16,5,33,1
-EN20240490,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,21,7,42,1
-EN20240491,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,20,6,42,1
-EN20240491,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,17,5,36,1
-EN20240491,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,18,6,36,1
-EN20240491,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,20,6,42,1
-EN20240492,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,19,6,41,1
-EN20240492,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,21,7,45,1
-EN20240492,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,21,7,43,1
-EN20240492,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,17,5,35,1
-EN20240493,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,15,5,31,1
-EN20240493,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,19,6,39,1
-EN20240493,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,21,7,43,1
-EN20240493,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,22,7,45,1
-EN20240494,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,8,2,17,1
-EN20240494,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,11,3,23,1
-EN20240494,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,10,3,21,1
-EN20240494,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,8,2,19,1
-EN20240495,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,25,8,52,1
-EN20240495,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,27,9,54,1
-EN20240495,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,27,9,55,1
-EN20240495,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,25,8,52,1
-EN20240496,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,16,5,33,1
-EN20240496,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,20,6,41,1
-EN20240496,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,15,5,31,1
-EN20240496,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,21,7,44,1
-EN20240497,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,20,6,42,1
-EN20240497,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,16,5,34,1
-EN20240497,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,21,7,44,1
-EN20240497,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,22,7,46,1
-EN20240498,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,22,7,46,1
-EN20240498,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,21,7,43,1
-EN20240498,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,17,5,37,1
-EN20240498,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,17,5,36,1
-EN20240499,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,27,9,54,1
-EN20240499,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,27,9,57,1
-EN20240499,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,25,8,53,1
-EN20240499,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,26,8,54,1
-EN20240500,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,20,6,42,1
-EN20240500,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,17,5,36,1
-EN20240500,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,15,5,32,1
-EN20240500,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,16,5,35,1
-EN20240501,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,19,6,40,1
-EN20240501,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,15,5,33,1
-EN20240501,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,20,6,43,1
-EN20240501,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,22,7,45,1
-EN20240502,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,16,5,35,1
-EN20240502,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,21,7,44,1
-EN20240502,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,21,7,43,1
-EN20240502,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,21,7,42,1
-EN20240503,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,15,5,31,1
-EN20240503,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,18,6,39,1
-EN20240503,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,21,7,44,1
-EN20240503,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,15,5,31,1
-EN20240504,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,28,9,58,1
-EN20240504,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,25,8,53,1
-EN20240504,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,28,9,58,1
-EN20240504,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,25,8,52,1
-EN20240505,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,20,6,43,1
-EN20240505,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,17,5,35,1
-EN20240505,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,21,7,44,1
-EN20240505,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,20,6,43,1
-EN20240506,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,8,2,18,1
-EN20240506,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,9,3,20,1
-EN20240506,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,7,2,16,1
-EN20240506,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,7,2,15,1
-EN20240507,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,17,5,37,1
-EN20240507,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,15,5,30,1
-EN20240507,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,21,7,44,1
-EN20240507,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,20,6,42,1
-EN20240508,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,21,7,42,1
-EN20240508,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,18,6,39,1
-EN20240508,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,15,5,32,1
-EN20240508,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,20,6,43,1
-EN20240509,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,15,5,33,1
-EN20240509,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,19,6,39,1
-EN20240509,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,21,7,45,1
-EN20240509,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,15,5,33,1
-EN20240510,MBA Sem 1 - Subject 1,Dr. Siddharth Gupta,19,6,39,1
-EN20240510,MBA Sem 1 - Subject 2,Dr. Krishna Sharma,19,6,41,1
-EN20240510,MBA Sem 1 - Subject 3,Dr. Krishna Sharma,16,5,33,1
-EN20240510,MBA Sem 1 - Subject 4,Dr. Siddharth Gupta,16,5,35,1
-EN20240511,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,18,6,37,2
-EN20240511,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,15,5,32,2
-EN20240511,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,16,5,35,2
-EN20240511,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,15,5,31,2
-EN20240512,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,15,5,30,2
-EN20240512,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,19,6,39,2
-EN20240512,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,15,5,31,2
-EN20240512,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,19,6,41,2
-EN20240513,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,15,5,31,2
-EN20240513,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,21,7,43,2
-EN20240513,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,22,7,46,2
-EN20240513,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,18,6,36,2
-EN20240514,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,20,6,41,2
-EN20240514,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,17,5,37,2
-EN20240514,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,16,5,34,2
-EN20240514,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,21,7,43,2
-EN20240515,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,17,5,35,2
-EN20240515,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,19,6,40,2
-EN20240515,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,19,6,40,2
-EN20240515,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,16,5,34,2
-EN20240516,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,19,6,39,2
-EN20240516,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,17,5,37,2
-EN20240516,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,22,7,46,2
-EN20240516,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,21,7,45,2
-EN20240517,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,16,5,35,2
-EN20240517,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,16,5,33,2
-EN20240517,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,18,6,39,2
-EN20240517,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,15,5,32,2
-EN20240518,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,20,6,41,2
-EN20240518,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,19,6,41,2
-EN20240518,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,16,5,35,2
-EN20240518,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,21,7,42,2
-EN20240519,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,16,5,33,2
-EN20240519,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,20,6,41,2
-EN20240519,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,17,5,36,2
-EN20240519,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,21,7,45,2
-EN20240520,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,16,5,35,2
-EN20240520,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,21,7,44,2
-EN20240520,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,21,7,43,2
-EN20240520,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,19,6,40,2
-EN20240521,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,28,9,57,2
-EN20240521,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,27,9,54,2
-EN20240521,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,27,9,55,2
-EN20240521,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,27,9,57,2
-EN20240522,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,6,2,12,2
-EN20240522,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,9,3,18,2
-EN20240522,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,6,2,14,2
-EN20240522,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,5,1,11,2
-EN20240523,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,15,5,32,2
-EN20240523,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,17,5,35,2
-EN20240523,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,15,5,31,2
-EN20240523,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,18,6,36,2
-EN20240524,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,21,7,42,2
-EN20240524,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,20,6,41,2
-EN20240524,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,18,6,39,2
-EN20240524,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,17,5,36,2
-EN20240525,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,20,6,43,2
-EN20240525,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,15,5,33,2
-EN20240525,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,18,6,39,2
-EN20240525,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,17,5,37,2
-EN20240526,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,15,5,30,2
-EN20240526,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,22,7,46,2
-EN20240526,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,21,7,44,2
-EN20240526,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,16,5,33,2
-EN20240527,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,20,6,42,2
-EN20240527,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,21,7,44,2
-EN20240527,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,21,7,44,2
-EN20240527,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,15,5,32,2
-EN20240528,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,15,5,33,2
-EN20240528,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,16,5,33,2
-EN20240528,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,15,5,32,2
-EN20240528,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,18,6,39,2
-EN20240529,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,6,2,15,2
-EN20240529,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,5,1,13,2
-EN20240529,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,11,3,24,2
-EN20240529,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,6,2,14,2
-EN20240530,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,15,5,33,2
-EN20240530,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,20,6,43,2
-EN20240530,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,18,6,39,2
-EN20240530,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,19,6,40,2
-EN20240531,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,10,3,21,2
-EN20240531,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,7,2,17,2
-EN20240531,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,10,3,23,2
-EN20240531,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,10,3,23,2
-EN20240532,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,20,6,42,2
-EN20240532,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,15,5,31,2
-EN20240532,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,15,5,32,2
-EN20240532,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,18,6,36,2
-EN20240533,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,18,6,38,2
-EN20240533,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,19,6,41,2
-EN20240533,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,16,5,35,2
-EN20240533,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,17,5,35,2
-EN20240534,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,19,6,40,2
-EN20240534,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,16,5,33,2
-EN20240534,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,16,5,33,2
-EN20240534,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,18,6,38,2
-EN20240535,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,19,6,40,2
-EN20240535,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,19,6,41,2
-EN20240535,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,16,5,33,2
-EN20240535,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,21,7,42,2
-EN20240536,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,28,9,57,2
-EN20240536,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,27,9,55,2
-EN20240536,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,25,8,52,2
-EN20240536,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,27,9,56,2
-EN20240537,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,22,7,46,2
-EN20240537,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,20,6,43,2
-EN20240537,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,19,6,40,2
-EN20240537,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,17,5,35,2
-EN20240538,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,15,5,30,2
-EN20240538,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,17,5,35,2
-EN20240538,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,18,6,38,2
-EN20240538,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,15,5,33,2
-EN20240539,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,26,8,55,2
-EN20240539,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,26,8,55,2
-EN20240539,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,27,9,57,2
-EN20240539,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,27,9,55,2
-EN20240540,MBA Sem 2 - Subject 1,Dr. Krishna Sharma,6,2,15,2
-EN20240540,MBA Sem 2 - Subject 2,Dr. Krishna Sharma,5,1,12,2
-EN20240540,MBA Sem 2 - Subject 3,Dr. Siddharth Gupta,9,3,19,2
-EN20240540,MBA Sem 2 - Subject 4,Dr. Krishna Sharma,8,2,17,2
-EN20240541,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,20,6,43,3
-EN20240541,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,18,6,37,3
-EN20240541,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,15,5,32,3
-EN20240541,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,19,6,40,3
-EN20240542,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,21,7,45,3
-EN20240542,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,19,6,39,3
-EN20240542,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,17,5,37,3
-EN20240542,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,17,5,36,3
-EN20240543,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,16,5,34,3
-EN20240543,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,16,5,35,3
-EN20240543,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,18,6,39,3
-EN20240543,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,18,6,37,3
-EN20240544,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,15,5,32,3
-EN20240544,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,22,7,46,3
-EN20240544,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,19,6,41,3
-EN20240544,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,18,6,37,3
-EN20240545,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,16,5,34,3
-EN20240545,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,15,5,31,3
-EN20240545,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,22,7,45,3
-EN20240545,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,22,7,45,3
-EN20240546,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,18,6,38,3
-EN20240546,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,16,5,34,3
-EN20240546,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,18,6,36,3
-EN20240546,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,15,5,30,3
-EN20240547,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,21,7,43,3
-EN20240547,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,15,5,32,3
-EN20240547,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,20,6,41,3
-EN20240547,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,18,6,37,3
-EN20240548,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,19,6,39,3
-EN20240548,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,16,5,33,3
-EN20240548,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,18,6,37,3
-EN20240548,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,21,7,44,3
-EN20240549,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,17,5,36,3
-EN20240549,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,22,7,45,3
-EN20240549,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,17,5,36,3
-EN20240549,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,17,5,35,3
-EN20240550,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,27,9,56,3
-EN20240550,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,27,9,54,3
-EN20240550,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,27,9,55,3
-EN20240550,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,26,8,55,3
-EN20240551,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,4,1,10,3
-EN20240551,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,6,2,15,3
-EN20240551,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,10,3,21,3
-EN20240551,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,7,2,16,3
-EN20240552,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,26,8,54,3
-EN20240552,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,26,8,53,3
-EN20240552,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,26,8,53,3
-EN20240552,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,25,8,52,3
-EN20240553,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,18,6,38,3
-EN20240553,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,20,6,42,3
-EN20240553,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,20,6,42,3
-EN20240553,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,17,5,35,3
-EN20240554,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,8,2,19,3
-EN20240554,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,6,2,13,3
-EN20240554,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,6,2,13,3
-EN20240554,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,9,3,21,3
-EN20240555,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,8,2,18,3
-EN20240555,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,7,2,15,3
-EN20240555,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,6,2,14,3
-EN20240555,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,10,3,23,3
-EN20240556,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,16,5,34,3
-EN20240556,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,15,5,31,3
-EN20240556,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,18,6,37,3
-EN20240556,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,17,5,35,3
-EN20240557,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,18,6,37,3
-EN20240557,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,15,5,33,3
-EN20240557,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,18,6,36,3
-EN20240557,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,16,5,33,3
-EN20240558,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,10,3,23,3
-EN20240558,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,9,3,20,3
-EN20240558,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,10,3,21,3
-EN20240558,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,9,3,20,3
-EN20240559,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,19,6,41,3
-EN20240559,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,21,7,44,3
-EN20240559,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,15,5,33,3
-EN20240559,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,21,7,44,3
-EN20240560,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,21,7,44,3
-EN20240560,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,21,7,43,3
-EN20240560,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,15,5,32,3
-EN20240560,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,21,7,44,3
-EN20240561,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,25,8,53,3
-EN20240561,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,27,9,56,3
-EN20240561,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,26,8,55,3
-EN20240561,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,26,8,53,3
-EN20240562,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,22,7,46,3
-EN20240562,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,20,6,41,3
-EN20240562,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,16,5,33,3
-EN20240562,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,22,7,45,3
-EN20240563,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,19,6,41,3
-EN20240563,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,17,5,37,3
-EN20240563,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,20,6,41,3
-EN20240563,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,21,7,45,3
-EN20240564,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,5,1,12,3
-EN20240564,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,7,2,16,3
-EN20240564,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,9,3,19,3
-EN20240564,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,8,2,19,3
-EN20240565,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,18,6,39,3
-EN20240565,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,15,5,31,3
-EN20240565,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,19,6,39,3
-EN20240565,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,22,7,46,3
-EN20240566,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,22,7,46,3
-EN20240566,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,16,5,35,3
-EN20240566,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,16,5,34,3
-EN20240566,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,21,7,42,3
-EN20240567,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,21,7,44,3
-EN20240567,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,16,5,34,3
-EN20240567,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,15,5,30,3
-EN20240567,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,15,5,31,3
-EN20240568,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,21,7,43,3
-EN20240568,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,18,6,36,3
-EN20240568,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,22,7,45,3
-EN20240568,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,16,5,35,3
-EN20240569,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,21,7,45,3
-EN20240569,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,19,6,41,3
-EN20240569,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,20,6,42,3
-EN20240569,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,15,5,33,3
-EN20240570,MBA Sem 3 - Subject 1,Dr. Krishna Sharma,15,5,33,3
-EN20240570,MBA Sem 3 - Subject 2,Dr. Krishna Sharma,19,6,39,3
-EN20240570,MBA Sem 3 - Subject 3,Dr. Krishna Sharma,17,5,35,3
-EN20240570,MBA Sem 3 - Subject 4,Dr. Siddharth Gupta,16,5,34,3
-EN20240571,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,9,3,21,4
-EN20240571,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,5,1,12,4
-EN20240571,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,10,3,22,4
-EN20240571,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,9,3,20,4
-EN20240572,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,15,5,33,4
-EN20240572,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,15,5,32,4
-EN20240572,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,20,6,42,4
-EN20240572,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,20,6,41,4
-EN20240573,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,28,9,57,4
-EN20240573,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,27,9,54,4
-EN20240573,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,26,8,55,4
-EN20240573,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,27,9,56,4
-EN20240574,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,10,3,23,4
-EN20240574,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,7,2,15,4
-EN20240574,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,6,2,15,4
-EN20240574,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,7,2,17,4
-EN20240575,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,16,5,33,4
-EN20240575,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,20,6,41,4
-EN20240575,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,16,5,34,4
-EN20240575,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,19,6,40,4
-EN20240576,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,21,7,44,4
-EN20240576,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,18,6,38,4
-EN20240576,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,15,5,30,4
-EN20240576,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,18,6,38,4
-EN20240577,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,17,5,36,4
-EN20240577,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,21,7,45,4
-EN20240577,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,20,6,42,4
-EN20240577,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,17,5,37,4
-EN20240578,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,15,5,33,4
-EN20240578,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,15,5,33,4
-EN20240578,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,17,5,36,4
-EN20240578,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,15,5,32,4
-EN20240579,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,16,5,35,4
-EN20240579,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,22,7,46,4
-EN20240579,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,16,5,35,4
-EN20240579,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,17,5,35,4
-EN20240580,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,17,5,35,4
-EN20240580,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,18,6,38,4
-EN20240580,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,21,7,43,4
-EN20240580,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,18,6,36,4
-EN20240581,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,27,9,57,4
-EN20240581,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,28,9,57,4
-EN20240581,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,27,9,54,4
-EN20240581,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,28,9,58,4
-EN20240582,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,22,7,46,4
-EN20240582,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,20,6,42,4
-EN20240582,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,21,7,44,4
-EN20240582,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,16,5,35,4
-EN20240583,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,18,6,39,4
-EN20240583,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,16,5,35,4
-EN20240583,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,20,6,41,4
-EN20240583,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,15,5,31,4
-EN20240584,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,18,6,37,4
-EN20240584,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,17,5,37,4
-EN20240584,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,18,6,36,4
-EN20240584,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,20,6,43,4
-EN20240585,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,16,5,35,4
-EN20240585,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,19,6,39,4
-EN20240585,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,15,5,30,4
-EN20240585,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,22,7,45,4
-EN20240586,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,26,8,54,4
-EN20240586,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,25,8,52,4
-EN20240586,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,25,8,52,4
-EN20240586,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,27,9,55,4
-EN20240587,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,18,6,39,4
-EN20240587,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,18,6,38,4
-EN20240587,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,21,7,44,4
-EN20240587,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,21,7,44,4
-EN20240588,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,16,5,34,4
-EN20240588,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,15,5,30,4
-EN20240588,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,17,5,35,4
-EN20240588,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,20,6,42,4
-EN20240589,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,21,7,42,4
-EN20240589,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,17,5,35,4
-EN20240589,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,17,5,35,4
-EN20240589,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,16,5,33,4
-EN20240590,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,15,5,33,4
-EN20240590,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,15,5,30,4
-EN20240590,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,20,6,42,4
-EN20240590,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,17,5,37,4
-EN20240591,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,28,9,58,4
-EN20240591,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,25,8,52,4
-EN20240591,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,28,9,58,4
-EN20240591,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,27,9,56,4
-EN20240592,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,21,7,43,4
-EN20240592,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,15,5,33,4
-EN20240592,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,16,5,33,4
-EN20240592,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,15,5,33,4
-EN20240593,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,22,7,45,4
-EN20240593,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,19,6,41,4
-EN20240593,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,19,6,41,4
-EN20240593,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,16,5,33,4
-EN20240594,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,21,7,43,4
-EN20240594,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,21,7,45,4
-EN20240594,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,15,5,30,4
-EN20240594,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,15,5,31,4
-EN20240595,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,21,7,44,4
-EN20240595,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,21,7,44,4
-EN20240595,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,15,5,31,4
-EN20240595,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,20,6,41,4
-EN20240596,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,18,6,38,4
-EN20240596,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,19,6,41,4
-EN20240596,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,16,5,33,4
-EN20240596,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,20,6,42,4
-EN20240597,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,20,6,43,4
-EN20240597,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,21,7,42,4
-EN20240597,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,17,5,37,4
-EN20240597,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,17,5,37,4
-EN20240598,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,26,8,54,4
-EN20240598,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,26,8,54,4
-EN20240598,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,27,9,54,4
-EN20240598,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,26,8,53,4
-EN20240599,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,5,1,11,4
-EN20240599,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,6,2,15,4
-EN20240599,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,11,3,24,4
-EN20240599,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,9,3,19,4
-EN20240600,MBA Sem 4 - Subject 1,Dr. Krishna Sharma,17,5,35,4
-EN20240600,MBA Sem 4 - Subject 2,Dr. Siddharth Gupta,16,5,33,4
-EN20240600,MBA Sem 4 - Subject 3,Dr. Siddharth Gupta,15,5,31,4
-EN20240600,MBA Sem 4 - Subject 4,Dr. Krishna Sharma,16,5,33,4
+enrollment_no,subject_name,internal_marks,viva_marks,external_marks
+BCA101,Distributed Systems,20,6,41
+BCA101,Quantum Computing,21,7,45
+BCA101,Theory of Computation,18,6,37
+BCA101,Blockchain Technology,18,6,37
+BCA102,Distributed Systems,27,9,54
+BCA102,Quantum Computing,27,9,57
+BCA102,Theory of Computation,27,9,54
+BCA102,Blockchain Technology,27,9,54
+BCA103,Distributed Systems,21,7,44
+BCA103,Quantum Computing,22,7,45
+BCA103,Theory of Computation,22,7,46
+BCA103,Blockchain Technology,17,5,37
+BCA104,Distributed Systems,20,6,41
+BCA104,Quantum Computing,20,6,41
+BCA104,Theory of Computation,19,6,40
+BCA104,Blockchain Technology,15,5,31
+BCA105,Distributed Systems,15,5,31
+BCA105,Quantum Computing,21,7,43
+BCA105,Theory of Computation,18,6,39
+BCA105,Blockchain Technology,21,7,45
+BCA106,Distributed Systems,18,6,39
+BCA106,Quantum Computing,22,7,46
+BCA106,Theory of Computation,21,7,45
+BCA106,Blockchain Technology,16,5,35
+BCA107,Distributed Systems,22,7,46
+BCA107,Quantum Computing,16,5,35
+BCA107,Theory of Computation,16,5,35
+BCA107,Blockchain Technology,22,7,45
+BCA108,Distributed Systems,21,7,44
+BCA108,Quantum Computing,18,6,39
+BCA108,Theory of Computation,15,5,33
+BCA108,Blockchain Technology,16,5,33
+BCA109,Distributed Systems,15,5,30
+BCA109,Quantum Computing,20,6,41
+BCA109,Theory of Computation,16,5,35
+BCA109,Blockchain Technology,22,7,46
+BCA110,Distributed Systems,19,6,40
+BCA110,Quantum Computing,17,5,36
+BCA110,Theory of Computation,19,6,39
+BCA110,Blockchain Technology,20,6,41
+BCA111,Distributed Systems,27,9,57
+BCA111,Quantum Computing,28,9,57
+BCA111,Theory of Computation,28,9,58
+BCA111,Blockchain Technology,28,9,57
+BCA112,Distributed Systems,22,7,45
+BCA112,Quantum Computing,21,7,44
+BCA112,Theory of Computation,16,5,34
+BCA112,Blockchain Technology,20,6,43
+BCA113,Distributed Systems,25,8,51
+BCA113,Quantum Computing,25,8,53
+BCA113,Theory of Computation,24,8,50
+BCA113,Blockchain Technology,28,9,57
+BCA114,Distributed Systems,24,8,48
+BCA114,Quantum Computing,26,8,55
+BCA114,Theory of Computation,24,8,51
+BCA114,Blockchain Technology,26,8,54
+BCA115,Distributed Systems,6,2,13
+BCA115,Quantum Computing,7,2,17
+BCA115,Theory of Computation,10,3,21
+BCA115,Blockchain Technology,10,3,22
+BCA116,Distributed Systems,22,7,46
+BCA116,Quantum Computing,15,5,30
+BCA116,Theory of Computation,22,7,46
+BCA116,Blockchain Technology,21,7,45
+BCA117,Distributed Systems,22,7,46
+BCA117,Quantum Computing,19,6,39
+BCA117,Theory of Computation,18,6,37
+BCA117,Blockchain Technology,20,6,41
+BCA118,Distributed Systems,18,6,39
+BCA118,Quantum Computing,17,5,36
+BCA118,Theory of Computation,22,7,46
+BCA118,Blockchain Technology,18,6,38
+BCA119,Distributed Systems,22,7,45
+BCA119,Quantum Computing,16,5,35
+BCA119,Theory of Computation,17,5,36
+BCA119,Blockchain Technology,17,5,37
+BCA120,Distributed Systems,21,7,44
+BCA120,Quantum Computing,20,6,42
+BCA120,Theory of Computation,17,5,37
+BCA120,Blockchain Technology,18,6,38
+BCA121,Distributed Systems,7,2,15
+BCA121,Quantum Computing,11,3,25
+BCA121,Theory of Computation,10,3,21
+BCA121,Blockchain Technology,7,2,17
+BCA122,Distributed Systems,16,5,33
+BCA122,Quantum Computing,15,5,30
+BCA122,Theory of Computation,16,5,33
+BCA122,Blockchain Technology,19,6,41
+BCA123,Distributed Systems,10,3,23
+BCA123,Quantum Computing,11,3,23
+BCA123,Theory of Computation,6,2,13
+BCA123,Blockchain Technology,11,3,23
+BCA124,Distributed Systems,27,9,55
+BCA124,Quantum Computing,24,8,49
+BCA124,Theory of Computation,25,8,51
+BCA124,Blockchain Technology,24,8,49
+BCA125,Distributed Systems,21,7,43
+BCA125,Quantum Computing,17,5,36
+BCA125,Theory of Computation,19,6,41
+BCA125,Blockchain Technology,18,6,39
+BCA126,Distributed Systems,21,7,42
+BCA126,Quantum Computing,18,6,37
+BCA126,Theory of Computation,21,7,43
+BCA126,Blockchain Technology,21,7,45
+BCA127,Distributed Systems,15,5,31
+BCA127,Quantum Computing,20,6,43
+BCA127,Theory of Computation,16,5,35
+BCA127,Blockchain Technology,18,6,39
+BCA128,Distributed Systems,10,3,23
+BCA128,Quantum Computing,11,3,25
+BCA128,Theory of Computation,6,2,13
+BCA128,Blockchain Technology,7,2,16
+BCA129,Distributed Systems,17,5,35
+BCA129,Quantum Computing,21,7,44
+BCA129,Theory of Computation,21,7,44
+BCA129,Blockchain Technology,17,5,36
+BCA130,Distributed Systems,6,2,14
+BCA130,Quantum Computing,8,2,17
+BCA130,Theory of Computation,6,2,13
+BCA130,Blockchain Technology,6,2,15
+BCA201,Advanced Database,15,5,33
+BCA201,Software Engineering,19,6,39
+BCA201,Python Programming,17,5,37
+BCA201,Design and Analysis of Algorithms,16,5,34
+BCA202,Advanced Database,11,3,24
+BCA202,Software Engineering,11,3,24
+BCA202,Python Programming,11,3,23
+BCA202,Design and Analysis of Algorithms,12,4,24
+BCA203,Advanced Database,16,5,34
+BCA203,Software Engineering,17,5,36
+BCA203,Python Programming,17,5,36
+BCA203,Design and Analysis of Algorithms,18,6,37
+BCA204,Advanced Database,8,2,19
+BCA204,Software Engineering,6,2,15
+BCA204,Python Programming,11,3,25
+BCA204,Design and Analysis of Algorithms,6,2,13
+BCA205,Advanced Database,15,5,32
+BCA205,Software Engineering,17,5,36
+BCA205,Python Programming,22,7,46
+BCA205,Design and Analysis of Algorithms,15,5,30
+BCA206,Advanced Database,21,7,42
+BCA206,Software Engineering,20,6,41
+BCA206,Python Programming,15,5,33
+BCA206,Design and Analysis of Algorithms,21,7,43
+BCA207,Advanced Database,16,5,35
+BCA207,Software Engineering,19,6,39
+BCA207,Python Programming,19,6,39
+BCA207,Design and Analysis of Algorithms,21,7,43
+BCA208,Advanced Database,15,5,33
+BCA208,Software Engineering,17,5,37
+BCA208,Python Programming,18,6,39
+BCA208,Design and Analysis of Algorithms,19,6,39
+BCA209,Advanced Database,18,6,39
+BCA209,Software Engineering,16,5,33
+BCA209,Python Programming,20,6,42
+BCA209,Design and Analysis of Algorithms,16,5,33
+BCA210,Advanced Database,15,5,33
+BCA210,Software Engineering,16,5,35
+BCA210,Python Programming,16,5,35
+BCA210,Design and Analysis of Algorithms,21,7,42
+BCA211,Advanced Database,26,8,53
+BCA211,Software Engineering,27,9,54
+BCA211,Python Programming,24,8,50
+BCA211,Design and Analysis of Algorithms,25,8,51
+BCA212,Advanced Database,21,7,43
+BCA212,Software Engineering,20,6,41
+BCA212,Python Programming,15,5,33
+BCA212,Design and Analysis of Algorithms,19,6,40
+BCA213,Advanced Database,10,3,22
+BCA213,Software Engineering,9,3,21
+BCA213,Python Programming,6,2,14
+BCA213,Design and Analysis of Algorithms,11,3,23
+BCA214,Advanced Database,22,7,45
+BCA214,Software Engineering,21,7,45
+BCA214,Python Programming,18,6,39
+BCA214,Design and Analysis of Algorithms,20,6,43
+BCA215,Advanced Database,16,5,34
+BCA215,Software Engineering,18,6,37
+BCA215,Python Programming,19,6,41
+BCA215,Design and Analysis of Algorithms,17,5,35
+BCA216,Advanced Database,15,5,32
+BCA216,Software Engineering,18,6,37
+BCA216,Python Programming,22,7,46
+BCA216,Design and Analysis of Algorithms,17,5,36
+BCA217,Advanced Database,18,6,38
+BCA217,Software Engineering,21,7,43
+BCA217,Python Programming,22,7,46
+BCA217,Design and Analysis of Algorithms,15,5,33
+BCA218,Advanced Database,18,6,37
+BCA218,Software Engineering,20,6,43
+BCA218,Python Programming,17,5,35
+BCA218,Design and Analysis of Algorithms,22,7,45
+BCA219,Advanced Database,18,6,36
+BCA219,Software Engineering,16,5,33
+BCA219,Python Programming,15,5,30
+BCA219,Design and Analysis of Algorithms,17,5,36
+BCA220,Advanced Database,19,6,41
+BCA220,Software Engineering,15,5,31
+BCA220,Python Programming,16,5,33
+BCA220,Design and Analysis of Algorithms,21,7,43
+BCA221,Advanced Database,19,6,39
+BCA221,Software Engineering,16,5,33
+BCA221,Python Programming,15,5,31
+BCA221,Design and Analysis of Algorithms,17,5,35
+BCA222,Advanced Database,24,8,48
+BCA222,Software Engineering,26,8,55
+BCA222,Python Programming,24,8,48
+BCA222,Design and Analysis of Algorithms,27,9,55
+BCA223,Advanced Database,6,2,14
+BCA223,Software Engineering,8,2,18
+BCA223,Python Programming,9,3,21
+BCA223,Design and Analysis of Algorithms,9,3,21
+BCA224,Advanced Database,19,6,40
+BCA224,Software Engineering,15,5,31
+BCA224,Python Programming,15,5,30
+BCA224,Design and Analysis of Algorithms,19,6,40
+BCA225,Advanced Database,17,5,36
+BCA225,Software Engineering,16,5,34
+BCA225,Python Programming,21,7,44
+BCA225,Design and Analysis of Algorithms,16,5,35
+BCA226,Advanced Database,25,8,51
+BCA226,Software Engineering,24,8,48
+BCA226,Python Programming,25,8,52
+BCA226,Design and Analysis of Algorithms,28,9,58
+BCA227,Advanced Database,9,3,18
+BCA227,Software Engineering,6,2,13
+BCA227,Python Programming,6,2,15
+BCA227,Design and Analysis of Algorithms,10,3,21
+BCA228,Advanced Database,19,6,40
+BCA228,Software Engineering,19,6,40
+BCA228,Python Programming,18,6,39
+BCA228,Design and Analysis of Algorithms,22,7,45
+BCA229,Advanced Database,26,8,55
+BCA229,Software Engineering,24,8,50
+BCA229,Python Programming,24,8,48
+BCA229,Design and Analysis of Algorithms,27,9,56
+BCA230,Advanced Database,26,8,55
+BCA230,Software Engineering,27,9,54
+BCA230,Python Programming,24,8,50
+BCA230,Design and Analysis of Algorithms,25,8,52
+BCA301,Data Mining,7,2,17
+BCA301,Machine Learning,8,2,18
+BCA301,Big Data Analytics,8,2,18
+BCA301,Mobile Application Development,6,2,14
+BCA302,Data Mining,22,7,45
+BCA302,Machine Learning,22,7,45
+BCA302,Big Data Analytics,19,6,40
+BCA302,Mobile Application Development,15,5,33
+BCA303,Data Mining,28,9,58
+BCA303,Machine Learning,25,8,52
+BCA303,Big Data Analytics,25,8,51
+BCA303,Mobile Application Development,26,8,53
+BCA304,Data Mining,15,5,31
+BCA304,Machine Learning,19,6,41
+BCA304,Big Data Analytics,22,7,45
+BCA304,Mobile Application Development,19,6,39
+BCA305,Data Mining,16,5,33
+BCA305,Machine Learning,22,7,46
+BCA305,Big Data Analytics,15,5,33
+BCA305,Mobile Application Development,18,6,38
+BCA306,Data Mining,15,5,32
+BCA306,Machine Learning,18,6,38
+BCA306,Big Data Analytics,20,6,43
+BCA306,Mobile Application Development,21,7,42
+BCA307,Data Mining,22,7,45
+BCA307,Machine Learning,16,5,34
+BCA307,Big Data Analytics,19,6,41
+BCA307,Mobile Application Development,16,5,34
+BCA308,Data Mining,20,6,42
+BCA308,Machine Learning,18,6,39
+BCA308,Big Data Analytics,16,5,34
+BCA308,Mobile Application Development,21,7,42
+BCA309,Data Mining,16,5,34
+BCA309,Machine Learning,22,7,45
+BCA309,Big Data Analytics,20,6,43
+BCA309,Mobile Application Development,21,7,44
+BCA310,Data Mining,18,6,39
+BCA310,Machine Learning,22,7,46
+BCA310,Big Data Analytics,18,6,38
+BCA310,Mobile Application Development,22,7,46
+BCA311,Data Mining,15,5,32
+BCA311,Machine Learning,19,6,39
+BCA311,Big Data Analytics,17,5,37
+BCA311,Mobile Application Development,15,5,33
+BCA312,Data Mining,28,9,58
+BCA312,Machine Learning,26,8,55
+BCA312,Big Data Analytics,28,9,57
+BCA312,Mobile Application Development,24,8,49
+BCA313,Data Mining,24,8,51
+BCA313,Machine Learning,24,8,49
+BCA313,Big Data Analytics,27,9,54
+BCA313,Mobile Application Development,24,8,50
+BCA314,Data Mining,21,7,42
+BCA314,Machine Learning,17,5,37
+BCA314,Big Data Analytics,15,5,32
+BCA314,Mobile Application Development,16,5,35
+BCA315,Data Mining,7,2,15
+BCA315,Machine Learning,12,4,24
+BCA315,Big Data Analytics,9,3,20
+BCA315,Mobile Application Development,7,2,16
+BCA316,Data Mining,11,3,23
+BCA316,Machine Learning,12,4,24
+BCA316,Big Data Analytics,7,2,16
+BCA316,Mobile Application Development,9,3,18
+BCA317,Data Mining,18,6,36
+BCA317,Machine Learning,21,7,43
+BCA317,Big Data Analytics,18,6,38
+BCA317,Mobile Application Development,16,5,35
+BCA318,Data Mining,16,5,35
+BCA318,Machine Learning,20,6,43
+BCA318,Big Data Analytics,19,6,39
+BCA318,Mobile Application Development,18,6,36
+BCA319,Data Mining,22,7,46
+BCA319,Machine Learning,20,6,41
+BCA319,Big Data Analytics,19,6,41
+BCA319,Mobile Application Development,17,5,37
+BCA320,Data Mining,27,9,55
+BCA320,Machine Learning,27,9,54
+BCA320,Big Data Analytics,26,8,54
+BCA320,Mobile Application Development,27,9,57
+BCA321,Data Mining,16,5,34
+BCA321,Machine Learning,17,5,36
+BCA321,Big Data Analytics,21,7,43
+BCA321,Mobile Application Development,17,5,36
+BCA322,Data Mining,25,8,53
+BCA322,Machine Learning,27,9,55
+BCA322,Big Data Analytics,27,9,57
+BCA322,Mobile Application Development,27,9,57
+BCA323,Data Mining,7,2,16
+BCA323,Machine Learning,6,2,15
+BCA323,Big Data Analytics,9,3,19
+BCA323,Mobile Application Development,6,2,12
+BCA324,Data Mining,17,5,37
+BCA324,Machine Learning,15,5,33
+BCA324,Big Data Analytics,17,5,35
+BCA324,Mobile Application Development,16,5,33
+BCA325,Data Mining,18,6,37
+BCA325,Machine Learning,21,7,44
+BCA325,Big Data Analytics,18,6,37
+BCA325,Mobile Application Development,18,6,39
+BCA326,Data Mining,20,6,42
+BCA326,Machine Learning,15,5,30
+BCA326,Big Data Analytics,15,5,31
+BCA326,Mobile Application Development,18,6,39
+BCA327,Data Mining,19,6,39
+BCA327,Machine Learning,15,5,33
+BCA327,Big Data Analytics,16,5,34
+BCA327,Mobile Application Development,19,6,41
+BCA328,Data Mining,21,7,42
+BCA328,Machine Learning,21,7,44
+BCA328,Big Data Analytics,21,7,44
+BCA328,Mobile Application Development,15,5,32
+BCA329,Data Mining,9,3,18
+BCA329,Machine Learning,6,2,15
+BCA329,Big Data Analytics,8,2,17
+BCA329,Mobile Application Development,9,3,20
+BCA330,Data Mining,20,6,43
+BCA330,Machine Learning,17,5,36
+BCA330,Big Data Analytics,16,5,35
+BCA330,Mobile Application Development,19,6,41
+BCA401,Computer Architecture,20,6,43
+BCA401,Artificial Intelligence,17,5,35
+BCA401,Cloud Computing,16,5,35
+BCA401,E-Commerce,19,6,39
+BCA402,Computer Architecture,28,9,57
+BCA402,Artificial Intelligence,25,8,53
+BCA402,Cloud Computing,24,8,50
+BCA402,E-Commerce,28,9,58
+BCA403,Computer Architecture,19,6,40
+BCA403,Artificial Intelligence,16,5,34
+BCA403,Cloud Computing,19,6,40
+BCA403,E-Commerce,21,7,42
+BCA404,Computer Architecture,20,6,43
+BCA404,Artificial Intelligence,17,5,37
+BCA404,Cloud Computing,21,7,42
+BCA404,E-Commerce,18,6,37
+BCA405,Computer Architecture,7,2,16
+BCA405,Artificial Intelligence,11,3,24
+BCA405,Cloud Computing,7,2,17
+BCA405,E-Commerce,8,2,19
+BCA406,Computer Architecture,15,5,32
+BCA406,Artificial Intelligence,20,6,43
+BCA406,Cloud Computing,17,5,36
+BCA406,E-Commerce,20,6,42
+BCA407,Computer Architecture,18,6,39
+BCA407,Artificial Intelligence,20,6,41
+BCA407,Cloud Computing,15,5,31
+BCA407,E-Commerce,17,5,35
+BCA408,Computer Architecture,16,5,34
+BCA408,Artificial Intelligence,21,7,42
+BCA408,Cloud Computing,18,6,36
+BCA408,E-Commerce,19,6,41
+BCA409,Computer Architecture,15,5,33
+BCA409,Artificial Intelligence,18,6,37
+BCA409,Cloud Computing,21,7,44
+BCA409,E-Commerce,21,7,42
+BCA410,Computer Architecture,9,3,18
+BCA410,Artificial Intelligence,12,4,24
+BCA410,Cloud Computing,6,2,14
+BCA410,E-Commerce,6,2,12
+BCA411,Computer Architecture,20,6,43
+BCA411,Artificial Intelligence,16,5,35
+BCA411,Cloud Computing,17,5,37
+BCA411,E-Commerce,16,5,33
+BCA412,Computer Architecture,22,7,46
+BCA412,Artificial Intelligence,17,5,36
+BCA412,Cloud Computing,21,7,42
+BCA412,E-Commerce,20,6,41
+BCA413,Computer Architecture,19,6,41
+BCA413,Artificial Intelligence,17,5,37
+BCA413,Cloud Computing,15,5,33
+BCA413,E-Commerce,15,5,31
+BCA414,Computer Architecture,10,3,22
+BCA414,Artificial Intelligence,6,2,13
+BCA414,Cloud Computing,11,3,24
+BCA414,E-Commerce,6,2,14
+BCA415,Computer Architecture,20,6,43
+BCA415,Artificial Intelligence,20,6,42
+BCA415,Cloud Computing,20,6,41
+BCA415,E-Commerce,21,7,44
+BCA416,Computer Architecture,17,5,36
+BCA416,Artificial Intelligence,18,6,39
+BCA416,Cloud Computing,17,5,35
+BCA416,E-Commerce,17,5,36
+BCA417,Computer Architecture,19,6,41
+BCA417,Artificial Intelligence,21,7,43
+BCA417,Cloud Computing,22,7,46
+BCA417,E-Commerce,16,5,34
+BCA418,Computer Architecture,27,9,57
+BCA418,Artificial Intelligence,27,9,56
+BCA418,Cloud Computing,26,8,55
+BCA418,E-Commerce,28,9,58
+BCA419,Computer Architecture,26,8,54
+BCA419,Artificial Intelligence,28,9,57
+BCA419,Cloud Computing,24,8,50
+BCA419,E-Commerce,26,8,55
+BCA420,Computer Architecture,20,6,42
+BCA420,Artificial Intelligence,17,5,36
+BCA420,Cloud Computing,16,5,34
+BCA420,E-Commerce,16,5,34
+BCA421,Computer Architecture,24,8,51
+BCA421,Artificial Intelligence,27,9,54
+BCA421,Cloud Computing,24,8,49
+BCA421,E-Commerce,27,9,54
+BCA422,Computer Architecture,6,2,15
+BCA422,Artificial Intelligence,7,2,16
+BCA422,Cloud Computing,8,2,18
+BCA422,E-Commerce,9,3,21
+BCA423,Computer Architecture,26,8,55
+BCA423,Artificial Intelligence,24,8,49
+BCA423,Cloud Computing,24,8,49
+BCA423,E-Commerce,24,8,51
+BCA424,Computer Architecture,6,2,12
+BCA424,Artificial Intelligence,10,3,21
+BCA424,Cloud Computing,10,3,21
+BCA424,E-Commerce,11,3,25
+BCA425,Computer Architecture,15,5,32
+BCA425,Artificial Intelligence,18,6,37
+BCA425,Cloud Computing,18,6,36
+BCA425,E-Commerce,17,5,36
+BCA426,Computer Architecture,15,5,30
+BCA426,Artificial Intelligence,20,6,43
+BCA426,Cloud Computing,18,6,37
+BCA426,E-Commerce,16,5,33
+BCA427,Computer Architecture,20,6,41
+BCA427,Artificial Intelligence,20,6,43
+BCA427,Cloud Computing,21,7,42
+BCA427,E-Commerce,16,5,35
+BCA428,Computer Architecture,15,5,31
+BCA428,Artificial Intelligence,15,5,30
+BCA428,Cloud Computing,15,5,33
+BCA428,E-Commerce,15,5,33
+BCA429,Computer Architecture,15,5,30
+BCA429,Artificial Intelligence,17,5,36
+BCA429,Cloud Computing,21,7,44
+BCA429,E-Commerce,18,6,36
+BCA430,Computer Architecture,17,5,36
+BCA430,Artificial Intelligence,21,7,43
+BCA430,Cloud Computing,16,5,34
+BCA430,E-Commerce,18,6,38
+BCA501,Embedded Systems,25,8,51
+BCA501,Deep Learning,28,9,58
+BCA501,Data Structures,24,8,49
+BCA501,Object Oriented Analysis and Design,24,8,49
+BCA502,Embedded Systems,6,2,14
+BCA502,Deep Learning,6,2,15
+BCA502,Data Structures,8,2,19
+BCA502,Object Oriented Analysis and Design,6,2,13
+BCA503,Embedded Systems,19,6,41
+BCA503,Deep Learning,16,5,34
+BCA503,Data Structures,19,6,41
+BCA503,Object Oriented Analysis and Design,20,6,42
+BCA504,Embedded Systems,21,7,43
+BCA504,Deep Learning,18,6,36
+BCA504,Data Structures,17,5,36
+BCA504,Object Oriented Analysis and Design,20,6,43
+BCA505,Embedded Systems,15,5,32
+BCA505,Deep Learning,21,7,44
+BCA505,Data Structures,20,6,41
+BCA505,Object Oriented Analysis and Design,15,5,32
+BCA506,Embedded Systems,17,5,37
+BCA506,Deep Learning,19,6,40
+BCA506,Data Structures,22,7,46
+BCA506,Object Oriented Analysis and Design,22,7,45
+BCA507,Embedded Systems,24,8,48
+BCA507,Deep Learning,28,9,57
+BCA507,Data Structures,24,8,48
+BCA507,Object Oriented Analysis and Design,28,9,57
+BCA508,Embedded Systems,22,7,46
+BCA508,Deep Learning,22,7,46
+BCA508,Data Structures,19,6,39
+BCA508,Object Oriented Analysis and Design,15,5,31
+BCA509,Embedded Systems,24,8,48
+BCA509,Deep Learning,26,8,53
+BCA509,Data Structures,27,9,54
+BCA509,Object Oriented Analysis and Design,26,8,55
+BCA510,Embedded Systems,21,7,43
+BCA510,Deep Learning,16,5,35
+BCA510,Data Structures,22,7,45
+BCA510,Object Oriented Analysis and Design,18,6,38
+BCA511,Embedded Systems,20,6,41
+BCA511,Deep Learning,21,7,44
+BCA511,Data Structures,15,5,30
+BCA511,Object Oriented Analysis and Design,17,5,35
+BCA512,Embedded Systems,7,2,17
+BCA512,Deep Learning,11,3,23
+BCA512,Data Structures,8,2,17
+BCA512,Object Oriented Analysis and Design,11,3,25
+BCA513,Embedded Systems,18,6,38
+BCA513,Deep Learning,17,5,36
+BCA513,Data Structures,15,5,30
+BCA513,Object Oriented Analysis and Design,17,5,37
+BCA514,Embedded Systems,20,6,41
+BCA514,Deep Learning,16,5,33
+BCA514,Data Structures,18,6,38
+BCA514,Object Oriented Analysis and Design,16,5,34
+BCA515,Embedded Systems,16,5,33
+BCA515,Deep Learning,18,6,36
+BCA515,Data Structures,20,6,41
+BCA515,Object Oriented Analysis and Design,18,6,38
+BCA516,Embedded Systems,27,9,54
+BCA516,Deep Learning,24,8,48
+BCA516,Data Structures,27,9,54
+BCA516,Object Oriented Analysis and Design,27,9,57
+BCA517,Embedded Systems,17,5,37
+BCA517,Deep Learning,21,7,42
+BCA517,Data Structures,15,5,31
+BCA517,Object Oriented Analysis and Design,16,5,33
+BCA518,Embedded Systems,18,6,37
+BCA518,Deep Learning,20,6,43
+BCA518,Data Structures,20,6,43
+BCA518,Object Oriented Analysis and Design,16,5,33
+BCA519,Embedded Systems,28,9,57
+BCA519,Deep Learning,24,8,49
+BCA519,Data Structures,24,8,51
+BCA519,Object Oriented Analysis and Design,24,8,50
+BCA520,Embedded Systems,20,6,41
+BCA520,Deep Learning,16,5,35
+BCA520,Data Structures,18,6,38
+BCA520,Object Oriented Analysis and Design,16,5,35
+BCA521,Embedded Systems,20,6,43
+BCA521,Deep Learning,19,6,40
+BCA521,Data Structures,19,6,40
+BCA521,Object Oriented Analysis and Design,18,6,37
+BCA522,Embedded Systems,21,7,43
+BCA522,Deep Learning,15,5,32
+BCA522,Data Structures,19,6,41
+BCA522,Object Oriented Analysis and Design,16,5,34
+BCA523,Embedded Systems,18,6,37
+BCA523,Deep Learning,17,5,36
+BCA523,Data Structures,19,6,40
+BCA523,Object Oriented Analysis and Design,15,5,30
+BCA524,Embedded Systems,16,5,35
+BCA524,Deep Learning,18,6,39
+BCA524,Data Structures,21,7,42
+BCA524,Object Oriented Analysis and Design,15,5,30
+BCA525,Embedded Systems,17,5,35
+BCA525,Deep Learning,18,6,39
+BCA525,Data Structures,21,7,42
+BCA525,Object Oriented Analysis and Design,20,6,41
+BCA526,Embedded Systems,9,3,18
+BCA526,Deep Learning,11,3,25
+BCA526,Data Structures,12,4,24
+BCA526,Object Oriented Analysis and Design,8,2,17
+BCA527,Embedded Systems,7,2,15
+BCA527,Deep Learning,11,3,24
+BCA527,Data Structures,9,3,21
+BCA527,Object Oriented Analysis and Design,11,3,25
+BCA528,Embedded Systems,20,6,42
+BCA528,Deep Learning,18,6,36
+BCA528,Data Structures,18,6,37
+BCA528,Object Oriented Analysis and Design,15,5,33
+BCA529,Embedded Systems,20,6,41
+BCA529,Deep Learning,21,7,42
+BCA529,Data Structures,21,7,44
+BCA529,Object Oriented Analysis and Design,21,7,44
+BCA530,Embedded Systems,6,2,14
+BCA530,Deep Learning,6,2,14
+BCA530,Data Structures,9,3,18
+BCA530,Object Oriented Analysis and Design,8,2,18
+BCA601,Computer Networks,20,6,43
+BCA601,Operating System,17,5,35
+BCA601,Management Information Systems,19,6,41
+BCA601,Compiler Design,19,6,41
+BCA602,Computer Networks,8,2,17
+BCA602,Operating System,10,3,22
+BCA602,Management Information Systems,9,3,21
+BCA602,Compiler Design,7,2,16
+BCA603,Computer Networks,8,2,18
+BCA603,Operating System,6,2,13
+BCA603,Management Information Systems,6,2,14
+BCA603,Compiler Design,10,3,23
+BCA604,Computer Networks,20,6,41
+BCA604,Operating System,20,6,41
+BCA604,Management Information Systems,19,6,39
+BCA604,Compiler Design,18,6,38
+BCA605,Computer Networks,18,6,38
+BCA605,Operating System,15,5,30
+BCA605,Management Information Systems,17,5,35
+BCA605,Compiler Design,17,5,37
+BCA606,Computer Networks,18,6,38
+BCA606,Operating System,22,7,46
+BCA606,Management Information Systems,17,5,36
+BCA606,Compiler Design,22,7,46
+BCA607,Computer Networks,7,2,16
+BCA607,Operating System,6,2,15
+BCA607,Management Information Systems,7,2,15
+BCA607,Compiler Design,9,3,20
+BCA608,Computer Networks,20,6,41
+BCA608,Operating System,17,5,37
+BCA608,Management Information Systems,21,7,42
+BCA608,Compiler Design,22,7,45
+BCA609,Computer Networks,25,8,53
+BCA609,Operating System,25,8,52
+BCA609,Management Information Systems,27,9,54
+BCA609,Compiler Design,24,8,51
+BCA610,Computer Networks,8,2,18
+BCA610,Operating System,11,3,24
+BCA610,Management Information Systems,7,2,17
+BCA610,Compiler Design,9,3,18
+BCA611,Computer Networks,27,9,56
+BCA611,Operating System,25,8,52
+BCA611,Management Information Systems,26,8,54
+BCA611,Compiler Design,24,8,50
+BCA612,Computer Networks,21,7,42
+BCA612,Operating System,21,7,44
+BCA612,Management Information Systems,19,6,41
+BCA612,Compiler Design,19,6,40
+BCA613,Computer Networks,15,5,31
+BCA613,Operating System,20,6,43
+BCA613,Management Information Systems,20,6,43
+BCA613,Compiler Design,18,6,38
+BCA614,Computer Networks,20,6,42
+BCA614,Operating System,18,6,36
+BCA614,Management Information Systems,17,5,36
+BCA614,Compiler Design,22,7,46
+BCA615,Computer Networks,22,7,45
+BCA615,Operating System,17,5,37
+BCA615,Management Information Systems,21,7,45
+BCA615,Compiler Design,18,6,37
+BCA616,Computer Networks,21,7,43
+BCA616,Operating System,20,6,41
+BCA616,Management Information Systems,21,7,45
+BCA616,Compiler Design,18,6,36
+BCA617,Computer Networks,24,8,50
+BCA617,Operating System,24,8,48
+BCA617,Management Information Systems,28,9,58
+BCA617,Compiler Design,28,9,58
+BCA618,Computer Networks,17,5,37
+BCA618,Operating System,18,6,39
+BCA618,Management Information Systems,21,7,45
+BCA618,Compiler Design,21,7,42
+BCA619,Computer Networks,24,8,48
+BCA619,Operating System,28,9,58
+BCA619,Management Information Systems,25,8,52
+BCA619,Compiler Design,24,8,50
+BCA620,Computer Networks,27,9,56
+BCA620,Operating System,27,9,57
+BCA620,Management Information Systems,24,8,48
+BCA620,Compiler Design,24,8,51
+BCA621,Computer Networks,17,5,36
+BCA621,Operating System,21,7,42
+BCA621,Management Information Systems,18,6,36
+BCA621,Compiler Design,19,6,40
+BCA622,Computer Networks,21,7,45
+BCA622,Operating System,17,5,37
+BCA622,Management Information Systems,17,5,36
+BCA622,Compiler Design,22,7,45
+BCA623,Computer Networks,19,6,41
+BCA623,Operating System,21,7,43
+BCA623,Management Information Systems,15,5,33
+BCA623,Compiler Design,20,6,43
+BCA624,Computer Networks,6,2,14
+BCA624,Operating System,11,3,24
+BCA624,Management Information Systems,9,3,18
+BCA624,Compiler Design,9,3,20
+BCA625,Computer Networks,16,5,34
+BCA625,Operating System,20,6,41
+BCA625,Management Information Systems,15,5,33
+BCA625,Compiler Design,15,5,32
+BCA626,Computer Networks,21,7,45
+BCA626,Operating System,16,5,34
+BCA626,Management Information Systems,17,5,37
+BCA626,Compiler Design,22,7,45
+BCA627,Computer Networks,15,5,32
+BCA627,Operating System,19,6,40
+BCA627,Management Information Systems,21,7,42
+BCA627,Compiler Design,18,6,36
+BCA628,Computer Networks,16,5,35
+BCA628,Operating System,18,6,38
+BCA628,Management Information Systems,21,7,45
+BCA628,Compiler Design,17,5,37
+BCA629,Computer Networks,22,7,45
+BCA629,Operating System,20,6,42
+BCA629,Management Information Systems,16,5,33
+BCA629,Compiler Design,19,6,39
+BCA630,Computer Networks,19,6,40
+BCA630,Operating System,20,6,41
+BCA630,Management Information Systems,16,5,33
+BCA630,Compiler Design,16,5,34
+MCA101,C Programming,27,9,57
+MCA101,Web Technologies,25,8,51
+MCA101,Information Security,27,9,55
+MCA101,Cyber Security,24,8,51
+MCA102,C Programming,18,6,36
+MCA102,Web Technologies,17,5,36
+MCA102,Information Security,18,6,38
+MCA102,Cyber Security,16,5,34
+MCA103,C Programming,28,9,57
+MCA103,Web Technologies,28,9,58
+MCA103,Information Security,25,8,53
+MCA103,Cyber Security,27,9,54
+MCA104,C Programming,10,3,22
+MCA104,Web Technologies,10,3,22
+MCA104,Information Security,11,3,24
+MCA104,Cyber Security,10,3,22
+MCA105,C Programming,20,6,42
+MCA105,Web Technologies,15,5,30
+MCA105,Information Security,21,7,45
+MCA105,Cyber Security,18,6,36
+MCA106,C Programming,19,6,40
+MCA106,Web Technologies,18,6,36
+MCA106,Information Security,22,7,45
+MCA106,Cyber Security,16,5,35
+MCA107,C Programming,18,6,39
+MCA107,Web Technologies,17,5,36
+MCA107,Information Security,16,5,35
+MCA107,Cyber Security,22,7,46
+MCA108,C Programming,26,8,54
+MCA108,Web Technologies,27,9,57
+MCA108,Information Security,25,8,52
+MCA108,Cyber Security,28,9,58
+MCA109,C Programming,20,6,42
+MCA109,Web Technologies,21,7,43
+MCA109,Information Security,21,7,42
+MCA109,Cyber Security,21,7,44
+MCA110,C Programming,7,2,16
+MCA110,Web Technologies,7,2,16
+MCA110,Information Security,10,3,22
+MCA110,Cyber Security,10,3,23
+MCA111,C Programming,19,6,41
+MCA111,Web Technologies,15,5,33
+MCA111,Information Security,18,6,39
+MCA111,Cyber Security,17,5,37
+MCA112,C Programming,19,6,40
+MCA112,Web Technologies,19,6,40
+MCA112,Information Security,15,5,33
+MCA112,Cyber Security,20,6,41
+MCA113,C Programming,10,3,23
+MCA113,Web Technologies,8,2,19
+MCA113,Information Security,7,2,16
+MCA113,Cyber Security,11,3,24
+MCA114,C Programming,17,5,36
+MCA114,Web Technologies,20,6,41
+MCA114,Information Security,15,5,30
+MCA114,Cyber Security,20,6,41
+MCA115,C Programming,10,3,23
+MCA115,Web Technologies,6,2,13
+MCA115,Information Security,11,3,23
+MCA115,Cyber Security,7,2,15
+MCA116,C Programming,10,3,22
+MCA116,Web Technologies,9,3,19
+MCA116,Information Security,10,3,23
+MCA116,Cyber Security,10,3,22
+MCA117,C Programming,18,6,36
+MCA117,Web Technologies,21,7,45
+MCA117,Information Security,15,5,33
+MCA117,Cyber Security,20,6,43
+MCA118,C Programming,17,5,37
+MCA118,Web Technologies,21,7,45
+MCA118,Information Security,16,5,34
+MCA118,Cyber Security,16,5,34
+MCA119,C Programming,28,9,57
+MCA119,Web Technologies,24,8,49
+MCA119,Information Security,27,9,55
+MCA119,Cyber Security,25,8,51
+MCA120,C Programming,17,5,36
+MCA120,Web Technologies,17,5,37
+MCA120,Information Security,18,6,39
+MCA120,Cyber Security,21,7,43
+MCA121,C Programming,19,6,40
+MCA121,Web Technologies,18,6,37
+MCA121,Information Security,20,6,42
+MCA121,Cyber Security,17,5,36
+MCA122,C Programming,18,6,37
+MCA122,Web Technologies,18,6,39
+MCA122,Information Security,18,6,38
+MCA122,Cyber Security,18,6,36
+MCA123,C Programming,17,5,35
+MCA123,Web Technologies,15,5,33
+MCA123,Information Security,16,5,33
+MCA123,Cyber Security,18,6,37
+MCA124,C Programming,18,6,38
+MCA124,Web Technologies,22,7,46
+MCA124,Information Security,19,6,41
+MCA124,Cyber Security,15,5,32
+MCA125,C Programming,20,6,42
+MCA125,Web Technologies,15,5,30
+MCA125,Information Security,15,5,33
+MCA125,Cyber Security,15,5,31
+MCA126,C Programming,27,9,56
+MCA126,Web Technologies,28,9,57
+MCA126,Information Security,28,9,58
+MCA126,Cyber Security,25,8,53
+MCA127,C Programming,15,5,32
+MCA127,Web Technologies,19,6,39
+MCA127,Information Security,20,6,43
+MCA127,Cyber Security,19,6,41
+MCA128,C Programming,18,6,37
+MCA128,Web Technologies,15,5,30
+MCA128,Information Security,20,6,43
+MCA128,Cyber Security,22,7,45
+MCA129,C Programming,20,6,43
+MCA129,Web Technologies,22,7,46
+MCA129,Information Security,21,7,44
+MCA129,Cyber Security,21,7,45
+MCA130,C Programming,22,7,45
+MCA130,Web Technologies,15,5,31
+MCA130,Information Security,19,6,40
+MCA130,Cyber Security,19,6,39
+MCA201,Human Computer Interaction,16,5,35
+MCA201,Software Testing,19,6,39
+MCA201,Bioinformatics,19,6,39
+MCA201,Cryptography,18,6,39
+MCA202,Human Computer Interaction,25,8,51
+MCA202,Software Testing,25,8,53
+MCA202,Bioinformatics,28,9,57
+MCA202,Cryptography,27,9,55
+MCA203,Human Computer Interaction,17,5,35
+MCA203,Software Testing,18,6,36
+MCA203,Bioinformatics,16,5,34
+MCA203,Cryptography,17,5,35
+MCA204,Human Computer Interaction,6,2,14
+MCA204,Software Testing,11,3,24
+MCA204,Bioinformatics,6,2,13
+MCA204,Cryptography,6,2,13
+MCA205,Human Computer Interaction,25,8,52
+MCA205,Software Testing,28,9,57
+MCA205,Bioinformatics,27,9,55
+MCA205,Cryptography,24,8,49
+MCA206,Human Computer Interaction,27,9,54
+MCA206,Software Testing,26,8,55
+MCA206,Bioinformatics,24,8,50
+MCA206,Cryptography,24,8,50
+MCA207,Human Computer Interaction,25,8,52
+MCA207,Software Testing,26,8,54
+MCA207,Bioinformatics,24,8,48
+MCA207,Cryptography,24,8,50
+MCA208,Human Computer Interaction,19,6,40
+MCA208,Software Testing,15,5,33
+MCA208,Bioinformatics,21,7,43
+MCA208,Cryptography,21,7,45
+MCA209,Human Computer Interaction,22,7,45
+MCA209,Software Testing,17,5,35
+MCA209,Bioinformatics,22,7,45
+MCA209,Cryptography,21,7,42
+MCA210,Human Computer Interaction,20,6,43
+MCA210,Software Testing,20,6,42
+MCA210,Bioinformatics,21,7,42
+MCA210,Cryptography,16,5,34
+MCA211,Human Computer Interaction,19,6,41
+MCA211,Software Testing,19,6,39
+MCA211,Bioinformatics,20,6,43
+MCA211,Cryptography,15,5,30
+MCA212,Human Computer Interaction,10,3,23
+MCA212,Software Testing,6,2,13
+MCA212,Bioinformatics,7,2,16
+MCA212,Cryptography,11,3,23
+MCA213,Human Computer Interaction,12,4,24
+MCA213,Software Testing,11,3,23
+MCA213,Bioinformatics,6,2,13
+MCA213,Cryptography,6,2,12
+MCA214,Human Computer Interaction,20,6,43
+MCA214,Software Testing,18,6,38
+MCA214,Bioinformatics,20,6,42
+MCA214,Cryptography,15,5,32
+MCA215,Human Computer Interaction,10,3,22
+MCA215,Software Testing,11,3,25
+MCA215,Bioinformatics,8,2,18
+MCA215,Cryptography,9,3,19
+MCA216,Human Computer Interaction,27,9,56
+MCA216,Software Testing,25,8,51
+MCA216,Bioinformatics,28,9,58
+MCA216,Cryptography,25,8,53
+MCA217,Human Computer Interaction,20,6,43
+MCA217,Software Testing,18,6,38
+MCA217,Bioinformatics,15,5,30
+MCA217,Cryptography,21,7,44
+MCA218,Human Computer Interaction,11,3,25
+MCA218,Software Testing,8,2,17
+MCA218,Bioinformatics,10,3,22
+MCA218,Cryptography,9,3,19
+MCA219,Human Computer Interaction,16,5,33
+MCA219,Software Testing,18,6,36
+MCA219,Bioinformatics,19,6,40
+MCA219,Cryptography,18,6,37
+MCA220,Human Computer Interaction,20,6,42
+MCA220,Software Testing,17,5,37
+MCA220,Bioinformatics,17,5,36
+MCA220,Cryptography,18,6,38
+MCA221,Human Computer Interaction,17,5,36
+MCA221,Software Testing,18,6,39
+MCA221,Bioinformatics,21,7,42
+MCA221,Cryptography,19,6,41
+MCA222,Human Computer Interaction,20,6,41
+MCA222,Software Testing,16,5,35
+MCA222,Bioinformatics,20,6,41
+MCA222,Cryptography,21,7,44
+MCA223,Human Computer Interaction,16,5,35
+MCA223,Software Testing,16,5,34
+MCA223,Bioinformatics,16,5,35
+MCA223,Cryptography,17,5,35
+MCA224,Human Computer Interaction,21,7,43
+MCA224,Software Testing,17,5,37
+MCA224,Bioinformatics,22,7,46
+MCA224,Cryptography,18,6,37
+MCA225,Human Computer Interaction,18,6,38
+MCA225,Software Testing,18,6,36
+MCA225,Bioinformatics,19,6,41
+MCA225,Cryptography,15,5,33
+MCA226,Human Computer Interaction,16,5,33
+MCA226,Software Testing,18,6,36
+MCA226,Bioinformatics,20,6,41
+MCA226,Cryptography,19,6,39
+MCA227,Human Computer Interaction,16,5,33
+MCA227,Software Testing,16,5,35
+MCA227,Bioinformatics,16,5,35
+MCA227,Cryptography,18,6,39
+MCA228,Human Computer Interaction,18,6,37
+MCA228,Software Testing,21,7,43
+MCA228,Bioinformatics,20,6,42
+MCA228,Cryptography,19,6,40
+MCA229,Human Computer Interaction,17,5,37
+MCA229,Software Testing,16,5,35
+MCA229,Bioinformatics,21,7,43
+MCA229,Cryptography,17,5,36
+MCA230,Human Computer Interaction,21,7,44
+MCA230,Software Testing,18,6,37
+MCA230,Bioinformatics,22,7,45
+MCA230,Cryptography,22,7,45
+MCA301,Java Programming,19,6,40
+MCA301,Microprocessors,21,7,45
+MCA301,Computer Vision,22,7,45
+MCA301,Database Management System,19,6,40
+MCA302,Java Programming,25,8,51
+MCA302,Microprocessors,25,8,53
+MCA302,Computer Vision,26,8,53
+MCA302,Database Management System,24,8,50
+MCA303,Java Programming,25,8,52
+MCA303,Microprocessors,25,8,51
+MCA303,Computer Vision,24,8,49
+MCA303,Database Management System,24,8,48
+MCA304,Java Programming,21,7,45
+MCA304,Microprocessors,15,5,32
+MCA304,Computer Vision,21,7,45
+MCA304,Database Management System,16,5,33
+MCA305,Java Programming,11,3,25
+MCA305,Microprocessors,10,3,22
+MCA305,Computer Vision,10,3,22
+MCA305,Database Management System,6,2,13
+MCA306,Java Programming,16,5,34
+MCA306,Microprocessors,15,5,30
+MCA306,Computer Vision,18,6,36
+MCA306,Database Management System,21,7,45
+MCA307,Java Programming,25,8,52
+MCA307,Microprocessors,25,8,53
+MCA307,Computer Vision,27,9,56
+MCA307,Database Management System,27,9,57
+MCA308,Java Programming,17,5,36
+MCA308,Microprocessors,21,7,44
+MCA308,Computer Vision,17,5,36
+MCA308,Database Management System,20,6,43
+MCA309,Java Programming,18,6,36
+MCA309,Microprocessors,21,7,42
+MCA309,Computer Vision,20,6,42
+MCA309,Database Management System,18,6,39
+MCA310,Java Programming,15,5,33
+MCA310,Microprocessors,18,6,39
+MCA310,Computer Vision,21,7,44
+MCA310,Database Management System,17,5,37
+MCA311,Java Programming,9,3,19
+MCA311,Microprocessors,8,2,19
+MCA311,Computer Vision,10,3,22
+MCA311,Database Management System,9,3,18
+MCA312,Java Programming,15,5,32
+MCA312,Microprocessors,21,7,44
+MCA312,Computer Vision,15,5,31
+MCA312,Database Management System,21,7,42
+MCA313,Java Programming,22,7,45
+MCA313,Microprocessors,16,5,34
+MCA313,Computer Vision,18,6,38
+MCA313,Database Management System,19,6,39
+MCA314,Java Programming,15,5,31
+MCA314,Microprocessors,18,6,39
+MCA314,Computer Vision,18,6,39
+MCA314,Database Management System,15,5,31
+MCA315,Java Programming,17,5,37
+MCA315,Microprocessors,15,5,32
+MCA315,Computer Vision,22,7,45
+MCA315,Database Management System,17,5,35
+MCA316,Java Programming,15,5,32
+MCA316,Microprocessors,19,6,40
+MCA316,Computer Vision,20,6,43
+MCA316,Database Management System,21,7,44
+MCA317,Java Programming,20,6,41
+MCA317,Microprocessors,20,6,42
+MCA317,Computer Vision,15,5,33
+MCA317,Database Management System,17,5,35
+MCA318,Java Programming,6,2,15
+MCA318,Microprocessors,10,3,23
+MCA318,Computer Vision,7,2,16
+MCA318,Database Management System,9,3,18
+MCA319,Java Programming,21,7,45
+MCA319,Microprocessors,18,6,36
+MCA319,Computer Vision,19,6,40
+MCA319,Database Management System,17,5,35
+MCA320,Java Programming,17,5,35
+MCA320,Microprocessors,15,5,32
+MCA320,Computer Vision,20,6,43
+MCA320,Database Management System,18,6,38
+MCA321,Java Programming,22,7,45
+MCA321,Microprocessors,15,5,30
+MCA321,Computer Vision,21,7,42
+MCA321,Database Management System,15,5,32
+MCA322,Java Programming,25,8,53
+MCA322,Microprocessors,28,9,57
+MCA322,Computer Vision,26,8,54
+MCA322,Database Management System,24,8,51
+MCA323,Java Programming,9,3,18
+MCA323,Microprocessors,10,3,22
+MCA323,Computer Vision,10,3,21
+MCA323,Database Management System,8,2,17
+MCA324,Java Programming,18,6,39
+MCA324,Microprocessors,17,5,37
+MCA324,Computer Vision,19,6,39
+MCA324,Database Management System,21,7,45
+MCA325,Java Programming,26,8,55
+MCA325,Microprocessors,24,8,51
+MCA325,Computer Vision,27,9,56
+MCA325,Database Management System,27,9,56
+MCA326,Java Programming,19,6,39
+MCA326,Microprocessors,19,6,41
+MCA326,Computer Vision,22,7,46
+MCA326,Database Management System,19,6,41
+MCA327,Java Programming,15,5,33
+MCA327,Microprocessors,19,6,41
+MCA327,Computer Vision,18,6,38
+MCA327,Database Management System,19,6,39
+MCA328,Java Programming,20,6,41
+MCA328,Microprocessors,20,6,42
+MCA328,Computer Vision,18,6,38
+MCA328,Database Management System,18,6,39
+MCA329,Java Programming,10,3,21
+MCA329,Microprocessors,11,3,23
+MCA329,Computer Vision,12,4,24
+MCA329,Database Management System,9,3,19
+MCA330,Java Programming,17,5,36
+MCA330,Microprocessors,20,6,42
+MCA330,Computer Vision,18,6,39
+MCA330,Database Management System,18,6,36
+MCA401,Digital Logic,6,2,14
+MCA401,Natural Language Processing,11,3,23
+MCA401,Internet of Things,9,3,21
+MCA401,Discrete Mathematics,11,3,24
+MCA402,Digital Logic,24,8,48
+MCA402,Natural Language Processing,27,9,57
+MCA402,Internet of Things,26,8,54
+MCA402,Discrete Mathematics,25,8,52
+MCA403,Digital Logic,17,5,37
+MCA403,Natural Language Processing,21,7,44
+MCA403,Internet of Things,16,5,35
+MCA403,Discrete Mathematics,15,5,32
+MCA404,Digital Logic,20,6,43
+MCA404,Natural Language Processing,16,5,35
+MCA404,Internet of Things,22,7,46
+MCA404,Discrete Mathematics,21,7,44
+MCA405,Digital Logic,24,8,48
+MCA405,Natural Language Processing,28,9,57
+MCA405,Internet of Things,26,8,53
+MCA405,Discrete Mathematics,28,9,58
+MCA406,Digital Logic,27,9,55
+MCA406,Natural Language Processing,26,8,55
+MCA406,Internet of Things,25,8,53
+MCA406,Discrete Mathematics,26,8,53
+MCA407,Digital Logic,18,6,38
+MCA407,Natural Language Processing,18,6,37
+MCA407,Internet of Things,20,6,43
+MCA407,Discrete Mathematics,19,6,40
+MCA408,Digital Logic,20,6,43
+MCA408,Natural Language Processing,21,7,44
+MCA408,Internet of Things,21,7,45
+MCA408,Discrete Mathematics,15,5,32
+MCA409,Digital Logic,17,5,36
+MCA409,Natural Language Processing,15,5,33
+MCA409,Internet of Things,22,7,46
+MCA409,Discrete Mathematics,20,6,42
+MCA410,Digital Logic,22,7,46
+MCA410,Natural Language Processing,20,6,43
+MCA410,Internet of Things,20,6,42
+MCA410,Discrete Mathematics,15,5,32
+MCA411,Digital Logic,22,7,45
+MCA411,Natural Language Processing,21,7,43
+MCA411,Internet of Things,15,5,32
+MCA411,Discrete Mathematics,18,6,39
+MCA412,Digital Logic,17,5,35
+MCA412,Natural Language Processing,19,6,41
+MCA412,Internet of Things,19,6,39
+MCA412,Discrete Mathematics,15,5,31
+MCA413,Digital Logic,21,7,43
+MCA413,Natural Language Processing,15,5,33
+MCA413,Internet of Things,21,7,42
+MCA413,Discrete Mathematics,19,6,41
+MCA414,Digital Logic,18,6,37
+MCA414,Natural Language Processing,16,5,33
+MCA414,Internet of Things,18,6,38
+MCA414,Discrete Mathematics,15,5,33
+MCA415,Digital Logic,18,6,38
+MCA415,Natural Language Processing,18,6,39
+MCA415,Internet of Things,15,5,30
+MCA415,Discrete Mathematics,21,7,44
+MCA416,Digital Logic,18,6,37
+MCA416,Natural Language Processing,18,6,38
+MCA416,Internet of Things,17,5,35
+MCA416,Discrete Mathematics,22,7,45
+MCA417,Digital Logic,11,3,23
+MCA417,Natural Language Processing,8,2,17
+MCA417,Internet of Things,9,3,21
+MCA417,Discrete Mathematics,10,3,21
+MCA418,Digital Logic,9,3,21
+MCA418,Natural Language Processing,8,2,18
+MCA418,Internet of Things,9,3,19
+MCA418,Discrete Mathematics,7,2,16
+MCA419,Digital Logic,18,6,36
+MCA419,Natural Language Processing,20,6,42
+MCA419,Internet of Things,19,6,40
+MCA419,Discrete Mathematics,16,5,33
+MCA420,Digital Logic,24,8,49
+MCA420,Natural Language Processing,25,8,53
+MCA420,Internet of Things,28,9,57
+MCA420,Discrete Mathematics,25,8,52
+MCA421,Digital Logic,20,6,43
+MCA421,Natural Language Processing,19,6,39
+MCA421,Internet of Things,21,7,44
+MCA421,Discrete Mathematics,16,5,34
+MCA422,Digital Logic,15,5,31
+MCA422,Natural Language Processing,21,7,45
+MCA422,Internet of Things,15,5,33
+MCA422,Discrete Mathematics,20,6,41
+MCA423,Digital Logic,8,2,19
+MCA423,Natural Language Processing,7,2,15
+MCA423,Internet of Things,9,3,19
+MCA423,Discrete Mathematics,7,2,17
+MCA424,Digital Logic,18,6,37
+MCA424,Natural Language Processing,16,5,35
+MCA424,Internet of Things,19,6,41
+MCA424,Discrete Mathematics,18,6,36
+MCA425,Digital Logic,20,6,43
+MCA425,Natural Language Processing,20,6,42
+MCA425,Internet of Things,19,6,40
+MCA425,Discrete Mathematics,22,7,45
+MCA426,Digital Logic,24,8,48
+MCA426,Natural Language Processing,25,8,52
+MCA426,Internet of Things,24,8,48
+MCA426,Discrete Mathematics,27,9,55
+MCA427,Digital Logic,20,6,41
+MCA427,Natural Language Processing,20,6,43
+MCA427,Internet of Things,20,6,43
+MCA427,Discrete Mathematics,15,5,33
+MCA428,Digital Logic,21,7,42
+MCA428,Natural Language Processing,15,5,33
+MCA428,Internet of Things,16,5,35
+MCA428,Discrete Mathematics,18,6,36
+MCA429,Digital Logic,8,2,19
+MCA429,Natural Language Processing,10,3,22
+MCA429,Internet of Things,9,3,20
+MCA429,Discrete Mathematics,11,3,23
+MCA430,Digital Logic,18,6,37
+MCA430,Natural Language Processing,21,7,42
+MCA430,Internet of Things,22,7,46
+MCA430,Discrete Mathematics,19,6,41
