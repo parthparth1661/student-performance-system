@@ -288,7 +288,7 @@ def get_dashboard_chart_data(filters={}):
         cursor.execute(query, values)
         data = cursor.fetchone()
         if data:
-            analytics['performance_trend']['labels'] = ['Unit Tests', 'Mid Term', 'Semester Final']
+            analytics['performance_trend']['labels'] = ['Internal', 'Viva', 'External']
             analytics['performance_trend']['values'] = [
                 float(data['Internal'] or 0),
                 float(data['Viva'] or 0),
