@@ -27,8 +27,9 @@ endblock %}
                 <i class="bi bi-plus-lg me-1"></i>Add Subject
             </a>
 
-            <a href="{{ url_for('admin.clear_subjects') }}" class="btn btn-danger px-4 rounded-3 fw-bold shadow-sm transition-hover ms-2"
-               onclick="return confirm('⚠️ SECURITY ALERT: Are you sure you want to delete ALL subject records?\n\nThis action cannot be undone. All institutional course data will be wiped.')">
+            <a href="{{ url_for('admin.clear_subjects') }}"
+                class="btn btn-danger px-4 rounded-3 fw-bold shadow-sm transition-hover ms-2"
+                onclick="return confirm('⚠️ SECURITY ALERT: Are you sure you want to delete ALL subject records?\n\nThis action cannot be undone. All institutional course data will be wiped.')">
                 <i class="bi bi-trash me-1"></i>Clear All Subjects
             </a>
         </div>
