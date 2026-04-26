@@ -26,21 +26,19 @@
                         <div class="col-md-6">
                             <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Department</label>
                             <select name="department" id="department" class="form-select border-0 bg-light rounded-3 py-3 px-4" required {% if edit_mode %}disabled{% endif %}>
-                                <option value="">Select Department</option>
-                                <option value="BCA" {% if selected_dept == 'BCA' or (mark and mark.department == 'BCA') %}selected{% endif %}>BCA (Computer Applications)</option>
-                                <option value="MCA" {% if selected_dept == 'MCA' or (mark and mark.department == 'MCA') %}selected{% endif %}>MCA (Master Applications)</option>
-                                <option value="B.TECH" {% if selected_dept == 'B.TECH' or (mark and mark.department == 'B.TECH') %}selected{% endif %}>B.TECH (Engineering)</option>
-                                <option value="MBA" {% if selected_dept == 'MBA' or (mark and mark.department == 'MBA') %}selected{% endif %}>MBA (Professional Management)</option>
-                            </select>
+                        <option value="">All Departments</option>
+                        <option value="BCA" {% if filters and filters.department == 'BCA' %}selected{% elif form_data and form_data.department == 'BCA' %}selected{% elif subject and subject.department == 'BCA' %}selected{% elif student and student.department == 'BCA' %}selected{% endif %}>BCA (Computer Science)</option>
+                        <option value="MCA" {% if filters and filters.department == 'MCA' %}selected{% elif form_data and form_data.department == 'MCA' %}selected{% elif subject and subject.department == 'MCA' %}selected{% elif student and student.department == 'MCA' %}selected{% endif %}>MCA (Master of Apps)</option>
+                    </select>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label fw-bold extra-small text-uppercase text-muted ls-1 mb-2">Semester</label>
                             <select name="semester" id="semester" class="form-select border-0 bg-light rounded-3 py-3 px-4" required {% if edit_mode %}disabled{% endif %}>
-                                <option value="">Select Semester</option>
-                                {% for i in range(1, 9) %}
-                                <option value="{{ i }}" {% if (selected_sem == (i|string)) or (mark and mark.semester == i) %}selected{% endif %}>Semester {{ i }}</option>
-                                {% endfor %}
-                            </select>
+                        <option value="">All Semesters</option>
+                        {% for i in range(1, 7) %}
+                        <option value="{{ i }}" {% if filters and filters.semester == i|string %}selected{% elif form_data and form_data.semester == i|string %}selected{% elif subject and subject.semester == i %}selected{% elif student and student.semester == i %}selected{% endif %}>Semester {{ i }}</option>
+                        {% endfor %}
+                    </select>
                         </div>
 
                         <!-- STEP 2: TARGET IDENTITIES -->

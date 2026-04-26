@@ -42,10 +42,8 @@ endblock %}
                     <label class="form-label fw-semibold extra-small text-muted mb-1">Department</label>
                     <select name="department" class="form-select form-select-sm border-0 bg-light rounded-3">
                         <option value="">All Departments</option>
-                        <option value="BCA" {% if filters.department=='BCA' %}selected{% endif %}>BCA</option>
-                        <option value="MCA" {% if filters.department=='MCA' %}selected{% endif %}>MCA</option>
-                        <option value="B.TECH" {% if filters.department=='B.TECH' %}selected{% endif %}>B.TECH</option>
-                        <option value="MBA" {% if filters.department=='MBA' %}selected{% endif %}>MBA</option>
+                        <option value="BCA" {% if filters and filters.department == 'BCA' %}selected{% elif form_data and form_data.department == 'BCA' %}selected{% elif subject and subject.department == 'BCA' %}selected{% elif student and student.department == 'BCA' %}selected{% endif %}>BCA (Computer Science)</option>
+                        <option value="MCA" {% if filters and filters.department == 'MCA' %}selected{% elif form_data and form_data.department == 'MCA' %}selected{% elif subject and subject.department == 'MCA' %}selected{% elif student and student.department == 'MCA' %}selected{% endif %}>MCA (Master of Apps)</option>
                     </select>
                 </div>
                 <div class="col-md-6">

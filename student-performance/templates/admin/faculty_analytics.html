@@ -22,13 +22,10 @@
         <div class="col-md-9">
             <label class="form-label extra-small fw-bold text-uppercase text-muted">Filter by Department</label>
             <select name="department" class="form-select border-0 bg-light rounded-3 py-2">
-                <option value="All">All Institutional Departments</option>
-                <option value="BCA" {% if filters.department == 'BCA' %}selected{% endif %}>BCA</option>
-                <option value="MCA" {% if filters.department == 'MCA' %}selected{% endif %}>MCA</option>
-                <option value="B.TECH" {% if filters.department == 'B.TECH' %}selected{% endif %}>B.TECH</option>
-                <option value="M.TECH" {% if filters.department == 'M.TECH' %}selected{% endif %}>M.TECH</option>
-                <option value="MBA" {% if filters.department == 'MBA' %}selected{% endif %}>MBA</option>
-            </select>
+                        <option value="">All Departments</option>
+                        <option value="BCA" {% if filters and filters.department == 'BCA' %}selected{% elif form_data and form_data.department == 'BCA' %}selected{% elif subject and subject.department == 'BCA' %}selected{% elif student and student.department == 'BCA' %}selected{% endif %}>BCA (Computer Science)</option>
+                        <option value="MCA" {% if filters and filters.department == 'MCA' %}selected{% elif form_data and form_data.department == 'MCA' %}selected{% elif subject and subject.department == 'MCA' %}selected{% elif student and student.department == 'MCA' %}selected{% endif %}>MCA (Master of Apps)</option>
+                    </select>
         </div>
         <div class="col-md-3 d-flex align-items-end">
             <button type="submit" class="btn btn-primary w-100 rounded-3 fw-bold py-2">

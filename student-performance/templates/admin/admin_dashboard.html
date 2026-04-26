@@ -36,11 +36,9 @@ endblock %}
                     <label class="form-label fw-bold text-uppercase small text-muted mb-2"
                         style="letter-spacing: 0.05em;">Department</label>
                     <select name="department" id="filter-department" class="form-select border-0 bg-light rounded-3 py-2">
-                        <option value="">All Department</option>
-                        <option value="BCA" {{ 'selected' if filters.department=='BCA' }}>BCA</option>
-                        <option value="MCA" {{ 'selected' if filters.department=='MCA' }}>MCA</option>
-                        <option value="B.TECH" {{ 'selected' if filters.department=='B.TECH' }}>B.TECH</option>
-                        <option value="MBA" {{ 'selected' if filters.department=='MBA' }}>MBA</option>
+                        <option value="">All Departments</option>
+                        <option value="BCA" {% if filters and filters.department == 'BCA' %}selected{% elif form_data and form_data.department == 'BCA' %}selected{% elif subject and subject.department == 'BCA' %}selected{% elif student and student.department == 'BCA' %}selected{% endif %}>BCA (Computer Science)</option>
+                        <option value="MCA" {% if filters and filters.department == 'MCA' %}selected{% elif form_data and form_data.department == 'MCA' %}selected{% elif subject and subject.department == 'MCA' %}selected{% elif student and student.department == 'MCA' %}selected{% endif %}>MCA (Master of Apps)</option>
                     </select>
                 </div>
                 <div class="col-md">
@@ -48,8 +46,8 @@ endblock %}
                         style="letter-spacing: 0.05em;">Semester</label>
                     <select name="semester" id="filter-semester" class="form-select border-0 bg-light rounded-3 py-2">
                         <option value="">All Semesters</option>
-                        {% for i in range(1, 9) %}
-                        <option value="{{ i }}" {{ 'selected' if filters.semester==i|string }}>Semester {{ i }}</option>
+                        {% for i in range(1, 7) %}
+                        <option value="{{ i }}" {% if filters and filters.semester == i|string %}selected{% elif form_data and form_data.semester == i|string %}selected{% elif subject and subject.semester == i %}selected{% elif student and student.semester == i %}selected{% endif %}>Semester {{ i }}</option>
                         {% endfor %}
                     </select>
                 </div>
