@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Analytics Report</title>
+    <style>
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; margin: 0; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #e2e8f0; padding-bottom: 20px; }
+        .header h1 { margin: 0; color: #1e293b; font-size: 28px; }
+        .header p { color: #64748b; font-size: 14px; margin-top: 5px; }
+        
+        .filters { background: #f8fafc; padding: 15px; border-radius: 8px; margin-bottom: 30px; font-size: 14px; border: 1px solid #e2e8f0; }
+        .filters-title { font-weight: bold; margin-bottom: 10px; color: #334155; }
+        .filter-item { display: inline-block; margin-right: 20px; }
+        .filter-label { color: #64748b; font-weight: bold; }
+        .filter-value { color: #0f172a; }
+        
+        .kpi-container { width: 100%; margin-bottom: 30px; display: table; table-layout: fixed; border-spacing: 15px 0; }
+        .kpi-row { display: table-row; }
+        .kpi-card { display: table-cell; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; text-align: center; }
+        .kpi-title { font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: bold; letter-spacing: 1px; }
+        .kpi-value { font-size: 24px; font-weight: bold; color: #0f172a; margin-top: 5px; }
+        
+        .section-title { font-size: 18px; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 15px; margin-top: 30px; page-break-after: avoid; }
+        
+        .chart-grid { width: 100%; display: table; table-layout: fixed; border-spacing: 15px 0; margin-bottom: 30px; }
+        .chart-col { display: table-cell; text-align: center; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; background: #fff; }
+        .chart-col h3 { font-size: 14px; color: #334155; margin-top: 0; margin-bottom: 15px; }
+        .chart-img { max-width: 100%; max-height: 250px; }
+        
+        .full-chart { width: 100%; text-align: center; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; background: #fff; margin-bottom: 30px; box-sizing: border-box; }
+        .full-chart h3 { font-size: 14px; color: #334155; margin-top: 0; margin-bottom: 15px; }
+
+        .tables-grid { width: 100%; display: table; table-layout: fixed; border-spacing: 15px 0; }
+        .table-col { display: table-cell; vertical-align: top; }
+        
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; background: #fff; }
+        th, td { border: 1px solid #e2e8f0; padding: 10px; text-align: left; }
+        th { background: #f8fafc; font-weight: bold; color: #334155; }
+        tr:nth-child(even) { background-color: #f8fafc; }
+        .text-center { text-align: center; }
+        
+        /* Avoid page breaks inside important containers */
+        .no-break { page-break-inside: avoid; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Dashboard Analytics Report</h1>
+        <p>Generated on {{ date }}</p>
+    </div>
+
+    <div class="filters no-break">
+        <div class="filters-title">Active Filters</div>
+        <div class="filter-item"><span class="filter-label">Department:</span> <span class="filter-value">{{ filters.department or 'All' }}</span></div>
+        <div class="filter-item"><span class="filter-label">Semester:</span> <span class="filter-value">{{ filters.semester or 'All' }}</span></div>
+        <div class="filter-item"><span class="filter-label">Subject:</span> <span class="filter-value">{{ filters.subject or 'All' }}</span></div>
+        {% if filters.search %}
+        <div class="filter-item"><span class="filter-label">Search:</span> <span class="filter-value">{{ filters.search }}</span></div>
+        {% endif %}
+    </div>
+
+    <div class="section-title">Key Performance Indicators</div>
+    <div class="kpi-container no-break">
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="kpi-title">Students</div>
+                <div class="kpi-value">{{ stats.total_students }}</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Subjects</div>
+                <div class="kpi-value">{{ stats.total_subjects }}</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Avg Marks</div>
+                <div class="kpi-value">{{ stats.avg_marks }}%</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Attendance</div>
+                <div class="kpi-value">{{ stats.attendance_percentage }}%</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">At Risk</div>
+                <div class="kpi-value">{{ stats.low_attendance_count }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">Analytical Visualizations</div>
+    <div class="chart-grid no-break">
+        {% if charts.subject_avg %}
+        <div class="chart-col">
+            <h3>Marks by Subject</h3>
+            <img src="{{ charts.subject_avg }}" class="chart-img" alt="Marks by Subject">
+        </div>
+        {% endif %}
+        
+        {% if charts.attendance_dist %}
+        <div class="chart-col">
+            <h3>Attendance Distribution</h3>
+            <img src="{{ charts.attendance_dist }}" class="chart-img" alt="Attendance Distribution">
+        </div>
+        {% endif %}
+    </div>
+
+    {% if charts.monthly_attendance %}
+    <div class="full-chart no-break">
+        <h3>Monthly Attendance Comparison</h3>
+        <img src="{{ charts.monthly_attendance }}" style="max-width: 100%; max-height: 250px;" alt="Monthly Attendance">
+    </div>
+    {% endif %}
+
+    <div class="section-title">Detailed Insights</div>
+    <div class="tables-grid no-break">
+        <div class="table-col">
+            <h3 style="font-size: 14px; margin-top: 0;">Top Performers</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Rank</th>
+                        <th>Student Name</th>
+                        <th class="text-center" style="width: 30%;">Average Marks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in top_students %}
+                    <tr>
+                        <td>#{{ loop.index }}</td>
+                        <td style="font-weight: bold;">{{ s.name }}</td>
+                        <td class="text-center">{{ s.avg_marks|round(1) }}%</td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="3" class="text-center">No leaderboard data found</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="table-col">
+            <h3 style="font-size: 14px; margin-top: 0;">Low Performance Alerts</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>At-Risk Student</th>
+                        <th class="text-center">Alert Trigger</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in low_students %}
+                    <tr>
+                        <td style="font-weight: bold;">{{ s.name }}</td>
+                        <td class="text-center" style="color: #ef4444;">{{ s.reason }}</td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="2" class="text-center">Minimal risk detected. Healthy records.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

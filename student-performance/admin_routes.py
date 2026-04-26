@@ -227,6 +227,169 @@ def dashboard_api_stats():
         'low_students': low_students
     })
 
+@admin_bp.route('/dashboard/export-pdf')
+def dashboard_export_pdf():
+    # 🛡️ STRICT SESSION PROTECTION
+    if 'admin_id' not in session:
+        return redirect(url_for('admin.login'))
+
+    # 🎯 GET FILTER VALUES
+    filters = {
+        'department': request.args.get('department'),
+        'semester': request.args.get('semester'),
+        'search': request.args.get('search'),
+        'subject': request.args.get('subject')
+    }
+
+    # Generate analytics
+    stats = get_dashboard_stats(filters)
+    chart_data = get_dashboard_chart_data(filters)
+
+    # Leaderboard & Risk alerts
+    from analysis import build_dashboard_conditions
+    where_clause, values = build_dashboard_conditions(filters)
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    # Leaderboard
+    cursor.execute(f"""
+        SELECT s.name, AVG(m.total_marks) as avg_marks
+        FROM students s
+        JOIN marks m ON s.enrollment_no = m.enrollment_no
+        JOIN subjects sub ON m.subject_id = sub.subject_id
+        {where_clause}
+        GROUP BY s.enrollment_no, s.name
+        ORDER BY avg_marks DESC
+        LIMIT 5
+    """, values)
+    top_students = cursor.fetchall()
+    
+    # Risk Alerts
+    cursor.execute(f"""
+        SELECT DISTINCT s.name, 'Critical Score' as reason
+        FROM students s
+        JOIN marks m ON s.enrollment_no = m.enrollment_no
+        JOIN subjects sub ON m.subject_id = sub.subject_id
+        {where_clause} AND m.total_marks < 40
+    """, values)
+    low_marks = cursor.fetchall()
+
+    cursor.execute(f"""
+        SELECT s.name, 'Low Attendance' as reason
+        FROM attendance a
+        JOIN students s ON a.enrollment_no = s.enrollment_no
+        LEFT JOIN subjects sub ON a.subject_id = sub.subject_id
+        {where_clause}
+        GROUP BY s.enrollment_no, s.name
+        HAVING (SUM(CASE WHEN a.status='Present' THEN 1 ELSE 0 END)*100.0/NULLIF(COUNT(*), 0)) < 75
+    """, values)
+    low_attendance = cursor.fetchall()
+    
+    alerts_dict = {}
+    for entry in low_marks: alerts_dict[entry['name']] = "Critical Marks"
+    for entry in low_attendance:
+        if entry['name'] in alerts_dict: alerts_dict[entry['name']] += " & Attendance"
+        else: alerts_dict[entry['name']] = "Low Attendance"
+    low_students = [{'name': name, 'reason': reason} for name, reason in alerts_dict.items()]
+    
+    cursor.close()
+    conn.close()
+
+    # Generate QuickChart URLs
+    import urllib.parse
+    import json
+    
+    def make_qc(chart_dict):
+        return f"https://quickchart.io/chart?c={urllib.parse.quote(json.dumps(chart_dict))}&w=500&h=300&bkg=white"
+
+    charts = {}
+    if chart_data.get('subject_avg') and chart_data['subject_avg']['labels']:
+        charts['subject_avg'] = make_qc({
+            "type": "bar",
+            "data": {
+                "labels": chart_data['subject_avg']['labels'],
+                "datasets": [{
+                    "label": "Average Marks (%)",
+                    "data": chart_data['subject_avg']['values'],
+                    "backgroundColor": "rgba(99, 102, 241, 0.75)"
+                }]
+            },
+            "options": {
+                "plugins": {"legend": {"display": False}},
+                "scales": {"y": {"beginAtZero": True, "max": 100}}
+            }
+        })
+        
+    if chart_data.get('attendance_dist') and chart_data['attendance_dist']['labels']:
+        charts['attendance_dist'] = make_qc({
+            "type": "doughnut",
+            "data": {
+                "labels": chart_data['attendance_dist']['labels'],
+                "datasets": [{
+                    "data": chart_data['attendance_dist']['values'],
+                    "backgroundColor": ["#10b981", "#ef4444"]
+                }]
+            }
+        })
+        
+    if chart_data.get('monthly_attendance') and chart_data['monthly_attendance']['labels']:
+        charts['monthly_attendance'] = make_qc({
+            "type": "line",
+            "data": {
+                "labels": chart_data['monthly_attendance']['labels'],
+                "datasets": [{
+                    "label": "Attendance %",
+                    "data": chart_data['monthly_attendance']['values'],
+                    "borderColor": "#0ea5e9",
+                    "fill": False
+                }]
+            },
+            "options": {"scales": {"y": {"beginAtZero": True, "max": 100}}}
+        })
+
+    rendered_html = render_template('admin/admin_pdf_report.html',
+                                    stats=stats,
+                                    chart_data=chart_data,
+                                    filters=filters,
+                                    top_students=top_students,
+                                    low_students=low_students,
+                                    charts=charts,
+                                    date=datetime.now().strftime("%B %d, %Y"))
+
+    import pdfkit
+    
+    # Locate wkhtmltopdf
+    path_wkhtmltopdf = None
+    for p in [r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe", r"C:\wkhtmltox\bin\wkhtmltopdf.exe"]:
+        if os.path.exists(p):
+            path_wkhtmltopdf = p
+            break
+            
+    options = {
+        'page-size': 'A4',
+        'margin-top': '0.75in',
+        'margin-right': '0.75in',
+        'margin-bottom': '0.75in',
+        'margin-left': '0.75in',
+        'encoding': "UTF-8",
+        'enable-local-file-access': None
+    }
+    
+    try:
+        if path_wkhtmltopdf:
+            config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+            pdf = pdfkit.from_string(rendered_html, False, options=options, configuration=config)
+        else:
+            pdf = pdfkit.from_string(rendered_html, False, options=options)
+            
+        response = make_response(pdf)
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = f'attachment; filename=dashboard_report_{datetime.now().strftime("%Y%m%d")}.pdf'
+        return response
+    except Exception as e:
+        flash(f"PDF Generation Error. Make sure wkhtmltopdf is installed. Details: {str(e)}", "danger")
+        return redirect(url_for('admin.dashboard', **request.args))
+
 # --- 🧑🎓 1. STUDENTS MODULE ---
 @admin_bp.route('/students')
 def view_students():
