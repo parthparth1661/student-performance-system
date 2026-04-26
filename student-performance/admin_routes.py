@@ -332,6 +332,38 @@ def dashboard_export_pdf():
             }
         })
         
+    if chart_data.get('performance_trend') and chart_data['performance_trend']['labels']:
+        charts['performance_trend'] = make_qc({
+            "type": "line",
+            "data": {
+                "labels": chart_data['performance_trend']['labels'],
+                "datasets": [{
+                    "label": "Average Marks",
+                    "data": chart_data['performance_trend']['values'],
+                    "borderColor": "#8b5cf6",
+                    "backgroundColor": "rgba(139, 92, 246, 0.08)",
+                    "fill": True,
+                    "tension": 0.4
+                }]
+            },
+            "options": {
+                "plugins": {"legend": {"display": False}},
+                "scales": {"y": {"beginAtZero": True, "max": 100}}
+            }
+        })
+
+    if chart_data.get('results_dist') and chart_data['results_dist']['labels']:
+        charts['results_dist'] = make_qc({
+            "type": "pie",
+            "data": {
+                "labels": chart_data['results_dist']['labels'],
+                "datasets": [{
+                    "data": chart_data['results_dist']['values'],
+                    "backgroundColor": ["#22c55e", "#f43f5e"]
+                }]
+            }
+        })
+        
     if chart_data.get('monthly_attendance') and chart_data['monthly_attendance']['labels']:
         charts['monthly_attendance'] = make_qc({
             "type": "line",

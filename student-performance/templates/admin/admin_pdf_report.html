@@ -104,6 +104,22 @@
         {% endif %}
     </div>
 
+    <div class="chart-grid no-break">
+        {% if charts.performance_trend %}
+        <div class="chart-col">
+            <h3>Performance Comparison</h3>
+            <img src="{{ charts.performance_trend }}" class="chart-img" alt="Performance Comparison">
+        </div>
+        {% endif %}
+        
+        {% if charts.results_dist %}
+        <div class="chart-col">
+            <h3>Result Overview</h3>
+            <img src="{{ charts.results_dist }}" class="chart-img" alt="Result Overview">
+        </div>
+        {% endif %}
+    </div>
+
     {% if charts.monthly_attendance %}
     <div class="full-chart no-break">
         <h3>Monthly Attendance Comparison</h3>
