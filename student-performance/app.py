@@ -11,7 +11,7 @@ app.permanent_session_lifetime = 1800  # 30 mins
 app.config['MYSQL_DB'] = 'SPDA'
 
 # 📧 EMAIL CONFIGURATION (GMAIL SMTP)
-app.config['EMAIL_ADDRESS'] = "khevnamodi2@gmail.com"
+# app.config['EMAIL_ADDRESS'] = "khevnamodi2@gmail.com"
 
 # Initialize database
 init_db()
